@@ -1,39 +1,54 @@
 'use strict';
 
 var _ = require('lodash');
+var $q = require('../services/ng-utils').$q;
 var tartan = require('tartan');
-var module = require('../module');
+var app = require('../module');
+var database = require('../services/database');
 
-module.controller('MainController', [
-  '$scope',
-  function($scope) {
-    $scope.source = 'K#101010 BLACK; B#2c2c80 BLUE; G#006818 GREEN;\n' +
-      'B/24 K4 B4 K4 B4 K20 G24 K6 G24 K20 B22 K4 B/4';
-    $scope.inifinteImage = true;
+app.controller('MainController', [
+  '$scope', '$window', '$timeout',
+  function($scope, $window, $timeout) {
+    $scope.current = {
+      weave: [2, 2]
+    };
 
-    $scope.availableSchemas = _.map(tartan.schema,
-      function(value, key) {
-        return {
-          name: value.name,
-          value: key
-        };
-      });
-    $scope.schema = 'classic';
-    $scope.metrics = null;
+    function updateImage() {
+      // Fix canvas size
+      $timeout(function() {
+        $window.dispatchEvent(new Event('resize'));
+      }, 50);
+    }
+    $scope.updateImage = updateImage();
 
-    $scope.$watch('metrics', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        console.log($scope.metrics);
+    $scope.getImageBounds = function() {
+      var isInfinite = !!$scope.current.isInfiniteMode;
+      var metrics = $scope.current.metrics;
+
+      var width = 0;
+      var height = 0;
+
+      if (_.isObject(metrics)) {
+        width = metrics.warp.length;
+        height = metrics.weft.length;
       }
+
+      return {
+        'max-width': isInfinite ? 'none' : width + 'px',
+        'max-height': isInfinite ? 'none' : height + 'px'
+      };
+    };
+
+    $q(database.loadItems()).then(function(data) {
+      $scope.tartans = data;
+      $scope.current.tartan = _.first(data);
+      $scope.isLoaded.application = true;
+
+      updateImage();
     });
 
-    $scope.availableWeaves = _.map(tartan.defaults.weave,
-      function(value, key) {
-        return {
-          name: _.startCase(key) + ' (' + value.join(' x ') + ')',
-          value: value
-        };
-      });
-    $scope.weave = tartan.defaults.weave.serge;
+    $scope.$watch('current', function() {
+      updateImage();
+    }, true);
   }
 ]);

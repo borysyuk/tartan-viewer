@@ -3,6 +3,15 @@
 var angular = require('angular');
 require('angular-tartan');
 
-module.exports = angular.module('Application', [
+var app = angular.module('Application', [
   'angular-tartan'
 ]);
+
+app.run([
+  '$rootScope',
+  function($rootScope) {
+    $rootScope.isLoaded = {};
+  }
+]);
+
+module.exports = app;

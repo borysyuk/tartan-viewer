@@ -1,0 +1,9 @@
+<p ng-if="!!tartan.source"><strong>Source:</strong> {{ tartan.source }}</p>
+<p ng-if="!!tartan.overview">{{ tartan.overview }}</p>
+<p ng-if="!!tartan.comment">{{ tartan.comment }}</p>
+<p ng-if="!!tartan.copyright">{{ tartan.copyright }}</p>
+
+<div ng-if="!!tartan.sett">
+  <p><strong>Tartan threadcount:</strong></p>
+  <pre>{{ tartan.sett }}</pre>
+</div>

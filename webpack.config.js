@@ -21,11 +21,16 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.less/,
+        loader: ExtractTextPlugin.extract(
+          'style-loader', 'css-loader!less-loader')
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?.*)?$/,
         loader: 'file?name=fonts/[name].[ext]'
       },
       {
-        test: /\.(jpg|jpeg|gif|png|svg)$/,
+        test: /\.(jpg|jpeg|gif|png|svg)(\?.*)?$/,
         loader: 'file?name=images/[name].[ext]'
       }
     ]
@@ -35,6 +40,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new ExtractTextPlugin('css/app.css')
+    new ExtractTextPlugin('app.css')
   ]
 };

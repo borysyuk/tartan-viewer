@@ -6,57 +6,63 @@
 
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <link type="text/css" href="dist/css/app.css" rel="stylesheet">
+  <link type="text/css" href="dist/app.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="section-wrapper">
-  <h1 id="version">Tartan Viewer</h1>
+<div ng-if="!isLoaded.application" class="text-center padding-top-50 padding-bottom-50">
+  <div class="margin-bottom-10"><i class="fa fa-4x fa-spinner fa-pulse"></i></div>
+  <div class="margin-bottom-10">Loading application...</div>
 </div>
 
-<div class="section-wrapper" ng-hide="true">
-  Loading application...
-</div>
-
-<div ng-cloak>
-  <div id="editor-container" class="section-wrapper container">
-    <textarea ng-model="source"></textarea>
-  </div>
-
-  <div class="section-wrapper">
-  <div style="margin-bottom: 10px;">
-    <label>
-      Schema:&nbsp;<select ng-model="schema"
-        ng-options="item.value as item.name for item in availableSchemas"></select>
-    </label>
-
-    <label>
-      Weave:&nbsp;<select ng-model="weave"
-        ng-options="item.value as item.name for item in availableWeaves"></select>
-    </label>
-  </div>
-  <div style="margin-bottom: 10px;">
-    <label>
-      <input type="checkbox" ng-model="inifinteImage">
-      Repeat image infinitely
-    </label>
-  </div>
-  </div>
-
-  <tartan source="{{ source }}">
-    <tartan-schema name="{{ schema }}"></tartan-schema>
-    <tartan-metrics model="metrics" options="{weave: weave}"></tartan-metrics>
-
-    <div id="canvas-container" class="section-wrapper container">
-      <tartan-render-image repeat="inifinteImage"
-        options="{weave: weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
+<div ng-cloak ng-if="isLoaded.application">
+  <div class="container-fluid">
+    <div class="margin-bottom-15">
+      <tartan-list items="tartans" selected="current.tartan"></tartan-list>
     </div>
-
-    <div id="formatted-container" class="section-wrapper container">
-      <tartan-format></tartan-format>
+    <div class="row margin-bottom-15">
+      <div ng-class="{'col-sm-6': !!current.tartan.sett, 'col-sm-12': !current.tartan.sett}">
+        <tartan-info tartan="current.tartan"></tartan-info>
+      </div>
+      <div class="col-sm-6" ng-if="!!current.tartan.sett">
+        <div class="margin-bottom-15">
+          <button type="button" class="btn"
+            ng-class="{'btn-default': !current.isInfiniteMode, 'btn-info': current.isInfiniteMode}"
+            ng-click="current.isInfiniteMode = !current.isInfiniteMode; updateImage()"
+          ><i class="margin-right-5 fa fa-check-square-o"
+            ng-if="current.isInfiniteMode"></i>Draw as infinite texture</button>
+        </div>
+        <div>
+          <tartan source="{{ current.tartan.palette + ' ' + current.tartan.threadcount }}">
+            <tartan-schema name="classic"></tartan-schema>
+            <tartan-metrics model="current.metrics" options="{weave: current.weave}"></tartan-metrics>
+            <div class="x-preview-canvas-wrapper" ng-style="getImageBounds()">
+              <tartan-render-image repeat="current.isInfiniteMode"
+                options="{weave: current.weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
+            </div>
+          </tartan>
+        </div>
+      </div>
     </div>
-  </tartan>
+  </div>
 </div>
+
+<footer class="container-fluid padding-top-15 padding-bottom-15">
+<div class="row">
+  <div class="col-md-6">
+    <div><a href="https://datahub.io/dataset/tartans-from-different-sources2">Database (on the DataHub)</a> &ndash; the data for this project.</div>
+    <div><a href="https://github.com/kravets-levko/tartan/">Tartan parser on GitHub.</a></div>
+    <div><a href="https://github.com/kravets-levko/angular-tartan/">Angular bindings for tartan parser.</a></div>
+    <div><a href="https://en.wikipedia.org/wiki/Tartan">About tartans (Wikipedia).</a></div>
+  </div>
+
+  <div class="col-md-6">
+    <div><a href="https://www.tartanregister.gov.uk/threadcount.aspx">Scottish Tartans Authority</a>, the only organisation dedicated to promoting tartan &ndash; registered charity.</div>
+    <div><a href="http://www.tartanregister.gov.uk/">The Scottish Register of Tartans</a>, Scotland's official tartan register.</div>
+    <div><a href="http://www.tartans.scotland.net/world_register.cfm.htm">The Scottish Tartans World Register.</a></div>
+  </div>
+</div>
+</footer>
 
 <script type="text/javascript" src="dist/js/app.js"></script>
 

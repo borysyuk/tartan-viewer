@@ -1,0 +1,158 @@
+@light-grey: #fcfcfc;
+@dark-grey: #f5f5f5;
+@very-dark-grey: #e7e7e7;
+
+html {
+  height: 100%;
+  background: @dark-grey;
+}
+
+body {
+  background: @light-grey;
+}
+
+footer {
+  border-top: 1px solid @very-dark-grey;
+  background: @dark-grey;
+}
+
+textarea {
+  resize: none;
+  &.resize-vertical {
+    resize: vertical;
+  }
+  &.resize-horizontal {
+    resize: horizontal;
+  }
+  &.resize-vertical.resize-horizontal,
+  &.resize-both {
+    resize: both;
+  }
+}
+
+.text-large {
+  font-size: 200%;
+}
+
+.without-margins {
+  margin: 0;
+}
+
+.margin-side-x(@side, @multiplier: 10) when (@multiplier > 0) {
+  @n: @multiplier * 5;
+  .margin-@{side}-@{n} {
+    margin-@{side}: unit(@n, px);
+  }
+  .margin-side-x(@side, (@multiplier - 1));
+}
+
+.margin-side-x(top);
+.margin-side-x(right);
+.margin-side-x(bottom);
+.margin-side-x(left);
+
+.padding-side-x(@side, @multiplier: 10) when (@multiplier > 0) {
+  @n: @multiplier * 5;
+  .padding-@{side}-@{n} {
+    padding-@{side}: unit(@n, px);
+  }
+  .padding-side-x(@side, (@multiplier - 1));
+}
+
+.padding-side-x(top);
+.padding-side-x(right);
+.padding-side-x(bottom);
+.padding-side-x(left);
+
+.padding-top-15 {
+  padding-top: 15px;
+}
+
+.x-preview-canvas-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 100%;
+  }
+
+  canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+
+    &.infinite-image {
+      cursor: move;
+    }
+  }
+}
+
+.x-tartan-list {
+  li.tartan-search-input {
+    & > span {
+      padding: 0.75em 15px;
+      display: block;
+      position: relative;
+    }
+
+    cursor: text;
+
+    .form-control-static {
+      display: block;
+      padding: 0.6em 1em 0.4em;
+    }
+
+    &.pinned {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      background: inherit;
+      padding-top: 0.75em;
+    }
+  }
+
+  .dropdown {
+    &.open {
+      background: @dark-grey;
+    }
+
+    & > h3 {
+      cursor: pointer;
+      text-transform: none;
+      margin: 0;
+      padding: 0.5em 0;
+      border-bottom: 1px solid @very-dark-grey;
+    }
+
+    .dropdown-menu {
+      background: @dark-grey;
+      border: 0;
+      border-bottom: 1px solid #e7e7e7;
+      border-radius: 0;
+      max-height: 500px;
+      overflow-y: auto;
+      margin: 0;
+
+      li a {
+        line-height: 2em;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+}
+
