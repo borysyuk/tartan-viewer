@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-controller="MainController">
+<head>
+  <meta charset="utf-8">
+  <title>Tartan Viewer</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link type="text/css" href="dist/css/app.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="section-wrapper">
+  <h1 id="version">Tartan Viewer</h1>
+</div>
+
+<div class="section-wrapper" ng-hide="true">
+  Loading application...
+</div>
+
+<div ng-cloak>
+  <div id="editor-container" class="section-wrapper container">
+    <textarea ng-model="source"></textarea>
+  </div>
+
+  <div class="section-wrapper">
+  <div style="margin-bottom: 10px;">
+    <label>
+      Schema:&nbsp;<select ng-model="schema"
+        ng-options="item.value as item.name for item in availableSchemas"></select>
+    </label>
+
+    <label>
+      Weave:&nbsp;<select ng-model="weave"
+        ng-options="item.value as item.name for item in availableWeaves"></select>
+    </label>
+  </div>
+  <div style="margin-bottom: 10px;">
+    <label>
+      <input type="checkbox" ng-model="inifinteImage">
+      Repeat image infinitely
+    </label>
+  </div>
+  </div>
+
+  <tartan source="{{ source }}">
+    <tartan-schema name="{{ schema }}"></tartan-schema>
+    <tartan-metrics model="metrics" options="{weave: weave}"></tartan-metrics>
+
+    <div id="canvas-container" class="section-wrapper container">
+      <tartan-render-image repeat="inifinteImage"
+        options="{weave: weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
+    </div>
+
+    <div id="formatted-container" class="section-wrapper container">
+      <tartan-format></tartan-format>
+    </div>
+  </tartan>
+</div>
+
+<script type="text/javascript" src="dist/js/app.js"></script>
+
+</body>
+</html>
