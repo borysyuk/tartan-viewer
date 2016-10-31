@@ -22,7 +22,7 @@ function query(sql) {
         return _.map(response.result.records, function(record) {
           var result = _.pick(changeKeysCase(record), [
             'source', 'name', 'overview', 'comment', 'copyright',
-            'palette', 'threadcount'
+            'palette', 'threadcount', 'category', 'sourceUrl'
           ]);
 
           if (result.palette == ';') {

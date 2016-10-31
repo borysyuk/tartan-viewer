@@ -4,7 +4,17 @@ var angular = require('angular');
 require('angular-tartan');
 
 var app = angular.module('Application', [
-  'angular-tartan'
+  'angular-tartan',
+  'hc.marked'
+]);
+
+app.config([
+  'markedProvider',
+  function (markedProvider) {
+    markedProvider.setOptions({
+      gfm: true
+    });
+  }
 ]);
 
 app.run([

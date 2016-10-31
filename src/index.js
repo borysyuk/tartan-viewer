@@ -34,6 +34,8 @@ require('./styles/main.less');
     globals.Promise = require('bluebird');
   }
 
+  require('angular-marked');
+
   globals.addEventListener('load', function() {
     require('./application');
     angular.bootstrap(globals.document, ['Application']);

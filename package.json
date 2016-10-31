@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-marked": "^1.2.2",
     "angular-tartan": "^0.2.1",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
@@ -42,6 +43,7 @@
     "jquery": "^3.1.1",
     "js-polyfills": "^0.1.27",
     "lodash": "^4.16.4",
+    "marked": "^0.3.6",
     "napa": "^2.3.0",
     "tartan": "^3.3.2"
   },
