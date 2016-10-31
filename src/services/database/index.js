@@ -24,11 +24,6 @@ function query(sql) {
             'source', 'name', 'overview', 'comment', 'copyright',
             'palette', 'threadcount', 'category', 'sourceUrl'
           ]);
-
-          if (result.palette == ';') {
-            result.palette = '';
-          }
-
           var sett = _.filter([result.palette, result.threadcount]);
           result.sett = sett.length > 0 ? sett.join('\n') : null;
           return result;

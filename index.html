@@ -36,7 +36,9 @@
           <tartan source="{{ current.tartan.palette + ' ' + current.tartan.threadcount }}">
             <tartan-schema name="classic"></tartan-schema>
             <tartan-metrics model="current.metrics" options="{weave: current.weave}"></tartan-metrics>
-            <div class="x-preview-canvas-wrapper" ng-style="getImageBounds()">
+            <div class="x-preview-canvas-wrapper"
+              ng-class="{square: !current.isInfiniteMode, screen: !!current.isInfiniteMode}"
+              ng-style="getImageBounds()">
               <tartan-render-image repeat="current.isInfiniteMode"
                 options="{weave: current.weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
             </div>
