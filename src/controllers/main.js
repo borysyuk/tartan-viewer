@@ -55,9 +55,8 @@ app.controller('MainController', [
       updateImage();
     });
 
-    $scope.$watch('current', function() {
-      updateImage();
-      updateCurrentTartans();
-    }, true);
+    $scope.$watch('current.category', updateCurrentTartans);
+    $scope.$watch('current.tartan', updateImage);
+    $scope.$watch('current.isInfiniteMode', updateImage);
   }
 ]);
