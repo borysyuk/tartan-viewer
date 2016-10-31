@@ -32,12 +32,18 @@
         <tartan-info tartan="current.tartan"></tartan-info>
       </div>
       <div class="col-sm-6" ng-if="!!current.tartan.sett">
-        <div class="margin-bottom-15">
+        <div class="btn-group margin-bottom-15">
           <button type="button" class="btn"
             ng-class="{'btn-default': !current.isInfiniteMode, 'btn-info': current.isInfiniteMode}"
             ng-click="current.isInfiniteMode = !current.isInfiniteMode; updateImage()"
           ><i class="margin-right-5 fa fa-check-square-o"
             ng-if="current.isInfiniteMode"></i>Draw as infinite texture</button>
+          <button type="button" class="btn btn-info"
+            title="Restore offset"
+            ng-if="current.isInfiniteMode"
+            ng-click="current.renderingOffset={x: 0, y: 0}">
+            <i class="fa fa-arrows-alt"></i>
+          </button>
         </div>
         <div>
           <tartan source="{{ current.tartan.palette + ' ' + current.tartan.threadcount }}">
@@ -47,6 +53,7 @@
               ng-class="{square: !current.isInfiniteMode, screen: !!current.isInfiniteMode}"
               ng-style="getImageBounds()">
               <tartan-render-image repeat="current.isInfiniteMode"
+                offset="current.renderingOffset"
                 options="{weave: current.weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
             </div>
           </tartan>
