@@ -1,7 +1,14 @@
-<p ng-if="!!tartan.source"><strong>Source:</strong> {{ tartan.source }}</p>
-<p ng-if="!!tartan.overview">{{ tartan.overview }}</p>
-<p ng-if="!!tartan.comment">{{ tartan.comment }}</p>
-<p ng-if="!!tartan.copyright">{{ tartan.copyright }}</p>
+<p ng-if="!!tartan.source"><strong>Source:</strong>
+  <a ng-if="!!tartan.sourceUrl" ng-href="{{ tartan.sourceUrl }}"
+    target="_blank">{{ tartan.source }}</a>
+  <span ng-if="!tartan.sourceUrl">{{ tartan.source }}</span>
+</p>
+<p ng-if="!!tartan.category"><strong>Category:</strong>
+  <span>{{ tartan.category }}</span>
+</p>
+<p ng-if="!!tartan.overview" marked="tartan.overview"></p>
+<p ng-if="!!tartan.comment" marked="tartan.comment"></p>
+<p ng-if="!!tartan.copyright" marked="tartan.copyright"></p>
 
 <div ng-if="!!tartan.sett">
   <p><strong>Tartan threadcount:</strong></p>

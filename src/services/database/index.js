@@ -22,13 +22,8 @@ function query(sql) {
         return _.map(response.result.records, function(record) {
           var result = _.pick(changeKeysCase(record), [
             'source', 'name', 'overview', 'comment', 'copyright',
-            'palette', 'threadcount'
+            'palette', 'threadcount', 'category', 'sourceUrl'
           ]);
-
-          if (result.palette == ';') {
-            result.palette = '';
-          }
-
           var sett = _.filter([result.palette, result.threadcount]);
           result.sett = sett.length > 0 ? sett.join('\n') : null;
           return result;
@@ -40,8 +35,37 @@ function query(sql) {
 }
 
 function loadItems() {
-  return query('SELECT * FROM "' + table +
-    '" ORDER BY "Source" ASC, "Name" ASC');
+  return query('SELECT * FROM "' + table + '"');
+}
+
+function getCategories(tartans) {
+  return _.chain(tartans)
+    .reduce(function(result, value) {
+      var key = JSON.stringify([value.source, value.category]);
+      if (!result[key]) {
+        result[key] = {
+          name: value.source + ' / ' + (value.category || '<Without category>'),
+          source: value.source,
+          category: value.category
+        };
+      }
+      return result;
+    }, {})
+    .sortBy('name')
+    .values()
+    .value();
+}
+
+function filterTartans(tartans, category) {
+  return _.chain(tartans)
+    .filter(function(item) {
+      return (item.source == category.source) &&
+        (item.category == category.category);
+    })
+    .sortBy('name')
+    .value();
 }
 
 module.exports.loadItems = loadItems;
+module.exports.getCategories = getCategories;
+module.exports.filterTartans = filterTartans;
