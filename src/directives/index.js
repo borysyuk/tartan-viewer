@@ -1,4 +1,4 @@
 'use strict';
 
-require('./tartan-list');
+require('./searchable-dropdown');
 require('./tartan-info');

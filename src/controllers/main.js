@@ -21,6 +21,12 @@ app.controller('MainController', [
     }
     $scope.updateImage = updateImage();
 
+    function updateCurrentTartans() {
+      $scope.current.tartans = database.filterTartans($scope.tartans,
+        $scope.current.category);
+      $scope.current.tartan = _.first($scope.current.tartans);
+    }
+
     $scope.getImageBounds = function() {
       var isInfinite = !!$scope.current.isInfiniteMode;
       var metrics = $scope.current.metrics;
@@ -41,7 +47,9 @@ app.controller('MainController', [
 
     $q(database.loadItems()).then(function(data) {
       $scope.tartans = data;
-      $scope.current.tartan = _.first(data);
+      $scope.categories = database.getCategories(data);
+      $scope.current.category = _.first($scope.categories);
+      updateCurrentTartans();
       $scope.isLoaded.application = true;
 
       updateImage();
@@ -49,6 +57,7 @@ app.controller('MainController', [
 
     $scope.$watch('current', function() {
       updateImage();
+      updateCurrentTartans();
     }, true);
   }
 ]);

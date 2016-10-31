@@ -35,8 +35,37 @@ function query(sql) {
 }
 
 function loadItems() {
-  return query('SELECT * FROM "' + table +
-    '" ORDER BY "Source" ASC, "Name" ASC');
+  return query('SELECT * FROM "' + table + '"');
+}
+
+function getCategories(tartans) {
+  return _.chain(tartans)
+    .reduce(function(result, value) {
+      var key = JSON.stringify([value.source, value.category]);
+      if (!result[key]) {
+        result[key] = {
+          name: value.source + ' / ' + (value.category || '<Without category>'),
+          source: value.source,
+          category: value.category
+        };
+      }
+      return result;
+    }, {})
+    .sortBy('name')
+    .values()
+    .value();
+}
+
+function filterTartans(tartans, category) {
+  return _.chain(tartans)
+    .filter(function(item) {
+      return (item.source == category.source) &&
+        (item.category == category.category);
+    })
+    .sortBy('name')
+    .value();
 }
 
 module.exports.loadItems = loadItems;
+module.exports.getCategories = getCategories;
+module.exports.filterTartans = filterTartans;

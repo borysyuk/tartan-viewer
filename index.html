@@ -17,8 +17,15 @@
 
 <div ng-cloak ng-if="isLoaded.application">
   <div class="container-fluid">
-    <div class="margin-bottom-15">
-      <tartan-list items="tartans" selected="current.tartan"></tartan-list>
+    <div class="row margin-bottom-15">
+      <div class="col-md-4">
+        <searchable-dropdown items="categories"
+          selected="current.category"></searchable-dropdown>
+      </div>
+      <div class="col-md-8">
+        <searchable-dropdown items="current.tartans"
+          selected="current.tartan"></searchable-dropdown>
+      </div>
     </div>
     <div class="row margin-bottom-15">
       <div ng-class="{'col-sm-6': !!current.tartan.sett, 'col-sm-12': !current.tartan.sett}">

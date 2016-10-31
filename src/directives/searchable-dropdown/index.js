@@ -3,7 +3,7 @@
 var $ = require('jquery');
 var app = require('../../module');
 
-app.directive('tartanList', [
+app.directive('searchableDropdown', [
   '$window', '$timeout',
   function($window, $timeout) {
     return {
@@ -32,17 +32,16 @@ app.directive('tartanList', [
         }
 
         var closeDropdownHandler = function(event) {
-          if (!$(event.target).parents($element.get(0)).length) {
+          if ($element.has(event.target).length == 0) {
             $timeout(function() {
               $scope.dropdownState.isOpen = false;
             });
           }
         };
 
-        $window.addEventListener('click', closeDropdownHandler);
-
+        $($window).on('click', closeDropdownHandler);
         $scope.$on('$destroy', function() {
-          $window.removeEventListener('click', closeDropdownHandler);
+          $($window).off('click', closeDropdownHandler);
         });
       }
     };
