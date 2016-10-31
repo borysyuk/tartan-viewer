@@ -9395,7 +9395,12 @@ textarea.resize-both {
   content: "";
   display: block;
   width: 100%;
+}
+.x-preview-canvas-wrapper.square:before {
   padding-top: 100%;
+}
+.x-preview-canvas-wrapper.screen:before {
+  padding-top: 60%;
 }
 .x-preview-canvas-wrapper canvas {
   position: absolute;
@@ -9443,6 +9448,12 @@ textarea.resize-both {
   margin: 0;
   padding: 0.5em 0;
   border-bottom: 1px solid #e7e7e7;
+}
+.x-tartan-list .dropdown > h3 span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .x-tartan-list .dropdown .dropdown-menu {
   background: #f5f5f5;
