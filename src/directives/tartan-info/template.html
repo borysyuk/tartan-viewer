@@ -3,8 +3,11 @@
     target="_blank">{{ tartan.source }}</a>
   <span ng-if="!tartan.sourceUrl">{{ tartan.source }}</span>
 </p>
-<p ng-if="!!tartan.category"><strong>Category:</strong>
-  <span>{{ tartan.category }}</span>
+<p ng-if="tartan.categories.length > 0"><strong
+  ng-pluralize
+  count="tartan.categories.length"
+  when="{'1': 'Category:', 'other': 'Categories:'}"></strong>
+  <span>{{ tartan.categories | join:', ' }}</span>
 </p>
 <p ng-if="!!tartan.overview" marked="tartan.overview"></p>
 <p ng-if="!!tartan.comment" marked="tartan.comment"></p>
