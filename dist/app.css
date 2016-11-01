@@ -9391,17 +9391,6 @@ textarea.resize-both {
   box-sizing: border-box;
   padding: 0;
 }
-.x-preview-canvas-wrapper:before {
-  content: "";
-  display: block;
-  width: 100%;
-}
-.x-preview-canvas-wrapper.square:before {
-  padding-top: 100%;
-}
-.x-preview-canvas-wrapper.screen:before {
-  padding-top: 60%;
-}
 .x-preview-canvas-wrapper .tartan-render-image {
   position: absolute !important;
   box-sizing: border-box;
