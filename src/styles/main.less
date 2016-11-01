@@ -73,6 +73,12 @@ textarea {
   box-sizing: border-box;
   padding: 0;
 
+  .x-preview-canvas-wrapper.interactive {
+    .tartan-render-image canvas.infinite-image {
+      cursor: move;
+    }
+  }
+
   .tartan-render-image {
     position: absolute !important;
     box-sizing: border-box;
@@ -90,10 +96,6 @@ textarea {
       padding: 0;
       image-rendering: pixelated;
       -ms-interpolation-mode: nearest-neighbor;
-
-      &.infinite-image {
-        cursor: move;
-      }
     }
   }
 }
