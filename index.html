@@ -33,14 +33,14 @@
       </div>
       <div class="col-sm-6" ng-if="!!current.tartan.sett">
         <div class="btn-group margin-bottom-15">
-          <button type="button" class="btn"
+          <button type="button" class="btn hide-outline"
             ng-class="{'btn-default': !current.isInfiniteMode, 'btn-info': current.isInfiniteMode}"
             ng-click="current.isInfiniteMode = !current.isInfiniteMode; current.isInteractiveMode = false; updateImage()"
           ><i class="margin-right-5 fa fa-check-square-o"
             ng-if="current.isInfiniteMode"></i>
             Draw as infinite texture
           </button>
-          <button type="button" class="btn btn-info"
+          <button type="button" class="btn btn-info hide-outline"
             title="Restore offset"
             ng-if="current.isInfiniteMode"
             ng-click="current.isInteractiveMode = !current.isInteractiveMode">
@@ -48,7 +48,7 @@
               ng-class="{'fa-check-square-o': current.isInteractiveMode, 'fa-square-o': !current.isInteractiveMode}"></i>
             Interactive
           </button>
-          <button type="button" class="btn btn-info"
+          <button type="button" class="btn btn-info hide-outline"
             title="Restore offset"
             ng-if="current.isInfiniteMode && current.isInteractiveMode"
             ng-click="current.renderingOffset={x: 0, y: 0}">
@@ -90,7 +90,7 @@
 </div>
 </footer>
 
-<script type="text/javascript" src="dist/js/app.js"></script>
+<script type="text/javascript" src="dist/app.js"></script>
 
 </body>
 </html>

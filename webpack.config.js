@@ -8,7 +8,7 @@ module.exports = {
   output: {
     library: 'app',
     libraryTarget: 'umd',
-    filename: 'js/app.js',
+    filename: 'app.js',
     path: './dist'
   },
   devtool: 'source-map',
