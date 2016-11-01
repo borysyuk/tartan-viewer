@@ -9140,6 +9140,26 @@ textarea.resize-both {
 .text-large {
   font-size: 200%;
 }
+.hide-outline {
+  outline: none;
+  -ms-hide-outline: expression(this.hideFocus = true);
+}
+.hide-outline:focus,
+.hide-outline:active,
+.hide-outline:focus:active {
+  outline: none;
+  -ms-hide-outline: expression(this.hideFocus = true);
+}
+.hide-outline:focus::-moz-focus-inner,
+.hide-outline:active::-moz-focus-inner,
+.hide-outline:focus:active::-moz-focus-inner {
+  outline: none !important;
+  border: 0 !important;
+}
+input::-ms-clear,
+input::-ms-reveal {
+  display: none !important;
+}
 .without-margins {
   margin: 0;
 }
@@ -9391,6 +9411,9 @@ textarea.resize-both {
   box-sizing: border-box;
   padding: 0;
 }
+.x-preview-canvas-wrapper.interactive .tartan-render-image canvas.infinite-image {
+  cursor: move;
+}
 .x-preview-canvas-wrapper .tartan-render-image {
   position: absolute !important;
   box-sizing: border-box;
@@ -9408,9 +9431,6 @@ textarea.resize-both {
   padding: 0;
   image-rendering: pixelated;
   -ms-interpolation-mode: nearest-neighbor;
-}
-.x-preview-canvas-wrapper .tartan-render-image canvas.infinite-image {
-  cursor: move;
 }
 .x-tartan-list li.tartan-search-input {
   cursor: text;
