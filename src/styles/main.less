@@ -34,6 +34,28 @@ textarea {
   font-size: 200%;
 }
 
+.hide-outline {
+  outline: none;
+  -ms-hide-outline: ~"expression(this.hideFocus = true)";
+
+  &:focus,
+  &:active,
+  &:focus:active {
+    outline: none;
+    -ms-hide-outline: ~"expression(this.hideFocus = true)";
+
+    &::-moz-focus-inner {
+      outline: none !important;
+      border: 0 !important;
+    }
+  }
+}
+
+input::-ms-clear,
+input::-ms-reveal{
+  display: none !important;
+}
+
 .without-margins {
   margin: 0;
 }
@@ -73,7 +95,7 @@ textarea {
   box-sizing: border-box;
   padding: 0;
 
-  .x-preview-canvas-wrapper.interactive {
+  &.interactive {
     .tartan-render-image canvas.infinite-image {
       cursor: move;
     }
