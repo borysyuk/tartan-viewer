@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  globals.tartan = __webpack_require__(7);
 	
-	  var angular = __webpack_require__(12);
+	  var angular = __webpack_require__(13);
 	  globals.angular = angular;
 	  if (typeof globals.Promise != 'function') {
 	    globals.Promise = __webpack_require__(16);
@@ -17609,7 +17609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var angular = __webpack_require__(12);
+	var angular = __webpack_require__(13);
 	
 	module.exports = angular.module('angular-tartan', []);
 
@@ -17701,17 +17701,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(32);
-	module.exports = angular;
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
-	var angular = __webpack_require__(12);
+	var angular = __webpack_require__(13);
 	__webpack_require__(30);
 	
 	var app = angular.module('Application', [
@@ -17736,6 +17728,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	]);
 	
 	module.exports = app;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(32);
+	module.exports = angular;
 
 
 /***/ },
@@ -71272,7 +71272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 57 */
 /***/ function(module, exports) {
 
-	module.exports = "<p ng-if=\"!!tartan.source\"><strong>Source:</strong>\n  <a ng-if=\"!!tartan.sourceUrl\" ng-href=\"{{ tartan.sourceUrl }}\"\n    target=\"_blank\">{{ tartan.source }}</a>\n  <span ng-if=\"!tartan.sourceUrl\">{{ tartan.source }}</span>\n</p>\n<p ng-if=\"!!tartan.category\"><strong>Category:</strong>\n  <span>{{ tartan.category }}</span>\n</p>\n<p ng-if=\"!!tartan.overview\" marked=\"tartan.overview\"></p>\n<p ng-if=\"!!tartan.comment\" marked=\"tartan.comment\"></p>\n<p ng-if=\"!!tartan.copyright\" marked=\"tartan.copyright\"></p>\n\n<div ng-if=\"!!tartan.sett\">\n  <p><strong>Tartan threadcount:</strong></p>\n  <pre>{{ tartan.sett }}</pre>\n</div>\n"
+	module.exports = "<p ng-if=\"!!tartan.source\"><strong>Source:</strong>\n  <a ng-if=\"!!tartan.sourceUrl\" ng-href=\"{{ tartan.sourceUrl }}\"\n    target=\"_blank\">{{ tartan.source }}</a>\n  <span ng-if=\"!tartan.sourceUrl\">{{ tartan.source }}</span>\n</p>\n<p ng-if=\"tartan.categories.length > 0\"><strong\n  ng-pluralize\n  count=\"tartan.categories.length\"\n  when=\"{'1': 'Category:', 'other': 'Categories:'}\"></strong>\n  <span>{{ tartan.categories | join:', ' }}</span>\n</p>\n<p ng-if=\"!!tartan.overview\" marked=\"tartan.overview\"></p>\n<p ng-if=\"!!tartan.comment\" marked=\"tartan.comment\"></p>\n<p ng-if=\"!!tartan.copyright\" marked=\"tartan.copyright\"></p>\n\n<div ng-if=\"!!tartan.sett\">\n  <p><strong>Tartan threadcount:</strong></p>\n  <pre>{{ tartan.sett }}</pre>\n</div>\n"
 
 /***/ },
 /* 58 */
@@ -74314,10 +74314,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports = __webpack_require__(13);
+	module.exports = __webpack_require__(12);
 	
 	__webpack_require__(99);
 	__webpack_require__(101);
+	__webpack_require__(104);
 
 
 /***/ },
@@ -74336,10 +74337,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var $q = __webpack_require__(106).$q;
+	var $q = __webpack_require__(108).$q;
 	var tartan = __webpack_require__(7);
-	var app = __webpack_require__(13);
-	var database = __webpack_require__(104);
+	var app = __webpack_require__(12);
+	var database = __webpack_require__(106);
 	
 	app.controller('MainController', [
 	  '$scope', '$window', '$timeout',
@@ -74414,7 +74415,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var $ = __webpack_require__(18);
-	var app = __webpack_require__(13);
+	var app = __webpack_require__(12);
 	
 	app.directive('searchableDropdown', [
 	  '$window', '$timeout',
@@ -74469,7 +74470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var app = __webpack_require__(13);
+	var app = __webpack_require__(12);
 	
 	app.directive('tartanInfo', [
 	  function() {
@@ -74493,8 +74494,38 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	__webpack_require__(105);
+
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	var _ = __webpack_require__(1);
-	var downloader = __webpack_require__(105);
+	var module = __webpack_require__(12);
+	
+	module.filter('join', [
+	  function() {
+	    return function(input, separator) {
+	      if (_.isArray(input)) {
+	        return _.filter(input).join(separator || ', ');
+	      }
+	      return input;
+	    };
+	  }
+	]);
+
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var downloader = __webpack_require__(107);
 	
 	var apiUrl = 'https://datahub.io/api/action/datastore_search_sql?sql=';
 	var table = '12352ad7-1424-4292-b9a6-141870ff1048';
@@ -74515,10 +74546,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _.map(response.result.records, function(record) {
 	          var result = _.pick(changeKeysCase(record), [
 	            'source', 'name', 'overview', 'comment', 'copyright',
-	            'palette', 'threadcount', 'category', 'sourceUrl'
+	            'palette', 'threadcount', 'sourceUrl'
 	          ]);
 	          var sett = _.filter([result.palette, result.threadcount]);
 	          result.sett = sett.length > 0 ? sett.join('\n') : null;
+	          result.categories = _.filter(record['Category'].split('; '));
 	          return result;
 	        });
 	      } else {
@@ -74528,20 +74560,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function loadItems() {
-	  return query('SELECT * FROM "' + table + '"');
+	  return query('SELECT * FROM "' + table +
+	    '" WHERE "Source" = \'House of Tartan\'');
 	}
 	
 	function getCategories(tartans) {
 	  return _.chain(tartans)
 	    .reduce(function(result, value) {
-	      var key = JSON.stringify([value.source, value.category]);
-	      if (!result[key]) {
-	        result[key] = {
-	          name: value.source + ' / ' + (value.category || '<Without category>'),
-	          source: value.source,
-	          category: value.category
-	        };
+	      var source = value.source;
+	      var categories = value.categories;
+	      if (categories.length == 0) {
+	        categories = [''];
 	      }
+	      _.each(categories, function(category) {
+	        var key = JSON.stringify([source, category]);
+	        if (!result[key]) {
+	          result[key] = {
+	            name: category || '<Without category>',
+	            source: source,
+	            category: category
+	          };
+	        }
+	      });
 	      return result;
 	    }, {})
 	    .sortBy('name')
@@ -74552,8 +74592,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	function filterTartans(tartans, category) {
 	  return _.chain(tartans)
 	    .filter(function(item) {
+	      var categories = item.categories;
+	      if (categories.length == 0) {
+	        categories = [''];
+	      }
 	      return (item.source == category.source) &&
-	        (item.category == category.category);
+	        (categories.indexOf(category.category) >= 0);
 	    })
 	    .sortBy('name')
 	    .value();
@@ -74565,7 +74609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74604,13 +74648,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 106 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var angular = __webpack_require__(12);
+	var angular = __webpack_require__(13);
 	
 	var q = null;
 	var timeout = null;
