@@ -35,7 +35,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-marked": "^1.2.2",
-    "angular-tartan": "^0.2.2",
+    "angular-tartan": "^0.2.3",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
