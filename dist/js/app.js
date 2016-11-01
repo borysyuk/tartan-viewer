@@ -117,7 +117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var undefined;
 	
 	  /** Used as the semantic version number. */
-	  var VERSION = '4.16.5';
+	  var VERSION = '4.16.6';
 	
 	  /** Used as the size to enable large array optimizations. */
 	  var LARGE_ARRAY_SIZE = 200;
@@ -4518,9 +4518,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            othIndex = -1;
 	
 	        while (++othIndex < length) {
-	          var othArray = arrays[othIndex];
-	          if (othArray !== array) {
-	            result[index] = baseDifference(result[index] || array, othArray, iteratee, comparator);
+	          if (othIndex != index) {
+	            result[index] = baseDifference(result[index] || array, arrays[othIndex], iteratee, comparator);
 	          }
 	        }
 	      }
@@ -34639,7 +34638,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      restrict: 'E',
 	      require: '^^tartan',
-	      template: '<canvas ng-class="{\'infinite-image\': !!repeat}"></canvas>',
+	      template:
+	        '<div class="tartan-render-image" style="position:relative;">' +
+	        '<canvas ng-class="{\'infinite-image\': !!repeat}"></canvas>' +
+	        '</div>',
 	      replace: false,
 	      scope: {
 	        options: '=?',
@@ -34647,7 +34649,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        offset: '=?'
 	      },
 	      link: function($scope, element, attr, controller) {
-	        var target = element.find('canvas').get(0);
+	        var target = element.find('canvas');
+	        var canvas = target.get(0);
+	        var parent = target.parent().get(0);
 	        var render = null;
 	        var lastSett = null;
 	        var offset = {x: 0, y: 0};
@@ -34667,7 +34671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }, true);
 	
 	        var repaint = tartan.helpers.repaint(function() {
-	          offset = render(target, offset, !!$scope.repeat);
+	          offset = render(canvas, offset, !!$scope.repeat);
 	          $timeout(updateOffset);
 	        });
 	
@@ -34679,14 +34683,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	              transformSett: tartan.transform.flatten()
 	            });
 	            render = tartan.render.canvas(sett, options);
-	            target.width = target.clientWidth;
-	            target.height = target.clientHeight;
 	          } else {
 	            render = tartan.render.canvas(); // Empty renderer
 	          }
-	          target.width = target.clientWidth;
-	          target.height = target.clientHeight;
-	          repaint();
+	          updateCanvasSize();
 	        }
 	
 	        update(controller.getSett());
@@ -34708,14 +34708,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }, true);
 	
 	        // Make it responsive
-	        $window.addEventListener('resize', function() {
-	          target.width = target.clientWidth;
-	          target.height = target.clientHeight;
+	        function updateCanvasSize() {
+	          var w = Math.ceil(parent.offsetWidth);
+	          var h = Math.ceil(parent.offsetHeight);
+	          target.css({
+	            position: 'absolute',
+	            left: '0px',
+	            top: '0px',
+	            width: w + 'px',
+	            height: h + 'px'
+	          });
+	          if (canvas.width != w) {
+	            canvas.width = w;
+	          }
+	          if (canvas.height != h) {
+	            canvas.height = h;
+	          }
 	          repaint();
+	        }
+	        $window.addEventListener('resize', updateCanvasSize);
+	        $scope.$on('$destroy', function() {
+	          $window.removeEventListener('resize', updateCanvasSize);
 	        });
 	
 	        // Make it draggable
-	        makeDraggable($window, target, function() {
+	        makeDraggable($window, canvas, function() {
 	          return offset;
 	        }, repaint);
 	      }
@@ -69684,25 +69701,25 @@ return /******/ (function(modules) { // webpackBootstrap
 		"_args": [
 			[
 				{
-					"raw": "angular-tartan@0.2.2",
+					"raw": "angular-tartan@0.2.3",
 					"scope": null,
 					"escapedName": "angular-tartan",
 					"name": "angular-tartan",
-					"rawSpec": "0.2.2",
-					"spec": "0.2.2",
+					"rawSpec": "0.2.3",
+					"spec": "0.2.3",
 					"type": "version"
 				},
 				"/var/projects/tartan-viewer"
 			]
 		],
-		"_from": "angular-tartan@0.2.2",
-		"_id": "angular-tartan@0.2.2",
+		"_from": "angular-tartan@0.2.3",
+		"_id": "angular-tartan@0.2.3",
 		"_inCache": true,
 		"_location": "/angular-tartan",
-		"_nodeVersion": "4.4.5",
+		"_nodeVersion": "4.5.0",
 		"_npmOperationalInternal": {
-			"host": "packages-18-east.internal.npmjs.com",
-			"tmp": "tmp/angular-tartan-0.2.2.tgz_1477926864525_0.9154292000457644"
+			"host": "packages-12-west.internal.npmjs.com",
+			"tmp": "tmp/angular-tartan-0.2.3.tgz_1477988247544_0.6725778414402157"
 		},
 		"_npmUser": {
 			"name": "levko",
@@ -69711,22 +69728,22 @@ return /******/ (function(modules) { // webpackBootstrap
 		"_npmVersion": "3.10.8",
 		"_phantomChildren": {},
 		"_requested": {
-			"raw": "angular-tartan@0.2.2",
+			"raw": "angular-tartan@0.2.3",
 			"scope": null,
 			"escapedName": "angular-tartan",
 			"name": "angular-tartan",
-			"rawSpec": "0.2.2",
-			"spec": "0.2.2",
+			"rawSpec": "0.2.3",
+			"spec": "0.2.3",
 			"type": "version"
 		},
 		"_requiredBy": [
 			"#USER",
 			"/"
 		],
-		"_resolved": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.2.2.tgz",
-		"_shasum": "d9c5bb580c5b7d25aa589efcd215d6fea8ea6b4c",
+		"_resolved": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.2.3.tgz",
+		"_shasum": "a25c670615dea69902bb9569f0f5e2cc07443639",
 		"_shrinkwrap": null,
-		"_spec": "angular-tartan@0.2.2",
+		"_spec": "angular-tartan@0.2.3",
 		"_where": "/var/projects/tartan-viewer",
 		"author": {
 			"name": "Levko Kravets",
@@ -69758,14 +69775,14 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"directories": {},
 		"dist": {
-			"shasum": "d9c5bb580c5b7d25aa589efcd215d6fea8ea6b4c",
-			"tarball": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.2.2.tgz"
+			"shasum": "a25c670615dea69902bb9569f0f5e2cc07443639",
+			"tarball": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.2.3.tgz"
 		},
 		"engines": {
 			"node": "^4.0.0",
 			"npm": "^2.0.0"
 		},
-		"gitHead": "a8f686e88a4e4b1075d847fe70b6fa1918f7c482",
+		"gitHead": "6e4f6d473cd700367eb41d2534063fdd70737693",
 		"homepage": "https://github.com/kravets-levko/angular-tartan#readme",
 		"keywords": [
 			"angular",
@@ -69800,7 +69817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			"start": "xdg-open index.html",
 			"test": "mocha tests/*.js tests/*/*.js"
 		},
-		"version": "0.2.2",
+		"version": "0.2.3",
 		"warnings": [
 			{
 				"code": "ENOTSUP",
@@ -69808,7 +69825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"node": "^4.0.0",
 					"npm": "^2.0.0"
 				},
-				"pkgid": "angular-tartan@0.2.2"
+				"pkgid": "angular-tartan@0.2.3"
 			},
 			{
 				"code": "ENOTSUP",
@@ -69816,7 +69833,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"node": "^4.0.0",
 					"npm": "^2.0.0"
 				},
-				"pkgid": "angular-tartan@0.2.2"
+				"pkgid": "angular-tartan@0.2.3"
 			}
 		]
 	};
