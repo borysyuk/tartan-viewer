@@ -22,10 +22,11 @@ function query(sql) {
         return _.map(response.result.records, function(record) {
           var result = _.pick(changeKeysCase(record), [
             'source', 'name', 'overview', 'comment', 'copyright',
-            'palette', 'threadcount', 'category', 'sourceUrl'
+            'palette', 'threadcount', 'sourceUrl'
           ]);
           var sett = _.filter([result.palette, result.threadcount]);
           result.sett = sett.length > 0 ? sett.join('\n') : null;
+          result.categories = _.filter(record['Category'].split('; '));
           return result;
         });
       } else {
@@ -35,20 +36,28 @@ function query(sql) {
 }
 
 function loadItems() {
-  return query('SELECT * FROM "' + table + '"');
+  return query('SELECT * FROM "' + table +
+    '" WHERE "Source" = \'House of Tartan\'');
 }
 
 function getCategories(tartans) {
   return _.chain(tartans)
     .reduce(function(result, value) {
-      var key = JSON.stringify([value.source, value.category]);
-      if (!result[key]) {
-        result[key] = {
-          name: value.source + ' / ' + (value.category || '<Without category>'),
-          source: value.source,
-          category: value.category
-        };
+      var source = value.source;
+      var categories = value.categories;
+      if (categories.length == 0) {
+        categories = [''];
       }
+      _.each(categories, function(category) {
+        var key = JSON.stringify([source, category]);
+        if (!result[key]) {
+          result[key] = {
+            name: category || '<Without category>',
+            source: source,
+            category: category
+          };
+        }
+      });
       return result;
     }, {})
     .sortBy('name')
@@ -59,8 +68,12 @@ function getCategories(tartans) {
 function filterTartans(tartans, category) {
   return _.chain(tartans)
     .filter(function(item) {
+      var categories = item.categories;
+      if (categories.length == 0) {
+        categories = [''];
+      }
       return (item.source == category.source) &&
-        (item.category == category.category);
+        (categories.indexOf(category.category) >= 0);
     })
     .sortBy('name')
     .value();
