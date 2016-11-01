@@ -40,6 +40,7 @@ app.controller('MainController', [
       }
 
       return {
+        'padding-top': isInfinite ? '60%' : '100%',
         'max-width': isInfinite ? 'none' : width + 'px',
         'max-height': isInfinite ? 'none' : height + 'px'
       };
