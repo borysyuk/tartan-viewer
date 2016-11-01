@@ -35,14 +35,24 @@
         <div class="btn-group margin-bottom-15">
           <button type="button" class="btn"
             ng-class="{'btn-default': !current.isInfiniteMode, 'btn-info': current.isInfiniteMode}"
-            ng-click="current.isInfiniteMode = !current.isInfiniteMode; updateImage()"
+            ng-click="current.isInfiniteMode = !current.isInfiniteMode; current.isInteractiveMode = false; updateImage()"
           ><i class="margin-right-5 fa fa-check-square-o"
-            ng-if="current.isInfiniteMode"></i>Draw as infinite texture</button>
+            ng-if="current.isInfiniteMode"></i>
+            Draw as infinite texture
+          </button>
           <button type="button" class="btn btn-info"
             title="Restore offset"
             ng-if="current.isInfiniteMode"
+            ng-click="current.isInteractiveMode = !current.isInteractiveMode">
+            <i class="margin-right-5 fa"
+              ng-class="{'fa-check-square-o': current.isInteractiveMode, 'fa-square-o': !current.isInteractiveMode}"></i>
+            Interactive
+          </button>
+          <button type="button" class="btn btn-info"
+            title="Restore offset"
+            ng-if="current.isInfiniteMode && current.isInteractiveMode"
             ng-click="current.renderingOffset={x: 0, y: 0}">
-            <i class="fa fa-arrows-alt"></i>
+            <i class="fa fa-home"></i>
           </button>
         </div>
         <div>
@@ -50,10 +60,10 @@
             <tartan-schema name="classic"></tartan-schema>
             <tartan-metrics model="current.metrics" options="{weave: current.weave}"></tartan-metrics>
             <div class="x-preview-canvas-wrapper"
-              ng-class="{square: !current.isInfiniteMode, screen: !!current.isInfiniteMode}"
+              ng-class="{interactive: current.isInteractiveMode}"
               ng-style="getImageBounds()">
               <tartan-render-image repeat="current.isInfiniteMode"
-                offset="current.renderingOffset"
+                offset="current.renderingOffset" interactive="current.isInteractiveMode"
                 options="{weave: current.weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
             </div>
           </tartan>

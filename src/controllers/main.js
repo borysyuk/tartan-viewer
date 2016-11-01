@@ -57,7 +57,10 @@ app.controller('MainController', [
     });
 
     $scope.$watch('current.category', updateCurrentTartans);
-    $scope.$watch('current.tartan', updateImage);
+    $scope.$watch('current.tartan', function() {
+      $scope.current.renderingOffset = {x: 0, y: 0};
+      updateImage();
+    });
     $scope.$watch('current.isInfiniteMode', updateImage);
   }
 ]);
