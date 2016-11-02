@@ -4,7 +4,7 @@ var _ = require('lodash');
 var $q = require('../services/ng-utils').$q;
 var tartan = require('tartan');
 var app = require('../module');
-var database = require('../services/database');
+var application = require('../services/application');
 
 app.controller('MainController', [
   '$scope', '$window', '$timeout',
@@ -12,6 +12,14 @@ app.controller('MainController', [
     $scope.current = {
       weave: [2, 2]
     };
+
+    $scope.searchExamples = [
+      'MacKenzie Clan',
+      'MacLeod Tartan',
+      'MacDonald\'s tartan'
+    ];
+
+    var searchIndex = null;
 
     function updateImage() {
       // Fix canvas size
@@ -22,8 +30,11 @@ app.controller('MainController', [
     $scope.updateImage = updateImage();
 
     function updateCurrentTartans() {
-      $scope.current.tartans = database.filterTartans($scope.tartans,
-        $scope.current.category);
+      if (searchIndex) {
+        $scope.current.tartans = searchIndex($scope.current.search);
+      } else {
+        $scope.current.tartans = [];
+      }
       $scope.current.tartan = _.first($scope.current.tartans);
     }
 
@@ -46,17 +57,14 @@ app.controller('MainController', [
       };
     };
 
-    $q(database.loadItems()).then(function(data) {
-      $scope.tartans = data;
-      $scope.categories = database.getCategories(data);
-      $scope.current.category = _.first($scope.categories);
+    $q(application.loadDatabase()).then(function(search) {
+      searchIndex = search;
       updateCurrentTartans();
       $scope.isLoaded.application = true;
-
       updateImage();
     });
 
-    $scope.$watch('current.category', updateCurrentTartans);
+    $scope.$watch('current.search', updateCurrentTartans);
     $scope.$watch('current.tartan', function() {
       $scope.current.renderingOffset = {x: 0, y: 0};
       updateImage();
