@@ -1,0 +1,14 @@
+<div class="margin-bottom-5">
+  <span ng-pluralize
+    count="items.length"
+    when="{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}"></span>
+</div>
+
+<pagination ng-show="pagination.count > 1"
+  items="items" items-per-page="{{ itemsPerPage }}" pagination="pagination"></pagination>
+
+<div>
+  <div ng-repeat="item in pagination.items track by item.id">
+    <a href="javascript:void(0)" ng-click="setCurrent(item)">{{ item.name }}</a>
+  </div>
+</div>
