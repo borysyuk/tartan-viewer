@@ -6,7 +6,8 @@
 
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <link type="text/css" href="dist/app.css" rel="stylesheet">
+  <link type="text/css" href="dist/styles/vendor.css" rel="stylesheet">
+  <link type="text/css" href="dist/styles/app.css" rel="stylesheet">
 </head>
 <body>
 
@@ -62,13 +63,12 @@
           <div>
             <tartan source="{{ current.tartan.palette + ' ' + current.tartan.threadcount }}">
               <tartan-schema name="classic"></tartan-schema>
-              <tartan-metrics model="current.metrics" options="{weave: current.weave}"></tartan-metrics>
               <div class="x-preview-canvas-wrapper"
                 ng-class="{interactive: current.isInteractiveMode}"
                 ng-style="getImageBounds()">
                 <tartan-render-image repeat="current.isInfiniteMode"
                   offset="current.renderingOffset" interactive="current.isInteractiveMode"
-                  options="{weave: current.weave, skipUnsupportedTokens: true, skipInvalidColors: true}"></tartan-render-image>
+                  metrics="current.metrics" options="{weave: current.weave}"></tartan-render-image>
               </div>
             </tartan>
           </div>
