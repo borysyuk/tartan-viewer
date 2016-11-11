@@ -1,103 +1,80 @@
 'use strict';
 
 var _ = require('lodash');
-var lunr = require('lunr');
 var Promise = require('bluebird');
-var downloader = require('../downloader');
+var csv = require('papaparse');
+var search = require('../search');
 
-var apiUrl = 'https://datahub.io/api/action/datastore_search_sql?sql=';
-var table = '12352ad7-1424-4292-b9a6-141870ff1048';
+var sourceUrl = 'https://raw.githubusercontent.com/kravets-levko/' +
+  'tartan-database/master/data/house-of-tartan.csv';
 
-function changeKeysCase(object) {
-  var result = {};
-  _.each(object, function(value, key) {
-    result[_.camelCase(key)] = value;
+function getPapaParseError(parseErrors) {
+  parseErrors = _.filter(parseErrors, function(error) {
+    // Delimiter was not auto-detected (defaults used).
+    // We'll not treat this as an error
+    var delimiterNotDetected = (error.type == 'Delimiter') &&
+      (error.code == 'UndetectableDelimiter');
+
+    return !delimiterNotDetected;
   });
-  return result;
+  if (parseErrors.length > 0) {
+    return new Error(parseErrors[0].message);
+  }
 }
 
-function query(sql) {
-  var url = apiUrl + encodeURIComponent(sql);
-  return downloader.getJson(url)
-    .then(function(response) {
-      if (response.success) {
-        return _.map(response.result.records, function(record, index) {
-          var result = _.pick(changeKeysCase(record), [
-            'source', 'name', 'overview', 'comment', 'copyright',
-            'palette', 'threadcount', 'sourceUrl'
-          ]);
-          result.id = index;
-          var sett = _.filter([result.palette, result.threadcount]);
-          result.sett = sett.length > 0 ? sett.join('\n') : null;
-          result.categories = _.filter(record['Category'].split('; '));
-          return result;
-        });
-      } else {
-        throw new Error(_.first(response.error.query))
-      }
-    });
-}
-
-function buildSearchIndex(records) {
-  return new Promise(function(resolve) {
-    var index = lunr(function() {
-      this.field('name', {boost: 100});
-      this.field('comment', {boost: 10});
-      this.field('source');
-      this.field('copyright');
-      this.ref('id');
-
-      var run = this.pipeline.run;
-      this.pipeline.run = function(tokens) {
-        var result = [];
-        var n = tokens.length;
-        for (var i = 0; i < n; i++) {
-          tokens[i] = tokens[i]
-            .replace(/[^a-z0-9-']+/ig, '')
-            .replace(/'s$/i, '');
-
-          var token = tokens[i];
-          token = token
-            .replace(/^(mac|mc|o')/i, '')
-            .replace(/[']+/ig, '');
-
-          tokens[i] = tokens[i]
-            .replace(/[']+/ig, '');
-
-          if (token != '') {
-            result.push(tokens[i], token);
-          }
+function loadData(url) {
+  return new Promise(function(resolve, reject) {
+    var config = {
+      download: true,
+      skipEmptyLines: true,
+      header: true,
+      error: function(error) {
+        reject(new Error('Failed to load ' + url + ' : ' + error));
+      },
+      complete: function(results) {
+        var error = getPapaParseError(results.errors);
+        if (error) {
+          reject(error);
+        } else {
+          resolve(_.map(results.data, function(record, index) {
+            var result = {
+              id: index,
+              /* eslint-disable dot-notation */
+              source: record['Source'],
+              name: record['Name'],
+              overview: record['Overview'],
+              comment: record['Comment'],
+              copyright: record['Copyright'],
+              palette: record['Palette'],
+              threadcount: record['Threadcount'],
+              sourceUrl: record['Source URL']
+              /* eslint-enable dot-notation */
+            };
+            var sett = _.filter([result.palette, result.threadcount]);
+            result.sett = sett.length > 0 ? sett.join('\n') : null;
+            /* eslint-disable dot-notation */
+            var categories = record['Category'].split(';');
+            /* eslint-enable dot-notation */
+            result.categories = _.chain(categories)
+              .map(_.trim)
+              .filter()
+              .value();
+            return result;
+          }));
         }
-        return run.call(this, result);
-      };
-    });
-
-    _.each(records, function(record) {
-      index.add(record);
-    });
-
-    resolve(function(query) {
-      if (!_.isString(query)) {
-        query = '';
       }
-      query = query.replace(/^\s+/i, '').replace(/\s+$/i, '');
-      if (query == '') {
-        return _.sortBy(records, 'name');
-      }
-      return _.chain(index.search(query))
-        .sortBy('score')
-        .reverse()
-        .map(function(item) {
-          return records[item.ref];
-        })
-        .value();
-    });
+    };
+    csv.parse(url, config);
   });
 }
 
 function loadDatabase() {
-  var sql = 'SELECT * FROM "' + table + '" WHERE "Source"=\'House of Tartan\'';
-  return query(sql).then(buildSearchIndex);
+  return loadData(sourceUrl).then(function(records) {
+    return search(records, [
+      search.fulltext(records),
+      search.category(records)
+    ]);
+  });
 }
 
 module.exports.loadDatabase = loadDatabase;
