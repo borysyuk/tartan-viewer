@@ -19,7 +19,7 @@
     "test": "mocha tests/*.js tests/*/*.js",
     "build:assets": "gulp",
     "build:app": "NODE_ENV=production webpack --hide-modules --config webpack.config.js",
-    "build": "npm bun build:assets && npm run build:app",
+    "build": "npm run build:assets && npm run build:app",
     "review": "eslint src tests gulpfile.js webpack.config.js"
   },
   "author": {
