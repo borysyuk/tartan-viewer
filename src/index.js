@@ -4,11 +4,6 @@
 
 var _ = require('lodash');
 
-require('angular/angular-csp.css');
-require('bootstrap/dist/css/bootstrap.css');
-require('font-awesome/css/font-awesome.css');
-require('./styles/main.less');
-
 // Init some global variables - needed for proper work of angular and
 // some other 3rd-party libraries
 (function(globals) {

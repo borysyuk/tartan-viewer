@@ -10,7 +10,7 @@ var app = angular.module('Application', [
 
 app.config([
   'markedProvider',
-  function (markedProvider) {
+  function(markedProvider) {
     markedProvider.setOptions({
       gfm: true
     });

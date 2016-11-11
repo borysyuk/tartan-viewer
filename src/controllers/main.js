@@ -1,8 +1,9 @@
 'use strict';
 
+/* global Event */
+
 var _ = require('lodash');
 var $q = require('../services/ng-utils').$q;
-var tartan = require('tartan');
 var app = require('../module');
 var application = require('../services/application');
 
@@ -51,7 +52,7 @@ app.controller('MainController', [
       }
 
       return {
-        'padding-top': isInfinite ? '60%' : '100%',
+        'padding-top': isInfinite ? '60%' : height + 'px',
         'max-width': isInfinite ? 'none' : width + 'px',
         'max-height': isInfinite ? 'none' : height + 'px'
       };
