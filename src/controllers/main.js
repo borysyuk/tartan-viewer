@@ -11,7 +11,8 @@ app.controller('MainController', [
   '$scope', '$window', '$timeout',
   function($scope, $window, $timeout) {
     $scope.current = {
-      weave: [2, 2]
+      weave: [2, 2],
+      search: {}
     };
 
     $scope.searchExamples = [
@@ -65,7 +66,7 @@ app.controller('MainController', [
       updateImage();
     });
 
-    $scope.$watch('current.search', updateCurrentTartans);
+    $scope.$watch('current.search', updateCurrentTartans, true);
     $scope.$watch('current.tartan', function() {
       $scope.current.renderingOffset = {x: 0, y: 0};
       updateImage();
