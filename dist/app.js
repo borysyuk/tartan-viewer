@@ -78392,8 +78392,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var csv = __webpack_require__(61);
 	var search = __webpack_require__(114);
 	
-	var sourceUrl = 'https://raw.githubusercontent.com/kravets-levko/' +
-	  'tartan-database/master/data/house-of-tartan.csv';
+	var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
+	  'v0.2/data/house-of-tartan.csv';
 	
 	function getPapaParseError(parseErrors) {
 	  parseErrors = _.filter(parseErrors, function(error) {
