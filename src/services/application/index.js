@@ -5,8 +5,8 @@ var Promise = require('bluebird');
 var csv = require('papaparse');
 var search = require('../search');
 
-var sourceUrl = 'https://raw.githubusercontent.com/kravets-levko/' +
-  'tartan-database/master/data/house-of-tartan.csv';
+var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
+  'v0.2/data/house-of-tartan.csv';
 
 function getPapaParseError(parseErrors) {
   parseErrors = _.filter(parseErrors, function(error) {
