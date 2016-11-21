@@ -1,99 +1,84 @@
 'use strict';
 
 var _ = require('lodash');
-var app = require('../../module');
+var ngModule = require('../../module');
 
-function createPagination(items, ipp) {
-  items = _.isArray(items) ? items : [];
-
-  ipp = parseInt(ipp, 10) || 0;
-  ipp = ipp <= 10 ? 10 : ipp;
-
-  var count = Math.ceil(items.length / ipp);
-
-  var window = 4;
-
-  var self = {
-    count: count,
-
-    set: function(page) {
-      if (page < 1) {
-        page = 1;
-      }
-      if (page > count) {
-        page = count;
-      }
-      self.current = page;
-      self.items = items.slice((page - 1) * ipp, page * ipp);
-
-      var range = self.range = [];
-
-      var from = 1;
-      var to = count;
-      if (count >= window * 2 + 1) {
-        from = page - window;
-        to = page + window;
-
-        if (from < 1) {
-          to += (1 - from);
-          from = 1;
-        }
-        if (to > count) {
-          from += (count - to);
-          to = count;
-        }
-      }
-
-      for (var i = from; i <= to; i++) {
-        range.push(i);
-      }
-
-      if (range.length > 2) {
-        if (from > 1) {
-          range[0] = 1;
-          range[1] = '...';
-        }
-        var n = range.length - 1;
-        if (to < count) {
-          range[n - 1] = '...';
-          range[n] = count;
-        }
-      }
-    }
-  };
-  self.set(1);
-
-  return self;
+function validateCount(value) {
+  value = parseFloat(value) || 0;
+  return value >= 1 ? value : 1;
 }
 
-app.directive('pagination', [
+function validateCurrent(value, count) {
+  value = parseFloat(value) || 0;
+  value = value < 1 ? 1 : value;
+  return value > count ? count : value;
+}
+
+ngModule.directive('pagination', [
   function() {
     return {
       restrict: 'E',
       template: require('./template.html'),
-      replace: false,
+      replace: true,
       scope: {
-        items: '=',
-        itemsPerPage: '@?',
-        pagination: '=?'
+        count: '=',
+        current: '='
       },
       link: function($scope) {
-        $scope.pagination = createPagination($scope.items,
-          $scope.itemsPerPage);
+        var state = $scope.state = {
+          count: 1,
+          current: 1,
+          savedCurrent: null,
+          editing: false
+        };
 
-        $scope.showPrevNext = true;
+        state.count = validateCount($scope.count);
+        state.current = validateCurrent($scope.current, state.count);
+        $scope.current = state.current;
 
-        $scope.$watch('itemsPerPage', function(newValue, oldValue) {
+        $scope.$watch('count', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            $scope.pagination = createPagination($scope.items,
-              $scope.itemsPerPage);
+            state.count = validateCount($scope.count);
+            if (!state.editing) {
+              state.current = validateCurrent(state.current, state.count);
+            }
           }
         });
 
-        $scope.$watchCollection('items', function() {
-          $scope.pagination = createPagination($scope.items,
-            $scope.itemsPerPage);
+        $scope.$watch('current', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            if (!state.editing) {
+              state.current = validateCurrent($scope.current, state.count);
+            }
+          }
         });
+
+        $scope.$watch('state', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            if (!state.editing) {
+              state.current = validateCurrent(state.current, state.count);
+              $scope.current = state.current;
+            }
+          }
+        }, true);
+
+        $scope.handleKeyPress = function($event) {
+          var modifiers = $event.altKey || $event.shiftKey ||
+            $event.ctrlKey || $event.metaKey;
+          if (!modifiers) {
+            switch ($event.keyCode) {
+              case 13:
+                state.editing = false;
+                $event.preventDefault();
+                break;
+              case 27:
+                state.editing = false;
+                state.current = $scope.current;
+                $event.preventDefault();
+                break;
+            }
+          }
+        };
       }
     };
   }

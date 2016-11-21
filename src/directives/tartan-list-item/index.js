@@ -1,8 +1,9 @@
 'use strict';
 
+var _ = require('lodash');
 var ngModule = require('../../module');
 
-ngModule.directive('tartanInfo', [
+ngModule.directive('tartanListItem', [
   function() {
     return {
       restrict: 'E',
@@ -10,7 +11,7 @@ ngModule.directive('tartanInfo', [
       replace: true,
       scope: {
         item: '=',
-        showTitle: '=?'
+        onchange: '&?'
       },
       link: function($scope) {
       }

@@ -1,18 +1,28 @@
-<div class="text-center">
-  <ul class="pagination">
-    <li ng-if="showPrevNext && (pagination.count > 0)"
-      ng-class="{disabled: pagination.current == 1}">
-      <a href="javascript:void(0)"
-        ng-click="pagination.set(pagination.current - 1)">&laquo;</a>
-    </li>
-    <li ng-repeat="n in pagination.range track by [$index, n]"
-      ng-class="{active: n == pagination.current, disabled: n == '...'}">
-      <a href="javascript:void(0)" ng-click="(n != '...') ? pagination.set(n) : null;">{{ n }}</a>
-    </li>
-    <li ng-if="showPrevNext && (pagination.count > 0)"
-      ng-class="{disabled: pagination.current == pagination.count}">
-      <a href="javascript:void(0)"
-        ng-click="pagination.set(pagination.current + 1)">&raquo;</a>
-    </li>
-  </ul>
+<div class="input-group pagination-control">
+  <span class="input-group-btn">
+    <button class="btn btn-default"
+      ng-click="state.current = 1"
+    ><i class="fa fa-angle-left"></i></button>
+    <button class="btn btn-default"
+      ng-click="state.current = state.current - 1"
+    ><i class="fa fa-angle-double-left"></i></button>
+  </span>
+  <button class="form-control"
+    ng-if="!state.editing"
+    ng-click="state.editing = true;"
+  >page {{ state.current }} of {{ state.count }}</button>
+  <input type="text" class="form-control text-center"
+    ng-if="state.editing" autofocus
+    ng-model="state.current"
+    ng-keydown="handleKeyPress($event)"
+    ng-blur="state.editing = false"
+  >
+  <span class="input-group-btn">
+    <button class="btn btn-default"
+      ng-click="state.current = state.current + 1"
+    ><i class="fa fa-angle-double-right"></i></button>
+    <button class="btn btn-default"
+      ng-click="state.current = state.count"
+    ><i class="fa fa-angle-right"></i></button>
+  </span>
 </div>
