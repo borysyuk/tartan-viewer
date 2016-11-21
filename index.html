@@ -17,66 +17,25 @@
 </div>
 
 <div ng-cloak ng-if="isLoaded.application">
-  <div class="container-fluid">
-    <div class="row margin-bottom-15">
-      <div class="col-sm-6">
-        <div class="input-group margin-top-15 margin-bottom-15">
-          <span class="input-group-addon"><i class="fa fa-search"></i></span>
-          <input type="text" class="form-control" placeholder="Search"
-            ng-model="current.search.query">
-        </div>
-        <div class="margin-top-5 margin-bottom-10">
-          <span class="margin-right-10">Example:</span>
-          <a href="javascript:void(0)" class="margin-right-10"
-            ng-repeat="phrase in searchExamples"
-            ng-click="current.search.query = phrase">{{ phrase }}</a>
-        </div>
-        <tartan-list items="current.tartans" items-per-page="20"
-          current="current.tartan"></tartan-list>
+  <div class="container-fluid margin-bottom-15">
+      <div class="input-group margin-top-15 margin-bottom-15">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search"
+          ng-model="state.search.query">
       </div>
-      <div class="col-sm-6">
-        <div><tartan-info tartan="current.tartan"></tartan-info></div>
-        <div ng-if="!!current.tartan.sett">
-          <div class="btn-group margin-bottom-15">
-            <button type="button" class="btn hide-outline"
-              ng-class="{'btn-default': !current.isInfiniteMode, 'btn-info': current.isInfiniteMode}"
-              ng-click="current.isInfiniteMode = !current.isInfiniteMode; current.isInteractiveMode = false; updateImage()"
-            ><i class="margin-right-5 fa fa-check-square-o"
-              ng-if="current.isInfiniteMode"></i>
-              Draw as infinite texture
-            </button>
-            <button type="button" class="btn btn-info hide-outline"
-              title="Restore offset"
-              ng-if="current.isInfiniteMode"
-              ng-click="current.isInteractiveMode = !current.isInteractiveMode">
-              <i class="margin-right-5 fa"
-                ng-class="{'fa-check-square-o': current.isInteractiveMode, 'fa-square-o': !current.isInteractiveMode}"></i>
-              Interactive
-            </button>
-            <button type="button" class="btn btn-info hide-outline"
-              title="Restore offset"
-              ng-if="current.isInfiniteMode && current.isInteractiveMode"
-              ng-click="current.renderingOffset={x: 0, y: 0}">
-              <i class="fa fa-home"></i>
-            </button>
-          </div>
-          <div>
-            <tartan source="{{ current.tartan.palette + ' ' + current.tartan.threadcount }}">
-              <tartan-schema name="classic"></tartan-schema>
-              <div class="x-preview-canvas-wrapper"
-                ng-class="{interactive: current.isInteractiveMode}"
-                ng-style="getImageBounds()">
-                <tartan-render-image repeat="current.isInfiniteMode"
-                  offset="current.renderingOffset" interactive="current.isInteractiveMode"
-                  metrics="current.metrics" options="{weave: current.weave}"></tartan-render-image>
-              </div>
-            </tartan>
-          </div>
-        </div>
+      <div class="margin-top-5 margin-bottom-10">
+        <span class="margin-right-10">Example:</span>
+        <a href="javascript:void(0)" class="margin-right-10"
+          ng-repeat="phrase in searchExamples"
+          ng-click="state.search.query = phrase">{{ phrase }}</a>
       </div>
+      <tartan-list items="state.tartans" item="state.tartan"
+        onpreview="state.showPreview = true;"></tartan-list>
     </div>
   </div>
 </div>
+
+<tartan-preview item="state.tartan" active="state.showPreview"></tartan-preview>
 
 <footer class="container-fluid padding-top-15 padding-bottom-15">
 <div class="row">

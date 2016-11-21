@@ -1,21 +1,54 @@
 'use strict';
 
-var app = require('../../module');
+var _ = require('lodash');
+var ngModule = require('../../module');
 
-app.directive('tartanList', [
+ngModule.directive('tartanList', [
   function() {
     return {
       restrict: 'E',
       template: require('./template.html'),
-      replace: false,
+      replace: true,
       scope: {
         items: '=',
-        itemsPerPage: '@?',
-        current: '=?'
+        item: '=?',
+        onpreview: '&?'
       },
       link: function($scope) {
+        var pagination = $scope.pagination = {
+          itemsPerPage: 20,
+          all: [],
+          items: [],
+          count: 1,
+          current: 1
+        };
+
+        function updateItems() {
+          var ipp = pagination.itemsPerPage;
+          var from = (pagination.current - 1) * ipp;
+          var to = from + ipp;
+          pagination.items = pagination.all.slice(from, to);
+        }
+
+        updateItems();
+
+        $scope.$watch('pagination.current', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            updateItems();
+          }
+        });
+
+        $scope.$watchCollection('items', function() {
+          pagination.all = _.isArray($scope.items) ? $scope.items : [];
+          pagination.count = Math.ceil(
+            pagination.all.length / pagination.itemsPerPage
+          );
+          pagination.current = 1;
+          updateItems();
+        });
+
         $scope.setCurrent = function(item) {
-          $scope.current = item;
+          $scope.item = item;
         };
       }
     };

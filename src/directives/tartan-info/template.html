@@ -1,20 +1,22 @@
-<h3 class="margin-top-15">{{ tartan.name }}</h3>
-<p ng-if="!!tartan.source"><strong>Source:</strong>
-  <a ng-if="!!tartan.sourceUrl" ng-href="{{ tartan.sourceUrl }}"
-    target="_blank">{{ tartan.source }}</a>
-  <span ng-if="!tartan.sourceUrl">{{ tartan.source }}</span>
-</p>
-<p ng-if="tartan.categories.length > 0"><strong
-  ng-pluralize
-  count="tartan.categories.length"
-  when="{1: 'Category:', 'other': 'Categories:'}"></strong>
-  <span>{{ tartan.categories | join:', ' }}</span>
-</p>
-<p ng-if="!!tartan.overview" marked="tartan.overview"></p>
-<p ng-if="!!tartan.comment" marked="tartan.comment"></p>
-<p ng-if="!!tartan.copyright" marked="tartan.copyright"></p>
+<div>
+  <h3 ng-if="showTitle" class="margin-top-15">{{ item.name }}</h3>
+  <p ng-if="!!item.source"><strong>Source:</strong>
+    <a ng-if="!!item.sourceUrl" ng-href="{{ item.sourceUrl }}"
+      target="_blank">{{ item.source }}</a>
+    <span ng-if="!item.sourceUrl">{{ item.source }}</span>
+  </p>
+  <p ng-if="item.categories.length > 0"><strong
+    ng-pluralize
+    count="item.categories.length"
+    when="{1: 'Category:', 'other': 'Categories:'}"></strong>
+    <span>{{ item.categories | join:', ' }}</span>
+  </p>
+  <p ng-if="!!item.overview" marked="item.overview"></p>
+  <p ng-if="!!item.comment" marked="item.comment"></p>
+  <p ng-if="!!item.copyright" marked="item.copyright"></p>
 
-<div ng-if="!!tartan.sett">
-  <p><strong>Tartan threadcount:</strong></p>
-  <pre>{{ tartan.sett }}</pre>
+  <div ng-if="!!item.sett">
+    <p><strong>item threadcount:</strong></p>
+    <pre>{{ item.sett }}</pre>
+  </div>
 </div>

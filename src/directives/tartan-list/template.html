@@ -1,14 +1,23 @@
-<div class="margin-bottom-5">
-  <span ng-pluralize
-    count="items.length"
-    when="{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}"></span>
-</div>
-
-<pagination ng-show="pagination.count > 1"
-  items="items" items-per-page="{{ itemsPerPage }}" pagination="pagination"></pagination>
-
-<div>
-  <div ng-repeat="item in pagination.items track by item.id">
-    <a href="javascript:void(0)" ng-click="setCurrent(item)">{{ item.name }}</a>
+<div class="tartan-list">
+  <div class="margin-left-10 margin-right-10 margin-bottom-5">
+    <span ng-pluralize
+      count="items.length"
+      when="{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}"></span>
   </div>
+
+  <div>
+    <pagination count="pagination.count" current="pagination.current"></pagination>
+  </div>
+
+  <div class="clearfix">
+    <tartan-list-item class="pull-left"
+      ng-repeat="item in pagination.items track by item.id"
+      item="item" onchange="setCurrent(item); onpreview();"
+    ></tartan-list-item>
+  </div>
+
+  <div ng-if="pagination.items.length >= pagination.itemsPerPage / 2">
+    <pagination count="pagination.count" current="pagination.current"></pagination>
+  </div>
+
 </div>
