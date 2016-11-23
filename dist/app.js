@@ -65,30 +65,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	(function(globals) {
 	  globals._ = _;
 	
-	  __webpack_require__(55);
+	  __webpack_require__(57);
 	
-	  var jquery = __webpack_require__(54);
+	  var jquery = __webpack_require__(56);
 	  globals.jQuery = globals.$ = jquery;
 	
-	  __webpack_require__(38);
+	  __webpack_require__(41);
 	
 	  // fetch() polyfill
-	  __webpack_require__(53);
+	  __webpack_require__(18);
 	  // saveAs() polyfill
-	  globals.saveAs = __webpack_require__(52).saveAs;
+	  globals.saveAs = __webpack_require__(55).saveAs;
 	
 	  globals.tartan = __webpack_require__(7);
 	
 	  var angular = __webpack_require__(11);
 	  globals.angular = angular;
 	  if (typeof globals.Promise != 'function') {
-	    globals.Promise = __webpack_require__(17);
+	    globals.Promise = __webpack_require__(13);
 	  }
 	
-	  __webpack_require__(24);
+	  __webpack_require__(27);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(104);
+	    __webpack_require__(112);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17164,7 +17164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(102)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(25)(module)))
 
 /***/ },
 /* 2 */
@@ -17172,16 +17172,49 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(95);
-	module.exports.color = __webpack_require__(23);
-	module.exports.token = __webpack_require__(99);
-	module.exports.node = __webpack_require__(96);
-	module.exports.sett = __webpack_require__(98);
-	module.exports.repaint = __webpack_require__(97);
+	module.exports.error = __webpack_require__(102);
+	module.exports.color = __webpack_require__(24);
+	module.exports.token = __webpack_require__(106);
+	module.exports.node = __webpack_require__(103);
+	module.exports.sett = __webpack_require__(105);
+	module.exports.repaint = __webpack_require__(104);
 
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var angular = __webpack_require__(11);
+	__webpack_require__(38);
+	
+	var app = angular.module('Application', [
+	  'angular-tartan',
+	  'hc.marked'
+	]);
+	
+	app.config([
+	  'markedProvider',
+	  function(markedProvider) {
+	    markedProvider.setOptions({
+	      gfm: true
+	    });
+	  }
+	]);
+	
+	app.run([
+	  '$rootScope',
+	  function($rootScope) {
+	    $rootScope.isLoaded = {};
+	  }
+	]);
+	
+	module.exports = app;
+
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17208,39 +17241,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'invalid',
 	  'whitespace'
 	];
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var angular = __webpack_require__(11);
-	__webpack_require__(35);
-	
-	var app = angular.module('Application', [
-	  'angular-tartan',
-	  'hc.marked'
-	]);
-	
-	app.config([
-	  'markedProvider',
-	  function(markedProvider) {
-	    markedProvider.setOptions({
-	      gfm: true
-	    });
-	  }
-	]);
-	
-	app.run([
-	  '$rootScope',
-	  function($rootScope) {
-	    $rootScope.isLoaded = {};
-	  }
-	]);
-	
-	module.exports = app;
 
 
 /***/ },
@@ -17282,8 +17282,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.classify = __webpack_require__(66);
-	module.exports.removeTokens = __webpack_require__(67);
+	module.exports.classify = __webpack_require__(73);
+	module.exports.removeTokens = __webpack_require__(74);
 
 
 /***/ },
@@ -17294,15 +17294,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(68));
+	_.extend(module.exports, __webpack_require__(75));
 	
-	module.exports.defaults = __webpack_require__(3);
+	module.exports.defaults = __webpack_require__(4);
 	module.exports.parse = __webpack_require__(8);
 	module.exports.filter = __webpack_require__(6);
 	module.exports.transform = __webpack_require__(12);
 	module.exports.syntax = __webpack_require__(10);
 	module.exports.render = __webpack_require__(9);
-	module.exports.schema = __webpack_require__(83);
+	module.exports.schema = __webpack_require__(90);
 	module.exports.utils = __webpack_require__(2);
 
 
@@ -17313,7 +17313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var tokenize = __webpack_require__(76);
+	var tokenize = __webpack_require__(83);
 	
 	var defaultOptions = {
 	  errorHandler: null,
@@ -17340,11 +17340,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.color = __webpack_require__(69);
-	module.exports.stripe = __webpack_require__(74);
-	module.exports.pivot = __webpack_require__(72);
-	module.exports.repeat = __webpack_require__(73);
-	module.exports.literal = __webpack_require__(71);
+	module.exports.color = __webpack_require__(76);
+	module.exports.stripe = __webpack_require__(81);
+	module.exports.pivot = __webpack_require__(79);
+	module.exports.repeat = __webpack_require__(80);
+	module.exports.literal = __webpack_require__(78);
 
 
 /***/ },
@@ -17353,8 +17353,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.canvas = __webpack_require__(77);
-	module.exports.format = __webpack_require__(78);
+	module.exports.canvas = __webpack_require__(84);
+	module.exports.format = __webpack_require__(85);
 
 
 /***/ },
@@ -17363,16 +17363,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.extended = __webpack_require__(90);
-	module.exports.classic = __webpack_require__(89);
-	module.exports.weddslist = __webpack_require__(91);
+	module.exports.extended = __webpack_require__(97);
+	module.exports.classic = __webpack_require__(96);
+	module.exports.weddslist = __webpack_require__(98);
 
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(37);
+	__webpack_require__(40);
 	module.exports = angular;
 
 
@@ -17399,162 +17399,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.flatten = __webpack_require__(92);
-	module.exports.flattenSimpleBlocks = __webpack_require__(19);
-	module.exports.fold = __webpack_require__(93);
-	module.exports.mergeStripes = __webpack_require__(20);
-	module.exports.removeEmptyBlocks = __webpack_require__(21);
-	module.exports.removeZeroWidthStripes = __webpack_require__(22);
-	module.exports.optimize = __webpack_require__(94);
+	module.exports.flatten = __webpack_require__(99);
+	module.exports.flattenSimpleBlocks = __webpack_require__(20);
+	module.exports.fold = __webpack_require__(100);
+	module.exports.mergeStripes = __webpack_require__(21);
+	module.exports.removeEmptyBlocks = __webpack_require__(22);
+	module.exports.removeZeroWidthStripes = __webpack_require__(23);
+	module.exports.optimize = __webpack_require__(101);
 
 
 /***/ },
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var defaults = __webpack_require__(3);
-	
-	module.exports.id = 'classic';
-	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(80);
-	module.exports.format = __webpack_require__(79);
-	module.exports.colors = defaults.colors;
-	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var defaults = __webpack_require__(3);
-	
-	module.exports.id = 'extended';
-	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(82);
-	module.exports.format = __webpack_require__(81);
-	module.exports.colors = defaults.colors;
-	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
-
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(2);
-	
-	module.exports.id = 'stwr';
-	module.exports.name = 'Scottish Register of Tartans / ' +
-	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(85);
-	module.exports.format = __webpack_require__(84);
-	module.exports.colors = utils.color.buildColorMap({
-	  /* eslint-disable key-spacing */
-	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
-	  DP: '#990099', W:  '#dddddd', DW: '#e1dfd0',
-	  LY: '#ffff66', Y:  '#ffff00', DY: '#ffcc00',
-	  O:  '#ddaa00', LT: '#ffce24', T:  '#bb5e00',
-	  DT: '#663300', LN: '#999999', N:  '#666666',
-	  DN: '#333333', R:  '#fd024e', LR: '#ff6262',
-	  DR: '#ce0000', MR: '#a40004', LG: '#336633',
-	  G:  '#339900', DG: '#1b5300', OG: '#484e05',
-	  BG: '#074b32', AB: '#229f7a', LB: '#88a8aa',
-	  B:  '#333399', DB: '#1e1e5b', RB: '#171366',
-	  NB: '#171366'
-	  /* eslint-enable key-spacing */
-	});
-	module.exports.warpAndWeftSeparator = '.';
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(18).nextTick;
-	var apply = Function.prototype.apply;
-	var slice = Array.prototype.slice;
-	var immediateIds = {};
-	var nextImmediateId = 0;
-	
-	// DOM APIs, for completeness
-	
-	exports.setTimeout = function() {
-	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-	};
-	exports.setInterval = function() {
-	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-	};
-	exports.clearTimeout =
-	exports.clearInterval = function(timeout) { timeout.close(); };
-	
-	function Timeout(id, clearFn) {
-	  this._id = id;
-	  this._clearFn = clearFn;
-	}
-	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-	Timeout.prototype.close = function() {
-	  this._clearFn.call(window, this._id);
-	};
-	
-	// Does not start the time, just sets up the members needed.
-	exports.enroll = function(item, msecs) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = msecs;
-	};
-	
-	exports.unenroll = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = -1;
-	};
-	
-	exports._unrefActive = exports.active = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-	
-	  var msecs = item._idleTimeout;
-	  if (msecs >= 0) {
-	    item._idleTimeoutId = setTimeout(function onTimeout() {
-	      if (item._onTimeout)
-	        item._onTimeout();
-	    }, msecs);
-	  }
-	};
-	
-	// That's not how node.js implements it but the exposed api is the same.
-	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-	  var id = nextImmediateId++;
-	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-	
-	  immediateIds[id] = true;
-	
-	  nextTick(function onNextTick() {
-	    if (immediateIds[id]) {
-	      // fn.call() is faster so we optimize for the common use-case
-	      // @see http://jsperf.com/call-apply-segu
-	      if (args) {
-	        fn.apply(null, args);
-	      } else {
-	        fn.call(null);
-	      }
-	      // Prevent ids from leaking
-	      exports.clearImmediate(id);
-	    }
-	  });
-	
-	  return id;
-	};
-	
-	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-	  delete immediateIds[id];
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16).setImmediate, __webpack_require__(16).clearImmediate))
-
-/***/ },
-/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global, setImmediate) {/* @preserve
@@ -23155,10 +23010,167 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	},{"./es5":13}]},{},[4])(4)
 	});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18), (function() { return this; }()), __webpack_require__(16).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19), (function() { return this; }()), __webpack_require__(17).setImmediate))
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var defaults = __webpack_require__(4);
+	
+	module.exports.id = 'classic';
+	module.exports.name = 'Classic (strict syntax)';
+	module.exports.parse = __webpack_require__(87);
+	module.exports.format = __webpack_require__(86);
+	module.exports.colors = defaults.colors;
+	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var defaults = __webpack_require__(4);
+	
+	module.exports.id = 'extended';
+	module.exports.name = 'Extended syntax';
+	module.exports.parse = __webpack_require__(89);
+	module.exports.format = __webpack_require__(88);
+	module.exports.colors = defaults.colors;
+	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(2);
+	
+	module.exports.id = 'stwr';
+	module.exports.name = 'Scottish Register of Tartans / ' +
+	  'Scottish Tartans World Register';
+	module.exports.parse = __webpack_require__(92);
+	module.exports.format = __webpack_require__(91);
+	module.exports.colors = utils.color.buildColorMap({
+	  /* eslint-disable key-spacing */
+	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
+	  DP: '#990099', W:  '#dddddd', DW: '#e1dfd0',
+	  LY: '#ffff66', Y:  '#ffff00', DY: '#ffcc00',
+	  O:  '#ddaa00', LT: '#ffce24', T:  '#bb5e00',
+	  DT: '#663300', LN: '#999999', N:  '#666666',
+	  DN: '#333333', R:  '#fd024e', LR: '#ff6262',
+	  DR: '#ce0000', MR: '#a40004', LG: '#336633',
+	  G:  '#339900', DG: '#1b5300', OG: '#484e05',
+	  BG: '#074b32', AB: '#229f7a', LB: '#88a8aa',
+	  B:  '#333399', DB: '#1e1e5b', RB: '#171366',
+	  NB: '#171366'
+	  /* eslint-enable key-spacing */
+	});
+	module.exports.warpAndWeftSeparator = '.';
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(19).nextTick;
+	var apply = Function.prototype.apply;
+	var slice = Array.prototype.slice;
+	var immediateIds = {};
+	var nextImmediateId = 0;
+	
+	// DOM APIs, for completeness
+	
+	exports.setTimeout = function() {
+	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+	};
+	exports.setInterval = function() {
+	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+	};
+	exports.clearTimeout =
+	exports.clearInterval = function(timeout) { timeout.close(); };
+	
+	function Timeout(id, clearFn) {
+	  this._id = id;
+	  this._clearFn = clearFn;
+	}
+	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+	Timeout.prototype.close = function() {
+	  this._clearFn.call(window, this._id);
+	};
+	
+	// Does not start the time, just sets up the members needed.
+	exports.enroll = function(item, msecs) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = msecs;
+	};
+	
+	exports.unenroll = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = -1;
+	};
+	
+	exports._unrefActive = exports.active = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	
+	  var msecs = item._idleTimeout;
+	  if (msecs >= 0) {
+	    item._idleTimeoutId = setTimeout(function onTimeout() {
+	      if (item._onTimeout)
+	        item._onTimeout();
+	    }, msecs);
+	  }
+	};
+	
+	// That's not how node.js implements it but the exposed api is the same.
+	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
+	  var id = nextImmediateId++;
+	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
+	
+	  immediateIds[id] = true;
+	
+	  nextTick(function onNextTick() {
+	    if (immediateIds[id]) {
+	      // fn.call() is faster so we optimize for the common use-case
+	      // @see http://jsperf.com/call-apply-segu
+	      if (args) {
+	        fn.apply(null, args);
+	      } else {
+	        fn.call(null);
+	      }
+	      // Prevent ids from leaking
+	      exports.clearImmediate(id);
+	    }
+	  });
+	
+	  return id;
+	};
+	
+	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
+	  delete immediateIds[id];
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17).setImmediate, __webpack_require__(17).clearImmediate))
 
 /***/ },
 /* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// the whatwg-fetch polyfill installs the fetch() function
+	// on the global object (window or self)
+	//
+	// Return that as the export for use in Webpack, Browserify etc.
+	__webpack_require__(111);
+	module.exports = self.fetch.bind(self);
+
+
+/***/ },
+/* 19 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -23344,7 +23356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23458,7 +23470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23535,7 +23547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23586,7 +23598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23692,7 +23704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23752,7 +23764,186 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 25 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var url = __webpack_require__(108);
+	var Promise = __webpack_require__(13);
+	var csv = __webpack_require__(62);
+	var downloader = __webpack_require__(126);
+	var search = __webpack_require__(130);
+	
+	var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
+	  'v0.2/data/house-of-tartan.csv';
+	
+	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
+	  'tartan-database/master/data/index.json';
+	
+	function getDatasetDirectory() {
+	  return downloader.getJson(datasetDirectoryUrl)
+	    .then(function(items) {
+	      return _.map(items, function(item) {
+	        item = _.clone(item);
+	        item.url = url.resolve(datasetDirectoryUrl, item.path);
+	        return item;
+	      });
+	    });
+	}
+	
+	function convertRecord(record, fields, attributes) {
+	  var result = {};
+	
+	  var propMap = {};
+	  _.each(fields, function(field) {
+	    propMap[field.name] = field.title;
+	  });
+	
+	  _.each(attributes, function(attribute) {
+	    var attrFields = _.isArray(attribute.fields) ? attribute.fields :
+	      [attribute.fields];
+	    var value = _.map(attrFields, function(name) {
+	        var result = record[propMap[name]];
+	        if (attribute.split) {
+	          result = _.map(result.split(attribute.split), _.trim);
+	        }
+	        return result;
+	      });
+	
+	    if (attribute.split) {
+	      // Merge and get unique values
+	      value = _.union.apply(null, value);
+	    }
+	
+	    value = _.filter(value, function(item) {
+	      return _.isString(item) && (item.length > 0);
+	    });
+	
+	    if (!attribute.split && !_.isArray(attribute.fields)) {
+	      value = _.first(value);
+	    }
+	
+	    if (attribute.join) {
+	      value = value.join(attribute.join);
+	    }
+	
+	    result[attribute.name] = value;
+	  });
+	
+	  return result;
+	}
+	
+	function getDataset(dataset) {
+	  var attributes = null;
+	  var fields = null;
+	  var resourceName = null;
+	  return downloader.getJson(dataset.url)
+	    .then(function(dataPackage) {
+	      attributes = dataPackage.attributes;
+	      var resource = _.first(dataPackage.resources);
+	      if (resource) {
+	        resourceName = resource.title;
+	        fields = _.extend({}, resource.schema).fields;
+	        if (!_.isArray(fields) && !_.isObject(fields)) {
+	          fields = [];
+	        }
+	        if (!_.isArray(attributes) && !_.isObject(attributes)) {
+	          attributes = _.map(fields, function(field) {
+	            return {name: field.name, fields: field.name};
+	          });
+	        }
+	        var resourceUrl = resource.url;
+	        if (resource.path) {
+	          resourceUrl = url.resolve(dataset.url, resource.path);
+	        }
+	        return getCSVData(resourceUrl);
+	      }
+	      return []; // return empty dataset
+	    })
+	    .then(function(records) {
+	      return _.map(records, function(record) {
+	        if (fields && attributes) {
+	          record = convertRecord(record, fields, attributes);
+	          record.dataset = resourceName;
+	        }
+	        return record;
+	      });
+	    })
+	    .then(function(records) {
+	      return _.extend({}, dataset, {
+	        items: records
+	      });
+	    });
+	}
+	
+	function getPapaParseError(parseErrors) {
+	  parseErrors = _.filter(parseErrors, function(error) {
+	    // Delimiter was not auto-detected (defaults used).
+	    // We'll not treat this as an error
+	    var delimiterNotDetected = (error.type == 'Delimiter') &&
+	      (error.code == 'UndetectableDelimiter');
+	
+	    return !delimiterNotDetected;
+	  });
+	  if (parseErrors.length > 0) {
+	    return new Error(parseErrors[0].message);
+	  }
+	}
+	
+	function getCSVData(url) {
+	  return new Promise(function(resolve, reject) {
+	    var config = {
+	      download: true,
+	      skipEmptyLines: true,
+	      header: true,
+	      error: function(error) {
+	        reject(new Error('Failed to load ' + url + ' : ' + error));
+	      },
+	      complete: function(results) {
+	        var error = getPapaParseError(results.errors);
+	        if (error) {
+	          reject(error);
+	        } else {
+	          resolve(results.data);
+	        }
+	      }
+	    };
+	    csv.parse(url, config);
+	  });
+	}
+	
+	function buildSearchIndex(items) {
+	  return search(items, [
+	    search.fulltext(items),
+	    search.category(items)
+	  ]);
+	}
+	
+	module.exports.getDatasetDirectory = getDatasetDirectory;
+	module.exports.getDataset = getDataset;
+	module.exports.buildSearchIndex = buildSearchIndex;
+
+
+/***/ },
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23765,7 +23956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var unindent = __webpack_require__(25);
+	var unindent = __webpack_require__(28);
 	
 	  /**
 	   * @ngdoc overview
@@ -23945,7 +24136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var m;
 	
 	    try {
-	      m = __webpack_require__(59);
+	      m = __webpack_require__(61);
 	    } catch (err) {
 	      m = $window.marked || marked;
 	    }
@@ -24106,7 +24297,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = function unindent(text) {
@@ -24141,23 +24332,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	__webpack_require__(37);
+	__webpack_require__(35);
+	__webpack_require__(36);
 	__webpack_require__(34);
-	__webpack_require__(32);
-	__webpack_require__(33);
 	__webpack_require__(31);
-	__webpack_require__(28);
+	__webpack_require__(33);
 	__webpack_require__(30);
-	__webpack_require__(27);
-	__webpack_require__(29);
+	__webpack_require__(32);
 
 
 /***/ },
-/* 27 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24210,7 +24401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24263,7 +24454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24301,7 +24492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24339,7 +24530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24376,7 +24567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24518,7 +24709,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24787,14 +24978,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var tartan = __webpack_require__(7);
-	var EventEmitter = __webpack_require__(51);
+	var EventEmitter = __webpack_require__(54);
 	var ngTartan = __webpack_require__(5);
 	
 	ngTartan.directive('tartan', [
@@ -24903,31 +25094,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(36));
+	_.extend(module.exports, __webpack_require__(39));
 	
-	__webpack_require__(26);
+	__webpack_require__(29);
 
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(56);
+	var packageFile = __webpack_require__(58);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/**
@@ -56700,25 +56891,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-	__webpack_require__(50)
-	__webpack_require__(40)
-	__webpack_require__(41)
-	__webpack_require__(42)
+	__webpack_require__(53)
 	__webpack_require__(43)
 	__webpack_require__(44)
 	__webpack_require__(45)
-	__webpack_require__(49)
 	__webpack_require__(46)
 	__webpack_require__(47)
 	__webpack_require__(48)
-	__webpack_require__(39)
+	__webpack_require__(52)
+	__webpack_require__(49)
+	__webpack_require__(50)
+	__webpack_require__(51)
+	__webpack_require__(42)
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -56886,7 +57077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -56986,7 +57177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57117,7 +57308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57360,7 +57551,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57578,7 +57769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57749,7 +57940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58094,7 +58285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58208,7 +58399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58386,7 +58577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58547,7 +58738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59073,7 +59264,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59138,7 +59329,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -59446,7 +59637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -59632,7 +59823,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(100) !== null) && (__webpack_require__(101) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(109) !== null) && (__webpack_require__(110) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -59640,19 +59831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// the whatwg-fetch polyfill installs the fetch() function
-	// on the global object (window or self)
-	//
-	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(103);
-	module.exports = self.fetch.bind(self);
-
-
-/***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -69878,7 +70057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -69955,7 +70134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -70098,7 +70277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -70239,7 +70418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -72318,7 +72497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -73611,7 +73790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -75020,44 +75199,222 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n  </span>\n</div>"
-
-/***/ },
-/* 62 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.source\"><strong>Source:</strong>\n    <a ng-if=\"!!item.sourceUrl\" ng-href=\"{{ item.sourceUrl }}\"\n      target=\"_blank\">{{ item.source }}</a>\n    <span ng-if=\"!item.sourceUrl\">{{ item.source }}</span>\n  </p>\n  <p ng-if=\"item.categories.length > 0\"><strong\n    ng-pluralize\n    count=\"item.categories.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.categories | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.overview\" marked=\"item.overview\"></p>\n  <p ng-if=\"!!item.comment\" marked=\"item.comment\"></p>\n  <p ng-if=\"!!item.copyright\" marked=\"item.copyright\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
-
-/***/ },
 /* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list-item\">\n  <a href=\"javascript:void(0)\" title=\"{{ item.name }}\" ng-click=\"onchange()\">\n    <tartan-image\n      source=\"{{ 'classic/2,2/' + item.palette + ' ' + item.threadcount }}\"\n    ></tartan-image>\n  </a>\n\n  <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n    ng-click=\"onchange()\">{{ item.name }}</a></h4>\n</div>"
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	'use strict';
+	
+	// If obj.hasOwnProperty has been overridden, then calling
+	// obj.hasOwnProperty(prop) will break.
+	// See: https://github.com/joyent/node/issues/1707
+	function hasOwnProperty(obj, prop) {
+	  return Object.prototype.hasOwnProperty.call(obj, prop);
+	}
+	
+	module.exports = function(qs, sep, eq, options) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  var obj = {};
+	
+	  if (typeof qs !== 'string' || qs.length === 0) {
+	    return obj;
+	  }
+	
+	  var regexp = /\+/g;
+	  qs = qs.split(sep);
+	
+	  var maxKeys = 1000;
+	  if (options && typeof options.maxKeys === 'number') {
+	    maxKeys = options.maxKeys;
+	  }
+	
+	  var len = qs.length;
+	  // maxKeys <= 0 means that we should not limit keys count
+	  if (maxKeys > 0 && len > maxKeys) {
+	    len = maxKeys;
+	  }
+	
+	  for (var i = 0; i < len; ++i) {
+	    var x = qs[i].replace(regexp, '%20'),
+	        idx = x.indexOf(eq),
+	        kstr, vstr, k, v;
+	
+	    if (idx >= 0) {
+	      kstr = x.substr(0, idx);
+	      vstr = x.substr(idx + 1);
+	    } else {
+	      kstr = x;
+	      vstr = '';
+	    }
+	
+	    k = decodeURIComponent(kstr);
+	    v = decodeURIComponent(vstr);
+	
+	    if (!hasOwnProperty(obj, k)) {
+	      obj[k] = v;
+	    } else if (Array.isArray(obj[k])) {
+	      obj[k].push(v);
+	    } else {
+	      obj[k] = [obj[k], v];
+	    }
+	  }
+	
+	  return obj;
+	};
+
 
 /***/ },
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-left-10 margin-right-10 margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"clearfix\">\n    <tartan-list-item class=\"pull-left\"\n      ng-repeat=\"item in pagination.items track by item.id\"\n      item=\"item\" onchange=\"setCurrent(item); onpreview();\"\n    ></tartan-list-item>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	'use strict';
+	
+	var stringifyPrimitive = function(v) {
+	  switch (typeof v) {
+	    case 'string':
+	      return v;
+	
+	    case 'boolean':
+	      return v ? 'true' : 'false';
+	
+	    case 'number':
+	      return isFinite(v) ? v : '';
+	
+	    default:
+	      return '';
+	  }
+	};
+	
+	module.exports = function(obj, sep, eq, name) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  if (obj === null) {
+	    obj = undefined;
+	  }
+	
+	  if (typeof obj === 'object') {
+	    return Object.keys(obj).map(function(k) {
+	      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+	      if (Array.isArray(obj[k])) {
+	        return obj[k].map(function(v) {
+	          return ks + encodeURIComponent(stringifyPrimitive(v));
+	        }).join(sep);
+	      } else {
+	        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+	      }
+	    }).join(sep);
+	
+	  }
+	
+	  if (!name) return '';
+	  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+	         encodeURIComponent(stringifyPrimitive(obj));
+	};
+
 
 /***/ },
 /* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.decode = exports.parse = __webpack_require__(63);
+	exports.encode = exports.stringify = __webpack_require__(64);
+
+
+/***/ },
+/* 66 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"dataset-header\">\n  <button class=\"btn btn-success pull-left without-margins margin-right-10\"\n    ng-if=\"onclose\" ng-click=\"onclose()\"><i\n    class=\"fa fa-reply margin-right-5\"></i>Back</button>\n  <h2 class=\"without-margins\">{{ item.title }}</h2>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
+
+/***/ },
+/* 67 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"panel panel-success dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\">\n    <button class=\"btn btn-success\" ng-click=\"onselect()\"><i\n      class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n  </div>\n</div>\n"
+
+/***/ },
+/* 68 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model=\"state.search.query\">\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Example:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <tartan-list items=\"state.items\" item=\"state.current\"\n    onpreview=\"state.showPreview = true;\"></tartan-list>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+
+/***/ },
+/* 69 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
+
+/***/ },
+/* 70 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+
+/***/ },
+/* 71 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-left-10 margin-right-10 margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.id\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+
+/***/ },
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ },
-/* 66 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var utils = __webpack_require__(2);
-	var defaults = __webpack_require__(3);
+	var defaults = __webpack_require__(4);
 	
 	var defaultOptions = {
 	  isColor: function(token, index, tokens) {
@@ -75116,13 +75473,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 67 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(3);
+	var defaults = __webpack_require__(4);
 	
 	function createPredicate(typesOrPredicate) {
 	  // Predicate should return `true` if token should be removed from list
@@ -75150,18 +75507,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 68 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(57);
+	var packageFile = __webpack_require__(59);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 69 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75339,7 +75696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 70 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75389,7 +75746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 71 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75437,7 +75794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 72 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75507,7 +75864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 73 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75578,7 +75935,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 74 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75648,7 +76005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 75 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75690,14 +76047,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(75);
-	var invalid = __webpack_require__(70);
+	var whitespace = __webpack_require__(82);
+	var invalid = __webpack_require__(77);
 	
 	function Context(source, parsers, options) {
 	  this.source = _.isString(source) ? source : '';
@@ -75798,13 +76155,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(3);
+	var defaults = __webpack_require__(4);
 	var utils = __webpack_require__(2);
 	
 	var defaultOptions = {
@@ -76040,7 +76397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 78 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76182,13 +76539,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(13);
+	var index = __webpack_require__(14);
 	var render = __webpack_require__(9);
 	var transform = __webpack_require__(12);
 	
@@ -76258,14 +76615,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(13);
-	var defaults = __webpack_require__(3);
+	var index = __webpack_require__(14);
+	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(8);
 	var filter = __webpack_require__(6);
 	var syntax = __webpack_require__(10);
@@ -76327,13 +76684,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(14);
+	var index = __webpack_require__(15);
 	var render = __webpack_require__(9);
 	
 	var defaultOptions = {
@@ -76396,14 +76753,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 82 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(14);
-	var defaults = __webpack_require__(3);
+	var index = __webpack_require__(15);
+	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(8);
 	var filter = __webpack_require__(6);
 	var syntax = __webpack_require__(10);
@@ -76473,25 +76830,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 83 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports.classic = __webpack_require__(13);
-	module.exports.extended = __webpack_require__(14);
-	module.exports.stwr = __webpack_require__(15);
-	module.exports.weddslist = __webpack_require__(87);
+	module.exports.classic = __webpack_require__(14);
+	module.exports.extended = __webpack_require__(15);
+	module.exports.stwr = __webpack_require__(16);
+	module.exports.weddslist = __webpack_require__(94);
 
 
 /***/ },
-/* 84 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(15);
+	var index = __webpack_require__(16);
 	var render = __webpack_require__(9);
 	var transform = __webpack_require__(12);
 	
@@ -76561,14 +76918,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 85 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(15);
-	var defaults = __webpack_require__(3);
+	var index = __webpack_require__(16);
+	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(8);
 	var filter = __webpack_require__(6);
 	var syntax = __webpack_require__(10);
@@ -76630,7 +76987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 86 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76704,7 +77061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 87 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76713,8 +77070,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'weddslist';
 	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(88);
-	module.exports.format = __webpack_require__(86);
+	module.exports.parse = __webpack_require__(95);
+	module.exports.format = __webpack_require__(93);
 	
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
@@ -76733,13 +77090,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 88 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(3);
+	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(8);
 	var filter = __webpack_require__(6);
 	var syntax = __webpack_require__(10);
@@ -76807,7 +77164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 89 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76950,7 +77307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 90 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77245,7 +77602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 91 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77477,7 +77834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 92 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77531,7 +77888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 93 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77616,17 +77973,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 94 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	var flattenSimpleBlocks = __webpack_require__(19);
-	var mergeStripes = __webpack_require__(20);
-	var removeEmptyBlocks = __webpack_require__(21);
-	var removeZeroWidthStripes = __webpack_require__(22);
+	var flattenSimpleBlocks = __webpack_require__(20);
+	var mergeStripes = __webpack_require__(21);
+	var removeEmptyBlocks = __webpack_require__(22);
+	var removeZeroWidthStripes = __webpack_require__(23);
 	
 	var defaultOptions = {
 	  // Also options for removeZeroWidthStripes
@@ -77665,7 +78022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 95 */
+/* 102 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -77693,7 +78050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 96 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77730,7 +78087,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 97 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77801,13 +78158,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 98 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var color = __webpack_require__(23);
+	var color = __webpack_require__(24);
 	
 	function getColor(name, colors, defaultColors) {
 	  var temp = colors[name];
@@ -77934,7 +78291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 99 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78150,14 +78507,1262 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 100 */
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
+	;(function(root) {
+	
+		/** Detect free variables */
+		var freeExports = typeof exports == 'object' && exports &&
+			!exports.nodeType && exports;
+		var freeModule = typeof module == 'object' && module &&
+			!module.nodeType && module;
+		var freeGlobal = typeof global == 'object' && global;
+		if (
+			freeGlobal.global === freeGlobal ||
+			freeGlobal.window === freeGlobal ||
+			freeGlobal.self === freeGlobal
+		) {
+			root = freeGlobal;
+		}
+	
+		/**
+		 * The `punycode` object.
+		 * @name punycode
+		 * @type Object
+		 */
+		var punycode,
+	
+		/** Highest positive signed 32-bit float value */
+		maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
+	
+		/** Bootstring parameters */
+		base = 36,
+		tMin = 1,
+		tMax = 26,
+		skew = 38,
+		damp = 700,
+		initialBias = 72,
+		initialN = 128, // 0x80
+		delimiter = '-', // '\x2D'
+	
+		/** Regular expressions */
+		regexPunycode = /^xn--/,
+		regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+		regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
+	
+		/** Error messages */
+		errors = {
+			'overflow': 'Overflow: input needs wider integers to process',
+			'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+			'invalid-input': 'Invalid input'
+		},
+	
+		/** Convenience shortcuts */
+		baseMinusTMin = base - tMin,
+		floor = Math.floor,
+		stringFromCharCode = String.fromCharCode,
+	
+		/** Temporary variable */
+		key;
+	
+		/*--------------------------------------------------------------------------*/
+	
+		/**
+		 * A generic error utility function.
+		 * @private
+		 * @param {String} type The error type.
+		 * @returns {Error} Throws a `RangeError` with the applicable error message.
+		 */
+		function error(type) {
+			throw RangeError(errors[type]);
+		}
+	
+		/**
+		 * A generic `Array#map` utility function.
+		 * @private
+		 * @param {Array} array The array to iterate over.
+		 * @param {Function} callback The function that gets called for every array
+		 * item.
+		 * @returns {Array} A new array of values returned by the callback function.
+		 */
+		function map(array, fn) {
+			var length = array.length;
+			var result = [];
+			while (length--) {
+				result[length] = fn(array[length]);
+			}
+			return result;
+		}
+	
+		/**
+		 * A simple `Array#map`-like wrapper to work with domain name strings or email
+		 * addresses.
+		 * @private
+		 * @param {String} domain The domain name or email address.
+		 * @param {Function} callback The function that gets called for every
+		 * character.
+		 * @returns {Array} A new string of characters returned by the callback
+		 * function.
+		 */
+		function mapDomain(string, fn) {
+			var parts = string.split('@');
+			var result = '';
+			if (parts.length > 1) {
+				// In email addresses, only the domain name should be punycoded. Leave
+				// the local part (i.e. everything up to `@`) intact.
+				result = parts[0] + '@';
+				string = parts[1];
+			}
+			// Avoid `split(regex)` for IE8 compatibility. See #17.
+			string = string.replace(regexSeparators, '\x2E');
+			var labels = string.split('.');
+			var encoded = map(labels, fn).join('.');
+			return result + encoded;
+		}
+	
+		/**
+		 * Creates an array containing the numeric code points of each Unicode
+		 * character in the string. While JavaScript uses UCS-2 internally,
+		 * this function will convert a pair of surrogate halves (each of which
+		 * UCS-2 exposes as separate characters) into a single code point,
+		 * matching UTF-16.
+		 * @see `punycode.ucs2.encode`
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode.ucs2
+		 * @name decode
+		 * @param {String} string The Unicode input string (UCS-2).
+		 * @returns {Array} The new array of code points.
+		 */
+		function ucs2decode(string) {
+			var output = [],
+			    counter = 0,
+			    length = string.length,
+			    value,
+			    extra;
+			while (counter < length) {
+				value = string.charCodeAt(counter++);
+				if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+					// high surrogate, and there is a next character
+					extra = string.charCodeAt(counter++);
+					if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+						output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+					} else {
+						// unmatched surrogate; only append this code unit, in case the next
+						// code unit is the high surrogate of a surrogate pair
+						output.push(value);
+						counter--;
+					}
+				} else {
+					output.push(value);
+				}
+			}
+			return output;
+		}
+	
+		/**
+		 * Creates a string based on an array of numeric code points.
+		 * @see `punycode.ucs2.decode`
+		 * @memberOf punycode.ucs2
+		 * @name encode
+		 * @param {Array} codePoints The array of numeric code points.
+		 * @returns {String} The new Unicode string (UCS-2).
+		 */
+		function ucs2encode(array) {
+			return map(array, function(value) {
+				var output = '';
+				if (value > 0xFFFF) {
+					value -= 0x10000;
+					output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+					value = 0xDC00 | value & 0x3FF;
+				}
+				output += stringFromCharCode(value);
+				return output;
+			}).join('');
+		}
+	
+		/**
+		 * Converts a basic code point into a digit/integer.
+		 * @see `digitToBasic()`
+		 * @private
+		 * @param {Number} codePoint The basic numeric code point value.
+		 * @returns {Number} The numeric value of a basic code point (for use in
+		 * representing integers) in the range `0` to `base - 1`, or `base` if
+		 * the code point does not represent a value.
+		 */
+		function basicToDigit(codePoint) {
+			if (codePoint - 48 < 10) {
+				return codePoint - 22;
+			}
+			if (codePoint - 65 < 26) {
+				return codePoint - 65;
+			}
+			if (codePoint - 97 < 26) {
+				return codePoint - 97;
+			}
+			return base;
+		}
+	
+		/**
+		 * Converts a digit/integer into a basic code point.
+		 * @see `basicToDigit()`
+		 * @private
+		 * @param {Number} digit The numeric value of a basic code point.
+		 * @returns {Number} The basic code point whose value (when used for
+		 * representing integers) is `digit`, which needs to be in the range
+		 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+		 * used; else, the lowercase form is used. The behavior is undefined
+		 * if `flag` is non-zero and `digit` has no uppercase form.
+		 */
+		function digitToBasic(digit, flag) {
+			//  0..25 map to ASCII a..z or A..Z
+			// 26..35 map to ASCII 0..9
+			return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+		}
+	
+		/**
+		 * Bias adaptation function as per section 3.4 of RFC 3492.
+		 * http://tools.ietf.org/html/rfc3492#section-3.4
+		 * @private
+		 */
+		function adapt(delta, numPoints, firstTime) {
+			var k = 0;
+			delta = firstTime ? floor(delta / damp) : delta >> 1;
+			delta += floor(delta / numPoints);
+			for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+				delta = floor(delta / baseMinusTMin);
+			}
+			return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+		}
+	
+		/**
+		 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+		 * symbols.
+		 * @memberOf punycode
+		 * @param {String} input The Punycode string of ASCII-only symbols.
+		 * @returns {String} The resulting string of Unicode symbols.
+		 */
+		function decode(input) {
+			// Don't use UCS-2
+			var output = [],
+			    inputLength = input.length,
+			    out,
+			    i = 0,
+			    n = initialN,
+			    bias = initialBias,
+			    basic,
+			    j,
+			    index,
+			    oldi,
+			    w,
+			    k,
+			    digit,
+			    t,
+			    /** Cached calculation results */
+			    baseMinusT;
+	
+			// Handle the basic code points: let `basic` be the number of input code
+			// points before the last delimiter, or `0` if there is none, then copy
+			// the first basic code points to the output.
+	
+			basic = input.lastIndexOf(delimiter);
+			if (basic < 0) {
+				basic = 0;
+			}
+	
+			for (j = 0; j < basic; ++j) {
+				// if it's not a basic code point
+				if (input.charCodeAt(j) >= 0x80) {
+					error('not-basic');
+				}
+				output.push(input.charCodeAt(j));
+			}
+	
+			// Main decoding loop: start just after the last delimiter if any basic code
+			// points were copied; start at the beginning otherwise.
+	
+			for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+	
+				// `index` is the index of the next character to be consumed.
+				// Decode a generalized variable-length integer into `delta`,
+				// which gets added to `i`. The overflow checking is easier
+				// if we increase `i` as we go, then subtract off its starting
+				// value at the end to obtain `delta`.
+				for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+	
+					if (index >= inputLength) {
+						error('invalid-input');
+					}
+	
+					digit = basicToDigit(input.charCodeAt(index++));
+	
+					if (digit >= base || digit > floor((maxInt - i) / w)) {
+						error('overflow');
+					}
+	
+					i += digit * w;
+					t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+	
+					if (digit < t) {
+						break;
+					}
+	
+					baseMinusT = base - t;
+					if (w > floor(maxInt / baseMinusT)) {
+						error('overflow');
+					}
+	
+					w *= baseMinusT;
+	
+				}
+	
+				out = output.length + 1;
+				bias = adapt(i - oldi, out, oldi == 0);
+	
+				// `i` was supposed to wrap around from `out` to `0`,
+				// incrementing `n` each time, so we'll fix that now:
+				if (floor(i / out) > maxInt - n) {
+					error('overflow');
+				}
+	
+				n += floor(i / out);
+				i %= out;
+	
+				// Insert `n` at position `i` of the output
+				output.splice(i++, 0, n);
+	
+			}
+	
+			return ucs2encode(output);
+		}
+	
+		/**
+		 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+		 * Punycode string of ASCII-only symbols.
+		 * @memberOf punycode
+		 * @param {String} input The string of Unicode symbols.
+		 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+		 */
+		function encode(input) {
+			var n,
+			    delta,
+			    handledCPCount,
+			    basicLength,
+			    bias,
+			    j,
+			    m,
+			    q,
+			    k,
+			    t,
+			    currentValue,
+			    output = [],
+			    /** `inputLength` will hold the number of code points in `input`. */
+			    inputLength,
+			    /** Cached calculation results */
+			    handledCPCountPlusOne,
+			    baseMinusT,
+			    qMinusT;
+	
+			// Convert the input in UCS-2 to Unicode
+			input = ucs2decode(input);
+	
+			// Cache the length
+			inputLength = input.length;
+	
+			// Initialize the state
+			n = initialN;
+			delta = 0;
+			bias = initialBias;
+	
+			// Handle the basic code points
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue < 0x80) {
+					output.push(stringFromCharCode(currentValue));
+				}
+			}
+	
+			handledCPCount = basicLength = output.length;
+	
+			// `handledCPCount` is the number of code points that have been handled;
+			// `basicLength` is the number of basic code points.
+	
+			// Finish the basic string - if it is not empty - with a delimiter
+			if (basicLength) {
+				output.push(delimiter);
+			}
+	
+			// Main encoding loop:
+			while (handledCPCount < inputLength) {
+	
+				// All non-basic code points < n have been handled already. Find the next
+				// larger one:
+				for (m = maxInt, j = 0; j < inputLength; ++j) {
+					currentValue = input[j];
+					if (currentValue >= n && currentValue < m) {
+						m = currentValue;
+					}
+				}
+	
+				// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+				// but guard against overflow
+				handledCPCountPlusOne = handledCPCount + 1;
+				if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+					error('overflow');
+				}
+	
+				delta += (m - n) * handledCPCountPlusOne;
+				n = m;
+	
+				for (j = 0; j < inputLength; ++j) {
+					currentValue = input[j];
+	
+					if (currentValue < n && ++delta > maxInt) {
+						error('overflow');
+					}
+	
+					if (currentValue == n) {
+						// Represent delta as a generalized variable-length integer
+						for (q = delta, k = base; /* no condition */; k += base) {
+							t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+							if (q < t) {
+								break;
+							}
+							qMinusT = q - t;
+							baseMinusT = base - t;
+							output.push(
+								stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+							);
+							q = floor(qMinusT / baseMinusT);
+						}
+	
+						output.push(stringFromCharCode(digitToBasic(q, 0)));
+						bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+						delta = 0;
+						++handledCPCount;
+					}
+				}
+	
+				++delta;
+				++n;
+	
+			}
+			return output.join('');
+		}
+	
+		/**
+		 * Converts a Punycode string representing a domain name or an email address
+		 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+		 * it doesn't matter if you call it on a string that has already been
+		 * converted to Unicode.
+		 * @memberOf punycode
+		 * @param {String} input The Punycoded domain name or email address to
+		 * convert to Unicode.
+		 * @returns {String} The Unicode representation of the given Punycode
+		 * string.
+		 */
+		function toUnicode(input) {
+			return mapDomain(input, function(string) {
+				return regexPunycode.test(string)
+					? decode(string.slice(4).toLowerCase())
+					: string;
+			});
+		}
+	
+		/**
+		 * Converts a Unicode string representing a domain name or an email address to
+		 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+		 * i.e. it doesn't matter if you call it with a domain that's already in
+		 * ASCII.
+		 * @memberOf punycode
+		 * @param {String} input The domain name or email address to convert, as a
+		 * Unicode string.
+		 * @returns {String} The Punycode representation of the given domain name or
+		 * email address.
+		 */
+		function toASCII(input) {
+			return mapDomain(input, function(string) {
+				return regexNonASCII.test(string)
+					? 'xn--' + encode(string)
+					: string;
+			});
+		}
+	
+		/*--------------------------------------------------------------------------*/
+	
+		/** Define the public API */
+		punycode = {
+			/**
+			 * A string representing the current Punycode.js version number.
+			 * @memberOf punycode
+			 * @type String
+			 */
+			'version': '1.3.2',
+			/**
+			 * An object of methods to convert from JavaScript's internal character
+			 * representation (UCS-2) to Unicode code points, and back.
+			 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+			 * @memberOf punycode
+			 * @type Object
+			 */
+			'ucs2': {
+				'decode': ucs2decode,
+				'encode': ucs2encode
+			},
+			'decode': decode,
+			'encode': encode,
+			'toASCII': toASCII,
+			'toUnicode': toUnicode
+		};
+	
+		/** Expose `punycode` */
+		// Some AMD build optimizers, like r.js, check for specific condition patterns
+		// like the following:
+		if (
+			true
+		) {
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+				return punycode;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (freeExports && freeModule) {
+			if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
+				freeModule.exports = punycode;
+			} else { // in Narwhal or RingoJS v0.7.0-
+				for (key in punycode) {
+					punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
+				}
+			}
+		} else { // in Rhino or a web browser
+			root.punycode = punycode;
+		}
+	
+	}(this));
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)(module), (function() { return this; }())))
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	var punycode = __webpack_require__(107);
+	
+	exports.parse = urlParse;
+	exports.resolve = urlResolve;
+	exports.resolveObject = urlResolveObject;
+	exports.format = urlFormat;
+	
+	exports.Url = Url;
+	
+	function Url() {
+	  this.protocol = null;
+	  this.slashes = null;
+	  this.auth = null;
+	  this.host = null;
+	  this.port = null;
+	  this.hostname = null;
+	  this.hash = null;
+	  this.search = null;
+	  this.query = null;
+	  this.pathname = null;
+	  this.path = null;
+	  this.href = null;
+	}
+	
+	// Reference: RFC 3986, RFC 1808, RFC 2396
+	
+	// define these here so at least they only have to be
+	// compiled once on the first module load.
+	var protocolPattern = /^([a-z0-9.+-]+:)/i,
+	    portPattern = /:[0-9]*$/,
+	
+	    // RFC 2396: characters reserved for delimiting URLs.
+	    // We actually just auto-escape these.
+	    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
+	
+	    // RFC 2396: characters not allowed for various reasons.
+	    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
+	
+	    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
+	    autoEscape = ['\''].concat(unwise),
+	    // Characters that are never ever allowed in a hostname.
+	    // Note that any invalid chars are also handled, but these
+	    // are the ones that are *expected* to be seen, so we fast-path
+	    // them.
+	    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
+	    hostEndingChars = ['/', '?', '#'],
+	    hostnameMaxLen = 255,
+	    hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
+	    hostnamePartStart = /^([a-z0-9A-Z_-]{0,63})(.*)$/,
+	    // protocols that can allow "unsafe" and "unwise" chars.
+	    unsafeProtocol = {
+	      'javascript': true,
+	      'javascript:': true
+	    },
+	    // protocols that never have a hostname.
+	    hostlessProtocol = {
+	      'javascript': true,
+	      'javascript:': true
+	    },
+	    // protocols that always contain a // bit.
+	    slashedProtocol = {
+	      'http': true,
+	      'https': true,
+	      'ftp': true,
+	      'gopher': true,
+	      'file': true,
+	      'http:': true,
+	      'https:': true,
+	      'ftp:': true,
+	      'gopher:': true,
+	      'file:': true
+	    },
+	    querystring = __webpack_require__(65);
+	
+	function urlParse(url, parseQueryString, slashesDenoteHost) {
+	  if (url && isObject(url) && url instanceof Url) return url;
+	
+	  var u = new Url;
+	  u.parse(url, parseQueryString, slashesDenoteHost);
+	  return u;
+	}
+	
+	Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+	  if (!isString(url)) {
+	    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
+	  }
+	
+	  var rest = url;
+	
+	  // trim before proceeding.
+	  // This is to support parse stuff like "  http://foo.com  \n"
+	  rest = rest.trim();
+	
+	  var proto = protocolPattern.exec(rest);
+	  if (proto) {
+	    proto = proto[0];
+	    var lowerProto = proto.toLowerCase();
+	    this.protocol = lowerProto;
+	    rest = rest.substr(proto.length);
+	  }
+	
+	  // figure out if it's got a host
+	  // user@server is *always* interpreted as a hostname, and url
+	  // resolution will treat //foo/bar as host=foo,path=bar because that's
+	  // how the browser resolves relative URLs.
+	  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+	    var slashes = rest.substr(0, 2) === '//';
+	    if (slashes && !(proto && hostlessProtocol[proto])) {
+	      rest = rest.substr(2);
+	      this.slashes = true;
+	    }
+	  }
+	
+	  if (!hostlessProtocol[proto] &&
+	      (slashes || (proto && !slashedProtocol[proto]))) {
+	
+	    // there's a hostname.
+	    // the first instance of /, ?, ;, or # ends the host.
+	    //
+	    // If there is an @ in the hostname, then non-host chars *are* allowed
+	    // to the left of the last @ sign, unless some host-ending character
+	    // comes *before* the @-sign.
+	    // URLs are obnoxious.
+	    //
+	    // ex:
+	    // http://a@b@c/ => user:a@b host:c
+	    // http://a@b?@c => user:a host:c path:/?@c
+	
+	    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+	    // Review our test case against browsers more comprehensively.
+	
+	    // find the first instance of any hostEndingChars
+	    var hostEnd = -1;
+	    for (var i = 0; i < hostEndingChars.length; i++) {
+	      var hec = rest.indexOf(hostEndingChars[i]);
+	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+	        hostEnd = hec;
+	    }
+	
+	    // at this point, either we have an explicit point where the
+	    // auth portion cannot go past, or the last @ char is the decider.
+	    var auth, atSign;
+	    if (hostEnd === -1) {
+	      // atSign can be anywhere.
+	      atSign = rest.lastIndexOf('@');
+	    } else {
+	      // atSign must be in auth portion.
+	      // http://a@b/c@d => host:b auth:a path:/c@d
+	      atSign = rest.lastIndexOf('@', hostEnd);
+	    }
+	
+	    // Now we have a portion which is definitely the auth.
+	    // Pull that off.
+	    if (atSign !== -1) {
+	      auth = rest.slice(0, atSign);
+	      rest = rest.slice(atSign + 1);
+	      this.auth = decodeURIComponent(auth);
+	    }
+	
+	    // the host is the remaining to the left of the first non-host char
+	    hostEnd = -1;
+	    for (var i = 0; i < nonHostChars.length; i++) {
+	      var hec = rest.indexOf(nonHostChars[i]);
+	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+	        hostEnd = hec;
+	    }
+	    // if we still have not hit it, then the entire thing is a host.
+	    if (hostEnd === -1)
+	      hostEnd = rest.length;
+	
+	    this.host = rest.slice(0, hostEnd);
+	    rest = rest.slice(hostEnd);
+	
+	    // pull out port.
+	    this.parseHost();
+	
+	    // we've indicated that there is a hostname,
+	    // so even if it's empty, it has to be present.
+	    this.hostname = this.hostname || '';
+	
+	    // if hostname begins with [ and ends with ]
+	    // assume that it's an IPv6 address.
+	    var ipv6Hostname = this.hostname[0] === '[' &&
+	        this.hostname[this.hostname.length - 1] === ']';
+	
+	    // validate a little.
+	    if (!ipv6Hostname) {
+	      var hostparts = this.hostname.split(/\./);
+	      for (var i = 0, l = hostparts.length; i < l; i++) {
+	        var part = hostparts[i];
+	        if (!part) continue;
+	        if (!part.match(hostnamePartPattern)) {
+	          var newpart = '';
+	          for (var j = 0, k = part.length; j < k; j++) {
+	            if (part.charCodeAt(j) > 127) {
+	              // we replace non-ASCII char with a temporary placeholder
+	              // we need this to make sure size of hostname is not
+	              // broken by replacing non-ASCII by nothing
+	              newpart += 'x';
+	            } else {
+	              newpart += part[j];
+	            }
+	          }
+	          // we test again with ASCII char only
+	          if (!newpart.match(hostnamePartPattern)) {
+	            var validParts = hostparts.slice(0, i);
+	            var notHost = hostparts.slice(i + 1);
+	            var bit = part.match(hostnamePartStart);
+	            if (bit) {
+	              validParts.push(bit[1]);
+	              notHost.unshift(bit[2]);
+	            }
+	            if (notHost.length) {
+	              rest = '/' + notHost.join('.') + rest;
+	            }
+	            this.hostname = validParts.join('.');
+	            break;
+	          }
+	        }
+	      }
+	    }
+	
+	    if (this.hostname.length > hostnameMaxLen) {
+	      this.hostname = '';
+	    } else {
+	      // hostnames are always lower case.
+	      this.hostname = this.hostname.toLowerCase();
+	    }
+	
+	    if (!ipv6Hostname) {
+	      // IDNA Support: Returns a puny coded representation of "domain".
+	      // It only converts the part of the domain name that
+	      // has non ASCII characters. I.e. it dosent matter if
+	      // you call it with a domain that already is in ASCII.
+	      var domainArray = this.hostname.split('.');
+	      var newOut = [];
+	      for (var i = 0; i < domainArray.length; ++i) {
+	        var s = domainArray[i];
+	        newOut.push(s.match(/[^A-Za-z0-9_-]/) ?
+	            'xn--' + punycode.encode(s) : s);
+	      }
+	      this.hostname = newOut.join('.');
+	    }
+	
+	    var p = this.port ? ':' + this.port : '';
+	    var h = this.hostname || '';
+	    this.host = h + p;
+	    this.href += this.host;
+	
+	    // strip [ and ] from the hostname
+	    // the host field still retains them, though
+	    if (ipv6Hostname) {
+	      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
+	      if (rest[0] !== '/') {
+	        rest = '/' + rest;
+	      }
+	    }
+	  }
+	
+	  // now rest is set to the post-host stuff.
+	  // chop off any delim chars.
+	  if (!unsafeProtocol[lowerProto]) {
+	
+	    // First, make 100% sure that any "autoEscape" chars get
+	    // escaped, even if encodeURIComponent doesn't think they
+	    // need to be.
+	    for (var i = 0, l = autoEscape.length; i < l; i++) {
+	      var ae = autoEscape[i];
+	      var esc = encodeURIComponent(ae);
+	      if (esc === ae) {
+	        esc = escape(ae);
+	      }
+	      rest = rest.split(ae).join(esc);
+	    }
+	  }
+	
+	
+	  // chop off from the tail first.
+	  var hash = rest.indexOf('#');
+	  if (hash !== -1) {
+	    // got a fragment string.
+	    this.hash = rest.substr(hash);
+	    rest = rest.slice(0, hash);
+	  }
+	  var qm = rest.indexOf('?');
+	  if (qm !== -1) {
+	    this.search = rest.substr(qm);
+	    this.query = rest.substr(qm + 1);
+	    if (parseQueryString) {
+	      this.query = querystring.parse(this.query);
+	    }
+	    rest = rest.slice(0, qm);
+	  } else if (parseQueryString) {
+	    // no query string, but parseQueryString still requested
+	    this.search = '';
+	    this.query = {};
+	  }
+	  if (rest) this.pathname = rest;
+	  if (slashedProtocol[lowerProto] &&
+	      this.hostname && !this.pathname) {
+	    this.pathname = '/';
+	  }
+	
+	  //to support http.request
+	  if (this.pathname || this.search) {
+	    var p = this.pathname || '';
+	    var s = this.search || '';
+	    this.path = p + s;
+	  }
+	
+	  // finally, reconstruct the href based on what has been validated.
+	  this.href = this.format();
+	  return this;
+	};
+	
+	// format a parsed object into a url string
+	function urlFormat(obj) {
+	  // ensure it's an object, and not a string url.
+	  // If it's an obj, this is a no-op.
+	  // this way, you can call url_format() on strings
+	  // to clean up potentially wonky urls.
+	  if (isString(obj)) obj = urlParse(obj);
+	  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+	  return obj.format();
+	}
+	
+	Url.prototype.format = function() {
+	  var auth = this.auth || '';
+	  if (auth) {
+	    auth = encodeURIComponent(auth);
+	    auth = auth.replace(/%3A/i, ':');
+	    auth += '@';
+	  }
+	
+	  var protocol = this.protocol || '',
+	      pathname = this.pathname || '',
+	      hash = this.hash || '',
+	      host = false,
+	      query = '';
+	
+	  if (this.host) {
+	    host = auth + this.host;
+	  } else if (this.hostname) {
+	    host = auth + (this.hostname.indexOf(':') === -1 ?
+	        this.hostname :
+	        '[' + this.hostname + ']');
+	    if (this.port) {
+	      host += ':' + this.port;
+	    }
+	  }
+	
+	  if (this.query &&
+	      isObject(this.query) &&
+	      Object.keys(this.query).length) {
+	    query = querystring.stringify(this.query);
+	  }
+	
+	  var search = this.search || (query && ('?' + query)) || '';
+	
+	  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+	
+	  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+	  // unless they had them to begin with.
+	  if (this.slashes ||
+	      (!protocol || slashedProtocol[protocol]) && host !== false) {
+	    host = '//' + (host || '');
+	    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
+	  } else if (!host) {
+	    host = '';
+	  }
+	
+	  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
+	  if (search && search.charAt(0) !== '?') search = '?' + search;
+	
+	  pathname = pathname.replace(/[?#]/g, function(match) {
+	    return encodeURIComponent(match);
+	  });
+	  search = search.replace('#', '%23');
+	
+	  return protocol + host + pathname + search + hash;
+	};
+	
+	function urlResolve(source, relative) {
+	  return urlParse(source, false, true).resolve(relative);
+	}
+	
+	Url.prototype.resolve = function(relative) {
+	  return this.resolveObject(urlParse(relative, false, true)).format();
+	};
+	
+	function urlResolveObject(source, relative) {
+	  if (!source) return relative;
+	  return urlParse(source, false, true).resolveObject(relative);
+	}
+	
+	Url.prototype.resolveObject = function(relative) {
+	  if (isString(relative)) {
+	    var rel = new Url();
+	    rel.parse(relative, false, true);
+	    relative = rel;
+	  }
+	
+	  var result = new Url();
+	  Object.keys(this).forEach(function(k) {
+	    result[k] = this[k];
+	  }, this);
+	
+	  // hash is always overridden, no matter what.
+	  // even href="" will remove it.
+	  result.hash = relative.hash;
+	
+	  // if the relative url is empty, then there's nothing left to do here.
+	  if (relative.href === '') {
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  // hrefs like //foo/bar always cut to the protocol.
+	  if (relative.slashes && !relative.protocol) {
+	    // take everything except the protocol from relative
+	    Object.keys(relative).forEach(function(k) {
+	      if (k !== 'protocol')
+	        result[k] = relative[k];
+	    });
+	
+	    //urlParse appends trailing / to urls like http://www.example.com
+	    if (slashedProtocol[result.protocol] &&
+	        result.hostname && !result.pathname) {
+	      result.path = result.pathname = '/';
+	    }
+	
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  if (relative.protocol && relative.protocol !== result.protocol) {
+	    // if it's a known url protocol, then changing
+	    // the protocol does weird things
+	    // first, if it's not file:, then we MUST have a host,
+	    // and if there was a path
+	    // to begin with, then we MUST have a path.
+	    // if it is file:, then the host is dropped,
+	    // because that's known to be hostless.
+	    // anything else is assumed to be absolute.
+	    if (!slashedProtocol[relative.protocol]) {
+	      Object.keys(relative).forEach(function(k) {
+	        result[k] = relative[k];
+	      });
+	      result.href = result.format();
+	      return result;
+	    }
+	
+	    result.protocol = relative.protocol;
+	    if (!relative.host && !hostlessProtocol[relative.protocol]) {
+	      var relPath = (relative.pathname || '').split('/');
+	      while (relPath.length && !(relative.host = relPath.shift()));
+	      if (!relative.host) relative.host = '';
+	      if (!relative.hostname) relative.hostname = '';
+	      if (relPath[0] !== '') relPath.unshift('');
+	      if (relPath.length < 2) relPath.unshift('');
+	      result.pathname = relPath.join('/');
+	    } else {
+	      result.pathname = relative.pathname;
+	    }
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    result.host = relative.host || '';
+	    result.auth = relative.auth;
+	    result.hostname = relative.hostname || relative.host;
+	    result.port = relative.port;
+	    // to support http.request
+	    if (result.pathname || result.search) {
+	      var p = result.pathname || '';
+	      var s = result.search || '';
+	      result.path = p + s;
+	    }
+	    result.slashes = result.slashes || relative.slashes;
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
+	      isRelAbs = (
+	          relative.host ||
+	          relative.pathname && relative.pathname.charAt(0) === '/'
+	      ),
+	      mustEndAbs = (isRelAbs || isSourceAbs ||
+	                    (result.host && relative.pathname)),
+	      removeAllDots = mustEndAbs,
+	      srcPath = result.pathname && result.pathname.split('/') || [],
+	      relPath = relative.pathname && relative.pathname.split('/') || [],
+	      psychotic = result.protocol && !slashedProtocol[result.protocol];
+	
+	  // if the url is a non-slashed url, then relative
+	  // links like ../.. should be able
+	  // to crawl up to the hostname, as well.  This is strange.
+	  // result.protocol has already been set by now.
+	  // Later on, put the first path part into the host field.
+	  if (psychotic) {
+	    result.hostname = '';
+	    result.port = null;
+	    if (result.host) {
+	      if (srcPath[0] === '') srcPath[0] = result.host;
+	      else srcPath.unshift(result.host);
+	    }
+	    result.host = '';
+	    if (relative.protocol) {
+	      relative.hostname = null;
+	      relative.port = null;
+	      if (relative.host) {
+	        if (relPath[0] === '') relPath[0] = relative.host;
+	        else relPath.unshift(relative.host);
+	      }
+	      relative.host = null;
+	    }
+	    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+	  }
+	
+	  if (isRelAbs) {
+	    // it's absolute.
+	    result.host = (relative.host || relative.host === '') ?
+	                  relative.host : result.host;
+	    result.hostname = (relative.hostname || relative.hostname === '') ?
+	                      relative.hostname : result.hostname;
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    srcPath = relPath;
+	    // fall through to the dot-handling below.
+	  } else if (relPath.length) {
+	    // it's relative
+	    // throw away the existing file, and take the new path instead.
+	    if (!srcPath) srcPath = [];
+	    srcPath.pop();
+	    srcPath = srcPath.concat(relPath);
+	    result.search = relative.search;
+	    result.query = relative.query;
+	  } else if (!isNullOrUndefined(relative.search)) {
+	    // just pull out the search.
+	    // like href='?foo'.
+	    // Put this after the other two cases because it simplifies the booleans
+	    if (psychotic) {
+	      result.hostname = result.host = srcPath.shift();
+	      //occationaly the auth can get stuck only in host
+	      //this especialy happens in cases like
+	      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+	      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+	                       result.host.split('@') : false;
+	      if (authInHost) {
+	        result.auth = authInHost.shift();
+	        result.host = result.hostname = authInHost.shift();
+	      }
+	    }
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    //to support http.request
+	    if (!isNull(result.pathname) || !isNull(result.search)) {
+	      result.path = (result.pathname ? result.pathname : '') +
+	                    (result.search ? result.search : '');
+	    }
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  if (!srcPath.length) {
+	    // no path at all.  easy.
+	    // we've already handled the other stuff above.
+	    result.pathname = null;
+	    //to support http.request
+	    if (result.search) {
+	      result.path = '/' + result.search;
+	    } else {
+	      result.path = null;
+	    }
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  // if a url ENDs in . or .., then it must get a trailing slash.
+	  // however, if it ends in anything else non-slashy,
+	  // then it must NOT get a trailing slash.
+	  var last = srcPath.slice(-1)[0];
+	  var hasTrailingSlash = (
+	      (result.host || relative.host) && (last === '.' || last === '..') ||
+	      last === '');
+	
+	  // strip single dots, resolve double dots to parent dir
+	  // if the path tries to go above the root, `up` ends up > 0
+	  var up = 0;
+	  for (var i = srcPath.length; i >= 0; i--) {
+	    last = srcPath[i];
+	    if (last == '.') {
+	      srcPath.splice(i, 1);
+	    } else if (last === '..') {
+	      srcPath.splice(i, 1);
+	      up++;
+	    } else if (up) {
+	      srcPath.splice(i, 1);
+	      up--;
+	    }
+	  }
+	
+	  // if the path is allowed to go above the root, restore leading ..s
+	  if (!mustEndAbs && !removeAllDots) {
+	    for (; up--; up) {
+	      srcPath.unshift('..');
+	    }
+	  }
+	
+	  if (mustEndAbs && srcPath[0] !== '' &&
+	      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
+	    srcPath.unshift('');
+	  }
+	
+	  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+	    srcPath.push('');
+	  }
+	
+	  var isAbsolute = srcPath[0] === '' ||
+	      (srcPath[0] && srcPath[0].charAt(0) === '/');
+	
+	  // put the host back
+	  if (psychotic) {
+	    result.hostname = result.host = isAbsolute ? '' :
+	                                    srcPath.length ? srcPath.shift() : '';
+	    //occationaly the auth can get stuck only in host
+	    //this especialy happens in cases like
+	    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+	    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+	                     result.host.split('@') : false;
+	    if (authInHost) {
+	      result.auth = authInHost.shift();
+	      result.host = result.hostname = authInHost.shift();
+	    }
+	  }
+	
+	  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
+	
+	  if (mustEndAbs && !isAbsolute) {
+	    srcPath.unshift('');
+	  }
+	
+	  if (!srcPath.length) {
+	    result.pathname = null;
+	    result.path = null;
+	  } else {
+	    result.pathname = srcPath.join('/');
+	  }
+	
+	  //to support request.http
+	  if (!isNull(result.pathname) || !isNull(result.search)) {
+	    result.path = (result.pathname ? result.pathname : '') +
+	                  (result.search ? result.search : '');
+	  }
+	  result.auth = relative.auth || result.auth;
+	  result.slashes = result.slashes || relative.slashes;
+	  result.href = result.format();
+	  return result;
+	};
+	
+	Url.prototype.parseHost = function() {
+	  var host = this.host;
+	  var port = portPattern.exec(host);
+	  if (port) {
+	    port = port[0];
+	    if (port !== ':') {
+	      this.port = port.substr(1);
+	    }
+	    host = host.substr(0, host.length - port.length);
+	  }
+	  if (host) this.hostname = host;
+	};
+	
+	function isString(arg) {
+	  return typeof arg === "string";
+	}
+	
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+	
+	function isNull(arg) {
+	  return arg === null;
+	}
+	function isNullOrUndefined(arg) {
+	  return  arg == null;
+	}
+
+
+/***/ },
+/* 109 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 101 */
+/* 110 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -78165,23 +79770,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 102 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 103 */
+/* 111 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -78620,82 +80209,79 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 104 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(4);
+	module.exports = __webpack_require__(3);
 	
-	__webpack_require__(105);
-	__webpack_require__(108);
+	__webpack_require__(113);
+	__webpack_require__(119);
+	__webpack_require__(124);
+
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	__webpack_require__(114);
 
 
 /***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	__webpack_require__(106);
-
-
-/***/ },
-/* 106 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	/* global Event */
 	
-	var _ = __webpack_require__(1);
-	var $q = __webpack_require__(117).$q;
-	var app = __webpack_require__(4);
-	var application = __webpack_require__(116);
+	var $q = __webpack_require__(127).$q;
+	var ngModule = __webpack_require__(3);
+	var application = __webpack_require__(26);
 	
-	app.controller('MainController', [
+	ngModule.controller('MainController', [
 	  '$scope',
 	  function($scope) {
-	    $scope.state = {
-	      search: {}
-	    };
-	
-	    $scope.searchExamples = [
-	      'MacKenzie Clan',
-	      'MacLeod Tartan',
-	      'MacDonald\'s tartan'
-	    ];
-	
-	    var searchIndex = null;
-	
-	    function updateCurrentTartans() {
-	      if (searchIndex) {
-	        $scope.state.tartans = searchIndex($scope.state.search);
-	      } else {
-	        $scope.state.tartans = [];
-	      }
-	      $scope.state.tartan = _.first($scope.state.tartans);
-	    }
-	
-	    $q(application.loadDatabase()).then(function(search) {
-	      searchIndex = search;
-	      updateCurrentTartans();
+	    $q(application.getDatasetDirectory()).then(function(datasets) {
+	      $scope.datasets = datasets;
 	      $scope.isLoaded.application = true;
 	    });
 	
-	    $scope.$watch('state.search', updateCurrentTartans, true);
+	    $scope.dataset = null;
+	
+	    $scope.openDataset = function(dataset) {
+	      $scope.dataset = dataset;
+	      $scope.isLoaded.dataset = false;
+	      $q(application.getDataset(dataset))
+	        .then(function(dataset) {
+	          if ($scope.dataset && ($scope.dataset.name == dataset.name)) {
+	            $scope.dataset = dataset;
+	          }
+	        })
+	        .finally(function() {
+	          if ($scope.dataset && ($scope.dataset.name == dataset.name)) {
+	            $scope.isLoaded.dataset = true;
+	          }
+	        });
+	    };
+	
+	    $scope.closeDataset = function() {
+	      $scope.dataset = null;
+	    };
 	  }
 	]);
 
 
 /***/ },
-/* 107 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(4);
+	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('autofocus', [
 	  '$timeout',
@@ -78712,29 +80298,156 @@ return /******/ (function(modules) { // webpackBootstrap
 	]);
 
 /***/ },
-/* 108 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(107);
+	var ngModule = __webpack_require__(3);
 	
-	// Components
-	__webpack_require__(109);
-	__webpack_require__(110);
-	__webpack_require__(112);
-	__webpack_require__(111);
-	__webpack_require__(113);
+	ngModule.directive('datasetHeader', [
+	  function() {
+	    return {
+	      restrict: 'E',
+	      template: __webpack_require__(66),
+	      replace: true,
+	      scope: {
+	        item: '=',
+	        loaded: '=?',
+	        onclose: '&?'
+	      },
+	      link: function() {
+	      }
+	    };
+	  }
+	]);
 
 
 /***/ },
-/* 109 */
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var ngModule = __webpack_require__(3);
+	
+	ngModule.directive('datasetListItem', [
+	  function() {
+	    return {
+	      restrict: 'E',
+	      template: __webpack_require__(67),
+	      replace: true,
+	      scope: {
+	        item: '=',
+	        onselect: '&?'
+	      },
+	      link: function() {
+	      }
+	    };
+	  }
+	]);
+
+
+/***/ },
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(4);
+	var application = __webpack_require__(26);
+	var ngModule = __webpack_require__(3);
+	
+	ngModule.directive('datasetView', [
+	  function() {
+	    return {
+	      restrict: 'E',
+	      template: __webpack_require__(68),
+	      replace: true,
+	      scope: {
+	        item: '='
+	      },
+	      link: function($scope) {
+	        var searchIndex = null;
+	
+	        var state = $scope.state = {
+	          search: {},
+	          showPreview: false,
+	          items: [],
+	          current: null
+	        };
+	
+	        $scope.searchExamples = [
+	          'MacKenzie Clan',
+	          'MacLeod Tartan',
+	          'MacDonald\'s tartan'
+	        ];
+	
+	        function performSearch() {
+	          if (searchIndex) {
+	            state.items = searchIndex(state.search);
+	          } else
+	          if (_.isObject($scope.item) && _.isArray($scope.item.items)) {
+	            state.items = $scope.item.items;
+	          } else {
+	            state.items = [];
+	          }
+	          state.current = _.first(state.items);
+	        }
+	
+	        $scope.$watch('state.search', function(newValue, oldValue) {
+	          if (newValue !== oldValue) {
+	            performSearch();
+	          }
+	        }, true);
+	
+	        function update() {
+	          searchIndex = null;
+	          if (_.isObject($scope.item) && _.isArray($scope.item.items)) {
+	            searchIndex = application.buildSearchIndex($scope.item.items);
+	          }
+	          performSearch();
+	        }
+	
+	        $scope.$watch('item', function(newValue, oldValue) {
+	          if (newValue !== oldValue) {
+	            update();
+	          }
+	        });
+	
+	        update();
+	      }
+	    };
+	  }
+	]);
+
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(115);
+	
+	// Components
+	__webpack_require__(120);
+	__webpack_require__(121);
+	__webpack_require__(122);
+	__webpack_require__(123);
+	__webpack_require__(117);
+	__webpack_require__(116);
+	__webpack_require__(118);
+
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var ngModule = __webpack_require__(3);
 	
 	function validateCount(value) {
 	  value = parseFloat(value) || 0;
@@ -78751,7 +80464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(61),
+	      template: __webpack_require__(69),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -78819,18 +80532,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 110 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(4);
+	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('tartanInfo', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(62),
+	      template: __webpack_require__(70),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -78844,45 +80557,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(4);
-	
-	ngModule.directive('tartanListItem', [
-	  function() {
-	    return {
-	      restrict: 'E',
-	      template: __webpack_require__(63),
-	      replace: true,
-	      scope: {
-	        item: '=',
-	        onchange: '&?'
-	      },
-	      link: function($scope) {
-	      }
-	    };
-	  }
-	]);
-
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(4);
+	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('tartanList', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(64),
+	      template: __webpack_require__(71),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -78932,20 +80619,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(4);
+	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('tartanPreview', [
 	  '$window', '$timeout', 'tartan',
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(65),
+	      template: __webpack_require__(72),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -79025,22 +80712,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(115);
+	__webpack_require__(125);
 
 
 /***/ },
-/* 115 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var module = __webpack_require__(4);
+	var module = __webpack_require__(3);
 	
 	module.filter('join', [
 	  function() {
@@ -79055,93 +80742,48 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var Promise = __webpack_require__(17);
-	var csv = __webpack_require__(60);
-	var search = __webpack_require__(120);
+	/* global fetch */
 	
-	var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
-	  'v0.2/data/house-of-tartan.csv';
+	__webpack_require__(18);
+	var Promise = __webpack_require__(13);
 	
-	function getPapaParseError(parseErrors) {
-	  parseErrors = _.filter(parseErrors, function(error) {
-	    // Delimiter was not auto-detected (defaults used).
-	    // We'll not treat this as an error
-	    var delimiterNotDetected = (error.type == 'Delimiter') &&
-	      (error.code == 'UndetectableDelimiter');
+	var cache = {};
 	
-	    return !delimiterNotDetected;
-	  });
-	  if (parseErrors.length > 0) {
-	    return new Error(parseErrors[0].message);
-	  }
-	}
-	
-	function loadData(url) {
-	  return new Promise(function(resolve, reject) {
-	    var config = {
-	      download: true,
-	      skipEmptyLines: true,
-	      header: true,
-	      error: function(error) {
-	        reject(new Error('Failed to load ' + url + ' : ' + error));
-	      },
-	      complete: function(results) {
-	        var error = getPapaParseError(results.errors);
-	        if (error) {
-	          reject(error);
-	        } else {
-	          resolve(_.map(results.data, function(record, index) {
-	            var result = {
-	              id: index,
-	              /* eslint-disable dot-notation */
-	              source: record['Source'],
-	              name: record['Name'],
-	              overview: record['Overview'],
-	              comment: record['Comment'],
-	              copyright: record['Copyright'],
-	              palette: record['Palette'],
-	              threadcount: record['Threadcount'],
-	              sourceUrl: record['Source URL']
-	              /* eslint-enable dot-notation */
-	            };
-	            var sett = _.filter([result.palette, result.threadcount]);
-	            result.sett = sett.length > 0 ? sett.join('\n') : null;
-	            /* eslint-disable dot-notation */
-	            var categories = record['Category'].split(';');
-	            /* eslint-enable dot-notation */
-	            result.categories = _.chain(categories)
-	              .map(_.trim)
-	              .filter()
-	              .value();
-	            return result;
-	          }));
+	module.exports = {
+	  get: function(url, options, bypassCache) {
+	    if (bypassCache || !cache[url]) {
+	      var requestPromise = fetch(url, options).then(function(response) {
+	        if (response.status != 200) {
+	          throw new Error('Failed loading data from ' + response.url);
 	        }
+	        return response.text();
+	      });
+	
+	      if (bypassCache) {
+	        return requestPromise;
 	      }
-	    };
-	    csv.parse(url, config);
-	  });
-	}
-	
-	function loadDatabase() {
-	  return loadData(sourceUrl).then(function(records) {
-	    return search(records, [
-	      search.fulltext(records),
-	      search.category(records)
-	    ]);
-	  });
-	}
-	
-	module.exports.loadDatabase = loadDatabase;
+	      cache[url] = requestPromise;
+	    }
+	    return new Promise(function(resolve, reject) {
+	      cache[url].then(resolve).catch(reject);
+	    });
+	  },
+	  getJson: function(url, options, bypassCache) {
+	    return this.get(url, options, bypassCache).then(JSON.parse);
+	  },
+	  clearCache: function() {
+	    cache = {};
+	  }
+	};
 
 
 /***/ },
-/* 117 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79180,7 +80822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 118 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79195,7 +80837,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _.each(records, function(record) {
 	    refMap[record.id] = record;
 	    refsList.push(record.id);
-	    var categories = record.categories;
+	    var categories = record.category;
 	    if (categories.length == 0) {
 	      categories = [''];
 	    }
@@ -79222,22 +80864,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var lunr = __webpack_require__(58);
+	var lunr = __webpack_require__(60);
 	
 	function createIndex(records) {
 	  records = _.sortBy(records, 'name');
 	
 	  var index = lunr(function() {
 	    this.field('name', {boost: 100});
-	    this.field('comment', {boost: 10});
-	    this.field('source');
-	    this.field('copyright');
+	    this.field('description');
 	    this.ref('id');
 	
 	    // Path pipeline to do some pre-processing
@@ -79269,6 +80909,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var refList = [];
 	  var refMap = {};
 	  _.each(records, function(record) {
+	    record = _.extend({}, record);
+	    if (_.isArray(record.description)) {
+	      record.description = record.description.join(' ');
+	    }
 	    index.add(record);
 	    refMap[record.id] = record;
 	    refList.push(record.id);
@@ -79296,7 +80940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79334,8 +80978,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = createIndex;
 	
-	module.exports.fulltext = __webpack_require__(119);
-	module.exports.category = __webpack_require__(118);
+	module.exports.fulltext = __webpack_require__(129);
+	module.exports.category = __webpack_require__(128);
 
 
 /***/ }
