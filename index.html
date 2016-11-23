@@ -17,25 +17,33 @@
 </div>
 
 <div ng-cloak ng-if="isLoaded.application">
-  <div class="container-fluid margin-bottom-15">
-      <div class="input-group margin-top-15 margin-bottom-15">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        <input type="text" class="form-control" placeholder="Search"
-          ng-model="state.search.query">
-      </div>
-      <div class="margin-top-5 margin-bottom-10">
-        <span class="margin-right-10">Example:</span>
-        <a href="javascript:void(0)" class="margin-right-10"
-          ng-repeat="phrase in searchExamples"
-          ng-click="state.search.query = phrase">{{ phrase }}</a>
-      </div>
-      <tartan-list items="state.tartans" item="state.tartan"
-        onpreview="state.showPreview = true;"></tartan-list>
+  <div class="container-fluid padding-top-15" ng-if="!dataset">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-4"
+      ng-repeat="dataset in datasets track by dataset.name"
+    >
+      <dataset-list-item item="dataset"
+        onselect="openDataset(dataset)"></dataset-list-item>
+    </div>
+  </div>
+  </div>
+
+  <div class="container-fluid padding-top-15" ng-if="!!dataset">
+    <dataset-header item="dataset" loaded="isLoaded.dataset"
+      onclose="closeDataset()"></dataset-header>
+
+    <div ng-if="!isLoaded.dataset" class="text-center padding-top-50 padding-bottom-50">
+      <div class="margin-bottom-10"><i class="fa fa-4x fa-spinner fa-pulse"></i></div>
+      <div class="margin-bottom-10">Loading dataset...</div>
+    </div>
+
+    <hr class="margin-top-10 margin-bottom-20">
+
+    <div ng-if="isLoaded.dataset">
+       <dataset-view item="dataset"></dataset-view>
     </div>
   </div>
 </div>
-
-<tartan-preview item="state.tartan" active="state.showPreview"></tartan-preview>
 
 <footer class="container-fluid padding-top-15 padding-bottom-15">
 <div class="row">

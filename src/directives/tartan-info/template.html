@@ -1,22 +1,20 @@
 <div>
   <h3 ng-if="showTitle" class="margin-top-15">{{ item.name }}</h3>
-  <p ng-if="!!item.source"><strong>Source:</strong>
-    <a ng-if="!!item.sourceUrl" ng-href="{{ item.sourceUrl }}"
-      target="_blank">{{ item.source }}</a>
-    <span ng-if="!item.sourceUrl">{{ item.source }}</span>
+  <p ng-if="!!item.dataset"><strong>Source:</strong>
+    <a ng-if="!!item.url" ng-href="{{ item.url }}"
+      target="_blank">{{ item.dataset }}</a>
+    <span ng-if="!item.url">{{ item.dataset }}</span>
   </p>
-  <p ng-if="item.categories.length > 0"><strong
+  <p ng-if="item.category.length > 0"><strong
     ng-pluralize
-    count="item.categories.length"
+    count="item.category.length"
     when="{1: 'Category:', 'other': 'Categories:'}"></strong>
-    <span>{{ item.categories | join:', ' }}</span>
+    <span>{{ item.category | join:', ' }}</span>
   </p>
-  <p ng-if="!!item.overview" marked="item.overview"></p>
-  <p ng-if="!!item.comment" marked="item.comment"></p>
-  <p ng-if="!!item.copyright" marked="item.copyright"></p>
+  <p ng-if="!!item.description" marked="item.description"></p>
 
   <div ng-if="!!item.sett">
-    <p><strong>item threadcount:</strong></p>
+    <p><strong>Item threadcount:</strong></p>
     <pre>{{ item.sett }}</pre>
   </div>
 </div>

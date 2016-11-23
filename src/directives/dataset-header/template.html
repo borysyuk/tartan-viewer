@@ -1,0 +1,24 @@
+<div class="dataset-header">
+  <button class="btn btn-success pull-left without-margins margin-right-10"
+    ng-if="onclose" ng-click="onclose()"><i
+    class="fa fa-reply margin-right-5"></i>Back</button>
+  <h2 class="without-margins">{{ item.title }}</h2>
+  <hr class="margin-top-15 margin-bottom-15">
+  <div class="clearfix">
+    <p marked="item.description | join:'\n\n'"></p>
+  </div>
+  <div class="clearfix">
+    <p class="pull-left margin-right-15" ng-if="item.author">
+      <strong>Author:</strong> {{ item.author }}
+    </p>
+    <p class="pull-left margin-right-15" ng-if="item.version">
+      <strong>Version:</strong> {{ item.version }}
+    </p>
+    <p class="pull-left margin-right-15" ng-if="item.updated">
+      <strong>Updated:</strong> {{ item.updated }}
+    </p>
+    <p class="pull-left margin-right-15" ng-if="loaded">
+      <strong>Count of items:</strong> {{ item.items.length }}
+    </p>
+  </div>
+</div>
