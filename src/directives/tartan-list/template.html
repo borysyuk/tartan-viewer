@@ -10,10 +10,16 @@
   </div>
 
   <div class="clearfix">
-    <tartan-list-item class="pull-left"
-      ng-repeat="item in pagination.items track by item.id"
-      item="item" onchange="setCurrent(item); onpreview();"
-    ></tartan-list-item>
+    <div class="tartan-list-item pull-left"
+      ng-repeat="item in pagination.items track by item.id">
+      <a href="javascript:void(0)" title="{{ item.name }}"
+        ng-click="setCurrent(item); onpreview();">
+        <tartan-image source="{{ 'classic/2,2/' + item.sett }}"></tartan-image>
+      </a>
+
+      <h4><a href="javascript:void(0)" title="{{ item.name }}"
+        ng-click="setCurrent(item); onpreview();">{{ item.name }}</a></h4>
+    </div>
   </div>
 
   <div ng-if="pagination.items.length >= pagination.itemsPerPage / 2">

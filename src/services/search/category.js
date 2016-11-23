@@ -10,7 +10,7 @@ function createIndex(records) {
   _.each(records, function(record) {
     refMap[record.id] = record;
     refsList.push(record.id);
-    var categories = record.categories;
+    var categories = record.category;
     if (categories.length == 0) {
       categories = [''];
     }

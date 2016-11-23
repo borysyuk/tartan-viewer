@@ -1,9 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
 var ngModule = require('../../module');
 
-ngModule.directive('tartanListItem', [
+ngModule.directive('datasetListItem', [
   function() {
     return {
       restrict: 'E',
@@ -11,9 +10,9 @@ ngModule.directive('tartanListItem', [
       replace: true,
       scope: {
         item: '=',
-        onchange: '&?'
+        onselect: '&?'
       },
-      link: function($scope) {
+      link: function() {
       }
     };
   }

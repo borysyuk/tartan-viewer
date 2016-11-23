@@ -1,0 +1,20 @@
+<div class="panel panel-success dataset-list-item">
+  <div class="panel-heading"><h4 title="{{ item.title }}"><i
+    class="fa fa-database margin-right-5"></i>{{ item.title }}</h4></div>
+  <div class="panel-body">
+    <p marked="item.description | join:'\n\n'"></p>
+    <p ng-if="item.author">
+      <strong>Author:</strong> {{ item.author }}
+    </p>
+    <p ng-if="item.version">
+      <strong>Version:</strong> {{ item.version }}
+    </p>
+    <p ng-if="item.updated">
+      <strong>Updated:</strong> {{ item.updated }}
+    </p>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-success" ng-click="onselect()"><i
+      class="fa fa-arrow-circle-right margin-right-5"></i>Open</button>
+  </div>
+</div>

@@ -6,5 +6,7 @@ require('./autofocus');
 require('./pagination');
 require('./tartan-info');
 require('./tartan-list');
-require('./tartan-list-item');
 require('./tartan-preview');
+require('./dataset-list-item');
+require('./dataset-header');
+require('./dataset-view');

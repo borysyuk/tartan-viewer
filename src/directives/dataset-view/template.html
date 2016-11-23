@@ -1,0 +1,18 @@
+<div class="dataset-view">
+  <div class="input-group margin-top-15 margin-bottom-15">
+    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+    <input type="text" class="form-control" placeholder="Search"
+      ng-model="state.search.query">
+  </div>
+  <div class="margin-top-5 margin-bottom-10">
+    <span class="margin-right-10">Example:</span>
+    <a href="javascript:void(0)" class="margin-right-10"
+      ng-repeat="phrase in searchExamples"
+      ng-click="state.search.query = phrase">{{ phrase }}</a>
+  </div>
+
+  <tartan-list items="state.items" item="state.current"
+    onpreview="state.showPreview = true;"></tartan-list>
+
+  <tartan-preview item="state.current" active="state.showPreview"></tartan-preview>
+</div>

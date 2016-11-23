@@ -1,12 +1,113 @@
 'use strict';
 
 var _ = require('lodash');
+var url = require('url');
 var Promise = require('bluebird');
 var csv = require('papaparse');
+var downloader = require('../downloader');
 var search = require('../search');
 
 var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
   'v0.2/data/house-of-tartan.csv';
+
+var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
+  'tartan-database/master/data/index.json';
+
+function getDatasetDirectory() {
+  return downloader.getJson(datasetDirectoryUrl)
+    .then(function(items) {
+      return _.map(items, function(item) {
+        item = _.clone(item);
+        item.url = url.resolve(datasetDirectoryUrl, item.path);
+        return item;
+      });
+    });
+}
+
+function convertRecord(record, fields, attributes) {
+  var result = {};
+
+  var propMap = {};
+  _.each(fields, function(field) {
+    propMap[field.name] = field.title;
+  });
+
+  _.each(attributes, function(attribute) {
+    var attrFields = _.isArray(attribute.fields) ? attribute.fields :
+      [attribute.fields];
+    var value = _.map(attrFields, function(name) {
+        var result = record[propMap[name]];
+        if (attribute.split) {
+          result = _.map(result.split(attribute.split), _.trim);
+        }
+        return result;
+      });
+
+    if (attribute.split) {
+      // Merge and get unique values
+      value = _.union.apply(null, value);
+    }
+
+    value = _.filter(value, function(item) {
+      return _.isString(item) && (item.length > 0);
+    });
+
+    if (!attribute.split && !_.isArray(attribute.fields)) {
+      value = _.first(value);
+    }
+
+    if (attribute.join) {
+      value = value.join(attribute.join);
+    }
+
+    result[attribute.name] = value;
+  });
+
+  return result;
+}
+
+function getDataset(dataset) {
+  var attributes = null;
+  var fields = null;
+  var resourceName = null;
+  return downloader.getJson(dataset.url)
+    .then(function(dataPackage) {
+      attributes = dataPackage.attributes;
+      var resource = _.first(dataPackage.resources);
+      if (resource) {
+        resourceName = resource.title;
+        fields = _.extend({}, resource.schema).fields;
+        if (!_.isArray(fields) && !_.isObject(fields)) {
+          fields = [];
+        }
+        if (!_.isArray(attributes) && !_.isObject(attributes)) {
+          attributes = _.map(fields, function(field) {
+            return {name: field.name, fields: field.name};
+          });
+        }
+        var resourceUrl = resource.url;
+        if (resource.path) {
+          resourceUrl = url.resolve(dataset.url, resource.path);
+        }
+        return getCSVData(resourceUrl);
+      }
+      return []; // return empty dataset
+    })
+    .then(function(records) {
+      return _.map(records, function(record) {
+        if (fields && attributes) {
+          record = convertRecord(record, fields, attributes);
+          record.dataset = resourceName;
+        }
+        return record;
+      });
+    })
+    .then(function(records) {
+      return _.extend({}, dataset, {
+        items: records
+      });
+    });
+}
 
 function getPapaParseError(parseErrors) {
   parseErrors = _.filter(parseErrors, function(error) {
@@ -22,7 +123,7 @@ function getPapaParseError(parseErrors) {
   }
 }
 
-function loadData(url) {
+function getCSVData(url) {
   return new Promise(function(resolve, reject) {
     var config = {
       download: true,
@@ -36,31 +137,7 @@ function loadData(url) {
         if (error) {
           reject(error);
         } else {
-          resolve(_.map(results.data, function(record, index) {
-            var result = {
-              id: index,
-              /* eslint-disable dot-notation */
-              source: record['Source'],
-              name: record['Name'],
-              overview: record['Overview'],
-              comment: record['Comment'],
-              copyright: record['Copyright'],
-              palette: record['Palette'],
-              threadcount: record['Threadcount'],
-              sourceUrl: record['Source URL']
-              /* eslint-enable dot-notation */
-            };
-            var sett = _.filter([result.palette, result.threadcount]);
-            result.sett = sett.length > 0 ? sett.join('\n') : null;
-            /* eslint-disable dot-notation */
-            var categories = record['Category'].split(';');
-            /* eslint-enable dot-notation */
-            result.categories = _.chain(categories)
-              .map(_.trim)
-              .filter()
-              .value();
-            return result;
-          }));
+          resolve(results.data);
         }
       }
     };
@@ -68,13 +145,13 @@ function loadData(url) {
   });
 }
 
-function loadDatabase() {
-  return loadData(sourceUrl).then(function(records) {
-    return search(records, [
-      search.fulltext(records),
-      search.category(records)
-    ]);
-  });
+function buildSearchIndex(items) {
+  return search(items, [
+    search.fulltext(items),
+    search.category(items)
+  ]);
 }
 
-module.exports.loadDatabase = loadDatabase;
+module.exports.getDatasetDirectory = getDatasetDirectory;
+module.exports.getDataset = getDataset;
+module.exports.buildSearchIndex = buildSearchIndex;
