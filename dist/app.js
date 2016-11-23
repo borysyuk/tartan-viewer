@@ -23879,9 +23879,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return []; // return empty dataset
 	    })
 	    .then(function(records) {
-	      return _.map(records, function(record) {
+	      return _.map(records, function(record, index) {
 	        if (fields && attributes) {
 	          record = convertRecord(record, fields, attributes);
+	          record.ref = index + 1;
 	          record.dataset = resourceName;
 	        }
 	        return record;
@@ -75398,7 +75399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 71 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-left-10 margin-right-10 margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.id\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-left-10 margin-right-10 margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
 
 /***/ },
 /* 72 */
@@ -80835,15 +80836,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var refMap = {};
 	
 	  _.each(records, function(record) {
-	    refMap[record.id] = record;
-	    refsList.push(record.id);
+	    refMap[record.ref] = record;
+	    refsList.push(record.ref);
 	    var categories = record.category;
 	    if (categories.length == 0) {
 	      categories = [''];
 	    }
 	    _.each(categories, function(category) {
 	      refCategories[category] = refCategories[category] || [];
-	      refCategories[category].push(record.id);
+	      refCategories[category].push(record.ref);
 	    });
 	  });
 	
@@ -80878,7 +80879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var index = lunr(function() {
 	    this.field('name', {boost: 100});
 	    this.field('description');
-	    this.ref('id');
+	    this.ref('ref');
 	
 	    // Path pipeline to do some pre-processing
 	    var run = this.pipeline.run;
@@ -80914,8 +80915,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      record.description = record.description.join(' ');
 	    }
 	    index.add(record);
-	    refMap[record.id] = record;
-	    refList.push(record.id);
+	    refMap[record.ref] = record;
+	    refList.push(record.ref);
 	  });
 	
 	  return function(query, returnOnlyRefs) {
@@ -80952,7 +80953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var refMap = {};
 	  _.each(records, function(record) {
-	    refMap[record.id] = record;
+	    refMap[record.ref] = record;
 	  });
 	
 	  if (engines.length == 0) {
