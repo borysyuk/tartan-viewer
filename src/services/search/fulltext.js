@@ -9,7 +9,7 @@ function createIndex(records) {
   var index = lunr(function() {
     this.field('name', {boost: 100});
     this.field('description');
-    this.ref('id');
+    this.ref('ref');
 
     // Path pipeline to do some pre-processing
     var run = this.pipeline.run;
@@ -45,8 +45,8 @@ function createIndex(records) {
       record.description = record.description.join(' ');
     }
     index.add(record);
-    refMap[record.id] = record;
-    refList.push(record.id);
+    refMap[record.ref] = record;
+    refList.push(record.ref);
   });
 
   return function(query, returnOnlyRefs) {

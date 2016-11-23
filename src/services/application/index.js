@@ -94,9 +94,10 @@ function getDataset(dataset) {
       return []; // return empty dataset
     })
     .then(function(records) {
-      return _.map(records, function(record) {
+      return _.map(records, function(record, index) {
         if (fields && attributes) {
           record = convertRecord(record, fields, attributes);
+          record.ref = index + 1;
           record.dataset = resourceName;
         }
         return record;

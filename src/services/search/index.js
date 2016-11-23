@@ -7,7 +7,7 @@ function createIndex(records, engines) {
 
   var refMap = {};
   _.each(records, function(record) {
-    refMap[record.id] = record;
+    refMap[record.ref] = record;
   });
 
   if (engines.length == 0) {
