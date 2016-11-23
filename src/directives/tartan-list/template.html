@@ -11,7 +11,7 @@
 
   <div class="clearfix">
     <div class="tartan-list-item pull-left"
-      ng-repeat="item in pagination.items track by item.id">
+      ng-repeat="item in pagination.items track by item.ref">
       <a href="javascript:void(0)" title="{{ item.name }}"
         ng-click="setCurrent(item); onpreview();">
         <tartan-image source="{{ 'classic/2,2/' + item.sett }}"></tartan-image>

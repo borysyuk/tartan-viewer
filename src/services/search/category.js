@@ -8,15 +8,15 @@ function createIndex(records) {
   var refMap = {};
 
   _.each(records, function(record) {
-    refMap[record.id] = record;
-    refsList.push(record.id);
+    refMap[record.ref] = record;
+    refsList.push(record.ref);
     var categories = record.category;
     if (categories.length == 0) {
       categories = [''];
     }
     _.each(categories, function(category) {
       refCategories[category] = refCategories[category] || [];
-      refCategories[category].push(record.id);
+      refCategories[category].push(record.ref);
     });
   });
 
