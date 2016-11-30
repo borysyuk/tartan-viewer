@@ -129,6 +129,14 @@ function createAttributeMapper(fields, attributes) {
                   mapper.push('values = _.flattenDeep(values);');
                 }
                 break;
+              case 'sort':
+                if (isArray) {
+                  mapper.push('values = _.sortBy(values);');
+                  var direction = ('' + _.first(args)).toLowerCase();
+                  if (direction == 'desc') {
+                    mapper.push('values = _.reverse(values);');
+                  }
+                }
               default:
                 break;
             }
