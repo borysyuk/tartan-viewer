@@ -11,7 +11,7 @@
     when="{1: 'Category:', 'other': 'Categories:'}"></strong>
     <span>{{ item.category | join:', ' }}</span>
   </p>
-  <p ng-if="!!item.description" marked="item.description"></p>
+  <p ng-if="!!item.description" marked="item.description | join:'\n\n'"></p>
 
   <div ng-if="!!item.sett">
     <p><strong>Item threadcount:</strong></p>

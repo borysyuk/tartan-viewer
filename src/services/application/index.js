@@ -24,66 +24,153 @@ function getDatasetDirectory() {
     });
 }
 
-function convertRecord(record, fields, attributes) {
-  var result = {};
+function createAttributeMapper(fields, attributes) {
+  var fieldIndex = _.chain(fields)
+    .map(function(field, index) {
+      return [field.name, index];
+    })
+    .fromPairs()
+    .value();
 
-  var propMap = {};
-  _.each(fields, function(field) {
-    propMap[field.name] = field.title;
-  });
+  function compileArguments(args) {
+    args = _.isArray(args) ? args : [args];
+    return _.chain(args)
+      .map(function(value) {
+        return _.isUndefined(value) ? 'undefined' : JSON.stringify(value);
+      })
+      .join(', ')
+      .value();
+  }
 
-  _.each(attributes, function(attribute) {
-    var attrFields = _.isArray(attribute.fields) ? attribute.fields :
-      [attribute.fields];
-    var value = _.map(attrFields, function(name) {
-        var result = record[propMap[name]];
-        if (attribute.split) {
-          result = _.map(result.split(attribute.split), _.trim);
+  var mapper = ['var result = {};'];
+
+  _.each(attributes, function(descriptor, name) {
+    if (_.isString(descriptor)) {
+      if (fieldIndex.hasOwnProperty(descriptor)) {
+        mapper.push('result[' + JSON.stringify(name) + '] = ' +
+          'row[' + fieldIndex[descriptor] + '];');
+      }
+    }
+    if (_.isArray(descriptor)) {
+      mapper.push('var values = [];');
+
+      var isArray = true;
+      _.each(descriptor, function(item) {
+        if (_.isString(item)) {
+          switch (item) {
+            case 'trim':
+              if (isArray) {
+                mapper.push('values = _.map(values, _.trim);');
+              } else {
+                mapper.push('values = _.trim(values);');
+              }
+              break;
+            case 'filter':
+              if (isArray) {
+                mapper.push('values = _.filter(values);');
+              }
+              break;
+            case 'unique':
+              if (isArray) {
+                mapper.push('values = _.uniq(values);');
+              }
+              break;
+            default:
+              break;
+          }
         }
-        return result;
+        if (_.isObject(item)) {
+          _.each(item, function(args, func) {
+            switch (func) {
+              case 'fields':
+                args = _.isArray(args) ? args : [args];
+                var fields = [];
+                _.each(args, function(field) {
+                  if (fieldIndex.hasOwnProperty(field)) {
+                    fields.push('row[' + fieldIndex[field] + ']');
+                  }
+                });
+                if (fields.length > 0) {
+                  if (!isArray) {
+                    mapper.push('values = [values];');
+                    isArray = true;
+                  }
+                  mapper.push('values.push(' + fields.join(', ') + ')');
+                }
+                break;
+              case 'values':
+                if (!isArray) {
+                  mapper.push('values = [values];');
+                  isArray = true;
+                }
+                mapper.push('values.push(' + compileArguments(args) + ')');
+                break;
+              case 'split':
+                if (isArray) {
+                  mapper.push('values = _.map(values, function(value) {');
+                  mapper.push('return _.split(value, ' +
+                    compileArguments(args) + ');');
+                  mapper.push('});');
+                } else {
+                  mapper.push('values = _.split(values, ' +
+                    compileArguments(args) + ');');
+                }
+                isArray = true;
+                break;
+              case 'join':
+                if (isArray) {
+                  mapper.push('values = _.join(values, ' +
+                    compileArguments(args) + ');');
+                  isArray = false;
+                }
+                break;
+              case 'flatten':
+                if (isArray) {
+                  mapper.push('values = _.flattenDeep(values);');
+                }
+                break;
+              default:
+                break;
+            }
+          });
+        }
       });
 
-    if (attribute.split) {
-      // Merge and get unique values
-      value = _.union.apply(null, value);
+      mapper.push('result[' + JSON.stringify(name) + '] = values;');
     }
-
-    value = _.filter(value, function(item) {
-      return _.isString(item) && (item.length > 0);
-    });
-
-    if (!attribute.split && !_.isArray(attribute.fields)) {
-      value = _.first(value);
-    }
-
-    if (attribute.join) {
-      value = value.join(attribute.join);
-    }
-
-    result[attribute.name] = value;
   });
 
-  return result;
+  mapper.push('return result;');
+
+  mapper = new Function('row', '_', mapper.join('\n'));
+  return function(row) {
+    return mapper(row, _);
+  };
 }
 
 function getDataset(dataset) {
   var attributes = null;
   var fields = null;
   var resourceName = null;
+  var hasHeaders = false;
   return downloader.getJson(dataset.url)
     .then(function(dataPackage) {
       attributes = dataPackage.attributes;
       var resource = _.first(dataPackage.resources);
       if (resource) {
         resourceName = resource.title;
+        hasHeaders = !!resource.headers;
         fields = _.extend({}, resource.schema).fields;
         if (!_.isArray(fields) && !_.isObject(fields)) {
           fields = [];
         }
         if (!_.isArray(attributes) && !_.isObject(attributes)) {
-          attributes = _.map(fields, function(field) {
-            return {name: field.name, fields: field.name};
-          });
+          attributes = _.chain(fields)
+            .map(function(field) {
+              return [field.name, field.name];
+            })
+            .fromPairs()
+            .value();
         }
         var resourceUrl = resource.url;
         if (resource.path) {
@@ -94,14 +181,22 @@ function getDataset(dataset) {
       return []; // return empty dataset
     })
     .then(function(records) {
-      return _.map(records, function(record, index) {
-        if (fields && attributes) {
-          record = convertRecord(record, fields, attributes);
-          record.ref = index + 1;
-          record.dataset = resourceName;
-        }
-        return record;
-      });
+      if (hasHeaders) {
+        records.splice(0, 1); // Remove first item
+      }
+      var result = records;
+      if (fields && attributes) {
+        var mapper = createAttributeMapper(fields, attributes);
+        console.time('Mapping attributes');
+        result = _.map(records, function(record, index) {
+          return _.extend({}, mapper(record), {
+            ref: index + 1,
+            dataset: resourceName
+          });
+        });
+        console.timeEnd('Mapping attributes');
+      }
+      return result;
     })
     .then(function(records) {
       return _.extend({}, dataset, {
@@ -129,7 +224,6 @@ function getCSVData(url) {
     var config = {
       download: true,
       skipEmptyLines: true,
-      header: true,
       error: function(error) {
         reject(new Error('Failed to load ' + url + ' : ' + error));
       },
