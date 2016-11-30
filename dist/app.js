@@ -23914,6 +23914,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  mapper.push('values = _.flattenDeep(values);');
 	                }
 	                break;
+	              case 'sort':
+	                if (isArray) {
+	                  mapper.push('values = _.sortBy(values);');
+	                  var direction = ('' + _.first(args)).toLowerCase();
+	                  if (direction == 'desc') {
+	                    mapper.push('values = _.reverse(values);');
+	                  }
+	                }
 	              default:
 	                break;
 	            }
@@ -75520,7 +75528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 69 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model=\"state.search.query\">\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Example:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <tartan-list items=\"state.items\" item=\"state.current\"\n    onpreview=\"state.showPreview = true;\"></tartan-list>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Example:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <tartan-list items=\"state.items\" item=\"state.current\"\n    onpreview=\"state.showPreview = true;\"></tartan-list>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
 
 /***/ },
 /* 70 */
