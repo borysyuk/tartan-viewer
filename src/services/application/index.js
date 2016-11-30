@@ -187,14 +187,12 @@ function getDataset(dataset) {
       var result = records;
       if (fields && attributes) {
         var mapper = createAttributeMapper(fields, attributes);
-        console.time('Mapping attributes');
         result = _.map(records, function(record, index) {
           return _.extend({}, mapper(record), {
             ref: index + 1,
             dataset: resourceName
           });
         });
-        console.timeEnd('Mapping attributes');
       }
       return result;
     })
