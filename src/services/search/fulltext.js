@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var lunr = require('lunr');
+var async = require('../utils/async');
 
 function createIndex(records) {
   records = _.sortBy(records, 'name');
@@ -39,7 +40,8 @@ function createIndex(records) {
 
   var refList = [];
   var refMap = {};
-  _.each(records, function(record) {
+
+  return async.each(records, function(record) {
     record = _.extend({}, record);
     if (_.isArray(record.description)) {
       record.description = record.description.join(' ');
@@ -47,24 +49,24 @@ function createIndex(records) {
     index.add(record);
     refMap[record.ref] = record;
     refList.push(record.ref);
+  }).then(function() {
+    return function(query, returnOnlyRefs) {
+      query = _.extend({query: ''}, query);
+      query = _.isString(query.query) ? query.query : '';
+      query = query.replace(/^\s+/i, '').replace(/\s+$/i, '');
+
+      if (query == '') {
+        return returnOnlyRefs ? refList : records;
+      }
+      return _.chain(index.search(query))
+        .sortBy('score')
+        .reverse()
+        .map(function(item) {
+          return returnOnlyRefs ? item.ref : refMap[item.ref];
+        })
+        .value();
+    };
   });
-
-  return function(query, returnOnlyRefs) {
-    query = _.extend({query: ''}, query);
-    query = _.isString(query.query) ? query.query : '';
-    query = query.replace(/^\s+/i, '').replace(/\s+$/i, '');
-
-    if (query == '') {
-      return returnOnlyRefs ? refList : records;
-    }
-    return _.chain(index.search(query))
-      .sortBy('score')
-      .reverse()
-      .map(function(item) {
-        return returnOnlyRefs ? item.ref : refMap[item.ref];
-      })
-      .value();
-  };
 }
 
 module.exports = createIndex;
