@@ -7,9 +7,6 @@ var csv = require('papaparse');
 var downloader = require('../downloader');
 var search = require('../search');
 
-var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
-  'v0.2/data/house-of-tartan.csv';
-
 var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
   'tartan-database/master/data/index.json';
 
@@ -247,10 +244,20 @@ function getCSVData(url) {
 }
 
 function buildSearchIndex(items) {
+  var availableCategories = [];
+
   return search(items, [
     search.fulltext(items),
-    search.category(items)
-  ]);
+    search.category(items).then(function(searchIndex) {
+      availableCategories = searchIndex.categories;
+      return searchIndex;
+    })
+  ]).then(function(searchIndex) {
+    return {
+      searchIndex: searchIndex,
+      availableCategories: availableCategories
+    };
+  });
 }
 
 module.exports.getDatasetDirectory = getDatasetDirectory;

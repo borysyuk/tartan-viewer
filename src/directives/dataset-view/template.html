@@ -4,16 +4,32 @@
     <input type="text" class="form-control" placeholder="Search"
       ng-model-options="{debounce: 300}"
       ng-model="state.search.query">
+    <dropdown ng-if="availableCategories.length > 0"
+      align="right" type="addon"
+      items="availableCategories" selected="state.search.categories"
+      title="Category"></dropdown>
   </div>
   <div class="margin-top-5 margin-bottom-10">
-    <span class="margin-right-10">Example:</span>
+    <span class="margin-right-10">Examples:</span>
     <a href="javascript:void(0)" class="margin-right-10"
       ng-repeat="phrase in searchExamples"
       ng-click="state.search.query = phrase">{{ phrase }}</a>
   </div>
 
-  <tartan-list items="state.items" item="state.current"
-    onpreview="state.showPreview = true;"></tartan-list>
+  <div ng-if="selectedCategories.length > 0" class="margin-top-10 margin-bottom-10">
+    <span class="margin-right-10">Categories:</span>
+    <span class="label label-success margin-right-5"
+      ng-repeat="item in selectedCategories track by item.value"
+    >{{ item.name }}<i style="cursor: pointer"
+      ng-click="clearSelectedCategory(item.value)"
+      class="fa fa-remove margin-left-5"></i>
+    </span>
+  </div>
+
+  <div class="margin-top-10 margin-bottom-10">
+    <tartan-list items="state.items" item="state.current"
+      onpreview="state.showPreview = true;"></tartan-list>
+  </div>
 
   <tartan-preview item="state.current" active="state.showPreview"></tartan-preview>
 </div>

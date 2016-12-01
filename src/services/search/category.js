@@ -11,6 +11,7 @@ function createIndex(records) {
   return async.each(records, function(record) {
     refMap[record.ref] = record;
     refsList.push(record.ref);
+
     var categories = record.category;
     if (categories.length == 0) {
       categories = [''];
@@ -20,17 +21,36 @@ function createIndex(records) {
       refCategories[category].push(record.ref);
     });
   }).then(function() {
-    return function(query, returnOnlyRefs) {
+    var searchIndex = function(query, returnOnlyRefs) {
       query = _.extend({categories: []}, query);
-      var categories = _.filter(query.categories, _.isString);
-      var results = refsList;
-      if (categories.length > 0) {
-        // TODO: Implement
-      }
+
+      var results = [refsList];
+      _.each(query.categories, function(category) {
+        var refs = refCategories[category];
+        if (_.isArray(refs)) {
+          results.push(refs);
+        }
+      });
+      results = _.intersection.apply(null, results);
+
       return returnOnlyRefs ? results : _.map(results, function(ref) {
         return refMap[ref];
       });
     };
+
+    searchIndex.categories = _.chain(refCategories)
+      .keys()
+      .sortBy()
+      .map(function(key) {
+        return {
+          name: key == '' ? 'Without category' : key,
+          value: key,
+          count: refCategories[key].length
+        };
+      })
+      .value();
+
+    return searchIndex;
   });
 }
 
