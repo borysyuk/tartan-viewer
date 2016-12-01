@@ -39,7 +39,7 @@
       <div class="margin-bottom-10">Loading dataset...</div>
     </div>
 
-    <hr class="margin-top-10 margin-bottom-20">
+    <hr ng-if="isLoaded.dataset" class="margin-top-10 margin-bottom-20">
 
     <div ng-if="isLoaded.dataset">
        <dataset-view item="dataset"></dataset-view>
@@ -50,9 +50,9 @@
 <footer class="container-fluid padding-top-15 padding-bottom-15">
 <div class="row">
   <div class="col-md-6">
-    <div><a href="https://datahub.io/dataset/tartans-from-different-sources2">Database (on the DataHub)</a> &ndash; the data for this project.</div>
-    <div><a href="https://github.com/kravets-levko/tartan/">Tartan parser on GitHub.</a></div>
-    <div><a href="https://github.com/kravets-levko/angular-tartan/">Angular bindings for tartan parser.</a></div>
+    <div><a href="https://github.com/thetartan/tartan-database">Database</a> &ndash; the data for this project.</div>
+    <div><a href="https://github.com/thetartan/tartan/">Tartan parser on GitHub.</a></div>
+    <div><a href="https://github.com/thetartan/angular-tartan/">Angular bindings for tartan parser.</a></div>
     <div><a href="https://en.wikipedia.org/wiki/Tartan">About tartans (Wikipedia).</a></div>
   </div>
 

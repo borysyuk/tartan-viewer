@@ -18,7 +18,7 @@
 
   <div ng-if="selectedCategories.length > 0" class="margin-top-10 margin-bottom-10">
     <span class="margin-right-10">Categories:</span>
-    <span class="label label-success margin-right-5"
+    <span class="label label-info margin-right-5"
       ng-repeat="item in selectedCategories track by item.value"
     >{{ item.name }}<i style="cursor: pointer"
       ng-click="clearSelectedCategory(item.value)"
