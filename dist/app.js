@@ -88,7 +88,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  __webpack_require__(28);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(113);
+	    __webpack_require__(114);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17172,12 +17172,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(103);
+	module.exports.error = __webpack_require__(104);
 	module.exports.color = __webpack_require__(24);
-	module.exports.token = __webpack_require__(107);
-	module.exports.node = __webpack_require__(104);
-	module.exports.sett = __webpack_require__(106);
-	module.exports.repaint = __webpack_require__(105);
+	module.exports.token = __webpack_require__(108);
+	module.exports.node = __webpack_require__(105);
+	module.exports.sett = __webpack_require__(107);
+	module.exports.repaint = __webpack_require__(106);
 
 
 /***/ },
@@ -22886,8 +22886,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.classify = __webpack_require__(74);
-	module.exports.removeTokens = __webpack_require__(75);
+	module.exports.classify = __webpack_require__(75);
+	module.exports.removeTokens = __webpack_require__(76);
 
 
 /***/ },
@@ -22898,7 +22898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(76));
+	_.extend(module.exports, __webpack_require__(77));
 	
 	module.exports.defaults = __webpack_require__(4);
 	module.exports.parse = __webpack_require__(9);
@@ -22906,7 +22906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.transform = __webpack_require__(13);
 	module.exports.syntax = __webpack_require__(11);
 	module.exports.render = __webpack_require__(10);
-	module.exports.schema = __webpack_require__(91);
+	module.exports.schema = __webpack_require__(92);
 	module.exports.utils = __webpack_require__(2);
 
 
@@ -22917,7 +22917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var tokenize = __webpack_require__(84);
+	var tokenize = __webpack_require__(85);
 	
 	var defaultOptions = {
 	  errorHandler: null,
@@ -22944,11 +22944,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.color = __webpack_require__(77);
-	module.exports.stripe = __webpack_require__(82);
-	module.exports.pivot = __webpack_require__(80);
-	module.exports.repeat = __webpack_require__(81);
-	module.exports.literal = __webpack_require__(79);
+	module.exports.color = __webpack_require__(78);
+	module.exports.stripe = __webpack_require__(83);
+	module.exports.pivot = __webpack_require__(81);
+	module.exports.repeat = __webpack_require__(82);
+	module.exports.literal = __webpack_require__(80);
 
 
 /***/ },
@@ -22957,8 +22957,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.canvas = __webpack_require__(85);
-	module.exports.format = __webpack_require__(86);
+	module.exports.canvas = __webpack_require__(86);
+	module.exports.format = __webpack_require__(87);
 
 
 /***/ },
@@ -22967,9 +22967,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.extended = __webpack_require__(98);
-	module.exports.classic = __webpack_require__(97);
-	module.exports.weddslist = __webpack_require__(99);
+	module.exports.extended = __webpack_require__(99);
+	module.exports.classic = __webpack_require__(98);
+	module.exports.weddslist = __webpack_require__(100);
 
 
 /***/ },
@@ -23003,13 +23003,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.flatten = __webpack_require__(100);
+	module.exports.flatten = __webpack_require__(101);
 	module.exports.flattenSimpleBlocks = __webpack_require__(20);
-	module.exports.fold = __webpack_require__(101);
+	module.exports.fold = __webpack_require__(102);
 	module.exports.mergeStripes = __webpack_require__(21);
 	module.exports.removeEmptyBlocks = __webpack_require__(22);
 	module.exports.removeZeroWidthStripes = __webpack_require__(23);
-	module.exports.optimize = __webpack_require__(102);
+	module.exports.optimize = __webpack_require__(103);
 
 
 /***/ },
@@ -23022,8 +23022,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'classic';
 	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(88);
-	module.exports.format = __webpack_require__(87);
+	module.exports.parse = __webpack_require__(89);
+	module.exports.format = __webpack_require__(88);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23038,8 +23038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'extended';
 	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(90);
-	module.exports.format = __webpack_require__(89);
+	module.exports.parse = __webpack_require__(91);
+	module.exports.format = __webpack_require__(90);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23055,8 +23055,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.id = 'stwr';
 	module.exports.name = 'Scottish Register of Tartans / ' +
 	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(93);
-	module.exports.format = __webpack_require__(92);
+	module.exports.parse = __webpack_require__(94);
+	module.exports.format = __webpack_require__(93);
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
 	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
@@ -23165,7 +23165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(112);
+	__webpack_require__(113);
 	module.exports = self.fetch.bind(self);
 
 
@@ -23786,14 +23786,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var url = __webpack_require__(109);
+	var url = __webpack_require__(110);
 	var Promise = __webpack_require__(6);
 	var csv = __webpack_require__(63);
-	var downloader = __webpack_require__(127);
-	var search = __webpack_require__(131);
-	
-	var sourceUrl = 'https://rawgit.com/thetartan/tartan-database/' +
-	  'v0.2/data/house-of-tartan.csv';
+	var downloader = __webpack_require__(129);
+	var search = __webpack_require__(133);
 	
 	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
 	  'tartan-database/master/data/index.json';
@@ -24032,10 +24029,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function buildSearchIndex(items) {
+	  var availableCategories = [];
+	
 	  return search(items, [
 	    search.fulltext(items),
-	    search.category(items)
-	  ]);
+	    search.category(items).then(function(searchIndex) {
+	      availableCategories = searchIndex.categories;
+	      return searchIndex;
+	    })
+	  ]).then(function(searchIndex) {
+	    return {
+	      searchIndex: searchIndex,
+	      availableCategories: availableCategories
+	    };
+	  });
 	}
 	
 	module.exports.getDatasetDirectory = getDatasetDirectory;
@@ -59971,7 +59978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(110) !== null) && (__webpack_require__(111) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(111) !== null) && (__webpack_require__(112) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -75528,34 +75535,40 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 69 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Example:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <tartan-list items=\"state.items\" item=\"state.current\"\n    onpreview=\"state.showPreview = true;\"></tartan-list>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"selectedCategories.length > 0\" class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-success margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
 
 /***/ },
 /* 70 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
+	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li><a href=\"javascript:void(0)\" ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
 
 /***/ },
 /* 71 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
 
 /***/ },
 /* 72 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-left-10 margin-right-10 margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
 
 /***/ },
 /* 73 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
 
 /***/ },
 /* 74 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75621,7 +75634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75655,7 +75668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75666,7 +75679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75844,7 +75857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75894,7 +75907,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75942,7 +75955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76012,7 +76025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76083,7 +76096,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76153,7 +76166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76195,14 +76208,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(83);
-	var invalid = __webpack_require__(78);
+	var whitespace = __webpack_require__(84);
+	var invalid = __webpack_require__(79);
 	
 	function Context(source, parsers, options) {
 	  this.source = _.isString(source) ? source : '';
@@ -76303,7 +76316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76545,7 +76558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76687,7 +76700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76763,7 +76776,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76832,7 +76845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76901,7 +76914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76978,7 +76991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76986,11 +76999,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.classic = __webpack_require__(14);
 	module.exports.extended = __webpack_require__(15);
 	module.exports.stwr = __webpack_require__(16);
-	module.exports.weddslist = __webpack_require__(95);
+	module.exports.weddslist = __webpack_require__(96);
 
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77066,7 +77079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77135,7 +77148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77209,7 +77222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77218,8 +77231,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'weddslist';
 	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(96);
-	module.exports.format = __webpack_require__(94);
+	module.exports.parse = __webpack_require__(97);
+	module.exports.format = __webpack_require__(95);
 	
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
@@ -77238,7 +77251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77312,7 +77325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77455,7 +77468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77750,7 +77763,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77982,7 +77995,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78036,7 +78049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78121,7 +78134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78170,7 +78183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78198,7 +78211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78235,7 +78248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78306,7 +78319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78439,7 +78452,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78655,7 +78668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -79190,7 +79203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)(module), (function() { return this; }())))
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -79214,7 +79227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(108);
+	var punycode = __webpack_require__(109);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -79903,14 +79916,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -79918,7 +79931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -80357,25 +80370,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = __webpack_require__(3);
 	
-	__webpack_require__(114);
-	__webpack_require__(120);
-	__webpack_require__(125);
-
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
 	__webpack_require__(115);
+	__webpack_require__(122);
+	__webpack_require__(127);
 
 
 /***/ },
@@ -80384,11 +80388,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	__webpack_require__(116);
+
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	/* global Event */
 	
-	var $q = __webpack_require__(128).$q;
+	var $q = __webpack_require__(130).$q;
 	var ngModule = __webpack_require__(3);
-	var log = __webpack_require__(132);
+	var log = __webpack_require__(134);
 	var application = __webpack_require__(26);
 	
 	ngModule.controller('MainController', [
@@ -80411,8 +80424,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        .then(function(dataset) {
 	          log.info('Building search index for: ' + dataset.name + '...');
 	          return application.buildSearchIndex(dataset.items)
-	            .then(function(searchIndex) {
-	              dataset.searchIndex = searchIndex;
+	            .then(function(options) {
+	              dataset.searchIndex = options.searchIndex;
+	              dataset.availableCategories = options.availableCategories;
 	              return dataset;
 	            });
 	        })
@@ -80437,7 +80451,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80459,7 +80473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	]);
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80485,7 +80499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80510,7 +80524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80532,7 +80546,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var searchIndex = _.constant([]);
 	
 	        var state = $scope.state = {
-	          search: {},
+	          search: {
+	            query: '',
+	            categories: []
+	          },
 	          showPreview: false,
 	          items: [],
 	          current: null
@@ -80544,26 +80561,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'MacDonald\'s tartan'
 	        ];
 	
+	        $scope.availableCategories = [];
+	        $scope.selectedCategories = [];
+	
+	        $scope.clearSelectedCategory = function(value) {
+	          var index = state.search.categories.indexOf(value);
+	          if (index >= 0) {
+	            state.search.categories.splice(index, 1);
+	          }
+	        };
+	
 	        function performSearch() {
 	          state.items = searchIndex(state.search);
 	          state.current = _.first(state.items);
+	
+	          var counts = {};
+	          _.each(state.items, function(item) {
+	            var categories = item.category;
+	            if (categories.length == 0) {
+	              categories = [''];
+	            }
+	            _.each(categories, function(category) {
+	              counts[category] = (counts[category] || 0) + 1;
+	            });
+	          });
+	
+	          _.each($scope.availableCategories, function(category) {
+	            category.count = counts[category.value] || 0;
+	          });
 	        }
 	
 	        $scope.$watch('state.search', function(newValue, oldValue) {
 	          if (newValue !== oldValue) {
+	            $scope.selectedCategories = _.filter($scope.availableCategories,
+	              function(category) {
+	                return state.search.categories.indexOf(category.value) >= 0;
+	              });
 	            performSearch();
 	          }
 	        }, true);
 	
 	        function update() {
 	          searchIndex = _.constant([]);
+	          $scope.availableCategories = [];
 	          if (_.isObject($scope.item)) {
 	            if (_.isFunction($scope.item.searchIndex)) {
 	              searchIndex = $scope.item.searchIndex;
 	            } else {
 	              searchIndex = _.constant($scope.item.items);
 	            }
+	
+	            $scope.availableCategories = _.clone(
+	              $scope.item.availableCategories);
 	          }
+	
+	          state.search.categories = [];
+	          $scope.selectedCategories = [];
+	
 	          performSearch();
 	        }
 	
@@ -80581,25 +80635,72 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(116);
+	var _ = __webpack_require__(1);
+	var ngModule = __webpack_require__(3);
 	
-	// Components
-	__webpack_require__(121);
-	__webpack_require__(122);
-	__webpack_require__(123);
-	__webpack_require__(124);
-	__webpack_require__(118);
-	__webpack_require__(117);
-	__webpack_require__(119);
+	ngModule.directive('dropdown', [
+	  function() {
+	    return {
+	      restrict: 'E',
+	      template: __webpack_require__(70),
+	      replace: true,
+	      scope: {
+	        items: '=',
+	        selected: '=?',
+	        title: '@?',
+	        type: '@?', // 'addon'
+	        align: '@?' // 'right'
+	      },
+	      link: function($scope, element) {
+	        element.find('.dropdown-toggle').dropdown();
+	
+	        $scope.toggleSelected = function(value) {
+	          if (!_.isArray($scope.selected)) {
+	            $scope.selected = [];
+	          }
+	          var index = $scope.selected.indexOf(value);
+	          if (index >= 0) {
+	            $scope.selected.splice(index, 1);
+	          } else {
+	            $scope.selected.push(value);
+	          }
+	        };
+	
+	        $scope.clearSelected = function() {
+	          $scope.selected = [];
+	        };
+	      }
+	    };
+	  }
+	]);
 
 
 /***/ },
-/* 121 */
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(117);
+	
+	// Components
+	__webpack_require__(123);
+	__webpack_require__(121);
+	__webpack_require__(124);
+	__webpack_require__(125);
+	__webpack_require__(126);
+	__webpack_require__(119);
+	__webpack_require__(118);
+	__webpack_require__(120);
+
+
+/***/ },
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80622,7 +80723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(70),
+	      template: __webpack_require__(71),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -80690,7 +80791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 122 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80701,7 +80802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(71),
+	      template: __webpack_require__(72),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80715,7 +80816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 123 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80727,7 +80828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(72),
+	      template: __webpack_require__(73),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -80777,7 +80878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80790,7 +80891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(73),
+	      template: __webpack_require__(74),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80870,16 +80971,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 125 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(126);
+	__webpack_require__(128);
 
 
 /***/ },
-/* 126 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80900,7 +81001,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 127 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80941,7 +81042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 128 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80980,7 +81081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 129 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80996,6 +81097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return async.each(records, function(record) {
 	    refMap[record.ref] = record;
 	    refsList.push(record.ref);
+	
 	    var categories = record.category;
 	    if (categories.length == 0) {
 	      categories = [''];
@@ -81005,17 +81107,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	      refCategories[category].push(record.ref);
 	    });
 	  }).then(function() {
-	    return function(query, returnOnlyRefs) {
+	    var searchIndex = function(query, returnOnlyRefs) {
 	      query = _.extend({categories: []}, query);
-	      var categories = _.filter(query.categories, _.isString);
-	      var results = refsList;
-	      if (categories.length > 0) {
-	        // TODO: Implement
-	      }
+	
+	      var results = [refsList];
+	      _.each(query.categories, function(category) {
+	        var refs = refCategories[category];
+	        if (_.isArray(refs)) {
+	          results.push(refs);
+	        }
+	      });
+	      results = _.intersection.apply(null, results);
+	
 	      return returnOnlyRefs ? results : _.map(results, function(ref) {
 	        return refMap[ref];
 	      });
 	    };
+	
+	    searchIndex.categories = _.chain(refCategories)
+	      .keys()
+	      .sortBy()
+	      .map(function(key) {
+	        return {
+	          name: key == '' ? 'Without category' : key,
+	          value: key,
+	          count: refCategories[key].length
+	        };
+	      })
+	      .value();
+	
+	    return searchIndex;
 	  });
 	}
 	
@@ -81023,7 +81144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 130 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81101,7 +81222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 131 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81143,12 +81264,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = createIndex;
 	
-	module.exports.fulltext = __webpack_require__(130);
-	module.exports.category = __webpack_require__(129);
+	module.exports.fulltext = __webpack_require__(132);
+	module.exports.category = __webpack_require__(131);
 
 
 /***/ },
-/* 132 */
+/* 134 */
 /***/ function(module, exports) {
 
 	'use strict';
