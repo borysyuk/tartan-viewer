@@ -4,6 +4,7 @@ require('./autofocus');
 
 // Components
 require('./pagination');
+require('./dropdown');
 require('./tartan-info');
 require('./tartan-list');
 require('./tartan-preview');

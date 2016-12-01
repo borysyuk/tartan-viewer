@@ -27,8 +27,9 @@ ngModule.controller('MainController', [
         .then(function(dataset) {
           log.info('Building search index for: ' + dataset.name + '...');
           return application.buildSearchIndex(dataset.items)
-            .then(function(searchIndex) {
-              dataset.searchIndex = searchIndex;
+            .then(function(options) {
+              dataset.searchIndex = options.searchIndex;
+              dataset.availableCategories = options.availableCategories;
               return dataset;
             });
         })

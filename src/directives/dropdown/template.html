@@ -1,0 +1,18 @@
+<div ng-class="{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}">
+  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    {{ title }}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" ng-class="{'dropdown-menu-right': align == 'right'}">
+    <li><a href="javascript:void(0)" ng-click="clearSelected()">Clear selection</a></li>
+    <li class="divider"></li>
+    <li ng-repeat="item in items track by item.value"
+      ng-if="item.count > 0"
+      ng-class="{active: selected.indexOf(item.value) >= 0}"
+    ><a href="javascript:void(0)"
+      ng-click="toggleSelected(item.value)"
+    ><span class="badge pull-right"
+    >{{ item.count }}</span><span style="margin-right: 60px"
+    >{{ item.name }}</span></a></li>
+  </ul>
+</div>
