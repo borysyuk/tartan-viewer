@@ -1,7 +1,5 @@
 'use strict';
 
-/* global Event */
-
 var $q = require('../services/ng-utils').$q;
 var ngModule = require('../module');
 var log = require('../services/utils/log');

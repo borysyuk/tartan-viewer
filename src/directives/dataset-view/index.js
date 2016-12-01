@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var application = require('../../services/application');
 var ngModule = require('../../module');
 
 ngModule.directive('datasetView', [

@@ -134,6 +134,7 @@ function createAttributeMapper(fields, attributes) {
                     mapper.push('values = _.reverse(values);');
                   }
                 }
+                break;
               default:
                 break;
             }
@@ -147,7 +148,9 @@ function createAttributeMapper(fields, attributes) {
 
   mapper.push('return result;');
 
+  /* eslint-disable no-new-func */
   mapper = new Function('row', '_', mapper.join('\n'));
+  /* eslint-enable no-new-func */
   return function(row) {
     return mapper(row, _);
   };
