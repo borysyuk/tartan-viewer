@@ -4,8 +4,9 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" ng-class="{'dropdown-menu-right': align == 'right'}">
-    <li><a href="javascript:void(0)" ng-click="clearSelected()">Clear selection</a></li>
-    <li class="divider"></li>
+    <li ng-if="selected.length > 0"><a href="javascript:void(0)"
+      ng-click="clearSelected()">Clear selection</a></li>
+    <li ng-if="selected.length > 0" class="divider"></li>
     <li ng-repeat="item in items track by item.value"
       ng-if="item.count > 0"
       ng-class="{active: selected.indexOf(item.value) >= 0}"
