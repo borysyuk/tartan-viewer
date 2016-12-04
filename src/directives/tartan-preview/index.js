@@ -1,5 +1,7 @@
 'use strict';
 
+/* global Event */
+
 var _ = require('lodash');
 var ngModule = require('../../module');
 

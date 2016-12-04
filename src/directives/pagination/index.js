@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var ngModule = require('../../module');
 
 function validateCount(value) {
@@ -75,6 +74,8 @@ ngModule.directive('pagination', [
                 state.editing = false;
                 state.current = $scope.current;
                 $event.preventDefault();
+                break;
+              default:
                 break;
             }
           }
