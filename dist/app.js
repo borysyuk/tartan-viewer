@@ -65,17 +65,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	(function(globals) {
 	  globals._ = _;
 	
-	  __webpack_require__(58);
+	  __webpack_require__(57);
 	
-	  var jquery = __webpack_require__(57);
+	  var jquery = __webpack_require__(56);
 	  globals.jQuery = globals.$ = jquery;
 	
-	  __webpack_require__(42);
+	  __webpack_require__(41);
 	
 	  // fetch() polyfill
 	  __webpack_require__(18);
 	  // saveAs() polyfill
-	  globals.saveAs = __webpack_require__(56).saveAs;
+	  globals.saveAs = __webpack_require__(55).saveAs;
 	
 	  globals.tartan = __webpack_require__(8);
 	
@@ -85,10 +85,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    globals.Promise = __webpack_require__(6);
 	  }
 	
-	  __webpack_require__(28);
+	  __webpack_require__(27);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(114);
+	    __webpack_require__(113);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17172,12 +17172,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(104);
+	module.exports.error = __webpack_require__(103);
 	module.exports.color = __webpack_require__(24);
-	module.exports.token = __webpack_require__(108);
-	module.exports.node = __webpack_require__(105);
-	module.exports.sett = __webpack_require__(107);
-	module.exports.repaint = __webpack_require__(106);
+	module.exports.token = __webpack_require__(107);
+	module.exports.node = __webpack_require__(104);
+	module.exports.sett = __webpack_require__(106);
+	module.exports.repaint = __webpack_require__(105);
 
 
 /***/ },
@@ -17187,7 +17187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var angular = __webpack_require__(12);
-	__webpack_require__(39);
+	__webpack_require__(38);
 	
 	var app = angular.module('Application', [
 	  'angular-tartan',
@@ -22886,8 +22886,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.classify = __webpack_require__(75);
-	module.exports.removeTokens = __webpack_require__(76);
+	module.exports.classify = __webpack_require__(74);
+	module.exports.removeTokens = __webpack_require__(75);
 
 
 /***/ },
@@ -22898,7 +22898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(77));
+	_.extend(module.exports, __webpack_require__(76));
 	
 	module.exports.defaults = __webpack_require__(4);
 	module.exports.parse = __webpack_require__(9);
@@ -22906,7 +22906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.transform = __webpack_require__(13);
 	module.exports.syntax = __webpack_require__(11);
 	module.exports.render = __webpack_require__(10);
-	module.exports.schema = __webpack_require__(92);
+	module.exports.schema = __webpack_require__(91);
 	module.exports.utils = __webpack_require__(2);
 
 
@@ -22917,7 +22917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var tokenize = __webpack_require__(85);
+	var tokenize = __webpack_require__(84);
 	
 	var defaultOptions = {
 	  errorHandler: null,
@@ -22944,11 +22944,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.color = __webpack_require__(78);
-	module.exports.stripe = __webpack_require__(83);
-	module.exports.pivot = __webpack_require__(81);
-	module.exports.repeat = __webpack_require__(82);
-	module.exports.literal = __webpack_require__(80);
+	module.exports.color = __webpack_require__(77);
+	module.exports.stripe = __webpack_require__(82);
+	module.exports.pivot = __webpack_require__(80);
+	module.exports.repeat = __webpack_require__(81);
+	module.exports.literal = __webpack_require__(79);
 
 
 /***/ },
@@ -22957,8 +22957,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.canvas = __webpack_require__(86);
-	module.exports.format = __webpack_require__(87);
+	module.exports.canvas = __webpack_require__(85);
+	module.exports.format = __webpack_require__(86);
 
 
 /***/ },
@@ -22967,16 +22967,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.extended = __webpack_require__(99);
-	module.exports.classic = __webpack_require__(98);
-	module.exports.weddslist = __webpack_require__(100);
+	module.exports.extended = __webpack_require__(98);
+	module.exports.classic = __webpack_require__(97);
+	module.exports.weddslist = __webpack_require__(99);
 
 
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(41);
+	__webpack_require__(40);
 	module.exports = angular;
 
 
@@ -23003,13 +23003,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.flatten = __webpack_require__(101);
+	module.exports.flatten = __webpack_require__(100);
 	module.exports.flattenSimpleBlocks = __webpack_require__(20);
-	module.exports.fold = __webpack_require__(102);
+	module.exports.fold = __webpack_require__(101);
 	module.exports.mergeStripes = __webpack_require__(21);
 	module.exports.removeEmptyBlocks = __webpack_require__(22);
 	module.exports.removeZeroWidthStripes = __webpack_require__(23);
-	module.exports.optimize = __webpack_require__(103);
+	module.exports.optimize = __webpack_require__(102);
 
 
 /***/ },
@@ -23022,8 +23022,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'classic';
 	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(89);
-	module.exports.format = __webpack_require__(88);
+	module.exports.parse = __webpack_require__(88);
+	module.exports.format = __webpack_require__(87);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23038,8 +23038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'extended';
 	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(91);
-	module.exports.format = __webpack_require__(90);
+	module.exports.parse = __webpack_require__(90);
+	module.exports.format = __webpack_require__(89);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23055,8 +23055,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.id = 'stwr';
 	module.exports.name = 'Scottish Register of Tartans / ' +
 	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(94);
-	module.exports.format = __webpack_require__(93);
+	module.exports.parse = __webpack_require__(93);
+	module.exports.format = __webpack_require__(92);
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
 	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
@@ -23165,7 +23165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(113);
+	__webpack_require__(112);
 	module.exports = self.fetch.bind(self);
 
 
@@ -23786,277 +23786,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var url = __webpack_require__(110);
-	var Promise = __webpack_require__(6);
-	var csv = __webpack_require__(63);
-	var downloader = __webpack_require__(129);
-	var search = __webpack_require__(133);
-	
-	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
-	  'tartan-database/master/data/index.json';
-	
-	function getDatasetDirectory() {
-	  return downloader.getJson(datasetDirectoryUrl)
-	    .then(function(items) {
-	      return _.map(items, function(item) {
-	        item = _.clone(item);
-	        item.url = url.resolve(datasetDirectoryUrl, item.path);
-	        return item;
-	      });
-	    });
-	}
-	
-	function createAttributeMapper(fields, attributes) {
-	  var fieldIndex = _.chain(fields)
-	    .map(function(field, index) {
-	      return [field.name, index];
-	    })
-	    .fromPairs()
-	    .value();
-	
-	  function compileArguments(args) {
-	    args = _.isArray(args) ? args : [args];
-	    return _.chain(args)
-	      .map(function(value) {
-	        return _.isUndefined(value) ? 'undefined' : JSON.stringify(value);
-	      })
-	      .join(', ')
-	      .value();
-	  }
-	
-	  var mapper = ['var result = {};'];
-	
-	  _.each(attributes, function(descriptor, name) {
-	    if (_.isString(descriptor)) {
-	      if (fieldIndex.hasOwnProperty(descriptor)) {
-	        mapper.push('result[' + JSON.stringify(name) + '] = ' +
-	          'row[' + fieldIndex[descriptor] + '];');
-	      }
-	    }
-	    if (_.isArray(descriptor)) {
-	      mapper.push('var values = [];');
-	
-	      var isArray = true;
-	      _.each(descriptor, function(item) {
-	        if (_.isString(item)) {
-	          switch (item) {
-	            case 'trim':
-	              if (isArray) {
-	                mapper.push('values = _.map(values, _.trim);');
-	              } else {
-	                mapper.push('values = _.trim(values);');
-	              }
-	              break;
-	            case 'filter':
-	              if (isArray) {
-	                mapper.push('values = _.filter(values);');
-	              }
-	              break;
-	            case 'unique':
-	              if (isArray) {
-	                mapper.push('values = _.uniq(values);');
-	              }
-	              break;
-	            default:
-	              break;
-	          }
-	        }
-	        if (_.isObject(item)) {
-	          _.each(item, function(args, func) {
-	            switch (func) {
-	              case 'fields':
-	                args = _.isArray(args) ? args : [args];
-	                var fields = [];
-	                _.each(args, function(field) {
-	                  if (fieldIndex.hasOwnProperty(field)) {
-	                    fields.push('row[' + fieldIndex[field] + ']');
-	                  }
-	                });
-	                if (fields.length > 0) {
-	                  if (!isArray) {
-	                    mapper.push('values = [values];');
-	                    isArray = true;
-	                  }
-	                  mapper.push('values.push(' + fields.join(', ') + ')');
-	                }
-	                break;
-	              case 'values':
-	                if (!isArray) {
-	                  mapper.push('values = [values];');
-	                  isArray = true;
-	                }
-	                mapper.push('values.push(' + compileArguments(args) + ')');
-	                break;
-	              case 'split':
-	                if (isArray) {
-	                  mapper.push('values = _.map(values, function(value) {');
-	                  mapper.push('return _.split(value, ' +
-	                    compileArguments(args) + ');');
-	                  mapper.push('});');
-	                } else {
-	                  mapper.push('values = _.split(values, ' +
-	                    compileArguments(args) + ');');
-	                }
-	                isArray = true;
-	                break;
-	              case 'join':
-	                if (isArray) {
-	                  mapper.push('values = _.join(values, ' +
-	                    compileArguments(args) + ');');
-	                  isArray = false;
-	                }
-	                break;
-	              case 'flatten':
-	                if (isArray) {
-	                  mapper.push('values = _.flattenDeep(values);');
-	                }
-	                break;
-	              case 'sort':
-	                if (isArray) {
-	                  mapper.push('values = _.sortBy(values);');
-	                  var direction = ('' + _.first(args)).toLowerCase();
-	                  if (direction == 'desc') {
-	                    mapper.push('values = _.reverse(values);');
-	                  }
-	                }
-	              default:
-	                break;
-	            }
-	          });
-	        }
-	      });
-	
-	      mapper.push('result[' + JSON.stringify(name) + '] = values;');
-	    }
-	  });
-	
-	  mapper.push('return result;');
-	
-	  mapper = new Function('row', '_', mapper.join('\n'));
-	  return function(row) {
-	    return mapper(row, _);
-	  };
-	}
-	
-	function getDataset(dataset) {
-	  var attributes = null;
-	  var fields = null;
-	  var resourceName = null;
-	  var hasHeaders = false;
-	  return downloader.getJson(dataset.url)
-	    .then(function(dataPackage) {
-	      attributes = dataPackage.attributes;
-	      var resource = _.first(dataPackage.resources);
-	      if (resource) {
-	        resourceName = resource.title;
-	        hasHeaders = !!resource.headers;
-	        fields = _.extend({}, resource.schema).fields;
-	        if (!_.isArray(fields) && !_.isObject(fields)) {
-	          fields = [];
-	        }
-	        if (!_.isArray(attributes) && !_.isObject(attributes)) {
-	          attributes = _.chain(fields)
-	            .map(function(field) {
-	              return [field.name, field.name];
-	            })
-	            .fromPairs()
-	            .value();
-	        }
-	        var resourceUrl = resource.url;
-	        if (resource.path) {
-	          resourceUrl = url.resolve(dataset.url, resource.path);
-	        }
-	        return getCSVData(resourceUrl);
-	      }
-	      return []; // return empty dataset
-	    })
-	    .then(function(records) {
-	      if (hasHeaders) {
-	        records.splice(0, 1); // Remove first item
-	      }
-	      var result = records;
-	      if (fields && attributes) {
-	        var mapper = createAttributeMapper(fields, attributes);
-	        result = _.map(records, function(record, index) {
-	          return _.extend({}, mapper(record), {
-	            ref: index + 1,
-	            dataset: resourceName
-	          });
-	        });
-	      }
-	      return result;
-	    })
-	    .then(function(records) {
-	      return _.extend({}, dataset, {
-	        items: records
-	      });
-	    });
-	}
-	
-	function getPapaParseError(parseErrors) {
-	  parseErrors = _.filter(parseErrors, function(error) {
-	    // Delimiter was not auto-detected (defaults used).
-	    // We'll not treat this as an error
-	    var delimiterNotDetected = (error.type == 'Delimiter') &&
-	      (error.code == 'UndetectableDelimiter');
-	
-	    return !delimiterNotDetected;
-	  });
-	  if (parseErrors.length > 0) {
-	    return new Error(parseErrors[0].message);
-	  }
-	}
-	
-	function getCSVData(url) {
-	  return new Promise(function(resolve, reject) {
-	    var config = {
-	      download: true,
-	      skipEmptyLines: true,
-	      error: function(error) {
-	        reject(new Error('Failed to load ' + url + ' : ' + error));
-	      },
-	      complete: function(results) {
-	        var error = getPapaParseError(results.errors);
-	        if (error) {
-	          reject(error);
-	        } else {
-	          resolve(results.data);
-	        }
-	      }
-	    };
-	    csv.parse(url, config);
-	  });
-	}
-	
-	function buildSearchIndex(items) {
-	  var availableCategories = [];
-	
-	  return search(items, [
-	    search.fulltext(items),
-	    search.category(items).then(function(searchIndex) {
-	      availableCategories = searchIndex.categories;
-	      return searchIndex;
-	    })
-	  ]).then(function(searchIndex) {
-	    return {
-	      searchIndex: searchIndex,
-	      availableCategories: availableCategories
-	    };
-	  });
-	}
-	
-	module.exports.getDatasetDirectory = getDatasetDirectory;
-	module.exports.getDataset = getDataset;
-	module.exports.buildSearchIndex = buildSearchIndex;
-
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
 	var Promise = __webpack_require__(6);
 	
 	var chunkSize = 100;
@@ -24098,7 +23827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24111,7 +23840,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var unindent = __webpack_require__(29);
+	var unindent = __webpack_require__(28);
 	
 	  /**
 	   * @ngdoc overview
@@ -24291,7 +24020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var m;
 	
 	    try {
-	      m = __webpack_require__(62);
+	      m = __webpack_require__(61);
 	    } catch (err) {
 	      m = $window.marked || marked;
 	    }
@@ -24452,7 +24181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = function unindent(text) {
@@ -24487,23 +24216,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(38);
-	__webpack_require__(36);
 	__webpack_require__(37);
 	__webpack_require__(35);
-	__webpack_require__(32);
+	__webpack_require__(36);
 	__webpack_require__(34);
 	__webpack_require__(31);
 	__webpack_require__(33);
+	__webpack_require__(30);
+	__webpack_require__(32);
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24556,7 +24285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24609,7 +24338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24647,7 +24376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24685,7 +24414,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24722,7 +24451,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24864,7 +24593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25133,14 +24862,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var tartan = __webpack_require__(8);
-	var EventEmitter = __webpack_require__(55);
+	var EventEmitter = __webpack_require__(54);
 	var ngTartan = __webpack_require__(5);
 	
 	ngTartan.directive('tartan', [
@@ -25249,31 +24978,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(40));
+	_.extend(module.exports, __webpack_require__(39));
 	
-	__webpack_require__(30);
+	__webpack_require__(29);
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(59);
+	var packageFile = __webpack_require__(58);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/**
@@ -57046,25 +56775,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-	__webpack_require__(54)
+	__webpack_require__(53)
+	__webpack_require__(43)
 	__webpack_require__(44)
 	__webpack_require__(45)
 	__webpack_require__(46)
 	__webpack_require__(47)
 	__webpack_require__(48)
+	__webpack_require__(52)
 	__webpack_require__(49)
-	__webpack_require__(53)
 	__webpack_require__(50)
 	__webpack_require__(51)
-	__webpack_require__(52)
-	__webpack_require__(43)
+	__webpack_require__(42)
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57232,7 +56961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57332,7 +57061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57463,7 +57192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57706,7 +57435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57924,7 +57653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58095,7 +57824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58440,7 +58169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58554,7 +58283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58732,7 +58461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58893,7 +58622,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59419,7 +59148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59484,7 +59213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -59792,7 +59521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -59978,7 +59707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(111) !== null) && (__webpack_require__(112) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(110) !== null) && (__webpack_require__(111) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -59986,7 +59715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -70212,7 +69941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -70289,7 +70018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -70432,7 +70161,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -70573,7 +70302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -72652,7 +72381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -73945,7 +73674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -75354,7 +75083,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -75440,7 +75169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -75510,65 +75239,65 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(64);
-	exports.encode = exports.stringify = __webpack_require__(65);
+	exports.decode = exports.parse = __webpack_require__(63);
+	exports.encode = exports.stringify = __webpack_require__(64);
 
 
 /***/ },
-/* 67 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"dataset-header\">\n  <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n    ng-if=\"onclose\" ng-click=\"onclose()\"><i\n    class=\"fa fa-reply margin-right-5\"></i>Back</button>\n  <h2 class=\"without-margins\">{{ item.title }}</h2>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
 
 /***/ },
-/* 68 */
+/* 67 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\">\n    <button class=\"btn btn-info\" ng-click=\"onselect()\"><i\n      class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n  </div>\n</div>\n"
 
 /***/ },
-/* 69 */
+/* 68 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"selectedCategories.length > 0\" class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
 
 /***/ },
-/* 70 */
+/* 69 */
 /***/ function(module, exports) {
 
 	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
 
 /***/ },
-/* 72 */
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75634,7 +75363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75668,18 +75397,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(60);
+	var packageFile = __webpack_require__(59);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75857,7 +75586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75907,7 +75636,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75955,7 +75684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76025,7 +75754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 82 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76096,7 +75825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 83 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76166,7 +75895,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 84 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76208,14 +75937,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(84);
-	var invalid = __webpack_require__(79);
+	var whitespace = __webpack_require__(83);
+	var invalid = __webpack_require__(78);
 	
 	function Context(source, parsers, options) {
 	  this.source = _.isString(source) ? source : '';
@@ -76316,7 +76045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76558,7 +76287,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 87 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76700,7 +76429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 88 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76776,7 +76505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 89 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76845,7 +76574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 90 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76914,7 +76643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 91 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76991,7 +76720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 92 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76999,11 +76728,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.classic = __webpack_require__(14);
 	module.exports.extended = __webpack_require__(15);
 	module.exports.stwr = __webpack_require__(16);
-	module.exports.weddslist = __webpack_require__(96);
+	module.exports.weddslist = __webpack_require__(95);
 
 
 /***/ },
-/* 93 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77079,7 +76808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 94 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77148,7 +76877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 95 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77222,7 +76951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 96 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77231,8 +76960,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'weddslist';
 	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(97);
-	module.exports.format = __webpack_require__(95);
+	module.exports.parse = __webpack_require__(96);
+	module.exports.format = __webpack_require__(94);
 	
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
@@ -77251,7 +76980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 97 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77325,7 +77054,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 98 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77468,7 +77197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 99 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77763,7 +77492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 100 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77995,7 +77724,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 101 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78049,7 +77778,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 102 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78134,7 +77863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 103 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78183,7 +77912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 104 */
+/* 103 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78211,7 +77940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78248,7 +77977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 106 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78319,7 +78048,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 107 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78452,7 +78181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 108 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78668,7 +78397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 109 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -79203,7 +78932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)(module), (function() { return this; }())))
 
 /***/ },
-/* 110 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -79227,7 +78956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(109);
+	var punycode = __webpack_require__(108);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -79299,7 +79028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(66);
+	    querystring = __webpack_require__(65);
 	
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -79916,14 +79645,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 110 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 112 */
+/* 111 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -79931,7 +79660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 113 */
+/* 112 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -80370,16 +80099,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = __webpack_require__(3);
 	
+	__webpack_require__(114);
+	__webpack_require__(121);
+	__webpack_require__(126);
+
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	__webpack_require__(115);
-	__webpack_require__(122);
-	__webpack_require__(127);
 
 
 /***/ },
@@ -80388,21 +80126,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	__webpack_require__(116);
-
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	/* global Event */
-	
 	var $q = __webpack_require__(130).$q;
 	var ngModule = __webpack_require__(3);
 	var log = __webpack_require__(134);
-	var application = __webpack_require__(26);
+	var application = __webpack_require__(128);
 	
 	ngModule.controller('MainController', [
 	  '$scope',
@@ -80451,7 +80178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 117 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80463,17 +80190,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($timeout) {
 	    return {
 	      restrict: 'A',
-	      link : function($scope, element) {
+	      link: function($scope, element) {
 	        $timeout(function() {
 	          element.focus();
 	        });
 	      }
-	    }
+	    };
 	  }
 	]);
 
+
 /***/ },
-/* 118 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80484,7 +80212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(67),
+	      template: __webpack_require__(66),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80499,7 +80227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80510,7 +80238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(68),
+	      template: __webpack_require__(67),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80524,20 +80252,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var application = __webpack_require__(26);
 	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('datasetView', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(69),
+	      template: __webpack_require__(68),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -80635,7 +80362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 121 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80647,7 +80374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(70),
+	      template: __webpack_require__(69),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -80681,31 +80408,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(116);
+	
+	// Components
+	__webpack_require__(122);
+	__webpack_require__(120);
+	__webpack_require__(123);
+	__webpack_require__(124);
+	__webpack_require__(125);
+	__webpack_require__(118);
+	__webpack_require__(117);
+	__webpack_require__(119);
+
+
+/***/ },
 /* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(117);
-	
-	// Components
-	__webpack_require__(123);
-	__webpack_require__(121);
-	__webpack_require__(124);
-	__webpack_require__(125);
-	__webpack_require__(126);
-	__webpack_require__(119);
-	__webpack_require__(118);
-	__webpack_require__(120);
-
-
-/***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
 	var ngModule = __webpack_require__(3);
 	
 	function validateCount(value) {
@@ -80723,7 +80449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(71),
+	      template: __webpack_require__(70),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -80781,6 +80507,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                state.current = $scope.current;
 	                $event.preventDefault();
 	                break;
+	              default:
+	                break;
 	            }
 	          }
 	        };
@@ -80791,7 +80519,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 124 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80802,7 +80530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(72),
+	      template: __webpack_require__(71),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80816,7 +80544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 125 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80828,7 +80556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(73),
+	      template: __webpack_require__(72),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -80878,10 +80606,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 126 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	/* global Event */
 	
 	var _ = __webpack_require__(1);
 	var ngModule = __webpack_require__(3);
@@ -80891,7 +80621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(74),
+	      template: __webpack_require__(73),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -80971,16 +80701,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 127 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(128);
+	__webpack_require__(127);
 
 
 /***/ },
-/* 128 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80998,6 +80728,280 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  }
 	]);
+
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var url = __webpack_require__(109);
+	var Promise = __webpack_require__(6);
+	var csv = __webpack_require__(62);
+	var downloader = __webpack_require__(129);
+	var search = __webpack_require__(133);
+	
+	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
+	  'tartan-database/master/data/index.json';
+	
+	function getDatasetDirectory() {
+	  return downloader.getJson(datasetDirectoryUrl)
+	    .then(function(items) {
+	      return _.map(items, function(item) {
+	        item = _.clone(item);
+	        item.url = url.resolve(datasetDirectoryUrl, item.path);
+	        return item;
+	      });
+	    });
+	}
+	
+	function createAttributeMapper(fields, attributes) {
+	  var fieldIndex = _.chain(fields)
+	    .map(function(field, index) {
+	      return [field.name, index];
+	    })
+	    .fromPairs()
+	    .value();
+	
+	  function compileArguments(args) {
+	    args = _.isArray(args) ? args : [args];
+	    return _.chain(args)
+	      .map(function(value) {
+	        return _.isUndefined(value) ? 'undefined' : JSON.stringify(value);
+	      })
+	      .join(', ')
+	      .value();
+	  }
+	
+	  var mapper = ['var result = {};'];
+	
+	  _.each(attributes, function(descriptor, name) {
+	    if (_.isString(descriptor)) {
+	      if (fieldIndex.hasOwnProperty(descriptor)) {
+	        mapper.push('result[' + JSON.stringify(name) + '] = ' +
+	          'row[' + fieldIndex[descriptor] + '];');
+	      }
+	    }
+	    if (_.isArray(descriptor)) {
+	      mapper.push('var values = [];');
+	
+	      var isArray = true;
+	      _.each(descriptor, function(item) {
+	        if (_.isString(item)) {
+	          switch (item) {
+	            case 'trim':
+	              if (isArray) {
+	                mapper.push('values = _.map(values, _.trim);');
+	              } else {
+	                mapper.push('values = _.trim(values);');
+	              }
+	              break;
+	            case 'filter':
+	              if (isArray) {
+	                mapper.push('values = _.filter(values);');
+	              }
+	              break;
+	            case 'unique':
+	              if (isArray) {
+	                mapper.push('values = _.uniq(values);');
+	              }
+	              break;
+	            default:
+	              break;
+	          }
+	        }
+	        if (_.isObject(item)) {
+	          _.each(item, function(args, func) {
+	            switch (func) {
+	              case 'fields':
+	                args = _.isArray(args) ? args : [args];
+	                var fields = [];
+	                _.each(args, function(field) {
+	                  if (fieldIndex.hasOwnProperty(field)) {
+	                    fields.push('row[' + fieldIndex[field] + ']');
+	                  }
+	                });
+	                if (fields.length > 0) {
+	                  if (!isArray) {
+	                    mapper.push('values = [values];');
+	                    isArray = true;
+	                  }
+	                  mapper.push('values.push(' + fields.join(', ') + ')');
+	                }
+	                break;
+	              case 'values':
+	                if (!isArray) {
+	                  mapper.push('values = [values];');
+	                  isArray = true;
+	                }
+	                mapper.push('values.push(' + compileArguments(args) + ')');
+	                break;
+	              case 'split':
+	                if (isArray) {
+	                  mapper.push('values = _.map(values, function(value) {');
+	                  mapper.push('return _.split(value, ' +
+	                    compileArguments(args) + ');');
+	                  mapper.push('});');
+	                } else {
+	                  mapper.push('values = _.split(values, ' +
+	                    compileArguments(args) + ');');
+	                }
+	                isArray = true;
+	                break;
+	              case 'join':
+	                if (isArray) {
+	                  mapper.push('values = _.join(values, ' +
+	                    compileArguments(args) + ');');
+	                  isArray = false;
+	                }
+	                break;
+	              case 'flatten':
+	                if (isArray) {
+	                  mapper.push('values = _.flattenDeep(values);');
+	                }
+	                break;
+	              case 'sort':
+	                if (isArray) {
+	                  mapper.push('values = _.sortBy(values);');
+	                  var direction = ('' + _.first(args)).toLowerCase();
+	                  if (direction == 'desc') {
+	                    mapper.push('values = _.reverse(values);');
+	                  }
+	                }
+	                break;
+	              default:
+	                break;
+	            }
+	          });
+	        }
+	      });
+	
+	      mapper.push('result[' + JSON.stringify(name) + '] = values;');
+	    }
+	  });
+	
+	  mapper.push('return result;');
+	
+	  /* eslint-disable no-new-func */
+	  mapper = new Function('row', '_', mapper.join('\n'));
+	  /* eslint-enable no-new-func */
+	  return function(row) {
+	    return mapper(row, _);
+	  };
+	}
+	
+	function getDataset(dataset) {
+	  var attributes = null;
+	  var fields = null;
+	  var resourceName = null;
+	  var hasHeaders = false;
+	  return downloader.getJson(dataset.url)
+	    .then(function(dataPackage) {
+	      attributes = dataPackage.attributes;
+	      var resource = _.first(dataPackage.resources);
+	      if (resource) {
+	        resourceName = resource.title;
+	        hasHeaders = !!resource.headers;
+	        fields = _.extend({}, resource.schema).fields;
+	        if (!_.isArray(fields) && !_.isObject(fields)) {
+	          fields = [];
+	        }
+	        if (!_.isArray(attributes) && !_.isObject(attributes)) {
+	          attributes = _.chain(fields)
+	            .map(function(field) {
+	              return [field.name, field.name];
+	            })
+	            .fromPairs()
+	            .value();
+	        }
+	        var resourceUrl = resource.url;
+	        if (resource.path) {
+	          resourceUrl = url.resolve(dataset.url, resource.path);
+	        }
+	        return getCSVData(resourceUrl);
+	      }
+	      return []; // return empty dataset
+	    })
+	    .then(function(records) {
+	      if (hasHeaders) {
+	        records.splice(0, 1); // Remove first item
+	      }
+	      var result = records;
+	      if (fields && attributes) {
+	        var mapper = createAttributeMapper(fields, attributes);
+	        result = _.map(records, function(record, index) {
+	          return _.extend({}, mapper(record), {
+	            ref: index + 1,
+	            dataset: resourceName
+	          });
+	        });
+	      }
+	      return result;
+	    })
+	    .then(function(records) {
+	      return _.extend({}, dataset, {
+	        items: records
+	      });
+	    });
+	}
+	
+	function getPapaParseError(parseErrors) {
+	  parseErrors = _.filter(parseErrors, function(error) {
+	    // Delimiter was not auto-detected (defaults used).
+	    // We'll not treat this as an error
+	    var delimiterNotDetected = (error.type == 'Delimiter') &&
+	      (error.code == 'UndetectableDelimiter');
+	
+	    return !delimiterNotDetected;
+	  });
+	  if (parseErrors.length > 0) {
+	    return new Error(parseErrors[0].message);
+	  }
+	}
+	
+	function getCSVData(url) {
+	  return new Promise(function(resolve, reject) {
+	    var config = {
+	      download: true,
+	      skipEmptyLines: true,
+	      error: function(error) {
+	        reject(new Error('Failed to load ' + url + ' : ' + error));
+	      },
+	      complete: function(results) {
+	        var error = getPapaParseError(results.errors);
+	        if (error) {
+	          reject(error);
+	        } else {
+	          resolve(results.data);
+	        }
+	      }
+	    };
+	    csv.parse(url, config);
+	  });
+	}
+	
+	function buildSearchIndex(items) {
+	  var availableCategories = [];
+	
+	  return search(items, [
+	    search.fulltext(items),
+	    search.category(items).then(function(searchIndex) {
+	      availableCategories = searchIndex.categories;
+	      return searchIndex;
+	    })
+	  ]).then(function(searchIndex) {
+	    return {
+	      searchIndex: searchIndex,
+	      availableCategories: availableCategories
+	    };
+	  });
+	}
+	
+	module.exports.getDatasetDirectory = getDatasetDirectory;
+	module.exports.getDataset = getDataset;
+	module.exports.buildSearchIndex = buildSearchIndex;
 
 
 /***/ },
@@ -81087,7 +81091,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var async = __webpack_require__(27);
+	var async = __webpack_require__(26);
 	
 	function createIndex(records) {
 	  var refsList = [];
@@ -81150,8 +81154,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var lunr = __webpack_require__(61);
-	var async = __webpack_require__(27);
+	var lunr = __webpack_require__(60);
+	var async = __webpack_require__(26);
 	
 	function createIndex(records) {
 	  records = _.sortBy(records, 'name');
