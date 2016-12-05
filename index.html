@@ -17,22 +17,30 @@
 </div>
 
 <div ng-cloak ng-if="isLoaded.application">
-  <div class="container-fluid padding-top-15" ng-if="!dataset">
+  <div class="container-fluid padding-top-15" ng-if="!state.dataset">
     <h2 class="without-margins margin-bottom-20">Tartan Viewer
       <span class="badge">alpha</span></h2>
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-lg-4"
-        ng-repeat="dataset in datasets track by dataset.name"
+        ng-repeat="dataset in state.datasets track by dataset.name"
       >
         <dataset-list-item item="dataset"
-          onselect="openDataset(dataset)"></dataset-list-item>
+          onselect="openDataset(dataset)"
+          ondownload="downloadDataset(dataset)"></dataset-list-item>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid padding-top-15" ng-if="!!dataset">
-    <dataset-header item="dataset" loaded="isLoaded.dataset"
-      onclose="closeDataset()"></dataset-header>
+  <dataset-download ng-if="!!state.datasetForDownload"
+    item="state.datasetForDownload"></dataset-download>
+
+  <div class="container-fluid padding-top-15" ng-if="!!state.dataset">
+    <dataset-header
+      item="state.dataset"
+      loaded="isLoaded.dataset"
+      onclose="closeDataset()"
+      ondownload="downloadDataset(state.dataset)"
+    ></dataset-header>
 
     <div ng-if="!isLoaded.dataset" class="text-center padding-top-50 padding-bottom-50">
       <div class="margin-bottom-10"><i class="fa fa-4x fa-spinner fa-pulse"></i></div>
@@ -42,7 +50,7 @@
     <hr ng-if="isLoaded.dataset" class="margin-top-10 margin-bottom-20">
 
     <div ng-if="isLoaded.dataset">
-       <dataset-view item="dataset"></dataset-view>
+       <dataset-view item="state.dataset"></dataset-view>
     </div>
   </div>
 </div>

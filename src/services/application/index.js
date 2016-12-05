@@ -1,11 +1,16 @@
 'use strict';
 
+/* global Blob */
+
 var _ = require('lodash');
 var url = require('url');
 var Promise = require('bluebird');
 var csv = require('papaparse');
 var downloader = require('../downloader');
 var search = require('../search');
+var TextEncoder = require('text-encoding').TextEncoder;
+var tar = require('tinytar').tar;
+var gzip = require('pako').gzip;
 
 var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
   'tartan-database/master/data/index.json';
@@ -263,6 +268,46 @@ function buildSearchIndex(items) {
   });
 }
 
+function getDatasetFiles(dataset) {
+  var dataPackage = null;
+  return downloader.getJson(dataset.url)
+    .then(function(result) {
+      dataPackage = result;
+      return Promise.all(_.map(dataPackage.resources, function(resource) {
+        if (resource.path) {
+          resource.url = url.resolve(dataset.url, resource.path);
+          resource.path = resource.name + '.csv';
+        }
+        return downloader.get(resource.url);
+      }));
+    })
+    .then(function(results) {
+      var encoder = new TextEncoder('utf-8');
+
+      var files = [];
+      files.push({
+        name: 'datapackage.json',
+        data: encoder.encode(JSON.stringify(dataPackage, null, 2))
+      });
+      _.each(dataPackage.resources, function(resource, index) {
+        files.push({
+          name: resource.path,
+          data: encoder.encode(results[index])
+        });
+      });
+      return files;
+    });
+}
+
+function createArchive(files) {
+  var bytes = gzip(tar(files));
+  return new Blob([bytes], {
+    type: 'application/gzip'
+  });
+}
+
 module.exports.getDatasetDirectory = getDatasetDirectory;
 module.exports.getDataset = getDataset;
 module.exports.buildSearchIndex = buildSearchIndex;
+module.exports.getDatasetFiles = getDatasetFiles;
+module.exports.createArchive = createArchive;

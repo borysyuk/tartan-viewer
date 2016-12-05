@@ -13,8 +13,15 @@
       <strong>Updated:</strong> {{ item.updated }}
     </p>
   </div>
-  <div class="panel-footer">
-    <button class="btn btn-info" ng-click="onselect()"><i
-      class="fa fa-arrow-circle-right margin-right-5"></i>Open</button>
+  <div class="panel-footer" ng-if="!!onselect || !!onsave">
+    <button class="btn btn-info margin-right-10"
+      title="View dataset"
+      ng-if="!!onselect" ng-click="onselect()"
+    ><i class="fa fa-arrow-circle-right margin-right-5"></i>Open</button>
+
+    <button class="btn btn-default margin-right-10"
+      title="Download this dataset"
+      ng-if="!!ondownload" ng-click="ondownload()"
+    ><i class="fa fa-download margin-right-5"></i> Download</button>
   </div>
 </div>

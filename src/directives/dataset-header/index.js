@@ -11,7 +11,8 @@ ngModule.directive('datasetHeader', [
       scope: {
         item: '=',
         loaded: '=?',
-        onclose: '&?'
+        onclose: '&?',
+        ondownload: '&?'
       },
       link: function() {
       }

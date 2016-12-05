@@ -1,8 +1,18 @@
 <div class="dataset-header">
-  <button class="btn btn-info pull-left without-margins margin-right-10"
-    ng-if="onclose" ng-click="onclose()"><i
-    class="fa fa-reply margin-right-5"></i>Back</button>
-  <h2 class="without-margins">{{ item.title }}</h2>
+  <div class="clearfix">
+    <button class="btn btn-info pull-left without-margins margin-right-10"
+      ng-if="onclose" ng-click="onclose()"><i
+      class="fa fa-reply margin-right-5"></i>Back</button>
+    <button class="btn btn-default pull-right without-margins margin-left-10"
+      title="Download this dataset"
+      ng-if="ondownload" ng-click="ondownload()"><i
+      class="fa fa-download"></i></button>
+    <h2 class="hidden-xs hidden-sm without-margins">{{ item.title }}</h2>
+    <h3 class="hidden-xs hidden-md hidden-lg without-margins">{{ item.title }}</h3>
+  </div>
+  <div class="margin-top-15">
+    <h3 class="hidden-sm hidden-md hidden-lg without-margins">{{ item.title }}</h3>
+  </div>
   <hr class="margin-top-15 margin-bottom-15">
   <div class="clearfix">
     <p marked="item.description | join:'\n\n'"></p>
