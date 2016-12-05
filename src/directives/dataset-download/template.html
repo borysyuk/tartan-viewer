@@ -1,0 +1,55 @@
+<div class="modal fade modal-fluid" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+        <h4 class="modal-title">{{ item.title }}</h4>
+      </div>
+
+      <div class="modal-body">
+        <p marked="item.description | join:'\n\n'"></p>
+        <p ng-if="item.author">
+          <strong>Author:</strong> {{ item.author }}
+        </p>
+        <p ng-if="item.version">
+          <strong>Version:</strong> {{ item.version }}
+        </p>
+        <p ng-if="item.updated">
+          <strong>Updated:</strong> {{ item.updated }}
+        </p>
+
+        <div ng-if="!isLoaded" class="text-center padding-top-50 padding-bottom-50">
+          <div class="margin-bottom-10"><i class="fa fa-4x fa-spinner fa-pulse"></i></div>
+          <div class="margin-bottom-10">Preparing files...</div>
+        </div>
+
+        <div ng-if="isLoaded && (files.length <= 0)" class="alert alert-info">
+          <i class="fa fa-2x fa-info-circle margin-right-5" style="vertical-align: middle;"></i>
+          <span style="vertical-align: middle;">No files available for download</span>
+        </div>
+
+        <div ng-if="isLoaded && (files.length > 0)">
+          <p><strong>Files in this package:</strong></p>
+          <ul class="list-group">
+            <li ng-repeat="file in files track by file.name" class="list-group-item">
+              <button class="btn btn-default btn-xs pull-right"
+                title="Download this file"
+                ng-click="downloadFile(file)"
+              ><i class="fa fa-download"></i></button>
+              <span class="pull-right margin-right-10">{{ file.formattedSize }}</span>
+              <i class="fa fa-file-o margin-right-5"></i>
+              <span>{{ file.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-info margin-right-10"
+          ng-if="isLoaded && (files.length > 0)" ng-click="downloadAll(files)"
+          ><i class="fa fa-download margin-right-5"></i>Download all (.tar.gz)</button>
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

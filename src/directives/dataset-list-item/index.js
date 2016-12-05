@@ -10,7 +10,8 @@ ngModule.directive('datasetListItem', [
       replace: true,
       scope: {
         item: '=',
-        onselect: '&?'
+        onselect: '&?',
+        ondownload: '&?'
       },
       link: function() {
       }

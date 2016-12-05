@@ -11,3 +11,4 @@ require('./tartan-preview');
 require('./dataset-list-item');
 require('./dataset-header');
 require('./dataset-view');
+require('./dataset-download');

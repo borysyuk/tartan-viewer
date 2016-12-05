@@ -8,17 +8,23 @@ var application = require('../services/application');
 ngModule.controller('MainController', [
   '$scope',
   function($scope) {
+    var state = $scope.state = {
+      datasets: [],
+      dataset: null,
+      datasetForDownload: null
+    };
+
     log.info('Loading datasets...');
     $q(application.getDatasetDirectory()).then(function(datasets) {
       log.info('Loaded datasets.');
-      $scope.datasets = datasets;
+      state.datasets = datasets;
       $scope.isLoaded.application = true;
     });
 
     $scope.dataset = null;
 
     $scope.openDataset = function(dataset) {
-      $scope.dataset = dataset;
+      state.dataset = dataset;
       $scope.isLoaded.dataset = false;
       log.info('Loading dataset: ' + dataset.name + '...');
       $q(application.getDataset(dataset))
@@ -32,20 +38,24 @@ ngModule.controller('MainController', [
             });
         })
         .then(function(dataset) {
-          if ($scope.dataset && ($scope.dataset.name == dataset.name)) {
+          if (state.dataset && (state.dataset.name == dataset.name)) {
             log.info('Loaded: ' + dataset.name + '.');
-            $scope.dataset = dataset;
+            state.dataset = dataset;
           }
         })
         .finally(function() {
-          if ($scope.dataset && ($scope.dataset.name == dataset.name)) {
+          if (state.dataset && (state.dataset.name == dataset.name)) {
             $scope.isLoaded.dataset = true;
           }
         });
     };
 
+    $scope.downloadDataset = function(dataset) {
+      state.datasetForDownload = dataset;
+    };
+
     $scope.closeDataset = function() {
-      $scope.dataset = null;
+      state.dataset = null;
     };
   }
 ]);
