@@ -65,17 +65,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	(function(globals) {
 	  globals._ = _;
 	
-	  __webpack_require__(68);
+	  __webpack_require__(70);
 	
-	  var jquery = __webpack_require__(67);
+	  var jquery = __webpack_require__(69);
 	  globals.jQuery = globals.$ = jquery;
 	
-	  __webpack_require__(52);
+	  __webpack_require__(54);
 	
 	  // fetch() polyfill
-	  __webpack_require__(21);
+	  __webpack_require__(23);
 	  // saveAs() polyfill
-	  globals.saveAs = __webpack_require__(66).saveAs;
+	  globals.saveAs = __webpack_require__(68).saveAs;
 	
 	  globals.tartan = __webpack_require__(9);
 	
@@ -85,10 +85,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    globals.Promise = __webpack_require__(7);
 	  }
 	
-	  __webpack_require__(38);
+	  __webpack_require__(40);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(141);
+	    __webpack_require__(142);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17164,7 +17164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(34)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(36)(module)))
 
 /***/ },
 /* 2 */
@@ -17172,12 +17172,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(124);
-	module.exports.color = __webpack_require__(32);
-	module.exports.token = __webpack_require__(128);
-	module.exports.node = __webpack_require__(125);
-	module.exports.sett = __webpack_require__(127);
-	module.exports.repaint = __webpack_require__(126);
+	module.exports.error = __webpack_require__(126);
+	module.exports.color = __webpack_require__(34);
+	module.exports.token = __webpack_require__(130);
+	module.exports.node = __webpack_require__(127);
+	module.exports.sett = __webpack_require__(129);
+	module.exports.repaint = __webpack_require__(128);
 
 
 /***/ },
@@ -17187,7 +17187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var angular = __webpack_require__(13);
-	__webpack_require__(49);
+	__webpack_require__(51);
 	
 	var app = angular.module('Application', [
 	  'angular-tartan',
@@ -22969,7 +22969,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	},{"./es5":13}]},{},[4])(4)
 	});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), (function() { return this; }()), __webpack_require__(19).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29), (function() { return this; }()), __webpack_require__(21).setImmediate))
 
 /***/ },
 /* 8 */
@@ -22994,8 +22994,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.classify = __webpack_require__(95);
-	module.exports.removeTokens = __webpack_require__(96);
+	module.exports.classify = __webpack_require__(97);
+	module.exports.removeTokens = __webpack_require__(98);
 
 
 /***/ },
@@ -23006,7 +23006,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(97));
+	_.extend(module.exports, __webpack_require__(99));
 	
 	module.exports.defaults = __webpack_require__(4);
 	module.exports.parse = __webpack_require__(10);
@@ -23014,7 +23014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.transform = __webpack_require__(14);
 	module.exports.syntax = __webpack_require__(12);
 	module.exports.render = __webpack_require__(11);
-	module.exports.schema = __webpack_require__(112);
+	module.exports.schema = __webpack_require__(114);
 	module.exports.utils = __webpack_require__(2);
 
 
@@ -23025,7 +23025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var tokenize = __webpack_require__(105);
+	var tokenize = __webpack_require__(107);
 	
 	var defaultOptions = {
 	  errorHandler: null,
@@ -23052,11 +23052,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.color = __webpack_require__(98);
-	module.exports.stripe = __webpack_require__(103);
-	module.exports.pivot = __webpack_require__(101);
-	module.exports.repeat = __webpack_require__(102);
-	module.exports.literal = __webpack_require__(100);
+	module.exports.color = __webpack_require__(100);
+	module.exports.stripe = __webpack_require__(105);
+	module.exports.pivot = __webpack_require__(103);
+	module.exports.repeat = __webpack_require__(104);
+	module.exports.literal = __webpack_require__(102);
 
 
 /***/ },
@@ -23065,8 +23065,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.canvas = __webpack_require__(106);
-	module.exports.format = __webpack_require__(107);
+	module.exports.canvas = __webpack_require__(108);
+	module.exports.format = __webpack_require__(109);
 
 
 /***/ },
@@ -23075,16 +23075,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.extended = __webpack_require__(119);
-	module.exports.classic = __webpack_require__(118);
-	module.exports.weddslist = __webpack_require__(120);
+	module.exports.extended = __webpack_require__(121);
+	module.exports.classic = __webpack_require__(120);
+	module.exports.weddslist = __webpack_require__(122);
 
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(51);
+	__webpack_require__(53);
 	module.exports = angular;
 
 
@@ -23111,17 +23111,190 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.flatten = __webpack_require__(121);
-	module.exports.flattenSimpleBlocks = __webpack_require__(28);
-	module.exports.fold = __webpack_require__(122);
-	module.exports.mergeStripes = __webpack_require__(29);
-	module.exports.removeEmptyBlocks = __webpack_require__(30);
-	module.exports.removeZeroWidthStripes = __webpack_require__(31);
-	module.exports.optimize = __webpack_require__(123);
+	module.exports.flatten = __webpack_require__(123);
+	module.exports.flattenSimpleBlocks = __webpack_require__(30);
+	module.exports.fold = __webpack_require__(124);
+	module.exports.mergeStripes = __webpack_require__(31);
+	module.exports.removeEmptyBlocks = __webpack_require__(32);
+	module.exports.removeZeroWidthStripes = __webpack_require__(33);
+	module.exports.optimize = __webpack_require__(125);
 
 
 /***/ },
 /* 15 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var NULL_CHAR = '\u0000';
+	
+	module.exports = {
+	  /* eslint-disable key-spacing */
+	
+	  NULL_CHAR: NULL_CHAR,
+	
+	  TMAGIC: 'ustar' + NULL_CHAR + '00',   // 'ustar', NULL, '00'
+	  OLDGNU_MAGIC: 'ustar  ' + NULL_CHAR,  // 'ustar  ', NULL
+	
+	  // Values used in typeflag field.
+	  REGTYPE:  0,  // regular file
+	  LNKTYPE:  1,  // link
+	  SYMTYPE:  2,  // reserved
+	  CHRTYPE:  3,  // character special
+	  BLKTYPE:  4,  // block special
+	  DIRTYPE:  5,  // directory
+	  FIFOTYPE: 6,  // FIFO special
+	  CONTTYPE: 7,  // reserved
+	
+	  // Bits used in the mode field, values in octal.
+	  TSUID: parseInt('4000', 8),  // set UID on execution
+	  TSGID: parseInt('2000', 8),  // set GID on execution
+	  TSVTX: parseInt('1000', 8),  // reserved
+	
+	  // file permissions
+	  TUREAD:  parseInt('0400', 8),  // read by owner
+	  TUWRITE: parseInt('0200', 8),  // write by owner
+	  TUEXEC:  parseInt('0100', 8),  // execute/search by owner
+	  TGREAD:  parseInt('0040', 8),  // read by group
+	  TGWRITE: parseInt('0020', 8),  // write by group
+	  TGEXEC:  parseInt('0010', 8),  // execute/search by group
+	  TOREAD:  parseInt('0004', 8),  // read by other
+	  TOWRITE: parseInt('0002', 8),  // write by other
+	  TOEXEC:  parseInt('0001', 8),   // execute/search by other
+	
+	  TPERMALL:  parseInt('0777', 8),   // rwxrwxrwx
+	  TPERMMASK: parseInt('0777', 8)    // permissions bitmask
+	
+	  /* eslint-enable key-spacing */
+	};
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var MAX_SAFE_INTEGER = 9007199254740991;
+	
+	var undefined = (function(undefined) {
+	  return undefined;
+	})();
+	
+	function isUndefined(value) {
+	  return value === undefined;
+	}
+	
+	function isString(value) {
+	  return (typeof value == 'string') ||
+	    (Object.prototype.toString.call(value) == '[object String]');
+	}
+	
+	function isDateTime(value) {
+	  return (Object.prototype.toString.call(value) == '[object Date]');
+	}
+	
+	function isObject(value) {
+	  return (value !== null) && (typeof value == 'object');
+	}
+	
+	function isFunction(value) {
+	  return typeof value == 'function';
+	}
+	
+	function isLength(value) {
+	  return (typeof value == 'number') &&
+	    (value > -1) && (value % 1 == 0) &&
+	    (value <= MAX_SAFE_INTEGER);
+	}
+	
+	function isArray(value) {
+	  return Object.prototype.toString.call(value) == '[object Array]';
+	}
+	
+	function isArrayLike(value) {
+	  return isObject(value) && !isFunction(value) && isLength(value.length);
+	}
+	
+	function isArrayBuffer(value) {
+	  return Object.prototype.toString.call(value) == '[object ArrayBuffer]';
+	}
+	
+	function map(array, iteratee) {
+	  return Array.prototype.map.call(array, iteratee);
+	}
+	
+	function find(array, iteratee) {
+	  var result = undefined;
+	
+	  if (isFunction(iteratee)) {
+	    Array.prototype.every.call(array, function(item, index, array) {
+	      var found = iteratee(item, index, array);
+	      if (found) {
+	        result = item;
+	      }
+	      return !found;  // continue if not found
+	    });
+	  }
+	
+	  return result;
+	}
+	
+	function extend(target /* ...sources */) {
+	  return Object.assign.apply(null, arguments);
+	}
+	
+	function toUint8Array(value) {
+	  var i;
+	  var length;
+	  var result;
+	
+	  if (isString(value)) {
+	    length = value.length;
+	    result = new Uint8Array(length);
+	    for (i = 0; i < length; i++) {
+	      result[i] = value.charCodeAt(i) & 0xFF;
+	    }
+	    return result;
+	  }
+	
+	  if (isArrayBuffer(value)) {
+	    return new Uint8Array(value);
+	  }
+	
+	  if (isObject(value) && isArrayBuffer(value.buffer)) {
+	    return new Uint8Array(value.buffer);
+	  }
+	
+	  if (isArrayLike(value)) {
+	    return new Uint8Array(value);
+	  }
+	
+	  if (isObject(value) && isFunction(value.toString)) {
+	    return toUint8Array(value.toString());
+	  }
+	
+	  return new Uint8Array();
+	}
+	
+	module.exports.MAX_SAFE_INTEGER = MAX_SAFE_INTEGER;
+	
+	module.exports.isUndefined = isUndefined;
+	module.exports.isString = isString;
+	module.exports.isObject = isObject;
+	module.exports.isDateTime = isDateTime;
+	module.exports.isFunction = isFunction;
+	module.exports.isArray = isArray;
+	module.exports.isArrayLike = isArrayLike;
+	module.exports.isArrayBuffer = isArrayBuffer;
+	module.exports.map = map;
+	module.exports.find = find;
+	module.exports.extend = extend;
+	module.exports.toUint8Array = toUint8Array;
+
+
+/***/ },
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23140,7 +23313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23149,14 +23322,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'classic';
 	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(109);
-	module.exports.format = __webpack_require__(108);
+	module.exports.parse = __webpack_require__(111);
+	module.exports.format = __webpack_require__(110);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23165,14 +23338,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'extended';
 	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(111);
-	module.exports.format = __webpack_require__(110);
+	module.exports.parse = __webpack_require__(113);
+	module.exports.format = __webpack_require__(112);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23182,8 +23355,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.id = 'stwr';
 	module.exports.name = 'Scottish Register of Tartans / ' +
 	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(114);
-	module.exports.format = __webpack_require__(113);
+	module.exports.parse = __webpack_require__(116);
+	module.exports.format = __webpack_require__(115);
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
 	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
@@ -23203,10 +23376,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(27).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(29).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -23282,10 +23455,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19).setImmediate, __webpack_require__(19).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21).setImmediate, __webpack_require__(21).clearImmediate))
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23332,19 +23505,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(140);
+	__webpack_require__(141);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// String encode/decode helpers
@@ -23535,7 +23708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23573,7 +23746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23629,7 +23802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23676,7 +23849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23711,7 +23884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -23897,7 +24070,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24011,7 +24184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24088,7 +24261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24139,7 +24312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24245,7 +24418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24305,100 +24478,280 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
-/***/ function(module, exports) {
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var MAX_SAFE_INTEGER = 9007199254740991;
+	var utils = __webpack_require__(16);
+	var constants = __webpack_require__(15);
 	
-	function isString(value) {
-	  return (typeof value == 'string') ||
-	    (Object.prototype.toString.call(value) == '[object String]');
-	}
+	var recordSize = 512;
+	var defaultFileMode = constants.TPERMALL;  // rwxrwxrwx
+	var defaultUid = 0;  // root
+	var defaultGid = 0;  // root
 	
-	function isObject(value) {
-	  return (value !== null) && (typeof value == 'object');
-	}
+	/*
+	 struct posix_header {           // byte offset
+	 char name[100];               //   0
+	 char mode[8];                 // 100
+	 char uid[8];                  // 108
+	 char gid[8];                  // 116
+	 char size[12];                // 124
+	 char mtime[12];               // 136
+	 char chksum[8];               // 148
+	 char typeflag;                // 156
+	 char linkname[100];           // 157
+	 char magic[6];                // 257
+	 char version[2];              // 263
+	 char uname[32];               // 265
+	 char gname[32];               // 297
+	 char devmajor[8];             // 329
+	 char devminor[8];             // 337
+	 char prefix[131];             // 345
+	 char atime[12];               // 476
+	 char ctime[12];               // 488
+	 };
+	 */
 	
-	function isFunction(value) {
-	  return typeof value == 'function';
-	}
+	var posixHeader = [
+	  // <field name>, <size>, <offset>, <used>, <format>, <parse>, [ <check> ]
+	  ['name', 100, 0, function(file, field) {
+	    return formatTarString(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarString(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['mode', 8, 100, function(file, field) {
+	    var mode = file[field[0]] || defaultFileMode;
+	    mode = mode & constants.TPERMMASK;
+	    return formatTarNumber(mode, field[1], defaultFileMode);
+	  }, function(buffer, offset, field) {
+	    var result = parseTarNumber(buffer.slice(offset, offset + field[1]));
+	    result &= constants.TPERMMASK;
+	    return result;
+	  }],
+	  ['uid', 8, 108, function(file, field) {
+	    return formatTarNumber(file[field[0]], field[1], defaultUid);
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['gid', 8, 116, function(file, field) {
+	    return formatTarNumber(file[field[0]], field[1], defaultGid);
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['size', 12, 124, function(file, field) {
+	    return formatTarNumber(file.data.length, field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['modifyTime', 12, 136, function(file, field) {
+	    return formatTarDateTime(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarDateTime(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['checksum', 8, 148, function(file, field) {
+	    return '        ';  // placeholder
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['type', 1, 156, function(file, field) {
+	    // get last octal digit; 0 - regular file
+	    return '' + ((parseInt(file[field[0]], 10) || 0) % 8);
+	  }, function(buffer, offset, field) {
+	    return (parseInt(String.fromCharCode(buffer[offset]), 10) || 0) % 8;
+	  }],
+	  ['linkName', 100, 157, function(file, field) {
+	    return '';  // only regular files are supported
+	  }, function(buffer, offset, field) {
+	    return parseTarString(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['ustar', 8, 257, function(file, field) {
+	    return constants.TMAGIC;  // magic + version
+	  }, function(buffer, offset, field) {
+	    return fixUstarMagic(
+	      parseTarString(buffer.slice(offset, offset + field[1]), true)
+	    );
+	  }, function(file, field) {
+	    return (file[field[0]] == constants.TMAGIC) ||
+	      (file[field[0]] == constants.OLDGNU_MAGIC);
+	  }],
+	  ['owner', 32, 265, function(file, field) {
+	    return formatTarString(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarString(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['group', 32, 297, function(file, field) {
+	    return formatTarString(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarString(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['majorNumber', 8, 329, function(file, field) {
+	    return '';  // only regular files are supported
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['minorNumber', 8, 337, function(file, field) {
+	    return '';  // only regular files are supported
+	  }, function(buffer, offset, field) {
+	    return parseTarNumber(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['prefix', 131, 345, function(file, field) {
+	    return formatTarString(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarString(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['accessTime', 12, 476, function(file, field) {
+	    return formatTarDateTime(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarDateTime(buffer.slice(offset, offset + field[1]));
+	  }],
+	  ['createTime', 12, 488, function(file, field) {
+	    return formatTarDateTime(file[field[0]], field[1]);
+	  }, function(buffer, offset, field) {
+	    return parseTarDateTime(buffer.slice(offset, offset + field[1]));
+	  }]
+	];
 	
-	function isLength(value) {
-	  return (typeof value == 'number') &&
-	    (value > -1) && (value % 1 == 0) &&
-	    (value <= MAX_SAFE_INTEGER);
-	}
+	var effectiveHeaderSize = (function(header) {
+	  var last = header[header.length - 1];
+	  return last[2] + last[1];  // offset + size
+	})(posixHeader);
 	
-	function isArray(value) {
-	  return Object.prototype.toString.call(value) == '[object Array]';
-	}
+	function fixUstarMagic(value) {
+	  if (value.length == 8) {
+	    var chars = value.split('');
 	
-	function isArrayLike(value) {
-	  return isObject(value) && !isFunction(value) && isLength(value.length);
-	}
-	
-	function isArrayBuffer(value) {
-	  return Object.prototype.toString.call(value) == '[object ArrayBuffer]';
-	}
-	
-	function map(array, iteratee) {
-	  return Array.prototype.map.call(array, iteratee);
-	}
-	
-	function extend(target /* ...sources */) {
-	  return Object.assign.apply(null, arguments);
-	}
-	
-	function toUint8Array(value) {
-	  var i;
-	  var length;
-	  var result;
-	
-	  if (isString(value)) {
-	    length = value.length;
-	    result = new Uint8Array(length);
-	    for (i = 0; i < length; i++) {
-	      result[i] = value.charCodeAt(i) & 0xFF;
+	    if (chars[5] == constants.NULL_CHAR) {
+	      // TMAGIC ?
+	      if ((chars[6] == ' ') || (chars[6] == constants.NULL_CHAR)) {
+	        chars[6] = '0';
+	      }
+	      if ((chars[7] == ' ') || (chars[7] == constants.NULL_CHAR)) {
+	        chars[7] = '0';
+	      }
+	      chars = chars.join('');
+	      return chars == constants.TMAGIC ? chars : value;
+	    } else if (chars[7] == constants.NULL_CHAR) {
+	      // OLDGNU_MAGIC ?
+	      if (chars[5] == constants.NULL_CHAR) {
+	        chars[5] = ' ';
+	      }
+	      if (chars[6] == constants.NULL_CHAR) {
+	        chars[6] = ' ';
+	      }
+	      return chars == constants.OLDGNU_MAGIC ? chars : value;
 	    }
+	  }
+	  return value;
+	}
+	
+	function formatTarString(value, length) {
+	  length -= 1;  // preserve space for trailing null-char
+	  if (utils.isUndefined(value)) {
+	    value = '';
+	  }
+	  value = ('' + value).substr(0, length);
+	  return value + constants.NULL_CHAR;
+	}
+	
+	function formatTarNumber(value, length, defaultValue) {
+	  defaultValue = parseInt(defaultValue) || 0;
+	  length -= 1;  // preserve space for trailing null-char
+	  value = (parseInt(value) || defaultValue)
+	    .toString(8).substr(-length, length);
+	  while (value.length < length) {
+	    value = '0' + value;
+	  }
+	  return value + constants.NULL_CHAR;
+	}
+	
+	function formatTarDateTime(value, length) {
+	  if (utils.isDateTime(value)) {
+	    value = Math.floor(1 * value / 1000);
+	  } else {
+	    value = parseInt(value, 10);
+	    if (isFinite(value)) {
+	      if (value <= 0) {
+	        return '';
+	      }
+	    } else {
+	      value = Math.floor(1 * new Date() / 1000);
+	    }
+	  }
+	  return formatTarNumber(value, length, 0);
+	}
+	
+	function parseTarString(bytes, returnUnprocessed) {
+	  var result = String.fromCharCode.apply(null, bytes);
+	  if (returnUnprocessed) {
 	    return result;
 	  }
-	
-	  if (isArrayBuffer(value)) {
-	    return new Uint8Array(value);
-	  }
-	
-	  if (isObject(value) && isArrayBuffer(value.buffer)) {
-	    return new Uint8Array(value.buffer);
-	  }
-	
-	  if (isArrayLike(value)) {
-	    return new Uint8Array(value);
-	  }
-	
-	  if (isObject(value) && isFunction(value.toString)) {
-	    return toUint8Array(value.toString());
-	  }
-	
-	  return new Uint8Array();
+	  var index = result.indexOf(constants.NULL_CHAR);
+	  return index >= 0 ? result.substr(0, index) : result;
 	}
 	
-	module.exports.MAX_SAFE_INTEGER = MAX_SAFE_INTEGER;
+	function parseTarNumber(bytes) {
+	  var result = String.fromCharCode.apply(null, bytes);
+	  return parseInt(result.replace(/^0+$/g, ''), 8) || 0;
+	}
 	
-	module.exports.isString = isString;
-	module.exports.isObject = isObject;
-	module.exports.isFunction = isFunction;
-	module.exports.isArray = isArray;
-	module.exports.isArrayLike = isArrayLike;
-	module.exports.isArrayBuffer = isArrayBuffer;
-	module.exports.map = map;
-	module.exports.extend = extend;
-	module.exports.toUint8Array = toUint8Array;
+	function parseTarDateTime(bytes) {
+	  if ((bytes.length == 0) || (bytes[0] == 0)) {
+	    return null;
+	  }
+	  return new Date(1000 * parseTarNumber(bytes));
+	}
+	
+	function calculateChecksum(buffer, offset, skipChecksum) {
+	  var from = parseInt(offset, 10) || 0;
+	  var to = Math.min(from + effectiveHeaderSize, buffer.length);
+	  var result = 0;
+	
+	  // When calculating checksum, `checksum` field should be
+	  // threat as filled with space char (byte 32)
+	  var skipFrom = 0;
+	  var skipTo = 0;
+	  if (skipChecksum) {
+	    posixHeader.every(function(field) {
+	      if (field[0] == 'checksum') {
+	        skipFrom = from + field[2];
+	        skipTo = skipFrom + field[1];
+	        return false;
+	      }
+	      return true;
+	    });
+	  }
+	
+	  var whitespace = ' '.charCodeAt(0);
+	  for (var i = from; i < to; i++) {
+	    // 262144 = 8^6 - 6 octal digits - maximum possible value for checksum;
+	    // wrap to avoid numeric overflow
+	    var byte = (i >= skipFrom) && (i < skipTo) ? whitespace : buffer[i];
+	    result = (result + byte) % 262144;
+	  }
+	  return result;
+	}
+	
+	module.exports.recordSize = recordSize;
+	module.exports.defaultFileMode = defaultFileMode;
+	module.exports.defaultUid = defaultUid;
+	module.exports.defaultGid = defaultGid;
+	module.exports.posixHeader = posixHeader;
+	module.exports.effectiveHeaderSize = effectiveHeaderSize;
+	
+	module.exports.calculateChecksum = calculateChecksum;
+	module.exports.formatTarString = formatTarString;
+	module.exports.formatTarNumber = formatTarNumber;
+	module.exports.formatTarDateTime = formatTarDateTime;
+	module.exports.parseTarString = parseTarString;
+	module.exports.parseTarNumber = parseTarNumber;
+	module.exports.parseTarDateTime = parseTarDateTime;
+	
 
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -24414,7 +24767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24422,14 +24775,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var url = __webpack_require__(137);
+	var url = __webpack_require__(138);
 	var Promise = __webpack_require__(7);
-	var csv = __webpack_require__(82);
-	var downloader = __webpack_require__(157);
-	var search = __webpack_require__(160);
-	var TextEncoder = __webpack_require__(129).TextEncoder;
-	var tar = __webpack_require__(132).tar;
-	var gzip = __webpack_require__(73).gzip;
+	var csv = __webpack_require__(84);
+	var downloader = __webpack_require__(158);
+	var search = __webpack_require__(161);
+	var TextEncoder = __webpack_require__(131).TextEncoder;
+	var tar = __webpack_require__(134).tar;
+	var gzip = __webpack_require__(75).gzip;
 	
 	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
 	  'tartan-database/master/data/index.json';
@@ -24733,7 +25086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24772,7 +25125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24784,7 +25137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24797,7 +25150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var unindent = __webpack_require__(39);
+	var unindent = __webpack_require__(41);
 	
 	  /**
 	   * @ngdoc overview
@@ -24977,7 +25330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var m;
 	
 	    try {
-	      m = __webpack_require__(72);
+	      m = __webpack_require__(74);
 	    } catch (err) {
 	      m = $window.marked || marked;
 	    }
@@ -25138,7 +25491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = function unindent(text) {
@@ -25173,23 +25526,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	__webpack_require__(50);
 	__webpack_require__(48);
-	__webpack_require__(46);
+	__webpack_require__(49);
 	__webpack_require__(47);
-	__webpack_require__(45);
-	__webpack_require__(42);
 	__webpack_require__(44);
-	__webpack_require__(41);
+	__webpack_require__(46);
 	__webpack_require__(43);
+	__webpack_require__(45);
 
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25242,7 +25595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25295,7 +25648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25333,7 +25686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25371,7 +25724,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25408,7 +25761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25550,7 +25903,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25819,14 +26172,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var tartan = __webpack_require__(9);
-	var EventEmitter = __webpack_require__(65);
+	var EventEmitter = __webpack_require__(67);
 	var ngTartan = __webpack_require__(5);
 	
 	ngTartan.directive('tartan', [
@@ -25935,31 +26288,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(50));
+	_.extend(module.exports, __webpack_require__(52));
 	
-	__webpack_require__(40);
+	__webpack_require__(42);
 
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(69);
+	var packageFile = __webpack_require__(71);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/**
@@ -57732,25 +58085,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-	__webpack_require__(64)
-	__webpack_require__(54)
-	__webpack_require__(55)
+	__webpack_require__(66)
 	__webpack_require__(56)
 	__webpack_require__(57)
 	__webpack_require__(58)
 	__webpack_require__(59)
-	__webpack_require__(63)
 	__webpack_require__(60)
 	__webpack_require__(61)
+	__webpack_require__(65)
 	__webpack_require__(62)
-	__webpack_require__(53)
+	__webpack_require__(63)
+	__webpack_require__(64)
+	__webpack_require__(55)
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -57918,7 +58271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58018,7 +58371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58149,7 +58502,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58392,7 +58745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58610,7 +58963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58781,7 +59134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59126,7 +59479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59240,7 +59593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59418,7 +59771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59579,7 +59932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60105,7 +60458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60170,7 +60523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -60478,7 +60831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -60664,7 +61017,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(138) !== null) && (__webpack_require__(139) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(139) !== null) && (__webpack_require__(140) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -60672,7 +61025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -70898,7 +71251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -70975,7 +71328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -71118,7 +71471,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -71259,7 +71612,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -73338,7 +73691,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -74631,7 +74984,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Top level file is just a mixin of submodules & constants
@@ -74639,9 +74992,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var assign    = __webpack_require__(6).assign;
 	
-	var deflate   = __webpack_require__(74);
-	var inflate   = __webpack_require__(75);
-	var constants = __webpack_require__(24);
+	var deflate   = __webpack_require__(76);
+	var inflate   = __webpack_require__(77);
+	var constants = __webpack_require__(26);
 	
 	var pako = {};
 	
@@ -74651,17 +75004,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var zlib_deflate = __webpack_require__(76);
+	var zlib_deflate = __webpack_require__(78);
 	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(22);
-	var msg          = __webpack_require__(15);
-	var ZStream      = __webpack_require__(26);
+	var strings      = __webpack_require__(24);
+	var msg          = __webpack_require__(17);
+	var ZStream      = __webpack_require__(28);
 	
 	var toString = Object.prototype.toString;
 	
@@ -75057,19 +75410,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var zlib_inflate = __webpack_require__(79);
+	var zlib_inflate = __webpack_require__(81);
 	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(22);
-	var c            = __webpack_require__(24);
-	var msg          = __webpack_require__(15);
-	var ZStream      = __webpack_require__(26);
-	var GZheader     = __webpack_require__(77);
+	var strings      = __webpack_require__(24);
+	var c            = __webpack_require__(26);
+	var msg          = __webpack_require__(17);
+	var ZStream      = __webpack_require__(28);
+	var GZheader     = __webpack_require__(79);
 	
 	var toString = Object.prototype.toString;
 	
@@ -75481,16 +75834,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var utils   = __webpack_require__(6);
-	var trees   = __webpack_require__(81);
-	var adler32 = __webpack_require__(23);
-	var crc32   = __webpack_require__(25);
-	var msg     = __webpack_require__(15);
+	var trees   = __webpack_require__(83);
+	var adler32 = __webpack_require__(25);
+	var crc32   = __webpack_require__(27);
+	var msg     = __webpack_require__(17);
 	
 	/* Public constants ==========================================================*/
 	/* ===========================================================================*/
@@ -77342,7 +77695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -77388,7 +77741,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -77720,17 +78073,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
 	var utils         = __webpack_require__(6);
-	var adler32       = __webpack_require__(23);
-	var crc32         = __webpack_require__(25);
-	var inflate_fast  = __webpack_require__(78);
-	var inflate_table = __webpack_require__(80);
+	var adler32       = __webpack_require__(25);
+	var crc32         = __webpack_require__(27);
+	var inflate_fast  = __webpack_require__(80);
+	var inflate_table = __webpack_require__(82);
 	
 	var CODES = 0;
 	var LENS = 1;
@@ -79264,7 +79617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79597,7 +79950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80805,7 +81158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -82214,7 +82567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -82300,7 +82653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -82370,71 +82723,71 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(83);
-	exports.encode = exports.stringify = __webpack_require__(84);
+	exports.decode = exports.parse = __webpack_require__(85);
+	exports.encode = exports.stringify = __webpack_require__(86);
 
-
-/***/ },
-/* 86 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
-
-/***/ },
-/* 87 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
 
 /***/ },
 /* 88 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ },
 /* 89 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"selectedCategories.length > 0\" class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
 
 /***/ },
 /* 90 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
+	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
 
 /***/ },
 /* 91 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
+	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"selectedCategories.length > 0\" class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
 
 /***/ },
 /* 92 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
 
 /***/ },
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
 
 /***/ },
 /* 94 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
 
 /***/ },
 /* 95 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+
+/***/ },
+/* 96 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82500,7 +82853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82534,18 +82887,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(70);
+	var packageFile = __webpack_require__(72);
 	
 	module.exports.version = packageFile.version;
 
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82723,7 +83076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82773,7 +83126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82821,7 +83174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82891,7 +83244,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82962,7 +83315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 103 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83032,7 +83385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 104 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83074,14 +83427,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(104);
-	var invalid = __webpack_require__(99);
+	var whitespace = __webpack_require__(106);
+	var invalid = __webpack_require__(101);
 	
 	function Context(source, parsers, options) {
 	  this.source = _.isString(source) ? source : '';
@@ -83182,7 +83535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 106 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83424,7 +83777,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 107 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83566,13 +83919,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 108 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(16);
+	var index = __webpack_require__(18);
 	var render = __webpack_require__(11);
 	var transform = __webpack_require__(14);
 	
@@ -83642,13 +83995,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 109 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(16);
+	var index = __webpack_require__(18);
 	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(10);
 	var filter = __webpack_require__(8);
@@ -83711,13 +84064,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 110 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(17);
+	var index = __webpack_require__(19);
 	var render = __webpack_require__(11);
 	
 	var defaultOptions = {
@@ -83780,13 +84133,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(17);
+	var index = __webpack_require__(19);
 	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(10);
 	var filter = __webpack_require__(8);
@@ -83857,25 +84210,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports.classic = __webpack_require__(16);
-	module.exports.extended = __webpack_require__(17);
-	module.exports.stwr = __webpack_require__(18);
-	module.exports.weddslist = __webpack_require__(116);
+	module.exports.classic = __webpack_require__(18);
+	module.exports.extended = __webpack_require__(19);
+	module.exports.stwr = __webpack_require__(20);
+	module.exports.weddslist = __webpack_require__(118);
 
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(18);
+	var index = __webpack_require__(20);
 	var render = __webpack_require__(11);
 	var transform = __webpack_require__(14);
 	
@@ -83945,13 +84298,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(18);
+	var index = __webpack_require__(20);
 	var defaults = __webpack_require__(4);
 	var parse = __webpack_require__(10);
 	var filter = __webpack_require__(8);
@@ -84014,7 +84367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84088,7 +84441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84097,8 +84450,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'weddslist';
 	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(117);
-	module.exports.format = __webpack_require__(115);
+	module.exports.parse = __webpack_require__(119);
+	module.exports.format = __webpack_require__(117);
 	
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
@@ -84117,7 +84470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 117 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84191,7 +84544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 118 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84334,7 +84687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84629,7 +84982,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84861,7 +85214,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 121 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84915,7 +85268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 122 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85000,17 +85353,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 123 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	var flattenSimpleBlocks = __webpack_require__(28);
-	var mergeStripes = __webpack_require__(29);
-	var removeEmptyBlocks = __webpack_require__(30);
-	var removeZeroWidthStripes = __webpack_require__(31);
+	var flattenSimpleBlocks = __webpack_require__(30);
+	var mergeStripes = __webpack_require__(31);
+	var removeEmptyBlocks = __webpack_require__(32);
+	var removeZeroWidthStripes = __webpack_require__(33);
 	
 	var defaultOptions = {
 	  // Also options for removeZeroWidthStripes
@@ -85049,7 +85402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -85077,7 +85430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 125 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85114,7 +85467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 126 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85185,13 +85538,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 127 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var color = __webpack_require__(32);
+	var color = __webpack_require__(34);
 	
 	function getColor(name, colors, defaultColors) {
 	  var temp = colors[name];
@@ -85318,7 +85671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 128 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85534,13 +85887,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 129 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
 	// See LICENSE.md for more information.
 	
-	var encoding = __webpack_require__(131);
+	var encoding = __webpack_require__(133);
 	
 	module.exports = {
 	  TextEncoder: encoding.TextEncoder,
@@ -85549,7 +85902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 130 */
+/* 132 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -85594,7 +85947,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 131 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
@@ -85607,7 +85960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	if (typeof module !== "undefined" && module.exports) {
 	  this["encoding-indexes"] =
-	    __webpack_require__(130)["encoding-indexes"];
+	    __webpack_require__(132)["encoding-indexes"];
 	}
 	
 	(function(global) {
@@ -88909,28 +89262,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 132 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// http://www.gnu.org/software/tar/manual/html_node/Standard.html
 	
-	var utils = __webpack_require__(33);
-	var tar = __webpack_require__(133);
-	var untar = __webpack_require__(135);
+	var utils = __webpack_require__(16);
+	var constants = __webpack_require__(15);
+	var tar = __webpack_require__(135);
+	var untar = __webpack_require__(136);
 	
-	utils.extend(module.exports, tar, untar);
+	utils.extend(module.exports, tar, untar, constants);
 
 
 /***/ },
-/* 133 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(33);
-	var types = __webpack_require__(134);
+	var constants = __webpack_require__(15);
+	var utils = __webpack_require__(16);
+	var types = __webpack_require__(35);
 	
 	function headerSize(file) {
 	  // header has fixed size
@@ -88966,43 +89321,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	function writeHeader(buffer, file, offset) {
 	  offset = parseInt(offset) || 0;
 	
-	  var checksum = 0;
 	  var currentOffset = offset;
 	  types.posixHeader.forEach(function(field) {
 	    var value = field[3](file, field);
-	
 	    var length = value.length;
 	    for (var i = 0; i < length; i += 1) {
-	      // put bytes
 	      buffer[currentOffset + i] = value.charCodeAt(i) & 0xFF;
-	
-	      // update the checksum
-	      checksum += value.charCodeAt(i) & 0xFF; // clamp to byte
-	      // 262144 = 8^6 - 6 octal digits - maximum possible value for checksum;
-	      // wrap to avoid numeric overflow
-	      if (checksum >= 262144) {
-	        checksum = 0;
-	      }
 	    }
-	
 	    currentOffset += field[1];  // move to the next field
 	  });
 	
-	  types.posixHeader.every(function(field) {
-	    if (field[0] == 'checksum') {
-	      var value = types.tarNumber(checksum, field[1] - 2) +
-	        types.NULL_CHAR + ' ';
-	      var length = value.length;
-	      var currentOffset = offset + field[2];
-	      for (var i = 0; i < length; i += 1) {
-	        // put bytes
-	        buffer[currentOffset] = value.charCodeAt(i) & 0xFF;
-	        currentOffset++;
-	      }
-	      return false;
-	    }
-	    return true;
+	  var field = utils.find(types.posixHeader, function(field) {
+	    return field[0] == 'checksum';
 	  });
+	
+	  if (field) {
+	    // Patch checksum field
+	    var checksum = types.calculateChecksum(buffer, offset, true);
+	    var value = types.formatTarNumber(checksum, field[1] - 2) +
+	      constants.NULL_CHAR + ' ';
+	    currentOffset = offset + field[2];
+	    for (var i = 0; i < value.length; i += 1) {
+	      // put bytes
+	      buffer[currentOffset] = value.charCodeAt(i) & 0xFF;
+	      currentOffset++;
+	    }
+	  }
 	
 	  return offset + headerSize(file);
 	}
@@ -89035,149 +89379,166 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 134 */
-/***/ function(module, exports) {
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var recordSize = 512;
-	var NULL_CHAR = '\u0000';
-	var defaultFileMode = parseInt('777', 8);  // rwxrwxrwx
-	var defaultUid = 0;  // root
-	var defaultGid = 0;  // root
+	var constants = __webpack_require__(15);
+	var utils = __webpack_require__(16);
+	var types = __webpack_require__(35);
 	
-	/*
-	 struct posix_header {           // byte offset
-	 char name[100];               //   0
-	 char mode[8];                 // 100
-	 char uid[8];                  // 108
-	 char gid[8];                  // 116
-	 char size[12];                // 124
-	 char mtime[12];               // 136
-	 char chksum[8];               // 148
-	 char typeflag;                // 156
-	 char linkname[100];           // 157
-	 char magic[6];                // 257
-	 char version[2];              // 263
-	 char uname[32];               // 265
-	 char gname[32];               // 297
-	 char devmajor[8];             // 329
-	 char devminor[8];             // 337
-	 char prefix[131];             // 345
-	 char atime[12];               // 476
-	 char ctime[12];               // 488
-	 };
-	 */
+	var defaultOptions = {
+	  extractData: true,
+	  checkHeader: true,
+	  checkChecksum: true,
+	  checkFileSize: true
+	};
 	
-	var posixHeader = [
-	  // [<field name>, <size>, <offset>, <value format/retrieve function>]
-	  ['name', 100, 0, function(file, field) {
-	    return tarString(file[field[0]], field[1]);
-	  }],
-	  ['mode', 8, 100, function(file, field) {
-	    var mode = file[field[0]] || defaultFileMode;
-	    mode = mode & parseInt('777', 8);
-	    return tarNumber(mode, field[1], defaultFileMode);
-	  }],
-	  ['uid', 8, 108, function(file, field) {
-	    return tarNumber(file[field[0]], field[1], defaultUid);
-	  }],
-	  ['gid', 8, 116, function(file, field) {
-	    return tarNumber(file[field[0]], field[1], defaultGid);
-	  }],
-	  ['size', 12, 124, function(file, field) {
-	    return tarNumber(file.data.length, field[1]);
-	  }],
-	  ['modifyTime', 12, 136, function(file, field) {
-	    return tarNumber(file[field[0]], field[1], currentTime());
-	  }],
-	  ['checksum', 8, 148, function(file, field) {
-	    return '        ';  // placeholder
-	  }],
-	  ['type', 1, 156, function(file, field) {
-	    return '0';  // regular file
-	  }],
-	  ['linkName', 100, 157, function(file, field) {
-	    return '';  // only regular files are supported
-	  }],
-	  ['ustar', 8, 257, function(file, field) {
-	    return 'ustar' + NULL_CHAR + '  ';  // magic + version
-	  }],
-	  ['owner', 32, 265, function(file, field) {
-	    return tarString(file[field[0]], field[1]);
-	  }],
-	  ['group', 32, 297, function(file, field) {
-	    return tarString(file[field[0]], field[1]);
-	  }],
-	  ['majorNumber', 8, 329, function(file, field) {
-	    return '';  // only regular files are supported
-	  }],
-	  ['minorNumber', 8, 337, function(file, field) {
-	    return '';  // only regular files are supported
-	  }],
-	  ['prefix', 131, 345, function(file, field) {
-	    return tarString(file[field[0]], field[1]);
-	  }],
-	  ['accessTime', 12, 476, function(file, field) {
-	    return tarNumber(file[field[0]], field[1], currentTime());
-	  }],
-	  ['createTime', 12, 488, function(file, field) {
-	    return tarNumber(file[field[0]], field[1], currentTime());
-	  }]
-	];
+	var excludeFields = {
+	  size: true,
+	  checksum: true,
+	  ustar: true
+	};
 	
-	function currentTime() {
-	  return Math.floor((new Date()).getTime() / 1000);
+	var messages = {
+	  unexpectedEndOfFile: 'Unexpected end of file.',
+	  fileCorrupted: 'File is corrupted.',
+	  checksumCheckFailed: 'Checksum check failed.'
+	};
+	
+	function headerSize(header) {
+	  // header has fixed size
+	  return types.recordSize;
 	}
 	
-	function tarString(value, length) {
-	  length -= 1;  // preserve space for trailing null-char
-	  if (typeof value == 'undefined') {
-	    value = '';
+	function dataSize(size) {
+	  // align to record boundary
+	  return Math.ceil(size / types.recordSize) * types.recordSize;
+	}
+	
+	function isEndOfFile(buffer, offset) {
+	  var from = offset;
+	  var to = Math.min(buffer.length, offset + types.recordSize * 2);
+	  for (var i = from; i < to; i++) {
+	    if (buffer[i] != 0) {
+	      return false;
+	    }
 	  }
-	  value = ('' + value).substr(0, length);
-	  return value + NULL_CHAR;
+	  return true;
 	}
 	
-	function tarNumber(value, length, defaultValue) {
-	  defaultValue = parseInt(defaultValue) || 0;
-	  length -= 1;  // preserve space for trailing null-char
-	  value = (parseInt(value) || defaultValue)
-	    .toString(8).substr(-length, length);
-	  while (value.length < length) {
-	    value = '0' + value;
+	function readHeader(buffer, offset, options) {
+	  if (buffer.length - offset < types.recordSize) {
+	    if (options.checkFileSize) {
+	      throw new Error(messages.unexpectedEndOfFile);
+	    }
+	    return null;
 	  }
-	  return value + NULL_CHAR;
+	
+	  offset = parseInt(offset) || 0;
+	
+	  var result = {};
+	  var currentOffset = offset;
+	  types.posixHeader.forEach(function(field) {
+	    result[field[0]] = field[4](buffer, currentOffset, field);
+	    currentOffset += field[1];
+	  });
+	
+	  if (result.type != 0) {  // only regular files can have data
+	    result.size = 0;
+	  }
+	
+	  if (options.checkHeader) {
+	    types.posixHeader.forEach(function(field) {
+	      if (utils.isFunction(field[5]) && !field[5](result, field)) {
+	        var error = new Error(messages.fileCorrupted);
+	        error.data = {
+	          offset: offset + field[2],
+	          field: field[0]
+	        };
+	        throw error;
+	      }
+	    });
+	  }
+	
+	  if (options.checkChecksum) {
+	    var checksum = types.calculateChecksum(buffer, offset, true);
+	    if (checksum != result.checksum) {
+	      var error = new Error(messages.checksumCheckFailed);
+	      error.data = {
+	        offset: offset,
+	        header: result,
+	        checksum: checksum
+	      };
+	      throw error;
+	    }
+	  }
+	
+	  return result;
 	}
 	
-	module.exports.recordSize = recordSize;
-	module.exports.NULL_CHAR = NULL_CHAR;
-	module.exports.defaultFileMode = defaultFileMode;
-	module.exports.defaultUid = defaultUid;
-	module.exports.defaultGid = defaultGid;
-	module.exports.posixHeader = posixHeader;
+	function readData(buffer, offset, header, options) {
+	  if (!options.extractData) {
+	    return null;
+	  }
 	
-	module.exports.currentTime = currentTime;
-	module.exports.tarString = tarString;
-	module.exports.tarNumber = tarNumber;
+	  if (header.size <= 0) {
+	    return new Uint8Array();
+	  }
+	  return buffer.slice(offset, offset + header.size);
+	}
 	
-
-
-/***/ },
-/* 135 */
-/***/ function(module, exports) {
-
-	'use strict';
+	function createFile(header, data) {
+	  var result = {};
+	  types.posixHeader.forEach(function(field) {
+	    var name = field[0];
+	    if (!excludeFields[name]) {
+	      result[name] = header[name];
+	    }
+	  });
 	
-	function untar(buffer) {
-	  throw new Error('Not implemented');
+	  result.isOldGNUFormat = header.ustar == constants.OLDGNU_MAGIC;
+	
+	  if (data) {
+	    result.data = data;
+	  }
+	
+	  return result;
+	}
+	
+	function untar(buffer, options) {
+	  options = utils.extend({}, defaultOptions, options);
+	
+	  var result = [];
+	  var offset = 0;
+	  var size = buffer.length;
+	
+	  while (size - offset >= types.recordSize) {
+	    buffer = utils.toUint8Array(buffer);
+	    var header = readHeader(buffer, offset, options);
+	    if (!header) {
+	      break;
+	    }
+	    offset += headerSize(header);
+	
+	    var data = readData(buffer, offset, header, options);
+	    result.push(createFile(header, data));
+	    offset += dataSize(header.size);
+	
+	    if (isEndOfFile(buffer, offset)) {
+	      break;
+	    }
+	  }
+	
+	  return result;
 	}
 	
 	module.exports.untar = untar;
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -89709,10 +90070,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module), (function() { return this; }())))
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -89736,7 +90097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(136);
+	var punycode = __webpack_require__(137);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -89808,7 +90169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(85);
+	    querystring = __webpack_require__(87);
 	
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -90425,14 +90786,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -90440,7 +90801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -90879,25 +91240,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = __webpack_require__(3);
 	
-	__webpack_require__(142);
-	__webpack_require__(150);
-	__webpack_require__(155);
-
-
-/***/ },
-/* 142 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
 	__webpack_require__(143);
+	__webpack_require__(151);
+	__webpack_require__(156);
 
 
 /***/ },
@@ -90906,10 +91258,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var $q = __webpack_require__(36).$q;
+	__webpack_require__(144);
+
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var $q = __webpack_require__(38).$q;
 	var ngModule = __webpack_require__(3);
-	var log = __webpack_require__(37);
-	var application = __webpack_require__(35);
+	var log = __webpack_require__(39);
+	var application = __webpack_require__(37);
 	
 	ngModule.controller('MainController', [
 	  '$scope',
@@ -90968,7 +91329,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90991,7 +91352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90999,9 +91360,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var $q = __webpack_require__(36).$q;
-	var application = __webpack_require__(35);
-	var utils = __webpack_require__(161);
+	var $q = __webpack_require__(38).$q;
+	var application = __webpack_require__(37);
+	var utils = __webpack_require__(162);
 	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('datasetDownload', [
@@ -91009,7 +91370,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(86),
+	      template: __webpack_require__(88),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -91078,7 +91439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91089,7 +91450,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(87),
+	      template: __webpack_require__(89),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91105,7 +91466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91116,7 +91477,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(88),
+	      template: __webpack_require__(90),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91131,7 +91492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91143,7 +91504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(89),
+	      template: __webpack_require__(91),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -91241,7 +91602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91253,7 +91614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(90),
+	      template: __webpack_require__(92),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -91287,27 +91648,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(144);
+	__webpack_require__(145);
 	
 	// Components
-	__webpack_require__(151);
-	__webpack_require__(149);
 	__webpack_require__(152);
+	__webpack_require__(150);
 	__webpack_require__(153);
 	__webpack_require__(154);
-	__webpack_require__(147);
-	__webpack_require__(146);
+	__webpack_require__(155);
 	__webpack_require__(148);
-	__webpack_require__(145);
+	__webpack_require__(147);
+	__webpack_require__(149);
+	__webpack_require__(146);
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91329,7 +91690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(91),
+	      template: __webpack_require__(93),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -91399,7 +91760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91410,7 +91771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(92),
+	      template: __webpack_require__(94),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91424,7 +91785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91436,7 +91797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(93),
+	      template: __webpack_require__(95),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -91486,7 +91847,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91501,7 +91862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(94),
+	      template: __webpack_require__(96),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91581,16 +91942,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(156);
+	__webpack_require__(157);
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91611,14 +91972,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	/* global fetch */
 	
-	__webpack_require__(21);
+	__webpack_require__(23);
 	var Promise = __webpack_require__(7);
 	
 	var cache = {};
@@ -91652,13 +92013,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var async = __webpack_require__(20);
+	var async = __webpack_require__(22);
 	
 	function createIndex(records) {
 	  var refsList = [];
@@ -91715,19 +92076,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var lunr = __webpack_require__(71);
-	var async = __webpack_require__(20);
+	var lunr = __webpack_require__(73);
+	var async = __webpack_require__(22);
 	
 	function createIndex(records) {
 	  records = _.sortBy(records, 'name');
 	
 	  var index = lunr(function() {
+	    /* eslint-disable no-invalid-this */
 	    this.field('name', {boost: 100});
 	    this.field('description');
 	    this.ref('ref');
@@ -91756,6 +92118,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return run.call(this, result);
 	    };
+	
+	    /* eslint-disable no-invalid-this */
 	  });
 	
 	  var refList = [];
@@ -91793,7 +92157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91835,12 +92199,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = createIndex;
 	
-	module.exports.fulltext = __webpack_require__(159);
-	module.exports.category = __webpack_require__(158);
+	module.exports.fulltext = __webpack_require__(160);
+	module.exports.category = __webpack_require__(159);
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91861,8 +92225,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return bytes.toFixed(1) + ' ' + units[u];
 	}
 	
-	module.exports.async = __webpack_require__(20);
-	module.exports.log = __webpack_require__(37);
+	module.exports.async = __webpack_require__(22);
+	module.exports.log = __webpack_require__(39);
 	
 	module.exports.formatDataSize = formatDataSize;
 
