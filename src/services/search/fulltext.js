@@ -8,6 +8,7 @@ function createIndex(records) {
   records = _.sortBy(records, 'name');
 
   var index = lunr(function() {
+    /* eslint-disable no-invalid-this */
     this.field('name', {boost: 100});
     this.field('description');
     this.ref('ref');
@@ -36,6 +37,8 @@ function createIndex(records) {
       }
       return run.call(this, result);
     };
+
+    /* eslint-disable no-invalid-this */
   });
 
   var refList = [];
