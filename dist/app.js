@@ -65,30 +65,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	(function(globals) {
 	  globals._ = _;
 	
-	  __webpack_require__(70);
+	  __webpack_require__(72);
 	
-	  var jquery = __webpack_require__(69);
+	  var jquery = __webpack_require__(71);
 	  globals.jQuery = globals.$ = jquery;
 	
-	  __webpack_require__(54);
+	  __webpack_require__(56);
 	
 	  // fetch() polyfill
-	  __webpack_require__(23);
+	  __webpack_require__(22);
 	  // saveAs() polyfill
-	  globals.saveAs = __webpack_require__(68).saveAs;
+	  globals.saveAs = __webpack_require__(70).saveAs;
 	
 	  globals.tartan = __webpack_require__(9);
 	
-	  var angular = __webpack_require__(13);
+	  var angular = __webpack_require__(14);
 	  globals.angular = angular;
 	  if (typeof globals.Promise != 'function') {
 	    globals.Promise = __webpack_require__(7);
 	  }
 	
-	  __webpack_require__(40);
+	  __webpack_require__(43);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(142);
+	    __webpack_require__(149);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17164,7 +17164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(36)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(39)(module)))
 
 /***/ },
 /* 2 */
@@ -17172,12 +17172,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(126);
-	module.exports.color = __webpack_require__(34);
-	module.exports.token = __webpack_require__(130);
-	module.exports.node = __webpack_require__(127);
-	module.exports.sett = __webpack_require__(129);
-	module.exports.repaint = __webpack_require__(128);
+	module.exports.error = __webpack_require__(131);
+	module.exports.color = __webpack_require__(37);
+	module.exports.token = __webpack_require__(135);
+	module.exports.node = __webpack_require__(132);
+	module.exports.sett = __webpack_require__(134);
+	module.exports.repaint = __webpack_require__(133);
 
 
 /***/ },
@@ -17186,13 +17186,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var angular = __webpack_require__(13);
-	__webpack_require__(51);
+	var angular = __webpack_require__(14);
+	__webpack_require__(54);
+	var packageInfo = __webpack_require__(90);
 	
 	var app = angular.module('Application', [
 	  'angular-tartan',
 	  'hc.marked'
 	]);
+	
+	app.constant('ApplicationVersion', packageInfo.version);
 	
 	app.config([
 	  'markedProvider',
@@ -17204,8 +17207,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	]);
 	
 	app.run([
-	  '$rootScope',
-	  function($rootScope) {
+	  '$rootScope', 'ApplicationVersion',
+	  function($rootScope, ApplicationVersion) {
+	    $rootScope.version = ApplicationVersion;
 	    $rootScope.isLoaded = {};
 	  }
 	]);
@@ -17250,7 +17254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var tartan = __webpack_require__(9);
-	var angular = __webpack_require__(13);
+	var angular = __webpack_require__(14);
 	
 	var ngTartan = angular.module('angular-tartan', []);
 	
@@ -22969,7 +22973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	},{"./es5":13}]},{},[4])(4)
 	});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29), (function() { return this; }()), __webpack_require__(21).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28), (function() { return this; }()), __webpack_require__(139).setImmediate))
 
 /***/ },
 /* 8 */
@@ -22994,8 +22998,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.classify = __webpack_require__(97);
-	module.exports.removeTokens = __webpack_require__(98);
+	module.exports.classify = __webpack_require__(101);
+	module.exports.removeTokens = __webpack_require__(102);
 
 
 /***/ },
@@ -23006,15 +23010,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(99));
+	_.extend(module.exports, __webpack_require__(89));
 	
 	module.exports.defaults = __webpack_require__(4);
 	module.exports.parse = __webpack_require__(10);
 	module.exports.filter = __webpack_require__(8);
-	module.exports.transform = __webpack_require__(14);
+	module.exports.transform = __webpack_require__(13);
 	module.exports.syntax = __webpack_require__(12);
 	module.exports.render = __webpack_require__(11);
-	module.exports.schema = __webpack_require__(114);
+	module.exports.schema = __webpack_require__(119);
 	module.exports.utils = __webpack_require__(2);
 
 
@@ -23025,38 +23029,141 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var tokenize = __webpack_require__(107);
+	var autodetectSource = __webpack_require__(29);
+	var tokenize = __webpack_require__(112);
+	var utils = __webpack_require__(2);
+	var defaults = __webpack_require__(4);
 	
 	var defaultOptions = {
 	  errorHandler: null,
 	  processTokens: null,
 	  buildSyntaxTree: null,
-	  foreseeLimit: 1
+	  foreseeLimit: 1,
+	  getSourceMeta: function(source) {
+	    return _.omit(source, [
+	      'warp', 'weft', 'threadcount', 'sett', 'palette', 'colors'
+	    ]);
+	  },
+	  // Used only if `source` is an object (or JSON) and has different
+	  // warp and weft, and `buildSyntaxTree` is not specified
+	  warpAndWeftSeparator: defaults.warpAndWeftSeparator
 	};
+	
+	function chooseNonEmptyString(values) {
+	  var result = _.filter(values, function(value) {
+	    return _.isString(value) && (value.length > 0);
+	  });
+	  return result.length > 0 ? _.first(result) : '';
+	}
+	
+	function chooseRootBlock(values) {
+	  var result = _.filter(values, function(value) {
+	    return _.isObject(value) && value.isBlock && value.isRoot &&
+	      _.isArrayLike(value.items);
+	  });
+	  return result.length > 0 ? _.first(result) : utils.node.newRootBlock([]);
+	}
+	
+	function parse(parsers, source, options) {
+	  var context = tokenize(source, parsers, options);
+	  var result = context.parse();
+	  if (_.isFunction(options.processTokens)) {
+	    result = options.processTokens(result);
+	  }
+	  if (_.isFunction(options.buildSyntaxTree)) {
+	    result = options.buildSyntaxTree(result);
+	  }
+	  return result;
+	}
 	
 	function factory(parsers, options) {
 	  options = _.extend({}, defaultOptions, options);
 	
 	  return function(source) {
-	    var context = tokenize(source, parsers, options);
-	    var result = context.parse();
-	    if (_.isFunction(options.processTokens)) {
-	      result = options.processTokens(result);
+	    source = autodetectSource(source);
+	
+	    var result;
+	
+	    if (_.isString(source.warp) || _.isString(source.weft)) {
+	      var warp = _.trim(chooseNonEmptyString([source.warp, source.weft]));
+	      var weft = _.trim(chooseNonEmptyString([source.weft, source.warp]));
+	      var warpIsSameAsWeft = warp == weft;
+	      warp = parse(parsers, warp, options);
+	      if (warpIsSameAsWeft) {
+	        // Create AST with same warp and weft; use meta from warp;
+	        // do not use palette
+	        result = {
+	          meta: _.extend({}, warp.meta),
+	          warp: chooseRootBlock([warp.warp, warp.weft])
+	        };
+	        result.weft = result.warp;
+	      } else {
+	        weft = parse(parsers, weft, options);
+	        if (_.isArrayLike(warp) && _.isArrayLike(weft)) {
+	          // Merge tokens together;
+	          result = _.concat(warp,
+	            utils.token.newLiteral(options.warpAndWeftSeparator),
+	            weft);
+	        } else
+	        if (_.isObject(warp) && _.isObject(weft)) {
+	          // Create AST with different warp and weft; merge meta;
+	          // do not use palette
+	          result = {
+	            meta: _.extend({}, warp.meta, weft.meta),
+	            warp: chooseRootBlock([warp.warp, warp.weft]),
+	            weft: chooseRootBlock([weft.warp, weft.weft])
+	          };
+	        }
+	      }
+	    } else
+	    if (_.isString(source.threadcount) || _.isString(source.sett)) {
+	      // Try to parse entire threadcount
+	      var threadcount = chooseNonEmptyString([source.threadcount, source.sett]);
+	      result = parse(parsers, threadcount, options);
+	    } else {
+	      // Create empty result
+	      result = parse(parsers, '', options);
 	    }
-	    if (_.isFunction(options.buildSyntaxTree)) {
-	      result = options.buildSyntaxTree(result);
+	
+	    if (_.isString(source.palette) || _.isString(source.colors)) {
+	      // Try to add palette - as tokens or as color map
+	      var palette = chooseNonEmptyString([source.palette, source.colors]);
+	      palette = parse(parsers, palette, options);
+	      if (_.isArrayLike(result)) {
+	        if (_.isArrayLike(palette)) {
+	          result = _.concat(palette, result);
+	        }
+	      } else
+	      if (_.isObject(result)) {
+	        if (_.isObject(palette)) {
+	          result.colors = palette.colors;
+	          result.meta = _.extend({}, palette.meta, result.meta);
+	        }
+	      }
 	    }
+	
+	    if (_.isObject(result)) {
+	      result.colors = _.extend({}, result.colors);
+	      if (_.isFunction(options.getSourceMeta)) {
+	        result.meta = _.extend({}, result.meta, options.getSourceMeta(source));
+	      } else {
+	        result.meta = _.extend({}, result.meta);
+	      }
+	    }
+	
 	    return result;
 	  };
 	}
 	
 	module.exports = factory;
 	
-	module.exports.color = __webpack_require__(100);
-	module.exports.stripe = __webpack_require__(105);
-	module.exports.pivot = __webpack_require__(103);
-	module.exports.repeat = __webpack_require__(104);
-	module.exports.literal = __webpack_require__(102);
+	module.exports.source = __webpack_require__(103);
+	
+	module.exports.color = __webpack_require__(105);
+	module.exports.stripe = __webpack_require__(110);
+	module.exports.pivot = __webpack_require__(108);
+	module.exports.repeat = __webpack_require__(109);
+	module.exports.literal = __webpack_require__(107);
 
 
 /***/ },
@@ -23065,8 +23172,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.canvas = __webpack_require__(108);
-	module.exports.format = __webpack_require__(109);
+	module.exports.canvas = __webpack_require__(32);
+	module.exports.houseOfTartan = __webpack_require__(114);
+	module.exports.format = __webpack_require__(113);
 
 
 /***/ },
@@ -23075,21 +23183,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.extended = __webpack_require__(121);
-	module.exports.classic = __webpack_require__(120);
-	module.exports.weddslist = __webpack_require__(122);
+	module.exports.extended = __webpack_require__(126);
+	module.exports.classic = __webpack_require__(125);
+	module.exports.weddslist = __webpack_require__(127);
 
 
 /***/ },
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(53);
-	module.exports = angular;
-
-
-/***/ },
-/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23111,13 +23211,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = factory;
 	
-	module.exports.flatten = __webpack_require__(123);
-	module.exports.flattenSimpleBlocks = __webpack_require__(30);
-	module.exports.fold = __webpack_require__(124);
-	module.exports.mergeStripes = __webpack_require__(31);
-	module.exports.removeEmptyBlocks = __webpack_require__(32);
-	module.exports.removeZeroWidthStripes = __webpack_require__(33);
-	module.exports.optimize = __webpack_require__(125);
+	module.exports.flatten = __webpack_require__(128);
+	module.exports.flattenSimpleBlocks = __webpack_require__(33);
+	module.exports.fold = __webpack_require__(129);
+	module.exports.mergeStripes = __webpack_require__(34);
+	module.exports.removeEmptyBlocks = __webpack_require__(35);
+	module.exports.removeZeroWidthStripes = __webpack_require__(36);
+	module.exports.optimize = __webpack_require__(130);
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(55);
+	module.exports = angular;
 
 
 /***/ },
@@ -23322,8 +23430,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'classic';
 	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(111);
-	module.exports.format = __webpack_require__(110);
+	module.exports.parse = __webpack_require__(116);
+	module.exports.format = __webpack_require__(115);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23338,8 +23446,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'extended';
 	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(113);
-	module.exports.format = __webpack_require__(112);
+	module.exports.parse = __webpack_require__(118);
+	module.exports.format = __webpack_require__(117);
 	module.exports.colors = defaults.colors;
 	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
 
@@ -23355,8 +23463,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.id = 'stwr';
 	module.exports.name = 'Scottish Register of Tartans / ' +
 	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(116);
-	module.exports.format = __webpack_require__(115);
+	module.exports.parse = __webpack_require__(121);
+	module.exports.format = __webpack_require__(120);
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
 	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
@@ -23377,88 +23485,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(29).nextTick;
-	var apply = Function.prototype.apply;
-	var slice = Array.prototype.slice;
-	var immediateIds = {};
-	var nextImmediateId = 0;
-	
-	// DOM APIs, for completeness
-	
-	exports.setTimeout = function() {
-	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-	};
-	exports.setInterval = function() {
-	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-	};
-	exports.clearTimeout =
-	exports.clearInterval = function(timeout) { timeout.close(); };
-	
-	function Timeout(id, clearFn) {
-	  this._id = id;
-	  this._clearFn = clearFn;
-	}
-	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-	Timeout.prototype.close = function() {
-	  this._clearFn.call(window, this._id);
-	};
-	
-	// Does not start the time, just sets up the members needed.
-	exports.enroll = function(item, msecs) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = msecs;
-	};
-	
-	exports.unenroll = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = -1;
-	};
-	
-	exports._unrefActive = exports.active = function(item) {
-	  clearTimeout(item._idleTimeoutId);
-	
-	  var msecs = item._idleTimeout;
-	  if (msecs >= 0) {
-	    item._idleTimeoutId = setTimeout(function onTimeout() {
-	      if (item._onTimeout)
-	        item._onTimeout();
-	    }, msecs);
-	  }
-	};
-	
-	// That's not how node.js implements it but the exposed api is the same.
-	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-	  var id = nextImmediateId++;
-	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-	
-	  immediateIds[id] = true;
-	
-	  nextTick(function onNextTick() {
-	    if (immediateIds[id]) {
-	      // fn.call() is faster so we optimize for the common use-case
-	      // @see http://jsperf.com/call-apply-segu
-	      if (args) {
-	        fn.apply(null, args);
-	      } else {
-	        fn.call(null);
-	      }
-	      // Prevent ids from leaking
-	      exports.clearImmediate(id);
-	    }
-	  });
-	
-	  return id;
-	};
-	
-	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-	  delete immediateIds[id];
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21).setImmediate, __webpack_require__(21).clearImmediate))
-
-/***/ },
-/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23505,19 +23531,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(141);
+	__webpack_require__(148);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// String encode/decode helpers
@@ -23708,7 +23734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23746,7 +23772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23802,7 +23828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23849,7 +23875,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23884,7 +23910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -24070,7 +24096,396 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var stringSource = __webpack_require__(31);
+	var objectSource = __webpack_require__(30);
+	
+	function factory(source) {
+	  if (_.isFunction(source)) {
+	    source = source();
+	  }
+	  if (_.isString(source)) {
+	    return stringSource(source);
+	  }
+	  return objectSource(source);
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'autodetect'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'Autodetect'
+	});
+
+
+/***/ },
 /* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return _.extend({threadcount: ''}, source);
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'object'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'Object'
+	});
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return {
+	    threadcount: _.isString(source) ? source : ''
+	  };
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'string'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'String'
+	});
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var defaults = __webpack_require__(4);
+	var utils = __webpack_require__(2);
+	
+	var defaultOptions = {
+	  weave: defaults.weave.serge,
+	  zoom: 1,
+	  defaultColors: null,
+	  transformSyntaxTree: null,
+	  hooks: {
+	    // Called after renderer fills up all options; it's a good place
+	    // to modify options object
+	    configure: function(options) {},
+	    // `stage`: `false` on before-action and `true` on after-action
+	    // `options` can mutate here; `context` is new for each repaint but
+	    // the same for each call during single repaint
+	    clear: function(context, options, stage) {},
+	    render: function(context, options, stage) {},
+	    renderWarp: function(context, options, stage) {},
+	    renderWeft: function(context, options, stage) {}
+	  }
+	};
+	
+	function clearCanvas(context, options) {
+	  if (!options.repeat) {
+	    context.clearRect(0, 0, options.width, options.height);
+	    options.width = Math.min(options.width, options.warp.lengthOfPattern);
+	    options.height = Math.min(options.height, options.warp.lengthOfPattern);
+	  }
+	  return options;
+	}
+	
+	function renderWarp(context, options) {
+	  var pattern = options.warp.pattern;
+	  var zoom = options.zoom;
+	  var i;
+	  var first;
+	  var item;
+	
+	  // Find first visible pattern item and its offset
+	  var x = options.offset.x;
+	  for (i = 0; i < pattern.length; i++) {
+	    item = pattern[i];
+	    if (x + item[1] * zoom > 0) {
+	      first = i;
+	      break;
+	    }
+	    x += item[1] * zoom;
+	  }
+	
+	  while (x <= options.width) {
+	    for (i = first; i < pattern.length; i++) {
+	      item = pattern[i];
+	      context.fillStyle = item[0];
+	      context.fillRect(x, 0, item[1] * zoom, options.height);
+	      x += item[1] * zoom;
+	      if (x >= options.width) {
+	        break;
+	      }
+	    }
+	    first = 0;
+	
+	    if (!options.repeat) {
+	      break;
+	    }
+	  }
+	}
+	
+	function renderWeft(context, options) {
+	  var pattern = options.weft.pattern;
+	  var i;
+	  var j;
+	  var zoom = options.zoom;
+	  var first;
+	  var item;
+	  var y = options.offset.y;
+	  var offsetX = options.offset.x;
+	  var offsetY = options.offset.y;
+	  var n = _.sum(options.weave);
+	  var offset;
+	
+	  // Find first visible pattern item and its offset
+	  for (i = 0; i < pattern.length; i++) {
+	    item = pattern[i];
+	    if (y + item[1] * zoom > 0) {
+	      first = i;
+	      break;
+	    }
+	    y += item[1] * zoom;
+	  }
+	
+	  context.setLineDash(_.map(options.weave, function(value) {
+	    return value * zoom;
+	  }));
+	
+	  while (y <= options.height) {
+	    for (i = first; i < pattern.length; i++) {
+	      item = pattern[i];
+	      context.strokeStyle = item[0];
+	
+	      // Do not draw outside of visible area
+	      j = y < 0 ? 0 : y;
+	      y += item[1] * zoom;
+	      for (j; j < y; j++) {
+	        // Correct offset of each line relating to global (0, 0) point
+	        offset = n - Math.floor((j - offsetY) / zoom) % n;
+	        offset = offset * zoom - offsetX;
+	        context.lineDashOffset = offset;
+	
+	        context.beginPath();
+	        context.moveTo(0, j + 0.5);
+	        context.lineTo(options.width, j + 0.5);
+	        context.stroke();
+	      }
+	
+	      if (y >= options.height) {
+	        break;
+	      }
+	    }
+	    first = 0;
+	
+	    if (!options.repeat) {
+	      break;
+	    }
+	  }
+	}
+	
+	function prepareWeave(weave, defaultWeave) {
+	  return _.isArray(weave) && weave.length == 2 ? weave : defaultWeave;
+	}
+	
+	function preparePattern(node, weave, colors, defaultColors) {
+	  var items = _.isObject(node) && node.isBlock ? node.items : [];
+	  var pattern = [];
+	  if (items.length > 0) {
+	    pattern = utils.sett.compile(items, colors, defaultColors);
+	  }
+	  var metrics = utils.sett.getPatternMetrics(pattern, weave);
+	
+	  return {
+	    pattern: pattern,
+	    lengthOfPattern: metrics.length,
+	    lengthOfCycle: metrics.fullCycle
+	  };
+	}
+	
+	function prepareOffset(offset, warp, weft, zoom) {
+	  var x = 0;
+	  var y = 0;
+	  if (_.isObject(offset)) {
+	    x = parseInt(offset.x, 10) || 0;
+	    y = parseInt(offset.y, 10) || 0;
+	  }
+	
+	  // `lengthOfCycle` is a number when pattern completely repeats
+	  // (including line offsets), so we can reduce size of offset to
+	  // avoid numeric overflows
+	  x %= (warp.lengthOfCycle * zoom);
+	  if (x > 0) {
+	    x -= (warp.lengthOfCycle * zoom);
+	  }
+	
+	  y %= (weft.lengthOfCycle * zoom);
+	  if (y > 0) {
+	    y -= (weft.lengthOfCycle * zoom);
+	  }
+	
+	  return {
+	    x: x,
+	    y: y
+	  };
+	}
+	
+	function getMetrics(weave, preparedWarp, preparedWeft) {
+	  return {
+	    weave: weave,
+	    warp: {
+	      length: preparedWarp.lengthOfPattern,
+	      fullCycle: preparedWarp.lengthOfCycle
+	    },
+	    weft: {
+	      length: preparedWeft.lengthOfPattern,
+	      fullCycle: preparedWeft.lengthOfCycle
+	    }
+	  };
+	}
+	
+	function renderEmpty(canvas) {
+	  var width = canvas.offsetWidth;
+	  var height = canvas.offsetHeight;
+	  if ((width > 0) && (height > 0)) {
+	    var context = canvas.getContext('2d');
+	    context.clearRect(0, 0, width, height);
+	  }
+	  return {x: 0, y: 0};
+	}
+	
+	renderEmpty.metrics = getMetrics(defaultOptions.weave,
+	  preparePattern(null, defaultOptions.weave, {}, {}),
+	  preparePattern(null, defaultOptions.weave, {}, {})
+	);
+	
+	function factory(sett, options) {
+	  if (!_.isObject(sett)) {
+	    return renderEmpty;
+	  }
+	
+	  options = _.merge({}, defaultOptions, options);
+	  // Validate hooks
+	  var hooks = options.hooks;
+	  if (!_.isObject(options.hooks)) {
+	    hooks = options.hooks = {};
+	  }
+	  _.each(defaultOptions.hooks, function(value, key) {
+	    if (!_.isFunction(hooks[key])) {
+	      hooks[key] = defaultOptions.hooks[key];
+	    }
+	  });
+	
+	  if (_.isFunction(options.transformSyntaxTree)) {
+	    sett = options.transformSyntaxTree(sett);
+	  }
+	
+	  var zoom = parseInt(options.zoom, 10) || 0;
+	  if (zoom < 1) {
+	    zoom = 1;
+	  }
+	
+	  var warpIsSameAsWeft = sett.weft === sett.warp;
+	
+	  var weave = prepareWeave(options.weave, defaults.weave.serge);
+	
+	  var warp = preparePattern(sett.warp || sett.weft, weave,
+	    sett.colors, options.defaultColors);
+	  var weft = warp;
+	  if (!warpIsSameAsWeft) {
+	    weft = preparePattern(sett.weft || sett.warp, weave,
+	      sett.colors, options.defaultColors);
+	  }
+	
+	  if ((warp.lengthOfPattern == 0) && (weft.lengthOfPattern == 0)) {
+	    return renderEmpty;
+	  }
+	
+	  var result = function(canvas, offset, repeat) {
+	    repeat = (arguments.length == 2) || !!repeat;
+	
+	    offset = repeat ? prepareOffset(offset, warp, weft, zoom) : {x: 0, y: 0};
+	
+	    var options = {
+	      warp: warp,
+	      weft: weft,
+	      weave: weave,
+	      zoom: zoom,
+	      width: Math.ceil(parseFloat(canvas.width) || 0),
+	      height: Math.ceil(parseFloat(canvas.height) || 0),
+	      offset: offset,
+	      repeat: repeat,
+	      canvas: canvas
+	    };
+	    hooks.configure(canvas, options);
+	
+	    if ((options.width > 0) && (options.height > 0)) {
+	      var context = canvas.getContext('2d');
+	      hooks.render(context, options, false);
+	
+	      hooks.clear(context, options, false);
+	      options = clearCanvas(context, options);
+	      hooks.clear(context, options, true);
+	
+	      hooks.renderWarp(context, options, false);
+	      renderWarp(context, options);
+	      hooks.renderWarp(context, options, true);
+	
+	      hooks.renderWeft(context, options, false);
+	      renderWeft(context, options);
+	      hooks.renderWeft(context, options, true);
+	
+	      hooks.render(context, options, true);
+	    }
+	
+	    return offset;
+	  };
+	
+	  result.metrics = getMetrics(weave, warp, weft);
+	
+	  return result;
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'canvas'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'Simple'
+	});
+
+
+/***/ },
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24184,7 +24599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24261,7 +24676,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24312,7 +24727,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24418,7 +24833,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24478,7 +24893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24751,7 +25166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -24767,7 +25182,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24775,13 +25190,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var url = __webpack_require__(138);
+	var url = __webpack_require__(144);
 	var Promise = __webpack_require__(7);
 	var csv = __webpack_require__(84);
-	var downloader = __webpack_require__(158);
-	var search = __webpack_require__(161);
-	var TextEncoder = __webpack_require__(131).TextEncoder;
-	var tar = __webpack_require__(134).tar;
+	var downloader = __webpack_require__(165);
+	var search = __webpack_require__(168);
+	var TextEncoder = __webpack_require__(136).TextEncoder;
+	var tar = __webpack_require__(140).tar;
 	var gzip = __webpack_require__(75).gzip;
 	
 	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
@@ -25086,13 +25501,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var angular = __webpack_require__(13);
+	var angular = __webpack_require__(14);
 	
 	var q = null;
 	var timeout = null;
@@ -25125,7 +25540,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25137,7 +25552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -25150,7 +25565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var unindent = __webpack_require__(41);
+	var unindent = __webpack_require__(44);
 	
 	  /**
 	   * @ngdoc overview
@@ -25491,7 +25906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = function unindent(text) {
@@ -25526,23 +25941,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	__webpack_require__(53);
+	__webpack_require__(51);
+	__webpack_require__(52);
 	__webpack_require__(50);
-	__webpack_require__(48);
-	__webpack_require__(49);
 	__webpack_require__(47);
-	__webpack_require__(44);
+	__webpack_require__(49);
 	__webpack_require__(46);
-	__webpack_require__(43);
-	__webpack_require__(45);
+	__webpack_require__(48);
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25595,7 +26010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25648,7 +26063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25686,7 +26101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25724,12 +26139,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
 	var ngTartan = __webpack_require__(5);
 	
 	ngTartan.directive('tartanFormatted', [
@@ -25741,10 +26155,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      replace: true,
 	      scope: {},
 	      link: function($scope, element, attr, controller) {
-	        var target = element.find('pre');
-	
 	        function tartanChanged(state) {
-	          target.text(state.formatted);
+	          element.text(state.formatted);
 	        }
 	
 	        controller.on('tartan.changed', tartanChanged);
@@ -25761,7 +26173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25784,7 +26196,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // auto - to keep aspect ratio;
 	        // source - to use source dimension
 	        width: '@?',
-	        height: '@?'
+	        height: '@?',
+	        renderer: '@?',
+	        zoom: '@?'
 	      },
 	      link: function($scope, element) {
 	        var canvas = element.get(0);
@@ -25821,11 +26235,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          var sett = schema.parse()(source);
 	          var options = {
+	            zoom: $scope.zoom,
 	            weave: weave,
 	            defaultColors: schema.colors,
 	            transformSyntaxTree: tartan.transform.flatten()
 	          };
-	          render = tartan.render.canvas(sett, options);
+	
+	          var renderer = tartan.render[$scope.renderer];
+	          if (!_.isFunction(renderer)) {
+	            renderer = _.find(tartan.render, {
+	              id: $scope.renderer
+	            });
+	            if (!_.isFunction(renderer)) {
+	              renderer = tartan.render.canvas;
+	            }
+	          }
+	
+	          render = renderer(sett, options);
 	          metrics.width = render.metrics.warp.length;
 	          metrics.height = render.metrics.weft.length;
 	        }
@@ -25856,7 +26282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            h = canvas.offsetHeight;
 	          } else
 	          if (sw == 'auto') {
-	            w = height * metrics.width / metrics.height;
+	            w = h * metrics.width / metrics.height;
 	          } else
 	          if (sh == 'auto') {
 	            h = w * metrics.height / metrics.width;
@@ -25875,23 +26301,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	          repaint();
 	        }
 	
-	        $scope.$watch('source', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            updateSource($scope.source);
-	            updateCanvasSize();
-	          }
+	        _.each(['source', 'zoom', 'renderer'], function(name) {
+	          $scope.$watch(name, function(newValue, oldValue) {
+	            if (newValue !== oldValue) {
+	              updateSource($scope.source);
+	              updateCanvasSize();
+	            }
+	          }, true);
 	        });
 	
-	        $scope.$watch('width', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            updateCanvasSize();
-	          }
-	        });
-	
-	        $scope.$watch('height', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            updateCanvasSize();
-	          }
+	        _.each(['width', 'height'], function(name) {
+	          $scope.$watch(name, function(newValue, oldValue) {
+	            if (newValue !== oldValue) {
+	              updateCanvasSize();
+	            }
+	          }, true);
 	        });
 	
 	        updateSource($scope.source);
@@ -25903,7 +26327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26015,11 +26439,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        repeat: '=?',
 	        offset: '=?',
 	        metrics: '=?',
-	        interactive: '=?'
+	        interactive: '=?',
+	        zoom: '=?',
+	        renderer: '=?'
 	      },
 	      link: function($scope, element, attr, controller) {
 	        element.css({
-	          'position': 'relative'
+	          position: 'relative'
 	        });
 	
 	        var target = element.find('canvas');
@@ -26048,11 +26474,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        function update() {
 	          var options = {
+	            zoom: $scope.zoom,
 	            weave: $scope.weave,
 	            defaultColors: currentState.colors,
 	            transformSyntaxTree: tartan.transform.flatten()
 	          };
-	          render = tartan.render.canvas(currentState.sett, options);
+	
+	          var renderer = tartan.render[$scope.renderer];
+	          if (!_.isFunction(renderer)) {
+	            renderer = _.find(tartan.render, {
+	              id: $scope.renderer
+	            });
+	            if (!_.isFunction(renderer)) {
+	              renderer = tartan.render.canvas;
+	            }
+	          }
+	
+	          render = renderer(currentState.sett, options);
 	          $scope.metrics = render.metrics;
 	          updateCanvasSize();
 	        }
@@ -26067,16 +26505,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        controller.requestUpdate(tartanChanged);
 	
-	        $scope.$watch('weave', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            update();
-	          }
-	        }, true);
-	
-	        $scope.$watch('repeat', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            update();
-	          }
+	        _.each(['weave', 'repeat', 'zoom', 'renderer'], function(name) {
+	          $scope.$watch(name, function(newValue, oldValue) {
+	            if (newValue !== oldValue) {
+	              update();
+	            }
+	          }, true);
 	        });
 	
 	        $scope.$watch('offset', function(newValue, oldValue) {
@@ -26107,12 +26541,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!disableResize) {
 	              disableResize = makeResizable($window, updateCanvasSize);
 	            }
-	          } else {
-	            if (disableResize) {
-	              // Disable it later, but NULL it now
-	              disable.push(disableResize);
-	              disableResize = null;
-	            }
+	          } else if (disableResize) {
+	            // Disable it later, but NULL it now
+	            disable.push(disableResize);
+	            disableResize = null;
 	          }
 	
 	          if (interactive.drag) {
@@ -26121,12 +26553,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return offset;
 	              }, repaint);
 	            }
-	          } else {
-	            if (disableDrag) {
-	              // Disable it later, but NULL it now
-	              disable.push(disableDrag);
-	              disableDrag = null;
-	            }
+	          } else if (disableDrag) {
+	            // Disable it later, but NULL it now
+	            disable.push(disableDrag);
+	            disableDrag = null;
 	          }
 	          repaint();
 	
@@ -26172,14 +26602,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var tartan = __webpack_require__(9);
-	var EventEmitter = __webpack_require__(67);
+	var EventEmitter = __webpack_require__(69);
 	var ngTartan = __webpack_require__(5);
 	
 	ngTartan.directive('tartan', [
@@ -26288,35 +26718,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	_.extend(module.exports, __webpack_require__(52));
+	_.extend(module.exports, __webpack_require__(88));
 	
-	__webpack_require__(42);
+	__webpack_require__(45);
 
 
 /***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var packageFile = __webpack_require__(71);
-	
-	module.exports.version = packageFile.version;
-
-
-/***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.5.8
+	 * @license AngularJS v1.5.9
 	 * (c) 2010-2016 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
@@ -26374,7 +26793,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return match;
 	    });
 	
-	    message += '\nhttp://errors.angularjs.org/1.5.8/' +
+	    message += '\nhttp://errors.angularjs.org/1.5.9/' +
 	      (module ? module + '/' : '') + code;
 	
 	    for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
@@ -26386,99 +26805,101 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}
 	
-	/* We need to tell jshint what variables are being exported */
-	/* global angular: true,
-	  msie: true,
-	  jqLite: true,
-	  jQuery: true,
-	  slice: true,
-	  splice: true,
-	  push: true,
-	  toString: true,
-	  ngMinErr: true,
-	  angularModule: true,
-	  uid: true,
-	  REGEX_STRING_REGEXP: true,
-	  VALIDITY_STATE_PROPERTY: true,
+	/* We need to tell ESLint what variables are being exported */
+	/* exported
+	  angular,
+	  msie,
+	  jqLite,
+	  jQuery,
+	  slice,
+	  splice,
+	  push,
+	  toString,
+	  ngMinErr,
+	  angularModule,
+	  uid,
+	  REGEX_STRING_REGEXP,
+	  VALIDITY_STATE_PROPERTY,
 	
-	  lowercase: true,
-	  uppercase: true,
-	  manualLowercase: true,
-	  manualUppercase: true,
-	  nodeName_: true,
-	  isArrayLike: true,
-	  forEach: true,
-	  forEachSorted: true,
-	  reverseParams: true,
-	  nextUid: true,
-	  setHashKey: true,
-	  extend: true,
-	  toInt: true,
-	  inherit: true,
-	  merge: true,
-	  noop: true,
-	  identity: true,
-	  valueFn: true,
-	  isUndefined: true,
-	  isDefined: true,
-	  isObject: true,
-	  isBlankObject: true,
-	  isString: true,
-	  isNumber: true,
-	  isDate: true,
-	  isArray: true,
-	  isFunction: true,
-	  isRegExp: true,
-	  isWindow: true,
-	  isScope: true,
-	  isFile: true,
-	  isFormData: true,
-	  isBlob: true,
-	  isBoolean: true,
-	  isPromiseLike: true,
-	  trim: true,
-	  escapeForRegexp: true,
-	  isElement: true,
-	  makeMap: true,
-	  includes: true,
-	  arrayRemove: true,
-	  copy: true,
-	  equals: true,
-	  csp: true,
-	  jq: true,
-	  concat: true,
-	  sliceArgs: true,
-	  bind: true,
-	  toJsonReplacer: true,
-	  toJson: true,
-	  fromJson: true,
-	  convertTimezoneToLocal: true,
-	  timezoneToOffset: true,
-	  startingTag: true,
-	  tryDecodeURIComponent: true,
-	  parseKeyValue: true,
-	  toKeyValue: true,
-	  encodeUriSegment: true,
-	  encodeUriQuery: true,
-	  angularInit: true,
-	  bootstrap: true,
-	  getTestability: true,
-	  snake_case: true,
-	  bindJQuery: true,
-	  assertArg: true,
-	  assertArgFn: true,
-	  assertNotHasOwnProperty: true,
-	  getter: true,
-	  getBlockNodes: true,
-	  hasOwnProperty: true,
-	  createMap: true,
+	  lowercase,
+	  uppercase,
+	  manualLowercase,
+	  manualUppercase,
+	  nodeName_,
+	  isArrayLike,
+	  forEach,
+	  forEachSorted,
+	  reverseParams,
+	  nextUid,
+	  setHashKey,
+	  extend,
+	  toInt,
+	  inherit,
+	  merge,
+	  noop,
+	  identity,
+	  valueFn,
+	  isUndefined,
+	  isDefined,
+	  isObject,
+	  isBlankObject,
+	  isString,
+	  isNumber,
+	  isNumberNaN,
+	  isDate,
+	  isArray,
+	  isFunction,
+	  isRegExp,
+	  isWindow,
+	  isScope,
+	  isFile,
+	  isFormData,
+	  isBlob,
+	  isBoolean,
+	  isPromiseLike,
+	  trim,
+	  escapeForRegexp,
+	  isElement,
+	  makeMap,
+	  includes,
+	  arrayRemove,
+	  copy,
+	  equals,
+	  csp,
+	  jq,
+	  concat,
+	  sliceArgs,
+	  bind,
+	  toJsonReplacer,
+	  toJson,
+	  fromJson,
+	  convertTimezoneToLocal,
+	  timezoneToOffset,
+	  startingTag,
+	  tryDecodeURIComponent,
+	  parseKeyValue,
+	  toKeyValue,
+	  encodeUriSegment,
+	  encodeUriQuery,
+	  angularInit,
+	  bootstrap,
+	  getTestability,
+	  snake_case,
+	  bindJQuery,
+	  assertArg,
+	  assertArgFn,
+	  assertNotHasOwnProperty,
+	  getter,
+	  getBlockNodes,
+	  hasOwnProperty,
+	  createMap,
 	
-	  NODE_TYPE_ELEMENT: true,
-	  NODE_TYPE_ATTRIBUTE: true,
-	  NODE_TYPE_TEXT: true,
-	  NODE_TYPE_COMMENT: true,
-	  NODE_TYPE_DOCUMENT: true,
-	  NODE_TYPE_DOCUMENT_FRAGMENT: true,
+	  NODE_TYPE_ELEMENT,
+	  NODE_TYPE_ATTRIBUTE,
+	  NODE_TYPE_TEXT,
+	  NODE_TYPE_COMMENT,
+	  NODE_TYPE_DOCUMENT,
+	  NODE_TYPE_DOCUMENT_FRAGMENT
 	*/
 	
 	////////////////////////////////////
@@ -26512,16 +26933,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	var manualLowercase = function(s) {
-	  /* jshint bitwise: false */
+	  /* eslint-disable no-bitwise */
 	  return isString(s)
 	      ? s.replace(/[A-Z]/g, function(ch) {return String.fromCharCode(ch.charCodeAt(0) | 32);})
 	      : s;
+	  /* eslint-enable */
 	};
 	var manualUppercase = function(s) {
-	  /* jshint bitwise: false */
+	  /* eslint-disable no-bitwise */
 	  return isString(s)
 	      ? s.replace(/[a-z]/g, function(ch) {return String.fromCharCode(ch.charCodeAt(0) & ~32);})
 	      : s;
+	  /* eslint-enable */
 	};
 	
 	
@@ -26576,12 +26999,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  // Support: iOS 8.2 (not reproducible in simulator)
 	  // "length" in obj used to prevent JIT error (gh-11508)
-	  var length = "length" in Object(obj) && obj.length;
+	  var length = 'length' in Object(obj) && obj.length;
 	
 	  // NodeList objects (with `item` method) and
 	  // other objects with suitable length characteristics are array-like
 	  return isNumber(length) &&
-	    (length >= 0 && ((length - 1) in obj || obj instanceof Array) || typeof obj.item == 'function');
+	    (length >= 0 && ((length - 1) in obj || obj instanceof Array) || typeof obj.item === 'function');
 	
 	}
 	
@@ -26627,7 +27050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      for (key in obj) {
 	        // Need to check if hasOwnProperty exists,
 	        // as on IE8 the result of querySelectorAll is an object without a hasOwnProperty function
-	        if (key != 'prototype' && key != 'length' && key != 'name' && (!obj.hasOwnProperty || obj.hasOwnProperty(key))) {
+	        if (key !== 'prototype' && key !== 'length' && key !== 'name' && (!obj.hasOwnProperty || obj.hasOwnProperty(key))) {
 	          iterator.call(context, obj[key], key, obj);
 	        }
 	      }
@@ -26795,6 +27218,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	function toInt(str) {
 	  return parseInt(str, 10);
 	}
+	
+	var isNumberNaN = Number.isNaN || function isNumberNaN(num) {
+	  // eslint-disable-next-line no-self-compare
+	  return num !== num;
+	};
 	
 	
 	function inherit(parent, extra) {
@@ -27073,8 +27501,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	// http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1021
 	// Prereq: s is a string.
 	var escapeForRegexp = function(s) {
-	  return s.replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').
-	           replace(/\x08/g, '\\x08');
+	  return s
+	    .replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1')
+	    // eslint-disable-next-line no-control-regex
+	    .replace(/\x08/g, '\\x08');
 	};
 	
 	
@@ -27114,7 +27544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function includes(array, obj) {
-	  return Array.prototype.indexOf.call(array, obj) != -1;
+	  return Array.prototype.indexOf.call(array, obj) !== -1;
 	}
 	
 	function arrayRemove(array, value) {
@@ -27153,7 +27583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {*} The copy or updated `destination`, if `destination` was specified.
 	 *
 	 * @example
-	  <example module="copyExample">
+	  <example module="copyExample" name="angular-copy">
 	    <file name="index.html">
 	      <div ng-controller="ExampleController">
 	        <form novalidate class="simple-form">
@@ -27196,10 +27626,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  if (destination) {
 	    if (isTypedArray(destination) || isArrayBuffer(destination)) {
-	      throw ngMinErr('cpta', "Can't copy! TypedArray destination cannot be mutated.");
+	      throw ngMinErr('cpta', 'Can\'t copy! TypedArray destination cannot be mutated.');
 	    }
 	    if (source === destination) {
-	      throw ngMinErr('cpi', "Can't copy! Source and destination are identical.");
+	      throw ngMinErr('cpi', 'Can\'t copy! Source and destination are identical.');
 	    }
 	
 	    // Empty the destination object
@@ -27265,7 +27695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (isWindow(source) || isScope(source)) {
 	      throw ngMinErr('cpws',
-	        "Can't copy! Making copies of Window or Scope instances is not supported.");
+	        'Can\'t copy! Making copies of Window or Scope instances is not supported.');
 	    }
 	
 	    var needsRecurse = false;
@@ -27298,10 +27728,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new source.constructor(copyElement(source.buffer), source.byteOffset, source.length);
 	
 	      case '[object ArrayBuffer]':
-	        //Support: IE10
+	        // Support: IE10
 	        if (!source.slice) {
+	          // If we're in this case we know the environment supports ArrayBuffer
+	          /* eslint-disable no-undef */
 	          var copied = new ArrayBuffer(source.byteLength);
 	          new Uint8Array(copied).set(new Uint8Array(source));
+	          /* eslint-enable */
 	          return copied;
 	        }
 	        return source.slice(0);
@@ -27384,7 +27817,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        angular.module('equalsExample', []).controller('ExampleController', ['$scope', function($scope) {
 	          $scope.user1 = {};
 	          $scope.user2 = {};
-	          $scope.result;
 	          $scope.compare = function() {
 	            $scope.result = angular.equals($scope.user1, $scope.user2);
 	          };
@@ -27395,12 +27827,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	function equals(o1, o2) {
 	  if (o1 === o2) return true;
 	  if (o1 === null || o2 === null) return false;
+	  // eslint-disable-next-line no-self-compare
 	  if (o1 !== o1 && o2 !== o2) return true; // NaN === NaN
 	  var t1 = typeof o1, t2 = typeof o2, length, key, keySet;
-	  if (t1 == t2 && t1 == 'object') {
+	  if (t1 === t2 && t1 === 'object') {
 	    if (isArray(o1)) {
 	      if (!isArray(o2)) return false;
-	      if ((length = o1.length) == o2.length) {
+	      if ((length = o1.length) === o2.length) {
 	        for (key = 0; key < length; key++) {
 	          if (!equals(o1[key], o2[key])) return false;
 	        }
@@ -27411,7 +27844,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return equals(o1.getTime(), o2.getTime());
 	    } else if (isRegExp(o1)) {
 	      if (!isRegExp(o2)) return false;
-	      return o1.toString() == o2.toString();
+	      return o1.toString() === o2.toString();
 	    } else {
 	      if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) ||
 	        isArray(o2) || isDate(o2) || isRegExp(o2)) return false;
@@ -27459,9 +27892,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function noUnsafeEval() {
 	    try {
-	      /* jshint -W031, -W054 */
+	      // eslint-disable-next-line no-new, no-new-func
 	      new Function('');
-	      /* jshint +W031, +W054 */
 	      return false;
 	    } catch (e) {
 	      return true;
@@ -27513,7 +27945,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var i, ii = ngAttrPrefixes.length, prefix, name;
 	  for (i = 0; i < ii; ++i) {
 	    prefix = ngAttrPrefixes[i];
-	    if (el = window.document.querySelector('[' + prefix.replace(':', '\\:') + 'jq]')) {
+	    el = window.document.querySelector('[' + prefix.replace(':', '\\:') + 'jq]');
+	    if (el) {
 	      name = el.getAttribute(prefix + 'jq');
 	      break;
 	    }
@@ -27531,7 +27964,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	
-	/* jshint -W101 */
 	/**
 	 * @ngdoc function
 	 * @name angular.bind
@@ -27549,7 +27981,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {...*} args Optional arguments to be prebound to the `fn` function call.
 	 * @returns {function()} Function that wraps the `fn` with all the specified bindings.
 	 */
-	/* jshint +W101 */
 	function bind(self, fn) {
 	  var curryArgs = arguments.length > 2 ? sliceArgs(arguments, 2) : [];
 	  if (isFunction(fn) && !(fn instanceof RegExp)) {
@@ -27657,7 +28088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // IE/Edge do not "understand" colon (`:`) in timezone
 	  timezone = timezone.replace(ALL_COLONS, '');
 	  var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
-	  return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+	  return isNumberNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
 	}
 	
 	
@@ -27685,7 +28116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // turns out IE does not let you set .html() on elements which
 	    // are not allowed to have children. So we just ignore it.
 	    element.empty();
-	  } catch (e) {}
+	  } catch (e) { /* empty */ }
 	  var elemHtml = jqLite('<div>').append(element).html();
 	  try {
 	    return element[0].nodeType === NODE_TYPE_TEXT ? lowercase(elemHtml) :
@@ -27724,7 +28155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function parseKeyValue(/**string*/keyValue) {
 	  var obj = {};
-	  forEach((keyValue || "").split('&'), function(keyValue) {
+	  forEach((keyValue || '').split('&'), function(keyValue) {
 	    var splitPoint, key, val;
 	    if (keyValue) {
 	      key = keyValue = keyValue.replace(/\+/g,'%20');
@@ -27819,6 +28250,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return null;
 	}
 	
+	function allowAutoBootstrap(document) {
+	  if (!document.currentScript) {
+	    return true;
+	  }
+	  var src = document.currentScript.getAttribute('src');
+	  var link = document.createElement('a');
+	  link.href = src;
+	  var scriptProtocol = link.protocol;
+	  var docLoadProtocol = document.location.protocol;
+	  if (docLoadProtocol === scriptProtocol) {
+	    return true;
+	  }
+	  switch (scriptProtocol) {
+	    case 'http:':
+	    case 'https:':
+	    case 'ftp:':
+	    case 'blob:':
+	    case 'file:':
+	    case 'data:':
+	      return true;
+	    default:
+	      return false;
+	  }
+	}
+	
+	// Cached as it has to run during loading so that document.currentScript is available.
+	var isAutoBootstrapAllowed = allowAutoBootstrap(window.document);
+	
 	/**
 	 * @ngdoc directive
 	 * @name ngApp
@@ -27862,7 +28321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * `ngApp` is the easiest, and most common way to bootstrap an application.
 	 *
-	 <example module="ngAppDemo">
+	 <example module="ngAppDemo" name="ng-app">
 	   <file name="index.html">
 	   <div ng-controller="ngAppDemoController">
 	     I can add: {{a}} + {{b}} =  {{ a+b }}
@@ -27878,7 +28337,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * Using `ngStrictDi`, you would see something like this:
 	 *
-	 <example ng-app-included="true">
+	 <example ng-app-included="true" name="strict-di">
 	   <file name="index.html">
 	   <div ng-app="ngAppStrictDemo" ng-strict-di>
 	       <div ng-controller="GoodController1">
@@ -27927,7 +28386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     }])
 	     .controller('GoodController2', GoodController2);
 	     function GoodController2($scope) {
-	       $scope.name = "World";
+	       $scope.name = 'World';
 	     }
 	     GoodController2.$inject = ['$scope'];
 	   </file>
@@ -27977,7 +28436,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  });
 	  if (appElement) {
-	    config.strictDi = getNgAttribute(appElement, "strict-di") !== null;
+	    if (!isAutoBootstrapAllowed) {
+	      window.console.error('Angular: disabling automatic bootstrap. <script> protocol indicates ' +
+	          'an extension, document.location.href does not match.');
+	      return;
+	    }
+	    config.strictDi = getNgAttribute(appElement, 'strict-di') !== null;
 	    bootstrap(appElement, module ? [module] : [], config);
 	  }
 	}
@@ -28055,7 +28519,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Encode angle brackets to prevent input from being sanitized to empty string #8683.
 	      throw ngMinErr(
 	          'btstrpd',
-	          "App already bootstrapped with this element '{0}'",
+	          'App already bootstrapped with this element \'{0}\'',
 	          tag.replace(/</,'&lt;').replace(/>/,'&gt;'));
 	    }
 	
@@ -28184,7 +28648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    jQuery.cleanData = function(elems) {
 	      var events;
 	      for (var i = 0, elem; (elem = elems[i]) != null; i++) {
-	        events = jQuery._data(elem, "events");
+	        events = jQuery._data(elem, 'events');
 	        if (events && events.$destroy) {
 	          jQuery(elem).triggerHandler('$destroy');
 	        }
@@ -28206,7 +28670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function assertArg(arg, name, reason) {
 	  if (!arg) {
-	    throw ngMinErr('areq', "Argument '{0}' is {1}", (name || '?'), (reason || "required"));
+	    throw ngMinErr('areq', 'Argument \'{0}\' is {1}', (name || '?'), (reason || 'required'));
 	  }
 	  return arg;
 	}
@@ -28228,7 +28692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function assertNotHasOwnProperty(name, context) {
 	  if (name === 'hasOwnProperty') {
-	    throw ngMinErr('badname', "hasOwnProperty is not a valid {0} name", context);
+	    throw ngMinErr('badname', 'hasOwnProperty is not a valid {0} name', context);
 	  }
 	}
 	
@@ -28396,9 +28860,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return ensure(modules, name, function() {
 	        if (!requires) {
-	          throw $injectorMinErr('nomod', "Module '{0}' is not available! You either misspelled " +
-	             "the module name or forgot to load it. If registering a module ensure that you " +
-	             "specify the dependencies as the second argument.", name);
+	          throw $injectorMinErr('nomod', 'Module \'{0}\' is not available! You either misspelled ' +
+	             'the module name or forgot to load it. If registering a module ensure that you ' +
+	             'specify the dependencies as the second argument.', name);
 	        }
 	
 	        /** @type {!Array.<Array.<*>>} */
@@ -28733,7 +29197,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  formDirective,
 	  scriptDirective,
 	  selectDirective,
-	  styleDirective,
 	  optionDirective,
 	  ngBindDirective,
 	  ngBindHtmlDirective,
@@ -28836,11 +29299,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
 	 */
 	var version = {
-	  full: '1.5.8',    // all of these placeholder strings will be replaced by grunt's
-	  major: 1,    // package task
+	  // These placeholder strings will be replaced by grunt's `build` task.
+	  // They need to be double- or single-quoted.
+	  full: '1.5.9',
+	  major: 1,
 	  minor: 5,
-	  dot: 8,
-	  codeName: 'arbitrary-fallbacks'
+	  dot: 9,
+	  codeName: 'timeturning-lockdown'
 	};
 	
 	
@@ -28894,7 +29359,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            form: formDirective,
 	            script: scriptDirective,
 	            select: selectDirective,
-	            style: styleDirective,
 	            option: optionDirective,
 	            ngBind: ngBindDirective,
 	            ngBindHtml: ngBindHtmlDirective,
@@ -28999,7 +29463,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  addEventListenerFn: true,
 	  removeEventListenerFn: true,
 	  BOOLEAN_ATTR: true,
-	  ALIASED_ATTR: true,
+	  ALIASED_ATTR: true
 	*/
 	
 	//////////////////////////////////
@@ -29127,9 +29591,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function jqNextId() { return ++jqId; }
 	
 	
-	var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+	var SPECIAL_CHARS_REGEXP = /([:\-_]+(.))/g;
 	var MOZ_HACK_REGEXP = /^moz([A-Z])/;
-	var MOUSE_EVENT_MAP= { mouseleave: "mouseout", mouseenter: "mouseover"};
+	var MOUSE_EVENT_MAP = { mouseleave: 'mouseout', mouseenter: 'mouseover' };
 	var jqLiteMinErr = minErr('jqLite');
 	
 	/**
@@ -29157,7 +29621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'col': [2, '<table><colgroup>', '</colgroup></table>'],
 	  'tr': [2, '<table><tbody>', '</tbody></table>'],
 	  'td': [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-	  '_default': [0, "", ""]
+	  '_default': [0, '', '']
 	};
 	
 	wrapMap.optgroup = wrapMap.option;
@@ -29199,10 +29663,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    nodes.push(context.createTextNode(html));
 	  } else {
 	    // Convert html into DOM nodes
-	    tmp = fragment.appendChild(context.createElement("div"));
-	    tag = (TAG_NAME_REGEXP.exec(html) || ["", ""])[1].toLowerCase();
+	    tmp = fragment.appendChild(context.createElement('div'));
+	    tag = (TAG_NAME_REGEXP.exec(html) || ['', ''])[1].toLowerCase();
 	    wrap = wrapMap[tag] || wrapMap._default;
-	    tmp.innerHTML = wrap[1] + html.replace(XHTML_TAG_REGEXP, "<$1></$2>") + wrap[2];
+	    tmp.innerHTML = wrap[1] + html.replace(XHTML_TAG_REGEXP, '<$1></$2>') + wrap[2];
 	
 	    // Descend through wrappers to the right content
 	    i = wrap[0];
@@ -29213,12 +29677,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    nodes = concat(nodes, tmp.childNodes);
 	
 	    tmp = fragment.firstChild;
-	    tmp.textContent = "";
+	    tmp.textContent = '';
 	  }
 	
 	  // Remove wrapper from fragment
-	  fragment.textContent = "";
-	  fragment.innerHTML = ""; // Clear inner HTML
+	  fragment.textContent = '';
+	  fragment.innerHTML = ''; // Clear inner HTML
 	  forEach(nodes, function(node) {
 	    fragment.appendChild(node);
 	  });
@@ -29253,10 +29717,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	// IE9-11 has no method "contains" in SVG element and in Node.prototype. Bug #10259.
-	var jqLiteContains = window.Node.prototype.contains || function(arg) {
-	  // jshint bitwise: false
+	var jqLiteContains = window.Node.prototype.contains || /** @this */ function(arg) {
+	  // eslint-disable-next-line no-bitwise
 	  return !!(this.compareDocumentPosition(arg) & 16);
-	  // jshint bitwise: true
 	};
 	
 	/////////////////////////////////////////////
@@ -29272,7 +29735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    argIsString = true;
 	  }
 	  if (!(this instanceof JQLite)) {
-	    if (argIsString && element.charAt(0) != '<') {
+	    if (argIsString && element.charAt(0) !== '<') {
 	      throw jqLiteMinErr('nosel', 'Looking up elements via selectors is not supported by jqLite! See: http://docs.angularjs.org/api/angular.element');
 	    }
 	    return new JQLite(element);
@@ -29401,17 +29864,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function jqLiteHasClass(element, selector) {
 	  if (!element.getAttribute) return false;
-	  return ((" " + (element.getAttribute('class') || '') + " ").replace(/[\n\t]/g, " ").
-	      indexOf(" " + selector + " ") > -1);
+	  return ((' ' + (element.getAttribute('class') || '') + ' ').replace(/[\n\t]/g, ' ').
+	      indexOf(' ' + selector + ' ') > -1);
 	}
 	
 	function jqLiteRemoveClass(element, cssClasses) {
 	  if (cssClasses && element.setAttribute) {
 	    forEach(cssClasses.split(' '), function(cssClass) {
 	      element.setAttribute('class', trim(
-	          (" " + (element.getAttribute('class') || '') + " ")
-	          .replace(/[\n\t]/g, " ")
-	          .replace(" " + trim(cssClass) + " ", " "))
+	          (' ' + (element.getAttribute('class') || '') + ' ')
+	          .replace(/[\n\t]/g, ' ')
+	          .replace(' ' + trim(cssClass) + ' ', ' '))
 	      );
 	    });
 	  }
@@ -29420,7 +29883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function jqLiteAddClass(element, cssClasses) {
 	  if (cssClasses && element.setAttribute) {
 	    var existingClasses = (' ' + (element.getAttribute('class') || '') + ' ')
-	                            .replace(/[\n\t]/g, " ");
+	                            .replace(/[\n\t]/g, ' ');
 	
 	    forEach(cssClasses.split(' '), function(cssClass) {
 	      cssClass = trim(cssClass);
@@ -29467,7 +29930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function jqLiteInheritedData(element, name, value) {
 	  // if element is the document object work with the html element instead
 	  // this makes $(document).scope() possible
-	  if (element.nodeType == NODE_TYPE_DOCUMENT) {
+	  if (element.nodeType === NODE_TYPE_DOCUMENT) {
 	    element = element.documentElement;
 	  }
 	  var names = isArray(name) ? name : [name];
@@ -29530,9 +29993,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      this.on('DOMContentLoaded', trigger); // works for modern browsers and IE9
 	      // we can not use jqLite since we are not done loading and jQuery could be loaded later.
-	      // jshint -W064
+	      // eslint-disable-next-line new-cap
 	      JQLite(window).on('load', trigger); // fallback to window.onload for others
-	      // jshint +W064
 	    }
 	  },
 	  toString: function() {
@@ -29637,7 +30099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var lowercasedName = lowercase(name);
 	    if (BOOLEAN_ATTR[lowercasedName]) {
 	      if (isDefined(value)) {
-	        if (!!value) {
+	        if (value) {
 	          element[name] = true;
 	          element.setAttribute(name, lowercasedName);
 	        } else {
@@ -29719,7 +30181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // in a way that survives minification.
 	    // jqLiteEmpty takes no arguments but is a setter.
 	    if (fn !== jqLiteEmpty &&
-	        (isUndefined((fn.length == 2 && (fn !== jqLiteHasClass && fn !== jqLiteController)) ? arg1 : arg2))) {
+	        (isUndefined((fn.length === 2 && (fn !== jqLiteHasClass && fn !== jqLiteController)) ? arg1 : arg2))) {
 	      if (isObject(arg1)) {
 	
 	        // we are a write, but the object properties are the key/values
@@ -30061,6 +30523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	// Provider for private $$jqLite service
+	/** @this */
 	function $$jqLiteProvider() {
 	  this.$get = function $$jqLite() {
 	    return extend(JQLite, {
@@ -30103,7 +30566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  var objType = typeof obj;
-	  if (objType == 'function' || (objType == 'object' && obj !== null)) {
+	  if (objType === 'function' || (objType === 'object' && obj !== null)) {
 	    key = obj.$$hashKey = objType + ':' + (nextUidFn || nextUid)();
 	  } else {
 	    key = objType + ':' + obj;
@@ -30153,7 +30616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 	
-	var $$HashMapProvider = [function() {
+	var $$HashMapProvider = [/** @this */function() {
 	  this.$get = [function() {
 	    return HashMap;
 	  }];
@@ -30478,7 +30941,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @returns {Array.<string>} The names of the services which the function requires.
 	 */
-	
 	
 	
 	
@@ -30825,7 +31287,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (angular.isString(caller)) {
 	              path.push(caller);
 	            }
-	            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
+	            throw $injectorMinErr('unpr', 'Unknown provider: {0}', path.join(' <- '));
 	          })),
 	      instanceCache = {},
 	      protoInstanceInjector =
@@ -30864,16 +31326,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      provider_ = providerInjector.instantiate(provider_);
 	    }
 	    if (!provider_.$get) {
-	      throw $injectorMinErr('pget', "Provider '{0}' must define $get factory method.", name);
+	      throw $injectorMinErr('pget', 'Provider \'{0}\' must define $get factory method.', name);
 	    }
-	    return providerCache[name + providerSuffix] = provider_;
+	    return (providerCache[name + providerSuffix] = provider_);
 	  }
 	
 	  function enforceReturnValue(name, factory) {
-	    return function enforcedReturnValue() {
+	    return /** @this */ function enforcedReturnValue() {
 	      var result = instanceInjector.invoke(factory, this);
 	      if (isUndefined(result)) {
-	        throw $injectorMinErr('undef', "Provider '{0}' must return a value from $get factory method.", name);
+	        throw $injectorMinErr('undef', 'Provider \'{0}\' must return a value from $get factory method.', name);
 	      }
 	      return result;
 	    };
@@ -30946,15 +31408,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (isArray(module)) {
 	          module = module[module.length - 1];
 	        }
-	        if (e.message && e.stack && e.stack.indexOf(e.message) == -1) {
+	        if (e.message && e.stack && e.stack.indexOf(e.message) === -1) {
 	          // Safari & FF's stack traces don't contain error.message content
 	          // unlike those of Chrome and IE
 	          // So if stack doesn't contain message, we create a new string that contains both.
 	          // Since error.stack is read-only in Safari, I'm overriding e and not e.stack here.
-	          /* jshint -W022 */
+	          // eslint-disable-next-line no-ex-assign
 	          e = e.message + '\n' + e.stack;
 	        }
-	        throw $injectorMinErr('modulerr', "Failed to instantiate module {0} due to:\n{1}",
+	        throw $injectorMinErr('modulerr', 'Failed to instantiate module {0} due to:\n{1}',
 	                  module, e.stack || e.message || e);
 	      }
 	    });
@@ -30978,7 +31440,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        try {
 	          path.unshift(serviceName);
 	          cache[serviceName] = INSTANTIATING;
-	          return cache[serviceName] = factory(serviceName, caller);
+	          cache[serviceName] = factory(serviceName, caller);
+	          return cache[serviceName];
 	        } catch (err) {
 	          if (cache[serviceName] === INSTANTIATING) {
 	            delete cache[serviceName];
@@ -31068,6 +31531,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $anchorScrollProvider
+	 * @this
 	 *
 	 * @description
 	 * Use `$anchorScrollProvider` to disable automatic scrolling whenever
@@ -31139,7 +31603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * </div>
 	   *
 	   * @example
-	     <example module="anchorScrollExample">
+	     <example module="anchorScrollExample" name="anchor-scroll">
 	       <file name="index.html">
 	         <div id="scrollArea" ng-controller="ScrollController">
 	           <a ng-click="gotoBottom()">Go to bottom</a>
@@ -31149,7 +31613,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       <file name="script.js">
 	         angular.module('anchorScrollExample', [])
 	           .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-	             function ($scope, $location, $anchorScroll) {
+	             function($scope, $location, $anchorScroll) {
 	               $scope.gotoBottom = function() {
 	                 // set the location.hash to the id of
 	                 // the element you wish to scroll to.
@@ -31178,7 +31642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * See {@link ng.$anchorScroll#yOffset $anchorScroll.yOffset} for more details.
 	   *
 	   * @example
-	     <example module="anchorScrollOffsetExample">
+	     <example module="anchorScrollOffsetExample" name="anchor-scroll-offset">
 	       <file name="index.html">
 	         <div class="fixed-header" ng-controller="headerCtrl">
 	           <a href="" ng-click="gotoAnchor(x)" ng-repeat="x in [1,2,3,4,5]">
@@ -31195,7 +31659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	             $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
 	           }])
 	           .controller('headerCtrl', ['$anchorScroll', '$location', '$scope',
-	             function ($anchorScroll, $location, $scope) {
+	             function($anchorScroll, $location, $scope) {
 	               $scope.gotoAnchor = function(x) {
 	                 var newHash = 'anchor' + x;
 	                 if ($location.hash() !== newHash) {
@@ -31314,7 +31778,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // first anchor with given name :-D
 	      else if ((elm = getFirstAnchor(document.getElementsByName(hash)))) scrollTo(elm);
 	
-	      // no element and hash == 'top', scroll to the top of the page
+	      // no element and hash === 'top', scroll to the top of the page
 	      else if (hash === 'top') scrollTo(null);
 	    }
 	
@@ -31389,13 +31853,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      : {};
 	}
 	
-	var $$CoreAnimateJsProvider = function() {
+	var $$CoreAnimateJsProvider = /** @this */ function() {
 	  this.$get = noop;
 	};
 	
 	// this is prefixed with Core since it conflicts with
 	// the animateQueueProvider defined in ngAnimate/animateQueue.js
-	var $$CoreAnimateQueueProvider = function() {
+	var $$CoreAnimateQueueProvider = /** @this */ function() {
 	  var postDigestQueue = new HashMap();
 	  var postDigestElements = [];
 	
@@ -31408,17 +31872,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	      pin: noop,
 	
 	      push: function(element, event, options, domOperation) {
-	        domOperation        && domOperation();
+	        if (domOperation) {
+	          domOperation();
+	        }
 	
 	        options = options || {};
-	        options.from        && element.css(options.from);
-	        options.to          && element.css(options.to);
+	        if (options.from) {
+	          element.css(options.from);
+	        }
+	        if (options.to) {
+	          element.css(options.to);
+	        }
 	
 	        if (options.addClass || options.removeClass) {
 	          addRemoveClassesPostDigest(element, options.addClass, options.removeClass);
 	        }
 	
-	        var runner = new $$AnimateRunner(); // jshint ignore:line
+	        var runner = new $$AnimateRunner();
 	
 	        // since there are no animations to run the runner needs to be
 	        // notified that the animation call is complete.
@@ -31462,8 +31932,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          });
 	
 	          forEach(element, function(elm) {
-	            toAdd    && jqLiteAddClass(elm, toAdd);
-	            toRemove && jqLiteRemoveClass(elm, toRemove);
+	            if (toAdd) {
+	              jqLiteAddClass(elm, toAdd);
+	            }
+	            if (toRemove) {
+	              jqLiteRemoveClass(elm, toRemove);
+	            }
 	          });
 	          postDigestQueue.remove(element);
 	        }
@@ -31503,7 +31977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * To see the functional implementation check out `src/ngAnimate/animate.js`.
 	 */
-	var $AnimateProvider = ['$provide', function($provide) {
+	var $AnimateProvider = ['$provide', /** @this */ function($provide) {
 	  var provider = this;
 	
 	  this.$$registeredAnimations = Object.create(null);
@@ -31549,7 +32023,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.register = function(name, factory) {
 	    if (name && name.charAt(0) !== '.') {
-	      throw $animateMinErr('notcsel', "Expecting class selector starting with '.' got '{0}'.", name);
+	      throw $animateMinErr('notcsel', 'Expecting class selector starting with \'.\' got \'{0}\'.', name);
 	    }
 	
 	    var key = name + '-animation';
@@ -31575,7 +32049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (arguments.length === 1) {
 	      this.$$classNameFilter = (expression instanceof RegExp) ? expression : null;
 	      if (this.$$classNameFilter) {
-	        var reservedRegex = new RegExp("(\\s+|\\/)" + NG_ANIMATE_CLASSNAME + "(\\s+|\\/)");
+	        var reservedRegex = new RegExp('(\\s+|\\/)' + NG_ANIMATE_CLASSNAME + '(\\s+|\\/)');
 	        if (reservedRegex.test(this.$$classNameFilter.toString())) {
 	          throw $animateMinErr('nongcls','$animateProvider.classNameFilter(regex) prohibits accepting a regex value which matches/contains the "{0}" CSS class.', NG_ANIMATE_CLASSNAME);
 	
@@ -31596,7 +32070,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          afterElement = null;
 	        }
 	      }
-	      afterElement ? afterElement.after(element) : parentElement.prepend(element);
+	      if (afterElement) {
+	        afterElement.after(element);
+	      } else {
+	        parentElement.prepend(element);
+	      }
 	    }
 	
 	    /**
@@ -31739,7 +32217,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	       * @param {Promise} animationPromise The animation promise that is returned when an animation is started.
 	       */
 	      cancel: function(runner) {
-	        runner.end && runner.end();
+	        if (runner.end) {
+	          runner.end();
+	        }
 	      },
 	
 	      /**
@@ -31976,7 +32456,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}];
 	
-	var $$AnimateAsyncRunFactoryProvider = function() {
+	var $$AnimateAsyncRunFactoryProvider = /** @this */ function() {
 	  this.$get = ['$$rAF', function($$rAF) {
 	    var waitQueue = [];
 	
@@ -31997,13 +32477,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        passed = true;
 	      });
 	      return function(callback) {
-	        passed ? callback() : waitForTick(callback);
+	        if (passed) {
+	          callback();
+	        } else {
+	          waitForTick(callback);
+	        }
 	      };
 	    };
 	  }];
 	};
 	
-	var $$AnimateRunnerFactoryProvider = function() {
+	var $$AnimateRunnerFactoryProvider = /** @this */ function() {
 	  this.$get = ['$q', '$sniffer', '$$animateAsyncRun', '$document', '$timeout',
 	       function($q,   $sniffer,   $$animateAsyncRun,   $document,   $timeout) {
 	
@@ -32090,7 +32574,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var self = this;
 	          this.promise = $q(function(resolve, reject) {
 	            self.done(function(status) {
-	              status === false ? reject() : resolve();
+	              if (status === false) {
+	                reject();
+	              } else {
+	                resolve();
+	              }
 	            });
 	          });
 	        }
@@ -32160,10 +32648,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	};
 	
+	/* exported $CoreAnimateCssProvider */
+	
 	/**
 	 * @ngdoc service
 	 * @name $animateCss
 	 * @kind object
+	 * @this
 	 *
 	 * @description
 	 * This is the core version of `$animateCss`. By default, only when the `ngAnimate` is included,
@@ -32196,7 +32687,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        options.from = null;
 	      }
 	
-	      /* jshint newcap: false */
 	      var closed, runner = new $$AnimateRunner();
 	      return {
 	        start: run,
@@ -32410,7 +32900,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      //   the new location.href if a reload happened or if there is a bug like in iOS 9 (see
 	      //   https://openradar.appspot.com/22186109).
 	      // - the replacement is a workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=407172
-	      return pendingLocation || location.href.replace(/%27/g,"'");
+	      return pendingLocation || location.href.replace(/%27/g,'\'');
 	    }
 	  };
 	
@@ -32535,7 +33025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  self.baseHref = function() {
 	    var href = baseElement.attr('href');
-	    return href ? href.replace(/^(https?\:)?\/\/[^\/]*/, '') : '';
+	    return href ? href.replace(/^(https?:)?\/\/[^\/]*/, '') : '';
 	  };
 	
 	  /**
@@ -32586,6 +33076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}
 	
+	/** @this */
 	function $BrowserProvider() {
 	  this.$get = ['$window', '$log', '$sniffer', '$document',
 	      function($window, $log, $sniffer, $document) {
@@ -32596,6 +33087,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc service
 	 * @name $cacheFactory
+	 * @this
 	 *
 	 * @description
 	 * Factory that constructs {@link $cacheFactory.Cache Cache} objects and gives access to
@@ -32632,7 +33124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - `{void}` `destroy()` — Removes references to this cache from $cacheFactory.
 	 *
 	 * @example
-	   <example module="cacheExampleApp">
+	   <example module="cacheExampleApp" name="cache-factory">
 	     <file name="index.html">
 	       <div ng-controller="CacheController">
 	         <input ng-model="newCacheKey" placeholder="Key">
@@ -32681,7 +33173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    function cacheFactory(cacheId, options) {
 	      if (cacheId in caches) {
-	        throw minErr('$cacheFactory')('iid', "CacheId '{0}' is already taken!", cacheId);
+	        throw minErr('$cacheFactory')('iid', 'CacheId \'{0}\' is already taken!', cacheId);
 	      }
 	
 	      var size = 0,
@@ -32731,7 +33223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       *  }));
 	       * ```
 	       */
-	      return caches[cacheId] = {
+	      return (caches[cacheId] = {
 	
 	        /**
 	         * @ngdoc method
@@ -32809,8 +33301,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            if (!lruEntry) return;
 	
-	            if (lruEntry == freshEnd) freshEnd = lruEntry.p;
-	            if (lruEntry == staleEnd) staleEnd = lruEntry.n;
+	            if (lruEntry === freshEnd) freshEnd = lruEntry.p;
+	            if (lruEntry === staleEnd) staleEnd = lruEntry.n;
 	            link(lruEntry.n,lruEntry.p);
 	
 	            delete lruHash[key];
@@ -32875,17 +33367,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        info: function() {
 	          return extend({}, stats, {size: size});
 	        }
-	      };
+	      });
 	
 	
 	      /**
 	       * makes the `entry` the freshEnd of the LRU linked list
 	       */
 	      function refresh(entry) {
-	        if (entry != freshEnd) {
+	        if (entry !== freshEnd) {
 	          if (!staleEnd) {
 	            staleEnd = entry;
-	          } else if (staleEnd == entry) {
+	          } else if (staleEnd === entry) {
 	            staleEnd = entry.n;
 	          }
 	
@@ -32901,7 +33393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       * bidirectionally links two entries of the LRU linked list
 	       */
 	      function link(nextEntry, prevEntry) {
-	        if (nextEntry != prevEntry) {
+	        if (nextEntry !== prevEntry) {
 	          if (nextEntry) nextEntry.p = prevEntry; //p stands for previous, 'prev' didn't minify
 	          if (prevEntry) prevEntry.n = nextEntry; //n stands for next, 'next' didn't minify
 	        }
@@ -32949,6 +33441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc service
 	 * @name $templateCache
+	 * @this
 	 *
 	 * @description
 	 * The first time a template is used, it is loaded in the template cache for quick retrieval. You
@@ -33810,7 +34303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * to illustrate how `$compile` works.
 	 * </div>
 	 *
-	 <example module="compileExample">
+	 <example module="compileExample" name="compile">
 	   <file name="index.html">
 	    <script>
 	      angular.module('compileExample', [], function($compileProvider) {
@@ -33953,11 +34446,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @description
 	 */
 	$CompileProvider.$inject = ['$provide', '$$sanitizeUriProvider'];
+	/** @this */
 	function $CompileProvider($provide, $$sanitizeUriProvider) {
 	  var hasDirectives = {},
 	      Suffix = 'Directive',
-	      COMMENT_DIRECTIVE_REGEXP = /^\s*directive\:\s*([\w\-]+)\s+(.*)$/,
-	      CLASS_DIRECTIVE_REGEXP = /(([\w\-]+)(?:\:([^;]+))?;?)/,
+	      COMMENT_DIRECTIVE_REGEXP = /^\s*directive:\s*([\w\-]+)\s+(.*)$/,
+	      CLASS_DIRECTIVE_REGEXP = /(([\w\-]+)(?::([^;]+))?;?)/,
 	      ALL_OR_NOTHING_ATTRS = makeMap('ngSrc,ngSrcset,src,srcset'),
 	      REQUIRE_PREFIX_REGEXP = /^(?:(\^\^?)?(\?)?(\^\^?)?)?/;
 	
@@ -33981,11 +34475,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      if (!match) {
 	        throw $compileMinErr('iscp',
-	            "Invalid {3} for directive '{0}'." +
-	            " Definition: {... {1}: '{2}' ...}",
+	            'Invalid {3} for directive \'{0}\'.' +
+	            ' Definition: {... {1}: \'{2}\' ...}',
 	            directiveName, scopeName, definition,
-	            (isController ? "controller bindings definition" :
-	            "isolate scope definition"));
+	            (isController ? 'controller bindings definition' :
+	            'isolate scope definition'));
 	      }
 	
 	      bindings[scopeName] = {
@@ -34027,12 +34521,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!controller) {
 	        // There is no controller, there may or may not be a controllerAs property
 	        throw $compileMinErr('noctrl',
-	              "Cannot bind to controller without directive '{0}'s controller.",
+	              'Cannot bind to controller without directive \'{0}\'s controller.',
 	              directiveName);
 	      } else if (!identifierForController(controller, controllerAs)) {
 	        // There is a controller, but no identifier or controllerAs property
 	        throw $compileMinErr('noident',
-	              "Cannot bind to controller without identifier for directive '{0}'.",
+	              'Cannot bind to controller without identifier for directive \'{0}\'.',
 	              directiveName);
 	      }
 	    }
@@ -34042,11 +34536,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function assertValidDirectiveName(name) {
 	    var letter = name.charAt(0);
 	    if (!letter || letter !== lowercase(letter)) {
-	      throw $compileMinErr('baddir', "Directive/Component name '{0}' is invalid. The first character must be a lowercase letter", name);
+	      throw $compileMinErr('baddir', 'Directive/Component name \'{0}\' is invalid. The first character must be a lowercase letter', name);
 	    }
 	    if (name !== name.trim()) {
 	      throw $compileMinErr('baddir',
-	            "Directive/Component name '{0}' is invalid. The name should not contain leading or trailing whitespaces",
+	            'Directive/Component name \'{0}\' is invalid. The name should not contain leading or trailing whitespaces',
 	            name);
 	    }
 	  }
@@ -34211,7 +34705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function factory($injector) {
 	      function makeInjectable(fn) {
 	        if (isFunction(fn) || isArray(fn)) {
-	          return function(tElement, tAttrs) {
+	          return /** @this */ function(tElement, tAttrs) {
 	            return $injector.invoke(fn, this, {$element: tElement, $attrs: tAttrs});
 	          };
 	        } else {
@@ -34381,6 +34875,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return TTL;
 	  };
 	
+	  var commentDirectivesEnabledConfig = true;
+	  /**
+	   * @ngdoc method
+	   * @name $compileProvider#commentDirectivesEnabled
+	   * @description
+	   *
+	   * It indicates to the compiler
+	   * whether or not directives on comments should be compiled.
+	   * Defaults to `true`.
+	   *
+	   * Calling this function with false disables the compilation of directives
+	   * on comments for the whole application.
+	   * This results in a compilation performance gain,
+	   * as the compiler doesn't have to check comments when looking for directives.
+	   * This should however only be used if you are sure that no comment directives are used in
+	   * the application (including any 3rd party directives).
+	   *
+	   * @param {boolean} enabled `false` if the compiler may ignore directives on comments
+	   * @returns {boolean|object} the current value (or `this` if called as a setter for chaining)
+	   */
+	  this.commentDirectivesEnabled = function(value) {
+	    if (arguments.length) {
+	      commentDirectivesEnabledConfig = value;
+	      return this;
+	    }
+	    return commentDirectivesEnabledConfig;
+	  };
+	
+	
+	  var cssClassDirectivesEnabledConfig = true;
+	  /**
+	   * @ngdoc method
+	   * @name $compileProvider#cssClassDirectivesEnabled
+	   * @description
+	   *
+	   * It indicates to the compiler
+	   * whether or not directives on element classes should be compiled.
+	   * Defaults to `true`.
+	   *
+	   * Calling this function with false disables the compilation of directives
+	   * on element classes for the whole application.
+	   * This results in a compilation performance gain,
+	   * as the compiler doesn't have to check element classes when looking for directives.
+	   * This should however only be used if you are sure that no class directives are used in
+	   * the application (including any 3rd party directives).
+	   *
+	   * @param {boolean} enabled `false` if the compiler may ignore directives on element classes
+	   * @returns {boolean|object} the current value (or `this` if called as a setter for chaining)
+	   */
+	  this.cssClassDirectivesEnabled = function(value) {
+	    if (arguments.length) {
+	      cssClassDirectivesEnabledConfig = value;
+	      return this;
+	    }
+	    return cssClassDirectivesEnabledConfig;
+	  };
+	
 	  this.$get = [
 	            '$injector', '$interpolate', '$exceptionHandler', '$templateRequest', '$parse',
 	            '$controller', '$rootScope', '$sce', '$animate', '$$sanitizeUri',
@@ -34390,6 +34941,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var SIMPLE_ATTR_NAME = /^\w/;
 	    var specialAttrHolder = window.document.createElement('div');
 	
+	
+	    var commentDirectivesEnabled = commentDirectivesEnabledConfig;
+	    var cssClassDirectivesEnabled = cssClassDirectivesEnabledConfig;
 	
 	
 	    var onChangesTtl = TTL;
@@ -34568,7 +35122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this[key] = value = $$sanitizeUri(value, key === 'src');
 	        } else if (nodeName === 'img' && key === 'srcset' && isDefined(value)) {
 	          // sanitize img[srcset] values
-	          var result = "";
+	          var result = '';
 	
 	          // first check if there are spaces because it's not the same pattern
 	          var trimmedSrcset = trim(value);
@@ -34586,7 +35140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // sanitize the uri
 	            result += $$sanitizeUri(trim(rawUris[innerIdx]), true);
 	            // add the descriptor
-	            result += (" " + trim(rawUris[innerIdx + 1]));
+	            result += (' ' + trim(rawUris[innerIdx + 1]));
 	          }
 	
 	          // split the last item into uri and descriptor
@@ -34597,7 +35151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          // and add the last descriptor if any
 	          if (lastTuple.length === 2) {
-	            result += (" " + trim(lastTuple[1]));
+	            result += (' ' + trim(lastTuple[1]));
 	          }
 	          this[key] = value = result;
 	        }
@@ -34616,13 +35170,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // fire observers
 	        var $$observers = this.$$observers;
-	        $$observers && forEach($$observers[observer], function(fn) {
-	          try {
-	            fn(value);
-	          } catch (e) {
-	            $exceptionHandler(e);
-	          }
-	        });
+	        if ($$observers) {
+	          forEach($$observers[observer], function(fn) {
+	            try {
+	              fn(value);
+	            } catch (e) {
+	              $exceptionHandler(e);
+	            }
+	          });
+	        }
 	      },
 	
 	
@@ -34668,7 +35224,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Attributes names that do not start with letters (such as `(click)`) cannot be set using `setAttribute`
 	      // so we have to jump through some hoops to get such an attribute
 	      // https://github.com/angular/angular.js/pull/13318
-	      specialAttrHolder.innerHTML = "<span " + attrName + ">";
+	      specialAttrHolder.innerHTML = '<span ' + attrName + '>';
 	      var attributes = specialAttrHolder.firstChild.attributes;
 	      var attribute = attributes[0];
 	      // We have to remove the attribute from its container element before we can add it to the destination element
@@ -34689,7 +35245,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    var startSymbol = $interpolate.startSymbol(),
 	        endSymbol = $interpolate.endSymbol(),
-	        denormalizeTemplate = (startSymbol == '{{' && endSymbol  == '}}')
+	        denormalizeTemplate = (startSymbol === '{{' && endSymbol  === '}}')
 	            ? identity
 	            : function denormalizeTemplate(template) {
 	              return template.replace(/\{\{/g, startSymbol).replace(/}}/g, endSymbol);
@@ -34899,7 +35455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          stableNodeList = new Array(nodeListLength);
 	
 	          // create a sparse array by only copying the elements which have a linkFn
-	          for (i = 0; i < linkFns.length; i+=3) {
+	          for (i = 0; i < linkFns.length; i += 3) {
 	            idx = linkFns[i];
 	            stableNodeList[idx] = nodeList[idx];
 	          }
@@ -34986,13 +35542,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var nodeType = node.nodeType,
 	          attrsMap = attrs.$attr,
 	          match,
+	          nodeName,
 	          className;
 	
 	      switch (nodeType) {
 	        case NODE_TYPE_ELEMENT: /* Element */
+	
+	          nodeName = nodeName_(node);
+	
 	          // use the node name: <directive>
 	          addDirective(directives,
-	              directiveNormalize(nodeName_(node)), 'E', maxPriority, ignoreDirective);
+	              directiveNormalize(nodeName), 'E', maxPriority, ignoreDirective);
 	
 	          // iterate over the attributes
 	          for (var attr, name, nName, ngAttrName, value, isNgAttr, nAttrs = node.attributes,
@@ -35006,7 +35566,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            // support ngAttr attribute binding
 	            ngAttrName = directiveNormalize(name);
-	            if (isNgAttr = NG_ATTR_BINDING.test(ngAttrName)) {
+	            isNgAttr = NG_ATTR_BINDING.test(ngAttrName);
+	            if (isNgAttr) {
 	              name = name.replace(PREFIX_REGEXP, '')
 	                .substr(8).replace(/_(.)/g, function(match, letter) {
 	                  return letter.toUpperCase();
@@ -35033,14 +35594,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                          attrEndName);
 	          }
 	
+	          if (nodeName === 'input' && node.getAttribute('type') === 'hidden') {
+	            // Hidden input elements can have strange behaviour when navigating back to the page
+	            // This tells the browser not to try to cache and reinstate previous values
+	            node.setAttribute('autocomplete', 'off');
+	          }
+	
 	          // use class as directive
+	          if (!cssClassDirectivesEnabled) break;
 	          className = node.className;
 	          if (isObject(className)) {
 	              // Maybe SVGAnimatedString
 	              className = className.animVal;
 	          }
 	          if (isString(className) && className !== '') {
-	            while (match = CLASS_DIRECTIVE_REGEXP.exec(className)) {
+	            while ((match = CLASS_DIRECTIVE_REGEXP.exec(className))) {
 	              nName = directiveNormalize(match[2]);
 	              if (addDirective(directives, nName, 'C', maxPriority, ignoreDirective)) {
 	                attrs[nName] = trim(match[3]);
@@ -35060,6 +35628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          addTextInterpolateDirective(directives, node.nodeValue);
 	          break;
 	        case NODE_TYPE_COMMENT: /* Comment */
+	          if (!commentDirectivesEnabled) break;
 	          collectCommentDirectives(node, directives, attrs, maxPriority, ignoreDirective);
 	          break;
 	      }
@@ -35101,10 +35670,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        do {
 	          if (!node) {
 	            throw $compileMinErr('uterdir',
-	                      "Unterminated attribute, found '{0}' but no matching '{1}' found.",
+	                      'Unterminated attribute, found \'{0}\' but no matching \'{1}\' found.',
 	                      attrStart, attrEnd);
 	          }
-	          if (node.nodeType == NODE_TYPE_ELEMENT) {
+	          if (node.nodeType === NODE_TYPE_ELEMENT) {
 	            if (node.hasAttribute(attrStart)) depth++;
 	            if (node.hasAttribute(attrEnd)) depth--;
 	          }
@@ -35150,7 +35719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (eager) {
 	        return compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
 	      }
-	      return function lazyCompilation() {
+	      return /** @this */ function lazyCompilation() {
 	        if (!compiled) {
 	          compiled = compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
 	
@@ -35226,7 +35795,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	          break; // prevent further processing of directives
 	        }
 	
-	        if (directiveValue = directive.scope) {
+	        directiveValue = directive.scope;
+	
+	        if (directiveValue) {
 	
 	          // skip the check for directives with async templates, we'll check the derived sync
 	          // directive when the template arrives
@@ -35260,7 +35831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            || (directive.transclude && !directive.$$tlb))) {
 	                var candidateDirective;
 	
-	                for (var scanningIndex = i + 1; candidateDirective = directives[scanningIndex++];) {
+	                for (var scanningIndex = i + 1; (candidateDirective = directives[scanningIndex++]);) {
 	                    if ((candidateDirective.transclude && !candidateDirective.$$tlb)
 	                        || (candidateDirective.replace && (candidateDirective.templateUrl || candidateDirective.template))) {
 	                        mightHaveMultipleTransclusionError = true;
@@ -35274,12 +35845,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!directive.templateUrl && directive.controller) {
 	          directiveValue = directive.controller;
 	          controllerDirectives = controllerDirectives || createMap();
-	          assertNoDuplicate("'" + directiveName + "' controller",
+	          assertNoDuplicate('\'' + directiveName + '\' controller',
 	              controllerDirectives[directiveName], directive, $compileNode);
 	          controllerDirectives[directiveName] = directive;
 	        }
 	
-	        if (directiveValue = directive.transclude) {
+	        directiveValue = directive.transclude;
+	
+	        if (directiveValue) {
 	          hasTranscludeDirective = true;
 	
 	          // Special case ngIf and ngRepeat so that we don't complain about duplicate transclusion.
@@ -35290,7 +35863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            nonTlbTranscludeDirective = directive;
 	          }
 	
-	          if (directiveValue == 'element') {
+	          if (directiveValue === 'element') {
 	            hasElementTranscludeDirective = true;
 	            terminalPriority = directive.priority;
 	            $template = $compileNode;
@@ -35408,9 +35981,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            compileNode = $template[0];
 	
-	            if ($template.length != 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
+	            if ($template.length !== 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
 	              throw $compileMinErr('tplrt',
-	                  "Template for directive '{0}' must have exactly one root element. {1}",
+	                  'Template for directive \'{0}\' must have exactly one root element. {1}',
 	                  directiveName, '');
 	            }
 	
@@ -35450,9 +36023,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            replaceDirective = directive;
 	          }
 	
-	          /* jshint -W021 */
+	          // eslint-disable-next-line no-func-assign
 	          nodeLinkFn = compileTemplateUrl(directives.splice(i, directives.length - i), $compileNode,
-	          /* jshint +W021 */
 	              templateAttrs, jqCollection, hasTranscludeDirective && childTranscludeFn, preLinkFns, postLinkFns, {
 	                controllerDirectives: controllerDirectives,
 	                newScopeDirective: (newScopeDirective !== directive) && newScopeDirective,
@@ -35583,7 +36155,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // from setupControllers
 	            controller.instance = controllerResult;
 	            $element.data('$' + controllerDirective.name + 'Controller', controllerResult);
-	            controller.bindingInfo.removeWatches && controller.bindingInfo.removeWatches();
+	            if (controller.bindingInfo.removeWatches) {
+	              controller.bindingInfo.removeWatches();
+	            }
 	            controller.bindingInfo =
 	              initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
 	          }
@@ -35644,7 +36218,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (newIsolateScopeDirective && (newIsolateScopeDirective.template || newIsolateScopeDirective.templateUrl === null)) {
 	          scopeToChild = isolateScope;
 	        }
-	        childLinkFn && childLinkFn(scopeToChild, linkNode.childNodes, undefined, boundTranscludeFn);
+	        if (childLinkFn) {
+	          childLinkFn(scopeToChild, linkNode.childNodes, undefined, boundTranscludeFn);
+	        }
 	
 	        // POSTLINKING
 	        for (i = postLinkFns.length - 1; i >= 0; i--) {
@@ -35731,7 +36307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (!value && !optional) {
 	          throw $compileMinErr('ctreq',
-	              "Controller '{0}', required by directive '{1}', can't be found!",
+	              'Controller \'{0}\', required by directive \'{1}\', can\'t be found!',
 	              name, directiveName);
 	        }
 	      } else if (isArray(require)) {
@@ -35761,7 +36337,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	
 	        var controller = directive.controller;
-	        if (controller == '@') {
+	        if (controller === '@') {
 	          controller = attrs[directive.name];
 	        }
 	
@@ -35813,7 +36389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          try {
 	            directive = directives[i];
 	            if ((isUndefined(maxPriority) || maxPriority > directive.priority) &&
-	                 directive.restrict.indexOf(location) != -1) {
+	                 directive.restrict.indexOf(location) !== -1) {
 	              if (startAttrName) {
 	                directive = inherit(directive, {$$start: startAttrName, $$end: endAttrName});
 	              }
@@ -35865,12 +36441,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    function mergeTemplateAttributes(dst, src) {
 	      var srcAttr = src.$attr,
-	          dstAttr = dst.$attr,
-	          $element = dst.$$element;
+	          dstAttr = dst.$attr;
 	
 	      // reapply the old attributes to the new element
 	      forEach(dst, function(value, key) {
-	        if (key.charAt(0) != '$') {
+	        if (key.charAt(0) !== '$') {
 	          if (src[key] && src[key] !== value) {
 	            value += (key === 'style' ? ';' : ' ') + src[key];
 	          }
@@ -35926,9 +36501,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            compileNode = $template[0];
 	
-	            if ($template.length != 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
+	            if ($template.length !== 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
 	              throw $compileMinErr('tplrt',
-	                  "Template for directive '{0}' must have exactly one root element. {1}",
+	                  'Template for directive \'{0}\' must have exactly one root element. {1}',
 	                  origAsyncDirective.name, templateUrl);
 	            }
 	
@@ -35954,7 +36529,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              childTranscludeFn, $compileNode, origAsyncDirective, preLinkFns, postLinkFns,
 	              previousCompileContext);
 	          forEach($rootElement, function(node, i) {
-	            if (node == compileNode) {
+	            if (node === compileNode) {
 	              $rootElement[i] = $compileNode[0];
 	            }
 	          });
@@ -36079,15 +36654,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    function getTrustedContext(node, attrNormalizedName) {
-	      if (attrNormalizedName == "srcdoc") {
+	      if (attrNormalizedName === 'srcdoc') {
 	        return $sce.HTML;
 	      }
 	      var tag = nodeName_(node);
+	      // All tags with src attributes require a RESOURCE_URL value, except for
+	      // img and various html5 media tags.
+	      if (attrNormalizedName === 'src' || attrNormalizedName === 'ngSrc') {
+	        if (['img', 'video', 'audio', 'source', 'track'].indexOf(tag) === -1) {
+	          return $sce.RESOURCE_URL;
+	        }
 	      // maction[xlink:href] can source SVG.  It's not limited to <maction>.
-	      if (attrNormalizedName == "xlinkHref" ||
-	          (tag == "form" && attrNormalizedName == "action") ||
-	          (tag != "img" && (attrNormalizedName == "src" ||
-	                            attrNormalizedName == "ngSrc"))) {
+	      } else if (attrNormalizedName === 'xlinkHref' ||
+	          (tag === 'form' && attrNormalizedName === 'action')
+	      ) {
 	        return $sce.RESOURCE_URL;
 	      }
 	    }
@@ -36103,9 +36683,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!interpolateFn) return;
 	
 	
-	      if (name === "multiple" && nodeName_(node) === "select") {
-	        throw $compileMinErr("selmulti",
-	            "Binding to the 'multiple' attribute is not supported. Element: {0}",
+	      if (name === 'multiple' && nodeName_(node) === 'select') {
+	        throw $compileMinErr('selmulti',
+	            'Binding to the \'multiple\' attribute is not supported. Element: {0}',
 	            startingTag(node));
 	      }
 	
@@ -36118,8 +36698,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	                if (EVENT_HANDLER_ATTR_REGEXP.test(name)) {
 	                  throw $compileMinErr('nodomevents',
-	                      "Interpolations for HTML DOM event attributes are disallowed.  Please use the " +
-	                          "ng- versions (such as ng-click instead of onclick) instead.");
+	                      'Interpolations for HTML DOM event attributes are disallowed.  Please use the ' +
+	                          'ng- versions (such as ng-click instead of onclick) instead.');
 	                }
 	
 	                // If the attribute has changed since last $interpolate()ed
@@ -36150,7 +36730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    //skip animations when the first digest occurs (when
 	                    //both the new and the old values are the same) since
 	                    //the CSS classes are the non-interpolated values
-	                    if (name === 'class' && newValue != oldValue) {
+	                    if (name === 'class' && newValue !== oldValue) {
 	                      attr.$updateClass(newValue, oldValue);
 	                    } else {
 	                      attr.$set(name, newValue);
@@ -36181,7 +36761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      if ($rootElement) {
 	        for (i = 0, ii = $rootElement.length; i < ii; i++) {
-	          if ($rootElement[i] == firstElementToRemove) {
+	          if ($rootElement[i] === firstElementToRemove) {
 	            $rootElement[i++] = newNode;
 	            for (var j = i, j2 = j + removeCount - 1,
 	                     jj = $rootElement.length;
@@ -36272,7 +36852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          case '@':
 	            if (!optional && !hasOwnProperty.call(attrs, attrName)) {
-	              destination[scopeName] = attrs[attrName] = void 0;
+	              destination[scopeName] = attrs[attrName] = undefined;
 	            }
 	            attrs.$observe(attrName, function(value) {
 	              if (isString(value) || isBoolean(value)) {
@@ -36298,7 +36878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          case '=':
 	            if (!hasOwnProperty.call(attrs, attrName)) {
 	              if (optional) break;
-	              attrs[attrName] = void 0;
+	              attrs[attrName] = undefined;
 	            }
 	            if (optional && !attrs[attrName]) break;
 	
@@ -36306,13 +36886,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (parentGet.literal) {
 	              compare = equals;
 	            } else {
+	              // eslint-disable-next-line no-self-compare
 	              compare = function simpleCompare(a, b) { return a === b || (a !== a && b !== b); };
 	            }
 	            parentSet = parentGet.assign || function() {
 	              // reset the change, or we will throw this exception on every $digest
 	              lastValue = destination[scopeName] = parentGet(scope);
 	              throw $compileMinErr('nonassign',
-	                  "Expression '{0}' in attribute '{1}' used with directive '{2}' is non-assignable!",
+	                  'Expression \'{0}\' in attribute \'{1}\' used with directive \'{2}\' is non-assignable!',
 	                  attrs[attrName], attrName, directive.name);
 	            };
 	            lastValue = destination[scopeName] = parentGet(scope);
@@ -36327,7 +36908,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  parentSet(scope, parentValue = destination[scopeName]);
 	                }
 	              }
-	              return lastValue = parentValue;
+	              lastValue = parentValue;
+	              return lastValue;
 	            };
 	            parentValueWatch.$stateful = true;
 	            if (definition.collection) {
@@ -36341,7 +36923,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          case '<':
 	            if (!hasOwnProperty.call(attrs, attrName)) {
 	              if (optional) break;
-	              attrs[attrName] = void 0;
+	              attrs[attrName] = undefined;
 	            }
 	            if (optional && !attrs[attrName]) break;
 	
@@ -36422,7 +37004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	SimpleChange.prototype.isFirstChange = function() { return this.previousValue === _UNINITIALIZED_VALUE; };
 	
 	
-	var PREFIX_REGEXP = /^((?:x|data)[\:\-_])/i;
+	var PREFIX_REGEXP = /^((?:x|data)[:\-_])/i;
 	/**
 	 * Converts all accepted directives format into proper directive name.
 	 * @param name Name to normalize
@@ -36500,7 +37082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  for (var i = 0; i < tokens1.length; i++) {
 	    var token = tokens1[i];
 	    for (var j = 0; j < tokens2.length; j++) {
-	      if (token == tokens2[j]) continue outer;
+	      if (token === tokens2[j]) continue outer;
 	    }
 	    values += (values.length > 0 ? ' ' : '') + token;
 	  }
@@ -36540,6 +37122,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $controllerProvider
+	 * @this
+	 *
 	 * @description
 	 * The {@link ng.$controller $controller service} is used by Angular to create new
 	 * controllers.
@@ -36634,10 +37218,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        match = expression.match(CNTRL_REG);
 	        if (!match) {
 	          throw $controllerMinErr('ctrlfmt',
-	            "Badly formed controller string '{0}'. " +
-	            "Must match `__name__ as __id__` or `__name__`.", expression);
+	            'Badly formed controller string \'{0}\'. ' +
+	            'Must match `__name__ as __id__` or `__name__`.', expression);
 	        }
-	        constructor = match[1],
+	        constructor = match[1];
 	        identifier = identifier || match[3];
 	        expression = controllers.hasOwnProperty(constructor)
 	            ? controllers[constructor]
@@ -36666,8 +37250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          addIdentifier(locals, identifier, instance, constructor || expression.name);
 	        }
 	
-	        var instantiate;
-	        return instantiate = extend(function $controllerInit() {
+	        return extend(function $controllerInit() {
 	          var result = $injector.invoke(expression, instance, locals, constructor);
 	          if (result !== instance && (isObject(result) || isFunction(result))) {
 	            instance = result;
@@ -36695,7 +37278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function addIdentifier(locals, identifier, instance, name) {
 	      if (!(locals && isObject(locals.$scope))) {
 	        throw minErr('$controller')('noscp',
-	          "Cannot export controller '{0}' as '{1}'! No $scope object provided via `locals`.",
+	          'Cannot export controller \'{0}\' as \'{1}\'! No $scope object provided via `locals`.',
 	          name, identifier);
 	      }
 	
@@ -36708,12 +37291,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ngdoc service
 	 * @name $document
 	 * @requires $window
+	 * @this
 	 *
 	 * @description
 	 * A {@link angular.element jQuery or jqLite} wrapper for the browser's `window.document` object.
 	 *
 	 * @example
-	   <example module="documentExample">
+	   <example module="documentExample" name="document">
 	     <file name="index.html">
 	       <div ng-controller="ExampleController">
 	         <p>$document title: <b ng-bind="title"></b></p>
@@ -36739,6 +37323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ngdoc service
 	 * @name $exceptionHandler
 	 * @requires ng.$log
+	 * @this
 	 *
 	 * @description
 	 * Any uncaught exception in angular expressions is delegated to this service.
@@ -36786,7 +37371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
-	var $$ForceReflowProvider = function() {
+	var $$ForceReflowProvider = /** @this */ function() {
 	  this.$get = ['$document', function($document) {
 	    return function(domNode) {
 	      //the line below will force the browser to perform a repaint so
@@ -36832,6 +37417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	
+	/** @this */
 	function $HttpParamSerializerProvider() {
 	  /**
 	   * @ngdoc service
@@ -36869,10 +37455,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}
 	
+	/** @this */
 	function $HttpParamSerializerJQLikeProvider() {
 	  /**
 	   * @ngdoc service
 	   * @name $httpParamSerializerJQLike
+	   *
 	   * @description
 	   *
 	   * Alternative {@link $http `$http`} params serializer that follows
@@ -37012,7 +37600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (name) {
 	      var value = headersObj[lowercase(name)];
-	      if (value === void 0) {
+	      if (value === undefined) {
 	        value = null;
 	      }
 	      return value;
@@ -37055,6 +37643,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $httpProvider
+	 * @this
+	 *
 	 * @description
 	 * Use `$httpProvider` to change the default behavior of the {@link ng.$http $http} service.
 	 * */
@@ -37660,7 +38250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     *
 	     * @example
-	<example module="httpExample">
+	<example module="httpExample" name="http-service">
 	<file name="index.html">
 	  <div ng-controller="FetchController">
 	    <select ng-model="method" aria-label="Request method">
@@ -37699,7 +38289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              $scope.status = response.status;
 	              $scope.data = response.data;
 	            }, function(response) {
-	              $scope.data = response.data || "Request failed";
+	              $scope.data = response.data || 'Request failed';
 	              $scope.status = response.status;
 	          });
 	        };
@@ -37718,7 +38308,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var data = element(by.binding('data'));
 	  var fetchBtn = element(by.id('fetchbtn'));
 	  var sampleGetBtn = element(by.id('samplegetbtn'));
-	  var sampleJsonpBtn = element(by.id('samplejsonpbtn'));
 	  var invalidJsonpBtn = element(by.id('invalidjsonpbtn'));
 	
 	  it('should make an xhr GET request', function() {
@@ -37730,6 +38319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Commented out due to flakes. See https://github.com/angular/angular.js/issues/9185
 	// it('should make a JSONP request to angularjs.org', function() {
+	//   var sampleJsonpBtn = element(by.id('samplejsonpbtn'));
 	//   sampleJsonpBtn.click();
 	//   fetchBtn.click();
 	//   expect(status.getText()).toMatch('200');
@@ -38179,7 +38769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    function buildUrl(url, serializedParams) {
 	      if (serializedParams.length > 0) {
-	        url += ((url.indexOf('?') == -1) ? '?' : '&') + serializedParams;
+	        url += ((url.indexOf('?') === -1) ? '?' : '&') + serializedParams;
 	      }
 	      return url;
 	    }
@@ -38189,6 +38779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc service
 	 * @name $xhrFactory
+	 * @this
 	 *
 	 * @description
 	 * Factory function used to create XMLHttpRequest objects.
@@ -38221,6 +38812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @requires $jsonpCallbacks
 	 * @requires $document
 	 * @requires $xhrFactory
+	 * @this
 	 *
 	 * @description
 	 * HTTP backend used by the {@link ng.$http service} that delegates to
@@ -38249,7 +38841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var jsonpDone = jsonpReq(url, callbackPath, function(status, text) {
 	        // jsonpReq only ever sets status to 200 (OK), 404 (ERROR) or -1 (WAITING)
 	        var response = (status === 200) && callbacks.getResponse(callbackPath);
-	        completeRequest(callback, status, response, "", text);
+	        completeRequest(callback, status, response, '', text);
 	        callbacks.removeCallback(callbackPath);
 	      });
 	    } else {
@@ -38277,7 +38869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // Occurs when accessing file resources or on Android 4.1 stock browser
 	        // while retrieving files from application cache.
 	        if (status === 0) {
-	          status = response ? 200 : urlResolve(url).protocol == 'file' ? 404 : 0;
+	          status = response ? 200 : urlResolve(url).protocol === 'file' ? 404 : 0;
 	        }
 	
 	        completeRequest(callback,
@@ -38295,6 +38887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      xhr.onerror = requestError;
 	      xhr.onabort = requestError;
+	      xhr.ontimeout = requestError;
 	
 	      forEach(eventHandlers, function(value, key) {
 	          xhr.addEventListener(key, value);
@@ -38336,8 +38929,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    function timeoutRequest() {
-	      jsonpDone && jsonpDone();
-	      xhr && xhr.abort();
+	      if (jsonpDone) {
+	        jsonpDone();
+	      }
+	      if (xhr) {
+	        xhr.abort();
+	      }
 	    }
 	
 	    function completeRequest(callback, status, response, headersString, statusText) {
@@ -38358,24 +38955,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // - fetches local scripts via XHR and evals them
 	    // - adds and immediately removes script elements from the document
 	    var script = rawDocument.createElement('script'), callback = null;
-	    script.type = "text/javascript";
+	    script.type = 'text/javascript';
 	    script.src = url;
 	    script.async = true;
 	
 	    callback = function(event) {
-	      removeEventListenerFn(script, "load", callback);
-	      removeEventListenerFn(script, "error", callback);
+	      removeEventListenerFn(script, 'load', callback);
+	      removeEventListenerFn(script, 'error', callback);
 	      rawDocument.body.removeChild(script);
 	      script = null;
 	      var status = -1;
-	      var text = "unknown";
+	      var text = 'unknown';
 	
 	      if (event) {
-	        if (event.type === "load" && !callbacks.wasCalled(callbackPath)) {
-	          event = { type: "error" };
+	        if (event.type === 'load' && !callbacks.wasCalled(callbackPath)) {
+	          event = { type: 'error' };
 	        }
 	        text = event.type;
-	        status = event.type === "error" ? 404 : 200;
+	        status = event.type === 'error' ? 404 : 200;
 	      }
 	
 	      if (done) {
@@ -38383,8 +38980,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    addEventListenerFn(script, "load", callback);
-	    addEventListenerFn(script, "error", callback);
+	    addEventListenerFn(script, 'load', callback);
+	    addEventListenerFn(script, 'error', callback);
 	    rawDocument.body.appendChild(script);
 	    return callback;
 	  }
@@ -38393,18 +38990,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	var $interpolateMinErr = angular.$interpolateMinErr = minErr('$interpolate');
 	$interpolateMinErr.throwNoconcat = function(text) {
 	  throw $interpolateMinErr('noconcat',
-	      "Error while interpolating: {0}\nStrict Contextual Escaping disallows " +
-	      "interpolations that concatenate multiple expressions when a trusted value is " +
-	      "required.  See http://docs.angularjs.org/api/ng.$sce", text);
+	      'Error while interpolating: {0}\nStrict Contextual Escaping disallows ' +
+	      'interpolations that concatenate multiple expressions when a trusted value is ' +
+	      'required.  See http://docs.angularjs.org/api/ng.$sce', text);
 	};
 	
 	$interpolateMinErr.interr = function(text, err) {
-	  return $interpolateMinErr('interr', "Can't interpolate: {0}\n{1}", text, err.toString());
+	  return $interpolateMinErr('interr', 'Can\'t interpolate: {0}\n{1}', text, err.toString());
 	};
 	
 	/**
 	 * @ngdoc provider
 	 * @name $interpolateProvider
+	 * @this
 	 *
 	 * @description
 	 *
@@ -38518,13 +39116,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return value;
 	    }
 	
-	    //TODO: this is the same as the constantWatchDelegate in parse.js
+	    // TODO: this is the same as the constantWatchDelegate in parse.js
 	    function constantWatchDelegate(scope, listener, objectEquality, constantInterp) {
-	      var unwatch;
-	      return unwatch = scope.$watch(function constantInterpolateWatch(scope) {
+	      var unwatch = scope.$watch(function constantInterpolateWatch(scope) {
 	        unwatch();
 	        return constantInterp(scope);
 	      }, listener, objectEquality);
+	      return unwatch;
 	    }
 	
 	    /**
@@ -38591,7 +39189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * this is typically useful only when user-data is used in rendering a template from the server, or
 	     * when otherwise untrusted data is used by a directive.
 	     *
-	     * <example>
+	     * <example name="interpolation">
 	     *  <file name="index.html">
 	     *    <div ng-init="username='A user'">
 	     *      <p ng-init="apptitle='Escaping demo'">{{apptitle}}: \{\{ username = "defaced value"; \}\}
@@ -38671,8 +39269,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          expressionPositions = [];
 	
 	      while (index < textLength) {
-	        if (((startIndex = text.indexOf(startSymbol, index)) != -1) &&
-	             ((endIndex = text.indexOf(endSymbol, startIndex + startSymbolLength)) != -1)) {
+	        if (((startIndex = text.indexOf(startSymbol, index)) !== -1) &&
+	             ((endIndex = text.indexOf(endSymbol, startIndex + startSymbolLength)) !== -1)) {
 	          if (index !== startIndex) {
 	            concat.push(unescapeText(text.substring(index, startIndex)));
 	          }
@@ -38737,7 +39335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          expressions: expressions,
 	          $$watchDelegate: function(scope, listener) {
 	            var lastValue;
-	            return scope.$watchGroup(parseFns, function interpolateFnWatcher(values, oldValues) {
+	            return scope.$watchGroup(parseFns, /** @this */ function interpolateFnWatcher(values, oldValues) {
 	              var currValue = compute(values);
 	              if (isFunction(listener)) {
 	                listener.call(this, currValue, values !== oldValues ? lastValue : currValue, scope);
@@ -38794,6 +39392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	/** @this */
 	function $IntervalProvider() {
 	  this.$get = ['$rootScope', '$window', '$q', '$$q', '$browser',
 	       function($rootScope,   $window,   $q,   $$q,   $browser) {
@@ -38836,7 +39435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      * @returns {promise} A promise which will be notified on each iteration.
 	      *
 	      * @example
-	      * <example module="intervalExample">
+	      * <example module="intervalExample" name="interval-service">
 	      * <file name="index.html">
 	      *   <script>
 	      *     angular.module('intervalExample', [])
@@ -39002,7 +39601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Override this service if you wish to customise where the callbacks are stored and
 	 * how they vary compared to the requested url.
 	 */
-	var $jsonpCallbacksProvider = function() {
+	var $jsonpCallbacksProvider = /** @this */ function() {
 	  this.$get = ['$window', function($window) {
 	    var callbacks = $window.angular.callbacks;
 	    var callbackMap = {};
@@ -39115,20 +39714,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	  locationObj.$$port = toInt(parsedUrl.port) || DEFAULT_PORTS[parsedUrl.protocol] || null;
 	}
 	
+	var DOUBLE_SLASH_REGEX = /^\s*[\\/]{2,}/;
+	function parseAppUrl(url, locationObj) {
 	
-	function parseAppUrl(relativeUrl, locationObj) {
-	  var prefixed = (relativeUrl.charAt(0) !== '/');
-	  if (prefixed) {
-	    relativeUrl = '/' + relativeUrl;
+	  if (DOUBLE_SLASH_REGEX.test(url)) {
+	    throw $locationMinErr('badpath', 'Invalid url "{0}".', url);
 	  }
-	  var match = urlResolve(relativeUrl);
+	
+	  var prefixed = (url.charAt(0) !== '/');
+	  if (prefixed) {
+	    url = '/' + url;
+	  }
+	  var match = urlResolve(url);
 	  locationObj.$$path = decodeURIComponent(prefixed && match.pathname.charAt(0) === '/' ?
 	      match.pathname.substring(1) : match.pathname);
 	  locationObj.$$search = parseKeyValue(match.search);
 	  locationObj.$$hash = decodeURIComponent(match.hash);
 	
 	  // make sure path starts with '/';
-	  if (locationObj.$$path && locationObj.$$path.charAt(0) != '/') {
+	  if (locationObj.$$path && locationObj.$$path.charAt(0) !== '/') {
 	    locationObj.$$path = '/' + locationObj.$$path;
 	  }
 	}
@@ -39153,7 +39757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function stripHash(url) {
 	  var index = url.indexOf('#');
-	  return index == -1 ? url : url.substr(0, index);
+	  return index === -1 ? url : url.substr(0, index);
 	}
 	
 	function trimEmptyHash(url) {
@@ -39229,16 +39833,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var appUrl, prevAppUrl;
 	    var rewrittenUrl;
 	
+	
 	    if (isDefined(appUrl = stripBaseUrl(appBase, url))) {
 	      prevAppUrl = appUrl;
-	      if (isDefined(appUrl = stripBaseUrl(basePrefix, appUrl))) {
+	      if (basePrefix && isDefined(appUrl = stripBaseUrl(basePrefix, appUrl))) {
 	        rewrittenUrl = appBaseNoFile + (stripBaseUrl('/', appUrl) || appUrl);
 	      } else {
 	        rewrittenUrl = appBase + prevAppUrl;
 	      }
 	    } else if (isDefined(appUrl = stripBaseUrl(appBaseNoFile, url))) {
 	      rewrittenUrl = appBaseNoFile + appUrl;
-	    } else if (appBaseNoFile == url + '/') {
+	    } else if (appBaseNoFile === url + '/') {
 	      rewrittenUrl = appBaseNoFile;
 	    }
 	    if (rewrittenUrl) {
@@ -39352,7 +39957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  this.$$parseLinkUrl = function(url, relHref) {
-	    if (stripHash(appBase) == stripHash(url)) {
+	    if (stripHash(appBase) === stripHash(url)) {
 	      this.$$parse(url);
 	      return true;
 	    }
@@ -39386,7 +39991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var rewrittenUrl;
 	    var appUrl;
 	
-	    if (appBase == stripHash(url)) {
+	    if (appBase === stripHash(url)) {
 	      rewrittenUrl = url;
 	    } else if ((appUrl = stripBaseUrl(appBaseNoFile, url))) {
 	      rewrittenUrl = appBase + hashPrefix + appUrl;
@@ -39580,7 +40185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  path: locationGetterSetter('$$path', function(path) {
 	    path = path !== null ? path.toString() : '';
-	    return path.charAt(0) == '/' ? path : '/' + path;
+	    return path.charAt(0) === '/' ? path : '/' + path;
 	  }),
 	
 	  /**
@@ -39742,14 +40347,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	function locationGetter(property) {
-	  return function() {
+	  return /** @this */ function() {
 	    return this[property];
 	  };
 	}
 	
 	
 	function locationGetterSetter(property, preprocess) {
-	  return function(value) {
+	  return /** @this */ function(value) {
 	    if (isUndefined(value)) {
 	      return this[property];
 	    }
@@ -39791,6 +40396,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $locationProvider
+	 * @this
+	 *
 	 * @description
 	 * Use the `$locationProvider` to configure how the application deep linking paths are stored.
 	 */
@@ -39911,7 +40518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (html5Mode.enabled) {
 	      if (!baseHref && html5Mode.requireBase) {
 	        throw $locationMinErr('nobase',
-	          "$location in HTML5 mode requires a <base> tag to be present!");
+	          '$location in HTML5 mode requires a <base> tag to be present!');
 	      }
 	      appBase = serverBase(initialUrl) + (baseHref || '/');
 	      LocationMode = $sniffer.history ? LocationHtml5Url : LocationHashbangInHtml5Url;
@@ -39951,7 +40558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // TODO(vojta): rewrite link when opening in new tab/window (in legacy browser)
 	      // currently we open nice url link and redirect then
 	
-	      if (!html5Mode.rewriteLinks || event.ctrlKey || event.metaKey || event.shiftKey || event.which == 2 || event.button == 2) return;
+	      if (!html5Mode.rewriteLinks || event.ctrlKey || event.metaKey || event.shiftKey || event.which === 2 || event.button === 2) return;
 	
 	      var elm = jqLite(event.target);
 	
@@ -39982,7 +40589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          // getting double entries in the location history.
 	          event.preventDefault();
 	          // update location manually
-	          if ($location.absUrl() != $browser.url()) {
+	          if ($location.absUrl() !== $browser.url()) {
 	            $rootScope.$apply();
 	            // hack to work around FF6 bug 684208 when scenario runner clicks on links
 	            $window.angular['ff-684208-preventDefault'] = true;
@@ -39993,7 +40600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    // rewrite hashbang url <> html5 url
-	    if (trimEmptyHash($location.absUrl()) != trimEmptyHash(initialUrl)) {
+	    if (trimEmptyHash($location.absUrl()) !== trimEmptyHash(initialUrl)) {
 	      $browser.url($location.absUrl(), true);
 	    }
 	
@@ -40099,7 +40706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * {@link ng.$logProvider ng.$logProvider#debugEnabled} to change this.
 	 *
 	 * @example
-	   <example module="logExample">
+	   <example module="logExample" name="log-service">
 	     <file name="script.js">
 	       angular.module('logExample', [])
 	         .controller('LogController', ['$scope', '$log', function($scope, $log) {
@@ -40125,6 +40732,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $logProvider
+	 * @this
+	 *
 	 * @description
 	 * Use the `$logProvider` to configure how the application logs messages
 	 */
@@ -40201,7 +40810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            fn.apply(self, arguments);
 	          }
 	        };
-	      }())
+	      })()
 	    };
 	
 	    function formatError(arg) {
@@ -40226,7 +40835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // The reason behind this is that console.log has type "object" in IE8...
 	      try {
 	        hasApply = !!logFn.apply;
-	      } catch (e) {}
+	      } catch (e) { /* empty */ }
 	
 	      if (hasApply) {
 	        return function() {
@@ -40260,6 +40869,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var $parseMinErr = minErr('$parse');
 	
+	var ARRAY_CTOR = [].constructor;
+	var BOOLEAN_CTOR = (false).constructor;
+	var FUNCTION_CTOR = Function.constructor;
+	var NUMBER_CTOR = (0).constructor;
+	var OBJECT_CTOR = {}.constructor;
+	var STRING_CTOR = ''.constructor;
+	var ARRAY_CTOR_PROTO = ARRAY_CTOR.prototype;
+	var BOOLEAN_CTOR_PROTO = BOOLEAN_CTOR.prototype;
+	var FUNCTION_CTOR_PROTO = FUNCTION_CTOR.prototype;
+	var NUMBER_CTOR_PROTO = NUMBER_CTOR.prototype;
+	var OBJECT_CTOR_PROTO = OBJECT_CTOR.prototype;
+	var STRING_CTOR_PROTO = STRING_CTOR.prototype;
+	
+	var CALL = FUNCTION_CTOR_PROTO.call;
+	var APPLY = FUNCTION_CTOR_PROTO.apply;
+	var BIND = FUNCTION_CTOR_PROTO.bind;
+	
+	var objectValueOf = OBJECT_CTOR_PROTO.valueOf;
+	
 	// Sandboxing Angular Expressions
 	// ------------------------------
 	// Angular expressions are generally considered safe because these expressions only have direct
@@ -40285,9 +40913,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	function ensureSafeMemberName(name, fullExpression) {
-	  if (name === "__defineGetter__" || name === "__defineSetter__"
-	      || name === "__lookupGetter__" || name === "__lookupSetter__"
-	      || name === "__proto__") {
+	  if (name === '__defineGetter__' || name === '__defineSetter__'
+	      || name === '__lookupGetter__' || name === '__lookupSetter__'
+	      || name === '__proto__') {
 	    throw $parseMinErr('isecfld',
 	        'Attempting to access a disallowed field in Angular expressions! '
 	        + 'Expression: {0}', fullExpression);
@@ -40340,10 +40968,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return obj;
 	}
 	
-	var CALL = Function.prototype.call;
-	var APPLY = Function.prototype.apply;
-	var BIND = Function.prototype.bind;
-	
 	function ensureSafeFunction(obj, fullExpression) {
 	  if (obj) {
 	    if (obj.constructor === obj) {
@@ -40360,17 +40984,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function ensureSafeAssignContext(obj, fullExpression) {
 	  if (obj) {
-	    if (obj === (0).constructor || obj === (false).constructor || obj === ''.constructor ||
-	        obj === {}.constructor || obj === [].constructor || obj === Function.constructor) {
+	    if (obj === ARRAY_CTOR ||
+	        obj === BOOLEAN_CTOR ||
+	        obj === FUNCTION_CTOR ||
+	        obj === NUMBER_CTOR ||
+	        obj === OBJECT_CTOR ||
+	        obj === STRING_CTOR ||
+	        obj === ARRAY_CTOR_PROTO ||
+	        obj === BOOLEAN_CTOR_PROTO ||
+	        obj === FUNCTION_CTOR_PROTO ||
+	        obj === NUMBER_CTOR_PROTO ||
+	        obj === OBJECT_CTOR_PROTO ||
+	        obj === STRING_CTOR_PROTO) {
 	      throw $parseMinErr('isecaf',
-	        'Assigning to a constructor is disallowed! Expression: {0}', fullExpression);
+	        'Assigning to a constructor or its prototype is disallowed! Expression: {0}',
+	        fullExpression);
 	    }
 	  }
 	}
 	
 	var OPERATORS = createMap();
 	forEach('+ - * / % === !== == != < > <= >= && || ! = |'.split(' '), function(operator) { OPERATORS[operator] = true; });
-	var ESCAPE = {"n":"\n", "f":"\f", "r":"\r", "t":"\t", "v":"\v", "'":"'", '"':'"'};
+	var ESCAPE = {'n':'\n', 'f':'\f', 'r':'\r', 't':'\t', 'v':'\v', '\'':'\'', '"':'"'};
 	
 	
 	/////////////////////////////////////////
@@ -40379,7 +41014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @constructor
 	 */
-	var Lexer = function(options) {
+	var Lexer = function Lexer(options) {
 	  this.options = options;
 	};
 	
@@ -40393,7 +41028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    while (this.index < this.text.length) {
 	      var ch = this.text.charAt(this.index);
-	      if (ch === '"' || ch === "'") {
+	      if (ch === '"' || ch === '\'') {
 	        this.readString(ch);
 	      } else if (this.isNumber(ch) || ch === '.' && this.isNumber(this.peek())) {
 	        this.readNumber();
@@ -40432,7 +41067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  isNumber: function(ch) {
-	    return ('0' <= ch && ch <= '9') && typeof ch === "string";
+	    return ('0' <= ch && ch <= '9') && typeof ch === 'string';
 	  },
 	
 	  isWhitespace: function(ch) {
@@ -40465,9 +41100,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  codePointAt: function(ch) {
 	    if (ch.length === 1) return ch.charCodeAt(0);
-	    /*jshint bitwise: false*/
+	    // eslint-disable-next-line no-bitwise
 	    return (ch.charCodeAt(0) << 10) + ch.charCodeAt(1) - 0x35FDC00;
-	    /*jshint bitwise: true*/
 	  },
 	
 	  peekMultichar: function() {
@@ -40502,19 +41136,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var start = this.index;
 	    while (this.index < this.text.length) {
 	      var ch = lowercase(this.text.charAt(this.index));
-	      if (ch == '.' || this.isNumber(ch)) {
+	      if (ch === '.' || this.isNumber(ch)) {
 	        number += ch;
 	      } else {
 	        var peekCh = this.peek();
-	        if (ch == 'e' && this.isExpOperator(peekCh)) {
+	        if (ch === 'e' && this.isExpOperator(peekCh)) {
 	          number += ch;
 	        } else if (this.isExpOperator(ch) &&
 	            peekCh && this.isNumber(peekCh) &&
-	            number.charAt(number.length - 1) == 'e') {
+	            number.charAt(number.length - 1) === 'e') {
 	          number += ch;
 	        } else if (this.isExpOperator(ch) &&
 	            (!peekCh || !this.isNumber(peekCh)) &&
-	            number.charAt(number.length - 1) == 'e') {
+	            number.charAt(number.length - 1) === 'e') {
 	          this.throwError('Invalid exponent');
 	        } else {
 	          break;
@@ -40589,7 +41223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 	
-	var AST = function(lexer, options) {
+	var AST = function AST(lexer, options) {
 	  this.lexer = lexer;
 	  this.options = options;
 	};
@@ -40645,8 +41279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  filterChain: function() {
 	    var left = this.expression();
-	    var token;
-	    while ((token = this.expect('|'))) {
+	    while (this.expect('|')) {
 	      left = this.filter(left);
 	    }
 	    return left;
@@ -40858,7 +41491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this.consume(':');
 	          property.value = this.expression();
 	        } else {
-	          this.throwError("invalid key", this.peek());
+	          this.throwError('invalid key', this.peek());
 	        }
 	        properties.push(property);
 	      } while (this.expect(','));
@@ -40942,6 +41575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function findConstantAndWatchExpressions(ast, $filter) {
 	  var allConstants;
 	  var argsToWatch;
+	  var isStatelessFilter;
 	  switch (ast.type) {
 	  case AST.Program:
 	    allConstants = true;
@@ -40992,7 +41626,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ast.toWatch = [ast];
 	    break;
 	  case AST.CallExpression:
-	    allConstants = ast.filter ? isStateless($filter, ast.callee.name) : false;
+	    isStatelessFilter = ast.filter ? isStateless($filter, ast.callee.name) : false;
+	    allConstants = isStatelessFilter;
 	    argsToWatch = [];
 	    forEach(ast.arguments, function(expr) {
 	      findConstantAndWatchExpressions(expr, $filter);
@@ -41002,7 +41637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 	    ast.constant = allConstants;
-	    ast.toWatch = ast.filter && isStateless($filter, ast.callee.name) ? argsToWatch : [ast];
+	    ast.toWatch = isStatelessFilter ? argsToWatch : [ast];
 	    break;
 	  case AST.AssignmentExpression:
 	    findConstantAndWatchExpressions(ast.left, $filter);
@@ -41048,7 +41683,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function getInputs(body) {
-	  if (body.length != 1) return;
+	  if (body.length !== 1) return;
 	  var lastExpression = body[0].expression;
 	  var candidate = lastExpression.toWatch;
 	  if (candidate.length !== 1) return candidate;
@@ -41130,7 +41765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.watchFns() +
 	      'return fn;';
 	
-	    /* jshint -W054 */
+	    // eslint-disable-next-line no-new-func
 	    var fn = (new Function('$filter',
 	        'ensureSafeMemberName',
 	        'ensureSafeObject',
@@ -41150,7 +41785,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          ifDefined,
 	          plusFn,
 	          expression);
-	    /* jshint +W054 */
 	    this.state = this.stage = undefined;
 	    fn.literal = isLiteral(ast);
 	    fn.constant = isConstant(ast);
@@ -41507,7 +42141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  nonComputedMember: function(left, right) {
-	    var SAFE_IDENTIFIER = /[$_a-zA-Z][$_a-zA-Z0-9]*/;
+	    var SAFE_IDENTIFIER = /^[$_a-zA-Z][$_a-zA-Z0-9]*$/;
 	    var UNSAFE_CHARACTERS = /[^$_a-zA-Z0-9]/g;
 	    if (SAFE_IDENTIFIER.test(right)) {
 	      return left + '.' + right;
@@ -41582,7 +42216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  escape: function(value) {
-	    if (isString(value)) return "'" + value.replace(this.stringEscapeRegex, this.stringEscapeFn) + "'";
+	    if (isString(value)) return '\'' + value.replace(this.stringEscapeRegex, this.stringEscapeFn) + '\'';
 	    if (isNumber(value)) return value.toString();
 	    if (value === true) return 'true';
 	    if (value === false) return 'false';
@@ -41661,7 +42295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  recurse: function(ast, context, create) {
-	    var left, right, self = this, args, expression;
+	    var left, right, self = this, args;
 	    if (ast.input) {
 	      return this.inputs(ast.input, ast.watchId);
 	    }
@@ -41873,12 +42507,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  'binary==': function(left, right, context) {
 	    return function(scope, locals, assign, inputs) {
+	      // eslint-disable-next-line eqeqeq
 	      var arg = left(scope, locals, assign, inputs) == right(scope, locals, assign, inputs);
 	      return context ? {value: arg} : arg;
 	    };
 	  },
 	  'binary!=': function(left, right, context) {
 	    return function(scope, locals, assign, inputs) {
+	      // eslint-disable-next-line eqeqeq
 	      var arg = left(scope, locals, assign, inputs) != right(scope, locals, assign, inputs);
 	      return context ? {value: arg} : arg;
 	    };
@@ -42001,7 +42637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @constructor
 	 */
-	var Parser = function(lexer, $filter, options) {
+	var Parser = function Parser(lexer, $filter, options) {
 	  this.lexer = lexer;
 	  this.$filter = $filter;
 	  this.options = options;
@@ -42019,10 +42655,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	function isPossiblyDangerousMemberName(name) {
-	  return name == 'constructor';
+	  return name === 'constructor';
 	}
-	
-	var objectValueOf = Object.prototype.valueOf;
 	
 	function getValueOf(value) {
 	  return isFunction(value.valueOf) ? value.valueOf() : objectValueOf.call(value);
@@ -42074,6 +42708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $parseProvider
+	 * @this
 	 *
 	 * @description
 	 * `$parseProvider` can be used for configuring the default behavior of the {@link ng.$parse $parse}
@@ -42108,6 +42743,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 /**
 	  * @ngdoc method
 	  * @name $parseProvider#setIdentifierFns
+	  *
 	  * @description
 	  *
 	  * Allows defining the set of characters that are allowed in Angular expressions. The function
@@ -42249,6 +42885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      //Primitive or NaN
+	      // eslint-disable-next-line no-self-compare
 	      return newValue === oldValueOfValue || (newValue !== newValue && oldValueOfValue !== oldValueOfValue);
 	    }
 	
@@ -42297,9 +42934,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    function oneTimeWatchDelegate(scope, listener, objectEquality, parsedExpression) {
 	      var unwatch, lastValue;
-	      return unwatch = scope.$watch(function oneTimeWatch(scope) {
+	      unwatch = scope.$watch(function oneTimeWatch(scope) {
 	        return parsedExpression(scope);
-	      }, function oneTimeListener(value, old, scope) {
+	      }, /** @this */ function oneTimeListener(value, old, scope) {
 	        lastValue = value;
 	        if (isFunction(listener)) {
 	          listener.apply(this, arguments);
@@ -42312,13 +42949,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          });
 	        }
 	      }, objectEquality);
+	      return unwatch;
 	    }
 	
 	    function oneTimeLiteralWatchDelegate(scope, listener, objectEquality, parsedExpression) {
 	      var unwatch, lastValue;
-	      return unwatch = scope.$watch(function oneTimeWatch(scope) {
+	      unwatch = scope.$watch(function oneTimeWatch(scope) {
 	        return parsedExpression(scope);
-	      }, function oneTimeListener(value, old, scope) {
+	      }, /** @this */ function oneTimeListener(value, old, scope) {
 	        lastValue = value;
 	        if (isFunction(listener)) {
 	          listener.call(this, value, old, scope);
@@ -42330,6 +42968,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }, objectEquality);
 	
+	      return unwatch;
+	
 	      function isAllDefined(value) {
 	        var allDefined = true;
 	        forEach(value, function(val) {
@@ -42340,11 +42980,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    function constantWatchDelegate(scope, listener, objectEquality, parsedExpression) {
-	      var unwatch;
-	      return unwatch = scope.$watch(function constantWatch(scope) {
+	      var unwatch = scope.$watch(function constantWatch(scope) {
 	        unwatch();
 	        return parsedExpression(scope);
 	      }, listener, objectEquality);
+	      return unwatch;
 	    }
 	
 	    function addInterceptor(parsedExpression, interceptorFn) {
@@ -42388,6 +43028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ngdoc service
 	 * @name $q
 	 * @requires $rootScope
+	 * @this
 	 *
 	 * @description
 	 * A service that helps you run functions asynchronously, and use their return values (or exceptions)
@@ -42610,6 +43251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	/** @this */
 	function $$QProvider() {
 	  this.$get = ['$browser', '$exceptionHandler', function($browser, $exceptionHandler) {
 	    return qFactory(function(callback) {
@@ -42666,11 +43308,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return result.promise;
 	    },
 	
-	    "catch": function(callback) {
+	    'catch': function(callback) {
 	      return this.then(null, callback);
 	    },
 	
-	    "finally": function(callback, progressBack) {
+	    'finally': function(callback, progressBack) {
 	      return this.then(function(value) {
 	        return handleCallback(value, true, callback);
 	      }, function(error) {
@@ -42726,7 +43368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (val === this.promise) {
 	        this.$$reject($qMinErr(
 	          'qcycle',
-	          "Expected promise to be resolved with value other than itself '{0}'",
+	          'Expected promise to be resolved with value other than itself \'{0}\'',
 	          val));
 	      } else {
 	        this.$$resolve(val);
@@ -42972,7 +43614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var $Q = function Q(resolver) {
 	    if (!isFunction(resolver)) {
-	      throw $qMinErr('norslvr', "Expected resolverFn, got '{0}'", resolver);
+	      throw $qMinErr('norslvr', 'Expected resolverFn, got \'{0}\'', resolver);
 	    }
 	
 	    var deferred = new Deferred();
@@ -43004,6 +43646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return $Q;
 	}
 	
+	/** @this */
 	function $$RAFProvider() { //rAF
 	  this.$get = ['$window', '$timeout', function($window, $timeout) {
 	    var requestAnimationFrame = $window.requestAnimationFrame ||
@@ -43093,6 +43736,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc service
 	 * @name $rootScope
+	 * @this
+	 *
 	 * @description
 	 *
 	 * Every application has a single root {@link ng.$rootScope.Scope scope}.
@@ -43143,8 +43788,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // all this scopes children
 	        //
 	        // See issue https://github.com/angular/angular.js/issues/10706
-	        $scope.$$childHead && cleanUpScope($scope.$$childHead);
-	        $scope.$$nextSibling && cleanUpScope($scope.$$nextSibling);
+	        if ($scope.$$childHead) {
+	          cleanUpScope($scope.$$childHead);
+	        }
+	        if ($scope.$$nextSibling) {
+	          cleanUpScope($scope.$$nextSibling);
+	        }
 	      }
 	
 	      // The code below works around IE9 and V8's memory leaks
@@ -43296,7 +43945,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // prototypically. In all other cases, this property needs to be set
 	        // when the parent scope is destroyed.
 	        // The listener needs to be added after the parent is set
-	        if (isolate || parent != this) child.$on('$destroy', destroyChildScope);
+	        if (isolate || parent !== this) child.$on('$destroy', destroyChildScope);
 	
 	        return child;
 	      },
@@ -43646,6 +44295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              oldItem = oldValue[i];
 	              newItem = newValue[i];
 	
+	              // eslint-disable-next-line no-self-compare
 	              bothNaN = (oldItem !== oldItem) && (newItem !== newItem);
 	              if (!bothNaN && (oldItem !== newItem)) {
 	                changeDetected++;
@@ -43668,6 +44318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                oldItem = oldValue[key];
 	
 	                if (key in oldValue) {
+	                  // eslint-disable-next-line no-self-compare
 	                  bothNaN = (oldItem !== oldItem) && (newItem !== newItem);
 	                  if (!bothNaN && (oldItem !== newItem)) {
 	                    changeDetected++;
@@ -43832,8 +44483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    if ((value = get(current)) !== (last = watch.last) &&
 	                        !(watch.eq
 	                            ? equals(value, last)
-	                            : (typeof value === 'number' && typeof last === 'number'
-	                               && isNaN(value) && isNaN(last)))) {
+	                            : (isNumberNaN(value) && isNumberNaN(last)))) {
 	                      dirty = true;
 	                      lastDirtyWatch = watch;
 	                      watch.last = watch.eq ? copy(value, null) : value;
@@ -43952,8 +44602,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // sever all the references to parent scopes (after this cleanup, the current scope should
 	        // not be retained by any of our references and should be eligible for garbage collection)
-	        if (parent && parent.$$childHead == this) parent.$$childHead = this.$$nextSibling;
-	        if (parent && parent.$$childTail == this) parent.$$childTail = this.$$prevSibling;
+	        if (parent && parent.$$childHead === this) parent.$$childHead = this.$$nextSibling;
+	        if (parent && parent.$$childTail === this) parent.$$childTail = this.$$prevSibling;
 	        if (this.$$prevSibling) this.$$prevSibling.$$nextSibling = this.$$nextSibling;
 	        if (this.$$nextSibling) this.$$nextSibling.$$prevSibling = this.$$prevSibling;
 	
@@ -44107,6 +44757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            $rootScope.$digest();
 	          } catch (e) {
 	            $exceptionHandler(e);
+	            // eslint-disable-next-line no-unsafe-finally
 	            throw e;
 	          }
 	        }
@@ -44131,7 +44782,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	       */
 	      $applyAsync: function(expr) {
 	        var scope = this;
-	        expr && applyAsyncQueue.push($applyAsyncExpression);
+	        if (expr) {
+	          applyAsyncQueue.push($applyAsyncExpression);
+	        }
 	        expr = $parse(expr);
 	        scheduleApplyAsync();
 	
@@ -44425,6 +45078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// the implementation is in angular.bootstrap
 	
 	/**
+	 * @this
 	 * @description
 	 * Private service to sanitize uris for links and images. Used by $compile and $sanitize.
 	 */
@@ -44504,6 +45158,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *    Or allows for someone to change the prototype of built-in objects?   *
 	 *     Or gives undesired access to variables likes document or window?    *
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	
+	/* exported $SceProvider, $SceDelegateProvider */
 	
 	var $sceMinErr = minErr('$sce');
 	
@@ -44588,6 +45244,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $sceDelegateProvider
+	 * @this
+	 *
 	 * @description
 	 *
 	 * The `$sceDelegateProvider` provider allows developers to configure the {@link ng.$sceDelegate
@@ -44603,7 +45261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * - your app is hosted at url `http://myapp.example.com/`
 	 * - but some of your templates are hosted on other domains you control such as
-	 *   `http://srv01.assets.example.com/`,  `http://srv02.assets.example.com/`, etc.
+	 *   `http://srv01.assets.example.com/`, `http://srv02.assets.example.com/`, etc.
 	 * - and you have an open redirect at `http://myapp.example.com/clickThru?...`.
 	 *
 	 * Here is what a secure configuration for this scenario might look like:
@@ -44884,6 +45542,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $sceProvider
+	 * @this
+	 *
 	 * @description
 	 *
 	 * The $sceProvider provider allows developers to configure the {@link ng.$sce $sce} service.
@@ -44892,8 +45552,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * Read more about {@link ng.$sce Strict Contextual Escaping (SCE)}.
 	 */
-	
-	/* jshint maxlen: false*/
 	
 	/**
 	 * @ngdoc service
@@ -45027,7 +45685,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * | `$sce.HTML`         | For HTML that's safe to source into the application.  The {@link ng.directive:ngBindHtml ngBindHtml} directive uses this context for bindings. If an unsafe value is encountered and the {@link ngSanitize $sanitize} module is present this will sanitize the value instead of throwing an error. |
 	 * | `$sce.CSS`          | For CSS that's safe to source into the application.  Currently unused.  Feel free to use it in your own directives. |
 	 * | `$sce.URL`          | For URLs that are safe to follow as links.  Currently unused (`<a href=` and `<img src=` sanitize their urls and don't constitute an SCE context. |
-	 * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include `ng-include`, `src` / `ngSrc` bindings for tags other than `IMG` (e.g. `IFRAME`, `OBJECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
+	 * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include `ng-include`, `src` / `ngSrc` bindings for tags other than `IMG`, `VIDEO`, `AUDIO`, `SOURCE`, and `TRACK` (e.g. `IFRAME`, `OBJECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
 	 * | `$sce.JS`           | For JavaScript that is safe to execute in your application's context.  Currently unused.  Feel free to use it in your own directives. |
 	 *
 	 * ## Format of items in {@link ng.$sceDelegateProvider#resourceUrlWhitelist resourceUrlWhitelist}/{@link ng.$sceDelegateProvider#resourceUrlBlacklist Blacklist} <a name="resourceUrlPatternItem"></a>
@@ -45079,7 +45737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * ## Show me an example using SCE.
 	 *
-	 * <example module="mySceApp" deps="angular-sanitize.js">
+	 * <example module="mySceApp" deps="angular-sanitize.js" name="sce-service">
 	 * <file name="index.html">
 	 *   <div ng-controller="AppController as myCtrl">
 	 *     <i ng-bind-html="myCtrl.explicitlyTrustedHtml" id="explicitlyTrustedHtml"></i><br><br>
@@ -45100,9 +45758,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * <file name="script.js">
 	 *   angular.module('mySceApp', ['ngSanitize'])
 	 *     .controller('AppController', ['$http', '$templateCache', '$sce',
-	 *       function($http, $templateCache, $sce) {
+	 *       function AppController($http, $templateCache, $sce) {
 	 *         var self = this;
-	 *         $http.get("test_data.json", {cache: $templateCache}).success(function(userComments) {
+	 *         $http.get('test_data.json', {cache: $templateCache}).success(function(userComments) {
 	 *           self.userComments = userComments;
 	 *         });
 	 *         self.explicitlyTrustedHtml = $sce.trustAsHtml(
@@ -45126,12 +45784,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * <file name="protractor.js" type="protractor">
 	 *   describe('SCE doc demo', function() {
 	 *     it('should sanitize untrusted values', function() {
-	 *       expect(element.all(by.css('.htmlComment')).first().getInnerHtml())
+	 *       expect(element.all(by.css('.htmlComment')).first().getAttribute('innerHTML'))
 	 *           .toBe('<span>Is <i>anyone</i> reading this?</span>');
 	 *     });
 	 *
 	 *     it('should NOT sanitize explicitly trusted values', function() {
-	 *       expect(element(by.id('explicitlyTrustedHtml')).getInnerHtml()).toBe(
+	 *       expect(element(by.id('explicitlyTrustedHtml')).getAttribute('innerHTML')).toBe(
 	 *           '<span onmouseover="this.textContent=&quot;Explicitly trusted HTML bypasses ' +
 	 *           'sanitization.&quot;">Hover over this text.</span>');
 	 *     });
@@ -45160,7 +45818,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * ```
 	 *
 	 */
-	/* jshint maxlen: 100 */
 	
 	function $SceProvider() {
 	  var enabled = true;
@@ -45545,13 +46202,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    forEach(SCE_CONTEXTS, function(enumValue, name) {
 	      var lName = lowercase(name);
-	      sce[camelCase("parse_as_" + lName)] = function(expr) {
+	      sce[camelCase('parse_as_' + lName)] = function(expr) {
 	        return parse(enumValue, expr);
 	      };
-	      sce[camelCase("get_trusted_" + lName)] = function(value) {
+	      sce[camelCase('get_trusted_' + lName)] = function(value) {
 	        return getTrusted(enumValue, value);
 	      };
-	      sce[camelCase("trust_as_" + lName)] = function(value) {
+	      sce[camelCase('trust_as_' + lName)] = function(value) {
 	        return trustAs(enumValue, value);
 	      };
 	    });
@@ -45560,12 +46217,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	/* exported $SnifferProvider */
+	
 	/**
 	 * !!! This is an undocumented "private" service !!!
 	 *
 	 * @name $sniffer
 	 * @requires $window
 	 * @requires $document
+	 * @this
 	 *
 	 * @property {boolean} history Does the browser support html5 history api ?
 	 * @property {boolean} transitions Does the browser support CSS transition events ?
@@ -45577,9 +46237,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	function $SnifferProvider() {
 	  this.$get = ['$window', '$document', function($window, $document) {
 	    var eventSupport = {},
-	        // Chrome Packaged Apps are not allowed to access `history.pushState`. They can be detected by
-	        // the presence of `chrome.app.runtime` (see https://developer.chrome.com/apps/api_index)
-	        isChromePackagedApp = $window.chrome && $window.chrome.app && $window.chrome.app.runtime,
+	        // Chrome Packaged Apps are not allowed to access `history.pushState`.
+	        // If not sandboxed, they can be detected by the presence of `chrome.app.runtime`
+	        // (see https://developer.chrome.com/apps/api_index). If sandboxed, they can be detected by
+	        // the presence of an extension runtime ID and the absence of other Chrome runtime APIs
+	        // (see https://developer.chrome.com/apps/manifest/sandbox).
+	        isChromePackagedApp =
+	            $window.chrome &&
+	            ($window.chrome.app && $window.chrome.app.runtime ||
+	                !$window.chrome.app && $window.chrome.runtime && $window.chrome.runtime.id),
 	        hasHistoryPushState = !isChromePackagedApp && $window.history && $window.history.pushState,
 	        android =
 	          toInt((/android (\d+)/.exec(lowercase(($window.navigator || {}).userAgent)) || [])[1]),
@@ -45594,7 +46260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (bodyStyle) {
 	      for (var prop in bodyStyle) {
-	        if (match = vendorRegex.exec(prop)) {
+	        if ((match = vendorRegex.exec(prop))) {
 	          vendorPrefix = match[0];
 	          vendorPrefix = vendorPrefix[0].toUpperCase() + vendorPrefix.substr(1);
 	          break;
@@ -45624,9 +46290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // older webkit browser (533.9) on Boxee box has exactly the same problem as Android has
 	      // so let's not use the history API also
 	      // We are purposefully using `!(android < 4)` to cover the case when `android` is undefined
-	      // jshint -W018
 	      history: !!(hasHistoryPushState && !(android < 4) && !boxee),
-	      // jshint +W018
 	      hasEvent: function(event) {
 	        // IE9 implements 'input' event it's so fubared that we rather pretend that it doesn't have
 	        // it. In particular the event is not fired when backspace or delete key are pressed or
@@ -45656,6 +46320,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc provider
 	 * @name $templateRequestProvider
+	 * @this
+	 *
 	 * @description
 	 * Used to configure the options passed to the {@link $http} service when making a template request.
 	 *
@@ -45736,8 +46402,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return $http.get(tpl, extend({
 	          cache: $templateCache,
 	          transformResponse: transformResponse
-	        }, httpOptions))
-	        ['finally'](function() {
+	        }, httpOptions)
+	        )['finally'](function() {
 	          handleRequestFn.totalPendingRequests--;
 	        })
 	        .then(function(response) {
@@ -45760,6 +46426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	/** @this */
 	function $$TestabilityProvider() {
 	  this.$get = ['$rootScope', '$browser', '$location',
 	       function($rootScope,   $browser,   $location) {
@@ -45798,7 +46465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                matches.push(binding);
 	              }
 	            } else {
-	              if (bindingName.indexOf(expression) != -1) {
+	              if (bindingName.indexOf(expression) !== -1) {
 	                matches.push(binding);
 	              }
 	            }
@@ -45875,6 +46542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	/** @this */
 	function $TimeoutProvider() {
 	  this.$get = ['$rootScope', '$browser', '$q', '$$q', '$exceptionHandler',
 	       function($rootScope,   $browser,   $q,   $$q,   $exceptionHandler) {
@@ -45930,8 +46598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } catch (e) {
 	          deferred.reject(e);
 	          $exceptionHandler(e);
-	        }
-	        finally {
+	        } finally {
 	          delete deferreds[promise.$$timeoutId];
 	        }
 	
@@ -45977,7 +46644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// doesn't know about mocked locations and resolves URLs to the real document - which is
 	// exactly the behavior needed here.  There is little value is mocking these out for this
 	// service.
-	var urlParsingNode = window.document.createElement("a");
+	var urlParsingNode = window.document.createElement('a');
 	var originUrl = urlResolve(window.location.href);
 	
 	
@@ -46032,7 +46699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (msie) {
 	    // Normalize before parse.  Refer Implementation Notes on why this is
 	    // done in two steps on IE.
-	    urlParsingNode.setAttribute("href", href);
+	    urlParsingNode.setAttribute('href', href);
 	    href = urlParsingNode.href;
 	  }
 	
@@ -46069,6 +46736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @ngdoc service
 	 * @name $window
+	 * @this
 	 *
 	 * @description
 	 * A reference to the browser's `window` object. While `window`
@@ -46082,7 +46750,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * expression.
 	 *
 	 * @example
-	   <example module="windowExample">
+	   <example module="windowExample" name="window-service">
 	     <file name="index.html">
 	       <script>
 	         angular.module('windowExample', [])
@@ -46162,6 +46830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	$$CookieReader.$inject = ['$document'];
 	
+	/** @this */
 	function $$CookieReaderProvider() {
 	  this.$get = $$CookieReader;
 	}
@@ -46241,9 +46910,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @description
 	 * Filters are used for formatting data displayed to the user.
 	 *
+	 * They can be used in view templates, controllers or services.Angular comes
+	 * with a collection of [built-in filters](api/ng/filter), but it is easy to
+	 * define your own as well.
+	 *
 	 * The general syntax in templates is as follows:
 	 *
-	 *         {{ expression [| filter_name[:parameter_value] ... ] }}
+	 * ```html
+	 * {{ expression [| filter_name[:parameter_value] ... ] }}
+	 * ```
 	 *
 	 * @param {String} name Name of the filter function to retrieve
 	 * @return {Function} the filter function
@@ -46266,6 +46941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   </example>
 	  */
 	$FilterProvider.$inject = ['$provide'];
+	/** @this */
 	function $FilterProvider($provide) {
 	  var suffix = 'Filter';
 	
@@ -46315,7 +46991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    lowercaseFilter: false,
 	    numberFilter: false,
 	    orderByFilter: false,
-	    uppercaseFilter: false,
+	    uppercaseFilter: false
 	  */
 	
 	  register('currency', currencyFilter);
@@ -46393,7 +47069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     By default `$`.
 	 *
 	 * @example
-	   <example>
+	   <example name="filter-filter">
 	     <file name="index.html">
 	       <div ng-init="friends = [{name:'John', phone:'555-1276'},
 	                                {name:'Mary', phone:'800-BIG-MARY'},
@@ -46485,9 +47161,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'number':
 	      case 'string':
 	        matchAgainstAnyProp = true;
-	        //jshint -W086
+	        // falls through
 	      case 'object':
-	        //jshint +W086
 	        predicateFn = createPredicateFn(expression, comparator, anyPropertyKey, matchAgainstAnyProp);
 	        break;
 	      default:
@@ -46577,7 +47252,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        return comparator(actual, expected);
 	      }
-	      break;
 	    case 'function':
 	      return false;
 	    default:
@@ -46610,7 +47284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *
 	 * @example
-	   <example module="currencyExample">
+	   <example module="currencyExample" name="currency-filter">
 	     <file name="index.html">
 	       <script>
 	         angular.module('currencyExample', [])
@@ -46632,7 +47306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         expect(element(by.id('currency-no-fractions')).getText()).toBe('USD$1,235');
 	       });
 	       it('should update', function() {
-	         if (browser.params.browser == 'safari') {
+	         if (browser.params.browser === 'safari') {
 	           // Safari does not understand the minus key. See
 	           // https://github.com/angular/protractor/issues/481
 	           return;
@@ -46688,7 +47362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *                   include "," group separators after each third digit).
 	 *
 	 * @example
-	   <example module="numberFilterExample">
+	   <example module="numberFilterExample" name="number-filter">
 	     <file name="index.html">
 	       <script>
 	         angular.module('numberFilterExample', [])
@@ -46767,16 +47441,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  // Count the number of leading zeros.
-	  for (i = 0; numStr.charAt(i) == ZERO_CHAR; i++) {/* jshint noempty: false */}
+	  for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) { /* empty */ }
 	
-	  if (i == (zeros = numStr.length)) {
+	  if (i === (zeros = numStr.length)) {
 	    // The digits are all zero.
 	    digits = [0];
 	    numberOfIntegerDigits = 1;
 	  } else {
 	    // Count the number of trailing zeros
 	    zeros--;
-	    while (numStr.charAt(zeros) == ZERO_CHAR) zeros--;
+	    while (numStr.charAt(zeros) === ZERO_CHAR) zeros--;
 	
 	    // Trailing zeros are insignificant so ignore them
 	    numberOfIntegerDigits -= i;
@@ -46968,7 +47642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (offset > 0 || value > -offset) {
 	      value += offset;
 	    }
-	    if (value === 0 && offset == -12) value = 12;
+	    if (value === 0 && offset === -12) value = 12;
 	    return padNumber(value, size, trim, negWrap);
 	  };
 	}
@@ -46985,7 +47659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function timeZoneGetter(date, formats, offset) {
 	  var zone = -1 * offset;
-	  var paddedZone = (zone >= 0) ? "+" : "";
+	  var paddedZone = (zone >= 0) ? '+' : '';
 	
 	  paddedZone += padNumber(Math[zone > 0 ? 'floor' : 'ceil'](zone / 60), 2) +
 	                padNumber(Math.abs(zone % 60), 2);
@@ -47137,7 +47811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {string} Formatted string or the input if input is not recognized as date/millis.
 	 *
 	 * @example
-	   <example>
+	   <example name="filter-date">
 	     <file name="index.html">
 	       <span ng-non-bindable>{{1288323623006 | date:'medium'}}</span>:
 	           <span>{{1288323623006 | date:'medium'}}</span><br>
@@ -47170,7 +47844,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                     // 1        2       3         4          5          6          7          8  9     10      11
 	  function jsonStringToDate(string) {
 	    var match;
-	    if (match = string.match(R_ISO8601_STR)) {
+	    if ((match = string.match(R_ISO8601_STR))) {
 	      var date = new Date(0),
 	          tzHour = 0,
 	          tzMin  = 0,
@@ -47231,7 +47905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    forEach(parts, function(value) {
 	      fn = DATE_FORMATS[value];
 	      text += fn ? fn(date, $locale.DATETIME_FORMATS, dateTimezoneOffset)
-	                 : value === "''" ? "'" : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
+	                 : value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 	    });
 	
 	    return text;
@@ -47256,15 +47930,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *
 	 * @example
-	   <example>
+	   <example name="filter-json">
 	     <file name="index.html">
 	       <pre id="default-spacing">{{ {'name':'value'} | json }}</pre>
 	       <pre id="custom-spacing">{{ {'name':'value'} | json:4 }}</pre>
 	     </file>
 	     <file name="protractor.js" type="protractor">
 	       it('should jsonify filtered objects', function() {
-	         expect(element(by.id('default-spacing')).getText()).toMatch(/\{\n  "name": ?"value"\n}/);
-	         expect(element(by.id('custom-spacing')).getText()).toMatch(/\{\n    "name": ?"value"\n}/);
+	         expect(element(by.id('default-spacing')).getText()).toMatch(/\{\n {2}"name": ?"value"\n}/);
+	         expect(element(by.id('custom-spacing')).getText()).toMatch(/\{\n {4}"name": ?"value"\n}/);
 	       });
 	     </file>
 	   </example>
@@ -47325,7 +47999,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     less than `limit` elements.
 	 *
 	 * @example
-	   <example module="limitToExample">
+	   <example module="limitToExample" name="limit-to-filter">
 	     <file name="index.html">
 	       <script>
 	         angular.module('limitToExample', [])
@@ -47407,7 +48081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      limit = toInt(limit);
 	    }
-	    if (isNaN(limit)) return input;
+	    if (isNumberNaN(limit)) return input;
 	
 	    if (isNumber(input)) input = input.toString();
 	    if (!isArrayLike(input)) return input;
@@ -48040,8 +48714,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (isFunction(predicate)) {
 	        get = predicate;
 	      } else if (isString(predicate)) {
-	        if ((predicate.charAt(0) == '+' || predicate.charAt(0) == '-')) {
-	          descending = predicate.charAt(0) == '-' ? -1 : 1;
+	        if ((predicate.charAt(0) === '+' || predicate.charAt(0) === '-')) {
+	          descending = predicate.charAt(0) === '-' ? -1 : 1;
 	          predicate = predicate.substring(1);
 	        }
 	        if (predicate !== '') {
@@ -48199,7 +48873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 * This example shows various combinations of `href`, `ng-href` and `ng-click` attributes
 	 * in links and their different behaviors:
-	    <example>
+	    <example name="ng-href">
 	      <file name="index.html">
 	        <input ng-model="value" /><br />
 	        <a id="link-1" href ng-click="value = 1">link 1</a> (link, don't reload)<br />
@@ -48335,7 +49009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * attribute. See the {@link guide/interpolation interpolation guide} for more info.
 	 *
 	 * @example
-	    <example>
+	    <example name="ng-disabled">
 	      <file name="index.html">
 	        <label>Click me to toggle: <input type="checkbox" ng-model="checked"></label><br/>
 	        <button ng-model="button" ng-disabled="checked">Button</button>
@@ -48371,7 +49045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * attribute. See the {@link guide/interpolation interpolation guide} for more info.
 	 *
 	 * @example
-	    <example>
+	    <example name="ng-checked">
 	      <file name="index.html">
 	        <label>Check me to check both: <input type="checkbox" ng-model="master"></label><br/>
 	        <input id="checkSlave" type="checkbox" ng-checked="master" aria-label="Slave input">
@@ -48407,7 +49081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * attribute. See the {@link guide/interpolation interpolation guide} for more info.
 	 *
 	 * @example
-	    <example>
+	    <example name="ng-readonly">
 	      <file name="index.html">
 	        <label>Check me to make text readonly: <input type="checkbox" ng-model="checked"></label><br/>
 	        <input type="text" ng-readonly="checked" value="I'm Angular" aria-label="Readonly field" />
@@ -48448,7 +49122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * </div>
 	 *
 	 * @example
-	    <example>
+	    <example name="ng-selected">
 	      <file name="index.html">
 	        <label>Check me to select: <input type="checkbox" ng-model="selected"></label><br/>
 	        <select aria-label="ngSelected demo">
@@ -48489,7 +49163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * recommended to use {@link ng.ngShow} and {@link ng.ngHide} instead.
 	 *
 	 * @example
-	     <example>
+	     <example name="ng-open">
 	       <file name="index.html">
 	         <label>Check me check multiple: <input type="checkbox" ng-model="open"></label><br/>
 	         <details id="details" ng-open="open">
@@ -48515,7 +49189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// boolean attrs are evaluated
 	forEach(BOOLEAN_ATTR, function(propName, attrName) {
 	  // binding to multiple is not supported
-	  if (propName == "multiple") return;
+	  if (propName === 'multiple') return;
 	
 	  function defaultLinkFn(scope, element, attr) {
 	    scope.$watch(attr[normalized], function ngBooleanAttrWatchAction(value) {
@@ -48552,10 +49226,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      link: function(scope, element, attr) {
 	        //special case ngPattern when a literal regular expression value
 	        //is used as the expression (this way we don't have to watch anything).
-	        if (ngAttr === "ngPattern" && attr.ngPattern.charAt(0) == "/") {
+	        if (ngAttr === 'ngPattern' && attr.ngPattern.charAt(0) === '/') {
 	          var match = attr.ngPattern.match(REGEX_STRING_REGEXP);
 	          if (match) {
-	            attr.$set("ngPattern", new RegExp(match[1], match[2]));
+	            attr.$set('ngPattern', new RegExp(match[1], match[2]));
 	            return;
 	          }
 	        }
@@ -48858,9 +49532,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * Sets the form to its pristine state.
 	   *
-	   * This method can be called to remove the 'ng-dirty' class and set the form to its pristine
-	   * state (ng-pristine class). This method will also propagate to all the controls contained
-	   * in this form.
+	   * This method sets the form's `$pristine` state to true, the `$dirty` state to false, removes
+	   * the `ng-dirty` class and adds the `ng-pristine` class. Additionally, it sets the `$submitted`
+	   * state to false.
+	   *
+	   * This method will also propagate to all the controls contained in this form.
 	   *
 	   * Setting a form back to a pristine state is often useful when we want to 'reuse' a form after
 	   * saving or resetting it.
@@ -49016,7 +49692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * </pre>
 	 *
 	 * @example
-	    <example deps="angular-animate.js" animations="true" fixBase="true" module="formExample">
+	    <example name="ng-form" deps="angular-animate.js" animations="true" fixBase="true" module="formExample">
 	      <file name="index.html">
 	       <script>
 	         angular.module('formExample', [])
@@ -49154,13 +49830,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var formDirective = formDirectiveFactory();
 	var ngFormDirective = formDirectiveFactory(true);
 	
-	/* global VALID_CLASS: false,
+	/* global
+	  VALID_CLASS: false,
 	  INVALID_CLASS: false,
 	  PRISTINE_CLASS: false,
 	  DIRTY_CLASS: false,
-	  UNTOUCHED_CLASS: false,
-	  TOUCHED_CLASS: false,
-	  ngModelMinErr: false,
+	  ngModelMinErr: false
 	*/
 	
 	// Regex code was initially obtained from SO prior to modification: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime#answer-3143231
@@ -49178,9 +49853,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	//   9. Fragment
 	//                 1111111111111111 222   333333    44444        555555555555555555555555    666     77777777     8888888     999
 	var URL_REGEXP = /^[a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+\])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
-	/* jshint maxlen:220 */
+	// eslint-disable-next-line max-len
 	var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
-	/* jshint maxlen:200 */
 	var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/;
 	var DATE_REGEXP = /^(\d{4,})-(\d{2})-(\d{2})$/;
 	var DATETIMELOCAL_REGEXP = /^(\d{4,})-(\d\d)-(\d\d)T(\d\d):(\d\d)(?::(\d\d)(\.\d{1,3})?)?$/;
@@ -49361,7 +50035,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     <file name="protractor.js" type="protractor">
 	        var value = element(by.binding('example.value | date: "yyyy-MM-dd"'));
 	        var valid = element(by.binding('myForm.input.$valid'));
-	        var input = element(by.model('example.value'));
 	
 	        // currently protractor/webdriver does not support
 	        // sending keys to all known HTML5 input controls
@@ -49464,7 +50137,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    <file name="protractor.js" type="protractor">
 	      var value = element(by.binding('example.value | date: "yyyy-MM-ddTHH:mm:ss"'));
 	      var valid = element(by.binding('myForm.input.$valid'));
-	      var input = element(by.model('example.value'));
 	
 	      // currently protractor/webdriver does not support
 	      // sending keys to all known HTML5 input controls
@@ -49568,7 +50240,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   <file name="protractor.js" type="protractor">
 	      var value = element(by.binding('example.value | date: "HH:mm:ss"'));
 	      var valid = element(by.binding('myForm.input.$valid'));
-	      var input = element(by.model('example.value'));
 	
 	      // currently protractor/webdriver does not support
 	      // sending keys to all known HTML5 input controls
@@ -49673,7 +50344,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    <file name="protractor.js" type="protractor">
 	      var value = element(by.binding('example.value | date: "yyyy-Www"'));
 	      var valid = element(by.binding('myForm.input.$valid'));
-	      var input = element(by.model('example.value'));
 	
 	      // currently protractor/webdriver does not support
 	      // sending keys to all known HTML5 input controls
@@ -49777,7 +50447,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   <file name="protractor.js" type="protractor">
 	      var value = element(by.binding('example.value | date: "yyyy-MM"'));
 	      var valid = element(by.binding('myForm.input.$valid'));
-	      var input = element(by.model('example.value'));
 	
 	      // currently protractor/webdriver does not support
 	      // sending keys to all known HTML5 input controls
@@ -50172,19 +50841,161 @@ return /******/ (function(modules) { // webpackBootstrap
 	        </file>
 	        <file name="protractor.js" type="protractor">
 	          it('should change state', function() {
+	            var inputs = element.all(by.model('color.name'));
 	            var color = element(by.binding('color.name'));
 	
 	            expect(color.getText()).toContain('blue');
 	
-	            element.all(by.model('color.name')).get(0).click();
-	
+	            inputs.get(0).click();
 	            expect(color.getText()).toContain('red');
+	
+	            inputs.get(1).click();
+	            expect(color.getText()).toContain('green');
 	          });
 	        </file>
 	      </example>
 	   */
 	  'radio': radioInputType,
 	
+	  /**
+	   * @ngdoc input
+	   * @name input[range]
+	   *
+	   * @description
+	   * Native range input with validation and transformation.
+	   *
+	   * <div class="alert alert-warning">
+	   *   <p>
+	   *     In v1.5.9+, in order to avoid interfering with already existing, custom directives for
+	   *     `input[range]`, you need to let Angular know that you want to enable its built-in support.
+	   *     You can do this by adding the `ng-input-range` attribute to the input element. E.g.:
+	   *     `<input type="range" ng-input-range ... />`
+	   *   </p><br />
+	   *   <p>
+	   *     Input elements without the `ng-input-range` attibute will continue to be treated the same
+	   *     as in previous versions (e.g. their model value will be a string not a number and Angular
+	   *     will not take `min`/`max`/`step` attributes and properties into account).
+	   *   </p><br />
+	   *   <p>
+	   *     **Note:** From v1.6.x onwards, the support for `input[range]` will be always enabled and
+	   *     the `ng-input-range` attribute will have no effect.
+	   *   </p><br />
+	   *   <p>
+	   *     This documentation page refers to elements which have the built-in support enabled; i.e.
+	   *     elements _with_ the `ng-input-range` attribute.
+	   *   </p>
+	   * </div>
+	   *
+	   * The model for the range input must always be a `Number`.
+	   *
+	   * IE9 and other browsers that do not support the `range` type fall back
+	   * to a text input without any default values for `min`, `max` and `step`. Model binding,
+	   * validation and number parsing are nevertheless supported.
+	   *
+	   * Browsers that support range (latest Chrome, Safari, Firefox, Edge) treat `input[range]`
+	   * in a way that never allows the input to hold an invalid value. That means:
+	   * - any non-numerical value is set to `(max + min) / 2`.
+	   * - any numerical value that is less than the current min val, or greater than the current max val
+	   * is set to the min / max val respectively.
+	   * - additionally, the current `step` is respected, so the nearest value that satisfies a step
+	   * is used.
+	   *
+	   * See the [HTML Spec on input[type=range]](https://www.w3.org/TR/html5/forms.html#range-state-(type=range))
+	   * for more info.
+	   *
+	   * This has the following consequences for Angular:
+	   *
+	   * Since the element value should always reflect the current model value, a range input
+	   * will set the bound ngModel expression to the value that the browser has set for the
+	   * input element. For example, in the following input `<input type="range" ng-input-range ng-model="model.value">`,
+	   * if the application sets `model.value = null`, the browser will set the input to `'50'`.
+	   * Angular will then set the model to `50`, to prevent input and model value being out of sync.
+	   *
+	   * That means the model for range will immediately be set to `50` after `ngModel` has been
+	   * initialized. It also means a range input can never have the required error.
+	   *
+	   * This does not only affect changes to the model value, but also to the values of the `min`,
+	   * `max`, and `step` attributes. When these change in a way that will cause the browser to modify
+	   * the input value, Angular will also update the model value.
+	   *
+	   * Automatic value adjustment also means that a range input element can never have the `required`,
+	   * `min`, or `max` errors.
+	   *
+	   * However, `step` is currently only fully implemented by Firefox. Other browsers have problems
+	   * when the step value changes dynamically - they do not adjust the element value correctly, but
+	   * instead may set the `stepMismatch` error. If that's the case, the Angular will set the `step`
+	   * error on the input, and set the model to `undefined`.
+	   *
+	   * Note that `input[range]` is not compatible with `ngMax`, `ngMin`, and `ngStep`, because they do
+	   * not set the `min` and `max` attributes, which means that the browser won't automatically adjust
+	   * the input value based on their values, and will always assume min = 0, max = 100, and step = 1.
+	   *
+	   * @param           ngInputRange The presense of this attribute enables the built-in support for
+	   *                  `input[range]`.
+	   * @param {string}  ngModel Assignable angular expression to data-bind to.
+	   * @param {string=} name Property name of the form under which the control is published.
+	   * @param {string=} min Sets the `min` validation to ensure that the value entered is greater
+	   *                  than `min`. Can be interpolated.
+	   * @param {string=} max Sets the `max` validation to ensure that the value entered is less than `max`.
+	   *                  Can be interpolated.
+	   * @param {string=} step Sets the `step` validation to ensure that the value entered matches the `step`
+	   *                  Can be interpolated.
+	   * @param {string=} ngChange Angular expression to be executed when the ngModel value changes due
+	   *                  to user interaction with the input element.
+	   *
+	   * @example
+	      <example name="range-input-directive" module="rangeExample">
+	        <file name="index.html">
+	          <script>
+	            angular.module('rangeExample', [])
+	              .controller('ExampleController', ['$scope', function($scope) {
+	                $scope.value = 75;
+	                $scope.min = 10;
+	                $scope.max = 90;
+	              }]);
+	          </script>
+	          <form name="myForm" ng-controller="ExampleController">
+	
+	            Model as range: <input type="range" ng-input-range name="range" ng-model="value" min="{{min}}"  max="{{max}}">
+	            <hr>
+	            Model as number: <input type="number" ng-model="value"><br>
+	            Min: <input type="number" ng-model="min"><br>
+	            Max: <input type="number" ng-model="max"><br>
+	            value = <code>{{value}}</code><br/>
+	            myForm.range.$valid = <code>{{myForm.range.$valid}}</code><br/>
+	            myForm.range.$error = <code>{{myForm.range.$error}}</code>
+	          </form>
+	        </file>
+	      </example>
+	
+	   * ## Range Input with ngMin & ngMax attributes
+	
+	   * @example
+	      <example name="range-input-directive-ng" module="rangeExample">
+	        <file name="index.html">
+	          <script>
+	            angular.module('rangeExample', [])
+	              .controller('ExampleController', ['$scope', function($scope) {
+	                $scope.value = 75;
+	                $scope.min = 10;
+	                $scope.max = 90;
+	              }]);
+	          </script>
+	          <form name="myForm" ng-controller="ExampleController">
+	            Model as range: <input type="range" ng-input-range name="range" ng-model="value" ng-min="min" ng-max="max">
+	            <hr>
+	            Model as number: <input type="number" ng-model="value"><br>
+	            Min: <input type="number" ng-model="min"><br>
+	            Max: <input type="number" ng-model="max"><br>
+	            value = <code>{{value}}</code><br/>
+	            myForm.range.$valid = <code>{{myForm.range.$valid}}</code><br/>
+	            myForm.range.$error = <code>{{myForm.range.$error}}</code>
+	          </form>
+	        </file>
+	      </example>
+	
+	   */
+	  'range': rangeInputType,
 	
 	  /**
 	   * @ngdoc input
@@ -50322,7 +51133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    element.on('keydown', function(event) {
+	    element.on('keydown', /** @this */ function(event) {
 	      var key = event.keyCode;
 	
 	      // ignore
@@ -50347,7 +51158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // For these event types, when native validators are present and the browser supports the type,
 	  // check for validity changes on various DOM events.
 	  if (PARTIAL_VALIDATION_TYPES[type] && ctrl.$$hasNativeValidators && type === attr.type) {
-	    element.on(PARTIAL_VALIDATION_EVENTS, function(ev) {
+	    element.on(PARTIAL_VALIDATION_EVENTS, /** @this */ function(ev) {
 	      if (!timeout) {
 	        var validity = this[VALIDITY_STATE_PROPERTY];
 	        var origBadInput = validity.badInput;
@@ -50415,7 +51226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // When a date is JSON'ified to wraps itself inside of an extra
 	      // set of double quotes. This makes the date parsing code unable
 	      // to match the date string and parse it as a date.
-	      if (iso.charAt(0) == '"' && iso.charAt(iso.length - 1) == '"') {
+	      if (iso.charAt(0) === '"' && iso.charAt(iso.length - 1) === '"') {
 	        iso = iso.substring(1, iso.length - 1);
 	      }
 	      if (ISO_DATE_REGEXP.test(iso)) {
@@ -50536,10 +51347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
-	  badInputChecker(scope, element, attr, ctrl);
-	  baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
-	
+	function numberFormatterParser(ctrl) {
 	  ctrl.$$parserName = 'number';
 	  ctrl.$parsers.push(function(value) {
 	    if (ctrl.$isEmpty(value))      return null;
@@ -50556,37 +51364,226 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return value;
 	  });
+	}
+	
+	function parseNumberAttrVal(val) {
+	  if (isDefined(val) && !isNumber(val)) {
+	    val = parseFloat(val);
+	  }
+	  return !isNumberNaN(val) ? val : undefined;
+	}
+	
+	function isNumberInteger(num) {
+	  // See http://stackoverflow.com/questions/14636536/how-to-check-if-a-variable-is-an-integer-in-javascript#14794066
+	  // (minus the assumption that `num` is a number)
+	
+	  // eslint-disable-next-line no-bitwise
+	  return (num | 0) === num;
+	}
+	
+	function countDecimals(num) {
+	  var numString = num.toString();
+	  var decimalSymbolIndex = numString.indexOf('.');
+	
+	  if (decimalSymbolIndex === -1) {
+	    if (-1 < num && num < 1) {
+	      // It may be in the exponential notation format (`1e-X`)
+	      var match = /e-(\d+)$/.exec(numString);
+	
+	      if (match) {
+	        return Number(match[1]);
+	      }
+	    }
+	
+	    return 0;
+	  }
+	
+	  return numString.length - decimalSymbolIndex - 1;
+	}
+	
+	function isValidForStep(viewValue, stepBase, step) {
+	  // At this point `stepBase` and `step` are expected to be non-NaN values
+	  // and `viewValue` is expected to be a valid stringified number.
+	  var value = Number(viewValue);
+	
+	  // Due to limitations in Floating Point Arithmetic (e.g. `0.3 - 0.2 !== 0.1` or
+	  // `0.5 % 0.1 !== 0`), we need to convert all numbers to integers.
+	  if (!isNumberInteger(value) || !isNumberInteger(stepBase) || !isNumberInteger(step)) {
+	    var decimalCount = Math.max(countDecimals(value), countDecimals(stepBase), countDecimals(step));
+	    var multiplier = Math.pow(10, decimalCount);
+	
+	    value = value * multiplier;
+	    stepBase = stepBase * multiplier;
+	    step = step * multiplier;
+	  }
+	
+	  return (value - stepBase) % step === 0;
+	}
+	
+	function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
+	  badInputChecker(scope, element, attr, ctrl);
+	  baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
+	  numberFormatterParser(ctrl);
+	
+	  var minVal;
+	  var maxVal;
 	
 	  if (isDefined(attr.min) || attr.ngMin) {
-	    var minVal;
 	    ctrl.$validators.min = function(value) {
 	      return ctrl.$isEmpty(value) || isUndefined(minVal) || value >= minVal;
 	    };
 	
 	    attr.$observe('min', function(val) {
-	      if (isDefined(val) && !isNumber(val)) {
-	        val = parseFloat(val);
-	      }
-	      minVal = isNumber(val) && !isNaN(val) ? val : undefined;
+	      minVal = parseNumberAttrVal(val);
 	      // TODO(matsko): implement validateLater to reduce number of validations
 	      ctrl.$validate();
 	    });
 	  }
 	
 	  if (isDefined(attr.max) || attr.ngMax) {
-	    var maxVal;
 	    ctrl.$validators.max = function(value) {
 	      return ctrl.$isEmpty(value) || isUndefined(maxVal) || value <= maxVal;
 	    };
 	
 	    attr.$observe('max', function(val) {
-	      if (isDefined(val) && !isNumber(val)) {
-	        val = parseFloat(val);
-	      }
-	      maxVal = isNumber(val) && !isNaN(val) ? val : undefined;
+	      maxVal = parseNumberAttrVal(val);
 	      // TODO(matsko): implement validateLater to reduce number of validations
 	      ctrl.$validate();
 	    });
+	  }
+	}
+	
+	function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
+	  badInputChecker(scope, element, attr, ctrl);
+	  numberFormatterParser(ctrl);
+	  baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
+	
+	  var supportsRange = ctrl.$$hasNativeValidators && element[0].type === 'range',
+	      minVal = supportsRange ? 0 : undefined,
+	      maxVal = supportsRange ? 100 : undefined,
+	      stepVal = supportsRange ? 1 : undefined,
+	      validity = element[0].validity,
+	      hasMinAttr = isDefined(attr.min),
+	      hasMaxAttr = isDefined(attr.max),
+	      hasStepAttr = isDefined(attr.step);
+	
+	  var originalRender = ctrl.$render;
+	
+	  ctrl.$render = supportsRange && isDefined(validity.rangeUnderflow) && isDefined(validity.rangeOverflow) ?
+	    //Browsers that implement range will set these values automatically, but reading the adjusted values after
+	    //$render would cause the min / max validators to be applied with the wrong value
+	    function rangeRender() {
+	      originalRender();
+	      ctrl.$setViewValue(element.val());
+	    } :
+	    originalRender;
+	
+	  if (hasMinAttr) {
+	    ctrl.$validators.min = supportsRange ?
+	      // Since all browsers set the input to a valid value, we don't need to check validity
+	      function noopMinValidator() { return true; } :
+	      // non-support browsers validate the min val
+	      function minValidator(modelValue, viewValue) {
+	        return ctrl.$isEmpty(viewValue) || isUndefined(minVal) || viewValue >= minVal;
+	      };
+	
+	    setInitialValueAndObserver('min', minChange);
+	  }
+	
+	  if (hasMaxAttr) {
+	    ctrl.$validators.max = supportsRange ?
+	      // Since all browsers set the input to a valid value, we don't need to check validity
+	      function noopMaxValidator() { return true; } :
+	      // non-support browsers validate the max val
+	      function maxValidator(modelValue, viewValue) {
+	        return ctrl.$isEmpty(viewValue) || isUndefined(maxVal) || viewValue <= maxVal;
+	      };
+	
+	    setInitialValueAndObserver('max', maxChange);
+	  }
+	
+	  if (hasStepAttr) {
+	    ctrl.$validators.step = supportsRange ?
+	      function nativeStepValidator() {
+	        // Currently, only FF implements the spec on step change correctly (i.e. adjusting the
+	        // input element value to a valid value). It's possible that other browsers set the stepMismatch
+	        // validity error instead, so we can at least report an error in that case.
+	        return !validity.stepMismatch;
+	      } :
+	      // ngStep doesn't set the setp attr, so the browser doesn't adjust the input value as setting step would
+	      function stepValidator(modelValue, viewValue) {
+	        return ctrl.$isEmpty(viewValue) || isUndefined(stepVal) ||
+	               isValidForStep(viewValue, minVal || 0, stepVal);
+	      };
+	
+	    setInitialValueAndObserver('step', stepChange);
+	  }
+	
+	  function setInitialValueAndObserver(htmlAttrName, changeFn) {
+	    // interpolated attributes set the attribute value only after a digest, but we need the
+	    // attribute value when the input is first rendered, so that the browser can adjust the
+	    // input value based on the min/max value
+	    element.attr(htmlAttrName, attr[htmlAttrName]);
+	    attr.$observe(htmlAttrName, changeFn);
+	  }
+	
+	  function minChange(val) {
+	    minVal = parseNumberAttrVal(val);
+	    // ignore changes before model is initialized
+	    if (isNumberNaN(ctrl.$modelValue)) {
+	      return;
+	    }
+	
+	    if (supportsRange) {
+	      var elVal = element.val();
+	      // IE11 doesn't set the el val correctly if the minVal is greater than the element value
+	      if (minVal > elVal) {
+	        elVal = minVal;
+	        element.val(elVal);
+	      }
+	      ctrl.$setViewValue(elVal);
+	    } else {
+	      // TODO(matsko): implement validateLater to reduce number of validations
+	      ctrl.$validate();
+	    }
+	  }
+	
+	  function maxChange(val) {
+	    maxVal = parseNumberAttrVal(val);
+	    // ignore changes before model is initialized
+	    if (isNumberNaN(ctrl.$modelValue)) {
+	      return;
+	    }
+	
+	    if (supportsRange) {
+	      var elVal = element.val();
+	      // IE11 doesn't set the el val correctly if the maxVal is less than the element value
+	      if (maxVal < elVal) {
+	        element.val(maxVal);
+	        // IE11 and Chrome don't set the value to the minVal when max < min
+	        elVal = maxVal < minVal ? minVal : maxVal;
+	      }
+	      ctrl.$setViewValue(elVal);
+	    } else {
+	      // TODO(matsko): implement validateLater to reduce number of validations
+	      ctrl.$validate();
+	    }
+	  }
+	
+	  function stepChange(val) {
+	    stepVal = parseNumberAttrVal(val);
+	    // ignore changes before model is initialized
+	    if (isNumberNaN(ctrl.$modelValue)) {
+	      return;
+	    }
+	
+	    // Some browsers don't adjust the input value correctly, but set the stepMismatch error
+	    if (supportsRange && ctrl.$viewValue !== element.val()) {
+	      ctrl.$setViewValue(element.val());
+	    } else {
+	      // TODO(matsko): implement validateLater to reduce number of validations
+	      ctrl.$validate();
+	    }
 	  }
 	}
 	
@@ -50632,7 +51629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  ctrl.$render = function() {
 	    var value = attr.value;
-	    element[0].checked = (value == ctrl.$viewValue);
+	    element[0].checked = (value === ctrl.$viewValue);
 	  };
 	
 	  attr.$observe('value', ctrl.$render);
@@ -50715,6 +51712,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {string=} ngChange Angular expression to be executed when input changes due to user
 	 *    interaction with the input element.
 	 * @param {boolean=} [ngTrim=true] If set to false Angular will not automatically trim the input.
+	 *
+	 * @knownIssue
+	 *
+	 * When specifying the `placeholder` attribute of `<textarea>`, Internet Explorer will temporarily
+	 * insert the placeholder value as the textarea's content. If the placeholder value contains
+	 * interpolation (`{{ ... }}`), an error will be logged in the console when Angular tries to update
+	 * the value of the by-then-removed text node. This doesn't affect the functionality of the
+	 * textarea, but can be undesirable.
+	 *
+	 * You can work around this Internet Explorer issue by using `ng-attr-placeholder` instead of
+	 * `placeholder` on textareas, whenever you need interpolation in the placeholder value. You can
+	 * find more details on `ngAttr` in the
+	 * [Interpolation](guide/interpolation#-ngattr-for-binding-to-arbitrary-attributes) section of the
+	 * Developer Guide.
 	 */
 	
 	
@@ -50863,7 +51874,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    link: {
 	      pre: function(scope, element, attr, ctrls) {
 	        if (ctrls[0]) {
-	          (inputType[lowercase(attr.type)] || inputType.text)(scope, element, attr, ctrls[0], $sniffer,
+	          var type = lowercase(attr.type);
+	          if ((type === 'range') && !attr.hasOwnProperty('ngInputRange')) {
+	            type = 'text';
+	          }
+	          (inputType[type] || inputType.text)(scope, element, attr, ctrls[0], $sniffer,
 	                                                              $browser, $filter, $parse);
 	        }
 	      }
@@ -50977,7 +51992,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @example
 	 * Enter a name in the Live Preview text box; the greeting below the text box changes instantly.
-	   <example module="bindExample">
+	   <example module="bindExample" name="ng-bind">
 	     <file name="index.html">
 	       <script>
 	         angular.module('bindExample', [])
@@ -51037,7 +52052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @example
 	 * Try it here: enter text in text box and watch the greeting change.
-	   <example module="bindExample">
+	   <example module="bindExample" name="ng-bind-template">
 	     <file name="index.html">
 	       <script>
 	         angular.module('bindExample', [])
@@ -51110,7 +52125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @example
 	
-	   <example module="bindHtmlExample" deps="angular-sanitize.js">
+	   <example module="bindHtmlExample" deps="angular-sanitize.js" name="ng-bind-html">
 	     <file name="index.html">
 	       <div ng-controller="ExampleController">
 	        <p ng-bind-html="myHTML"></p>
@@ -51235,6 +52250,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
+	/* exported
+	  ngClassDirective,
+	  ngClassEvenDirective,
+	  ngClassOddDirective
+	*/
+	
 	function classDirective(name, selector) {
 	  name = 'ngClass' + name;
 	  return ['$animate', function($animate) {
@@ -51252,14 +52273,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (name !== 'ngClass') {
 	          scope.$watch('$index', function($index, old$index) {
-	            // jshint bitwise: false
+	            /* eslint-disable no-bitwise */
 	            var mod = $index & 1;
 	            if (mod !== (old$index & 1)) {
 	              var classes = arrayClasses(scope.$eval(attr[name]));
-	              mod === selector ?
-	                addClasses(classes) :
+	              if (mod === selector) {
+	                addClasses(classes);
+	              } else {
 	                removeClasses(classes);
+	              }
 	            }
+	            /* eslint-enable */
 	          });
 	        }
 	
@@ -51304,9 +52328,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        function ngClassWatchAction(newVal) {
-	          // jshint bitwise: false
+	          // eslint-disable-next-line no-bitwise
 	          if (selector === true || (scope.$index & 1) === selector) {
-	          // jshint bitwise: true
 	            var newClasses = arrayClasses(newVal || []);
 	            if (!oldVal) {
 	              addClasses(newClasses);
@@ -51331,7 +52354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      for (var i = 0; i < tokens1.length; i++) {
 	        var token = tokens1[i];
 	        for (var j = 0; j < tokens2.length; j++) {
-	          if (token == tokens2[j]) continue outer;
+	          if (token === tokens2[j]) continue outer;
 	        }
 	        values.push(token);
 	      }
@@ -51407,7 +52430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   element.
 	 *
 	 * @example Example that demonstrates basic bindings via ngClass directive.
-	   <example>
+	   <example name="ng-class">
 	     <file name="index.html">
 	       <p ng-class="{strike: deleted, bold: important, 'has-error': error}">Map Syntax Example</p>
 	       <label>
@@ -51500,7 +52523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	   The example below demonstrates how to perform animations using ngClass.
 	
-	   <example module="ngAnimate" deps="angular-animate.js" animations="true">
+	   <example module="ngAnimate" deps="angular-animate.js" animations="true" name="ng-class">
 	     <file name="index.html">
 	      <input id="setbtn" type="button" value="set" ng-click="myVar='my-class'">
 	      <input id="clearbtn" type="button" value="clear" ng-click="myVar=''">
@@ -51563,7 +52586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   of the evaluation can be a string representing space delimited class names or an array.
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-class-odd">
 	     <file name="index.html">
 	        <ol ng-init="names=['John', 'Mary', 'Cate', 'Suz']">
 	          <li ng-repeat="name in names">
@@ -51611,7 +52634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   result of the evaluation can be a string representing space delimited class names or an array.
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-class-even">
 	     <file name="index.html">
 	        <ol ng-init="names=['John', 'Mary', 'Cate', 'Suz']">
 	          <li ng-repeat="name in names">
@@ -51677,7 +52700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @element ANY
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-cloak">
 	     <file name="index.html">
 	        <div id="template1" ng-cloak>{{ 'hello' }}</div>
 	        <div id="template2" class="ng-cloak">{{ 'world' }}</div>
@@ -51786,10 +52809,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *      .controller('SettingsController1', SettingsController1);
 	 *
 	 *    function SettingsController1() {
-	 *      this.name = "John Smith";
+	 *      this.name = 'John Smith';
 	 *      this.contacts = [
 	 *        {type: 'phone', value: '408 555 1212'},
-	 *        {type: 'email', value: 'john.smith@example.org'} ];
+	 *        {type: 'email', value: 'john.smith@example.org'}
+	 *      ];
 	 *    }
 	 *
 	 *    SettingsController1.prototype.greet = function() {
@@ -51869,10 +52893,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     .controller('SettingsController2', ['$scope', SettingsController2]);
 	 *
 	 *   function SettingsController2($scope) {
-	 *     $scope.name = "John Smith";
+	 *     $scope.name = 'John Smith';
 	 *     $scope.contacts = [
 	 *       {type:'phone', value:'408 555 1212'},
-	 *       {type:'email', value:'john.smith@example.org'} ];
+	 *       {type:'email', value:'john.smith@example.org'}
+	 *     ];
 	 *
 	 *     $scope.greet = function() {
 	 *       alert($scope.name);
@@ -52037,15 +53062,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        </file>
 	        <file name="script.js">
 	           angular.module('cspExample', [])
-	             .controller('MainController', function() {
+	             .controller('MainController', function MainController() {
 	                this.counter = 0;
 	                this.inc = function() {
 	                  this.counter++;
 	                };
 	                this.evil = function() {
-	                  // jshint evil:true
 	                  try {
-	                    eval('1+2');
+	                    eval('1+2'); // eslint-disable-line no-eval
 	                  } catch (e) {
 	                    this.evilError = e.message;
 	                  }
@@ -52097,7 +53121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          beforeEach(function() {
 	            util = require('util');
-	            webdriver = require('protractor/node_modules/selenium-webdriver');
+	            webdriver = require('selenium-webdriver');
 	          });
 	
 	          // For now, we only test on Chrome,
@@ -52152,7 +53176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * click. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-click">
 	     <file name="index.html">
 	      <button ng-click="count = count + 1" ng-init="count=0">
 	        Increment
@@ -52227,7 +53251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * a dblclick. (The Event object is available as `$event`)
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-dblclick">
 	     <file name="index.html">
 	      <button ng-dblclick="count = count + 1" ng-init="count=0">
 	        Increment (on double click)
@@ -52251,7 +53275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mousedown. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mousedown">
 	     <file name="index.html">
 	      <button ng-mousedown="count = count + 1" ng-init="count=0">
 	        Increment (on mouse down)
@@ -52275,7 +53299,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mouseup. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mouseup">
 	     <file name="index.html">
 	      <button ng-mouseup="count = count + 1" ng-init="count=0">
 	        Increment (on mouse up)
@@ -52298,7 +53322,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mouseover. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mouseover">
 	     <file name="index.html">
 	      <button ng-mouseover="count = count + 1" ng-init="count=0">
 	        Increment (when mouse is over)
@@ -52322,7 +53346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mouseenter. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mouseenter">
 	     <file name="index.html">
 	      <button ng-mouseenter="count = count + 1" ng-init="count=0">
 	        Increment (when mouse enters)
@@ -52346,7 +53370,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mouseleave. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mouseleave">
 	     <file name="index.html">
 	      <button ng-mouseleave="count = count + 1" ng-init="count=0">
 	        Increment (when mouse leaves)
@@ -52370,7 +53394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * mousemove. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-mousemove">
 	     <file name="index.html">
 	      <button ng-mousemove="count = count + 1" ng-init="count=0">
 	        Increment (when mouse moves)
@@ -52394,7 +53418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * keydown. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-keydown">
 	     <file name="index.html">
 	      <input ng-keydown="count = count + 1" ng-init="count=0">
 	      key down count: {{count}}
@@ -52416,7 +53440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * keyup. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-keyup">
 	     <file name="index.html">
 	       <p>Typing in the input box below updates the key count</p>
 	       <input ng-keyup="count = count + 1" ng-init="count=0"> key up count: {{count}}
@@ -52443,7 +53467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * and can be interrogated for keyCode, altKey, etc.)
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-keypress">
 	     <file name="index.html">
 	      <input ng-keypress="count = count + 1" ng-init="count=0">
 	      key press count: {{count}}
@@ -52476,7 +53500,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example module="submitExample">
+	   <example module="submitExample" name="ng-submit">
 	     <file name="index.html">
 	      <script>
 	        angular.module('submitExample', [])
@@ -52572,7 +53596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * copy. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-copy">
 	     <file name="index.html">
 	      <input ng-copy="copied=true" ng-init="copied=false; value='copy me'" ng-model="value">
 	      copied: {{copied}}
@@ -52593,7 +53617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * cut. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-cut">
 	     <file name="index.html">
 	      <input ng-cut="cut=true" ng-init="cut=false; value='cut me'" ng-model="value">
 	      cut: {{cut}}
@@ -52614,7 +53638,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * paste. ({@link guide/expression#-event- Event object is available as `$event`})
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-paste">
 	     <file name="index.html">
 	      <input ng-paste="paste=true" ng-init="paste=false" placeholder='paste here'>
 	      pasted: {{paste}}
@@ -52669,7 +53693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     element is added to the DOM tree.
 	 *
 	 * @example
-	  <example module="ngAnimate" deps="angular-animate.js" animations="true">
+	  <example module="ngAnimate" deps="angular-animate.js" animations="true" name="ng-if">
 	    <file name="index.html">
 	      <label>Click me: <input type="checkbox" ng-model="checked" ng-init="checked=true" /></label><br/>
 	      Show when checked:
@@ -52799,7 +53823,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *                  - Otherwise enable scrolling only if the expression evaluates to truthy value.
 	 *
 	 * @example
-	  <example module="includeExample" deps="angular-animate.js" animations="true">
+	  <example module="includeExample" deps="angular-animate.js" animations="true" name="ng-include">
 	    <file name="index.html">
 	     <div ng-controller="ExampleController">
 	       <select ng-model="template" ng-options="t.name for t in templates">
@@ -52816,8 +53840,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      angular.module('includeExample', ['ngAnimate'])
 	        .controller('ExampleController', ['$scope', function($scope) {
 	          $scope.templates =
-	            [ { name: 'template1.html', url: 'template1.html'},
-	              { name: 'template2.html', url: 'template2.html'} ];
+	            [{ name: 'template1.html', url: 'template1.html'},
+	             { name: 'template2.html', url: 'template2.html'}];
 	          $scope.template = $scope.templates[0];
 	        }]);
 	     </file>
@@ -52875,7 +53899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	
 	      it('should load template2.html', function() {
-	        if (browser.params.browser == 'firefox') {
+	        if (browser.params.browser === 'firefox') {
 	          // Firefox can't handle using selects
 	          // See https://github.com/angular/protractor/issues/480
 	          return;
@@ -52886,7 +53910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	
 	      it('should change to blank', function() {
-	        if (browser.params.browser == 'firefox') {
+	        if (browser.params.browser === 'firefox') {
 	          // Firefox can't handle using selects
 	          return;
 	        }
@@ -53084,7 +54108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {expression} ngInit {@link guide/expression Expression} to eval.
 	 *
 	 * @example
-	   <example module="initExample">
+	   <example module="initExample" name="ng-init">
 	     <file name="index.html">
 	   <script>
 	     angular.module('initExample', [])
@@ -53255,7 +54279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PRISTINE_CLASS: true,
 	  DIRTY_CLASS: true,
 	  UNTOUCHED_CLASS: true,
-	  TOUCHED_CLASS: true,
+	  TOUCHED_CLASS: true
 	*/
 	
 	var VALID_CLASS = 'ng-valid',
@@ -53428,7 +54452,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var html = element.html();
 	                // When we clear the content editable the browser leaves a <br> behind
 	                // If strip-br attribute is provided then we strip this out
-	                if ( attrs.stripBr && html == '<br>' ) {
+	                if (attrs.stripBr && html === '<br>') {
 	                  html = '';
 	                }
 	                ngModel.$setViewValue(html);
@@ -53450,7 +54474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    </file>
 	    <file name="protractor.js" type="protractor">
 	    it('should data-bind and become invalid', function() {
-	      if (browser.params.browser == 'safari' || browser.params.browser == 'firefox') {
+	      if (browser.params.browser === 'safari' || browser.params.browser === 'firefox') {
 	        // SafariDriver can't handle contenteditable
 	        // and Firefox driver can't clear contenteditables very well
 	        return;
@@ -53471,7 +54495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 */
 	var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$parse', '$animate', '$timeout', '$rootScope', '$q', '$interpolate',
-	    function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
+	    /** @this */ function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
 	  this.$viewValue = Number.NaN;
 	  this.$modelValue = Number.NaN;
 	  this.$$rawModelValue = undefined; // stores the parsed modelValue / model set from scope regardless of validity.
@@ -53521,7 +54545,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      };
 	    } else if (!parsedNgModel.assign) {
-	      throw ngModelMinErr('nonassign', "Expression '{0}' is non-assignable. Element: {1}",
+	      throw ngModelMinErr('nonassign', 'Expression \'{0}\' is non-assignable. Element: {1}',
 	          $attr.ngModel, startingTag($element));
 	    }
 	  };
@@ -53567,6 +54591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @returns {boolean} True if `value` is "empty".
 	   */
 	  this.$isEmpty = function(value) {
+	    // eslint-disable-next-line no-self-compare
 	    return isUndefined(value) || value === '' || value === null || value !== value;
 	  };
 	
@@ -53721,7 +54746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *       $scope.model = {};
 	   *
 	   *       $scope.setEmpty = function(e, value, rollback) {
-	   *         if (e.keyCode == 27) {
+	   *         if (e.keyCode === 27) {
 	   *           e.preventDefault();
 	   *           if (rollback) {
 	   *             $scope.myForm[value].$rollbackViewValue();
@@ -53797,7 +54822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  this.$validate = function() {
 	    // ignore $validate before model is initialized
-	    if (isNumber(ctrl.$modelValue) && isNaN(ctrl.$modelValue)) {
+	    if (isNumberNaN(ctrl.$modelValue)) {
 	      return;
 	    }
 	
@@ -53889,7 +54914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var promise = validator(modelValue, viewValue);
 	        if (!isPromiseLike(promise)) {
 	          throw ngModelMinErr('nopromise',
-	            "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
+	            'Expected asynchronous validator to return a promise but got \'{0}\' instead.', promise);
 	        }
 	        setValidity(name, undefined);
 	        validatorPromises.push(promise.then(function() {
@@ -53968,7 +54993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	    }
-	    if (isNumber(ctrl.$modelValue) && isNaN(ctrl.$modelValue)) {
+	    if (isNumberNaN(ctrl.$modelValue)) {
 	      // ctrl.$modelValue has not been touched yet...
 	      ctrl.$modelValue = ngModelGet($scope);
 	    }
@@ -54114,6 +55139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // TODO(perf): why not move this to the action fn?
 	    if (modelValue !== ctrl.$modelValue &&
 	       // checks for NaN is needed to allow setting the model to NaN when there's an asyncValidator
+	        // eslint-disable-next-line no-self-compare
 	       (ctrl.$modelValue === ctrl.$modelValue || modelValue === modelValue)
 	    ) {
 	      ctrl.$modelValue = ctrl.$$rawModelValue = modelValue;
@@ -54131,7 +55157,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ctrl.$viewValue = ctrl.$$lastCommittedViewValue = viewValue;
 	        ctrl.$render();
 	
-	        ctrl.$$runValidators(modelValue, viewValue, noop);
+	        // It is possible that model and view value have been updated during render
+	        ctrl.$$runValidators(ctrl.$modelValue, ctrl.$viewValue, noop);
 	      }
 	    }
 	
@@ -54247,7 +55274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * </pre>
 	 *
 	 * @example
-	 * <example deps="angular-animate.js" animations="true" fixBase="true" module="inputExample">
+	 * <example deps="angular-animate.js" animations="true" fixBase="true" module="inputExample" name="ng-model">
 	     <file name="index.html">
 	       <script>
 	        angular.module('inputExample', [])
@@ -54383,6 +55410,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}];
 	
+	
+	
 	var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
 	
 	/**
@@ -54458,7 +55487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          $scope.user = { name: 'John', data: '' };
 	
 	          $scope.cancel = function(e) {
-	            if (e.keyCode == 27) {
+	            if (e.keyCode === 27) {
 	              $scope.userForm.userName.$rollbackViewValue();
 	            }
 	          };
@@ -54549,7 +55578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ngModelOptionsDirective = function() {
 	  return {
 	    restrict: 'A',
-	    controller: ['$scope', '$attrs', function($scope, $attrs) {
+	    controller: ['$scope', '$attrs', function NgModelOptionsController($scope, $attrs) {
 	      var that = this;
 	      this.$options = copy($scope.$eval($attrs.ngModelOptions));
 	      // Allow adding/overriding bound events
@@ -54694,7 +55723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * but the one wrapped in `ngNonBindable` is left alone.
 	 *
 	 * @example
-	    <example>
+	    <example name="ng-non-bindable">
 	      <file name="index.html">
 	        <div>Normal: {{1 + 2}}</div>
 	        <div ng-non-bindable>Ignored: {{1 + 2}}</div>
@@ -54708,6 +55737,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    </example>
 	 */
 	var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
+	
+	/* exported ngOptionsDirective */
 	
 	/* global jqLiteRemove */
 	
@@ -54866,7 +55897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *      even when the options are recreated (e.g. reloaded from the server).
 	 *
 	 * @example
-	    <example module="selectExample">
+	    <example module="selectExample" name="select">
 	      <file name="index.html">
 	        <script>
 	        angular.module('selectExample', [])
@@ -54939,7 +55970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    </example>
 	 */
 	
-	// jshint maxlen: false
+	/* eslint-disable max-len */
 	//                     //00001111111111000000000002222222222000000000000000000000333333333300000000000000000000000004444444444400000000000005555555555555550000000006666666666666660000000777777777777777000000000000000888888888800000000000000000009999999999
 	var NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?(?:\s+disable\s+when\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/;
 	                        // 1: value expression (valueFn)
@@ -54951,7 +55982,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        // 7: object item value variable name
 	                        // 8: collection expression
 	                        // 9: track by expression
-	// jshint maxlen: 100
+	/* eslint-enable */
 	
 	
 	var ngOptionsDirective = ['$compile', '$document', '$parse', function($compile, $document, $parse) {
@@ -54961,9 +55992,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var match = optionsExp.match(NG_OPTIONS_REGEXP);
 	    if (!(match)) {
 	      throw ngOptionsMinErr('iexp',
-	        "Expected expression in form of " +
-	        "'_select_ (as _label_)? for (_key_,)?_value_ in _collection_'" +
-	        " but got '{0}'. Element: {1}",
+	        'Expected expression in form of ' +
+	        '\'_select_ (as _label_)? for (_key_,)?_value_ in _collection_\'' +
+	        ' but got \'{0}\'. Element: {1}',
 	        optionsExp, startingTag(selectElement));
 	    }
 	
@@ -55158,9 +56189,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var removeEmptyOption = function() {
 	        if (!providedEmptyOption) {
 	          emptyOption.remove();
+	        } else {
+	          emptyOption.removeAttr('selected');
 	        }
 	      };
-	
 	
 	      var renderUnknownOption = function() {
 	        selectElement.prepend(unknownOption);
@@ -55177,7 +56209,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!multiple) {
 	
 	        selectCtrl.writeValue = function writeNgOptionsValue(value) {
+	          var selectedOption = options.selectValueMap[selectElement.val()];
 	          var option = options.getOptionFromViewValue(value);
+	
+	          // Make sure to remove the selected attribute from the previously selected option
+	          // Otherwise, screen readers might get confused
+	          if (selectedOption) selectedOption.element.removeAttribute('selected');
 	
 	          if (option) {
 	            // Don't update the option when it is already selected.
@@ -55219,6 +56256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // If we are using `track by` then we must watch the tracked value on the model
 	        // since ngModel only watches for object identity change
+	        // FIXME: When a user selects an option, this watch will fire needlessly
 	        if (ngOptions.trackBy) {
 	          scope.$watch(
 	            function() { return ngOptions.getTrackByValue(ngModelCtrl.$viewValue); },
@@ -55511,7 +56549,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {number=} offset Offset to deduct from the total number.
 	 *
 	 * @example
-	    <example module="pluralizeExample">
+	    <example module="pluralizeExample" name="ng-pluralize">
 	      <file name="index.html">
 	        <script>
 	          angular.module('pluralizeExample', [])
@@ -55625,7 +56663,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      scope.$watch(numberExp, function ngPluralizeWatchAction(newVal) {
 	        var count = parseFloat(newVal);
-	        var countIsNaN = isNaN(count);
+	        var countIsNaN = isNumberNaN(count);
 	
 	        if (!countIsNaN && !(count in whens)) {
 	          // If an explicit number rule such as 1, 2, 3... is defined, just use it.
@@ -55635,12 +56673,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // If both `count` and `lastCount` are NaN, we don't need to re-register a watch.
 	        // In JS `NaN !== NaN`, so we have to explicitly check.
-	        if ((count !== lastCount) && !(countIsNaN && isNumber(lastCount) && isNaN(lastCount))) {
+	        if ((count !== lastCount) && !(countIsNaN && isNumberNaN(lastCount))) {
 	          watchRemover();
 	          var whenExpFn = whensExpFns[count];
 	          if (isUndefined(whenExpFn)) {
 	            if (newVal != null) {
-	              $log.debug("ngPluralize: no rule defined for '" + count + "' in " + whenExp);
+	              $log.debug('ngPluralize: no rule defined for \'' + count + '\' in ' + whenExp);
 	            }
 	            watchRemover = noop;
 	            updateElementText();
@@ -55657,6 +56695,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 	}];
+	
+	/* exported ngRepeatDirective */
 	
 	/**
 	 * @ngdoc directive
@@ -55890,7 +56930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 * This example uses `ngRepeat` to display a list of people. A filter is used to restrict the displayed
 	 * results by name. New (entering) and removed (leaving) items are animated.
-	  <example module="ngRepeat" name="ngRepeat" deps="angular-animate.js" animations="true">
+	  <example module="ngRepeat" name="ngRepeat" deps="angular-animate.js" animations="true" name="ng-repeat">
 	    <file name="index.html">
 	      <div ng-controller="repeatController">
 	        I have {{friends.length}} friends. They are:
@@ -55899,7 +56939,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          <li class="animate-repeat" ng-repeat="friend in friends | filter:q as results">
 	            [{{$index + 1}}] {{friend.name}} who is {{friend.age}} years old.
 	          </li>
-	          <li class="animate-repeat" ng-if="results.length == 0">
+	          <li class="animate-repeat" ng-if="results.length === 0">
 	            <strong>No results found...</strong>
 	          </li>
 	        </ul>
@@ -55992,9 +57032,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    scope.$first = (index === 0);
 	    scope.$last = (index === (arrayLength - 1));
 	    scope.$middle = !(scope.$first || scope.$last);
-	    // jshint bitwise: false
-	    scope.$odd = !(scope.$even = (index&1) === 0);
-	    // jshint bitwise: true
+	    // eslint-disable-next-line no-bitwise
+	    scope.$odd = !(scope.$even = (index & 1) === 0);
 	  };
 	
 	  var getBlockStart = function(block) {
@@ -56020,7 +57059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/);
 	
 	      if (!match) {
-	        throw ngRepeatMinErr('iexp', "Expected expression in form of '_item_ in _collection_[ track by _id_]' but got '{0}'.",
+	        throw ngRepeatMinErr('iexp', 'Expected expression in form of \'_item_ in _collection_[ track by _id_]\' but got \'{0}\'.',
 	            expression);
 	      }
 	
@@ -56032,7 +57071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      match = lhs.match(/^(?:(\s*[\$\w]+)|\(\s*([\$\w]+)\s*,\s*([\$\w]+)\s*\))$/);
 	
 	      if (!match) {
-	        throw ngRepeatMinErr('iidexp', "'_item_' in '_item_ in _collection_' should be an identifier or '(_key_, _value_)' expression, but got '{0}'.",
+	        throw ngRepeatMinErr('iidexp', '\'_item_\' in \'_item_ in _collection_\' should be an identifier or \'(_key_, _value_)\' expression, but got \'{0}\'.',
 	            lhs);
 	      }
 	      var valueIdentifier = match[3] || match[1];
@@ -56040,7 +57079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      if (aliasAs && (!/^[$a-zA-Z_][$a-zA-Z0-9_]*$/.test(aliasAs) ||
 	          /^(null|undefined|this|\$index|\$first|\$middle|\$last|\$even|\$odd|\$parent|\$root|\$id)$/.test(aliasAs))) {
-	        throw ngRepeatMinErr('badident', "alias '{0}' is invalid --- must be a valid JS identifier which is not a reserved name.",
+	        throw ngRepeatMinErr('badident', 'alias \'{0}\' is invalid --- must be a valid JS identifier which is not a reserved name.',
 	          aliasAs);
 	      }
 	
@@ -56136,7 +57175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                if (block && block.scope) lastBlockMap[block.id] = block;
 	              });
 	              throw ngRepeatMinErr('dupes',
-	                  "Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}, Duplicate value: {2}",
+	                  'Duplicates in a repeater are not allowed. Use \'track by\' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}, Duplicate value: {2}',
 	                  expression, trackById, value);
 	            } else {
 	              // new never before seen block
@@ -56177,7 +57216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                nextNode = nextNode.nextSibling;
 	              } while (nextNode && nextNode[NG_REMOVED]);
 	
-	              if (getBlockStart(block) != nextNode) {
+	              if (getBlockStart(block) !== nextNode) {
 	                // existing item which got moved
 	                $animate.move(getBlockNodes(block.clone), null, previousNode);
 	              }
@@ -56308,7 +57347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     then the element is shown or hidden respectively.
 	 *
 	 * @example
-	  <example module="ngAnimate" deps="angular-animate.js" animations="true">
+	  <example module="ngAnimate" deps="angular-animate.js" animations="true" name="ng-show">
 	    <file name="index.html">
 	      Click me: <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br/>
 	      <div>
@@ -56475,7 +57514,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     the element is shown or hidden respectively.
 	 *
 	 * @example
-	  <example module="ngAnimate" deps="angular-animate.js" animations="true">
+	  <example module="ngAnimate" deps="angular-animate.js" animations="true" name="ng-hide">
 	    <file name="index.html">
 	      Click me: <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow"><br/>
 	      <div>
@@ -56572,7 +57611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * See the 'background-color' style in the example below.
 	 *
 	 * @example
-	   <example>
+	   <example name="ng-style">
 	     <file name="index.html">
 	        <input type="button" value="set color" ng-click="myStyle={color:'red'}">
 	        <input type="button" value="set background" ng-click="myStyle={'background-color':'blue'}">
@@ -56665,7 +57704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *
 	 * @example
-	  <example module="switchExample" deps="angular-animate.js" animations="true">
+	  <example module="switchExample" deps="angular-animate.js" animations="true" name="ng-switch">
 	    <file name="index.html">
 	      <div ng-controller="ExampleController">
 	        <select ng-model="selection" ng-options="item for item in items">
@@ -56742,7 +57781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    require: 'ngSwitch',
 	
 	    // asks for $scope to fool the BC controller module
-	    controller: ['$scope', function ngSwitchController() {
+	    controller: ['$scope', function NgSwitchController() {
 	     this.cases = {};
 	    }],
 	    link: function(scope, element, attr, ngSwitchController) {
@@ -56882,7 +57921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This example shows how to use `NgTransclude` with fallback content, that
 	 * is displayed if no transcluded content is provided.
 	 *
-	 * <example module="transcludeFallbackContentExample">
+	 * <example module="transcludeFallbackContentExample" name="ng-transclude">
 	 * <file name="index.html">
 	 * <script>
 	 * angular.module('transcludeFallbackContentExample', [])
@@ -56935,7 +57974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   </file>
 	 *   <file name="app.js">
 	 *    angular.module('multiSlotTranscludeExample', [])
-	 *     .directive('pane', function(){
+	 *     .directive('pane', function() {
 	 *        return {
 	 *          restrict: 'E',
 	 *          transclude: {
@@ -56952,7 +57991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *    })
 	 *    .controller('ExampleController', ['$scope', function($scope) {
 	 *      $scope.title = 'Lorem Ipsum';
-	 *      $scope.link = "https://google.com";
+	 *      $scope.link = 'https://google.com';
 	 *      $scope.text = 'Neque porro quisquam est qui dolorem ipsum quia dolor...';
 	 *    }]);
 	 *   </file>
@@ -57046,7 +58085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {string} id Cache name of the template.
 	 *
 	 * @example
-	  <example>
+	  <example  name="script-tag">
 	    <file name="index.html">
 	      <script type="text/ng-template" id="/tpl.html">
 	        Content of the template.
@@ -57068,7 +58107,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    restrict: 'E',
 	    terminal: true,
 	    compile: function(element, attr) {
-	      if (attr.type == 'text/ng-template') {
+	      if (attr.type === 'text/ng-template') {
 	        var templateUrl = attr.id,
 	            text = element[0].text;
 	
@@ -57077,6 +58116,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 	}];
+	
+	/* exported selectDirective, optionDirective */
 	
 	var noopNgModelController = { $setViewValue: noop, $render: noop };
 	
@@ -57098,7 +58139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * added `<option>` elements, perhaps by an `ngRepeat` directive.
 	 */
 	var SelectController =
-	        ['$element', '$scope', function($element, $scope) {
+	        ['$element', '$scope', /** @this */ function($element, $scope) {
 	
 	  var self = this,
 	      optionsMap = new HashMap();
@@ -57318,7 +58359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *      $scope.data = {
 	 *       singleSelect: null,
 	 *       multipleSelect: [],
-	 *       option1: 'option-1',
+	 *       option1: 'option-1'
 	 *      };
 	 *
 	 *      $scope.forceUnknownOption = function() {
@@ -57351,7 +58392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *         {id: '1', name: 'Option A'},
 	 *         {id: '2', name: 'Option B'},
 	 *         {id: '3', name: 'Option C'}
-	 *       ],
+	 *       ]
 	 *      };
 	 *   }]);
 	 * </file>
@@ -57422,7 +58463,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   </file>
 	 *   <file name="protractor.js" type="protractor">
 	 *     it('should initialize to model', function() {
-	 *       var select = element(by.css('select'));
 	 *       expect(element(by.model('model.id')).$('option:checked').getText()).toEqual('Two');
 	 *     });
 	 *   </file>
@@ -57560,11 +58600,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 	}];
-	
-	var styleDirective = valueFn({
-	  restrict: 'E',
-	  terminal: false
-	});
 	
 	/**
 	 * @ngdoc directive
@@ -57826,7 +58861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var maxlength = -1;
 	      attr.$observe('maxlength', function(value) {
 	        var intVal = toInt(value);
-	        maxlength = isNaN(intVal) ? -1 : intVal;
+	        maxlength = isNumberNaN(intVal) ? -1 : intVal;
 	        ctrl.$validate();
 	      });
 	      ctrl.$validators.maxlength = function(modelValue, viewValue) {
@@ -58085,25 +59120,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-	__webpack_require__(66)
-	__webpack_require__(56)
-	__webpack_require__(57)
+	__webpack_require__(68)
 	__webpack_require__(58)
 	__webpack_require__(59)
 	__webpack_require__(60)
 	__webpack_require__(61)
-	__webpack_require__(65)
 	__webpack_require__(62)
 	__webpack_require__(63)
+	__webpack_require__(67)
 	__webpack_require__(64)
-	__webpack_require__(55)
+	__webpack_require__(65)
+	__webpack_require__(66)
+	__webpack_require__(57)
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58271,7 +59306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58371,7 +59406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58502,7 +59537,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58745,7 +59780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -58963,7 +59998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59134,7 +60169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59479,7 +60514,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59593,7 +60628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59771,7 +60806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59932,7 +60967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60458,7 +61493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60523,7 +61558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -60831,7 +61866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -61017,7 +62052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(139) !== null) && (__webpack_require__(140) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(146) !== null) && (__webpack_require__(147) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -61025,7 +62060,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71251,7 +72286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -71326,290 +72361,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}(self));
 
-
-/***/ },
-/* 71 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"_args": [
-			[
-				{
-					"raw": "angular-tartan@0.4.1",
-					"scope": null,
-					"escapedName": "angular-tartan",
-					"name": "angular-tartan",
-					"rawSpec": "0.4.1",
-					"spec": "0.4.1",
-					"type": "version"
-				},
-				"/var/projects/tartan-viewer"
-			]
-		],
-		"_from": "angular-tartan@0.4.1",
-		"_id": "angular-tartan@0.4.1",
-		"_inCache": true,
-		"_location": "/angular-tartan",
-		"_nodeVersion": "4.4.5",
-		"_npmOperationalInternal": {
-			"host": "packages-18-east.internal.npmjs.com",
-			"tmp": "tmp/angular-tartan-0.4.1.tgz_1479755112744_0.6084770273882896"
-		},
-		"_npmUser": {
-			"name": "levko",
-			"email": "levko.ne@gmail.com"
-		},
-		"_npmVersion": "3.10.8",
-		"_phantomChildren": {},
-		"_requested": {
-			"raw": "angular-tartan@0.4.1",
-			"scope": null,
-			"escapedName": "angular-tartan",
-			"name": "angular-tartan",
-			"rawSpec": "0.4.1",
-			"spec": "0.4.1",
-			"type": "version"
-		},
-		"_requiredBy": [
-			"#USER",
-			"/"
-		],
-		"_resolved": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.4.1.tgz",
-		"_shasum": "69d357922d9d39bea3177a2e431160f4da85df05",
-		"_shrinkwrap": null,
-		"_spec": "angular-tartan@0.4.1",
-		"_where": "/var/projects/tartan-viewer",
-		"author": {
-			"name": "Levko Kravets",
-			"email": "levko.ne@gmail.com"
-		},
-		"bugs": {
-			"url": "https://github.com/thetartan/angular-tartan/issues"
-		},
-		"contributors": [
-			{
-				"name": "Levko Kravets",
-				"email": "levko.ne@gmail.com"
-			}
-		],
-		"dependencies": {
-			"angular": "^1.5.8",
-			"lodash": "^4.16.4",
-			"tartan": "^4.0.0"
-		},
-		"description": "Angular bindings for tartan library.",
-		"devDependencies": {
-			"chai": "^3.5.0",
-			"eslint": "^3.9.1",
-			"eslint-config-google": "^0.6.0",
-			"json-loader": "^0.5.4",
-			"mocha": "^3.1.2",
-			"raw-loader": "^0.5.1",
-			"val-loader": "^0.5.0",
-			"webpack": "^1.13.2"
-		},
-		"directories": {},
-		"dist": {
-			"shasum": "69d357922d9d39bea3177a2e431160f4da85df05",
-			"tarball": "https://registry.npmjs.org/angular-tartan/-/angular-tartan-0.4.1.tgz"
-		},
-		"engines": {
-			"node": "^4.0.0",
-			"npm": "^2.0.0"
-		},
-		"gitHead": "980a6c72b571da88b52759a92dcf182b9fddb563",
-		"homepage": "https://github.com/thetartan/angular-tartan#readme",
-		"keywords": [
-			"angular",
-			"tartan",
-			"scotland",
-			"threadcount"
-		],
-		"license": "MIT",
-		"main": "src/index.js",
-		"maintainers": [
-			{
-				"name": "levko",
-				"email": "levko.ne@gmail.com"
-			}
-		],
-		"name": "angular-tartan",
-		"optionalDependencies": {},
-		"readme": "ERROR: No README data found!",
-		"repository": {
-			"type": "git",
-			"url": "git+https://github.com/thetartan/angular-tartan.git"
-		},
-		"scripts": {
-			"build": "npm run build:dev && npm run build:dist",
-			"build:dev": "NODE_ENV=development webpack --hide-modules --config webpack.config.development.js",
-			"build:dist": "NODE_ENV=production webpack --hide-modules --config webpack.config.production.js",
-			"prepublish": "npm run build",
-			"review": "eslint src",
-			"start": "xdg-open index.html",
-			"test": "mocha tests/*.js tests/*/*.js"
-		},
-		"version": "0.4.1",
-		"warnings": [
-			{
-				"code": "ENOTSUP",
-				"required": {
-					"node": "^4.0.0",
-					"npm": "^2.0.0"
-				},
-				"pkgid": "angular-tartan@0.4.1"
-			},
-			{
-				"code": "ENOTSUP",
-				"required": {
-					"node": "^4.0.0",
-					"npm": "^2.0.0"
-				},
-				"pkgid": "angular-tartan@0.4.1"
-			}
-		]
-	};
-
-/***/ },
-/* 72 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"_args": [
-			[
-				{
-					"raw": "tartan@4.1.0",
-					"scope": null,
-					"escapedName": "tartan",
-					"name": "tartan",
-					"rawSpec": "4.1.0",
-					"spec": "4.1.0",
-					"type": "version"
-				},
-				"/var/projects/tartan-viewer"
-			]
-		],
-		"_from": "tartan@4.1.0",
-		"_id": "tartan@4.1.0",
-		"_inCache": true,
-		"_location": "/tartan",
-		"_nodeVersion": "4.4.5",
-		"_npmOperationalInternal": {
-			"host": "packages-18-east.internal.npmjs.com",
-			"tmp": "tmp/tartan-4.1.0.tgz_1479492726984_0.7018930893391371"
-		},
-		"_npmUser": {
-			"name": "levko",
-			"email": "levko.ne@gmail.com"
-		},
-		"_npmVersion": "3.10.8",
-		"_phantomChildren": {},
-		"_requested": {
-			"raw": "tartan@4.1.0",
-			"scope": null,
-			"escapedName": "tartan",
-			"name": "tartan",
-			"rawSpec": "4.1.0",
-			"spec": "4.1.0",
-			"type": "version"
-		},
-		"_requiredBy": [
-			"#USER",
-			"/",
-			"/angular-tartan"
-		],
-		"_resolved": "https://registry.npmjs.org/tartan/-/tartan-4.1.0.tgz",
-		"_shasum": "ca1569f0392f2872654f901575bdfcc48e721a3e",
-		"_shrinkwrap": null,
-		"_spec": "tartan@4.1.0",
-		"_where": "/var/projects/tartan-viewer",
-		"author": {
-			"name": "Levko Kravets",
-			"email": "levko.ne@gmail.com"
-		},
-		"bugs": {
-			"url": "https://github.com/thetartan/tartan/issues"
-		},
-		"contributors": [
-			{
-				"name": "Levko Kravets",
-				"email": "levko.ne@gmail.com"
-			}
-		],
-		"dependencies": {
-			"lodash": "^4.16.4"
-		},
-		"description": "This library allows to parse tartan threadcount.",
-		"devDependencies": {
-			"chai": "^3.5.0",
-			"eslint": "^3.9.1",
-			"eslint-config-google": "^0.6.0",
-			"json-loader": "^0.5.4",
-			"mocha": "^3.1.2",
-			"raw-loader": "^0.5.1",
-			"val-loader": "^0.5.0",
-			"webpack": "^1.13.3"
-		},
-		"directories": {},
-		"dist": {
-			"shasum": "ca1569f0392f2872654f901575bdfcc48e721a3e",
-			"tarball": "https://registry.npmjs.org/tartan/-/tartan-4.1.0.tgz"
-		},
-		"engines": {
-			"node": "^4.0.0",
-			"npm": "^2.0.0"
-		},
-		"gitHead": "43ce942a51353b6704ca65b360455e22b289c9d2",
-		"homepage": "https://github.com/thetartan/tartan#readme",
-		"keywords": [
-			"tartan",
-			"scotland",
-			"threadcount"
-		],
-		"license": "MIT",
-		"main": "src/index.js",
-		"maintainers": [
-			{
-				"name": "levko",
-				"email": "levko.ne@gmail.com"
-			}
-		],
-		"name": "tartan",
-		"optionalDependencies": {},
-		"readme": "ERROR: No README data found!",
-		"repository": {
-			"type": "git",
-			"url": "git+https://github.com/thetartan/tartan.git"
-		},
-		"scripts": {
-			"build": "npm run build:dev && npm run build:dist",
-			"build:dev": "NODE_ENV=development webpack --hide-modules --config webpack.config.development.js",
-			"build:dist": "NODE_ENV=production webpack --hide-modules --config webpack.config.production.js",
-			"prepublish": "npm run build",
-			"review": "eslint src",
-			"start": "xdg-open index.html",
-			"test": "mocha tests/*.js tests/*/*.js"
-		},
-		"version": "4.1.0",
-		"warnings": [
-			{
-				"code": "ENOTSUP",
-				"required": {
-					"node": "^4.0.0",
-					"npm": "^2.0.0"
-				},
-				"pkgid": "tartan@4.1.0"
-			},
-			{
-				"code": "ENOTSUP",
-				"required": {
-					"node": "^4.0.0",
-					"npm": "^2.0.0"
-				},
-				"pkgid": "tartan@4.1.0"
-			}
-		]
-	};
 
 /***/ },
 /* 73 */
@@ -74994,7 +75745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var deflate   = __webpack_require__(76);
 	var inflate   = __webpack_require__(77);
-	var constants = __webpack_require__(26);
+	var constants = __webpack_require__(25);
 	
 	var pako = {};
 	
@@ -75012,9 +75763,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var zlib_deflate = __webpack_require__(78);
 	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(24);
+	var strings      = __webpack_require__(23);
 	var msg          = __webpack_require__(17);
-	var ZStream      = __webpack_require__(28);
+	var ZStream      = __webpack_require__(27);
 	
 	var toString = Object.prototype.toString;
 	
@@ -75418,10 +76169,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var zlib_inflate = __webpack_require__(81);
 	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(24);
-	var c            = __webpack_require__(26);
+	var strings      = __webpack_require__(23);
+	var c            = __webpack_require__(25);
 	var msg          = __webpack_require__(17);
-	var ZStream      = __webpack_require__(28);
+	var ZStream      = __webpack_require__(27);
 	var GZheader     = __webpack_require__(79);
 	
 	var toString = Object.prototype.toString;
@@ -75841,8 +76592,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var utils   = __webpack_require__(6);
 	var trees   = __webpack_require__(83);
-	var adler32 = __webpack_require__(25);
-	var crc32   = __webpack_require__(27);
+	var adler32 = __webpack_require__(24);
+	var crc32   = __webpack_require__(26);
 	var msg     = __webpack_require__(17);
 	
 	/* Public constants ==========================================================*/
@@ -78080,8 +78831,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	var utils         = __webpack_require__(6);
-	var adler32       = __webpack_require__(25);
-	var crc32         = __webpack_require__(27);
+	var adler32       = __webpack_require__(24);
+	var crc32         = __webpack_require__(26);
 	var inflate_fast  = __webpack_require__(80);
 	var inflate_table = __webpack_require__(82);
 	
@@ -82736,58 +83487,269 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 88 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = {"version":"0.5.0"}
 
 /***/ },
 /* 89 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
+	module.exports = {"version":"4.3.0"}
 
 /***/ },
 /* 90 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
+	module.exports = {"version":"0.1.2"}
 
 /***/ },
 /* 91 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dataset-view\">\n  <div class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"selectedCategories.length > 0\" class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ },
 /* 92 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
+	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
 
 /***/ },
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
+	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
 
 /***/ },
 /* 94 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+	module.exports = "<div class=\"dataset-view\">\n  <div ng-if=\"!isSearchIndexReady\"\n    class=\"alert alert-info margin-top-15 margin-bottom-15\">\n    <i class=\"fa fa-2x fa-spinner fa-pulse margin-right-5\" style=\"vertical-align: middle;\"></i>\n    <span style=\"vertical-align: middle;\">Preparing search index...</span>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"isSearchIndexReady && (selectedCategories.length > 0)\"\n    class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
 
 /***/ },
 /* 95 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
 
 /***/ },
 /* 96 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
 
 /***/ },
 /* 97 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+
+/***/ },
+/* 98 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+
+/***/ },
+/* 99 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+	    "use strict";
+	
+	    if (global.setImmediate) {
+	        return;
+	    }
+	
+	    var nextHandle = 1; // Spec says greater than zero
+	    var tasksByHandle = {};
+	    var currentlyRunningATask = false;
+	    var doc = global.document;
+	    var registerImmediate;
+	
+	    function setImmediate(callback) {
+	      // Callback can either be a function or a string
+	      if (typeof callback !== "function") {
+	        callback = new Function("" + callback);
+	      }
+	      // Copy function arguments
+	      var args = new Array(arguments.length - 1);
+	      for (var i = 0; i < args.length; i++) {
+	          args[i] = arguments[i + 1];
+	      }
+	      // Store and register the task
+	      var task = { callback: callback, args: args };
+	      tasksByHandle[nextHandle] = task;
+	      registerImmediate(nextHandle);
+	      return nextHandle++;
+	    }
+	
+	    function clearImmediate(handle) {
+	        delete tasksByHandle[handle];
+	    }
+	
+	    function run(task) {
+	        var callback = task.callback;
+	        var args = task.args;
+	        switch (args.length) {
+	        case 0:
+	            callback();
+	            break;
+	        case 1:
+	            callback(args[0]);
+	            break;
+	        case 2:
+	            callback(args[0], args[1]);
+	            break;
+	        case 3:
+	            callback(args[0], args[1], args[2]);
+	            break;
+	        default:
+	            callback.apply(undefined, args);
+	            break;
+	        }
+	    }
+	
+	    function runIfPresent(handle) {
+	        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+	        // So if we're currently running a task, we'll need to delay this invocation.
+	        if (currentlyRunningATask) {
+	            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+	            // "too much recursion" error.
+	            setTimeout(runIfPresent, 0, handle);
+	        } else {
+	            var task = tasksByHandle[handle];
+	            if (task) {
+	                currentlyRunningATask = true;
+	                try {
+	                    run(task);
+	                } finally {
+	                    clearImmediate(handle);
+	                    currentlyRunningATask = false;
+	                }
+	            }
+	        }
+	    }
+	
+	    function installNextTickImplementation() {
+	        registerImmediate = function(handle) {
+	            process.nextTick(function () { runIfPresent(handle); });
+	        };
+	    }
+	
+	    function canUsePostMessage() {
+	        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+	        // where `global.postMessage` means something completely different and can't be used for this purpose.
+	        if (global.postMessage && !global.importScripts) {
+	            var postMessageIsAsynchronous = true;
+	            var oldOnMessage = global.onmessage;
+	            global.onmessage = function() {
+	                postMessageIsAsynchronous = false;
+	            };
+	            global.postMessage("", "*");
+	            global.onmessage = oldOnMessage;
+	            return postMessageIsAsynchronous;
+	        }
+	    }
+	
+	    function installPostMessageImplementation() {
+	        // Installs an event handler on `global` for the `message` event: see
+	        // * https://developer.mozilla.org/en/DOM/window.postMessage
+	        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+	
+	        var messagePrefix = "setImmediate$" + Math.random() + "$";
+	        var onGlobalMessage = function(event) {
+	            if (event.source === global &&
+	                typeof event.data === "string" &&
+	                event.data.indexOf(messagePrefix) === 0) {
+	                runIfPresent(+event.data.slice(messagePrefix.length));
+	            }
+	        };
+	
+	        if (global.addEventListener) {
+	            global.addEventListener("message", onGlobalMessage, false);
+	        } else {
+	            global.attachEvent("onmessage", onGlobalMessage);
+	        }
+	
+	        registerImmediate = function(handle) {
+	            global.postMessage(messagePrefix + handle, "*");
+	        };
+	    }
+	
+	    function installMessageChannelImplementation() {
+	        var channel = new MessageChannel();
+	        channel.port1.onmessage = function(event) {
+	            var handle = event.data;
+	            runIfPresent(handle);
+	        };
+	
+	        registerImmediate = function(handle) {
+	            channel.port2.postMessage(handle);
+	        };
+	    }
+	
+	    function installReadyStateChangeImplementation() {
+	        var html = doc.documentElement;
+	        registerImmediate = function(handle) {
+	            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+	            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+	            var script = doc.createElement("script");
+	            script.onreadystatechange = function () {
+	                runIfPresent(handle);
+	                script.onreadystatechange = null;
+	                html.removeChild(script);
+	                script = null;
+	            };
+	            html.appendChild(script);
+	        };
+	    }
+	
+	    function installSetTimeoutImplementation() {
+	        registerImmediate = function(handle) {
+	            setTimeout(runIfPresent, 0, handle);
+	        };
+	    }
+	
+	    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+	    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+	    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+	
+	    // Don't get fooled by e.g. browserify environments.
+	    if ({}.toString.call(global.process) === "[object process]") {
+	        // For Node.js before 0.9
+	        installNextTickImplementation();
+	
+	    } else if (canUsePostMessage()) {
+	        // For non-IE10 modern browsers
+	        installPostMessageImplementation();
+	
+	    } else if (global.MessageChannel) {
+	        // For web workers, where supported
+	        installMessageChannelImplementation();
+	
+	    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+	        // For IE 6–8
+	        installReadyStateChangeImplementation();
+	
+	    } else {
+	        // For older browsers
+	        installSetTimeoutImplementation();
+	    }
+	
+	    attachTo.setImmediate = setImmediate;
+	    attachTo.clearImmediate = clearImmediate;
+	}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(28)))
+
+/***/ },
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82853,7 +83815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 98 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82887,18 +83849,46 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 99 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var packageFile = __webpack_require__(72);
-	
-	module.exports.version = packageFile.version;
+	module.exports.autodetect = __webpack_require__(29);
+	module.exports.string = __webpack_require__(31);
+	module.exports.object = __webpack_require__(30);
+	module.exports.json = __webpack_require__(104);
 
 
 /***/ },
-/* 100 */
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return _.extend(
+	    {threadcount: ''},
+	    _.isString(source) ? JSON.parse(source) : source
+	  );
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'json'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'JSON'
+	});
+
+
+/***/ },
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83076,7 +84066,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 101 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83126,7 +84116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 102 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83174,7 +84164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 103 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83244,7 +84234,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 104 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83315,7 +84305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83385,7 +84375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 106 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83427,14 +84417,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 107 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(106);
-	var invalid = __webpack_require__(101);
+	var whitespace = __webpack_require__(111);
+	var invalid = __webpack_require__(106);
 	
 	function Context(source, parsers, options) {
 	  this.source = _.isString(source) ? source : '';
@@ -83535,249 +84525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(4);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  weave: defaults.weave.serge,
-	  defaultColors: null,
-	  transformSyntaxTree: null
-	};
-	
-	function clearCanvas(context, options) {
-	  if (!options.repeat) {
-	    context.clearRect(0, 0, options.width, options.height);
-	    options.width = Math.min(options.width, options.warp.lengthOfPattern);
-	    options.height = Math.min(options.height, options.warp.lengthOfPattern);
-	  }
-	  return options;
-	}
-	
-	function renderWarp(context, options) {
-	  var pattern = options.warp.pattern;
-	  var i;
-	  var first;
-	  var item;
-	
-	  // Find first visible pattern item and its offset
-	  var x = options.offset.x;
-	  for (i = 0; i < pattern.length; i++) {
-	    item = pattern[i];
-	    if (x + item[1] > 0) {
-	      first = i;
-	      break;
-	    }
-	    x += item[1];
-	  }
-	
-	  while (x <= options.width) {
-	    for (i = first; i < pattern.length; i++) {
-	      item = pattern[i];
-	      context.fillStyle = item[0];
-	      context.fillRect(x, 0, item[1], options.height);
-	      x += item[1];
-	      if (x >= options.width) {
-	        break;
-	      }
-	    }
-	    first = 0;
-	
-	    if (!options.repeat) {
-	      break;
-	    }
-	  }
-	}
-	
-	function renderWeft(context, options) {
-	  var pattern = options.weft.pattern;
-	  var i;
-	  var j;
-	  var first;
-	  var item;
-	  var y = options.offset.y;
-	  var n = _.sum(options.weave);
-	  var offsetX = (options.offset.x) % n;
-	  var offsetY = (options.offset.y) % n;
-	  var offset;
-	
-	  // Find first visible pattern item and its offset
-	  for (i = 0; i < pattern.length; i++) {
-	    item = pattern[i];
-	    if (y + item[1] > 0) {
-	      first = i;
-	      break;
-	    }
-	    y += item[1];
-	  }
-	
-	  context.setLineDash(options.weave);
-	
-	  while (y <= options.height) {
-	    for (i = first; i < pattern.length; i++) {
-	      item = pattern[i];
-	      context.strokeStyle = item[0];
-	
-	      // Do not draw outside of visible area
-	      j = y < 0 ? 0 : y;
-	      y += item[1];
-	      for (j; j < y; j++) {
-	        // Correct offset of each line relating to global (0, 0) point
-	        offset = n - (j - offsetY) % n + 1;
-	        offset = (offset - offsetX) % n;
-	        context.lineDashOffset = offset;
-	
-	        context.beginPath();
-	        context.moveTo(0, j + 0.5);
-	        context.lineTo(options.width, j + 0.5);
-	        context.stroke();
-	      }
-	
-	      if (y >= options.height) {
-	        break;
-	      }
-	    }
-	    first = 0;
-	
-	    if (!options.repeat) {
-	      break;
-	    }
-	  }
-	}
-	
-	function prepareWeave(weave, defaultWeave) {
-	  return _.isArray(weave) && weave.length == 2 ? weave : defaultWeave;
-	}
-	
-	function preparePattern(node, weave, colors, defaultColors) {
-	  var items = _.isObject(node) && node.isBlock ? node.items : [];
-	  var pattern = utils.sett.compile(items, colors, defaultColors);
-	  var metrics = utils.sett.getPatternMetrics(pattern, weave);
-	
-	  return {
-	    pattern: pattern,
-	    lengthOfPattern: metrics.length,
-	    lengthOfCycle: metrics.fullCycle
-	  };
-	}
-	
-	function prepareOffset(offset, warp, weft) {
-	  var x = 0;
-	  var y = 0;
-	  if (_.isObject(offset)) {
-	    x = parseInt(offset.x, 10) || 0;
-	    y = parseInt(offset.y, 10) || 0;
-	  }
-	
-	  // `lengthOfCycle` is a number when pattern completely repeats
-	  // (including line offsets), so we can reduce size of offset to
-	  // avoid numeric overflows
-	  x %= warp.lengthOfCycle;
-	  if (x > 0) {
-	    x -= warp.lengthOfCycle;
-	  }
-	
-	  y %= weft.lengthOfCycle;
-	  if (y > 0) {
-	    y -= weft.lengthOfCycle;
-	  }
-	
-	  return {
-	    x: x,
-	    y: y
-	  };
-	}
-	
-	function getMetrics(weave, preparedWarp, preparedWeft) {
-	  return {
-	    weave: weave,
-	    warp: {
-	      length: preparedWarp.lengthOfPattern,
-	      fullCycle: preparedWarp.lengthOfCycle
-	    },
-	    weft: {
-	      length: preparedWeft.lengthOfPattern,
-	      fullCycle: preparedWeft.lengthOfCycle
-	    }
-	  };
-	}
-	
-	function renderEmpty(canvas) {
-	  var width = canvas.offsetWidth;
-	  var height = canvas.offsetHeight;
-	  if ((width > 0) && (height > 0)) {
-	    var context = canvas.getContext('2d');
-	    context.clearRect(0, 0, width, height);
-	  }
-	  return {x: 0, y: 0};
-	}
-	
-	function factory(sett, options) {
-	  if (!_.isObject(sett)) {
-	    return renderEmpty;
-	  }
-	
-	  options = _.extend({}, defaultOptions, options);
-	  if (_.isFunction(options.transformSyntaxTree)) {
-	    sett = options.transformSyntaxTree(sett);
-	  }
-	
-	  var warpIsSameAsWeft = sett.weft === sett.warp;
-	
-	  var weave = prepareWeave(options.weave, defaults.weave.serge);
-	
-	  var warp = preparePattern(sett.warp || sett.weft, weave,
-	    sett.colors, options.defaultColors);
-	  var weft = warp;
-	  if (!warpIsSameAsWeft) {
-	    weft = preparePattern(sett.weft || sett.warp, weave,
-	      sett.colors, options.defaultColors);
-	  }
-	
-	  if ((warp.length == 0) && (weft.length == 0)) {
-	    return renderEmpty;
-	  }
-	
-	  var result = function(canvas, offset, repeat) {
-	    repeat = (arguments.length == 2) || !!repeat;
-	
-	    offset = repeat ? prepareOffset(offset, warp, weft) : {x: 0, y: 0};
-	
-	    var options = {
-	      warp: warp,
-	      weft: weft,
-	      weave: weave,
-	      width: Math.ceil(parseFloat(canvas.width) || 0),
-	      height: Math.ceil(parseFloat(canvas.height) || 0),
-	      offset: offset,
-	      repeat: repeat
-	    };
-	
-	    if ((options.width > 0) && (options.height > 0)) {
-	      var context = canvas.getContext('2d');
-	      options = clearCanvas(context, options);
-	      renderWarp(context, options);
-	      renderWeft(context, options);
-	    }
-	
-	    return offset;
-	  };
-	
-	  result.metrics = getMetrics(weave, warp, weft);
-	
-	  return result;
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 109 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83919,7 +84667,64 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 110 */
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var canvas = __webpack_require__(32);
+	var defaults = __webpack_require__(4);
+	
+	/* global Image */
+	
+	var shadow = new Image();
+	shadow.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAAD' +
+	  'ED76LAAAABHNCSVQICAgIfAhkiAAAAFVJREFUGJV1jsENgEAIBGcTCvBrJbbi90qgEuu6buw' +
+	  'AHx4mKjcfkg0MS0Qs3KyA5xy5m6TGmwPokk4AcnNm0gidPxvQn4uZyb4/i051+zQZsFft03Q' +
+	  'B/booYDTfo3wAAAAASUVORK5CYII=';
+	
+	function renderWeft(context, options, stage) {
+	  if (stage) {
+	    if (options.zoom == 2) {
+	      var dx = options.offset.x;
+	      var dy = options.offset.y;
+	
+	      context.save();
+	      context.translate(dx, dy);
+	
+	      context.fillStyle = context.createPattern(shadow, 'repeat');
+	      context.fillRect(-dx, -dy, options.width, options.height);
+	
+	      context.restore();
+	    }
+	  }
+	}
+	
+	function factory(sett, options) {
+	  return canvas(sett, _.extend(options, {
+	    weave: defaults.weave.serge,
+	    zoom: 2,
+	    hooks: {
+	      renderWeft: renderWeft
+	    }
+	  }));
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'house-of-tartan'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'House of Tartan'
+	});
+
+
+/***/ },
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83927,7 +84732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _ = __webpack_require__(1);
 	var index = __webpack_require__(18);
 	var render = __webpack_require__(11);
-	var transform = __webpack_require__(14);
+	var transform = __webpack_require__(13);
 	
 	function formatPivot(str) {
 	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
@@ -83971,7 +84776,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  options.transformSyntaxTree = transform([
 	    options.transformSyntaxTree,
 	    transform.flatten(),
-	    transform.fold()
+	    transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
 	  ]);
 	
 	  options.join = function(components) {
@@ -83995,7 +84808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 111 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84064,7 +84877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 112 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84072,6 +84885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _ = __webpack_require__(1);
 	var index = __webpack_require__(19);
 	var render = __webpack_require__(11);
+	var transform = __webpack_require__(13);
 	
 	var defaultOptions = {
 	  format: {
@@ -84112,6 +84926,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
 	  }
 	
+	  options.transformSyntaxTree = transform([
+	    options.transformSyntaxTree,
+	    transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
+	  ]);
+	
 	  options.join = function(components) {
 	    var parts = [];
 	    if (components.colors.length > 0) {
@@ -84133,7 +84960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 113 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84210,7 +85037,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84218,11 +85045,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports.classic = __webpack_require__(18);
 	module.exports.extended = __webpack_require__(19);
 	module.exports.stwr = __webpack_require__(20);
-	module.exports.weddslist = __webpack_require__(118);
+	module.exports.weddslist = __webpack_require__(123);
 
 
 /***/ },
-/* 115 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84230,7 +85057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _ = __webpack_require__(1);
 	var index = __webpack_require__(20);
 	var render = __webpack_require__(11);
-	var transform = __webpack_require__(14);
+	var transform = __webpack_require__(13);
 	
 	function formatPivot(str) {
 	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
@@ -84274,7 +85101,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  options.transformSyntaxTree = transform([
 	    options.transformSyntaxTree,
 	    transform.flatten(),
-	    transform.fold()
+	    transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
 	  ]);
 	
 	  options.join = function(components) {
@@ -84298,7 +85133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 116 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84367,14 +85202,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 117 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var render = __webpack_require__(11);
-	var transform = __webpack_require__(14);
+	var transform = __webpack_require__(13);
 	
 	var defaultOptions = {
 	  format: {
@@ -84431,7 +85266,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  options.transformSyntaxTree = transform([
 	    options.transformSyntaxTree,
 	    transform.flatten(),
-	    transform.fold()
+	    transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
 	  ]);
 	
 	  return render.format(options);
@@ -84441,7 +85284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 118 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84450,8 +85293,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.id = 'weddslist';
 	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(119);
-	module.exports.format = __webpack_require__(117);
+	module.exports.parse = __webpack_require__(124);
+	module.exports.format = __webpack_require__(122);
 	
 	module.exports.colors = utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
@@ -84470,7 +85313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 119 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84544,7 +85387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 120 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84687,7 +85530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 121 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84982,7 +85825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 122 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85214,7 +86057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 123 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85268,60 +86111,353 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 124 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(2);
 	
 	var defaultOptions = {
+	  // treat root block as infinite - may detect non-obvious folds
+	  allowRootReorder: true,
+	
+	  // Enables extended mode - search of sub-blocks
+	  allowNestedBlocks: false, // fold only root
+	
+	  // Next options are applicable only to extended mode:
+	  maxFoldLevels: 2, // fold root and up to 2 nested levels; 0 - unlimited
+	
+	  // detected blocks should contain at least 3 stripes when folded
+	  minBlockSize: 3,
+	
+	  // Example: R10 K20 Y2 G2 Y2 K20 R10
+	  // Non-greedy algorithm will capture only [R10 K20 Y2 G2]
+	  // Greedy will also produce R10 [K20 Y2 G2] R10
+	  greedy: false, // Capture only longest sequence
+	
+	  // R15 K10 Y2 K10 R10 => R5 R10 K10 Y2 K10 R10 => R5 [R10 K10 Y2]
+	  allowSplitStripe: true,
+	
+	  // If sett already contains some nested blocks - try to fold them too
+	  processExistingBlocks: true,
+	
+	  // Evaluation function - should return a number that will be used to
+	  // compare blocks and choose the best variant
+	  calculateNodeWeight: utils.node.calculateNodeWeight
 	};
 	
-	function processTokens(root, options) {
-	  if (root.reflect || (root.items.length % 2 != 0)) {
-	    return root;
-	  }
+	function tryFoldBlock(items) {
 	  // Smallest reflective sett contains 3 stripes in threadcount or
-	  // 4 stripes when unfolded, i.e. R/10 K2 Y/2 => R10 K2 Y2 K2;
+	  // 5 stripes when unfolded, i.e. R/10 K2 Y/2 => R10 K2 Y2 K2 R10;
 	  // R/10 K/2 => R10 K2
-	  if (root.items.length < 4) {
-	    return root;
+	  if ((items.length < 5) || (items.length % 2 != 1)) {
+	    return;
 	  }
 	
-	  var result = [];
-	  var i = 1;
-	  var j = root.items.length - 1;
 	  var left;
 	  var right;
 	
-	  result.push(root.items[0]);
+	  var result = [];
+	  var i = 0;
+	  var j = items.length - 1;
 	  while (true) {
-	    left = root.items[i];
-	    right = root.items[j];
-	    if (left.isStripe && right.isStripe) {
-	      var isSameColor = left.name == right.name;
-	      var isSameCount = left.count == right.count;
-	      if (isSameColor && isSameCount) {
-	        result.push(left);
-	        if (i == j) {
-	          break;
-	        }
-	        i++;
-	        j--;
-	        continue;
+	    left = items[i];
+	    right = items[j];
+	    if (utils.node.isSameNode(left, right)) {
+	      result.push(left);
+	      if (i == j) {
+	        break;
 	      }
+	      i++;
+	      j--;
+	      continue;
 	    }
-	    result = null;
-	    break;
+	    return;
 	  }
 	
-	  if (result) {
-	    root = _.clone(root);
-	    root.items = result;
-	    root.reflect = true;
+	  return result;
+	}
+	
+	function foldRootBlock(root, options, results) {
+	  if (root.reflect || (root.items.length == 0)) {
+	    return;
 	  }
-	  return root;
+	
+	  var items = _.concat(root.items, root.items[0]);
+	  var resultItems = tryFoldBlock(items);
+	  if (_.isArray(resultItems)) {
+	    var result = _.clone(root);
+	    result.items = resultItems;
+	    result.reflect = true;
+	    results.push({
+	      node: result,
+	      hash: utils.node.calculateNodeHash(result),
+	      weight: options.calculateNodeWeight(result)
+	    });
+	  }
+	}
+	
+	function findRootBlockVariants(root, options) {
+	  var results = [root];
+	
+	  if (root.reflect || (root.items.length == 0) || !options.allowRootReorder) {
+	    return results;
+	  }
+	
+	  var i;
+	  var items = _.clone(root.items);
+	
+	  for (i = 0; i < items.length - 1; i++) {
+	    // Move first node to the end
+	    var temp = items[0];
+	    items.splice(0, 1);
+	    items.push(temp);
+	
+	    var result = _.clone(root);
+	    result.items = _.clone(items);
+	    results.push(result);
+	  }
+	
+	  return results;
+	}
+	
+	function findAllPossibleVariants(items, options, results, level) {
+	  results.push(items);
+	
+	  if (level <= 0) {
+	    return;
+	  }
+	
+	  if (items.length >= options.minBlockSize * 2 - 1) {
+	    var from = options.minBlockSize - 1;
+	    var to = items.length - options.minBlockSize;
+	    for (var i = from; i <= to; i++) {
+	      tryFindNestedBlocks(i, items, _.extend({}, options, {
+	        allowSplitStripe: false
+	      }), results, level - 1);
+	      if (options.allowSplitStripe) {
+	        tryFindNestedBlocks(i, items, _.extend({}, options, {
+	          allowSplitStripe: true
+	        }), results, level - 1);
+	      }
+	    }
+	  }
+	}
+	
+	function processNestedVariants(items, left, right, middle, appendToPrefix,
+	  prependToSuffix, options, results, level) {
+	  if (middle.length < options.minBlockSize) {
+	    return;
+	  }
+	
+	  var prefix = items.slice(0, left >= 0 ? left + 1 : 0);
+	  if (appendToPrefix) {
+	    prefix.push(appendToPrefix);
+	  }
+	
+	  var middleVariants = [];
+	  findAllPossibleVariants(middle, options, middleVariants, level);
+	
+	  var suffix = items.slice(right, items.length);
+	  if (prependToSuffix) {
+	    suffix.splice(0, 0, prependToSuffix);
+	  }
+	  var suffixVariants = [];
+	  findAllPossibleVariants(suffix, options, suffixVariants, level);
+	
+	  _.each(suffixVariants, function(variant) {
+	    _.each(middleVariants, function(middle) {
+	      results.push(_.concat(prefix,
+	        utils.node.newBlock(middle, true),
+	        variant));
+	    });
+	  });
+	}
+	
+	function tryFindNestedBlocks(index, items, options, results, level) {
+	  var left;
+	  var right;
+	
+	  left = index - 1;
+	  right = index + 1;
+	  var appendToPrefix = null;
+	  var prependToSuffix = null;
+	  var middle = [items[index]];
+	  var processLast = false;
+	  while ((left >= 0) && (right < items.length)) {
+	    if (utils.node.isSameNode(items[left], items[right])) {
+	      middle.splice(0, 0, items[left]);
+	    } else
+	    if (
+	      options.allowSplitStripe && items[left].isStripe &&
+	      items[right].isStripe && (items[left].name == items[right].name)) {
+	      var diff = items[left].count - items[right].count;
+	      if (diff > 0) {
+	        appendToPrefix = utils.node.newStripe({
+	          name: items[left].name,
+	          count: Math.abs(diff)
+	        });
+	      } else {
+	        prependToSuffix = utils.node.newStripe({
+	          name: items[left].name,
+	          count: Math.abs(diff)
+	        });
+	      }
+	      var node = _.clone(items[left]);
+	      node.count = Math.min(items[left].count, items[right].count);
+	      middle.splice(0, 0, node);
+	      left--;
+	      right++;
+	      processLast = true;
+	      break;
+	    } else {
+	      processLast = true;
+	      break;
+	    }
+	    left--;
+	    right++;
+	
+	    if (options.greedy) {
+	      processNestedVariants(items, left, right, middle,
+	        appendToPrefix, prependToSuffix, options, results, level);
+	    }
+	  }
+	
+	  if (processLast || !options.greedy) {
+	    processNestedVariants(items, left, right, middle,
+	      appendToPrefix, prependToSuffix, options, results, level);
+	  }
+	}
+	
+	function findNestedBlocks(block, options, results) {
+	  if (block.items.length < options.minBlockSize * 2 - 1) {
+	    // This block cannot be folded to contain `minBlockSize` stripes as it
+	    // is too small
+	    return;
+	  }
+	
+	  var variants = [];
+	  findAllPossibleVariants(block.items, options, variants,
+	    options.maxFoldLevels);
+	
+	  _.each(variants, function(variant) {
+	    var result = _.clone(block);
+	    result.items = variant;
+	    results.push({
+	      node: result,
+	      hash: utils.node.calculateNodeHash(result),
+	      weight: options.calculateNodeWeight(result)
+	    });
+	  });
+	}
+	
+	function processExistingBlocks(root, options, results) {
+	  results.push(root);
+	
+	  if (
+	    options.allowNestedBlocks && options.processExistingBlocks &&
+	    options.maxFoldLevels > 1
+	  ) {
+	    var prefixes = [];
+	    var suffix = [];
+	
+	    var modifiedOptions = _.clone(options);
+	    // Nested blocks are not real roots, so do not use extended algorithm
+	    modifiedOptions.allowRootReorder = false;
+	    // We already drilled down one level
+	    modifiedOptions.maxFoldLevels -= 1;
+	
+	    _.each(root.items, function(item) {
+	      if (item.isBlock) {
+	        // Calculate variants of item
+	        item = _.clone(item);
+	        item.isRoot = true;
+	        var variants = processTokens(item, modifiedOptions, true);
+	
+	        // Merge previous prefixes, variants of current block and suffix
+	        var temp = prefixes;
+	        prefixes = [];
+	        _.each(variants, function(variant) {
+	          variant = _.clone(variant.node);
+	          variant.isRoot = false;
+	
+	          if (temp.length > 0) {
+	            _.each(temp, function(prefix) {
+	              prefixes.push(_.concat(prefix, suffix, variant));
+	            });
+	          } else {
+	            prefixes.push(_.concat(suffix, variant));
+	          }
+	        });
+	
+	        // Suffix is already merged, reset it
+	        suffix = [];
+	      } else {
+	        suffix.push(item);
+	      }
+	    });
+	
+	    _.each(prefixes, function(prefix) {
+	      var result = _.clone(root);
+	      result.items = _.concat(prefix, suffix);
+	      results.push(result);
+	    });
+	  }
+	}
+	
+	function processTokens(root, options, doNotLog) {
+	  var variants = [{
+	    node: root,
+	    hash: utils.node.calculateNodeHash(root),
+	    weight: utils.node.calculateNodeWeight(root)
+	  }];
+	
+	  var rootVariants = [];
+	  processExistingBlocks(root, options, rootVariants);
+	
+	  var excludeHashes = [];
+	
+	  _.each(rootVariants, function(root) {
+	    var rootVariants = findRootBlockVariants(root, options);
+	
+	    // Exclude non-folded modified roots
+	    _.each(_.drop(rootVariants), function(root) {
+	      excludeHashes.push({hash: utils.node.calculateNodeHash(root)});
+	    });
+	
+	    _.each(rootVariants, function(root) {
+	      foldRootBlock(root, options, variants);
+	      if (options.allowNestedBlocks) {
+	        findNestedBlocks(root, options, variants);
+	      }
+	    });
+	  });
+	
+	  return _.chain(variants)
+	    .differenceBy(excludeHashes, function(item) {
+	      return item.hash;
+	    })
+	    .uniqBy(function(item) {
+	      return item.hash;
+	    })
+	    .sortBy(function(item) {
+	      return item.weight;
+	    })
+	    .each(function(item) {
+	      if (!doNotLog) {
+	        // Debug code, let it be here for now
+	        console.log(item.weight.toFixed(4),
+	          item.hash
+	            .replace(/\[R\*[0-9]+\/R[PF]:/g, '')
+	            .replace(/B\*[0-9]+\/R[PF]:/g, '')
+	            .replace(/]$/g, '')
+	            .replace(/[0-9]+/g, '')
+	        );
+	      }
+	    })
+	    .value();
 	}
 	
 	function transform(sett, options) {
@@ -85329,21 +86465,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var warpIsSameAsWeft = sett.warp === sett.weft;
 	  if (_.isObject(sett.warp)) {
-	    result.warp = processTokens(sett.warp, options);
+	    result.warpVariants = processTokens(sett.warp, options, true);
 	  }
 	  if (_.isObject(sett.weft)) {
 	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
+	      result.weftVariants = result.warpVariants;
 	    } else {
-	      result.weft = processTokens(sett.weft, options);
+	      result.weftVariants = processTokens(sett.weft, options, true);
 	    }
 	  }
+	
+	  // Take the best variant, but keep other too
+	  result.warp = _.first(result.warpVariants).node;
+	  result.weft = _.first(result.weftVariants).node;
 	
 	  return result;
 	}
 	
 	function factory(options) {
 	  options = _.extend({}, defaultOptions, options);
+	  if (options.minBlockSize < 1) {
+	    options.minBlockSize = 1;
+	  }
+	  if (options.maxFoldLevels <= 0) {
+	    options.maxFoldLevels = 200000000; // Just a huge number
+	  }
 	  return function(sett) {
 	    return transform(sett, options);
 	  };
@@ -85353,17 +86499,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 125 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	var flattenSimpleBlocks = __webpack_require__(30);
-	var mergeStripes = __webpack_require__(31);
-	var removeEmptyBlocks = __webpack_require__(32);
-	var removeZeroWidthStripes = __webpack_require__(33);
+	var flattenSimpleBlocks = __webpack_require__(33);
+	var mergeStripes = __webpack_require__(34);
+	var removeEmptyBlocks = __webpack_require__(35);
+	var removeZeroWidthStripes = __webpack_require__(36);
 	
 	var defaultOptions = {
 	  // Also options for removeZeroWidthStripes
@@ -85402,7 +86548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 126 */
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -85430,7 +86576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 127 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85461,13 +86607,128 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return result;
 	}
 	
+	function parseRepeat(value) {
+	  var result = parseInt(value, 10) || 0;
+	  return result > 1 ? result : 1;
+	}
+	
+	function calculateNodeHash(node) {
+	  if (!_.isObject(node)) {
+	    return '';
+	  }
+	  if (node.isStripe && (node.count > 0)) {
+	    return node.name + node.count * parseRepeat(node.repeat);
+	  }
+	  if (node.isBlock) {
+	    if (_.isArray(node.items) && (node.items.length > 0)) {
+	      return '[' + (node.isRoot ? 'R' : 'B') +
+	        '*' + parseRepeat(node.repeat) +
+	        '/' + (node.reflect ? 'RF' : 'RP') + ':' +
+	        _.chain(node.items)
+	          .map(calculateNodeHash)
+	          .join('')
+	          .value() +
+	        ']';
+	    }
+	  }
+	  return '';
+	}
+	
+	function calculateNodeWeight(node, returnRawWeight) {
+	  var stripeCount = 0;
+	  var blockCount = 0;
+	
+	  if (_.isObject(node)) {
+	    if (node.isStripe) {
+	      stripeCount++;
+	    }
+	
+	    if (node.isBlock && _.isArray(node.items) && (node.items.length > 0)) {
+	      if (!node.isRoot) {
+	        blockCount++;
+	      }
+	      var multiplier = node.reflect ? 2 : 1;
+	      _.each(node.items, function(item) {
+	        if (_.isObject(item)) {
+	          if (item.isBlock) {
+	            var nested = calculateNodeWeight(item, true);
+	            blockCount += nested.blocks * multiplier;
+	          }
+	          if (item.isStripe && node.isRoot && !node.reflect) {
+	            // Calculate only stripes in root if it is not reflected
+	            stripeCount++;
+	          }
+	        }
+	      });
+	    }
+	  }
+	
+	  if (returnRawWeight) {
+	    return {blocks: blockCount, stripes: stripeCount};
+	  }
+	
+	  if ((blockCount == 0) && (stripeCount == 0)) {
+	    return node.isRoot ? 0 : Number.MAX_VALUE;
+	  }
+	
+	  return Math.sqrt(blockCount * blockCount + stripeCount * stripeCount);
+	}
+	
+	function isSameNode(left, right) {
+	  if (!_.isObject(left) || (!_.isObject(right))) {
+	    return false;
+	  }
+	  if (left.isStripe && right.isStripe) {
+	    return (left.name == right.name) && (
+	      left.count * parseRepeat(left.repeat) ==
+	      right.count * parseRepeat(right.repeat)
+	    );
+	  }
+	  if (left.isBlock && right.isBlock) {
+	    // Both should be root or not
+	    if (left.isRoot != right.isRoot) {
+	      return false;
+	    }
+	    // Both should be reflected or not
+	    if (left.reflect != right.reflect) {
+	      return false;
+	    }
+	    // Both should be repeated equal times
+	    if (parseRepeat(left.repeat) != parseRepeat(right.repeat)) {
+	      return false;
+	    }
+	    // Both should have same count of items
+	    if (!_.isArray(left.items) || !_.isArray(right.items)) {
+	      return false;
+	    }
+	    if (left.items.length != right.items.length) {
+	      return false;
+	    }
+	
+	    // Complex case: compare all items
+	    var result = true;
+	    _.each(left.items, function(leftItem, index) {
+	      var rightItem = right.items[index];
+	      if (!isSameNode(leftItem, rightItem)) {
+	        result = false;
+	        return false; // Break
+	      }
+	    });
+	    return result;
+	  }
+	  return false;
+	}
+	
 	module.exports.newStripe = newStripe;
 	module.exports.newBlock = newBlock;
 	module.exports.newRootBlock = newRootBlock;
+	module.exports.isSameNode = isSameNode;
+	module.exports.calculateNodeHash = calculateNodeHash;
+	module.exports.calculateNodeWeight = calculateNodeWeight;
 
 
 /***/ },
-/* 128 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85538,13 +86799,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 129 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var color = __webpack_require__(34);
+	var color = __webpack_require__(37);
 	
 	function getColor(name, colors, defaultColors) {
 	  var temp = colors[name];
@@ -85671,7 +86932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 130 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85887,13 +87148,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 131 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
 	// See LICENSE.md for more information.
 	
-	var encoding = __webpack_require__(133);
+	var encoding = __webpack_require__(138);
 	
 	module.exports = {
 	  TextEncoder: encoding.TextEncoder,
@@ -85902,7 +87163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 132 */
+/* 137 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -85947,7 +87208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 133 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
@@ -85960,7 +87221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	if (typeof module !== "undefined" && module.exports) {
 	  this["encoding-indexes"] =
-	    __webpack_require__(132)["encoding-indexes"];
+	    __webpack_require__(137)["encoding-indexes"];
 	}
 	
 	(function(global) {
@@ -89262,7 +90523,66 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 134 */
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var apply = Function.prototype.apply;
+	
+	// DOM APIs, for completeness
+	
+	exports.setTimeout = function() {
+	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+	};
+	exports.setInterval = function() {
+	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+	};
+	exports.clearTimeout =
+	exports.clearInterval = function(timeout) {
+	  if (timeout) {
+	    timeout.close();
+	  }
+	};
+	
+	function Timeout(id, clearFn) {
+	  this._id = id;
+	  this._clearFn = clearFn;
+	}
+	Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+	Timeout.prototype.close = function() {
+	  this._clearFn.call(window, this._id);
+	};
+	
+	// Does not start the time, just sets up the members needed.
+	exports.enroll = function(item, msecs) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = msecs;
+	};
+	
+	exports.unenroll = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = -1;
+	};
+	
+	exports._unrefActive = exports.active = function(item) {
+	  clearTimeout(item._idleTimeoutId);
+	
+	  var msecs = item._idleTimeout;
+	  if (msecs >= 0) {
+	    item._idleTimeoutId = setTimeout(function onTimeout() {
+	      if (item._onTimeout)
+	        item._onTimeout();
+	    }, msecs);
+	  }
+	};
+	
+	// setimmediate attaches itself to the global object
+	__webpack_require__(100);
+	exports.setImmediate = setImmediate;
+	exports.clearImmediate = clearImmediate;
+
+
+/***/ },
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89271,21 +90591,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var utils = __webpack_require__(16);
 	var constants = __webpack_require__(15);
-	var tar = __webpack_require__(135);
-	var untar = __webpack_require__(136);
+	var tar = __webpack_require__(141);
+	var untar = __webpack_require__(142);
 	
 	utils.extend(module.exports, tar, untar, constants);
 
 
 /***/ },
-/* 135 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var constants = __webpack_require__(15);
 	var utils = __webpack_require__(16);
-	var types = __webpack_require__(35);
+	var types = __webpack_require__(38);
 	
 	function headerSize(file) {
 	  // header has fixed size
@@ -89379,14 +90699,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 136 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var constants = __webpack_require__(15);
 	var utils = __webpack_require__(16);
-	var types = __webpack_require__(35);
+	var types = __webpack_require__(38);
 	
 	var defaultOptions = {
 	  extractData: true,
@@ -89538,7 +90858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 137 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -90070,10 +91390,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)(module), (function() { return this; }())))
 
 /***/ },
-/* 138 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -90097,7 +91417,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(137);
+	'use strict';
+	
+	var punycode = __webpack_require__(143);
+	var util = __webpack_require__(145);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -90128,6 +91451,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var protocolPattern = /^([a-z0-9.+-]+:)/i,
 	    portPattern = /:[0-9]*$/,
 	
+	    // Special case for a simple path URL
+	    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
+	
 	    // RFC 2396: characters reserved for delimiting URLs.
 	    // We actually just auto-escape these.
 	    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
@@ -90144,8 +91470,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
 	    hostEndingChars = ['/', '?', '#'],
 	    hostnameMaxLen = 255,
-	    hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
-	    hostnamePartStart = /^([a-z0-9A-Z_-]{0,63})(.*)$/,
+	    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
+	    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
 	    // protocols that can allow "unsafe" and "unwise" chars.
 	    unsafeProtocol = {
 	      'javascript': true,
@@ -90172,7 +91498,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    querystring = __webpack_require__(87);
 	
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
-	  if (url && isObject(url) && url instanceof Url) return url;
+	  if (url && util.isObject(url) && url instanceof Url) return url;
 	
 	  var u = new Url;
 	  u.parse(url, parseQueryString, slashesDenoteHost);
@@ -90180,15 +91506,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
-	  if (!isString(url)) {
+	  if (!util.isString(url)) {
 	    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
 	  }
+	
+	  // Copy chrome, IE, opera backslash-handling behavior.
+	  // Back slashes before the query string get converted to forward slashes
+	  // See: https://code.google.com/p/chromium/issues/detail?id=25916
+	  var queryIndex = url.indexOf('?'),
+	      splitter =
+	          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+	      uSplit = url.split(splitter),
+	      slashRegex = /\\/g;
+	  uSplit[0] = uSplit[0].replace(slashRegex, '/');
+	  url = uSplit.join(splitter);
 	
 	  var rest = url;
 	
 	  // trim before proceeding.
 	  // This is to support parse stuff like "  http://foo.com  \n"
 	  rest = rest.trim();
+	
+	  if (!slashesDenoteHost && url.split('#').length === 1) {
+	    // Try fast path regexp
+	    var simplePath = simplePathPattern.exec(rest);
+	    if (simplePath) {
+	      this.path = rest;
+	      this.href = rest;
+	      this.pathname = simplePath[1];
+	      if (simplePath[2]) {
+	        this.search = simplePath[2];
+	        if (parseQueryString) {
+	          this.query = querystring.parse(this.search.substr(1));
+	        } else {
+	          this.query = this.search.substr(1);
+	        }
+	      } else if (parseQueryString) {
+	        this.search = '';
+	        this.query = {};
+	      }
+	      return this;
+	    }
+	  }
 	
 	  var proto = protocolPattern.exec(rest);
 	  if (proto) {
@@ -90327,18 +91686,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    if (!ipv6Hostname) {
-	      // IDNA Support: Returns a puny coded representation of "domain".
-	      // It only converts the part of the domain name that
-	      // has non ASCII characters. I.e. it dosent matter if
-	      // you call it with a domain that already is in ASCII.
-	      var domainArray = this.hostname.split('.');
-	      var newOut = [];
-	      for (var i = 0; i < domainArray.length; ++i) {
-	        var s = domainArray[i];
-	        newOut.push(s.match(/[^A-Za-z0-9_-]/) ?
-	            'xn--' + punycode.encode(s) : s);
-	      }
-	      this.hostname = newOut.join('.');
+	      // IDNA Support: Returns a punycoded representation of "domain".
+	      // It only converts parts of the domain name that
+	      // have non-ASCII characters, i.e. it doesn't matter if
+	      // you call it with a domain that already is ASCII-only.
+	      this.hostname = punycode.toASCII(this.hostname);
 	    }
 	
 	    var p = this.port ? ':' + this.port : '';
@@ -90365,6 +91717,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // need to be.
 	    for (var i = 0, l = autoEscape.length; i < l; i++) {
 	      var ae = autoEscape[i];
+	      if (rest.indexOf(ae) === -1)
+	        continue;
 	      var esc = encodeURIComponent(ae);
 	      if (esc === ae) {
 	        esc = escape(ae);
@@ -90418,7 +91772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // If it's an obj, this is a no-op.
 	  // this way, you can call url_format() on strings
 	  // to clean up potentially wonky urls.
-	  if (isString(obj)) obj = urlParse(obj);
+	  if (util.isString(obj)) obj = urlParse(obj);
 	  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
 	  return obj.format();
 	}
@@ -90449,7 +91803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  if (this.query &&
-	      isObject(this.query) &&
+	      util.isObject(this.query) &&
 	      Object.keys(this.query).length) {
 	    query = querystring.stringify(this.query);
 	  }
@@ -90493,16 +91847,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	Url.prototype.resolveObject = function(relative) {
-	  if (isString(relative)) {
+	  if (util.isString(relative)) {
 	    var rel = new Url();
 	    rel.parse(relative, false, true);
 	    relative = rel;
 	  }
 	
 	  var result = new Url();
-	  Object.keys(this).forEach(function(k) {
-	    result[k] = this[k];
-	  }, this);
+	  var tkeys = Object.keys(this);
+	  for (var tk = 0; tk < tkeys.length; tk++) {
+	    var tkey = tkeys[tk];
+	    result[tkey] = this[tkey];
+	  }
 	
 	  // hash is always overridden, no matter what.
 	  // even href="" will remove it.
@@ -90517,10 +91873,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // hrefs like //foo/bar always cut to the protocol.
 	  if (relative.slashes && !relative.protocol) {
 	    // take everything except the protocol from relative
-	    Object.keys(relative).forEach(function(k) {
-	      if (k !== 'protocol')
-	        result[k] = relative[k];
-	    });
+	    var rkeys = Object.keys(relative);
+	    for (var rk = 0; rk < rkeys.length; rk++) {
+	      var rkey = rkeys[rk];
+	      if (rkey !== 'protocol')
+	        result[rkey] = relative[rkey];
+	    }
 	
 	    //urlParse appends trailing / to urls like http://www.example.com
 	    if (slashedProtocol[result.protocol] &&
@@ -90542,9 +91900,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // because that's known to be hostless.
 	    // anything else is assumed to be absolute.
 	    if (!slashedProtocol[relative.protocol]) {
-	      Object.keys(relative).forEach(function(k) {
+	      var keys = Object.keys(relative);
+	      for (var v = 0; v < keys.length; v++) {
+	        var k = keys[v];
 	        result[k] = relative[k];
-	      });
+	      }
 	      result.href = result.format();
 	      return result;
 	    }
@@ -90633,14 +91993,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    srcPath = srcPath.concat(relPath);
 	    result.search = relative.search;
 	    result.query = relative.query;
-	  } else if (!isNullOrUndefined(relative.search)) {
+	  } else if (!util.isNullOrUndefined(relative.search)) {
 	    // just pull out the search.
 	    // like href='?foo'.
 	    // Put this after the other two cases because it simplifies the booleans
 	    if (psychotic) {
 	      result.hostname = result.host = srcPath.shift();
 	      //occationaly the auth can get stuck only in host
-	      //this especialy happens in cases like
+	      //this especially happens in cases like
 	      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
 	      var authInHost = result.host && result.host.indexOf('@') > 0 ?
 	                       result.host.split('@') : false;
@@ -90652,7 +92012,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result.search = relative.search;
 	    result.query = relative.query;
 	    //to support http.request
-	    if (!isNull(result.pathname) || !isNull(result.search)) {
+	    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
 	      result.path = (result.pathname ? result.pathname : '') +
 	                    (result.search ? result.search : '');
 	    }
@@ -90679,15 +92039,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // then it must NOT get a trailing slash.
 	  var last = srcPath.slice(-1)[0];
 	  var hasTrailingSlash = (
-	      (result.host || relative.host) && (last === '.' || last === '..') ||
-	      last === '');
+	      (result.host || relative.host || srcPath.length > 1) &&
+	      (last === '.' || last === '..') || last === '');
 	
 	  // strip single dots, resolve double dots to parent dir
 	  // if the path tries to go above the root, `up` ends up > 0
 	  var up = 0;
 	  for (var i = srcPath.length; i >= 0; i--) {
 	    last = srcPath[i];
-	    if (last == '.') {
+	    if (last === '.') {
 	      srcPath.splice(i, 1);
 	    } else if (last === '..') {
 	      srcPath.splice(i, 1);
@@ -90722,7 +92082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result.hostname = result.host = isAbsolute ? '' :
 	                                    srcPath.length ? srcPath.shift() : '';
 	    //occationaly the auth can get stuck only in host
-	    //this especialy happens in cases like
+	    //this especially happens in cases like
 	    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
 	    var authInHost = result.host && result.host.indexOf('@') > 0 ?
 	                     result.host.split('@') : false;
@@ -90746,7 +92106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  //to support request.http
-	  if (!isNull(result.pathname) || !isNull(result.search)) {
+	  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
 	    result.path = (result.pathname ? result.pathname : '') +
 	                  (result.search ? result.search : '');
 	  }
@@ -90768,32 +92128,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  if (host) this.hostname = host;
 	};
-	
-	function isString(arg) {
-	  return typeof arg === "string";
-	}
-	
-	function isObject(arg) {
-	  return typeof arg === 'object' && arg !== null;
-	}
-	
-	function isNull(arg) {
-	  return arg === null;
-	}
-	function isNullOrUndefined(arg) {
-	  return  arg == null;
-	}
 
 
 /***/ },
-/* 139 */
+/* 145 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+	  isString: function(arg) {
+	    return typeof(arg) === 'string';
+	  },
+	  isObject: function(arg) {
+	    return typeof(arg) === 'object' && arg !== null;
+	  },
+	  isNull: function(arg) {
+	    return arg === null;
+	  },
+	  isNullOrUndefined: function(arg) {
+	    return arg == null;
+	  }
+	};
+
+
+/***/ },
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 140 */
+/* 147 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -90801,7 +92168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 141 */
+/* 148 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -91240,37 +92607,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 142 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = __webpack_require__(3);
 	
-	__webpack_require__(143);
+	__webpack_require__(150);
+	__webpack_require__(158);
+	__webpack_require__(163);
+
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	__webpack_require__(151);
-	__webpack_require__(156);
 
 
 /***/ },
-/* 143 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(144);
-
-
-/***/ },
-/* 144 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var $q = __webpack_require__(38).$q;
+	var $q = __webpack_require__(41).$q;
 	var ngModule = __webpack_require__(3);
-	var log = __webpack_require__(39);
-	var application = __webpack_require__(37);
+	var log = __webpack_require__(42);
+	var application = __webpack_require__(40);
 	
 	ngModule.controller('MainController', [
 	  '$scope',
@@ -91297,12 +92664,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      $q(application.getDataset(dataset))
 	        .then(function(dataset) {
 	          log.info('Building search index for: ' + dataset.name + '...');
-	          return application.buildSearchIndex(dataset.items)
-	            .then(function(options) {
-	              dataset.searchIndex = options.searchIndex;
-	              dataset.availableCategories = options.availableCategories;
-	              return dataset;
-	            });
+	          dataset.$searchIndex = $q(application.buildSearchIndex(
+	            dataset.items));
+	          return dataset;
 	        })
 	        .then(function(dataset) {
 	          if (state.dataset && (state.dataset.name == dataset.name)) {
@@ -91329,7 +92693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 145 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91352,7 +92716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 146 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91360,9 +92724,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var $q = __webpack_require__(38).$q;
-	var application = __webpack_require__(37);
-	var utils = __webpack_require__(162);
+	var $q = __webpack_require__(41).$q;
+	var application = __webpack_require__(40);
+	var utils = __webpack_require__(169);
 	var ngModule = __webpack_require__(3);
 	
 	ngModule.directive('datasetDownload', [
@@ -91370,7 +92734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(88),
+	      template: __webpack_require__(91),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -91439,7 +92803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 147 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91450,7 +92814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(89),
+	      template: __webpack_require__(92),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91466,7 +92830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 148 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91477,7 +92841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(90),
+	      template: __webpack_require__(93),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91492,7 +92856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 149 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91504,12 +92868,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(91),
+	      template: __webpack_require__(94),
 	      replace: true,
 	      scope: {
 	        item: '='
 	      },
 	      link: function($scope) {
+	        $scope.isSearchIndexReady = false;
 	        var searchIndex = _.constant([]);
 	
 	        var state = $scope.state = {
@@ -91572,14 +92937,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	          searchIndex = _.constant([]);
 	          $scope.availableCategories = [];
 	          if (_.isObject($scope.item)) {
-	            if (_.isFunction($scope.item.searchIndex)) {
-	              searchIndex = $scope.item.searchIndex;
-	            } else {
-	              searchIndex = _.constant($scope.item.items);
-	            }
+	            searchIndex = _.constant(_.sortBy($scope.item.items, 'name'));
+	            if (_.isObject($scope.item.$searchIndex)) {
+	              $scope.item.$searchIndex.then(function(options) {
+	                if (_.isFunction(options.searchIndex)) {
+	                  searchIndex = options.searchIndex;
+	                }
+	                $scope.availableCategories = _.filter(
+	                  options.availableCategories, _.isObject);
 	
-	            $scope.availableCategories = _.clone(
-	              $scope.item.availableCategories);
+	                $scope.isSearchIndexReady = true;
+	
+	                performSearch();
+	
+	                return options;
+	              });
+	            }
 	          }
 	
 	          state.search.categories = [];
@@ -91602,7 +92975,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 150 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91614,7 +92987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(92),
+	      template: __webpack_require__(95),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -91648,27 +93021,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 151 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(145);
+	__webpack_require__(152);
 	
 	// Components
-	__webpack_require__(152);
-	__webpack_require__(150);
-	__webpack_require__(153);
-	__webpack_require__(154);
+	__webpack_require__(159);
+	__webpack_require__(157);
+	__webpack_require__(160);
+	__webpack_require__(161);
+	__webpack_require__(162);
 	__webpack_require__(155);
-	__webpack_require__(148);
-	__webpack_require__(147);
-	__webpack_require__(149);
-	__webpack_require__(146);
+	__webpack_require__(154);
+	__webpack_require__(156);
+	__webpack_require__(153);
 
 
 /***/ },
-/* 152 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91690,7 +93063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(93),
+	      template: __webpack_require__(96),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -91760,7 +93133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 153 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91771,7 +93144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(94),
+	      template: __webpack_require__(97),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91785,7 +93158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 154 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91797,7 +93170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(95),
+	      template: __webpack_require__(98),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -91847,7 +93220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 155 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91862,7 +93235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(96),
+	      template: __webpack_require__(99),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -91942,16 +93315,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 156 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(157);
+	__webpack_require__(164);
 
 
 /***/ },
-/* 157 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91972,14 +93345,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 158 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	/* global fetch */
 	
-	__webpack_require__(23);
+	__webpack_require__(22);
 	var Promise = __webpack_require__(7);
 	
 	var cache = {};
@@ -92013,13 +93386,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 159 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var async = __webpack_require__(22);
+	var async = __webpack_require__(21);
 	
 	function createIndex(records) {
 	  var refsList = [];
@@ -92076,14 +93449,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 160 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	var lunr = __webpack_require__(73);
-	var async = __webpack_require__(22);
+	var async = __webpack_require__(21);
 	
 	function createIndex(records) {
 	  records = _.sortBy(records, 'name');
@@ -92157,7 +93530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 161 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92199,12 +93572,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = createIndex;
 	
-	module.exports.fulltext = __webpack_require__(160);
-	module.exports.category = __webpack_require__(159);
+	module.exports.fulltext = __webpack_require__(167);
+	module.exports.category = __webpack_require__(166);
 
 
 /***/ },
-/* 162 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92225,8 +93598,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return bytes.toFixed(1) + ' ' + units[u];
 	}
 	
-	module.exports.async = __webpack_require__(22);
-	module.exports.log = __webpack_require__(39);
+	module.exports.async = __webpack_require__(21);
+	module.exports.log = __webpack_require__(42);
 	
 	module.exports.formatDataSize = formatDataSize;
 
