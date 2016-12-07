@@ -1,5 +1,10 @@
 <div class="dataset-view">
-  <div class="input-group margin-top-15 margin-bottom-15">
+  <div ng-if="!isSearchIndexReady"
+    class="alert alert-info margin-top-15 margin-bottom-15">
+    <i class="fa fa-2x fa-spinner fa-pulse margin-right-5" style="vertical-align: middle;"></i>
+    <span style="vertical-align: middle;">Preparing search index...</span>
+  </div>
+  <div ng-if="isSearchIndexReady" class="input-group margin-top-15 margin-bottom-15">
     <span class="input-group-addon"><i class="fa fa-search"></i></span>
     <input type="text" class="form-control" placeholder="Search"
       ng-model-options="{debounce: 300}"
@@ -9,14 +14,15 @@
       items="availableCategories" selected="state.search.categories"
       title="Category"></dropdown>
   </div>
-  <div class="margin-top-5 margin-bottom-10">
+  <div ng-if="isSearchIndexReady" class="margin-top-5 margin-bottom-10">
     <span class="margin-right-10">Examples:</span>
     <a href="javascript:void(0)" class="margin-right-10"
       ng-repeat="phrase in searchExamples"
       ng-click="state.search.query = phrase">{{ phrase }}</a>
   </div>
 
-  <div ng-if="selectedCategories.length > 0" class="margin-top-10 margin-bottom-10">
+  <div ng-if="isSearchIndexReady && (selectedCategories.length > 0)"
+    class="margin-top-10 margin-bottom-10">
     <span class="margin-right-10">Categories:</span>
     <span class="label label-info margin-right-5"
       ng-repeat="item in selectedCategories track by item.value"
