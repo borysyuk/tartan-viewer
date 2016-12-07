@@ -30,12 +30,9 @@ ngModule.controller('MainController', [
       $q(application.getDataset(dataset))
         .then(function(dataset) {
           log.info('Building search index for: ' + dataset.name + '...');
-          return application.buildSearchIndex(dataset.items)
-            .then(function(options) {
-              dataset.searchIndex = options.searchIndex;
-              dataset.availableCategories = options.availableCategories;
-              return dataset;
-            });
+          dataset.$searchIndex = $q(application.buildSearchIndex(
+            dataset.items));
+          return dataset;
         })
         .then(function(dataset) {
           if (state.dataset && (state.dataset.name == dataset.name)) {

@@ -13,6 +13,7 @@ ngModule.directive('datasetView', [
         item: '='
       },
       link: function($scope) {
+        $scope.isSearchIndexReady = false;
         var searchIndex = _.constant([]);
 
         var state = $scope.state = {
@@ -75,14 +76,22 @@ ngModule.directive('datasetView', [
           searchIndex = _.constant([]);
           $scope.availableCategories = [];
           if (_.isObject($scope.item)) {
-            if (_.isFunction($scope.item.searchIndex)) {
-              searchIndex = $scope.item.searchIndex;
-            } else {
-              searchIndex = _.constant($scope.item.items);
-            }
+            searchIndex = _.constant(_.sortBy($scope.item.items, 'name'));
+            if (_.isObject($scope.item.$searchIndex)) {
+              $scope.item.$searchIndex.then(function(options) {
+                if (_.isFunction(options.searchIndex)) {
+                  searchIndex = options.searchIndex;
+                }
+                $scope.availableCategories = _.filter(
+                  options.availableCategories, _.isObject);
 
-            $scope.availableCategories = _.clone(
-              $scope.item.availableCategories);
+                $scope.isSearchIndexReady = true;
+
+                performSearch();
+
+                return options;
+              });
+            }
           }
 
           state.search.categories = [];

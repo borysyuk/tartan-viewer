@@ -14,7 +14,10 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.html$/, loader: 'raw'},
-      {test: /\.json/, loader: 'json'}
+      {test: /\.json/, loader: 'json'},
+      // Evaluate every @package.js and bundle pre-calculated exports
+      // as a value. This allows to omit package.json file(s) from bundle.
+      {test: /[\\/]@package\.js$/, loaders: ['raw', 'val']}
     ]
   },
   plugins: [

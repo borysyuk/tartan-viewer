@@ -1,6 +1,6 @@
 {
   "name": "tartan-viewer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tartan Viewer",
   "keywords": [
     "angular",
@@ -37,7 +37,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-marked": "^1.2.2",
-    "angular-tartan": "^0.4.0",
+    "angular-tartan": "^0.5.0",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
