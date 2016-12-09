@@ -21,17 +21,21 @@ ngModule.controller('TestController', [
         return '';
       }
       return [
-        '*** ' + fp.colors[2].join(' ') + ';',
-        '**  ' + fp.colors[1].join(' ') + ';',
-        '*   ' + fp.colors[0].join(' ') + ';',
-        'Wr: ' + _.reverse(_.clone(fp.warp)).join(' - ') + ';',
-        'Wf: ' + _.reverse(_.clone(fp.weft)).join(' - ') + ';'
+        '***  (' + fp.cl3.join(') (') + ')',
+        '**   (' + fp.cl2.join(') (') + ')',
+        '*    (' + fp.cl1.join(') (') + ')',
+        'Wr:  (' + [fp.wr3, fp.wr2, fp.wr1, fp.wr0].join(' : ') + ')',
+        '  gr: ' + fp.wrgr,
+        'Wf:  (' + [fp.wf3, fp.wf2, fp.wf1, fp.wf0].join(' : ') + ')',
+        '  gr: ' + fp.wfgr
       ].join('\n');
     };
 
     $scope.selectItem = function() {
       $scope.similarItems = [];
+      state.compareItem = null;
       if (state.originalItem) {
+        console.time('search');
         $scope.similarItems = _.chain($scope.items)
           .map(function(item) {
             var score = fingerprint.compare(state.originalItem.fingerprint,
@@ -46,9 +50,10 @@ ngModule.controller('TestController', [
           })
           .filter()
           .sortBy(function(item) {
-            return item.score.score;
+            return item.score.color;
           })  // less score is better
           .value();
+        console.timeEnd('search');
       }
     };
 
@@ -61,11 +66,13 @@ ngModule.controller('TestController', [
         var parse = schema.parse({
           transformSyntaxTree: tartan.transform.flatten()
         });
+        console.time('fingerprint');
         $scope.items = _.map(dataset.items, function(item) {
           item.fingerprint = fingerprint.create(parse(item.sett),
             schema.colors);
           return item;
         });
+        console.timeEnd('fingerprint');
         $scope.isLoaded.application = true;
       });
   }

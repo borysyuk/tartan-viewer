@@ -35,29 +35,23 @@ ngModule.directive('pagination', [
         state.current = validateCurrent($scope.current, state.count);
         $scope.current = state.current;
 
-        $scope.$watch('count', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            state.count = validateCount($scope.count);
-            if (!state.editing) {
-              state.current = validateCurrent(state.current, state.count);
-            }
+        $scope.$watch('count', function() {
+          state.count = validateCount($scope.count);
+          if (!state.editing) {
+            state.current = validateCurrent(state.current, state.count);
           }
         });
 
-        $scope.$watch('current', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            if (!state.editing) {
-              state.current = validateCurrent($scope.current, state.count);
-            }
+        $scope.$watch('current', function() {
+          if (!state.editing) {
+            state.current = validateCurrent($scope.current, state.count);
           }
         });
 
-        $scope.$watch('state', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            if (!state.editing) {
-              state.current = validateCurrent(state.current, state.count);
-              $scope.current = state.current;
-            }
+        $scope.$watch('state', function() {
+          if (!state.editing) {
+            state.current = validateCurrent(state.current, state.count);
+            $scope.current = state.current;
           }
         }, true);
 

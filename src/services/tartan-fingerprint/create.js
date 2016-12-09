@@ -3,6 +3,24 @@
 var _ = require('lodash');
 var tartan = require('tartan');
 
+/*
+cl3 - most used colors
+cl2 - something between
+cl1 - rarely used colors
+
+wr* - warp, wf* - weft
+
+wr0..wr3 - count of stripes, from thin to wide
+wrgr/wfgr - granularity
+
+*/
+
+function scale(value, min, max, inverse) {
+  value = inverse ? 1 - Math.sqrt(value) : Math.sqrt(value);
+  value = Math.round(value * (max - min)) + min;
+  return value <= max ? value : max;
+}
+
 function createColorFingerprint(warp, weft) {
   warp = _.reduce(warp, function(accumulator, value) {
     accumulator[value[0]] = accumulator[value[0]] || 0;
@@ -31,32 +49,57 @@ function createColorFingerprint(warp, weft) {
     });
   });
 
-  var mapped = [[], [], []];
+  var mapped = {
+    cl1: [],
+    cl2: [],
+    cl3: []
+  };
 
   var normalize = _.max(_.values(result));
-  var remap = [0, 1, 1, 2, 2, 2, 2];
   _.each(result, function(score, color) {
     score = score / normalize;
     if (score >= 0.1) {
-      score = remap[Math.round(score * 6)];
-      mapped[score].push(color);
+      mapped['cl' + scale(score, 1, 3)].push([
+        parseInt(color[1] + color[2], 16),
+        parseInt(color[3] + color[4], 16),
+        parseInt(color[5] + color[6], 16)
+      ]);
     }
   });
 
   return mapped;
 }
 
-function createSequenceFingerprint(items) {
+function createSequenceFingerprint(items, prefix) {
   var normalize = _.max(_.map(items, function(item) {
     return item[1];
   }));
 
-  var mapped = [0, 0, 0, 0];
-  var remap = [0, 1, 1, 2, 2, 3, 3, 3, 3];
+  var mapped = {};
+  mapped[prefix + '0'] = 0;
+  mapped[prefix + '1'] = 0;
+  mapped[prefix + '2'] = 0;
+  mapped[prefix + '3'] = 0;
+
+  mapped[prefix + 'gr'] = 0;
+
+  var granularity = 0;
+  var prevValue = null;
   _.each(items, function(item) {
-    var score = remap[Math.round(item[1] / normalize * 8)];
-    mapped[score] += 1;
+    var value = item[1] / normalize;
+    var score = scale(value, 0, 3);
+    mapped[prefix + score] += 1;
+
+    var isThin = value <= 0.3;
+    if ((prevValue !== null) && (isThin !== prevValue)) {
+      granularity += 1;
+    }
+    prevValue = isThin;
   });
+
+  if (items.length > 0) {
+    mapped[prefix + 'gr'] = granularity / items.length;
+  }
 
   return mapped;
 }
@@ -80,17 +123,25 @@ function create(sett, defaultColors) {
     }
   }
 
-  var warpFingerprint = createSequenceFingerprint(warp);
-  var weftFingerprint = warpFingerprint;
-  if (weft !== warp) {
-    weftFingerprint = createSequenceFingerprint(weft);
+  var warpFingerprint = createSequenceFingerprint(warp, 'wr');
+  var weftFingerprint;
+  if (weft === warp) {
+    weftFingerprint = {
+      wf0: warpFingerprint.wr0,
+      wf1: warpFingerprint.wr1,
+      wf2: warpFingerprint.wr2,
+      wf3: warpFingerprint.wr3,
+      wfgr: warpFingerprint.wrgr
+    };
+  } else {
+    weftFingerprint = createSequenceFingerprint(weft, 'wf');
   }
 
-  return {
-    colors: createColorFingerprint(warp, weft),
-    warp: warpFingerprint,
-    weft: weftFingerprint,
-  };
+  return _.extend({},
+    createColorFingerprint(warp, weft),
+    warpFingerprint,
+    weftFingerprint
+  );
 }
 
 module.exports = create;
