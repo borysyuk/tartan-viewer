@@ -37,16 +37,16 @@ ngModule.controller('TestController', [
           .map(function(item) {
             var score = fingerprint.compare(state.originalItem.fingerprint,
               item.fingerprint);
-            item.score = score.sett;
+            item.score = score.total;
             return item;
           })
           .filter()
           .sortBy('score')  // less score is better
           .value();
 
-        // $scope.similarItems = _.filter($scope.similarItems, function(item) {
-        //   return item.score <= 2.7;
-        // });
+        $scope.similarItems = _.filter($scope.similarItems, function(item) {
+          return item.score <= 2.121;
+        });
         console.timeEnd('search');
       }
     };

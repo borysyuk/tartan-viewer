@@ -86,15 +86,16 @@ function compareSequence(left, right, prefix) {
 
 function compare(left, right) {
   var color = compareColors(left, right);
-  var warp = compareSequence(left, right, 'wr');
-  var weft = compareSequence(left, right, 'wf');
+  var sett = compareSequence(left, right, 'wr') +
+    compareSequence(left, right, 'wf');
+
+  var q1 = 2 / 7;
+  var q2 = 1 - q1;
 
   return {
     color: color,
-    warp: warp,
-    weft: weft,
-    sett: warp + weft,
-    total: 0.5 * color + 0.5 * (warp + weft)
+    sett: sett,
+    total: q1 * color + q2 * sett
   };
 }
 
