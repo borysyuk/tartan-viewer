@@ -4,9 +4,8 @@ var _ = require('lodash');
 var tartan = require('tartan');
 
 /*
-cl3 - most used colors
-cl2 - something between
-cl1 - rarely used colors
+cl - colors (from most-used to less used), cut by threashold
+clrs - count of rest colors
 
 wr* - warp, wf* - weft
 
@@ -14,6 +13,32 @@ wr0..wr3 - count of stripes, from thin to wide
 wrgr/wfgr - granularity
 
 */
+
+function grayscaleFactor(color) {
+  // Calculate S from HLS
+  var r = color[0];
+  var g = color[1];
+  var b = color[2];
+
+  var st = 0;
+  if (r + g + b != 0) {
+    var min = Math.min(r, g, b) / 255;
+    var max = Math.max(r, g, b) / 255;
+    // Special for black and white colors
+    if (min + max > 1.91) {  // almost white
+      st = 0.37;
+    } else if (min + max < 0.07) {  // almost black
+      st = 0.23;
+    } else if (min + max < 1) {
+      st = (max - min) / (max + min);
+    } else {
+      st = (max - min) / (2.0 - max - min);
+    }
+  }
+
+  // scale and offset - we don't need zero values
+  return st * 0.89 + 0.11;
+}
 
 function scale(value, min, max, inverse) {
   value = inverse ? 1 - Math.sqrt(value) : Math.sqrt(value);
@@ -50,22 +75,27 @@ function createColorFingerprint(warp, weft) {
   });
 
   var mapped = {
-    cl1: [],
-    cl2: [],
-    cl3: []
+    cl: [],
+    clrs: 0
   };
 
   var normalize = _.max(_.values(result));
   _.each(result, function(score, color) {
-    score = score / normalize;
-    if (score >= 0.1) {
-      mapped['cl' + scale(score, 1, 3)].push([
+    score = Math.sqrt(score / normalize);
+    if (score >= 0.17) {
+      var value = [
         parseInt(color[1] + color[2], 16),
         parseInt(color[3] + color[4], 16),
         parseInt(color[5] + color[6], 16)
-      ]);
+      ];
+      value.push(score / normalize * grayscaleFactor(value));
+      mapped['cl'].push(value);
+    } else {
+      mapped.clrs += 1;
     }
   });
+
+  mapped.cl = _.chain(mapped.cl).sortBy(3).reverse().value();
 
   return mapped;
 }

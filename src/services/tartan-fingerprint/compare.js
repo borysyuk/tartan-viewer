@@ -1,18 +1,5 @@
 'use strict';
 
-var normalizeGrayscaleFactor = Math.sqrt(3 * 255 * 255);
-
-function grayscaleFactor(color) {
-  var min = Math.min(color[0], color[1], color[2]);
-  var max = Math.max(color[0], color[1], color[2]);
-  var gray = (min + max) / 2;
-  return 1 - Math.sqrt(
-    (color[0] - gray) * (color[0] - gray) +
-    (color[1] - gray) * (color[1] - gray) +
-    (color[2] - gray) * (color[2] - gray)
-  ) / normalizeGrayscaleFactor;
-}
-
 function colorDistance(left, right) {
   var rmean = (left[0] + right[0]) / 2;
   var r = left[0] - right[0];
@@ -22,61 +9,67 @@ function colorDistance(left, right) {
     (767 - rmean) * b * b / 256) / 768;
 }
 
-function compareColorsHelper(left, right, grayscaleMultiplier) {
+function compareColorsHelper(left, right) {
   if ((left.length == 0) || (right.length == 0)) {
-    if ((left.length == 0) && (right.length == 0)) {
-      return 0;  // complete match
-    } else {
-      return 1;  // none matched
-    }
+    return {sum: 0, restLeft: left, restRight: right};
   }
+  right = right.slice(0, right.length);  // copy
 
-  var threshold = 0.17;
-  var count = 0;
   var sum = 0;
-  for (var i = 0; i < left.length; i++) {
-    for (var j = 0; j < right.length; j++) {
-      var diff = colorDistance(left[i], right[j]);
-      if (grayscaleMultiplier > 0) {
-        diff *= grayscaleFactor(left[i]) * grayscaleMultiplier;
-        diff *= grayscaleFactor(right[j]) * grayscaleMultiplier;
-      }
-      if (diff <= threshold) {
-        sum += diff / threshold;
-        count += 1;
+  var restLeft = [];
+  left.forEach(function(cleft) {
+    for (var i = 0; i < right.length; i++) {
+      var cright = right[i];
+      var dist = colorDistance(cleft, cright);
+      if (dist <= 0.11) {
+        var diff = cleft[3] - cright[3];
+        sum += diff * diff;
+        right.splice(i, 1);  // remove it
+        return;
       }
     }
-  }
-
-  var rest = (left.length * right.length) / 2 - count;
-  if (rest < 0) {
-    rest = 0;
-  }
-
-  return (sum + rest) / count;
+    restLeft.push(cleft);
+  });
+  return {
+    sum: sum,
+    restLeft: restLeft,
+    restRight: right
+  };
 }
 
 function compareColors(left, right) {
-  var diff = [
-    0.99 * compareColorsHelper(left.cl3, right.cl3, 0.03),
-    0.79 * compareColorsHelper(left.cl2, right.cl2, 0.43),
-    0.17 * compareColorsHelper(left.cl1, right.cl1, 0.79),
+  // Map left colors to right
+  var temp = compareColorsHelper(left.cl, right.cl);
+  var sum = temp.sum;
 
-    0.11 * compareColorsHelper(left.cl3, right.cl2),
-    0.11 * compareColorsHelper(left.cl2, right.cl3),
+  // Map unmatched right colors to unmatched left
+  temp = compareColorsHelper(temp.restRight, temp.restLeft);
+  sum += temp.sum;
 
-    0.03 * compareColorsHelper(left.cl2, right.cl1),
-    0.03 * compareColorsHelper(left.cl1, right.cl2)
-  ];
-
-  diff = diff.map(function(value) {
-    return value * value;
-  });
-
-  var sum = 0;
-  for (var i = 0; i < diff.length; i++) {
-    sum += diff[i];
+  // Add the rest of unmatched with difference against 0,
+  // but only if there ae more than one unmatched color and it is not
+  // major
+  var rest = 1;
+  if (temp.restLeft.length + temp.restRight.length == 1) {
+    if (temp.restLeft.length == 1) {
+      rest = temp.restLeft[0][3];
+    }
+    if (temp.restRight.length == 1) {
+      rest = temp.restRight[0][3];
+    }
   }
+  if (rest > 0.43) {
+    temp.restLeft.forEach(function(value) {
+      sum += value[3] * value[3];
+    });
+    temp.restRight.forEach(function(value) {
+      sum += value[3] * value[3];
+    });
+  }
+
+  // Respect smallest stripes
+  var diff = left.clrs - right.clrs;
+  sum += diff * diff;
 
   return Math.sqrt(sum);
 }
@@ -109,7 +102,11 @@ function compare(left, right) {
     warp: warp,
     weft: weft,
     sett: Math.sqrt(warp * warp + weft * weft),
-    score: Math.sqrt(color * color + warp * warp + weft * weft)
+    total: Math.sqrt(
+      1.0 * color * color +
+      0.8 * warp * warp +
+      0.8 * weft * weft
+    )
   };
 }
 

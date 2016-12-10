@@ -21,9 +21,8 @@ ngModule.controller('TestController', [
         return '';
       }
       return [
-        '***  (' + fp.cl3.join(') (') + ')',
-        '**   (' + fp.cl2.join(') (') + ')',
-        '*    (' + fp.cl1.join(') (') + ')',
+        'Cl:  (' + fp.cl.join(') (') + ')',
+        '  r:  ' + fp.clrs,
         'Wr:  (' + [fp.wr3, fp.wr2, fp.wr1, fp.wr0].join(' : ') + ')',
         '  gr: ' + fp.wrgr,
         'Wf:  (' + [fp.wf3, fp.wf2, fp.wf1, fp.wf0].join(' : ') + ')',
@@ -45,14 +44,16 @@ ngModule.controller('TestController', [
               return null;
             }
 
-            item.score = score;
+            item.score = score.total;
             return item;
           })
           .filter()
-          .sortBy(function(item) {
-            return item.score.color;
-          })  // less score is better
+          .sortBy('score')  // less score is better
           .value();
+
+        $scope.similarItems = _.filter($scope.similarItems, function(item) {
+          return item.score <= 2.7;
+        });
         console.timeEnd('search');
       }
     };
