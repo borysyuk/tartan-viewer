@@ -9,8 +9,7 @@ clrs - count of rest colors
 
 wr* - warp, wf* - weft
 
-wr0..wr3 - count of stripes, from thin to wide
-wrgr/wfgr - granularity
+wrsq/wfsq - normalized stripes, ordered from wide to thin
 
 */
 
@@ -24,12 +23,7 @@ function grayscaleFactor(color) {
   if (r + g + b != 0) {
     var min = Math.min(r, g, b) / 255;
     var max = Math.max(r, g, b) / 255;
-    // Special for black and white colors
-    if (min + max > 1.91) {  // almost white
-      st = 0.37;
-    } else if (min + max < 0.07) {  // almost black
-      st = 0.23;
-    } else if (min + max < 1) {
+    if (min + max < 1) {
       st = (max - min) / (max + min);
     } else {
       st = (max - min) / (2.0 - max - min);
@@ -37,7 +31,7 @@ function grayscaleFactor(color) {
   }
 
   // scale and offset - we don't need zero values
-  return st * 0.89 + 0.11;
+  return st * 0.5 + 0.5;
 }
 
 function scale(value, min, max, inverse) {
@@ -101,35 +95,25 @@ function createColorFingerprint(warp, weft) {
 }
 
 function createSequenceFingerprint(items, prefix) {
-  var normalize = _.max(_.map(items, function(item) {
-    return item[1];
-  }));
+  var normalize = _.chain(items)
+    .map(function(item) {
+      return item[1];
+    })
+    .max()
+    .value();
 
   var mapped = {};
-  mapped[prefix + '0'] = 0;
-  mapped[prefix + '1'] = 0;
-  mapped[prefix + '2'] = 0;
-  mapped[prefix + '3'] = 0;
+  mapped[prefix + 'sq'] = [];
 
-  mapped[prefix + 'gr'] = 0;
-
-  var granularity = 0;
-  var prevValue = null;
   _.each(items, function(item) {
     var value = item[1] / normalize;
-    var score = scale(value, 0, 3);
-    mapped[prefix + score] += 1;
-
-    var isThin = value <= 0.3;
-    if ((prevValue !== null) && (isThin !== prevValue)) {
-      granularity += 1;
-    }
-    prevValue = isThin;
+    mapped[prefix + 'sq'].push(value);
   });
 
-  if (items.length > 0) {
-    mapped[prefix + 'gr'] = granularity / items.length;
-  }
+  mapped[prefix + 'sq'] = _.chain(mapped[prefix + 'sq'])
+    .sortBy()
+    .reverse()
+    .value();
 
   return mapped;
 }
@@ -157,11 +141,7 @@ function create(sett, defaultColors) {
   var weftFingerprint;
   if (weft === warp) {
     weftFingerprint = {
-      wf0: warpFingerprint.wr0,
-      wf1: warpFingerprint.wr1,
-      wf2: warpFingerprint.wr2,
-      wf3: warpFingerprint.wr3,
-      wfgr: warpFingerprint.wrgr
+      wfsq: warpFingerprint.wrsq
     };
   } else {
     weftFingerprint = createSequenceFingerprint(weft, 'wf');

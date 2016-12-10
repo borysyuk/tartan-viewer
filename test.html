@@ -38,8 +38,12 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-12" ng-if="!!state.originalItem && !!state.compareItem">
+      <div class="col-xs-6" ng-if="!!state.originalItem && !!state.compareItem">
         <pre>{{ state.compareItem.score }}</pre>
+      </div>
+      <div class="col-xs-6" ng-if="!!state.originalItem && !!state.compareItem">
+        <button type="button" class="btn btn-default"
+          ng-click="compareSelectedItems()">Compare</button>
       </div>
     </div>
 

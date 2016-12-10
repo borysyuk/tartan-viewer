@@ -21,7 +21,7 @@ function compareColorsHelper(left, right) {
     for (var i = 0; i < right.length; i++) {
       var cright = right[i];
       var dist = colorDistance(cleft, cright);
-      if (dist <= 0.11) {
+      if (dist <= 0.07) {
         var diff = cleft[3] - cright[3];
         sum += diff * diff;
         right.splice(i, 1);  // remove it
@@ -41,10 +41,6 @@ function compareColors(left, right) {
   // Map left colors to right
   var temp = compareColorsHelper(left.cl, right.cl);
   var sum = temp.sum;
-
-  // Map unmatched right colors to unmatched left
-  temp = compareColorsHelper(temp.restRight, temp.restLeft);
-  sum += temp.sum;
 
   // Add the rest of unmatched with difference against 0,
   // but only if there ae more than one unmatched color and it is not
@@ -74,39 +70,31 @@ function compareColors(left, right) {
   return Math.sqrt(sum);
 }
 
-function compareSequence(left, right, prefix, count) {
-  var key;
-  var diff;
+function compareSequence(left, right, prefix) {
+  var vleft = left[prefix + 'sq'];
+  var vright = right[prefix + 'sq'];
+  var n = Math.max(vleft.length, vright.length);
 
   var sum = 0;
-  for (var i = 0; i < count; i++) {
-    key = '' + prefix + i;
-    diff = (right[key] || 0) - (left[key] || 0);
+  for (var i = 0; i < n; i++) {
+    var diff = (vleft[i] || 0) - (vright[i] || 0);
     sum += diff * diff;
   }
-
-  key = '' + prefix + 'gr';
-  diff = (right[key] || 0) - (left[key] || 0);
-  sum += diff * diff;
 
   return Math.sqrt(sum);
 }
 
 function compare(left, right) {
   var color = compareColors(left, right);
-  var warp = compareSequence(left, right, 'wr', 4);
-  var weft = compareSequence(left, right, 'wf', 4);
+  var warp = compareSequence(left, right, 'wr');
+  var weft = compareSequence(left, right, 'wf');
 
   return {
     color: color,
     warp: warp,
     weft: weft,
-    sett: Math.sqrt(warp * warp + weft * weft),
-    total: Math.sqrt(
-      1.0 * color * color +
-      0.8 * warp * warp +
-      0.8 * weft * weft
-    )
+    sett: warp + weft,
+    total: 0.5 * color + 0.5 * (warp + weft)
   };
 }
 

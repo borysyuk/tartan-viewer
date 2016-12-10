@@ -23,10 +23,8 @@ ngModule.controller('TestController', [
       return [
         'Cl:  (' + fp.cl.join(') (') + ')',
         '  r:  ' + fp.clrs,
-        'Wr:  (' + [fp.wr3, fp.wr2, fp.wr1, fp.wr0].join(' : ') + ')',
-        '  gr: ' + fp.wrgr,
-        'Wf:  (' + [fp.wf3, fp.wf2, fp.wf1, fp.wf0].join(' : ') + ')',
-        '  gr: ' + fp.wfgr
+        'Wr:  (' + fp.wrsq.join(' ') + ')',
+        'Wf:  (' + fp.wfsq.join(' ') + ')'
       ].join('\n');
     };
 
@@ -39,24 +37,26 @@ ngModule.controller('TestController', [
           .map(function(item) {
             var score = fingerprint.compare(state.originalItem.fingerprint,
               item.fingerprint);
-
-            if (score < 0.5) {
-              return null;
-            }
-
-            item.score = score.total;
+            item.score = score.sett;
             return item;
           })
           .filter()
           .sortBy('score')  // less score is better
           .value();
 
-        $scope.similarItems = _.filter($scope.similarItems, function(item) {
-          return item.score <= 2.7;
-        });
+        // $scope.similarItems = _.filter($scope.similarItems, function(item) {
+        //   return item.score <= 2.7;
+        // });
         console.timeEnd('search');
       }
     };
+
+    $scope.compareSelectedItems = function() {
+      if (state.originalItem && state.compareItem) {
+        fingerprint.compare(state.originalItem.fingerprint,
+          state.compareItem.fingerprint);
+      }
+    }
 
     $q(application.getDatasetDirectory())
       .then(function(datasets) {
