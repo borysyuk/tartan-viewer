@@ -43,7 +43,9 @@
       </div>
       <div class="col-xs-6" ng-if="!!state.originalItem && !!state.compareItem">
         <button type="button" class="btn btn-default"
-          ng-click="compareSelectedItems()">Compare</button>
+          ng-click="compareItems(state.originalItem, state.compareItem)">Compare selected</button>
+        <button type="button" class="btn btn-default"
+          ng-click="compareItems(state.originalItem, state.originalItem)">Compare to self</button>
       </div>
     </div>
 

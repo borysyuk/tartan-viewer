@@ -20,12 +20,22 @@ ngModule.controller('TestController', [
       if (!_.isObject(fp)) {
         return '';
       }
-      return [
-        'Cl:  (' + fp.cl.join(') (') + ')',
-        '  r:  ' + fp.clrs,
-        'Wr:  (' + fp.wrsq.join(' ') + ')',
-        'Wf:  (' + fp.wfsq.join(' ') + ')'
-      ].join('\n');
+      return [].concat(
+        [
+          'Cl:  (' + fp.cl.join(') (') + ')',
+          'Cl-r: ' + fp.clrs,
+          'wrsq:  (' + fp.wrsq.join(' ') + ')',
+          'wfsq:  (' + fp.wfsq.join(' ') + ')'
+        ],
+        ['wrsc:'],
+        _.map(fp.wrsc, function(value, key) {
+          return '  ' + key + ': ' + value.join(' ');
+        }),
+        ['wfsc:'],
+        _.map(fp.wfsc, function(value, key) {
+          return '  ' + key + ': ' + value.join(' ');
+        })
+      ).join('\n');
     };
 
     $scope.selectItem = function() {
@@ -37,26 +47,25 @@ ngModule.controller('TestController', [
           .map(function(item) {
             var score = fingerprint.compare(state.originalItem.fingerprint,
               item.fingerprint);
-            item.score = score.total;
+            item.score = score.sett;
             return item;
           })
           .filter()
           .sortBy('score')  // less score is better
           .value();
 
-        $scope.similarItems = _.filter($scope.similarItems, function(item) {
-          return item.score <= 2.121;
-        });
+        // $scope.similarItems = _.filter($scope.similarItems, function(item) {
+        //   return item.score <= 2.121;
+        // });
         console.timeEnd('search');
       }
     };
 
-    $scope.compareSelectedItems = function() {
-      if (state.originalItem && state.compareItem) {
-        fingerprint.compare(state.originalItem.fingerprint,
-          state.compareItem.fingerprint);
+    $scope.compareItems = function(left, right) {
+      if (left && right) {
+        fingerprint.compare(left.fingerprint, right.fingerprint);
       }
-    }
+    };
 
     $q(application.getDatasetDirectory())
       .then(function(datasets) {

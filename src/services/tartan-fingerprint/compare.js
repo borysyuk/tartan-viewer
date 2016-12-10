@@ -70,24 +70,86 @@ function compareColors(left, right) {
   return Math.sqrt(sum);
 }
 
-function compareSequence(left, right, prefix) {
-  var vleft = left[prefix + 'sq'];
-  var vright = right[prefix + 'sq'];
-  var n = Math.max(vleft.length, vright.length);
+function compareSequence(left, right) {
+  var n = Math.max(left.length, right.length);
 
   var sum = 0;
   for (var i = 0; i < n; i++) {
-    var diff = (vleft[i] || 0) - (vright[i] || 0);
+    var diff = (left[i] || 0) - (right[i] || 0);
     sum += diff * diff;
   }
 
   return Math.sqrt(sum);
 }
 
+function compareColorSequences(left, right) {
+  // If one of sequences is empty - consider sequences very far each from other
+  if ((left.length == 0) || (right.length == 0)) {
+    return 100;
+  }
+
+  // Compare all possible pairs and calculate difference
+  var pairs = [];
+  for (var i = 0; i < left.length; i++) {
+    for (var j = 0; j < right.length; j++) {
+      pairs.push([
+        compareSequence(left[i], right[j]),
+        left[i],
+        right[j]
+      ]);
+    }
+  }
+
+  // Choose best combinations
+  pairs = pairs.sort(function(a, b) {
+    return a[0] - b[0];
+  });
+
+  var sum = 0;
+  var usedLeft = [];
+  var usedRight = [];
+  pairs.forEach(function(value) {
+    var isLeftUsed = usedLeft.indexOf(value[1]) >= 0;
+    var isRightUsed = usedRight.indexOf(value[2]) >= 0;
+    if (isLeftUsed || isRightUsed) {
+      return;
+    }
+
+    sum += value[0] * value[0];
+    usedLeft.push(value[1]);
+    usedRight.push(value[2]);
+  });
+
+  // Find and update rest
+  left.forEach(function(value) {
+    var isUsed = usedLeft.indexOf(value) >= 0;
+    if (!isUsed) {
+      var diff = compareSequence(value, []);
+      sum += diff * diff;
+    }
+  });
+  right.forEach(function(value) {
+    var isUsed = usedRight.indexOf(value) >= 0;
+    if (!isUsed) {
+      var diff = compareSequence(value, []);
+      sum += diff * diff;
+    }
+  });
+
+  return Math.sqrt(sum);
+}
+
 function compare(left, right) {
   var color = compareColors(left, right);
-  var sett = compareSequence(left, right, 'wr') +
-    compareSequence(left, right, 'wf');
+  var sett1 = compareSequence(left.wrsq, right.wrsq) +
+    compareSequence(left.wfsq, right.wfsq);
+
+  var sett2 = compareColorSequences(left.wrsc, right.wrsc) +
+    compareColorSequences(left.wfsc, right.wfsc);
+
+  var w1 = 2 / 7;
+  var w2 = 1 - w1;
+  var sett = w1 * sett1 + w2 * sett2;
 
   var q1 = 2 / 7;
   var q2 = 1 - q1;

@@ -10,6 +10,7 @@ clrs - count of rest colors
 wr* - warp, wf* - weft
 
 wrsq/wfsq - normalized stripes, ordered from wide to thin
+wrsc/wfsc - normalized stripes, ordered from wide to thin and groupped by color
 
 */
 
@@ -32,12 +33,6 @@ function grayscaleFactor(color) {
 
   // scale and offset - we don't need zero values
   return st * 0.5 + 0.5;
-}
-
-function scale(value, min, max, inverse) {
-  value = inverse ? 1 - Math.sqrt(value) : Math.sqrt(value);
-  value = Math.round(value * (max - min)) + min;
-  return value <= max ? value : max;
 }
 
 function createColorFingerprint(warp, weft) {
@@ -89,7 +84,7 @@ function createColorFingerprint(warp, weft) {
     }
   });
 
-  mapped.cl = _.chain(mapped.cl).sortBy(3).reverse().value();
+  mapped.cl = _.orderBy(mapped.cl, _.identity, 'desc');
 
   return mapped;
 }
@@ -105,14 +100,24 @@ function createSequenceFingerprint(items, prefix) {
   var mapped = {};
   mapped[prefix + 'sq'] = [];
 
+  var itemsByColors = {};
+
   _.each(items, function(item) {
     var value = item[1] / normalize;
     mapped[prefix + 'sq'].push(value);
+
+    itemsByColors[item[0]] = itemsByColors[item[0]] || [];
+    itemsByColors[item[0]].push(value);
   });
 
-  mapped[prefix + 'sq'] = _.chain(mapped[prefix + 'sq'])
-    .sortBy()
-    .reverse()
+  mapped[prefix + 'sq'] = _.orderBy(mapped[prefix + 'sq'], _.identity, 'desc');
+
+  mapped[prefix + 'sc'] = _.chain(itemsByColors)
+    .values()
+    .map(function(items) {
+      return _.orderBy(items, _.identity, 'desc');
+    })
+    .orderBy('length', 'desc')
     .value();
 
   return mapped;
@@ -140,9 +145,20 @@ function create(sett, defaultColors) {
   var warpFingerprint = createSequenceFingerprint(warp, 'wr');
   var weftFingerprint;
   if (weft === warp) {
-    weftFingerprint = {
-      wfsq: warpFingerprint.wrsq
-    };
+    weftFingerprint = _.chain(warpFingerprint)
+      .toPairs()
+      .map(function(pair) {
+        if (pair[0].substr(0, 2) == 'wr') {
+          return [
+            'wf' + pair[0].substr(2, pair[0].length),
+            pair[1]
+          ];
+        } else {
+          return pair;
+        }
+      })
+      .fromPairs()
+      .value();
   } else {
     weftFingerprint = createSequenceFingerprint(weft, 'wf');
   }
