@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-controller="TestController">
+<html lang="en" ng-controller="Test2Controller">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,62 +24,36 @@
       <span class="badge">alpha</span>
     </h2>
     <div class="margin-top-15 margin-bottom-15">
-      <tartan-list items="items" item="state.originalItem" items-per-page="3"
-        onpreview="resetOffsets(); selectItem()"></tartan-list>
+      <tartan-list items="items" item="state.item" items-per-page="3"
+        onpreview="resetOffsets(); state.modifiedSett = modifySett(state.item.sett)"></tartan-list>
     </div>
 
-    <div class="row margin-top-15">
-      <div class="col-sm-6"  ng-if="!!state.originalItem">
-        <pre>{{ state.originalItem.sett }}</pre>
+    <div class="row margin-top-15" ng-if="!!state.item">
+      <div class="col-sm-6">
+        <pre>{{ state.item.sett }}</pre>
       </div>
-      <div class="col-sm-6" ng-if="!!state.originalItem && !!state.compareItem">
-        <pre>{{ state.compareItem.sett }}</pre>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-6" ng-if="!!state.originalItem && !!state.compareItem">
-        <pre>{{ state.compareItem.score }}</pre>
-      </div>
-      <div class="col-xs-6" ng-if="!!state.originalItem && !!state.compareItem">
-        <button type="button" class="btn btn-default"
-          ng-click="compareItems(state.originalItem, state.compareItem)">Compare selected</button>
-        <button type="button" class="btn btn-default"
-          ng-click="compareItems(state.originalItem, state.originalItem)">Compare to self</button>
+      <div class="col-sm-6">
+        <pre>{{ state.modifiedSett }}</pre>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-6" ng-if="!!state.originalItem">
-        <pre>{{ formatFingerprint(state.originalItem.fingerprint) }}</pre>
-      </div>
-      <div class="col-sm-6" ng-if="!!state.originalItem && !!state.compareItem">
-        <pre>{{ formatFingerprint(state.compareItem.fingerprint) }}</pre>
-      </div>
-    </div>
-
-    <div class="row margin-bottom-15">
-      <div class="col-sm-6" ng-if="!!state.originalItem">
-        <tartan schema="classic" source="{{ state.originalItem.sett }}">
+    <div class="row margin-bottom-15" ng-if="!!state.item">
+      <div class="col-sm-6">
+        <tartan schema="classic" source="{{ state.item.sett }}">
           <div class="x-preview-canvas-wrapper interactive" style="padding-top: 80%">
             <tartan-preview-control repeat="true" offset="state.offsetOriginal"
               interactive="{resize: true, drag: true}"></tartan-preview-control>
           </div>
         </tartan>
       </div>
-      <div class="col-sm-6" ng-if="!!state.originalItem && !!state.compareItem">
-        <tartan schema="classic" source="{{ state.compareItem.sett }}">
+      <div class="col-sm-6">
+        <tartan schema="classic" source="{{ state.modifiedSett }}">
           <div class="x-preview-canvas-wrapper interactive" style="padding-top: 80%">
             <tartan-preview-control repeat="true" offset="state.offsetCompare"
               interactive="{resize: true, drag: true}"></tartan-preview-control>
           </div>
         </tartan>
       </div>
-    </div>
-
-    <div class="margin-top-15 margin-bottom-15">
-      <tartan-list items="similarItems" items-per-page="20"
-        show-header="true" item="state.compareItem"></tartan-list>
     </div>
   </div>
 

@@ -16,6 +16,11 @@ ngModule.controller('TestController', [
       compareItem: null
     };
 
+    $scope.resetOffsets = function() {
+      state.offsetOriginal = {x: 0, y: 0};
+      state.offsetCompare = {x: 0, y: 0};
+    };
+
     $scope.formatFingerprint = function(fp) {
       if (!_.isObject(fp)) {
         return '';
@@ -43,20 +48,8 @@ ngModule.controller('TestController', [
       state.compareItem = null;
       if (state.originalItem) {
         console.time('search');
-        $scope.similarItems = _.chain($scope.items)
-          .map(function(item) {
-            var score = fingerprint.compare(state.originalItem.fingerprint,
-              item.fingerprint);
-            item.score = score.sett;
-            return item;
-          })
-          .filter()
-          .sortBy('score')  // less score is better
-          .value();
-
-        // $scope.similarItems = _.filter($scope.similarItems, function(item) {
-        //   return item.score <= 2.121;
-        // });
+        $scope.similarItems = fingerprint.search($scope.items,
+          state.originalItem.fingerprint);
         console.timeEnd('search');
       }
     };

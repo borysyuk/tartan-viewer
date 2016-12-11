@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 function colorDistance(left, right) {
   var rmean = (left[0] + right[0]) / 2;
   var r = left[0] - right[0];
@@ -141,13 +143,14 @@ function compareColorSequences(left, right) {
 
 function compare(left, right) {
   var color = compareColors(left, right);
+
   var sett1 = compareSequence(left.wrsq, right.wrsq) +
     compareSequence(left.wfsq, right.wfsq);
 
   var sett2 = compareColorSequences(left.wrsc, right.wrsc) +
     compareColorSequences(left.wfsc, right.wfsc);
 
-  var w1 = 2 / 7;
+  var w1 = 2 / 5;
   var w2 = 1 - w1;
   var sett = w1 * sett1 + w2 * sett2;
 
@@ -161,4 +164,36 @@ function compare(left, right) {
   };
 }
 
-module.exports = compare;
+function search(items, fingerprint) {
+  var result = _.chain(items)
+    .map(function(item) {
+      var score = compare(fingerprint, item.fingerprint);
+      return _.extend({}, item, {
+        score: score.sett
+      });
+    })
+    .filter()
+    .sortBy('score')  // less score is better
+    .value();
+
+  var sum = 0;
+  var count = 0;
+  _.each(result, function(item) {
+    if (item.score <= 5) {
+      sum += item.score;
+      count += 1;
+    } else {
+      return false;
+    }
+  });
+  var threshold = sum / count < 1.21 ? 1.21 : sum / count;
+
+  return _.filter(result, function(item) {
+    return item.score <= threshold;
+  });
+}
+
+module.exports = {
+  compare: compare,
+  search: search
+};

@@ -9,7 +9,8 @@ clrs - count of rest colors
 
 wr* - warp, wf* - weft
 
-wrsq/wfsq - normalized stripes, ordered from wide to thin
+wrsq/wfsq - normalized stripes, ordered from wide to thin;
+            simplified using median filter
 wrsc/wfsc - normalized stripes, ordered from wide to thin and groupped by color
 
 */
@@ -89,6 +90,72 @@ function createColorFingerprint(warp, weft) {
   return mapped;
 }
 
+function createColorSequenceFingerprint(items, normalize) {
+  var itemsByColors = {};
+
+  _.each(items, function(item) {
+    itemsByColors[item[0]] = itemsByColors[item[0]] || [];
+    itemsByColors[item[0]].push(item[1] / normalize);
+  });
+
+  return _.chain(itemsByColors)
+    .values()
+    .map(function(items) {
+      return _.orderBy(items, _.identity, 'desc');
+    })
+    .orderBy('length', 'desc')
+    .value();
+}
+
+function createMedianSequenceFingerprint(items, normalize) {
+  return _.chain(items)
+    .map(function(current, index, items) {
+      // Median filter
+      var lastIndex = items.length - 1;
+      var left = index == 0 ? items[lastIndex] : items[index - 1];
+      var right = index == lastIndex ? items[0] : items[index + 1];
+
+      if (left[0] == right[0]) {
+        if (left[1] + right[1] >= current[1] * 3) {
+          return [left[0], current[1]];
+        }
+      }
+
+      return current;
+    })
+    .reduce(function(accumulator, item, index, items) {
+      // Merge stripes with the same color
+      var prev = accumulator.pop();
+      if (prev && (prev[0] == item[0])) {
+        accumulator.push([prev[0], prev[1] + item[1]]);
+      } else {
+        if (prev) {
+          accumulator.push(prev);
+        }
+        accumulator.push(item);
+      }
+
+      // If first and last stripes has the same color, merge it
+      if ((index == items.length - 1) && (accumulator.length >= 3)) {
+        var first = accumulator[0];
+        var last = accumulator.pop();
+        if (last[0] == first[0]) {
+          first[1] += last[1];
+        } else {
+          accumulator.push(last);
+        }
+      }
+
+      return accumulator;
+    }, [])
+    .map(function(item) {
+      // Normalize values
+      return item[1] / normalize;
+    })
+    .orderBy(_.identity, 'desc')
+    .value();
+}
+
 function createSequenceFingerprint(items, prefix) {
   var normalize = _.chain(items)
     .map(function(item) {
@@ -98,27 +165,8 @@ function createSequenceFingerprint(items, prefix) {
     .value();
 
   var mapped = {};
-  mapped[prefix + 'sq'] = [];
-
-  var itemsByColors = {};
-
-  _.each(items, function(item) {
-    var value = item[1] / normalize;
-    mapped[prefix + 'sq'].push(value);
-
-    itemsByColors[item[0]] = itemsByColors[item[0]] || [];
-    itemsByColors[item[0]].push(value);
-  });
-
-  mapped[prefix + 'sq'] = _.orderBy(mapped[prefix + 'sq'], _.identity, 'desc');
-
-  mapped[prefix + 'sc'] = _.chain(itemsByColors)
-    .values()
-    .map(function(items) {
-      return _.orderBy(items, _.identity, 'desc');
-    })
-    .orderBy('length', 'desc')
-    .value();
+  mapped[prefix + 'sq'] = createMedianSequenceFingerprint(items, normalize);
+  mapped[prefix + 'sc'] = createColorSequenceFingerprint(items, normalize);
 
   return mapped;
 }
@@ -170,4 +218,6 @@ function create(sett, defaultColors) {
   );
 }
 
-module.exports = create;
+module.exports = {
+  create: create
+};

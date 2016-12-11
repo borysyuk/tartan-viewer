@@ -1,4 +1,5 @@
 'use strict';
 
-module.exports.create = require('./create');
-module.exports.compare = require('./compare');
+var _ = require('lodash');
+
+_.extend(module.exports, require('./create'), require('./compare'));
