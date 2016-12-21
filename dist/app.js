@@ -60,35 +60,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
+	// Initialize tartan library and its plugins
+	__webpack_require__(2);
+	__webpack_require__(121);
+	__webpack_require__(125);
+	__webpack_require__(128);
+	__webpack_require__(119);
+	__webpack_require__(79);
+	
 	// Init some global variables - needed for proper work of angular and
 	// some other 3rd-party libraries
 	(function(globals) {
 	  globals._ = _;
 	
-	  __webpack_require__(72);
+	  __webpack_require__(82);
 	
-	  var jquery = __webpack_require__(71);
+	  var jquery = __webpack_require__(81);
 	  globals.jQuery = globals.$ = jquery;
 	
-	  __webpack_require__(56);
+	  __webpack_require__(63);
 	
 	  // fetch() polyfill
-	  __webpack_require__(22);
+	  __webpack_require__(21);
 	  // saveAs() polyfill
-	  globals.saveAs = __webpack_require__(70).saveAs;
+	  globals.saveAs = __webpack_require__(77).saveAs;
 	
-	  globals.tartan = __webpack_require__(9);
+	  globals.tartan = __webpack_require__(2);
 	
-	  var angular = __webpack_require__(14);
+	  var angular = __webpack_require__(5);
 	  globals.angular = angular;
 	  if (typeof globals.Promise != 'function') {
-	    globals.Promise = __webpack_require__(7);
+	    globals.Promise = __webpack_require__(9);
 	  }
 	
-	  __webpack_require__(43);
+	  __webpack_require__(50);
 	
 	  globals.addEventListener('load', function() {
-	    __webpack_require__(149);
+	    __webpack_require__(174);
 	    angular.bootstrap(globals.document, ['Application']);
 	  });
 	})(window);
@@ -17164,7 +17172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(39)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(46)(module)))
 
 /***/ },
 /* 2 */
@@ -17172,12 +17180,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.error = __webpack_require__(131);
-	module.exports.color = __webpack_require__(37);
-	module.exports.token = __webpack_require__(135);
-	module.exports.node = __webpack_require__(132);
-	module.exports.sett = __webpack_require__(134);
-	module.exports.repaint = __webpack_require__(133);
+	var _ = __webpack_require__(1);
+	
+	_.extend(module.exports, __webpack_require__(104));
+	
+	module.exports.defaults = __webpack_require__(8);
+	module.exports.parse = __webpack_require__(36);
+	module.exports.filter = __webpack_require__(35);
+	module.exports.transform = __webpack_require__(42);
+	module.exports.syntax = __webpack_require__(41);
+	module.exports.render = __webpack_require__(40);
+	module.exports.schema = __webpack_require__(153);
+	module.exports.utils = __webpack_require__(3);
 
 
 /***/ },
@@ -17186,9 +17200,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var angular = __webpack_require__(14);
-	__webpack_require__(54);
-	var packageInfo = __webpack_require__(90);
+	module.exports.error = __webpack_require__(157);
+	module.exports.color = __webpack_require__(43);
+	module.exports.token = __webpack_require__(161);
+	module.exports.node = __webpack_require__(158);
+	module.exports.sett = __webpack_require__(160);
+	module.exports.repaint = __webpack_require__(159);
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var angular = __webpack_require__(5);
+	__webpack_require__(61);
+	var packageInfo = __webpack_require__(105);
 	
 	var app = angular.module('Application', [
 	  'angular-tartan',
@@ -17218,43 +17246,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(2);
-	
-	module.exports.weave = {
-	  // Thread above warp, threads under warp
-	  plain: [1, 1],
-	  serge: [2, 2]
-	};
-	
-	module.exports.colors = utils.color.buildColorMap({
-	  /* eslint-disable key-spacing */
-	  B: '#304080', G: '#004c00', K: '#000000',
-	  N: '#666666', R: '#c80000', T: '#603311',
-	  W: '#ffffff', Y: '#ffe600'
-	  /* eslint-enable key-spacing */
-	});
-	
-	module.exports.warpAndWeftSeparator = '//';
-	
-	module.exports.insignificantTokens = [
-	  'invalid',
-	  'whitespace'
-	];
-
-
-/***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(62);
+	module.exports = angular;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
-	var tartan = __webpack_require__(9);
-	var angular = __webpack_require__(14);
+	var tartan = __webpack_require__(2);
+	var angular = __webpack_require__(5);
 	
 	var ngTartan = angular.module('angular-tartan', []);
 	
@@ -17264,7 +17270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17372,7 +17378,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 7 */
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(3);
+	
+	module.exports.weave = {
+	  // Thread above warp, threads under warp
+	  plain: [1, 1],
+	  serge: [2, 2]
+	};
+	
+	module.exports.colors = utils.color.buildColorMap({
+	  /* eslint-disable key-spacing */
+	  B: '#304080', G: '#004c00', K: '#000000',
+	  N: '#666666', R: '#c80000', T: '#603311',
+	  W: '#ffffff', Y: '#ffe600'
+	  /* eslint-enable key-spacing */
+	});
+	
+	module.exports.warpAndWeftSeparator = '//';
+	
+	module.exports.insignificantTokens = [
+	  'invalid',
+	  'whitespace'
+	];
+
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global, setImmediate) {/* @preserve
@@ -22973,263 +23009,118 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	},{"./es5":13}]},{},[4])(4)
 	});                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28), (function() { return this; }()), __webpack_require__(139).setImmediate))
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	
-	function factory(processors) {
-	  processors = _.filter(processors, _.isFunction);
-	
-	  return function(tokens) {
-	    if (_.isArray(tokens)) {
-	      for (var i = 0; i < processors.length; i++) {
-	        tokens = processors[i](tokens);
-	      }
-	    }
-	    return tokens;
-	  };
-	}
-	
-	module.exports = factory;
-	
-	module.exports.classify = __webpack_require__(101);
-	module.exports.removeTokens = __webpack_require__(102);
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	
-	_.extend(module.exports, __webpack_require__(89));
-	
-	module.exports.defaults = __webpack_require__(4);
-	module.exports.parse = __webpack_require__(10);
-	module.exports.filter = __webpack_require__(8);
-	module.exports.transform = __webpack_require__(13);
-	module.exports.syntax = __webpack_require__(12);
-	module.exports.render = __webpack_require__(11);
-	module.exports.schema = __webpack_require__(119);
-	module.exports.utils = __webpack_require__(2);
-
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), (function() { return this; }()), __webpack_require__(165).setImmediate))
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var autodetectSource = __webpack_require__(29);
-	var tokenize = __webpack_require__(112);
-	var utils = __webpack_require__(2);
-	var defaults = __webpack_require__(4);
+	var MAX_SAFE_INTEGER = 9007199254740991;
 	
-	var defaultOptions = {
-	  errorHandler: null,
-	  processTokens: null,
-	  buildSyntaxTree: null,
-	  foreseeLimit: 1,
-	  getSourceMeta: function(source) {
-	    return _.omit(source, [
-	      'warp', 'weft', 'threadcount', 'sett', 'palette', 'colors'
-	    ]);
-	  },
-	  // Used only if `source` is an object (or JSON) and has different
-	  // warp and weft, and `buildSyntaxTree` is not specified
-	  warpAndWeftSeparator: defaults.warpAndWeftSeparator
-	};
-	
-	function chooseNonEmptyString(values) {
-	  var result = _.filter(values, function(value) {
-	    return _.isString(value) && (value.length > 0);
-	  });
-	  return result.length > 0 ? _.first(result) : '';
+	function identity(value) {
+	  return value;
 	}
 	
-	function chooseRootBlock(values) {
-	  var result = _.filter(values, function(value) {
-	    return _.isObject(value) && value.isBlock && value.isRoot &&
-	      _.isArrayLike(value.items);
-	  });
-	  return result.length > 0 ? _.first(result) : utils.node.newRootBlock([]);
+	var toString = Object.prototype.toString;
+	
+	// string
+	var tagString = '[object String]';
+	
+	// function
+	var tagAsync = '[object AsyncFunction]';
+	var tagFunction = '[object Function]';
+	var tagGenerator = '[object GeneratorFunction]';
+	var tagProxy = '[object Proxy]';
+	
+	var reTrim = /^\s+|\s+$/g;
+	
+	function isLength(value) {
+	  return (  // it should be...
+	    (typeof value == 'number') &&  // ...a number
+	    (value > -1) &&  // ...non-negative
+	    (value % 1 == 0) &&  // ...integer
+	    (value <= MAX_SAFE_INTEGER)  // ...within some reasonable bounds
+	  );
 	}
 	
-	function parse(parsers, source, options) {
-	  var context = tokenize(source, parsers, options);
-	  var result = context.parse();
-	  if (_.isFunction(options.processTokens)) {
-	    result = options.processTokens(result);
+	function isUndefined(value) {
+	  return typeof value == 'undefined';
+	}
+	
+	function isNull(value) {
+	  return value === null;
+	}
+	
+	function isString(value) {
+	  return (typeof value == 'string') ||
+	    (toString.call(value) == tagString);
+	}
+	
+	function isFunction(value) {
+	  var tag = toString.call(value);
+	  return (tag == tagAsync) || (tag == tagFunction) ||
+	    (tag == tagGenerator) || (tag == tagProxy);
+	}
+	
+	function isArray(value) {
+	  return isObject(value) && isLength(value.length) && !isFunction(value);
+	}
+	
+	function isObject(value) {
+	  return (value !== null) && (typeof value == 'object');
+	}
+	
+	function join(array, separator) {
+	  if ((array === undefined) || (array === null)) {
+	    return '';
 	  }
-	  if (_.isFunction(options.buildSyntaxTree)) {
-	    result = options.buildSyntaxTree(result);
+	  return Array.prototype.join.call(array, separator);
+	}
+	
+	function trim(value) {
+	  if (isString(value)) {
+	    return value.replace(reTrim, '');
 	  }
-	  return result;
 	}
 	
-	function factory(parsers, options) {
-	  options = _.extend({}, defaultOptions, options);
-	
-	  return function(source) {
-	    source = autodetectSource(source);
-	
-	    var result;
-	
-	    if (_.isString(source.warp) || _.isString(source.weft)) {
-	      var warp = _.trim(chooseNonEmptyString([source.warp, source.weft]));
-	      var weft = _.trim(chooseNonEmptyString([source.weft, source.warp]));
-	      var warpIsSameAsWeft = warp == weft;
-	      warp = parse(parsers, warp, options);
-	      if (warpIsSameAsWeft) {
-	        // Create AST with same warp and weft; use meta from warp;
-	        // do not use palette
-	        result = {
-	          meta: _.extend({}, warp.meta),
-	          warp: chooseRootBlock([warp.warp, warp.weft])
-	        };
-	        result.weft = result.warp;
-	      } else {
-	        weft = parse(parsers, weft, options);
-	        if (_.isArrayLike(warp) && _.isArrayLike(weft)) {
-	          // Merge tokens together;
-	          result = _.concat(warp,
-	            utils.token.newLiteral(options.warpAndWeftSeparator),
-	            weft);
-	        } else
-	        if (_.isObject(warp) && _.isObject(weft)) {
-	          // Create AST with different warp and weft; merge meta;
-	          // do not use palette
-	          result = {
-	            meta: _.extend({}, warp.meta, weft.meta),
-	            warp: chooseRootBlock([warp.warp, warp.weft]),
-	            weft: chooseRootBlock([weft.warp, weft.weft])
-	          };
-	        }
-	      }
-	    } else
-	    if (_.isString(source.threadcount) || _.isString(source.sett)) {
-	      // Try to parse entire threadcount
-	      var threadcount = chooseNonEmptyString([source.threadcount, source.sett]);
-	      result = parse(parsers, threadcount, options);
-	    } else {
-	      // Create empty result
-	      result = parse(parsers, '', options);
-	    }
-	
-	    if (_.isString(source.palette) || _.isString(source.colors)) {
-	      // Try to add palette - as tokens or as color map
-	      var palette = chooseNonEmptyString([source.palette, source.colors]);
-	      palette = parse(parsers, palette, options);
-	      if (_.isArrayLike(result)) {
-	        if (_.isArrayLike(palette)) {
-	          result = _.concat(palette, result);
-	        }
-	      } else
-	      if (_.isObject(result)) {
-	        if (_.isObject(palette)) {
-	          result.colors = palette.colors;
-	          result.meta = _.extend({}, palette.meta, result.meta);
-	        }
-	      }
-	    }
-	
-	    if (_.isObject(result)) {
-	      result.colors = _.extend({}, result.colors);
-	      if (_.isFunction(options.getSourceMeta)) {
-	        result.meta = _.extend({}, result.meta, options.getSourceMeta(source));
-	      } else {
-	        result.meta = _.extend({}, result.meta);
-	      }
-	    }
-	
-	    return result;
-	  };
+	function keys(value) {
+	  if (isObject(value)) {
+	    return Object.keys(value);
+	  }
+	  return [];
 	}
 	
-	module.exports = factory;
+	function map(array, iteratee) {
+	  if (isArray(array)) {
+	    iteratee = isFunction(iteratee) ? iteratee : identity;
+	    return Array.prototype.map.call(array, iteratee, null);
+	  }
+	  return [];
+	}
 	
-	module.exports.source = __webpack_require__(103);
+	function assign(object, source) {
+	  return Object.assign.apply(null, arguments);
+	}
 	
-	module.exports.color = __webpack_require__(105);
-	module.exports.stripe = __webpack_require__(110);
-	module.exports.pivot = __webpack_require__(108);
-	module.exports.repeat = __webpack_require__(109);
-	module.exports.literal = __webpack_require__(107);
+	module.exports.isUndefined = isUndefined;
+	module.exports.isNull = isNull;
+	module.exports.isString = isString;
+	module.exports.isFunction = isFunction;
+	module.exports.isArray = isArray;
+	module.exports.isObject = isObject;
+	module.exports.join = join;
+	module.exports.trim = trim;
+	module.exports.keys = keys;
+	module.exports.map = map;
+	
+	module.exports.assign = assign;
+	module.exports.extend = assign; // alias
 
 
 /***/ },
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports.canvas = __webpack_require__(32);
-	module.exports.houseOfTartan = __webpack_require__(114);
-	module.exports.format = __webpack_require__(113);
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports.extended = __webpack_require__(126);
-	module.exports.classic = __webpack_require__(125);
-	module.exports.weddslist = __webpack_require__(127);
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	
-	function factory(processors) {
-	  processors = _.filter(processors, _.isFunction);
-	
-	  return function(sett) {
-	    if (_.isObject(sett)) {
-	      _.each(processors, function(processor) {
-	        sett = processor(sett);
-	      });
-	    }
-	    return sett;
-	  };
-	}
-	
-	module.exports = factory;
-	
-	module.exports.flatten = __webpack_require__(128);
-	module.exports.flattenSimpleBlocks = __webpack_require__(33);
-	module.exports.fold = __webpack_require__(129);
-	module.exports.mergeStripes = __webpack_require__(34);
-	module.exports.removeEmptyBlocks = __webpack_require__(35);
-	module.exports.removeZeroWidthStripes = __webpack_require__(36);
-	module.exports.optimize = __webpack_require__(130);
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(55);
-	module.exports = angular;
-
-
-/***/ },
-/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23278,7 +23169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23402,7 +23293,2498 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+	 * elasticlunr - http://weixsong.github.io
+	 * Lightweight full-text search engine in Javascript for browser search and offline search. - 0.9.5
+	 *
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 * MIT Licensed
+	 * @license
+	 */
+	
+	(function(){
+	
+	/*!
+	 * elasticlunr.js
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * Convenience function for instantiating a new elasticlunr index and configuring it
+	 * with the default pipeline functions and the passed config function.
+	 *
+	 * When using this convenience function a new index will be created with the
+	 * following functions already in the pipeline:
+	 * 
+	 * 1. elasticlunr.trimmer - trim non-word character
+	 * 2. elasticlunr.StopWordFilter - filters out any stop words before they enter the
+	 * index
+	 * 3. elasticlunr.stemmer - stems the tokens before entering the index.
+	 *
+	 *
+	 * Example:
+	 *
+	 *     var idx = elasticlunr(function () {
+	 *       this.addField('id');
+	 *       this.addField('title');
+	 *       this.addField('body');
+	 *       
+	 *       //this.setRef('id'); // default ref is 'id'
+	 *
+	 *       this.pipeline.add(function () {
+	 *         // some custom pipeline function
+	 *       });
+	 *     });
+	 * 
+	 *    idx.addDoc({
+	 *      id: 1, 
+	 *      title: 'Oracle released database 12g',
+	 *      body: 'Yestaday, Oracle has released their latest database, named 12g, more robust. this product will increase Oracle profit.'
+	 *    });
+	 * 
+	 *    idx.addDoc({
+	 *      id: 2, 
+	 *      title: 'Oracle released annual profit report',
+	 *      body: 'Yestaday, Oracle has released their annual profit report of 2015, total profit is 12.5 Billion.'
+	 *    });
+	 * 
+	 *    # simple search
+	 *    idx.search('oracle database');
+	 * 
+	 *    # search with query-time boosting
+	 *    idx.search('oracle database', {fields: {title: {boost: 2}, body: {boost: 1}}});
+	 *
+	 * @param {Function} config A function that will be called with the new instance
+	 * of the elasticlunr.Index as both its context and first parameter. It can be used to
+	 * customize the instance of new elasticlunr.Index.
+	 * @namespace
+	 * @module
+	 * @return {elasticlunr.Index}
+	 *
+	 */
+	var elasticlunr = function (config) {
+	  var idx = new elasticlunr.Index;
+	
+	  idx.pipeline.add(
+	    elasticlunr.trimmer,
+	    elasticlunr.stopWordFilter,
+	    elasticlunr.stemmer
+	  );
+	
+	  if (config) config.call(idx, idx);
+	
+	  return idx;
+	};
+	
+	elasticlunr.version = "0.9.5";
+	
+	// only used this to make elasticlunr.js compatible with lunr-languages
+	// this is a trick to define a global alias of elasticlunr
+	lunr = elasticlunr;
+	
+	/*!
+	 * elasticlunr.utils
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * A namespace containing utils for the rest of the elasticlunr library
+	 */
+	elasticlunr.utils = {};
+	
+	/**
+	 * Print a warning message to the console.
+	 *
+	 * @param {String} message The message to be printed.
+	 * @memberOf Utils
+	 */
+	elasticlunr.utils.warn = (function (global) {
+	  return function (message) {
+	    if (global.console && console.warn) {
+	      console.warn(message);
+	    }
+	  };
+	})(this);
+	
+	/**
+	 * Convert an object to string.
+	 *
+	 * In the case of `null` and `undefined` the function returns
+	 * an empty string, in all other cases the result of calling
+	 * `toString` on the passed object is returned.
+	 *
+	 * @param {object} obj The object to convert to a string.
+	 * @return {String} string representation of the passed object.
+	 * @memberOf Utils
+	 */
+	elasticlunr.utils.toString = function (obj) {
+	  if (obj === void 0 || obj === null) {
+	    return "";
+	  }
+	
+	  return obj.toString();
+	};
+	/*!
+	 * elasticlunr.EventEmitter
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.EventEmitter is an event emitter for elasticlunr.
+	 * It manages adding and removing event handlers and triggering events and their handlers.
+	 *
+	 * Each event could has multiple corresponding functions,
+	 * these functions will be called as the sequence that they are added into the event.
+	 * 
+	 * @constructor
+	 */
+	elasticlunr.EventEmitter = function () {
+	  this.events = {};
+	};
+	
+	/**
+	 * Binds a handler function to a specific event(s).
+	 *
+	 * Can bind a single function to many different events in one call.
+	 *
+	 * @param {String} [eventName] The name(s) of events to bind this function to.
+	 * @param {Function} fn The function to call when an event is fired.
+	 * @memberOf EventEmitter
+	 */
+	elasticlunr.EventEmitter.prototype.addListener = function () {
+	  var args = Array.prototype.slice.call(arguments),
+	      fn = args.pop(),
+	      names = args;
+	
+	  if (typeof fn !== "function") throw new TypeError ("last argument must be a function");
+	
+	  names.forEach(function (name) {
+	    if (!this.hasHandler(name)) this.events[name] = [];
+	    this.events[name].push(fn);
+	  }, this);
+	};
+	
+	/**
+	 * Removes a handler function from a specific event.
+	 *
+	 * @param {String} eventName The name of the event to remove this function from.
+	 * @param {Function} fn The function to remove from an event.
+	 * @memberOf EventEmitter
+	 */
+	elasticlunr.EventEmitter.prototype.removeListener = function (name, fn) {
+	  if (!this.hasHandler(name)) return;
+	
+	  var fnIndex = this.events[name].indexOf(fn);
+	  if (fnIndex === -1) return;
+	
+	  this.events[name].splice(fnIndex, 1);
+	
+	  if (this.events[name].length == 0) delete this.events[name];
+	};
+	
+	/**
+	 * Call all functions that bounded to the given event.
+	 *
+	 * Additional data can be passed to the event handler as arguments to `emit`
+	 * after the event name.
+	 *
+	 * @param {String} eventName The name of the event to emit.
+	 * @memberOf EventEmitter
+	 */
+	elasticlunr.EventEmitter.prototype.emit = function (name) {
+	  if (!this.hasHandler(name)) return;
+	
+	  var args = Array.prototype.slice.call(arguments, 1);
+	
+	  this.events[name].forEach(function (fn) {
+	    fn.apply(undefined, args);
+	  }, this);
+	};
+	
+	/**
+	 * Checks whether a handler has ever been stored against an event.
+	 *
+	 * @param {String} eventName The name of the event to check.
+	 * @private
+	 * @memberOf EventEmitter
+	 */
+	elasticlunr.EventEmitter.prototype.hasHandler = function (name) {
+	  return name in this.events;
+	};
+	/*!
+	 * elasticlunr.tokenizer
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * A function for splitting a string into tokens.
+	 * Currently English is supported as default.
+	 * Uses `elasticlunr.tokenizer.seperator` to split strings, you could change
+	 * the value of this property to set how you want strings are split into tokens.
+	 * IMPORTANT: use elasticlunr.tokenizer.seperator carefully, if you are not familiar with
+	 * text process, then you'd better not change it.
+	 *
+	 * @module
+	 * @param {String} str The string that you want to tokenize.
+	 * @see elasticlunr.tokenizer.seperator
+	 * @return {Array}
+	 */
+	elasticlunr.tokenizer = function (str) {
+	  if (!arguments.length || str === null || str === undefined) return [];
+	  if (Array.isArray(str)) {
+	    var arr = str.filter(function(token) {
+	      if (token === null || token === undefined) {
+	        return false;
+	      }
+	
+	      return true;
+	    });
+	
+	    arr = arr.map(function (t) {
+	      return elasticlunr.utils.toString(t).toLowerCase();
+	    });
+	
+	    var out = [];
+	    arr.forEach(function(item) {
+	      var tokens = item.split(elasticlunr.tokenizer.seperator);
+	      out = out.concat(tokens);
+	    }, this);
+	
+	    return out;
+	  }
+	
+	  return str.toString().trim().toLowerCase().split(elasticlunr.tokenizer.seperator);
+	};
+	
+	/**
+	 * Default string seperator.
+	 */
+	elasticlunr.tokenizer.defaultSeperator = /[\s\-]+/;
+	
+	/**
+	 * The sperator used to split a string into tokens. Override this property to change the behaviour of
+	 * `elasticlunr.tokenizer` behaviour when tokenizing strings. By default this splits on whitespace and hyphens.
+	 *
+	 * @static
+	 * @see elasticlunr.tokenizer
+	 */
+	elasticlunr.tokenizer.seperator = elasticlunr.tokenizer.defaultSeperator;
+	
+	/**
+	 * Set up customized string seperator
+	 *
+	 * @param {Object} sep The customized seperator that you want to use to tokenize a string.
+	 */
+	elasticlunr.tokenizer.setSeperator = function(sep) {
+	    if (sep !== null && sep !== undefined && typeof(sep) === 'object') {
+	        elasticlunr.tokenizer.seperator = sep;
+	    }
+	}
+	
+	/**
+	 * Reset string seperator
+	 *
+	 */
+	elasticlunr.tokenizer.resetSeperator = function() {
+	    elasticlunr.tokenizer.seperator = elasticlunr.tokenizer.defaultSeperator;
+	}
+	
+	/**
+	 * Get string seperator
+	 *
+	 */
+	elasticlunr.tokenizer.getSeperator = function() {
+	    return elasticlunr.tokenizer.seperator;
+	}
+	/*!
+	 * elasticlunr.Pipeline
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.Pipelines maintain an ordered list of functions to be applied to 
+	 * both documents tokens and query tokens.
+	 *
+	 * An instance of elasticlunr.Index will contain a pipeline
+	 * with a trimmer, a stop word filter, an English stemmer. Extra
+	 * functions can be added before or after either of these functions or these
+	 * default functions can be removed.
+	 *
+	 * When run the pipeline, it will call each function in turn.
+	 *
+	 * The output of the functions in the pipeline will be passed to the next function
+	 * in the pipeline. To exclude a token from entering the index the function
+	 * should return undefined, the rest of the pipeline will not be called with
+	 * this token.
+	 *
+	 * For serialisation of pipelines to work, all functions used in an instance of
+	 * a pipeline should be registered with elasticlunr.Pipeline. Registered functions can
+	 * then be loaded. If trying to load a serialised pipeline that uses functions
+	 * that are not registered an error will be thrown.
+	 *
+	 * If not planning on serialising the pipeline then registering pipeline functions
+	 * is not necessary.
+	 *
+	 * @constructor
+	 */
+	elasticlunr.Pipeline = function () {
+	  this._queue = [];
+	};
+	
+	elasticlunr.Pipeline.registeredFunctions = {};
+	
+	/**
+	 * Register a function in the pipeline.
+	 *
+	 * Functions that are used in the pipeline should be registered if the pipeline
+	 * needs to be serialised, or a serialised pipeline needs to be loaded.
+	 *
+	 * Registering a function does not add it to a pipeline, functions must still be
+	 * added to instances of the pipeline for them to be used when running a pipeline.
+	 *
+	 * @param {Function} fn The function to register.
+	 * @param {String} label The label to register this function with
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.registerFunction = function (fn, label) {
+	  if (label in elasticlunr.Pipeline.registeredFunctions) {
+	    elasticlunr.utils.warn('Overwriting existing registered function: ' + label);
+	  }
+	
+	  fn.label = label;
+	  elasticlunr.Pipeline.registeredFunctions[label] = fn;
+	};
+	
+	/**
+	 * Get a registered function in the pipeline.
+	 *
+	 * @param {String} label The label of registered function.
+	 * @return {Function}
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.getRegisteredFunction = function (label) {
+	  if ((label in elasticlunr.Pipeline.registeredFunctions) !== true) {
+	    return null;
+	  }
+	
+	  return elasticlunr.Pipeline.registeredFunctions[label];
+	};
+	
+	/**
+	 * Warns if the function is not registered as a Pipeline function.
+	 *
+	 * @param {Function} fn The function to check for.
+	 * @private
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
+	  var isRegistered = fn.label && (fn.label in this.registeredFunctions);
+	
+	  if (!isRegistered) {
+	    elasticlunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn);
+	  }
+	};
+	
+	/**
+	 * Loads a previously serialised pipeline.
+	 *
+	 * All functions to be loaded must already be registered with elasticlunr.Pipeline.
+	 * If any function from the serialised data has not been registered then an
+	 * error will be thrown.
+	 *
+	 * @param {Object} serialised The serialised pipeline to load.
+	 * @return {elasticlunr.Pipeline}
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.load = function (serialised) {
+	  var pipeline = new elasticlunr.Pipeline;
+	
+	  serialised.forEach(function (fnName) {
+	    var fn = elasticlunr.Pipeline.getRegisteredFunction(fnName);
+	
+	    if (fn) {
+	      pipeline.add(fn);
+	    } else {
+	      throw new Error('Cannot load un-registered function: ' + fnName);
+	    }
+	  });
+	
+	  return pipeline;
+	};
+	
+	/**
+	 * Adds new functions to the end of the pipeline.
+	 *
+	 * Logs a warning if the function has not been registered.
+	 *
+	 * @param {Function} functions Any number of functions to add to the pipeline.
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.add = function () {
+	  var fns = Array.prototype.slice.call(arguments);
+	
+	  fns.forEach(function (fn) {
+	    elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
+	    this._queue.push(fn);
+	  }, this);
+	};
+	
+	/**
+	 * Adds a single function after a function that already exists in the
+	 * pipeline.
+	 *
+	 * Logs a warning if the function has not been registered.
+	 * If existingFn is not found, throw an Exception.
+	 *
+	 * @param {Function} existingFn A function that already exists in the pipeline.
+	 * @param {Function} newFn The new function to add to the pipeline.
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.after = function (existingFn, newFn) {
+	  elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
+	
+	  var pos = this._queue.indexOf(existingFn);
+	  if (pos === -1) {
+	    throw new Error('Cannot find existingFn');
+	  }
+	
+	  this._queue.splice(pos + 1, 0, newFn);
+	};
+	
+	/**
+	 * Adds a single function before a function that already exists in the
+	 * pipeline.
+	 *
+	 * Logs a warning if the function has not been registered.
+	 * If existingFn is not found, throw an Exception.
+	 *
+	 * @param {Function} existingFn A function that already exists in the pipeline.
+	 * @param {Function} newFn The new function to add to the pipeline.
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.before = function (existingFn, newFn) {
+	  elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
+	
+	  var pos = this._queue.indexOf(existingFn);
+	  if (pos === -1) {
+	    throw new Error('Cannot find existingFn');
+	  }
+	
+	  this._queue.splice(pos, 0, newFn);
+	};
+	
+	/**
+	 * Removes a function from the pipeline.
+	 *
+	 * @param {Function} fn The function to remove from the pipeline.
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.remove = function (fn) {
+	  var pos = this._queue.indexOf(fn);
+	  if (pos === -1) {
+	    return;
+	  }
+	
+	  this._queue.splice(pos, 1);
+	};
+	
+	/**
+	 * Runs the current list of functions that registered in the pipeline against the
+	 * input tokens.
+	 *
+	 * @param {Array} tokens The tokens to run through the pipeline.
+	 * @return {Array}
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.run = function (tokens) {
+	  var out = [],
+	      tokenLength = tokens.length,
+	      pipelineLength = this._queue.length;
+	
+	  for (var i = 0; i < tokenLength; i++) {
+	    var token = tokens[i];
+	
+	    for (var j = 0; j < pipelineLength; j++) {
+	      token = this._queue[j](token, i, tokens);
+	      if (token === void 0 || token === null) break;
+	    };
+	
+	    if (token !== void 0 && token !== null) out.push(token);
+	  };
+	
+	  return out;
+	};
+	
+	/**
+	 * Resets the pipeline by removing any existing processors.
+	 *
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.reset = function () {
+	  this._queue = [];
+	};
+	
+	 /**
+	  * Get the pipeline if user want to check the pipeline.
+	  *
+	  * @memberOf Pipeline
+	  */
+	 elasticlunr.Pipeline.prototype.get = function () {
+	   return this._queue;
+	 };
+	
+	/**
+	 * Returns a representation of the pipeline ready for serialisation.
+	 * Only serialize pipeline function's name. Not storing function, so when
+	 * loading the archived JSON index file, corresponding pipeline function is 
+	 * added by registered function of elasticlunr.Pipeline.registeredFunctions
+	 *
+	 * Logs a warning if the function has not been registered.
+	 *
+	 * @return {Array}
+	 * @memberOf Pipeline
+	 */
+	elasticlunr.Pipeline.prototype.toJSON = function () {
+	  return this._queue.map(function (fn) {
+	    elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
+	    return fn.label;
+	  });
+	};
+	/*!
+	 * elasticlunr.Index
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.Index is object that manages a search index.  It contains the indexes
+	 * and stores all the tokens and document lookups.  It also provides the main
+	 * user facing API for the library.
+	 *
+	 * @constructor
+	 */
+	elasticlunr.Index = function () {
+	  this._fields = [];
+	  this._ref = 'id';
+	  this.pipeline = new elasticlunr.Pipeline;
+	  this.documentStore = new elasticlunr.DocumentStore;
+	  this.index = {};
+	  this.eventEmitter = new elasticlunr.EventEmitter;
+	  this._idfCache = {};
+	
+	  this.on('add', 'remove', 'update', (function () {
+	    this._idfCache = {};
+	  }).bind(this));
+	};
+	
+	/**
+	 * Bind a handler to events being emitted by the index.
+	 *
+	 * The handler can be bound to many events at the same time.
+	 *
+	 * @param {String} [eventName] The name(s) of events to bind the function to.
+	 * @param {Function} fn The serialised set to load.
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.on = function () {
+	  var args = Array.prototype.slice.call(arguments);
+	  return this.eventEmitter.addListener.apply(this.eventEmitter, args);
+	};
+	
+	/**
+	 * Removes a handler from an event being emitted by the index.
+	 *
+	 * @param {String} eventName The name of events to remove the function from.
+	 * @param {Function} fn The serialised set to load.
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.off = function (name, fn) {
+	  return this.eventEmitter.removeListener(name, fn);
+	};
+	
+	/**
+	 * Loads a previously serialised index.
+	 *
+	 * Issues a warning if the index being imported was serialised
+	 * by a different version of elasticlunr.
+	 *
+	 * @param {Object} serialisedData The serialised set to load.
+	 * @return {elasticlunr.Index}
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.load = function (serialisedData) {
+	  if (serialisedData.version !== elasticlunr.version) {
+	    elasticlunr.utils.warn('version mismatch: current '
+	                    + elasticlunr.version + ' importing ' + serialisedData.version);
+	  }
+	
+	  var idx = new this;
+	
+	  idx._fields = serialisedData.fields;
+	  idx._ref = serialisedData.ref;
+	  idx.documentStore = elasticlunr.DocumentStore.load(serialisedData.documentStore);
+	  idx.pipeline = elasticlunr.Pipeline.load(serialisedData.pipeline);
+	  idx.index = {};
+	  for (var field in serialisedData.index) {
+	    idx.index[field] = elasticlunr.InvertedIndex.load(serialisedData.index[field]);
+	  }
+	
+	  return idx;
+	};
+	
+	/**
+	 * Adds a field to the list of fields that will be searchable within documents in the index.
+	 *
+	 * Remember that inner index is build based on field, which means each field has one inverted index.
+	 *
+	 * Fields should be added before any documents are added to the index, fields
+	 * that are added after documents are added to the index will only apply to new
+	 * documents added to the index.
+	 *
+	 * @param {String} fieldName The name of the field within the document that should be indexed
+	 * @return {elasticlunr.Index}
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.addField = function (fieldName) {
+	  this._fields.push(fieldName);
+	  this.index[fieldName] = new elasticlunr.InvertedIndex;
+	  return this;
+	};
+	
+	/**
+	 * Sets the property used to uniquely identify documents added to the index,
+	 * by default this property is 'id'.
+	 *
+	 * This should only be changed before adding documents to the index, changing
+	 * the ref property without resetting the index can lead to unexpected results.
+	 *
+	 * @param {String} refName The property to use to uniquely identify the
+	 * documents in the index.
+	 * @param {Boolean} emitEvent Whether to emit add events, defaults to true
+	 * @return {elasticlunr.Index}
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.setRef = function (refName) {
+	  this._ref = refName;
+	  return this;
+	};
+	
+	/**
+	 *
+	 * Set if the JSON format original documents are save into elasticlunr.DocumentStore
+	 *
+	 * Defaultly save all the original JSON documents.
+	 *
+	 * @param {Boolean} save Whether to save the original JSON documents.
+	 * @return {elasticlunr.Index}
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.saveDocument = function (save) {
+	  this.documentStore = new elasticlunr.DocumentStore(save);
+	  return this;
+	};
+	
+	/**
+	 * Add a JSON format document to the index.
+	 *
+	 * This is the way new documents enter the index, this function will run the
+	 * fields from the document through the index's pipeline and then add it to
+	 * the index, it will then show up in search results.
+	 *
+	 * An 'add' event is emitted with the document that has been added and the index
+	 * the document has been added to. This event can be silenced by passing false
+	 * as the second argument to add.
+	 *
+	 * @param {Object} doc The JSON format document to add to the index.
+	 * @param {Boolean} emitEvent Whether or not to emit events, default true.
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.addDoc = function (doc, emitEvent) {
+	  if (!doc) return;
+	  var emitEvent = emitEvent === undefined ? true : emitEvent;
+	
+	  var docRef = doc[this._ref];
+	
+	  this.documentStore.addDoc(docRef, doc);
+	  this._fields.forEach(function (field) {
+	    var fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
+	    this.documentStore.addFieldLength(docRef, field, fieldTokens.length);
+	
+	    var tokenCount = {};
+	    fieldTokens.forEach(function (token) {
+	      if (token in tokenCount) tokenCount[token] += 1;
+	      else tokenCount[token] = 1;
+	    }, this);
+	
+	    for (var token in tokenCount) {
+	      var termFrequency = tokenCount[token];
+	      termFrequency = Math.sqrt(termFrequency);
+	      this.index[field].addToken(token, { ref: docRef, tf: termFrequency });
+	    }
+	  }, this);
+	
+	  if (emitEvent) this.eventEmitter.emit('add', doc, this);
+	};
+	
+	/**
+	 * Removes a document from the index by doc ref.
+	 *
+	 * To make sure documents no longer show up in search results they can be
+	 * removed from the index using this method.
+	 *
+	 * A 'remove' event is emitted with the document that has been removed and the index
+	 * the document has been removed from. This event can be silenced by passing false
+	 * as the second argument to remove.
+	 *
+	 * If user setting DocumentStore not storing the documents, then remove doc by docRef is not allowed.
+	 *
+	 * @param {String|Integer} docRef The document ref to remove from the index.
+	 * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.removeDocByRef = function (docRef, emitEvent) {
+	  if (!docRef) return;
+	  if (this.documentStore.isDocStored() === false) {
+	    return;
+	  }
+	
+	  if (!this.documentStore.hasDoc(docRef)) return;
+	  var doc = this.documentStore.getDoc(docRef);
+	  this.removeDoc(doc, false);
+	};
+	
+	/**
+	 * Removes a document from the index.
+	 * This remove operation could work even the original doc is not store in the DocumentStore.
+	 *
+	 * To make sure documents no longer show up in search results they can be
+	 * removed from the index using this method.
+	 *
+	 * A 'remove' event is emitted with the document that has been removed and the index
+	 * the document has been removed from. This event can be silenced by passing false
+	 * as the second argument to remove.
+	 *
+	 *
+	 * @param {Object} doc The document ref to remove from the index.
+	 * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.removeDoc = function (doc, emitEvent) {
+	  if (!doc) return;
+	
+	  var emitEvent = emitEvent === undefined ? true : emitEvent;
+	
+	  var docRef = doc[this._ref];
+	  if (!this.documentStore.hasDoc(docRef)) return;
+	
+	  this.documentStore.removeDoc(docRef);
+	
+	  this._fields.forEach(function (field) {
+	    var fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
+	    fieldTokens.forEach(function (token) {
+	      this.index[field].removeToken(token, docRef);
+	    }, this);
+	  }, this);
+	
+	  if (emitEvent) this.eventEmitter.emit('remove', doc, this);
+	};
+	
+	/**
+	 * Updates a document in the index.
+	 *
+	 * When a document contained within the index gets updated, fields changed,
+	 * added or removed, to make sure it correctly matched against search queries,
+	 * it should be updated in the index.
+	 *
+	 * This method is just a wrapper around `remove` and `add`
+	 *
+	 * An 'update' event is emitted with the document that has been updated and the index.
+	 * This event can be silenced by passing false as the second argument to update. Only
+	 * an update event will be fired, the 'add' and 'remove' events of the underlying calls
+	 * are silenced.
+	 *
+	 * @param {Object} doc The document to update in the index.
+	 * @param {Boolean} emitEvent Whether to emit update events, defaults to true
+	 * @see Index.prototype.remove
+	 * @see Index.prototype.add
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.updateDoc = function (doc, emitEvent) {
+	  var emitEvent = emitEvent === undefined ? true : emitEvent;
+	
+	  this.removeDocByRef(doc[this._ref], false);
+	  this.addDoc(doc, false);
+	
+	  if (emitEvent) this.eventEmitter.emit('update', doc, this);
+	};
+	
+	/**
+	 * Calculates the inverse document frequency for a token within the index of a field.
+	 *
+	 * @param {String} token The token to calculate the idf of.
+	 * @param {String} field The field to compute idf.
+	 * @see Index.prototype.idf
+	 * @private
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.idf = function (term, field) {
+	  var cacheKey = "@" + field + '/' + term;
+	  if (Object.prototype.hasOwnProperty.call(this._idfCache, cacheKey)) return this._idfCache[cacheKey];
+	
+	  var df = this.index[field].getDocFreq(term);
+	  var idf = 1 + Math.log(this.documentStore.length / (df + 1));
+	  this._idfCache[cacheKey] = idf;
+	
+	  return idf;
+	};
+	
+	/**
+	 * get fields of current index instance
+	 *
+	 * @return {Array}
+	 */
+	elasticlunr.Index.prototype.getFields = function () {
+	  return this._fields.slice();
+	};
+	
+	/**
+	 * Searches the index using the passed query.
+	 * Queries should be a string, multiple words are allowed.
+	 *
+	 * If config is null, will search all fields defaultly, and lead to OR based query.
+	 * If config is specified, will search specified with query time boosting.
+	 *
+	 * All query tokens are passed through the same pipeline that document tokens
+	 * are passed through, so any language processing involved will be run on every
+	 * query term.
+	 *
+	 * Each query term is expanded, so that the term 'he' might be expanded to
+	 * 'hello' and 'help' if those terms were already included in the index.
+	 *
+	 * Matching documents are returned as an array of objects, each object contains
+	 * the matching document ref, as set for this index, and the similarity score
+	 * for this document against the query.
+	 *
+	 * @param {String} query The query to search the index with.
+	 * @param {JSON} userConfig The user query config, JSON format.
+	 * @return {Object}
+	 * @see Index.prototype.idf
+	 * @see Index.prototype.documentVector
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.search = function (query, userConfig) {
+	  if (!query) return [];
+	
+	  var configStr = null;
+	  if (userConfig != null) {
+	    configStr = JSON.stringify(userConfig);
+	  }
+	
+	  var config = new elasticlunr.Configuration(configStr, this.getFields()).get();
+	
+	  var queryTokens = this.pipeline.run(elasticlunr.tokenizer(query));
+	
+	  var queryResults = {};
+	
+	  for (var field in config) {
+	    var fieldSearchResults = this.fieldSearch(queryTokens, field, config);
+	    var fieldBoost = config[field].boost;
+	
+	    for (var docRef in fieldSearchResults) {
+	      fieldSearchResults[docRef] = fieldSearchResults[docRef] * fieldBoost;
+	    }
+	
+	    for (var docRef in fieldSearchResults) {
+	      if (docRef in queryResults) {
+	        queryResults[docRef] += fieldSearchResults[docRef];
+	      } else {
+	        queryResults[docRef] = fieldSearchResults[docRef];
+	      }
+	    }
+	  }
+	
+	  var results = [];
+	  for (var docRef in queryResults) {
+	    results.push({ref: docRef, score: queryResults[docRef]});
+	  }
+	
+	  results.sort(function (a, b) { return b.score - a.score; });
+	  return results;
+	};
+	
+	/**
+	 * search queryTokens in specified field.
+	 *
+	 * @param {Array} queryTokens The query tokens to query in this field.
+	 * @param {String} field Field to query in.
+	 * @param {elasticlunr.Configuration} config The user query config, JSON format.
+	 * @return {Object}
+	 */
+	elasticlunr.Index.prototype.fieldSearch = function (queryTokens, fieldName, config) {
+	  var booleanType = config[fieldName].bool;
+	  var expand = config[fieldName].expand;
+	  var boost = config[fieldName].boost;
+	  var scores = null;
+	  var docTokens = {};
+	
+	  // Do nothing if the boost is 0
+	  if (boost === 0) {
+	    return;
+	  }
+	
+	  queryTokens.forEach(function (token) {
+	    var tokens = [token];
+	    if (expand == true) {
+	      tokens = this.index[fieldName].expandToken(token);
+	    }
+	    // Consider every query token in turn. If expanded, each query token
+	    // corresponds to a set of tokens, which is all tokens in the 
+	    // index matching the pattern queryToken* .
+	    // For the set of tokens corresponding to a query token, find and score
+	    // all matching documents. Store those scores in queryTokenScores, 
+	    // keyed by docRef.
+	    // Then, depending on the value of booleanType, combine the scores
+	    // for this query token with previous scores.  If booleanType is OR,
+	    // then merge the scores by summing into the accumulated total, adding
+	    // new document scores are required (effectively a union operator). 
+	    // If booleanType is AND, accumulate scores only if the document 
+	    // has previously been scored by another query token (an intersection
+	    // operation0. 
+	    // Furthermore, since when booleanType is AND, additional 
+	    // query tokens can't add new documents to the result set, use the
+	    // current document set to limit the processing of each new query 
+	    // token for efficiency (i.e., incremental intersection).
+	    
+	    var queryTokenScores = {};
+	    tokens.forEach(function (key) {
+	      var docs = this.index[fieldName].getDocs(key);
+	      var idf = this.idf(key, fieldName);
+	      
+	      if (scores && booleanType == 'AND') {
+	          // special case, we can rule out documents that have been
+	          // already been filtered out because they weren't scored
+	          // by previous query token passes.
+	          var filteredDocs = {};
+	          for (var docRef in scores) {
+	              if (docRef in docs) {
+	                  filteredDocs[docRef] = docs[docRef];
+	              }
+	          }
+	          docs = filteredDocs;
+	      }
+	      // only record appeared token for retrieved documents for the
+	      // original token, not for expaned token.
+	      // beause for doing coordNorm for a retrieved document, coordNorm only care how many
+	      // query token appear in that document.
+	      // so expanded token should not be added into docTokens, if added, this will pollute the
+	      // coordNorm
+	      if (key == token) {
+	        this.fieldSearchStats(docTokens, key, docs);
+	      }
+	
+	      for (var docRef in docs) {
+	        var tf = this.index[fieldName].getTermFrequency(key, docRef);
+	        var fieldLength = this.documentStore.getFieldLength(docRef, fieldName);
+	        var fieldLengthNorm = 1;
+	        if (fieldLength != 0) {
+	          fieldLengthNorm = 1 / Math.sqrt(fieldLength);
+	        }
+	
+	        var penality = 1;
+	        if (key != token) {
+	          // currently I'm not sure if this penality is enough,
+	          // need to do verification
+	          penality = (1 - (key.length - token.length) / key.length) * 0.15;
+	        }
+	
+	        var score = tf * idf * fieldLengthNorm * penality;
+	
+	        if (docRef in queryTokenScores) {
+	          queryTokenScores[docRef] += score;
+	        } else {
+	          queryTokenScores[docRef] = score;
+	        }
+	      }
+	    }, this);
+	    
+	    scores = this.mergeScores(scores, queryTokenScores, booleanType);
+	  }, this);
+	
+	  scores = this.coordNorm(scores, docTokens, queryTokens.length);
+	  return scores;
+	};
+	
+	/**
+	 * Merge the scores from one set of tokens into an accumulated score table.
+	 * Exact operation depends on the op parameter. If op is 'AND', then only the
+	 * intersection of the two score lists is retained. Otherwise, the union of
+	 * the two score lists is returned. For internal use only.
+	 *
+	 * @param {Object} bool accumulated scores. Should be null on first call.
+	 * @param {String} scores new scores to merge into accumScores.
+	 * @param {Object} op merge operation (should be 'AND' or 'OR').
+	 *
+	 */
+	
+	elasticlunr.Index.prototype.mergeScores = function (accumScores, scores, op) {
+	    if (!accumScores) {
+	        return scores; 
+	    }
+	    if (op == 'AND') {
+	        var intersection = {};
+	        for (var docRef in scores) {
+	            if (docRef in accumScores) {
+	                intersection[docRef] = accumScores[docRef] + scores[docRef];
+	            }
+	        }
+	        return intersection;
+	    } else {
+	        for (var docRef in scores) {
+	            if (docRef in accumScores) {
+	                accumScores[docRef] += scores[docRef];
+	            } else {
+	                accumScores[docRef] = scores[docRef];
+	            }
+	        }
+	        return accumScores;
+	    }
+	};
+	
+	
+	/**
+	 * Record the occuring query token of retrieved doc specified by doc field.
+	 * Only for inner user.
+	 *
+	 * @param {Object} docTokens a data structure stores which token appears in the retrieved doc.
+	 * @param {String} token query token
+	 * @param {Object} docs the retrieved documents of the query token
+	 *
+	 */
+	elasticlunr.Index.prototype.fieldSearchStats = function (docTokens, token, docs) {
+	  for (var doc in docs) {
+	    if (doc in docTokens) {
+	      docTokens[doc].push(token);
+	    } else {
+	      docTokens[doc] = [token];
+	    }
+	  }
+	};
+	
+	/**
+	 * coord norm the score of a doc.
+	 * if a doc contain more query tokens, then the score will larger than the doc
+	 * contains less query tokens.
+	 *
+	 * only for inner use.
+	 *
+	 * @param {Object} results first results
+	 * @param {Object} docs field search results of a token
+	 * @param {Integer} n query token number
+	 * @return {Object}
+	 */
+	elasticlunr.Index.prototype.coordNorm = function (scores, docTokens, n) {
+	  for (var doc in scores) {
+	    if (!(doc in docTokens)) continue;
+	    var tokens = docTokens[doc].length;
+	    scores[doc] = scores[doc] * tokens / n;
+	  }
+	
+	  return scores;
+	};
+	
+	/**
+	 * Returns a representation of the index ready for serialisation.
+	 *
+	 * @return {Object}
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.toJSON = function () {
+	  var indexJson = {};
+	  this._fields.forEach(function (field) {
+	    indexJson[field] = this.index[field].toJSON();
+	  }, this);
+	
+	  return {
+	    version: elasticlunr.version,
+	    fields: this._fields,
+	    ref: this._ref,
+	    documentStore: this.documentStore.toJSON(),
+	    index: indexJson,
+	    pipeline: this.pipeline.toJSON()
+	  };
+	};
+	
+	/**
+	 * Applies a plugin to the current index.
+	 *
+	 * A plugin is a function that is called with the index as its context.
+	 * Plugins can be used to customise or extend the behaviour the index
+	 * in some way. A plugin is just a function, that encapsulated the custom
+	 * behaviour that should be applied to the index.
+	 *
+	 * The plugin function will be called with the index as its argument, additional
+	 * arguments can also be passed when calling use. The function will be called
+	 * with the index as its context.
+	 *
+	 * Example:
+	 *
+	 *     var myPlugin = function (idx, arg1, arg2) {
+	 *       // `this` is the index to be extended
+	 *       // apply any extensions etc here.
+	 *     }
+	 *
+	 *     var idx = elasticlunr(function () {
+	 *       this.use(myPlugin, 'arg1', 'arg2')
+	 *     })
+	 *
+	 * @param {Function} plugin The plugin to apply.
+	 * @memberOf Index
+	 */
+	elasticlunr.Index.prototype.use = function (plugin) {
+	  var args = Array.prototype.slice.call(arguments, 1);
+	  args.unshift(this);
+	  plugin.apply(this, args);
+	};
+	/*!
+	 * elasticlunr.DocumentStore
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.DocumentStore is a simple key-value document store used for storing sets of tokens for
+	 * documents stored in index.
+	 *
+	 * elasticlunr.DocumentStore store original JSON format documents that you could build search snippet by this original JSON document.
+	 *
+	 * user could choose whether original JSON format document should be store, if no configuration then document will be stored defaultly.
+	 * If user care more about the index size, user could select not store JSON documents, then this will has some defects, such as user
+	 * could not use JSON document to generate snippets of search results.
+	 *
+	 * @param {Boolean} save If the original JSON document should be stored.
+	 * @constructor
+	 * @module
+	 */
+	elasticlunr.DocumentStore = function (save) {
+	  if (save === null || save === undefined) {
+	    this._save = true;
+	  } else {
+	    this._save = save;
+	  }
+	
+	  this.docs = {};
+	  this.docInfo = {};
+	  this.length = 0;
+	};
+	
+	/**
+	 * Loads a previously serialised document store
+	 *
+	 * @param {Object} serialisedData The serialised document store to load.
+	 * @return {elasticlunr.DocumentStore}
+	 */
+	elasticlunr.DocumentStore.load = function (serialisedData) {
+	  var store = new this;
+	
+	  store.length = serialisedData.length;
+	  store.docs = serialisedData.docs;
+	  store.docInfo = serialisedData.docInfo;
+	  store._save = serialisedData.save;
+	
+	  return store;
+	};
+	
+	/**
+	 * check if current instance store the original doc
+	 *
+	 * @return {Boolean}
+	 */
+	elasticlunr.DocumentStore.prototype.isDocStored = function () {
+	  return this._save;
+	};
+	
+	/**
+	 * Stores the given doc in the document store against the given id.
+	 * If docRef already exist, then update doc.
+	 *
+	 * Document is store by original JSON format, then you could use original document to generate search snippets.
+	 *
+	 * @param {Integer|String} docRef The key used to store the JSON format doc.
+	 * @param {Object} doc The JSON format doc.
+	 */
+	elasticlunr.DocumentStore.prototype.addDoc = function (docRef, doc) {
+	  if (!this.hasDoc(docRef)) this.length++;
+	
+	  if (this._save === true) {
+	    this.docs[docRef] = clone(doc);
+	  } else {
+	    this.docs[docRef] = null;
+	  }
+	};
+	
+	/**
+	 * Retrieves the JSON doc from the document store for a given key.
+	 *
+	 * If docRef not found, return null.
+	 * If user set not storing the documents, return null.
+	 *
+	 * @param {Integer|String} docRef The key to lookup and retrieve from the document store.
+	 * @return {Object}
+	 * @memberOf DocumentStore
+	 */
+	elasticlunr.DocumentStore.prototype.getDoc = function (docRef) {
+	  if (this.hasDoc(docRef) === false) return null;
+	  return this.docs[docRef];
+	};
+	
+	/**
+	 * Checks whether the document store contains a key (docRef).
+	 *
+	 * @param {Integer|String} docRef The id to look up in the document store.
+	 * @return {Boolean}
+	 * @memberOf DocumentStore
+	 */
+	elasticlunr.DocumentStore.prototype.hasDoc = function (docRef) {
+	  return docRef in this.docs;
+	};
+	
+	/**
+	 * Removes the value for a key in the document store.
+	 *
+	 * @param {Integer|String} docRef The id to remove from the document store.
+	 * @memberOf DocumentStore
+	 */
+	elasticlunr.DocumentStore.prototype.removeDoc = function (docRef) {
+	  if (!this.hasDoc(docRef)) return;
+	
+	  delete this.docs[docRef];
+	  delete this.docInfo[docRef];
+	  this.length--;
+	};
+	
+	/**
+	 * Add field length of a document's field tokens from pipeline results.
+	 * The field length of a document is used to do field length normalization even without the original JSON document stored.
+	 *
+	 * @param {Integer|String} docRef document's id or reference
+	 * @param {String} fieldName field name
+	 * @param {Integer} length field length
+	 */
+	elasticlunr.DocumentStore.prototype.addFieldLength = function (docRef, fieldName, length) {
+	  if (docRef === null || docRef === undefined) return;
+	  if (this.hasDoc(docRef) == false) return;
+	
+	  if (!this.docInfo[docRef]) this.docInfo[docRef] = {};
+	  this.docInfo[docRef][fieldName] = length;
+	};
+	
+	/**
+	 * Update field length of a document's field tokens from pipeline results.
+	 * The field length of a document is used to do field length normalization even without the original JSON document stored.
+	 *
+	 * @param {Integer|String} docRef document's id or reference
+	 * @param {String} fieldName field name
+	 * @param {Integer} length field length
+	 */
+	elasticlunr.DocumentStore.prototype.updateFieldLength = function (docRef, fieldName, length) {
+	  if (docRef === null || docRef === undefined) return;
+	  if (this.hasDoc(docRef) == false) return;
+	
+	  this.addFieldLength(docRef, fieldName, length);
+	};
+	
+	/**
+	 * get field length of a document by docRef
+	 *
+	 * @param {Integer|String} docRef document id or reference
+	 * @param {String} fieldName field name
+	 * @return {Integer} field length
+	 */
+	elasticlunr.DocumentStore.prototype.getFieldLength = function (docRef, fieldName) {
+	  if (docRef === null || docRef === undefined) return 0;
+	
+	  if (!(docRef in this.docs)) return 0;
+	  if (!(fieldName in this.docInfo[docRef])) return 0;
+	  return this.docInfo[docRef][fieldName];
+	};
+	
+	/**
+	 * Returns a JSON representation of the document store used for serialisation.
+	 *
+	 * @return {Object} JSON format
+	 * @memberOf DocumentStore
+	 */
+	elasticlunr.DocumentStore.prototype.toJSON = function () {
+	  return {
+	    docs: this.docs,
+	    docInfo: this.docInfo,
+	    length: this.length,
+	    save: this._save
+	  };
+	};
+	
+	/**
+	 * Cloning object
+	 *
+	 * @param {Object} object in JSON format
+	 * @return {Object} copied object
+	 */
+	function clone(obj) {
+	  if (null === obj || "object" !== typeof obj) return obj;
+	
+	  var copy = obj.constructor();
+	
+	  for (var attr in obj) {
+	    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+	  }
+	
+	  return copy;
+	}
+	/*!
+	 * elasticlunr.stemmer
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
+	 */
+	
+	/**
+	 * elasticlunr.stemmer is an english language stemmer, this is a JavaScript
+	 * implementation of the PorterStemmer taken from http://tartarus.org/~martin
+	 *
+	 * @module
+	 * @param {String} str The string to stem
+	 * @return {String}
+	 * @see elasticlunr.Pipeline
+	 */
+	elasticlunr.stemmer = (function(){
+	  var step2list = {
+	      "ational" : "ate",
+	      "tional" : "tion",
+	      "enci" : "ence",
+	      "anci" : "ance",
+	      "izer" : "ize",
+	      "bli" : "ble",
+	      "alli" : "al",
+	      "entli" : "ent",
+	      "eli" : "e",
+	      "ousli" : "ous",
+	      "ization" : "ize",
+	      "ation" : "ate",
+	      "ator" : "ate",
+	      "alism" : "al",
+	      "iveness" : "ive",
+	      "fulness" : "ful",
+	      "ousness" : "ous",
+	      "aliti" : "al",
+	      "iviti" : "ive",
+	      "biliti" : "ble",
+	      "logi" : "log"
+	    },
+	
+	    step3list = {
+	      "icate" : "ic",
+	      "ative" : "",
+	      "alize" : "al",
+	      "iciti" : "ic",
+	      "ical" : "ic",
+	      "ful" : "",
+	      "ness" : ""
+	    },
+	
+	    c = "[^aeiou]",          // consonant
+	    v = "[aeiouy]",          // vowel
+	    C = c + "[^aeiouy]*",    // consonant sequence
+	    V = v + "[aeiou]*",      // vowel sequence
+	
+	    mgr0 = "^(" + C + ")?" + V + C,               // [C]VC... is m>0
+	    meq1 = "^(" + C + ")?" + V + C + "(" + V + ")?$",  // [C]VC[V] is m=1
+	    mgr1 = "^(" + C + ")?" + V + C + V + C,       // [C]VCVC... is m>1
+	    s_v = "^(" + C + ")?" + v;                   // vowel in stem
+	
+	  var re_mgr0 = new RegExp(mgr0);
+	  var re_mgr1 = new RegExp(mgr1);
+	  var re_meq1 = new RegExp(meq1);
+	  var re_s_v = new RegExp(s_v);
+	
+	  var re_1a = /^(.+?)(ss|i)es$/;
+	  var re2_1a = /^(.+?)([^s])s$/;
+	  var re_1b = /^(.+?)eed$/;
+	  var re2_1b = /^(.+?)(ed|ing)$/;
+	  var re_1b_2 = /.$/;
+	  var re2_1b_2 = /(at|bl|iz)$/;
+	  var re3_1b_2 = new RegExp("([^aeiouylsz])\\1$");
+	  var re4_1b_2 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+	
+	  var re_1c = /^(.+?[^aeiou])y$/;
+	  var re_2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/;
+	
+	  var re_3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/;
+	
+	  var re_4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/;
+	  var re2_4 = /^(.+?)(s|t)(ion)$/;
+	
+	  var re_5 = /^(.+?)e$/;
+	  var re_5_1 = /ll$/;
+	  var re3_5 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+	
+	  var porterStemmer = function porterStemmer(w) {
+	    var   stem,
+	      suffix,
+	      firstch,
+	      re,
+	      re2,
+	      re3,
+	      re4;
+	
+	    if (w.length < 3) { return w; }
+	
+	    firstch = w.substr(0,1);
+	    if (firstch == "y") {
+	      w = firstch.toUpperCase() + w.substr(1);
+	    }
+	
+	    // Step 1a
+	    re = re_1a
+	    re2 = re2_1a;
+	
+	    if (re.test(w)) { w = w.replace(re,"$1$2"); }
+	    else if (re2.test(w)) { w = w.replace(re2,"$1$2"); }
+	
+	    // Step 1b
+	    re = re_1b;
+	    re2 = re2_1b;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      re = re_mgr0;
+	      if (re.test(fp[1])) {
+	        re = re_1b_2;
+	        w = w.replace(re,"");
+	      }
+	    } else if (re2.test(w)) {
+	      var fp = re2.exec(w);
+	      stem = fp[1];
+	      re2 = re_s_v;
+	      if (re2.test(stem)) {
+	        w = stem;
+	        re2 = re2_1b_2;
+	        re3 = re3_1b_2;
+	        re4 = re4_1b_2;
+	        if (re2.test(w)) {  w = w + "e"; }
+	        else if (re3.test(w)) { re = re_1b_2; w = w.replace(re,""); }
+	        else if (re4.test(w)) { w = w + "e"; }
+	      }
+	    }
+	
+	    // Step 1c - replace suffix y or Y by i if preceded by a non-vowel which is not the first letter of the word (so cry -> cri, by -> by, say -> say)
+	    re = re_1c;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      stem = fp[1];
+	      w = stem + "i";
+	    }
+	
+	    // Step 2
+	    re = re_2;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      stem = fp[1];
+	      suffix = fp[2];
+	      re = re_mgr0;
+	      if (re.test(stem)) {
+	        w = stem + step2list[suffix];
+	      }
+	    }
+	
+	    // Step 3
+	    re = re_3;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      stem = fp[1];
+	      suffix = fp[2];
+	      re = re_mgr0;
+	      if (re.test(stem)) {
+	        w = stem + step3list[suffix];
+	      }
+	    }
+	
+	    // Step 4
+	    re = re_4;
+	    re2 = re2_4;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      stem = fp[1];
+	      re = re_mgr1;
+	      if (re.test(stem)) {
+	        w = stem;
+	      }
+	    } else if (re2.test(w)) {
+	      var fp = re2.exec(w);
+	      stem = fp[1] + fp[2];
+	      re2 = re_mgr1;
+	      if (re2.test(stem)) {
+	        w = stem;
+	      }
+	    }
+	
+	    // Step 5
+	    re = re_5;
+	    if (re.test(w)) {
+	      var fp = re.exec(w);
+	      stem = fp[1];
+	      re = re_mgr1;
+	      re2 = re_meq1;
+	      re3 = re3_5;
+	      if (re.test(stem) || (re2.test(stem) && !(re3.test(stem)))) {
+	        w = stem;
+	      }
+	    }
+	
+	    re = re_5_1;
+	    re2 = re_mgr1;
+	    if (re.test(w) && re2.test(w)) {
+	      re = re_1b_2;
+	      w = w.replace(re,"");
+	    }
+	
+	    // and turn initial Y back to y
+	
+	    if (firstch == "y") {
+	      w = firstch.toLowerCase() + w.substr(1);
+	    }
+	
+	    return w;
+	  };
+	
+	  return porterStemmer;
+	})();
+	
+	elasticlunr.Pipeline.registerFunction(elasticlunr.stemmer, 'stemmer');
+	/*!
+	 * elasticlunr.stopWordFilter
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.stopWordFilter is an English language stop words filter, any words
+	 * contained in the stop word list will not be passed through the filter.
+	 *
+	 * This is intended to be used in the Pipeline. If the token does not pass the
+	 * filter then undefined will be returned.
+	 * Currently this StopwordFilter using dictionary to do O(1) time complexity stop word filtering.
+	 *
+	 * @module
+	 * @param {String} token The token to pass through the filter
+	 * @return {String}
+	 * @see elasticlunr.Pipeline
+	 */
+	elasticlunr.stopWordFilter = function (token) {
+	  if (token && elasticlunr.stopWordFilter.stopWords[token] !== true) {
+	    return token;
+	  }
+	};
+	
+	/**
+	 * Remove predefined stop words
+	 * if user want to use customized stop words, user could use this function to delete
+	 * all predefined stopwords.
+	 *
+	 * @return {null}
+	 */
+	elasticlunr.clearStopWords = function () {
+	  elasticlunr.stopWordFilter.stopWords = {};
+	};
+	
+	/**
+	 * Add customized stop words
+	 * user could use this function to add customized stop words
+	 * 
+	 * @params {Array} words customized stop words
+	 * @return {null}
+	 */
+	elasticlunr.addStopWords = function (words) {
+	  if (words == null || Array.isArray(words) === false) return;
+	
+	  words.forEach(function (word) {
+	    elasticlunr.stopWordFilter.stopWords[word] = true;
+	  }, this);
+	};
+	
+	/**
+	 * Reset to default stop words
+	 * user could use this function to restore default stop words
+	 *
+	 * @return {null}
+	 */
+	elasticlunr.resetStopWords = function () {
+	  elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
+	};
+	
+	elasticlunr.defaultStopWords = {
+	  "": true,
+	  "a": true,
+	  "able": true,
+	  "about": true,
+	  "across": true,
+	  "after": true,
+	  "all": true,
+	  "almost": true,
+	  "also": true,
+	  "am": true,
+	  "among": true,
+	  "an": true,
+	  "and": true,
+	  "any": true,
+	  "are": true,
+	  "as": true,
+	  "at": true,
+	  "be": true,
+	  "because": true,
+	  "been": true,
+	  "but": true,
+	  "by": true,
+	  "can": true,
+	  "cannot": true,
+	  "could": true,
+	  "dear": true,
+	  "did": true,
+	  "do": true,
+	  "does": true,
+	  "either": true,
+	  "else": true,
+	  "ever": true,
+	  "every": true,
+	  "for": true,
+	  "from": true,
+	  "get": true,
+	  "got": true,
+	  "had": true,
+	  "has": true,
+	  "have": true,
+	  "he": true,
+	  "her": true,
+	  "hers": true,
+	  "him": true,
+	  "his": true,
+	  "how": true,
+	  "however": true,
+	  "i": true,
+	  "if": true,
+	  "in": true,
+	  "into": true,
+	  "is": true,
+	  "it": true,
+	  "its": true,
+	  "just": true,
+	  "least": true,
+	  "let": true,
+	  "like": true,
+	  "likely": true,
+	  "may": true,
+	  "me": true,
+	  "might": true,
+	  "most": true,
+	  "must": true,
+	  "my": true,
+	  "neither": true,
+	  "no": true,
+	  "nor": true,
+	  "not": true,
+	  "of": true,
+	  "off": true,
+	  "often": true,
+	  "on": true,
+	  "only": true,
+	  "or": true,
+	  "other": true,
+	  "our": true,
+	  "own": true,
+	  "rather": true,
+	  "said": true,
+	  "say": true,
+	  "says": true,
+	  "she": true,
+	  "should": true,
+	  "since": true,
+	  "so": true,
+	  "some": true,
+	  "than": true,
+	  "that": true,
+	  "the": true,
+	  "their": true,
+	  "them": true,
+	  "then": true,
+	  "there": true,
+	  "these": true,
+	  "they": true,
+	  "this": true,
+	  "tis": true,
+	  "to": true,
+	  "too": true,
+	  "twas": true,
+	  "us": true,
+	  "wants": true,
+	  "was": true,
+	  "we": true,
+	  "were": true,
+	  "what": true,
+	  "when": true,
+	  "where": true,
+	  "which": true,
+	  "while": true,
+	  "who": true,
+	  "whom": true,
+	  "why": true,
+	  "will": true,
+	  "with": true,
+	  "would": true,
+	  "yet": true,
+	  "you": true,
+	  "your": true
+	};
+	
+	elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
+	
+	elasticlunr.Pipeline.registerFunction(elasticlunr.stopWordFilter, 'stopWordFilter');
+	/*!
+	 * elasticlunr.trimmer
+	 * Copyright (C) 2016 Oliver Nightingale
+	 * Copyright (C) 2016 Wei Song
+	 */
+	
+	/**
+	 * elasticlunr.trimmer is a pipeline function for trimming non word
+	 * characters from the begining and end of tokens before they
+	 * enter the index.
+	 *
+	 * This implementation may not work correctly for non latin
+	 * characters and should either be removed or adapted for use
+	 * with languages with non-latin characters.
+	 *
+	 * @module
+	 * @param {String} token The token to pass through the filter
+	 * @return {String}
+	 * @see elasticlunr.Pipeline
+	 */
+	elasticlunr.trimmer = function (token) {
+	  if (token === null || token === undefined) {
+	    throw new Error('token should not be undefined');
+	  }
+	
+	  return token
+	    .replace(/^\W+/, '')
+	    .replace(/\W+$/, '');
+	};
+	
+	elasticlunr.Pipeline.registerFunction(elasticlunr.trimmer, 'trimmer');
+	/*!
+	 * elasticlunr.InvertedIndex
+	 * Copyright (C) 2016 Wei Song
+	 * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
+	 */
+	
+	/**
+	 * elasticlunr.InvertedIndex is used for efficiently storing and
+	 * lookup of documents that contain a given token.
+	 *
+	 * @constructor
+	 */
+	elasticlunr.InvertedIndex = function () {
+	  this.root = { docs: {}, df: 0 };
+	};
+	
+	/**
+	 * Loads a previously serialised inverted index.
+	 *
+	 * @param {Object} serialisedData The serialised inverted index to load.
+	 * @return {elasticlunr.InvertedIndex}
+	 */
+	elasticlunr.InvertedIndex.load = function (serialisedData) {
+	  var idx = new this;
+	  idx.root = serialisedData.root;
+	
+	  return idx;
+	};
+	
+	/**
+	 * Adds a {token: tokenInfo} pair to the inverted index.
+	 * If the token already exist, then update the tokenInfo.
+	 *
+	 * tokenInfo format: { ref: 1, tf: 2}
+	 * tokenInfor should contains the document's ref and the tf(token frequency) of that token in
+	 * the document.
+	 *
+	 * By default this function starts at the root of the current inverted index, however
+	 * it can start at any node of the inverted index if required.
+	 *
+	 * @param {String} token 
+	 * @param {Object} tokenInfo format: { ref: 1, tf: 2}
+	 * @param {Object} root An optional node at which to start looking for the
+	 * correct place to enter the doc, by default the root of this elasticlunr.InvertedIndex
+	 * is used.
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.addToken = function (token, tokenInfo, root) {
+	  var root = root || this.root,
+	      idx = 0;
+	
+	  while (idx <= token.length - 1) {
+	    var key = token[idx];
+	
+	    if (!(key in root)) root[key] = {docs: {}, df: 0};
+	    idx += 1;
+	    root = root[key];
+	  }
+	
+	  var docRef = tokenInfo.ref;
+	  if (!root.docs[docRef]) {
+	    // if this doc not exist, then add this doc
+	    root.docs[docRef] = {tf: tokenInfo.tf};
+	    root.df += 1;
+	  } else {
+	    // if this doc already exist, then update tokenInfo
+	    root.docs[docRef] = {tf: tokenInfo.tf};
+	  }
+	};
+	
+	/**
+	 * Checks whether a token is in this elasticlunr.InvertedIndex.
+	 * 
+	 *
+	 * @param {String} token The token to be checked
+	 * @return {Boolean}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.hasToken = function (token) {
+	  if (!token) return false;
+	
+	  var node = this.root;
+	
+	  for (var i = 0; i < token.length; i++) {
+	    if (!node[token[i]]) return false;
+	    node = node[token[i]];
+	  }
+	
+	  return true;
+	};
+	
+	/**
+	 * Retrieve a node from the inverted index for a given token.
+	 * If token not found in this InvertedIndex, return null.
+	 * 
+	 *
+	 * @param {String} token The token to get the node for.
+	 * @return {Object}
+	 * @see InvertedIndex.prototype.get
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.getNode = function (token) {
+	  if (!token) return null;
+	
+	  var node = this.root;
+	
+	  for (var i = 0; i < token.length; i++) {
+	    if (!node[token[i]]) return null;
+	    node = node[token[i]];
+	  }
+	
+	  return node;
+	};
+	
+	/**
+	 * Retrieve the documents of a given token.
+	 * If token not found, return {}.
+	 *
+	 *
+	 * @param {String} token The token to get the documents for.
+	 * @return {Object}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.getDocs = function (token) {
+	  var node = this.getNode(token);
+	  if (node == null) {
+	    return {};
+	  }
+	
+	  return node.docs;
+	};
+	
+	/**
+	 * Retrieve term frequency of given token in given docRef.
+	 * If token or docRef not found, return 0.
+	 *
+	 *
+	 * @param {String} token The token to get the documents for.
+	 * @param {String|Integer} docRef
+	 * @return {Integer}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.getTermFrequency = function (token, docRef) {
+	  var node = this.getNode(token);
+	
+	  if (node == null) {
+	    return 0;
+	  }
+	
+	  if (!(docRef in node.docs)) {
+	    return 0;
+	  }
+	
+	  return node.docs[docRef].tf;
+	};
+	
+	/**
+	 * Retrieve the document frequency of given token.
+	 * If token not found, return 0.
+	 *
+	 *
+	 * @param {String} token The token to get the documents for.
+	 * @return {Object}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.getDocFreq = function (token) {
+	  var node = this.getNode(token);
+	
+	  if (node == null) {
+	    return 0;
+	  }
+	
+	  return node.df;
+	};
+	
+	/**
+	 * Remove the document identified by document's ref from the token in the inverted index.
+	 *
+	 *
+	 * @param {String} token Remove the document from which token.
+	 * @param {String} ref The ref of the document to remove from given token.
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.removeToken = function (token, ref) {
+	  if (!token) return;
+	  var node = this.getNode(token);
+	
+	  if (node == null) return;
+	
+	  if (ref in node.docs) {
+	    delete node.docs[ref];
+	    node.df -= 1;
+	  }
+	};
+	
+	/**
+	 * Find all the possible suffixes of given token using tokens currently in the inverted index.
+	 * If token not found, return empty Array.
+	 *
+	 * @param {String} token The token to expand.
+	 * @return {Array}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.expandToken = function (token, memo, root) {
+	  if (token == null || token == '') return [];
+	  var memo = memo || [];
+	
+	  if (root == void 0) {
+	    root = this.getNode(token);
+	    if (root == null) return memo;
+	  }
+	
+	  if (root.df > 0) memo.push(token);
+	
+	  for (var key in root) {
+	    if (key === 'docs') continue;
+	    if (key === 'df') continue;
+	    this.expandToken(token + key, memo, root[key]);
+	  }
+	
+	  return memo;
+	};
+	
+	/**
+	 * Returns a representation of the inverted index ready for serialisation.
+	 *
+	 * @return {Object}
+	 * @memberOf InvertedIndex
+	 */
+	elasticlunr.InvertedIndex.prototype.toJSON = function () {
+	  return {
+	    root: this.root
+	  };
+	};
+	
+	/*!
+	 * elasticlunr.Configuration
+	 * Copyright (C) 2016 Wei Song
+	 */
+	 
+	 /** 
+	  * elasticlunr.Configuration is used to analyze the user search configuration.
+	  * 
+	  * By elasticlunr.Configuration user could set query-time boosting, boolean model in each field.
+	  * 
+	  * Currently configuration supports:
+	  * 1. query-time boosting, user could set how to boost each field.
+	  * 2. boolean model chosing, user could choose which boolean model to use for each field.
+	  * 3. token expandation, user could set token expand to True to improve Recall. Default is False.
+	  * 
+	  * Query time boosting must be configured by field category, "boolean" model could be configured 
+	  * by both field category or globally as the following example. Field configuration for "boolean"
+	  * will overwrite global configuration.
+	  * Token expand could be configured both by field category or golbally. Local field configuration will
+	  * overwrite global configuration.
+	  * 
+	  * configuration example:
+	  * {
+	  *   fields:{ 
+	  *     title: {boost: 2},
+	  *     body: {boost: 1}
+	  *   },
+	  *   bool: "OR"
+	  * }
+	  * 
+	  * "bool" field configuation overwrite global configuation example:
+	  * {
+	  *   fields:{ 
+	  *     title: {boost: 2, bool: "AND"},
+	  *     body: {boost: 1}
+	  *   },
+	  *   bool: "OR"
+	  * }
+	  * 
+	  * "expand" example:
+	  * {
+	  *   fields:{ 
+	  *     title: {boost: 2, bool: "AND"},
+	  *     body: {boost: 1}
+	  *   },
+	  *   bool: "OR",
+	  *   expand: true
+	  * }
+	  * 
+	  * "expand" example for field category:
+	  * {
+	  *   fields:{ 
+	  *     title: {boost: 2, bool: "AND", expand: true},
+	  *     body: {boost: 1}
+	  *   },
+	  *   bool: "OR"
+	  * }
+	  * 
+	  * setting the boost to 0 ignores the field (this will only search the title):
+	  * {
+	  *   fields:{
+	  *     title: {boost: 1},
+	  *     body: {boost: 0}
+	  *   }
+	  * }
+	  *
+	  * then, user could search with configuration to do query-time boosting.
+	  * idx.search('oracle database', {fields: {title: {boost: 2}, body: {boost: 1}}});
+	  * 
+	  * 
+	  * @constructor
+	  * 
+	  * @param {String} config user configuration
+	  * @param {Array} fields fields of index instance
+	  * @module
+	  */
+	elasticlunr.Configuration = function (config, fields) {
+	  var config = config || '';
+	
+	  if (fields == undefined || fields == null) {
+	    throw new Error('fields should not be null');
+	  }
+	
+	  this.config = {};
+	
+	  var userConfig;
+	  try {
+	    userConfig = JSON.parse(config);
+	    this.buildUserConfig(userConfig, fields);
+	  } catch (error) {
+	    elasticlunr.utils.warn('user configuration parse failed, will use default configuration');
+	    this.buildDefaultConfig(fields);
+	  }
+	};
+	
+	/**
+	 * Build default search configuration.
+	 * 
+	 * @param {Array} fields fields of index instance
+	 */
+	elasticlunr.Configuration.prototype.buildDefaultConfig = function (fields) {
+	  this.reset();
+	  fields.forEach(function (field) {
+	    this.config[field] = {
+	      boost: 1,
+	      bool: "OR",
+	      expand: false
+	    };
+	  }, this);
+	};
+	
+	/**
+	 * Build user configuration.
+	 * 
+	 * @param {JSON} config User JSON configuratoin
+	 * @param {Array} fields fields of index instance
+	 */
+	elasticlunr.Configuration.prototype.buildUserConfig = function (config, fields) {
+	  var global_bool = "OR";
+	  var global_expand = false;
+	
+	  this.reset();
+	  if ('bool' in config) {
+	    global_bool = config['bool'] || global_bool;
+	  }
+	
+	  if ('expand' in config) {
+	    global_expand = config['expand'] || global_expand;
+	  }
+	
+	  if ('fields' in config) {
+	    for (var field in config['fields']) {
+	      if (fields.indexOf(field) > -1) {
+	        var field_config = config['fields'][field];
+	        var field_expand = global_expand;
+	        if (field_config.expand != undefined) {
+	          field_expand = field_config.expand;
+	        }
+	
+	        this.config[field] = {
+	          boost: (field_config.boost || field_config.boost === 0) ? field_config.boost : 1,
+	          bool: field_config.bool || global_bool,
+	          expand: field_expand
+	        };
+	      } else {
+	        elasticlunr.utils.warn('field name in user configuration not found in index instance fields');
+	      }
+	    }
+	  } else {
+	    this.addAllFields2UserConfig(global_bool, global_expand, fields);
+	  }
+	};
+	
+	/**
+	 * Add all fields to user search configuration.
+	 * 
+	 * @param {String} bool Boolean model
+	 * @param {String} expand Expand model
+	 * @param {Array} fields fields of index instance
+	 */
+	elasticlunr.Configuration.prototype.addAllFields2UserConfig = function (bool, expand, fields) {
+	  fields.forEach(function (field) {
+	    this.config[field] = {
+	      boost: 1,
+	      bool: bool,
+	      expand: expand
+	    };
+	  }, this);
+	};
+	
+	/**
+	 * get current user configuration
+	 */
+	elasticlunr.Configuration.prototype.get = function () {
+	  return this.config;
+	};
+	
+	/**
+	 * reset user search configuration.
+	 */
+	elasticlunr.Configuration.prototype.reset = function () {
+	  this.config = {};
+	};
+	/**
+	 * sorted_set.js is added only to make elasticlunr.js compatible with lunr-languages.
+	 * if elasticlunr.js support different languages by default, this will make elasticlunr.js
+	 * much bigger that not good for browser usage.
+	 *
+	 */
+	
+	
+	/*!
+	 * lunr.SortedSet
+	 * Copyright (C) 2016 Oliver Nightingale
+	 */
+	
+	/**
+	 * lunr.SortedSets are used to maintain an array of uniq values in a sorted
+	 * order.
+	 *
+	 * @constructor
+	 */
+	lunr.SortedSet = function () {
+	  this.length = 0
+	  this.elements = []
+	}
+	
+	/**
+	 * Loads a previously serialised sorted set.
+	 *
+	 * @param {Array} serialisedData The serialised set to load.
+	 * @returns {lunr.SortedSet}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.load = function (serialisedData) {
+	  var set = new this
+	
+	  set.elements = serialisedData
+	  set.length = serialisedData.length
+	
+	  return set
+	}
+	
+	/**
+	 * Inserts new items into the set in the correct position to maintain the
+	 * order.
+	 *
+	 * @param {Object} The objects to add to this set.
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.add = function () {
+	  var i, element
+	
+	  for (i = 0; i < arguments.length; i++) {
+	    element = arguments[i]
+	    if (~this.indexOf(element)) continue
+	    this.elements.splice(this.locationFor(element), 0, element)
+	  }
+	
+	  this.length = this.elements.length
+	}
+	
+	/**
+	 * Converts this sorted set into an array.
+	 *
+	 * @returns {Array}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.toArray = function () {
+	  return this.elements.slice()
+	}
+	
+	/**
+	 * Creates a new array with the results of calling a provided function on every
+	 * element in this sorted set.
+	 *
+	 * Delegates to Array.prototype.map and has the same signature.
+	 *
+	 * @param {Function} fn The function that is called on each element of the
+	 * set.
+	 * @param {Object} ctx An optional object that can be used as the context
+	 * for the function fn.
+	 * @returns {Array}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.map = function (fn, ctx) {
+	  return this.elements.map(fn, ctx)
+	}
+	
+	/**
+	 * Executes a provided function once per sorted set element.
+	 *
+	 * Delegates to Array.prototype.forEach and has the same signature.
+	 *
+	 * @param {Function} fn The function that is called on each element of the
+	 * set.
+	 * @param {Object} ctx An optional object that can be used as the context
+	 * @memberOf SortedSet
+	 * for the function fn.
+	 */
+	lunr.SortedSet.prototype.forEach = function (fn, ctx) {
+	  return this.elements.forEach(fn, ctx)
+	}
+	
+	/**
+	 * Returns the index at which a given element can be found in the
+	 * sorted set, or -1 if it is not present.
+	 *
+	 * @param {Object} elem The object to locate in the sorted set.
+	 * @returns {Number}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.indexOf = function (elem) {
+	  var start = 0,
+	      end = this.elements.length,
+	      sectionLength = end - start,
+	      pivot = start + Math.floor(sectionLength / 2),
+	      pivotElem = this.elements[pivot]
+	
+	  while (sectionLength > 1) {
+	    if (pivotElem === elem) return pivot
+	
+	    if (pivotElem < elem) start = pivot
+	    if (pivotElem > elem) end = pivot
+	
+	    sectionLength = end - start
+	    pivot = start + Math.floor(sectionLength / 2)
+	    pivotElem = this.elements[pivot]
+	  }
+	
+	  if (pivotElem === elem) return pivot
+	
+	  return -1
+	}
+	
+	/**
+	 * Returns the position within the sorted set that an element should be
+	 * inserted at to maintain the current order of the set.
+	 *
+	 * This function assumes that the element to search for does not already exist
+	 * in the sorted set.
+	 *
+	 * @param {Object} elem The elem to find the position for in the set
+	 * @returns {Number}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.locationFor = function (elem) {
+	  var start = 0,
+	      end = this.elements.length,
+	      sectionLength = end - start,
+	      pivot = start + Math.floor(sectionLength / 2),
+	      pivotElem = this.elements[pivot]
+	
+	  while (sectionLength > 1) {
+	    if (pivotElem < elem) start = pivot
+	    if (pivotElem > elem) end = pivot
+	
+	    sectionLength = end - start
+	    pivot = start + Math.floor(sectionLength / 2)
+	    pivotElem = this.elements[pivot]
+	  }
+	
+	  if (pivotElem > elem) return pivot
+	  if (pivotElem < elem) return pivot + 1
+	}
+	
+	/**
+	 * Creates a new lunr.SortedSet that contains the elements in the intersection
+	 * of this set and the passed set.
+	 *
+	 * @param {lunr.SortedSet} otherSet The set to intersect with this set.
+	 * @returns {lunr.SortedSet}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.intersect = function (otherSet) {
+	  var intersectSet = new lunr.SortedSet,
+	      i = 0, j = 0,
+	      a_len = this.length, b_len = otherSet.length,
+	      a = this.elements, b = otherSet.elements
+	
+	  while (true) {
+	    if (i > a_len - 1 || j > b_len - 1) break
+	
+	    if (a[i] === b[j]) {
+	      intersectSet.add(a[i])
+	      i++, j++
+	      continue
+	    }
+	
+	    if (a[i] < b[j]) {
+	      i++
+	      continue
+	    }
+	
+	    if (a[i] > b[j]) {
+	      j++
+	      continue
+	    }
+	  };
+	
+	  return intersectSet
+	}
+	
+	/**
+	 * Makes a copy of this set
+	 *
+	 * @returns {lunr.SortedSet}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.clone = function () {
+	  var clone = new lunr.SortedSet
+	
+	  clone.elements = this.toArray()
+	  clone.length = clone.elements.length
+	
+	  return clone
+	}
+	
+	/**
+	 * Creates a new lunr.SortedSet that contains the elements in the union
+	 * of this set and the passed set.
+	 *
+	 * @param {lunr.SortedSet} otherSet The set to union with this set.
+	 * @returns {lunr.SortedSet}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.union = function (otherSet) {
+	  var longSet, shortSet, unionSet
+	
+	  if (this.length >= otherSet.length) {
+	    longSet = this, shortSet = otherSet
+	  } else {
+	    longSet = otherSet, shortSet = this
+	  }
+	
+	  unionSet = longSet.clone()
+	
+	  for(var i = 0, shortSetElements = shortSet.toArray(); i < shortSetElements.length; i++){
+	    unionSet.add(shortSetElements[i])
+	  }
+	
+	  return unionSet
+	}
+	
+	/**
+	 * Returns a representation of the sorted set ready for serialisation.
+	 *
+	 * @returns {Array}
+	 * @memberOf SortedSet
+	 */
+	lunr.SortedSet.prototype.toJSON = function () {
+	  return this.toArray()
+	}
+	  /**
+	   * export the module via AMD, CommonJS or as a browser global
+	   * Export code from https://github.com/umdjs/umd/blob/master/returnExports.js
+	   */
+	  ;(function (root, factory) {
+	    if (true) {
+	      // AMD. Register as an anonymous module.
+	      !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+	    } else if (typeof exports === 'object') {
+	      /**
+	       * Node. Does not work with strict CommonJS, but
+	       * only CommonJS-like enviroments that support module.exports,
+	       * like Node.
+	       */
+	      module.exports = factory()
+	    } else {
+	      // Browser globals (root is window)
+	      root.elasticlunr = factory()
+	    }
+	  }(this, function () {
+	    /**
+	     * Just return a value to define the module export.
+	     * This example returns an object, but the module
+	     * can return a function as the exported value.
+	     */
+	    return elasticlunr
+	  }))
+	})();
+
+
+/***/ },
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23421,51 +25803,35 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var defaults = __webpack_require__(4);
-	
-	module.exports.id = 'classic';
-	module.exports.name = 'Classic (strict syntax)';
-	module.exports.parse = __webpack_require__(116);
-	module.exports.format = __webpack_require__(115);
-	module.exports.colors = defaults.colors;
-	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var defaults = __webpack_require__(4);
+	var tartan = __webpack_require__(2);
 	
 	module.exports.id = 'extended';
 	module.exports.name = 'Extended syntax';
-	module.exports.parse = __webpack_require__(118);
-	module.exports.format = __webpack_require__(117);
-	module.exports.colors = defaults.colors;
-	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
+	module.exports.parse = __webpack_require__(130);
+	module.exports.format = __webpack_require__(129);
+	module.exports.colors = tartan.defaults.colors;
+	module.exports.warpAndWeftSeparator = tartan.defaults.warpAndWeftSeparator;
 
 
 /***/ },
-/* 20 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(2);
+	var tartan = __webpack_require__(2);
 	
 	module.exports.id = 'stwr';
 	module.exports.name = 'Scottish Register of Tartans / ' +
 	  'Scottish Tartans World Register';
-	module.exports.parse = __webpack_require__(121);
-	module.exports.format = __webpack_require__(120);
-	module.exports.colors = utils.color.buildColorMap({
+	module.exports.parse = __webpack_require__(133);
+	module.exports.format = __webpack_require__(132);
+	module.exports.colors = tartan.utils.color.buildColorMap({
 	  /* eslint-disable key-spacing */
 	  K:  '#000000', LP: '#9966ff', P:  '#9933ff',
 	  DP: '#990099', W:  '#dddddd', DW: '#e1dfd0',
@@ -23484,13 +25850,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var defaults = __webpack_require__(8);
+	
+	module.exports.id = 'classic';
+	module.exports.name = 'Classic (strict syntax)';
+	module.exports.parse = __webpack_require__(152);
+	module.exports.format = __webpack_require__(151);
+	module.exports.colors = defaults.colors;
+	module.exports.warpAndWeftSeparator = defaults.warpAndWeftSeparator;
+
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var Promise = __webpack_require__(7);
+	var url = __webpack_require__(45);
+	var Promise = __webpack_require__(9);
 	
 	var chunkSize = 100;
 	var sleepTimeout = 10;
@@ -23527,30 +25910,226 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	}
 	
+	function task(task, data, context, imports) {
+	  return new Promise(function(resolve, reject) {
+	    var code = [];
+	
+	    var baseUrl = window.location.href;
+	    code.push(
+	      'importScripts(' +
+	      _.chain(imports)
+	        .map(function(scriptUrl) {
+	          return JSON.stringify(url.resolve(baseUrl, scriptUrl));
+	        })
+	        .join(',')
+	        .value() +
+	      ');'
+	    );
+	
+	    code.push(';(function() {');
+	    code.push('self.window = self;');
+	
+	    _.each(context, function(value, key) {
+	      if (!_.isUndefined(value)) {
+	        if (_.isFunction(value)) {
+	          code.push('var ' + key + '=' + value.toString() + ';');
+	        } else {
+	          code.push('var ' + key + '=' + JSON.stringify(value) + ';');
+	        }
+	      }
+	    });
+	
+	    code.push('(' + task.toString() + ')();');
+	    code.push('})();');
+	
+	    var blob = new Blob([code.join('\n')], {type: 'text/javascript'});
+	    var workerUrl = window.URL.createObjectURL(blob);
+	    var worker = new Worker(workerUrl);
+	    window.URL.revokeObjectURL(workerUrl);
+	
+	    worker.onmessage = function(event) {
+	      resolve(event.data);
+	      worker.terminate();
+	    };
+	    worker.onerror = function(event) {
+	      console.log(event);
+	      reject(new Error(event.message));
+	      worker.terminate();
+	    };
+	
+	    worker.postMessage(data);
+	  });
+	}
+	
 	module.exports.each = each;
+	module.exports.task = task;
 
 
 /***/ },
-/* 22 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(10);
+	var md5 = __webpack_require__(84);
+	
+	var defaultOptions = {
+	  colors: [], // Palette entries
+	  maxWidth: 121, // Max width in threads
+	  multiplier: 2 // Scale for each stripe
+	};
+	
+	function chooseColors(hash, colors) {
+	  var result = [];
+	  var palette = [];
+	  var i;
+	  var n;
+	
+	  // Choose palette
+	  var count = parseInt(hash.charAt(0), 16) % 3 + 3; // 3..5 colors
+	  for (i = 1; i <= count; i++) {
+	    n = parseInt(hash.charAt(i), 16) % colors.length;
+	    palette.push(colors[n]);
+	    colors.splice(n, 1);
+	  }
+	
+	  // Generate color sequence
+	  var last = -1;
+	  for (i = hash.length - 1; i >= 0; i--) {
+	    n = parseInt(hash[i], 16) % palette.length;
+	    if (n != last) {
+	      result.push(palette[n]);
+	      last = n;
+	    }
+	  }
+	  if (result.length < 2) {
+	    [].push.apply(result, palette);
+	  }
+	
+	  return result;
+	}
+	
+	function chooseStripes(hash, options) {
+	  var result = [];
+	  // at least three stripes
+	  var count = parseInt(hash.charAt(0), 16) % 13 + 3;
+	  var i;
+	  for (i = 1; i < hash.length; i++) {
+	    var stripe = parseInt(hash.charAt(i), 16) + 1;
+	    if (result.length == count) {
+	      result[i % count] ^= stripe;
+	    } else {
+	      result.push(stripe);
+	    }
+	  }
+	
+	  // Fix zero-width stripes
+	  hash = hash.replace(/0/g, '') + '1';
+	  for (i = 0; i < result.length; i++) {
+	    if (result[i] == 0) {
+	      var j = i % hash.length;
+	      result[i] = parseInt(hash.charAt(j), 16);
+	    }
+	  }
+	
+	  if (options.maxWidth > 31) {
+	    var sum = 0;
+	    for (i = 0; i < result.length; i++) {
+	      sum += result[i];
+	      if (sum >= options.maxWidth) {
+	        result.splice(i, result.length);
+	        break;
+	      }
+	    }
+	  }
+	
+	  if (result.length == 1) {
+	    result.push(result[0]);
+	  }
+	
+	  return result;
+	}
+	
+	function merge(stripes, colors, options) {
+	  var result = [];
+	  var i;
+	  var last = stripes.length - 1;
+	
+	  for (i = 0; i <= last; i++) {
+	    var color = colors[i % colors.length];
+	    var count = stripes[i] * options.multiplier;
+	    result.push({
+	      name: color,
+	      count: count,
+	      isPivot: (i == 0) || (i == last)
+	    });
+	  }
+	
+	  return result;
+	}
+	
+	function generate(string, options) {
+	  options = _.extend({}, defaultOptions, options);
+	
+	  var hash = md5(string);
+	  var colors = options.colors;
+	  if (!_.isArray(colors)) {
+	    if (_.isObject(colors)) {
+	      colors = _.keys(colors);
+	    } else {
+	      colors = [];
+	    }
+	  }
+	
+	  if (colors.length < 2) {
+	    return [];
+	  }
+	
+	  return merge(chooseStripes(hash, options),
+	    chooseColors(hash, colors), options);
+	}
+	
+	module.exports.generate = generate;
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var tartan = __webpack_require__(2);
+	
+	module.exports.id = 'identartan';
+	module.exports.name = 'IdenTartan';
+	module.exports.parse = __webpack_require__(80);
+	module.exports.format = __webpack_require__(78);
+	module.exports.colors = tartan.defaults.colors;
+	module.exports.warpAndWeftSeparator = tartan.defaults.warpAndWeftSeparator;
+
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(148);
+	__webpack_require__(173);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// String encode/decode helpers
 	'use strict';
 	
 	
-	var utils = __webpack_require__(6);
+	var utils = __webpack_require__(7);
 	
 	
 	// Quick check if we can use fast array to bin string conversion
@@ -23734,7 +26313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23772,7 +26351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23828,7 +26407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23875,7 +26454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23910,7 +26489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -24096,35 +26675,194 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(2).utils;
+	
+	function simplify(block) {
+	  var color = null;
+	  var isSingleColor = true;
+	  _.each(block.items, function(item) {
+	    if (item.isStripe) {
+	      // Do not take in account zero-width stripes
+	      if (item.count == 0) {
+	        return;
+	      }
+	      if (color === null) {
+	        // Initialize with current color
+	        color = item.name;
+	        return;
+	      }
+	      // Everything is ok
+	      if (item.name == color) {
+	        return;
+	      }
+	    }
+	    // Break
+	    isSingleColor = false;
+	    return false;
+	  });
+	
+	  if (isSingleColor && (color !== null)) {
+	    block = utils.sett.reflectAndRepeat(block);
+	    block.items = [
+	      utils.node.newStripe(
+	        utils.token.newStripe(
+	          color,
+	          _.sumBy(block.items, function(item) {
+	            return item.count;
+	          })
+	        )
+	      )
+	    ];
+	  }
+	
+	  return block;
+	}
+	
+	function flatten(block) {
+	  block = _.clone(block);
+	
+	  // Try to simplify nested items
+	  block.items = _.chain(block.items)
+	    // Unfold nested blocks if they are not reflective and
+	    // should be repeated only once
+	    .reduce(function(accumulator, item) {
+	      if (item.isBlock && !item.isRoot && !item.reflect && (item.repeat <= 1)) {
+	        [].push.apply(accumulator, item.items);
+	      } else {
+	        accumulator.push(item);
+	      }
+	      return accumulator;
+	    }, [])
+	    // Unfold and merge single-color blocks
+	    .map(function(item) {
+	      if (item.isBlock) {
+	        if (item.items.length == 0) {
+	          return null;
+	        }
+	
+	        item = flatten(item);
+	        if (item.items.length == 0) {
+	          return null;
+	        }
+	        if (item.items.length == 1) {
+	          return _.first(item.items);
+	        }
+	      }
+	      return item;
+	    })
+	    .filter()
+	    .value();
+	
+	  // Try to simplify block itself
+	  return simplify(block);
+	}
+	
+	function transform(sett) {
+	  var result = _.clone(sett);
+	  var warpIsSameAsWeft = sett.warp == sett.weft;
+	
+	  if (_.isObject(sett.warp)) {
+	    result.warp = flatten(sett.warp);
+	  }
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weft = result.warp;
+	    } else {
+	      result.weft = flatten(sett.weft);
+	    }
+	  }
+	
+	  return result;
+	}
+	
+	function factory() {
+	  return transform;
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var stringSource = __webpack_require__(31);
-	var objectSource = __webpack_require__(30);
 	
-	function factory(source) {
-	  if (_.isFunction(source)) {
-	    source = source();
+	// Do not merge last stripe in reflected blocks as it is central pivot.
+	// Do not merge first stripe in blocks if it is reflected and repeated.
+	// Example: [R20 R10 R5 Y2 K10 K5]
+	// Wrong: [R35 Y2 K15] => R35 Y2 K15 Y2
+	// Right: [R20 R15 Y2 K10 K5]
+	//        => R20 R15 Y2 K10 K5 K10 Y2 R15
+	//        => R35 Y2 K25 Y2 R15
+	function processTokens(block) {
+	  // Root is always repetitive
+	  var first = block.reflect && (block.isRoot || (block.repeat > 1)) ?
+	    _.first(block.items) : null;
+	  var last = block.reflect ? _.last(block.items) : null;
+	
+	  block = _.clone(block);
+	  block.items = _.reduce(block.items, function(accumulator, item) {
+	    // Process nested blocks
+	    if (item.isBlock) {
+	      accumulator.push(processTokens(item));
+	      return accumulator;
+	    }
+	    if (item.isStripe) {
+	      // Check last item
+	      if (item === last) {
+	        accumulator.push(item);
+	        return accumulator;
+	      }
+	      var prev = _.last(accumulator);
+	      // Check first item
+	      if (prev && prev.isStripe && (prev !== first)) {
+	        if (prev.name == item.name) {
+	          prev = _.clone(accumulator.pop());
+	          prev.count += item.count;
+	          accumulator.push(prev);
+	          return accumulator;
+	        }
+	      }
+	    }
+	    accumulator.push(item);
+	    return accumulator;
+	  }, []);
+	
+	  return block;
+	}
+	
+	function transform(sett, options) {
+	  var result = _.clone(sett);
+	
+	  var warpIsSameAsWeft = sett.warp === sett.weft;
+	  if (_.isObject(sett.warp)) {
+	    result.warp = processTokens(sett.warp, options);
 	  }
-	  if (_.isString(source)) {
-	    return stringSource(source);
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weft = result.warp;
+	    } else {
+	      result.weft = processTokens(sett.weft, options);
+	    }
 	  }
-	  return objectSource(source);
+	
+	  return result;
+	}
+	
+	function factory() {
+	  return transform;
 	}
 	
 	module.exports = factory;
-	// Define some properties for `factory()` function
-	Object.defineProperty(module.exports, 'id', {
-	  enumerable: true,
-	  value: 'autodetect'
-	});
-	Object.defineProperty(module.exports, 'name', {
-	  enumerable: true,
-	  value: 'Autodetect'
-	});
 
 
 /***/ },
@@ -24135,20 +26873,47 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	function factory(source) {
-	  return _.extend({threadcount: ''}, source);
+	function removeEmptyBlocks(block) {
+	  block = _.clone(block);
+	  block.items = _.chain(block.items)
+	    .map(function(item) {
+	      // Recursive processing of nested blocks
+	      if (item.isBlock) {
+	        item = removeEmptyBlocks(item);
+	        return item.items.length > 0 ? item : null;
+	      }
+	      // Keep everything else
+	      return item;
+	    })
+	    .filter()
+	    .value();
+	
+	  return block;
+	}
+	
+	function transform(sett) {
+	  var result = _.clone(sett);
+	  var warpIsSameAsWeft = sett.warp == sett.weft;
+	
+	  if (_.isObject(sett.warp)) {
+	    result.warp = removeEmptyBlocks(sett.warp);
+	  }
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weft = result.warp;
+	    } else {
+	      result.weft = removeEmptyBlocks(sett.weft);
+	    }
+	  }
+	
+	  return result;
+	}
+	
+	function factory() {
+	  return transform;
 	}
 	
 	module.exports = factory;
-	// Define some properties for `factory()` function
-	Object.defineProperty(module.exports, 'id', {
-	  enumerable: true,
-	  value: 'object'
-	});
-	Object.defineProperty(module.exports, 'name', {
-	  enumerable: true,
-	  value: 'Object'
-	});
 
 
 /***/ },
@@ -24159,22 +26924,102 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	function factory(source) {
-	  return {
-	    threadcount: _.isString(source) ? source : ''
+	var defaultOptions = {
+	  keepZeroWidthPivots: true
+	};
+	
+	// Do not remove first stripe in blocks if it is reflected and repeated.
+	// Example: [R0 B10 Y2 K5]
+	// Wrong: [B10 Y2 K5] => B10 Y2 K5 Y2
+	// Right: [R0 B10 Y2 K5]
+	//        => R0 B10 Y2 K5 Y2 B10
+	//        => B10 Y2 K5 Y2 B10
+	//
+	// Last zero-width stripe in block can be removed with
+	// modifying previous stripe:
+	// [R10 K4 W0] => R10 K4 W0 K4 R10 => R10 K8 R10
+	// [R10 K8]              =>           R10 K8 R10
+	
+	function removeZeroWidthStripes(block, options) {
+	  // Root is always repetitive
+	  var first = block.reflect && (block.isRoot || (block.repeat > 1)) ?
+	    _.first(block.items) : null;
+	  var last = block.reflect ? _.last(block.items) : null;
+	
+	  block = _.clone(block);
+	  block.items = _.chain(block.items)
+	    .map(function(item) {
+	      // Recursive processing of nested blocks
+	      if (item.isBlock) {
+	        item = removeZeroWidthStripes(item, options);
+	        return item.items.length > 0 ? item : null;
+	      } else
+	      // Check stripes
+	      if (item.isStripe) {
+	        if (item.count > 0) {
+	          return item;
+	        }
+	        if (options.keepZeroWidthPivots) {
+	          // Keep first and last stripes as they are pivots
+	          if ((item === first) || (item === last)) {
+	            return item;
+	          }
+	        }
+	      } else {
+	        // Keep everything else
+	        return item;
+	      }
+	      return null;
+	    })
+	    .filter()
+	    .value();
+	
+	  // Try to remove last stripe, if it is zero-width and previous item is stripe
+	  if (block.items.length >= 2) {
+	    last = _.last(block.items);
+	    if (last.isStripe && (last.count <= 0)) {
+	      block.items.pop();
+	      // If previous item is stripe - duplicate its width:
+	      // ... R10 K0 => ... R20
+	      var prev = _.last(block.items);
+	      if (prev.isStripe) {
+	        prev.count *= 2;
+	      } else {
+	        // keep zero-width stripe :-(
+	        block.items.push(last);
+	      }
+	    }
+	  }
+	
+	  return block;
+	}
+	
+	function transform(sett, options) {
+	  var result = _.clone(sett);
+	  var warpIsSameAsWeft = sett.warp == sett.weft;
+	
+	  if (_.isObject(sett.warp)) {
+	    result.warp = removeZeroWidthStripes(sett.warp, options);
+	  }
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weft = result.warp;
+	    } else {
+	      result.weft = removeZeroWidthStripes(sett.weft, options);
+	    }
+	  }
+	
+	  return result;
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  return function(sett) {
+	    return transform(sett, options);
 	  };
 	}
 	
 	module.exports = factory;
-	// Define some properties for `factory()` function
-	Object.defineProperty(module.exports, 'id', {
-	  enumerable: true,
-	  value: 'string'
-	});
-	Object.defineProperty(module.exports, 'name', {
-	  enumerable: true,
-	  value: 'String'
-	});
 
 
 /***/ },
@@ -24184,11 +27029,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(4);
-	var utils = __webpack_require__(2);
+	var tartan = __webpack_require__(2);
 	
 	var defaultOptions = {
-	  weave: defaults.weave.serge,
+	  weave: tartan.defaults.weave.serge,
 	  zoom: 1,
 	  defaultColors: null,
 	  transformSyntaxTree: null,
@@ -24318,9 +27162,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var items = _.isObject(node) && node.isBlock ? node.items : [];
 	  var pattern = [];
 	  if (items.length > 0) {
-	    pattern = utils.sett.compile(items, colors, defaultColors);
+	    pattern = tartan.utils.sett.compile(items, colors, defaultColors);
 	  }
-	  var metrics = utils.sett.getPatternMetrics(pattern, weave);
+	  var metrics = tartan.utils.sett.getPatternMetrics(pattern, weave);
 	
 	  return {
 	    pattern: pattern,
@@ -24413,7 +27257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  var warpIsSameAsWeft = sett.weft === sett.warp;
 	
-	  var weave = prepareWeave(options.weave, defaults.weave.serge);
+	  var weave = prepareWeave(options.weave, defaultOptions.weave);
 	
 	  var warp = preparePattern(sett.warp || sett.weft, weave,
 	    sett.colors, options.defaultColors);
@@ -24491,108 +27335,289 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
+	var utils = __webpack_require__(2).utils;
 	
-	function simplify(block) {
-	  var color = null;
-	  var isSingleColor = true;
-	  _.each(block.items, function(item) {
-	    if (item.isStripe) {
-	      // Do not take in account zero-width stripes
-	      if (item.count == 0) {
-	        return;
-	      }
-	      if (color === null) {
-	        // Initialize with current color
-	        color = item.name;
-	        return;
-	      }
-	      // Everything is ok
-	      if (item.name == color) {
-	        return;
-	      }
-	    }
-	    // Break
-	    isSingleColor = false;
-	    return false;
-	  });
+	var defaultOptions = {
+	  // Error handler
+	  errorHandler: function(error, data, severity) {
+	    // Do nothing
+	  },
+	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
+	  processTokens: null,
+	  // function to transform newly built AST: (ast) => { return modifiedAst; }
+	  transformSyntaxTree: null
+	};
 	
-	  if (isSingleColor && (color !== null)) {
-	    block = utils.sett.reflectAndRepeat(block);
-	    block.items = [
-	      utils.node.newStripe(
-	        utils.token.newStripe(
-	          color,
-	          _.sumBy(block.items, function(item) {
-	            return item.count;
-	          })
-	        )
-	      )
-	    ];
-	  }
-	
-	  return block;
+	function isMatchingToken(opening, closing) {
+	  return (
+	    utils.token.isOpeningSquareBracket(opening) &&
+	    utils.token.isClosingSquareBracket(closing)
+	  ) || (
+	    utils.token.isOpeningParenthesis(opening) &&
+	    utils.token.isClosingParenthesis(closing)
+	  );
 	}
 	
-	function flatten(block) {
-	  block = _.clone(block);
+	/*
+	  <sett> ::= <sequence> [ '//' <sequence> ]
+	  <sequence> ::= {
+	    <color> |
+	    [ <repeat> ] <stripe> [ <repeat> ] |
+	    <pivots> |
+	    [ <repeat> ] <block> [ <repeat> ]
+	  }
+	  <block> ::= '[' <sequence> ']' | '(' <sequence> ')'
+	  <pivots> ::=
+	    [ <repeat> ] <pivot> [ <repeat> ]
+	    [{ <color> | [ <repeat> ] <stripe> [ <repeat> ] }]
+	    [ <repeat> ] <pivot> [ <repeat> ]
+	*/
 	
-	  // Try to simplify nested items
-	  block.items = _.chain(block.items)
-	    // Unfold nested blocks if they are not reflective and
-	    // should be repeated only once
-	    .reduce(function(accumulator, item) {
-	      if (item.isBlock && !item.isRoot && !item.reflect && (item.repeat <= 1)) {
-	        [].push.apply(accumulator, item.items);
+	function buildTree(tokens, options) {
+	  var stack = [{
+	    isRegularBlock: true,
+	    items: []
+	  }];
+	  var current;
+	  var parent;
+	
+	  _.each(tokens, function(token) {
+	    if (token.isStripe) {
+	      current = _.last(stack);
+	      current.items.push(utils.node.newStripe(token));
+	      return;
+	    }
+	    if (token.isPivot) {
+	      current = _.last(stack);
+	      if (current.isPivotBlock) {
+	        current.items.push(utils.node.newStripe(token));
+	        stack.pop();
+	        parent = _.last(stack);
+	        parent.items.push(utils.node.newBlock(current.items, true));
 	      } else {
+	        stack.push({
+	          isPivotBlock: true,
+	          token: token,
+	          items: [utils.node.newStripe(token)]
+	        });
+	      }
+	      return;
+	    }
+	    if (token.isBlockStart || token.isBlockEnd) {
+	      current = _.last(stack);
+	      if (current.isPivotBlock) {
+	        options.errorHandler(
+	          new Error(utils.error.message.orphanedPivot),
+	          {token: current.token},
+	          utils.error.severity.warning
+	        );
+	        stack.pop();
+	        parent = _.last(stack);
+	        [].push.apply(parent.items, current.items);
+	      }
+	    }
+	    if (token.isBlockStart) {
+	      stack.push({
+	        isRegularBlock: true,
+	        token: token,
+	        items: []
+	      });
+	      return;
+	    }
+	    if (token.isBlockEnd) {
+	      if (stack.length > 1) {
+	        current = stack.pop();
+	        if (isMatchingToken(current.token, token)) {
+	          if (current.items.length > 0) {
+	            parent = _.last(stack);
+	            parent.items.push(utils.node.newBlock(
+	              current.items, // items
+	              utils.token.isClosingSquareBracket(token), // reflect
+	              current.token.repeat * token.repeat // repeat
+	            ));
+	          }
+	          return;
+	        }
+	        // Put block back onto stack and proceed to showing an error
+	        stack.push(current);
+	      }
+	      options.errorHandler(
+	        new Error(utils.error.message.unmatchedBlockEnd),
+	        {token: token},
+	        utils.error.severity.error
+	      );
+	      return;
+	    }
+	    options.errorHandler(
+	      new Error(utils.error.message.unexpectedToken),
+	      {token: token},
+	      utils.error.severity.error
+	    );
+	  });
+	
+	  while (stack.length > 1) {
+	    current = stack.pop();
+	    parent = _.last(stack);
+	    if (current.items.length > 0) {
+	      [].push.apply(parent.items, current.items);
+	    }
+	    if (current.isPivotBlock) {
+	      options.errorHandler(
+	        new Error(utils.error.message.orphanedPivot),
+	        {token: current.token},
+	        utils.error.severity.warning
+	      );
+	    } else {
+	      options.errorHandler(
+	        new Error(utils.error.message.unmatchedBlockStart),
+	        {token: current.token},
+	        utils.error.severity.error
+	      );
+	    }
+	  }
+	
+	  current = _.first(stack).items;
+	  var isReflected = false;
+	  if ((current.length == 1) && current[0].isBlock && current[0].reflect) {
+	    isReflected = true;
+	    current = current[0].items;
+	  }
+	  return utils.node.newRootBlock(current, isReflected);
+	}
+	
+	function processRepeats(tokens, options) {
+	  return _.chain(tokens)
+	    // Process suffix repeats
+	    .reduce(function(accumulator, item) {
+	      if (item.isRepeat && item.isSuffix) {
+	        var last = accumulator.pop();
+	        if (last) {
+	          last = _.clone(last);
+	          last.repeat = last.repeat > 1 ? last.repeat : 1;
+	          last.repeat *= item.count;
+	          accumulator.push(last);
+	        } else {
+	          options.errorHandler(
+	            new Error(utils.error.message.unexpectedToken),
+	            {token: item},
+	            utils.error.severity.error
+	          );
+	        }
+	      } else {
+	        item = _.clone(item);
+	        item.repeat = item.repeat > 1 ? item.repeat : 1;
 	        accumulator.push(item);
 	      }
 	      return accumulator;
 	    }, [])
-	    // Unfold and merge single-color blocks
+	    // Process prefix repeats; result will be reversed - so after this
+	    // turn it back
+	    .reduceRight(function(accumulator, item) {
+	      if (item.isRepeat && item.isPrefix) {
+	        var last = accumulator.pop();
+	        if (last) {
+	          last = _.clone(last);
+	          last.repeat = last.repeat > 1 ? last.repeat : 1;
+	          last.repeat *= item.count;
+	          accumulator.push(last);
+	        } else {
+	          options.errorHandler(
+	            new Error(utils.error.message.unexpectedToken),
+	            {token: item},
+	            utils.error.severity.error
+	          );
+	        }
+	      } else {
+	        item = _.clone(item);
+	        item.repeat = item.repeat > 1 ? item.repeat : 1;
+	        accumulator.push(item);
+	      }
+	      return accumulator;
+	    }, [])
+	    .reverse()
+	    // Apply repeats to stripes and pivots
 	    .map(function(item) {
-	      if (item.isBlock) {
-	        if (item.items.length == 0) {
-	          return null;
-	        }
-	
-	        item = flatten(item);
-	        if (item.items.length == 0) {
-	          return null;
-	        }
-	        if (item.items.length == 1) {
-	          return _.first(item.items);
-	        }
+	      if ((item.isStripe || item.isPivot) && (item.repeat > 1)) {
+	        item = _.clone(item);
+	        item.count *= item.repeat;
+	        item.repeat = 1;
 	      }
 	      return item;
 	    })
-	    .filter()
 	    .value();
-	
-	  // Try to simplify block itself
-	  return simplify(block);
 	}
 	
-	function transform(sett) {
-	  var result = _.clone(sett);
-	  var warpIsSameAsWeft = sett.warp == sett.weft;
-	
-	  if (_.isObject(sett.warp)) {
-	    result.warp = flatten(sett.warp);
+	function buildSyntaxTree(tokens, options) {
+	  // Some pre-validation and filtering
+	  if (!_.isArray(tokens)) {
+	    return tokens;
 	  }
-	  if (_.isObject(sett.weft)) {
-	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
-	    } else {
-	      result.weft = flatten(sett.weft);
+	  if (_.isFunction(options.processTokens)) {
+	    tokens = options.processTokens(tokens);
+	    if (!_.isArray(tokens)) {
+	      return tokens;
 	    }
+	  }
+	
+	  // Extract colors; split warp and weft
+	  var colorTokens = [];
+	  var warpTokens = [];
+	  var weftTokens = [];
+	  var current = warpTokens;
+	  _.each(tokens, function(token) {
+	    if (token.isColor) {
+	      colorTokens.push(token);
+	      return;
+	    }
+	    if (token.isWarpAndWeftSeparator) {
+	      if (current === weftTokens) {
+	        options.errorHandler(
+	          new Error(utils.error.message.multipleWarpAnWeftSeparator),
+	          {token: token},
+	          utils.error.severity.warning
+	        );
+	      }
+	      current = weftTokens;
+	    } else {
+	      current.push(token);
+	    }
+	  });
+	
+	  warpTokens = processRepeats(warpTokens, options);
+	  weftTokens = processRepeats(weftTokens, options);
+	
+	  if (warpTokens.length == 0) {
+	    warpTokens = weftTokens;
+	    weftTokens = [];
+	  }
+	  if (weftTokens.length == 0) {
+	    weftTokens = warpTokens;
+	  }
+	
+	  var result = {};
+	  result.colors = utils.color.buildColorMap(colorTokens);
+	  result.warp = buildTree(warpTokens, options);
+	  if (weftTokens === warpTokens) {
+	    result.weft = result.warp;
+	  } else {
+	    result.weft = buildTree(weftTokens, options);
+	  }
+	
+	  if (_.isFunction(options.transformSyntaxTree)) {
+	    result = options.transformSyntaxTree(result);
 	  }
 	
 	  return result;
 	}
 	
-	function factory() {
-	  return transform;
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  if (!_.isFunction(options.errorHandler)) {
+	    options.errorHandler = defaultOptions.errorHandler;
+	  }
+	  return function(tokens) {
+	    return buildSyntaxTree(tokens, options);
+	  };
 	}
 	
 	module.exports = factory;
@@ -24605,71 +27630,226 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(2).utils;
 	
-	// Do not merge last stripe in reflected blocks as it is central pivot.
-	// Do not merge first stripe in blocks if it is reflected and repeated.
-	// Example: [R20 R10 R5 Y2 K10 K5]
-	// Wrong: [R35 Y2 K15] => R35 Y2 K15 Y2
-	// Right: [R20 R15 Y2 K10 K5]
-	//        => R20 R15 Y2 K10 K5 K10 Y2 R15
-	//        => R35 Y2 K25 Y2 R15
-	function processTokens(block) {
-	  // Root is always repetitive
-	  var first = block.reflect && (block.isRoot || (block.repeat > 1)) ?
-	    _.first(block.items) : null;
-	  var last = block.reflect ? _.last(block.items) : null;
+	var defaultOptions = {
+	  // Error handler
+	  errorHandler: function(error, data, severity) {
+	    // Do nothing
+	  },
+	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
+	  processTokens: null,
+	  // function to transform newly built AST: (ast) => { return modifiedAst; }
+	  transformSyntaxTree: null
+	};
 	
-	  block = _.clone(block);
-	  block.items = _.reduce(block.items, function(accumulator, item) {
-	    // Process nested blocks
-	    if (item.isBlock) {
-	      accumulator.push(processTokens(item));
-	      return accumulator;
-	    }
-	    if (item.isStripe) {
-	      // Check last item
-	      if (item === last) {
-	        accumulator.push(item);
-	        return accumulator;
+	/*
+	  <sett> ::= [ { <color> } ]
+	    <sequence> |
+	    <warp> [ <weft> ] |
+	    [ <warp> ] <weft> |
+	    <weft> <warp>
+	
+	  <warp> ::= '[' <sequence>
+	  <weft> ::= ']' <sequence>
+	
+	  <sequence> ::= <reflected> | <repetitive>
+	  <reflected> ::= <stripe> '(' { <stripe> } ')' <stripe>
+	  <repetitive> ::= [ '(' ] { <stripe> } [ ')' ]
+	*/
+	
+	function buildTree(tokens, options) {
+	  var first;
+	  var last;
+	  var isReflected = false;
+	
+	  tokens = _.filter(tokens, function(token) {
+	    return !token.isWarpStart && !token.isWeftStart;
+	  });
+	
+	  // Strip parenthesis at beginning and end
+	  if (tokens.length >= 2) {
+	    first = _.first(tokens);
+	    last = _.last(tokens);
+	    if (first.isBlockBodyStart && last.isBlockBodyEnd) {
+	      tokens.splice(0, 1);
+	      tokens.splice(-1, 1);
+	    } else {
+	      if (first.isBlockBodyStart) {
+	        options.errorHandler(
+	          new Error(utils.error.message.unexpectedToken),
+	          {token: first},
+	          utils.error.severity.error
+	        );
+	        tokens.splice(0, 1);
 	      }
-	      var prev = _.last(accumulator);
-	      // Check first item
-	      if (prev && prev.isStripe && (prev !== first)) {
-	        if (prev.name == item.name) {
-	          prev = _.clone(accumulator.pop());
-	          prev.count += item.count;
-	          accumulator.push(prev);
-	          return accumulator;
-	        }
+	      if (last.isBlockBodyStart) {
+	        options.errorHandler(
+	          new Error(utils.error.message.unexpectedToken),
+	          {token: last},
+	          utils.error.severity.error
+	        );
+	        tokens.splice(-1, 1);
 	      }
 	    }
-	    accumulator.push(item);
-	    return accumulator;
-	  }, []);
+	  }
 	
-	  return block;
+	  // Check if sequence is reflected
+	  if (tokens.length >= 4) {
+	    first = _.first(tokens);
+	    last = _.last(tokens);
+	    if (first.isStripe && last.isStripe) {
+	      first = tokens[1];
+	      last = tokens[tokens.length - 2];
+	      if (first.isBlockBodyStart && last.isBlockBodyEnd) {
+	        isReflected = true;
+	        tokens.splice(1, 1);
+	        tokens.splice(-2, 1);
+	      }
+	    }
+	  }
+	
+	  // Convert all tokens to items
+	  var items = _.chain(tokens)
+	    .map(function(token) {
+	      if (token.isStripe) {
+	        return utils.node.newStripe(token);
+	      }
+	      options.errorHandler(
+	        new Error(utils.error.message.unexpectedToken),
+	        {token: token},
+	        utils.error.severity.error
+	      );
+	      return null;
+	    })
+	    .filter()
+	    .value();
+	
+	  // Check for <stripe> '(' ')' <stripe>
+	  if (items.length <= 2) {
+	    isReflected = false;
+	  }
+	
+	  return utils.node.newRootBlock(items, isReflected);
 	}
 	
-	function transform(sett, options) {
-	  var result = _.clone(sett);
+	function extractSequence(tokens, result, options, shouldBreak) {
+	  var first = _.first(tokens);
+	  _.each(tokens, function(token) {
+	    if (shouldBreak(token)) {
+	      return false; // Break
+	    }
+	    if (token.isWarpStart && (token !== first)) {
+	      options.errorHandler(
+	        new Error(utils.error.message.multipleWarpAnWeftSeparator),
+	        {token: token},
+	        utils.error.severity.warning
+	      );
+	    }
+	    result.push(token);
+	  });
+	}
 	
-	  var warpIsSameAsWeft = sett.warp === sett.weft;
-	  if (_.isObject(sett.warp)) {
-	    result.warp = processTokens(sett.warp, options);
+	function extractWarpAndWeft(tokens, warp, weft, options) {
+	  if (tokens.length == 0) {
+	    return;
 	  }
-	  if (_.isObject(sett.weft)) {
-	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
-	    } else {
-	      result.weft = processTokens(sett.weft, options);
+	
+	  var first;
+	  var isWarpExtracted = false;
+	
+	  // Try to extract warp
+	  first = _.first(tokens);
+	  if (first.isWarpStart || first.isStripe || first.isBlockBodyStart) {
+	    extractSequence(tokens, warp, options, function(token) {
+	      return token.isWeftStart;
+	    });
+	    tokens.splice(0, warp.length);
+	    isWarpExtracted = true;
+	  }
+	
+	  // Try to extract weft
+	  first = _.first(tokens);
+	  if (first && first.isWeftStart) {
+	    extractSequence(tokens, weft, options, function(token) {
+	      return token.isWarpStart;
+	    });
+	    tokens.splice(0, weft.length);
+	  }
+	
+	  // If warp was not extracted, try again, but more strict
+	  if (!isWarpExtracted) {
+	    first = _.first(tokens);
+	    if (first && first.isWarpStart) {
+	      extractSequence(tokens, warp, options, function(token) {
+	        return token.isWeftStart;
+	      });
+	      tokens.splice(0, warp.length);
 	    }
 	  }
 	
+	  // Trigger error for rest tokens
+	  _.each(tokens, function(token) {
+	    options.errorHandler(
+	      new Error(utils.error.message.extraTokenInInputSequence),
+	      {token: token},
+	      utils.error.severity.warning
+	    );
+	  });
+	}
+	
+	function buildSyntaxTree(tokens, options) {
+	  // Some pre-validation and filtering
+	  if (!_.isArray(tokens)) {
+	    return tokens;
+	  }
+	  if (_.isFunction(options.processTokens)) {
+	    tokens = options.processTokens(tokens);
+	    if (!_.isArray(tokens)) {
+	      return tokens;
+	    }
+	  }
+	
+	  // Extract colors; split warp and weft
+	  var colorTokens = _.filter(tokens, function(token) {
+	    return token.isColor;
+	  });
+	  var warpTokens = [];
+	  var weftTokens = [];
+	  extractWarpAndWeft(_.filter(tokens, function(token) {
+	    return !token.isColor;
+	  }), warpTokens, weftTokens, options);
+	  if (warpTokens.length == 0) {
+	    warpTokens = weftTokens;
+	    weftTokens = [];
+	  }
+	  if (weftTokens.length == 0) {
+	    weftTokens = warpTokens;
+	  }
+	
+	  var result = {};
+	  result.colors = utils.color.buildColorMap(colorTokens);
+	  result.warp = buildTree(warpTokens, options);
+	  if (weftTokens === warpTokens) {
+	    result.weft = result.warp;
+	  } else {
+	    result.weft = buildTree(weftTokens, options);
+	  }
+	
+	  if (_.isFunction(options.transformSyntaxTree)) {
+	    result = options.transformSyntaxTree(result);
+	  }
 	  return result;
 	}
 	
-	function factory() {
-	  return transform;
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  if (!_.isFunction(options.errorHandler)) {
+	    options.errorHandler = defaultOptions.errorHandler;
+	  }
+	  return function(tokens) {
+	    return buildSyntaxTree(tokens, options);
+	  };
 	}
 	
 	module.exports = factory;
@@ -24683,47 +27863,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _ = __webpack_require__(1);
 	
-	function removeEmptyBlocks(block) {
-	  block = _.clone(block);
-	  block.items = _.chain(block.items)
-	    .map(function(item) {
-	      // Recursive processing of nested blocks
-	      if (item.isBlock) {
-	        item = removeEmptyBlocks(item);
-	        return item.items.length > 0 ? item : null;
+	function factory(processors) {
+	  processors = _.filter(processors, _.isFunction);
+	
+	  return function(tokens) {
+	    if (_.isArray(tokens)) {
+	      for (var i = 0; i < processors.length; i++) {
+	        tokens = processors[i](tokens);
 	      }
-	      // Keep everything else
-	      return item;
-	    })
-	    .filter()
-	    .value();
-	
-	  return block;
-	}
-	
-	function transform(sett) {
-	  var result = _.clone(sett);
-	  var warpIsSameAsWeft = sett.warp == sett.weft;
-	
-	  if (_.isObject(sett.warp)) {
-	    result.warp = removeEmptyBlocks(sett.warp);
-	  }
-	  if (_.isObject(sett.weft)) {
-	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
-	    } else {
-	      result.weft = removeEmptyBlocks(sett.weft);
 	    }
-	  }
-	
-	  return result;
-	}
-	
-	function factory() {
-	  return transform;
+	    return tokens;
+	  };
 	}
 	
 	module.exports = factory;
+	
+	module.exports.classify = __webpack_require__(138);
+	module.exports.removeTokens = __webpack_require__(139);
 
 
 /***/ },
@@ -24733,107 +27889,272 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
+	var autodetectSource = __webpack_require__(37);
+	var tokenize = __webpack_require__(149);
+	var utils = __webpack_require__(3);
+	var defaults = __webpack_require__(8);
 	
 	var defaultOptions = {
-	  keepZeroWidthPivots: true
+	  errorHandler: null,
+	  processTokens: null,
+	  buildSyntaxTree: null,
+	  foreseeLimit: 1,
+	  getSourceMeta: function(source) {
+	    return _.omit(source, [
+	      'warp', 'weft', 'threadcount', 'sett', 'palette', 'colors'
+	    ]);
+	  },
+	  // Used only if `source` is an object (or JSON) and has different
+	  // warp and weft, and `buildSyntaxTree` is not specified
+	  warpAndWeftSeparator: defaults.warpAndWeftSeparator
 	};
 	
-	// Do not remove first stripe in blocks if it is reflected and repeated.
-	// Example: [R0 B10 Y2 K5]
-	// Wrong: [B10 Y2 K5] => B10 Y2 K5 Y2
-	// Right: [R0 B10 Y2 K5]
-	//        => R0 B10 Y2 K5 Y2 B10
-	//        => B10 Y2 K5 Y2 B10
-	//
-	// Last zero-width stripe in block can be removed with
-	// modifying previous stripe:
-	// [R10 K4 W0] => R10 K4 W0 K4 R10 => R10 K8 R10
-	// [R10 K8]              =>           R10 K8 R10
-	
-	function removeZeroWidthStripes(block, options) {
-	  // Root is always repetitive
-	  var first = block.reflect && (block.isRoot || (block.repeat > 1)) ?
-	    _.first(block.items) : null;
-	  var last = block.reflect ? _.last(block.items) : null;
-	
-	  block = _.clone(block);
-	  block.items = _.chain(block.items)
-	    .map(function(item) {
-	      // Recursive processing of nested blocks
-	      if (item.isBlock) {
-	        item = removeZeroWidthStripes(item, options);
-	        return item.items.length > 0 ? item : null;
-	      } else
-	      // Check stripes
-	      if (item.isStripe) {
-	        if (item.count > 0) {
-	          return item;
-	        }
-	        if (options.keepZeroWidthPivots) {
-	          // Keep first and last stripes as they are pivots
-	          if ((item === first) || (item === last)) {
-	            return item;
-	          }
-	        }
-	      } else {
-	        // Keep everything else
-	        return item;
-	      }
-	      return null;
-	    })
-	    .filter()
-	    .value();
-	
-	  // Try to remove last stripe, if it is zero-width and previous item is stripe
-	  if (block.items.length >= 2) {
-	    last = _.last(block.items);
-	    if (last.isStripe && (last.count <= 0)) {
-	      block.items.pop();
-	      // If previous item is stripe - duplicate its width:
-	      // ... R10 K0 => ... R20
-	      var prev = _.last(block.items);
-	      if (prev.isStripe) {
-	        prev.count *= 2;
-	      } else {
-	        // keep zero-width stripe :-(
-	        block.items.push(last);
-	      }
-	    }
-	  }
-	
-	  return block;
+	function chooseNonEmptyString(values) {
+	  var result = _.filter(values, function(value) {
+	    return _.isString(value) && (value.length > 0);
+	  });
+	  return result.length > 0 ? _.first(result) : '';
 	}
 	
-	function transform(sett, options) {
-	  var result = _.clone(sett);
-	  var warpIsSameAsWeft = sett.warp == sett.weft;
+	function chooseRootBlock(values) {
+	  var result = _.filter(values, function(value) {
+	    return _.isObject(value) && value.isBlock && value.isRoot &&
+	      _.isArrayLike(value.items);
+	  });
+	  return result.length > 0 ? _.first(result) : utils.node.newRootBlock([]);
+	}
 	
-	  if (_.isObject(sett.warp)) {
-	    result.warp = removeZeroWidthStripes(sett.warp, options);
+	function parse(parsers, source, options) {
+	  var context = tokenize(source, parsers, options);
+	  var result = context.parse();
+	  if (_.isFunction(options.processTokens)) {
+	    result = options.processTokens(result);
 	  }
-	  if (_.isObject(sett.weft)) {
-	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
-	    } else {
-	      result.weft = removeZeroWidthStripes(sett.weft, options);
-	    }
+	  if (_.isFunction(options.buildSyntaxTree)) {
+	    result = options.buildSyntaxTree(result);
 	  }
-	
 	  return result;
 	}
 	
-	function factory(options) {
+	function factory(parsers, options) {
 	  options = _.extend({}, defaultOptions, options);
-	  return function(sett) {
-	    return transform(sett, options);
+	
+	  return function(source) {
+	    source = autodetectSource(source);
+	
+	    var result;
+	
+	    if (_.isString(source.warp) || _.isString(source.weft)) {
+	      var warp = _.trim(chooseNonEmptyString([source.warp, source.weft]));
+	      var weft = _.trim(chooseNonEmptyString([source.weft, source.warp]));
+	      var warpIsSameAsWeft = warp == weft;
+	      warp = parse(parsers, warp, options);
+	      if (warpIsSameAsWeft) {
+	        // Create AST with same warp and weft; use meta from warp;
+	        // do not use palette
+	        result = {
+	          meta: _.extend({}, warp.meta),
+	          warp: chooseRootBlock([warp.warp, warp.weft])
+	        };
+	        result.weft = result.warp;
+	      } else {
+	        weft = parse(parsers, weft, options);
+	        if (_.isArrayLike(warp) && _.isArrayLike(weft)) {
+	          // Merge tokens together;
+	          result = _.concat(warp,
+	            utils.token.newLiteral(options.warpAndWeftSeparator),
+	            weft);
+	        } else
+	        if (_.isObject(warp) && _.isObject(weft)) {
+	          // Create AST with different warp and weft; merge meta;
+	          // do not use palette
+	          result = {
+	            meta: _.extend({}, warp.meta, weft.meta),
+	            warp: chooseRootBlock([warp.warp, warp.weft]),
+	            weft: chooseRootBlock([weft.warp, weft.weft])
+	          };
+	        }
+	      }
+	    } else
+	    if (_.isString(source.threadcount) || _.isString(source.sett)) {
+	      // Try to parse entire threadcount
+	      var threadcount = chooseNonEmptyString([source.threadcount, source.sett]);
+	      result = parse(parsers, threadcount, options);
+	    } else {
+	      // Create empty result
+	      result = parse(parsers, '', options);
+	    }
+	
+	    if (_.isString(source.palette) || _.isString(source.colors)) {
+	      // Try to add palette - as tokens or as color map
+	      var palette = chooseNonEmptyString([source.palette, source.colors]);
+	      palette = parse(parsers, palette, options);
+	      if (_.isArrayLike(result)) {
+	        if (_.isArrayLike(palette)) {
+	          result = _.concat(palette, result);
+	        }
+	      } else
+	      if (_.isObject(result)) {
+	        if (_.isObject(palette)) {
+	          result.colors = palette.colors;
+	          result.meta = _.extend({}, palette.meta, result.meta);
+	        }
+	      }
+	    }
+	
+	    if (_.isObject(result)) {
+	      result.colors = _.extend({}, result.colors);
+	      if (_.isFunction(options.getSourceMeta)) {
+	        result.meta = _.extend({}, result.meta, options.getSourceMeta(source));
+	      } else {
+	        result.meta = _.extend({}, result.meta);
+	      }
+	    }
+	
+	    return result;
 	  };
 	}
 	
 	module.exports = factory;
+	
+	module.exports.source = __webpack_require__(140);
+	
+	module.exports.color = __webpack_require__(142);
+	module.exports.stripe = __webpack_require__(147);
+	module.exports.pivot = __webpack_require__(145);
+	module.exports.repeat = __webpack_require__(146);
+	module.exports.literal = __webpack_require__(144);
 
 
 /***/ },
 /* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var stringSource = __webpack_require__(39);
+	var objectSource = __webpack_require__(38);
+	
+	function factory(source) {
+	  if (_.isFunction(source)) {
+	    source = source();
+	  }
+	  if (_.isString(source)) {
+	    return stringSource(source);
+	  }
+	  return objectSource(source);
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'autodetect'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'Autodetect'
+	});
+
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return _.extend({threadcount: ''}, source);
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'object'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'Object'
+	});
+
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return {
+	    threadcount: _.isString(source) ? source : ''
+	  };
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'string'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'String'
+	});
+
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.format = __webpack_require__(150);
+
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.classic = __webpack_require__(154);
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(processors) {
+	  processors = _.filter(processors, _.isFunction);
+	
+	  return function(sett) {
+	    if (_.isObject(sett)) {
+	      _.each(processors, function(processor) {
+	        sett = processor(sett);
+	      });
+	    }
+	    return sett;
+	  };
+	}
+	
+	module.exports = factory;
+	
+	module.exports.flatten = __webpack_require__(155);
+	module.exports.fold = __webpack_require__(156);
+
+
+/***/ },
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24893,13 +28214,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(16);
-	var constants = __webpack_require__(15);
+	var utils = __webpack_require__(12);
+	var constants = __webpack_require__(11);
 	
 	var recordSize = 512;
 	var defaultFileMode = constants.TPERMALL;  // rwxrwxrwx
@@ -25166,7 +28487,745 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	'use strict';
+	
+	var punycode = __webpack_require__(169);
+	var util = __webpack_require__(170);
+	
+	exports.parse = urlParse;
+	exports.resolve = urlResolve;
+	exports.resolveObject = urlResolveObject;
+	exports.format = urlFormat;
+	
+	exports.Url = Url;
+	
+	function Url() {
+	  this.protocol = null;
+	  this.slashes = null;
+	  this.auth = null;
+	  this.host = null;
+	  this.port = null;
+	  this.hostname = null;
+	  this.hash = null;
+	  this.search = null;
+	  this.query = null;
+	  this.pathname = null;
+	  this.path = null;
+	  this.href = null;
+	}
+	
+	// Reference: RFC 3986, RFC 1808, RFC 2396
+	
+	// define these here so at least they only have to be
+	// compiled once on the first module load.
+	var protocolPattern = /^([a-z0-9.+-]+:)/i,
+	    portPattern = /:[0-9]*$/,
+	
+	    // Special case for a simple path URL
+	    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
+	
+	    // RFC 2396: characters reserved for delimiting URLs.
+	    // We actually just auto-escape these.
+	    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
+	
+	    // RFC 2396: characters not allowed for various reasons.
+	    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
+	
+	    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
+	    autoEscape = ['\''].concat(unwise),
+	    // Characters that are never ever allowed in a hostname.
+	    // Note that any invalid chars are also handled, but these
+	    // are the ones that are *expected* to be seen, so we fast-path
+	    // them.
+	    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
+	    hostEndingChars = ['/', '?', '#'],
+	    hostnameMaxLen = 255,
+	    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
+	    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
+	    // protocols that can allow "unsafe" and "unwise" chars.
+	    unsafeProtocol = {
+	      'javascript': true,
+	      'javascript:': true
+	    },
+	    // protocols that never have a hostname.
+	    hostlessProtocol = {
+	      'javascript': true,
+	      'javascript:': true
+	    },
+	    // protocols that always contain a // bit.
+	    slashedProtocol = {
+	      'http': true,
+	      'https': true,
+	      'ftp': true,
+	      'gopher': true,
+	      'file': true,
+	      'http:': true,
+	      'https:': true,
+	      'ftp:': true,
+	      'gopher:': true,
+	      'file:': true
+	    },
+	    querystring = __webpack_require__(97);
+	
+	function urlParse(url, parseQueryString, slashesDenoteHost) {
+	  if (url && util.isObject(url) && url instanceof Url) return url;
+	
+	  var u = new Url;
+	  u.parse(url, parseQueryString, slashesDenoteHost);
+	  return u;
+	}
+	
+	Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+	  if (!util.isString(url)) {
+	    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
+	  }
+	
+	  // Copy chrome, IE, opera backslash-handling behavior.
+	  // Back slashes before the query string get converted to forward slashes
+	  // See: https://code.google.com/p/chromium/issues/detail?id=25916
+	  var queryIndex = url.indexOf('?'),
+	      splitter =
+	          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+	      uSplit = url.split(splitter),
+	      slashRegex = /\\/g;
+	  uSplit[0] = uSplit[0].replace(slashRegex, '/');
+	  url = uSplit.join(splitter);
+	
+	  var rest = url;
+	
+	  // trim before proceeding.
+	  // This is to support parse stuff like "  http://foo.com  \n"
+	  rest = rest.trim();
+	
+	  if (!slashesDenoteHost && url.split('#').length === 1) {
+	    // Try fast path regexp
+	    var simplePath = simplePathPattern.exec(rest);
+	    if (simplePath) {
+	      this.path = rest;
+	      this.href = rest;
+	      this.pathname = simplePath[1];
+	      if (simplePath[2]) {
+	        this.search = simplePath[2];
+	        if (parseQueryString) {
+	          this.query = querystring.parse(this.search.substr(1));
+	        } else {
+	          this.query = this.search.substr(1);
+	        }
+	      } else if (parseQueryString) {
+	        this.search = '';
+	        this.query = {};
+	      }
+	      return this;
+	    }
+	  }
+	
+	  var proto = protocolPattern.exec(rest);
+	  if (proto) {
+	    proto = proto[0];
+	    var lowerProto = proto.toLowerCase();
+	    this.protocol = lowerProto;
+	    rest = rest.substr(proto.length);
+	  }
+	
+	  // figure out if it's got a host
+	  // user@server is *always* interpreted as a hostname, and url
+	  // resolution will treat //foo/bar as host=foo,path=bar because that's
+	  // how the browser resolves relative URLs.
+	  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+	    var slashes = rest.substr(0, 2) === '//';
+	    if (slashes && !(proto && hostlessProtocol[proto])) {
+	      rest = rest.substr(2);
+	      this.slashes = true;
+	    }
+	  }
+	
+	  if (!hostlessProtocol[proto] &&
+	      (slashes || (proto && !slashedProtocol[proto]))) {
+	
+	    // there's a hostname.
+	    // the first instance of /, ?, ;, or # ends the host.
+	    //
+	    // If there is an @ in the hostname, then non-host chars *are* allowed
+	    // to the left of the last @ sign, unless some host-ending character
+	    // comes *before* the @-sign.
+	    // URLs are obnoxious.
+	    //
+	    // ex:
+	    // http://a@b@c/ => user:a@b host:c
+	    // http://a@b?@c => user:a host:c path:/?@c
+	
+	    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+	    // Review our test case against browsers more comprehensively.
+	
+	    // find the first instance of any hostEndingChars
+	    var hostEnd = -1;
+	    for (var i = 0; i < hostEndingChars.length; i++) {
+	      var hec = rest.indexOf(hostEndingChars[i]);
+	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+	        hostEnd = hec;
+	    }
+	
+	    // at this point, either we have an explicit point where the
+	    // auth portion cannot go past, or the last @ char is the decider.
+	    var auth, atSign;
+	    if (hostEnd === -1) {
+	      // atSign can be anywhere.
+	      atSign = rest.lastIndexOf('@');
+	    } else {
+	      // atSign must be in auth portion.
+	      // http://a@b/c@d => host:b auth:a path:/c@d
+	      atSign = rest.lastIndexOf('@', hostEnd);
+	    }
+	
+	    // Now we have a portion which is definitely the auth.
+	    // Pull that off.
+	    if (atSign !== -1) {
+	      auth = rest.slice(0, atSign);
+	      rest = rest.slice(atSign + 1);
+	      this.auth = decodeURIComponent(auth);
+	    }
+	
+	    // the host is the remaining to the left of the first non-host char
+	    hostEnd = -1;
+	    for (var i = 0; i < nonHostChars.length; i++) {
+	      var hec = rest.indexOf(nonHostChars[i]);
+	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+	        hostEnd = hec;
+	    }
+	    // if we still have not hit it, then the entire thing is a host.
+	    if (hostEnd === -1)
+	      hostEnd = rest.length;
+	
+	    this.host = rest.slice(0, hostEnd);
+	    rest = rest.slice(hostEnd);
+	
+	    // pull out port.
+	    this.parseHost();
+	
+	    // we've indicated that there is a hostname,
+	    // so even if it's empty, it has to be present.
+	    this.hostname = this.hostname || '';
+	
+	    // if hostname begins with [ and ends with ]
+	    // assume that it's an IPv6 address.
+	    var ipv6Hostname = this.hostname[0] === '[' &&
+	        this.hostname[this.hostname.length - 1] === ']';
+	
+	    // validate a little.
+	    if (!ipv6Hostname) {
+	      var hostparts = this.hostname.split(/\./);
+	      for (var i = 0, l = hostparts.length; i < l; i++) {
+	        var part = hostparts[i];
+	        if (!part) continue;
+	        if (!part.match(hostnamePartPattern)) {
+	          var newpart = '';
+	          for (var j = 0, k = part.length; j < k; j++) {
+	            if (part.charCodeAt(j) > 127) {
+	              // we replace non-ASCII char with a temporary placeholder
+	              // we need this to make sure size of hostname is not
+	              // broken by replacing non-ASCII by nothing
+	              newpart += 'x';
+	            } else {
+	              newpart += part[j];
+	            }
+	          }
+	          // we test again with ASCII char only
+	          if (!newpart.match(hostnamePartPattern)) {
+	            var validParts = hostparts.slice(0, i);
+	            var notHost = hostparts.slice(i + 1);
+	            var bit = part.match(hostnamePartStart);
+	            if (bit) {
+	              validParts.push(bit[1]);
+	              notHost.unshift(bit[2]);
+	            }
+	            if (notHost.length) {
+	              rest = '/' + notHost.join('.') + rest;
+	            }
+	            this.hostname = validParts.join('.');
+	            break;
+	          }
+	        }
+	      }
+	    }
+	
+	    if (this.hostname.length > hostnameMaxLen) {
+	      this.hostname = '';
+	    } else {
+	      // hostnames are always lower case.
+	      this.hostname = this.hostname.toLowerCase();
+	    }
+	
+	    if (!ipv6Hostname) {
+	      // IDNA Support: Returns a punycoded representation of "domain".
+	      // It only converts parts of the domain name that
+	      // have non-ASCII characters, i.e. it doesn't matter if
+	      // you call it with a domain that already is ASCII-only.
+	      this.hostname = punycode.toASCII(this.hostname);
+	    }
+	
+	    var p = this.port ? ':' + this.port : '';
+	    var h = this.hostname || '';
+	    this.host = h + p;
+	    this.href += this.host;
+	
+	    // strip [ and ] from the hostname
+	    // the host field still retains them, though
+	    if (ipv6Hostname) {
+	      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
+	      if (rest[0] !== '/') {
+	        rest = '/' + rest;
+	      }
+	    }
+	  }
+	
+	  // now rest is set to the post-host stuff.
+	  // chop off any delim chars.
+	  if (!unsafeProtocol[lowerProto]) {
+	
+	    // First, make 100% sure that any "autoEscape" chars get
+	    // escaped, even if encodeURIComponent doesn't think they
+	    // need to be.
+	    for (var i = 0, l = autoEscape.length; i < l; i++) {
+	      var ae = autoEscape[i];
+	      if (rest.indexOf(ae) === -1)
+	        continue;
+	      var esc = encodeURIComponent(ae);
+	      if (esc === ae) {
+	        esc = escape(ae);
+	      }
+	      rest = rest.split(ae).join(esc);
+	    }
+	  }
+	
+	
+	  // chop off from the tail first.
+	  var hash = rest.indexOf('#');
+	  if (hash !== -1) {
+	    // got a fragment string.
+	    this.hash = rest.substr(hash);
+	    rest = rest.slice(0, hash);
+	  }
+	  var qm = rest.indexOf('?');
+	  if (qm !== -1) {
+	    this.search = rest.substr(qm);
+	    this.query = rest.substr(qm + 1);
+	    if (parseQueryString) {
+	      this.query = querystring.parse(this.query);
+	    }
+	    rest = rest.slice(0, qm);
+	  } else if (parseQueryString) {
+	    // no query string, but parseQueryString still requested
+	    this.search = '';
+	    this.query = {};
+	  }
+	  if (rest) this.pathname = rest;
+	  if (slashedProtocol[lowerProto] &&
+	      this.hostname && !this.pathname) {
+	    this.pathname = '/';
+	  }
+	
+	  //to support http.request
+	  if (this.pathname || this.search) {
+	    var p = this.pathname || '';
+	    var s = this.search || '';
+	    this.path = p + s;
+	  }
+	
+	  // finally, reconstruct the href based on what has been validated.
+	  this.href = this.format();
+	  return this;
+	};
+	
+	// format a parsed object into a url string
+	function urlFormat(obj) {
+	  // ensure it's an object, and not a string url.
+	  // If it's an obj, this is a no-op.
+	  // this way, you can call url_format() on strings
+	  // to clean up potentially wonky urls.
+	  if (util.isString(obj)) obj = urlParse(obj);
+	  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+	  return obj.format();
+	}
+	
+	Url.prototype.format = function() {
+	  var auth = this.auth || '';
+	  if (auth) {
+	    auth = encodeURIComponent(auth);
+	    auth = auth.replace(/%3A/i, ':');
+	    auth += '@';
+	  }
+	
+	  var protocol = this.protocol || '',
+	      pathname = this.pathname || '',
+	      hash = this.hash || '',
+	      host = false,
+	      query = '';
+	
+	  if (this.host) {
+	    host = auth + this.host;
+	  } else if (this.hostname) {
+	    host = auth + (this.hostname.indexOf(':') === -1 ?
+	        this.hostname :
+	        '[' + this.hostname + ']');
+	    if (this.port) {
+	      host += ':' + this.port;
+	    }
+	  }
+	
+	  if (this.query &&
+	      util.isObject(this.query) &&
+	      Object.keys(this.query).length) {
+	    query = querystring.stringify(this.query);
+	  }
+	
+	  var search = this.search || (query && ('?' + query)) || '';
+	
+	  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+	
+	  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+	  // unless they had them to begin with.
+	  if (this.slashes ||
+	      (!protocol || slashedProtocol[protocol]) && host !== false) {
+	    host = '//' + (host || '');
+	    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
+	  } else if (!host) {
+	    host = '';
+	  }
+	
+	  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
+	  if (search && search.charAt(0) !== '?') search = '?' + search;
+	
+	  pathname = pathname.replace(/[?#]/g, function(match) {
+	    return encodeURIComponent(match);
+	  });
+	  search = search.replace('#', '%23');
+	
+	  return protocol + host + pathname + search + hash;
+	};
+	
+	function urlResolve(source, relative) {
+	  return urlParse(source, false, true).resolve(relative);
+	}
+	
+	Url.prototype.resolve = function(relative) {
+	  return this.resolveObject(urlParse(relative, false, true)).format();
+	};
+	
+	function urlResolveObject(source, relative) {
+	  if (!source) return relative;
+	  return urlParse(source, false, true).resolveObject(relative);
+	}
+	
+	Url.prototype.resolveObject = function(relative) {
+	  if (util.isString(relative)) {
+	    var rel = new Url();
+	    rel.parse(relative, false, true);
+	    relative = rel;
+	  }
+	
+	  var result = new Url();
+	  var tkeys = Object.keys(this);
+	  for (var tk = 0; tk < tkeys.length; tk++) {
+	    var tkey = tkeys[tk];
+	    result[tkey] = this[tkey];
+	  }
+	
+	  // hash is always overridden, no matter what.
+	  // even href="" will remove it.
+	  result.hash = relative.hash;
+	
+	  // if the relative url is empty, then there's nothing left to do here.
+	  if (relative.href === '') {
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  // hrefs like //foo/bar always cut to the protocol.
+	  if (relative.slashes && !relative.protocol) {
+	    // take everything except the protocol from relative
+	    var rkeys = Object.keys(relative);
+	    for (var rk = 0; rk < rkeys.length; rk++) {
+	      var rkey = rkeys[rk];
+	      if (rkey !== 'protocol')
+	        result[rkey] = relative[rkey];
+	    }
+	
+	    //urlParse appends trailing / to urls like http://www.example.com
+	    if (slashedProtocol[result.protocol] &&
+	        result.hostname && !result.pathname) {
+	      result.path = result.pathname = '/';
+	    }
+	
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  if (relative.protocol && relative.protocol !== result.protocol) {
+	    // if it's a known url protocol, then changing
+	    // the protocol does weird things
+	    // first, if it's not file:, then we MUST have a host,
+	    // and if there was a path
+	    // to begin with, then we MUST have a path.
+	    // if it is file:, then the host is dropped,
+	    // because that's known to be hostless.
+	    // anything else is assumed to be absolute.
+	    if (!slashedProtocol[relative.protocol]) {
+	      var keys = Object.keys(relative);
+	      for (var v = 0; v < keys.length; v++) {
+	        var k = keys[v];
+	        result[k] = relative[k];
+	      }
+	      result.href = result.format();
+	      return result;
+	    }
+	
+	    result.protocol = relative.protocol;
+	    if (!relative.host && !hostlessProtocol[relative.protocol]) {
+	      var relPath = (relative.pathname || '').split('/');
+	      while (relPath.length && !(relative.host = relPath.shift()));
+	      if (!relative.host) relative.host = '';
+	      if (!relative.hostname) relative.hostname = '';
+	      if (relPath[0] !== '') relPath.unshift('');
+	      if (relPath.length < 2) relPath.unshift('');
+	      result.pathname = relPath.join('/');
+	    } else {
+	      result.pathname = relative.pathname;
+	    }
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    result.host = relative.host || '';
+	    result.auth = relative.auth;
+	    result.hostname = relative.hostname || relative.host;
+	    result.port = relative.port;
+	    // to support http.request
+	    if (result.pathname || result.search) {
+	      var p = result.pathname || '';
+	      var s = result.search || '';
+	      result.path = p + s;
+	    }
+	    result.slashes = result.slashes || relative.slashes;
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
+	      isRelAbs = (
+	          relative.host ||
+	          relative.pathname && relative.pathname.charAt(0) === '/'
+	      ),
+	      mustEndAbs = (isRelAbs || isSourceAbs ||
+	                    (result.host && relative.pathname)),
+	      removeAllDots = mustEndAbs,
+	      srcPath = result.pathname && result.pathname.split('/') || [],
+	      relPath = relative.pathname && relative.pathname.split('/') || [],
+	      psychotic = result.protocol && !slashedProtocol[result.protocol];
+	
+	  // if the url is a non-slashed url, then relative
+	  // links like ../.. should be able
+	  // to crawl up to the hostname, as well.  This is strange.
+	  // result.protocol has already been set by now.
+	  // Later on, put the first path part into the host field.
+	  if (psychotic) {
+	    result.hostname = '';
+	    result.port = null;
+	    if (result.host) {
+	      if (srcPath[0] === '') srcPath[0] = result.host;
+	      else srcPath.unshift(result.host);
+	    }
+	    result.host = '';
+	    if (relative.protocol) {
+	      relative.hostname = null;
+	      relative.port = null;
+	      if (relative.host) {
+	        if (relPath[0] === '') relPath[0] = relative.host;
+	        else relPath.unshift(relative.host);
+	      }
+	      relative.host = null;
+	    }
+	    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+	  }
+	
+	  if (isRelAbs) {
+	    // it's absolute.
+	    result.host = (relative.host || relative.host === '') ?
+	                  relative.host : result.host;
+	    result.hostname = (relative.hostname || relative.hostname === '') ?
+	                      relative.hostname : result.hostname;
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    srcPath = relPath;
+	    // fall through to the dot-handling below.
+	  } else if (relPath.length) {
+	    // it's relative
+	    // throw away the existing file, and take the new path instead.
+	    if (!srcPath) srcPath = [];
+	    srcPath.pop();
+	    srcPath = srcPath.concat(relPath);
+	    result.search = relative.search;
+	    result.query = relative.query;
+	  } else if (!util.isNullOrUndefined(relative.search)) {
+	    // just pull out the search.
+	    // like href='?foo'.
+	    // Put this after the other two cases because it simplifies the booleans
+	    if (psychotic) {
+	      result.hostname = result.host = srcPath.shift();
+	      //occationaly the auth can get stuck only in host
+	      //this especially happens in cases like
+	      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+	      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+	                       result.host.split('@') : false;
+	      if (authInHost) {
+	        result.auth = authInHost.shift();
+	        result.host = result.hostname = authInHost.shift();
+	      }
+	    }
+	    result.search = relative.search;
+	    result.query = relative.query;
+	    //to support http.request
+	    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+	      result.path = (result.pathname ? result.pathname : '') +
+	                    (result.search ? result.search : '');
+	    }
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  if (!srcPath.length) {
+	    // no path at all.  easy.
+	    // we've already handled the other stuff above.
+	    result.pathname = null;
+	    //to support http.request
+	    if (result.search) {
+	      result.path = '/' + result.search;
+	    } else {
+	      result.path = null;
+	    }
+	    result.href = result.format();
+	    return result;
+	  }
+	
+	  // if a url ENDs in . or .., then it must get a trailing slash.
+	  // however, if it ends in anything else non-slashy,
+	  // then it must NOT get a trailing slash.
+	  var last = srcPath.slice(-1)[0];
+	  var hasTrailingSlash = (
+	      (result.host || relative.host || srcPath.length > 1) &&
+	      (last === '.' || last === '..') || last === '');
+	
+	  // strip single dots, resolve double dots to parent dir
+	  // if the path tries to go above the root, `up` ends up > 0
+	  var up = 0;
+	  for (var i = srcPath.length; i >= 0; i--) {
+	    last = srcPath[i];
+	    if (last === '.') {
+	      srcPath.splice(i, 1);
+	    } else if (last === '..') {
+	      srcPath.splice(i, 1);
+	      up++;
+	    } else if (up) {
+	      srcPath.splice(i, 1);
+	      up--;
+	    }
+	  }
+	
+	  // if the path is allowed to go above the root, restore leading ..s
+	  if (!mustEndAbs && !removeAllDots) {
+	    for (; up--; up) {
+	      srcPath.unshift('..');
+	    }
+	  }
+	
+	  if (mustEndAbs && srcPath[0] !== '' &&
+	      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
+	    srcPath.unshift('');
+	  }
+	
+	  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+	    srcPath.push('');
+	  }
+	
+	  var isAbsolute = srcPath[0] === '' ||
+	      (srcPath[0] && srcPath[0].charAt(0) === '/');
+	
+	  // put the host back
+	  if (psychotic) {
+	    result.hostname = result.host = isAbsolute ? '' :
+	                                    srcPath.length ? srcPath.shift() : '';
+	    //occationaly the auth can get stuck only in host
+	    //this especially happens in cases like
+	    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+	    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+	                     result.host.split('@') : false;
+	    if (authInHost) {
+	      result.auth = authInHost.shift();
+	      result.host = result.hostname = authInHost.shift();
+	    }
+	  }
+	
+	  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
+	
+	  if (mustEndAbs && !isAbsolute) {
+	    srcPath.unshift('');
+	  }
+	
+	  if (!srcPath.length) {
+	    result.pathname = null;
+	    result.path = null;
+	  } else {
+	    result.pathname = srcPath.join('/');
+	  }
+	
+	  //to support request.http
+	  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+	    result.path = (result.pathname ? result.pathname : '') +
+	                  (result.search ? result.search : '');
+	  }
+	  result.auth = relative.auth || result.auth;
+	  result.slashes = result.slashes || relative.slashes;
+	  result.href = result.format();
+	  return result;
+	};
+	
+	Url.prototype.parseHost = function() {
+	  var host = this.host;
+	  var port = portPattern.exec(host);
+	  if (port) {
+	    port = port[0];
+	    if (port !== ':') {
+	      this.port = port.substr(1);
+	    }
+	    host = host.substr(0, host.length - port.length);
+	  }
+	  if (host) this.hostname = host;
+	};
+
+
+/***/ },
+/* 46 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -25182,7 +29241,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25190,14 +29249,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var url = __webpack_require__(144);
-	var Promise = __webpack_require__(7);
-	var csv = __webpack_require__(84);
-	var downloader = __webpack_require__(165);
-	var search = __webpack_require__(168);
-	var TextEncoder = __webpack_require__(136).TextEncoder;
-	var tar = __webpack_require__(140).tar;
-	var gzip = __webpack_require__(75).gzip;
+	var url = __webpack_require__(45);
+	var Promise = __webpack_require__(9);
+	var csv = __webpack_require__(94);
+	var downloader = __webpack_require__(190);
+	var search = __webpack_require__(193);
+	var TextEncoder = __webpack_require__(162).TextEncoder;
+	var tar = __webpack_require__(166).tar;
+	var gzip = __webpack_require__(85).gzip;
 	
 	var datasetDirectoryUrl = 'https://rawgit.com/thetartan/' +
 	  'tartan-database/master/data/index.json';
@@ -25213,7 +29272,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	}
 	
-	function createAttributeMapper(fields, attributes) {
+	function createAttributeMapper(fields, attributes, pickAttributes) {
+	  if (_.isString(pickAttributes) || _.isArray(pickAttributes)) {
+	    attributes = _.pick(attributes, pickAttributes);
+	  }
+	
 	  var fieldIndex = _.chain(fields)
 	    .map(function(field, index) {
 	      return [field.name, index];
@@ -25348,7 +29411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}
 	
-	function getDataset(dataset) {
+	function getDataset(dataset, pickAttributes) {
 	  var attributes = null;
 	  var fields = null;
 	  var resourceName = null;
@@ -25386,7 +29449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      var result = records;
 	      if (fields && attributes) {
-	        var mapper = createAttributeMapper(fields, attributes);
+	        var mapper = createAttributeMapper(fields, attributes, pickAttributes);
 	        result = _.map(records, function(record, index) {
 	          return _.extend({}, mapper(record), {
 	            ref: index + 1,
@@ -25501,13 +29564,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var angular = __webpack_require__(14);
+	var angular = __webpack_require__(5);
 	
 	var q = null;
 	var timeout = null;
@@ -25540,7 +29603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25552,7 +29615,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -25565,7 +29628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	'use strict';
 	
-	var unindent = __webpack_require__(44);
+	var unindent = __webpack_require__(51);
 	
 	  /**
 	   * @ngdoc overview
@@ -25745,7 +29808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var m;
 	
 	    try {
-	      m = __webpack_require__(74);
+	      m = __webpack_require__(83);
 	    } catch (err) {
 	      m = $window.marked || marked;
 	    }
@@ -25906,7 +29969,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = function unindent(text) {
@@ -25941,28 +30004,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	__webpack_require__(60);
+	__webpack_require__(58);
+	__webpack_require__(59);
+	__webpack_require__(57);
+	__webpack_require__(54);
+	__webpack_require__(56);
 	__webpack_require__(53);
-	__webpack_require__(51);
-	__webpack_require__(52);
-	__webpack_require__(50);
-	__webpack_require__(47);
-	__webpack_require__(49);
-	__webpack_require__(46);
-	__webpack_require__(48);
+	__webpack_require__(55);
 
 
 /***/ },
-/* 46 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngTartan = __webpack_require__(5);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartanErrorHandlerCollect', [
 	  function() {
@@ -26010,13 +30073,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var ngTartan = __webpack_require__(5);
+	var angular = __webpack_require__(5);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartanErrorHandlerConsole', [
 	  function() {
@@ -26029,15 +30092,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      link: function($scope, element, attr, controller) {
 	        var map = {};
 	        var def = null;
-	        if (_.isObject(console)) {
-	          def = _.isFunction(console.trace) ? 'trace' : 'log';
-	          if (_.isFunction(console.error)) {
+	        if (angular.isObject(console)) {
+	          def = angular.isFunction(console.trace) ? 'trace' : 'log';
+	          if (angular.isFunction(console.error)) {
 	            map.error = 'error';
 	          }
-	          if (_.isFunction(console.warn)) {
+	          if (angular.isFunction(console.warn)) {
 	            map.warning = 'warn';
 	          }
-	          if (_.isFunction(console.info)) {
+	          if (angular.isFunction(console.info)) {
 	            map.notice = 'info';
 	          }
 	        }
@@ -26063,12 +30126,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngTartan = __webpack_require__(5);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartanErrorHandlerCustom', [
 	  function() {
@@ -26101,12 +30164,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngTartan = __webpack_require__(5);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartanErrorHandlerThrow', [
 	  function() {
@@ -26139,12 +30202,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngTartan = __webpack_require__(5);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartanFormatted', [
 	  function() {
@@ -26173,14 +30236,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var tartan = __webpack_require__(9);
-	var ngTartan = __webpack_require__(5);
+	var angular = __webpack_require__(5);
+	var tartan = __webpack_require__(2);
+	var ngTartan = __webpack_require__(6);
 	
 	var parseSourcePattern = /^([\s\S]*?)\/([\s\S]*?)\/([\s\S]*)$/;
 	
@@ -26210,7 +30273,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	
 	        function updateSource(source) {
-	          source = _.isString(source) ? source : '';
+	          source = angular.isString(source) ? source : '';
 	          var matches = parseSourcePattern.exec(source);
 	          if (matches) {
 	            source = [matches[3], matches[2], matches[1]];
@@ -26219,17 +30282,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	
 	          var schema = tartan.schema[source.pop().toLowerCase()] || null;
-	          if (!_.isObject(schema)) {
+	          if (!angular.isObject(schema)) {
 	            schema = tartan.schema.classic;
 	          }
-	          var weave = _.chain(source.pop())
+	          var weave = source.pop()
 	            .split(',')
 	            .map(function(value) {
 	              value = parseInt(value, 10);
 	              return value > 0 ? value : 0;
 	            })
-	            .filter()
-	            .value();
+	            .filter(function(value) {
+	              return value > 0;
+	            });
 	
 	          source = source.join('/');
 	
@@ -26242,12 +30306,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	          };
 	
 	          var renderer = tartan.render[$scope.renderer];
-	          if (!_.isFunction(renderer)) {
-	            renderer = _.find(tartan.render, {
-	              id: $scope.renderer
-	            });
-	            if (!_.isFunction(renderer)) {
-	              renderer = tartan.render.canvas;
+	          if (!angular.isFunction(renderer)) {
+	            renderer = tartan.render.canvas;
+	            if (angular.isString($scope.renderer)) {
+	              for (var key in tartan.render) {
+	                if (
+	                  angular.isFunction(tartan.render[key]) &&
+	                  angular.isString(tartan.render[key].id) &&
+	                  (tartan.render[key].id == $scope.renderer)
+	                ) {
+	                  renderer = tartan.render[key];
+	                  break;
+	                }
+	              }
 	            }
 	          }
 	
@@ -26301,7 +30372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          repaint();
 	        }
 	
-	        _.each(['source', 'zoom', 'renderer'], function(name) {
+	        ['source', 'zoom', 'renderer'].forEach(function(name) {
 	          $scope.$watch(name, function(newValue, oldValue) {
 	            if (newValue !== oldValue) {
 	              updateSource($scope.source);
@@ -26310,7 +30381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }, true);
 	        });
 	
-	        _.each(['width', 'height'], function(name) {
+	        ['width', 'height'].forEach(function(name) {
 	          $scope.$watch(name, function(newValue, oldValue) {
 	            if (newValue !== oldValue) {
 	              updateCanvasSize();
@@ -26327,14 +30398,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var tartan = __webpack_require__(9);
-	var ngTartan = __webpack_require__(5);
+	var angular = __webpack_require__(5);
+	var tartan = __webpack_require__(2);
+	var ngTartan = __webpack_require__(6);
 	
 	function makeDraggable(window, canvas, getOffset, repaint) {
 	  var document = window.document;
@@ -26412,7 +30483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function makeResizable(window, update) {
 	  function onResize() {
-	    if (_.isFunction(update)) {
+	    if (angular.isFunction(update)) {
 	      update();
 	    }
 	  }
@@ -26461,7 +30532,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	
 	        function updateOffset() {
-	          $scope.offset = _.clone(offset);
+	          $scope.offset = angular.extend({}, offset);
 	        }
 	
 	        var repaint = tartan.utils.repaint(function() {
@@ -26481,12 +30552,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	          };
 	
 	          var renderer = tartan.render[$scope.renderer];
-	          if (!_.isFunction(renderer)) {
-	            renderer = _.find(tartan.render, {
-	              id: $scope.renderer
-	            });
-	            if (!_.isFunction(renderer)) {
-	              renderer = tartan.render.canvas;
+	          if (!angular.isFunction(renderer)) {
+	            renderer = tartan.render.canvas;
+	            if (angular.isString($scope.renderer)) {
+	              for (var key in tartan.render) {
+	                if (
+	                  angular.isFunction(tartan.render[key]) &&
+	                  angular.isString(tartan.render[key].id) &&
+	                  (tartan.render[key].id == $scope.renderer)
+	                ) {
+	                  renderer = tartan.render[key];
+	                  break;
+	                }
+	              }
 	            }
 	          }
 	
@@ -26505,7 +30583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        controller.requestUpdate(tartanChanged);
 	
-	        _.each(['weave', 'repeat', 'zoom', 'renderer'], function(name) {
+	        ['weave', 'repeat', 'zoom', 'renderer'].forEach(function(name) {
 	          $scope.$watch(name, function(newValue, oldValue) {
 	            if (newValue !== oldValue) {
 	              update();
@@ -26515,7 +30593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        $scope.$watch('offset', function(newValue, oldValue) {
 	          if (newValue !== oldValue) {
-	            var temp = _.extend({}, offset, newValue);
+	            var temp = angular.extend({}, offset, newValue);
 	            if ((temp.x != offset.x) || (temp.y != offset.y)) {
 	              offset = temp;
 	              repaint();
@@ -26527,7 +30605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var disableDrag = null;
 	
 	        $scope.$watch('interactive', function() {
-	          var interactive = _.extend({
+	          var interactive = angular.extend({
 	            resize: false,
 	            drag: false
 	          }, $scope.interactive === true ? {
@@ -26562,7 +30640,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          // Safely run each callback - even if one of them will
 	          // crash - it doesn't matter at the moment
-	          _.each(disable, function(disable) {
+	          disable.forEach(function(disable) {
 	            disable();
 	          });
 	        });
@@ -26602,15 +30680,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
-	var tartan = __webpack_require__(9);
-	var EventEmitter = __webpack_require__(69);
-	var ngTartan = __webpack_require__(5);
+	var angular = __webpack_require__(5);
+	var tartan = __webpack_require__(2);
+	var EventEmitter = __webpack_require__(76);
+	var ngTartan = __webpack_require__(6);
 	
 	ngTartan.directive('tartan', [
 	  function() {
@@ -26629,8 +30707,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var self = this;
 	
 	          // Allow controller to emit events
-	          _.extend(self, new EventEmitter());
-	          self.off = self.removeListener;
+	          self._events = new EventEmitter();
+	          self.emit = angular.bind(self._events, self._events.emit);
+	          self.on = angular.bind(self._events, self._events.addListener);
+	          self.off = angular.bind(self._events, self._events.removeListener);
 	
 	          var errorHandler = null;
 	          var parse = null;
@@ -26646,10 +30726,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          function updateSchema() {
 	            var schema = tartan.schema[$scope.schema] || tartan.schema.classic;
-	            parse = schema.parse(_.extend({}, $scope.options, {
+	            parse = schema.parse(angular.extend({}, $scope.options, {
 	              errorHandler: errorHandler
 	            }));
-	            format = schema.format(_.extend({}, $scope.options));
+	            format = schema.format(angular.extend({}, $scope.options));
 	
 	            state = {
 	              schema: schema,
@@ -26666,7 +30746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            self.emit('tartan.beginUpdate');
 	
 	            var sett = parse($scope.source);
-	            state = _.extend({}, state, {
+	            state = angular.extend({}, state, {
 	              source: $scope.source,
 	              sett: sett,
 	              formatted: format(sett)
@@ -26677,7 +30757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	
 	          this.requestUpdate = function(callback) {
-	            if (_.isFunction(callback)) {
+	            if (angular.isFunction(callback)) {
 	              callback(state);
 	            }
 	          };
@@ -26718,24 +30798,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _ = __webpack_require__(1);
+	var angular = __webpack_require__(5);
 	
-	_.extend(module.exports, __webpack_require__(88));
+	angular.extend(module.exports, __webpack_require__(98));
 	
-	__webpack_require__(45);
+	__webpack_require__(52);
 
 
 /***/ },
-/* 55 */
+/* 62 */
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.5.9
+	 * @license AngularJS v1.6.0
 	 * (c) 2010-2016 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
@@ -26793,7 +30873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return match;
 	    });
 	
-	    message += '\nhttp://errors.angularjs.org/1.5.9/' +
+	    message += '\nhttp://errors.angularjs.org/1.6.0/' +
 	      (module ? module + '/' : '') + code;
 	
 	    for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
@@ -26893,6 +30973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getBlockNodes,
 	  hasOwnProperty,
 	  createMap,
+	  stringify,
 	
 	  NODE_TYPE_ELEMENT,
 	  NODE_TYPE_ATTRIBUTE,
@@ -26926,9 +31007,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	// This is used so that it's possible for internal tests to create mock ValidityStates.
 	var VALIDITY_STATE_PROPERTY = 'validity';
 	
+	
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	
+	/**
+	 * @ngdoc function
+	 * @name angular.lowercase
+	 * @module ng
+	 * @kind function
+	 *
+	 * @deprecated
+	 * sinceVersion="1.5.0"
+	 * removeVersion="1.7.0"
+	 * Use [String.prototype.toLowerCase](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) instead.
+	 *
+	 * @description Converts the specified string to lowercase.
+	 * @param {string} string String to be converted to lowercase.
+	 * @returns {string} Lowercased string.
+	 */
 	var lowercase = function(string) {return isString(string) ? string.toLowerCase() : string;};
+	
+	/**
+	 * @ngdoc function
+	 * @name angular.uppercase
+	 * @module ng
+	 * @kind function
+	 *
+	 * @deprecated
+	 * sinceVersion="1.5.0"
+	 * removeVersion="1.7.0"
+	 * Use [String.prototype.toUpperCase](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) instead.
+	 *
+	 * @description Converts the specified string to uppercase.
+	 * @param {string} string String to be converted to uppercase.
+	 * @returns {string} Uppercased string.
+	 */
 	var uppercase = function(string) {return isString(string) ? string.toUpperCase() : string;};
 	
 	
@@ -26973,6 +31086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    angularModule,
 	    uid               = 0;
 	
+	// Support: IE 9-11 only
 	/**
 	 * documentMode is an IE-only property
 	 * http://msdn.microsoft.com/en-us/library/ie/cc196988(v=vs.85).aspx
@@ -27048,9 +31162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (obj) {
 	    if (isFunction(obj)) {
 	      for (key in obj) {
-	        // Need to check if hasOwnProperty exists,
-	        // as on IE8 the result of querySelectorAll is an object without a hasOwnProperty function
-	        if (key !== 'prototype' && key !== 'length' && key !== 'name' && (!obj.hasOwnProperty || obj.hasOwnProperty(key))) {
+	        if (key !== 'prototype' && key !== 'length' && key !== 'name' && obj.hasOwnProperty(key)) {
 	          iterator.call(context, obj[key], key, obj);
 	        }
 	      }
@@ -27407,7 +31519,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @kind function
 	 *
 	 * @description
-	 * Determines if a reference is an `Array`.
+	 * Determines if a reference is an `Array`. Alias of Array.isArray.
 	 *
 	 * @param {*} value Reference to check.
 	 * @returns {boolean} True if `value` is an `Array`.
@@ -27483,7 +31595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	
-	var TYPED_ARRAY_REGEXP = /^\[object (?:Uint8|Uint8Clamped|Uint16|Uint32|Int8|Int16|Int32|Float32|Float64)Array\]$/;
+	var TYPED_ARRAY_REGEXP = /^\[object (?:Uint8|Uint8Clamped|Uint16|Uint32|Int8|Int16|Int32|Float32|Float64)Array]$/;
 	function isTypedArray(value) {
 	  return value && isNumber(value.length) && TYPED_ARRAY_REGEXP.test(toString.call(value));
 	}
@@ -27502,7 +31614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Prereq: s is a string.
 	var escapeForRegexp = function(s) {
 	  return s
-	    .replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1')
+	    .replace(/([-()[\]{}+?*.$^|,:#<!\\])/g, '\\$1')
 	    // eslint-disable-next-line no-control-regex
 	    .replace(/\x08/g, '\\x08');
 	};
@@ -27746,7 +31858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new source.constructor(source.valueOf());
 	
 	      case '[object RegExp]':
-	        var re = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
+	        var re = new RegExp(source.source, source.toString().match(/[^/]*$/)[0]);
 	        re.lastIndex = source.lastIndex;
 	        return re;
 	
@@ -28029,7 +32141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Serializes input into a JSON-formatted string. Properties with leading $$ characters will be
 	 * stripped since angular uses this notation internally.
 	 *
-	 * @param {Object|Array|Date|string|number} obj Input to be serialized into JSON.
+	 * @param {Object|Array|Date|string|number|boolean} obj Input to be serialized into JSON.
 	 * @param {boolean|number} [pretty=2] If set to true, the JSON output will contain newlines and whitespace.
 	 *    If set to an integer, the JSON output will contain that many spaces per indentation.
 	 * @returns {string|undefined} JSON-ified string representing `obj`.
@@ -28085,6 +32197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var ALL_COLONS = /:/g;
 	function timezoneToOffset(timezone, fallback) {
+	  // Support: IE 9-11 only, Edge 13-14+
 	  // IE/Edge do not "understand" colon (`:`) in timezone
 	  timezone = timezone.replace(ALL_COLONS, '');
 	  var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
@@ -28122,7 +32235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return element[0].nodeType === NODE_TYPE_TEXT ? lowercase(elemHtml) :
 	        elemHtml.
 	          match(/^(<[^>]+>)/)[1].
-	          replace(/^<([\w\-]+)/, function(match, nodeName) {return '<' + lowercase(nodeName);});
+	          replace(/^<([\w-]+)/, function(match, nodeName) {return '<' + lowercase(nodeName);});
 	  } catch (e) {
 	    return lowercase(elemHtml);
 	  }
@@ -28220,7 +32333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This method is intended for encoding *key* or *value* parts of query component. We need a custom
 	 * method because encodeURIComponent is too aggressive and encodes stuff that doesn't have to be
 	 * encoded per http://tools.ietf.org/html/rfc3986:
-	 *    query       = *( pchar / "/" / "?" )
+	 *    query         = *( pchar / "/" / "?" )
 	 *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
 	 *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
 	 *    pct-encoded   = "%" HEXDIG HEXDIG
@@ -28257,12 +32370,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var src = document.currentScript.getAttribute('src');
 	  var link = document.createElement('a');
 	  link.href = src;
-	  var scriptProtocol = link.protocol;
-	  var docLoadProtocol = document.location.protocol;
-	  if (docLoadProtocol === scriptProtocol) {
+	  if (document.location.origin === link.origin) {
+	    // Same-origin resources are always allowed, even for non-whitelisted schemes.
 	    return true;
 	  }
-	  switch (scriptProtocol) {
+	  // Disabled bootstrapping unless angular.js was loaded from a known scheme used on the web.
+	  // This is to prevent angular.js bundled with browser extensions from being used to bypass the
+	  // content security policy in web pages and other browser extensions.
+	  switch (link.protocol) {
 	    case 'http:':
 	    case 'https:':
 	    case 'ftp:':
@@ -28762,6 +32877,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return Object.create(null);
 	}
 	
+	function stringify(value) {
+	  if (value == null) { // null || undefined
+	    return '';
+	  }
+	  switch (typeof value) {
+	    case 'string':
+	      break;
+	    case 'number':
+	      value = '' + value;
+	      break;
+	    default:
+	      if (hasCustomToString(value) && !isArray(value) && !isDate(value)) {
+	        value = value.toString();
+	      } else {
+	        value = toJson(value);
+	      }
+	  }
+	
+	  return value;
+	}
+	
 	var NODE_TYPE_ELEMENT = 1;
 	var NODE_TYPE_ATTRIBUTE = 2;
 	var NODE_TYPE_TEXT = 3;
@@ -28972,7 +33108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	           * @description
 	           * See {@link auto.$provide#decorator $provide.decorator()}.
 	           */
-	          decorator: invokeLaterAndSetModuleName('$provide', 'decorator'),
+	          decorator: invokeLaterAndSetModuleName('$provide', 'decorator', configBlocks),
 	
 	          /**
 	           * @ngdoc method
@@ -29118,10 +33254,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @param {string} method
 	         * @returns {angular.Module}
 	         */
-	        function invokeLaterAndSetModuleName(provider, method) {
+	        function invokeLaterAndSetModuleName(provider, method, queue) {
+	          if (!queue) queue = invokeQueue;
 	          return function(recipeName, factoryFunction) {
 	            if (factoryFunction && isFunction(factoryFunction)) factoryFunction.$$moduleName = name;
-	            invokeQueue.push([provider, method, arguments]);
+	            queue.push([provider, method, arguments]);
 	            return moduleInstance;
 	          };
 	        }
@@ -29250,6 +33387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  $ControllerProvider,
 	  $DateProvider,
 	  $DocumentProvider,
+	  $$IsDocumentHiddenProvider,
 	  $ExceptionHandlerProvider,
 	  $FilterProvider,
 	  $$ForceReflowProvider,
@@ -29301,11 +33439,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var version = {
 	  // These placeholder strings will be replaced by grunt's `build` task.
 	  // They need to be double- or single-quoted.
-	  full: '1.5.9',
+	  full: '1.6.0',
 	  major: 1,
-	  minor: 5,
-	  dot: 9,
-	  codeName: 'timeturning-lockdown'
+	  minor: 6,
+	  dot: 0,
+	  codeName: 'rainbow-tsunami'
 	};
 	
 	
@@ -29338,9 +33476,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'uppercase': uppercase,
 	    'callbacks': {$$counter: 0},
 	    'getTestability': getTestability,
+	    'reloadWithDebugInfo': reloadWithDebugInfo,
 	    '$$minErr': minErr,
 	    '$$csp': csp,
-	    'reloadWithDebugInfo': reloadWithDebugInfo
+	    '$$encodeUriSegment': encodeUriSegment,
+	    '$$encodeUriQuery': encodeUriQuery,
+	    '$$stringify': stringify
 	  });
 	
 	  angularModule = setupModuleLoader(window);
@@ -29414,6 +33555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        $cacheFactory: $CacheFactoryProvider,
 	        $controller: $ControllerProvider,
 	        $document: $DocumentProvider,
+	        $$isDocumentHidden: $$IsDocumentHiddenProvider,
 	        $exceptionHandler: $ExceptionHandlerProvider,
 	        $filter: $FilterProvider,
 	        $$forceReflow: $$ForceReflowProvider,
@@ -29459,9 +33601,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     Or gives undesired access to variables likes document or window?    *
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
-	/* global JQLitePrototype: true,
-	  addEventListenerFn: true,
-	  removeEventListenerFn: true,
+	/* global
+	  JQLitePrototype: true,
 	  BOOLEAN_ATTR: true,
 	  ALIASED_ATTR: true
 	*/
@@ -29505,7 +33646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - [`after()`](http://api.jquery.com/after/)
 	 * - [`append()`](http://api.jquery.com/append/)
 	 * - [`attr()`](http://api.jquery.com/attr/) - Does not support functions as parameters
-	 * - [`bind()`](http://api.jquery.com/bind/) - Does not support namespaces, selectors or eventData
+	 * - [`bind()`](http://api.jquery.com/bind/) (_deprecated_, use [`on()`](http://api.jquery.com/on/)) - Does not support namespaces, selectors or eventData
 	 * - [`children()`](http://api.jquery.com/children/) - Does not support selectors
 	 * - [`clone()`](http://api.jquery.com/clone/)
 	 * - [`contents()`](http://api.jquery.com/contents/)
@@ -29525,16 +33666,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - [`parent()`](http://api.jquery.com/parent/) - Does not support selectors
 	 * - [`prepend()`](http://api.jquery.com/prepend/)
 	 * - [`prop()`](http://api.jquery.com/prop/)
-	 * - [`ready()`](http://api.jquery.com/ready/)
+	 * - [`ready()`](http://api.jquery.com/ready/) (_deprecated_, use `angular.element(callback)` instead of `angular.element(document).ready(callback)`)
 	 * - [`remove()`](http://api.jquery.com/remove/)
-	 * - [`removeAttr()`](http://api.jquery.com/removeAttr/)
+	 * - [`removeAttr()`](http://api.jquery.com/removeAttr/) - Does not support multiple attributes
 	 * - [`removeClass()`](http://api.jquery.com/removeClass/) - Does not support a function as first argument
 	 * - [`removeData()`](http://api.jquery.com/removeData/)
 	 * - [`replaceWith()`](http://api.jquery.com/replaceWith/)
 	 * - [`text()`](http://api.jquery.com/text/)
 	 * - [`toggleClass()`](http://api.jquery.com/toggleClass/) - Does not support a function as first argument
 	 * - [`triggerHandler()`](http://api.jquery.com/triggerHandler/) - Passes a dummy event object to handlers
-	 * - [`unbind()`](http://api.jquery.com/unbind/) - Does not support namespaces or event object as parameter
+	 * - [`unbind()`](http://api.jquery.com/unbind/) (_deprecated_, use [`off()`](http://api.jquery.com/off/)) - Does not support namespaces or event object as parameter
 	 * - [`val()`](http://api.jquery.com/val/)
 	 * - [`wrap()`](http://api.jquery.com/wrap/)
 	 *
@@ -29572,13 +33713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	JQLite.expando = 'ng339';
 	
 	var jqCache = JQLite.cache = {},
-	    jqId = 1,
-	    addEventListenerFn = function(element, type, fn) {
-	      element.addEventListener(type, fn, false);
-	    },
-	    removeEventListenerFn = function(element, type, fn) {
-	      element.removeEventListener(type, fn, false);
-	    };
+	    jqId = 1;
 	
 	/*
 	 * !!! This is an undocumented "private" function !!!
@@ -29591,22 +33726,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	function jqNextId() { return ++jqId; }
 	
 	
-	var SPECIAL_CHARS_REGEXP = /([:\-_]+(.))/g;
-	var MOZ_HACK_REGEXP = /^moz([A-Z])/;
+	var DASH_LOWERCASE_REGEXP = /-([a-z])/g;
+	var MS_HACK_REGEXP = /^-ms-/;
 	var MOUSE_EVENT_MAP = { mouseleave: 'mouseout', mouseenter: 'mouseover' };
 	var jqLiteMinErr = minErr('jqLite');
 	
 	/**
-	 * Converts snake_case to camelCase.
-	 * Also there is special case for Moz prefix starting with upper case letter.
+	 * Converts kebab-case to camelCase.
+	 * There is also a special case for the ms prefix starting with a lowercase letter.
 	 * @param name Name to normalize
 	 */
-	function camelCase(name) {
-	  return name.
-	    replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
-	      return offset ? letter.toUpperCase() : letter;
-	    }).
-	    replace(MOZ_HACK_REGEXP, 'Moz$1');
+	function cssKebabToCamel(name) {
+	    return kebabToCamel(name.replace(MS_HACK_REGEXP, 'ms-'));
+	}
+	
+	function fnCamelCaseReplace(all, letter) {
+	  return letter.toUpperCase();
+	}
+	
+	/**
+	 * Converts kebab-case to camelCase.
+	 * @param name Name to normalize
+	 */
+	function kebabToCamel(name) {
+	  return name
+	    .replace(DASH_LOWERCASE_REGEXP, fnCamelCaseReplace);
 	}
 	
 	var SINGLE_TAG_REGEXP = /^<([\w-]+)\s*\/?>(?:<\/\1>|)$/;
@@ -29743,6 +33887,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  if (argIsString) {
 	    jqLiteAddNodes(this, jqLiteParseHTML(element));
+	  } else if (isFunction(element)) {
+	    jqLiteReady(element);
 	  } else {
 	    jqLiteAddNodes(this, element);
 	  }
@@ -29775,7 +33921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (!type) {
 	    for (type in events) {
 	      if (type !== '$destroy') {
-	        removeEventListenerFn(element, type, handle);
+	        element.removeEventListener(type, handle);
 	      }
 	      delete events[type];
 	    }
@@ -29787,7 +33933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        arrayRemove(listenerFns || [], fn);
 	      }
 	      if (!(isDefined(fn) && listenerFns && listenerFns.length > 0)) {
-	        removeEventListenerFn(element, type, handle);
+	        element.removeEventListener(type, handle);
 	        delete events[type];
 	      }
 	    };
@@ -29838,6 +33984,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function jqLiteData(element, key, value) {
 	  if (jqLiteAcceptsData(element)) {
+	    var prop;
 	
 	    var isSimpleSetter = isDefined(value);
 	    var isSimpleGetter = !isSimpleSetter && key && !isObject(key);
@@ -29846,16 +33993,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var data = expandoStore && expandoStore.data;
 	
 	    if (isSimpleSetter) { // data('key', value)
-	      data[key] = value;
+	      data[kebabToCamel(key)] = value;
 	    } else {
 	      if (massGetter) {  // data()
 	        return data;
 	      } else {
 	        if (isSimpleGetter) { // data('key')
 	          // don't force creation of expandoStore if it doesn't exist yet
-	          return data && data[key];
+	          return data && data[kebabToCamel(key)];
 	        } else { // mass-setter: data({key1: val1, key2: val2})
-	          extend(data, key);
+	          for (prop in key) {
+	            data[kebabToCamel(prop)] = key[prop];
+	          }
 	        }
 	      }
 	    }
@@ -29974,29 +34123,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
+	function jqLiteReady(fn) {
+	  function trigger() {
+	    window.document.removeEventListener('DOMContentLoaded', trigger);
+	    window.removeEventListener('load', trigger);
+	    fn();
+	  }
+	
+	  // check if document is already loaded
+	  if (window.document.readyState === 'complete') {
+	    window.setTimeout(fn);
+	  } else {
+	    // We can not use jqLite since we are not done loading and jQuery could be loaded later.
+	
+	    // Works for modern browsers and IE9
+	    window.document.addEventListener('DOMContentLoaded', trigger);
+	
+	    // Fallback to window.onload for others
+	    window.addEventListener('load', trigger);
+	  }
+	}
+	
 	//////////////////////////////////////////
 	// Functions which are declared directly.
 	//////////////////////////////////////////
 	var JQLitePrototype = JQLite.prototype = {
-	  ready: function(fn) {
-	    var fired = false;
-	
-	    function trigger() {
-	      if (fired) return;
-	      fired = true;
-	      fn();
-	    }
-	
-	    // check if document is already loaded
-	    if (window.document.readyState === 'complete') {
-	      window.setTimeout(trigger);
-	    } else {
-	      this.on('DOMContentLoaded', trigger); // works for modern browsers and IE9
-	      // we can not use jqLite since we are not done loading and jQuery could be loaded later.
-	      // eslint-disable-next-line new-cap
-	      JQLite(window).on('load', trigger); // fallback to window.onload for others
-	    }
-	  },
+	  ready: jqLiteReady,
 	  toString: function() {
 	    var value = [];
 	    forEach(this, function(e) { value.push('' + e);});
@@ -30031,7 +34183,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'ngMaxlength': 'maxlength',
 	  'ngMin': 'min',
 	  'ngMax': 'max',
-	  'ngPattern': 'pattern'
+	  'ngPattern': 'pattern',
+	  'ngStep': 'step'
 	};
 	
 	function getBooleanAttrName(element, name) {
@@ -30082,7 +34235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  hasClass: jqLiteHasClass,
 	
 	  css: function(element, name, value) {
-	    name = camelCase(name);
+	    name = cssKebabToCamel(name);
 	
 	    if (isDefined(value)) {
 	      element.style[name] = value;
@@ -30092,33 +34245,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  attr: function(element, name, value) {
+	    var ret;
 	    var nodeType = element.nodeType;
-	    if (nodeType === NODE_TYPE_TEXT || nodeType === NODE_TYPE_ATTRIBUTE || nodeType === NODE_TYPE_COMMENT) {
+	    if (nodeType === NODE_TYPE_TEXT || nodeType === NODE_TYPE_ATTRIBUTE || nodeType === NODE_TYPE_COMMENT ||
+	      !element.getAttribute) {
 	      return;
 	    }
+	
 	    var lowercasedName = lowercase(name);
-	    if (BOOLEAN_ATTR[lowercasedName]) {
-	      if (isDefined(value)) {
-	        if (value) {
-	          element[name] = true;
-	          element.setAttribute(name, lowercasedName);
-	        } else {
-	          element[name] = false;
-	          element.removeAttribute(lowercasedName);
-	        }
+	    var isBooleanAttr = BOOLEAN_ATTR[lowercasedName];
+	
+	    if (isDefined(value)) {
+	      // setter
+	
+	      if (value === null || (value === false && isBooleanAttr)) {
+	        element.removeAttribute(name);
 	      } else {
-	        return (element[name] ||
-	                 (element.attributes.getNamedItem(name) || noop).specified)
-	               ? lowercasedName
-	               : undefined;
+	        element.setAttribute(name, isBooleanAttr ? lowercasedName : value);
 	      }
-	    } else if (isDefined(value)) {
-	      element.setAttribute(name, value);
-	    } else if (element.getAttribute) {
-	      // the extra argument "2" is to get the right thing for a.href in IE, see jQuery code
-	      // some elements (e.g. Document) don't have get attribute, so return undefined
-	      var ret = element.getAttribute(name, 2);
-	      // normalize non-existing attributes to undefined (as jQuery)
+	    } else {
+	      // getter
+	
+	      ret = element.getAttribute(name);
+	
+	      if (isBooleanAttr && ret !== null) {
+	        ret = lowercasedName;
+	      }
+	      // Normalize non-existing attributes to undefined (as jQuery).
 	      return ret === null ? undefined : ret;
 	    }
 	  },
@@ -30153,7 +34306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            result.push(option.value || option.text);
 	          }
 	        });
-	        return result.length === 0 ? null : result;
+	        return result;
 	      }
 	      return element.value;
 	    }
@@ -30323,7 +34476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        eventFns = events[type] = [];
 	        eventFns.specialHandlerWrapper = specialHandlerWrapper;
 	        if (type !== '$destroy' && !noEventListener) {
-	          addEventListenerFn(element, type, handle);
+	          element.addEventListener(type, handle);
 	        }
 	      }
 	
@@ -30515,11 +34668,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return isDefined(value) ? value : this;
 	  };
-	
-	  // bind legacy bind/unbind to on/off
-	  JQLite.prototype.bind = JQLite.prototype.on;
-	  JQLite.prototype.unbind = JQLite.prototype.off;
 	});
+	
+	// bind legacy bind/unbind to on/off
+	JQLite.prototype.bind = JQLite.prototype.on;
+	JQLite.prototype.unbind = JQLite.prototype.off;
 	
 	
 	// Provider for private $$jqLite service
@@ -30685,8 +34838,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Implicit module which gets automatically added to each {@link auto.$injector $injector}.
 	 */
 	
-	var ARROW_ARG = /^([^\(]+?)=>/;
-	var FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m;
+	var ARROW_ARG = /^([^(]+?)=>/;
+	var FN_ARGS = /^[^(]*\(\s*([^)]*)\)/m;
 	var FN_ARG_SPLIT = /,/;
 	var FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
 	var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
@@ -31471,14 +35624,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    function isClass(func) {
+	      // Support: IE 9-11 only
 	      // IE 9-11 do not support classes and IE9 leaks with the code below.
-	      if (msie <= 11) {
+	      if (msie || typeof func !== 'function') {
 	        return false;
 	      }
-	      // Support: Edge 12-13 only
-	      // See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6156135/
-	      return typeof func === 'function'
-	        && /^(?:class\b|constructor\()/.test(stringifyFn(func));
+	      var result = func.$$ngIsClass;
+	      if (!isBoolean(result)) {
+	        // Support: Edge 12-13 only
+	        // See: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/6156135/
+	        result = func.$$ngIsClass = /^(?:class\b|constructor\()/.test(stringifyFn(func));
+	      }
+	      return result;
 	    }
 	
 	    function invoke(fn, self, locals, serviceName) {
@@ -31766,7 +35923,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    function scroll(hash) {
-	      hash = isString(hash) ? hash : $location.hash();
+	      // Allow numeric hashes
+	      hash = isString(hash) ? hash : isNumber(hash) ? hash.toString() : $location.hash();
 	      var elm;
 	
 	      // empty hash, scroll to the top of the page
@@ -32052,7 +36210,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var reservedRegex = new RegExp('(\\s+|\\/)' + NG_ANIMATE_CLASSNAME + '(\\s+|\\/)');
 	        if (reservedRegex.test(this.$$classNameFilter.toString())) {
 	          throw $animateMinErr('nongcls','$animateProvider.classNameFilter(regex) prohibits accepting a regex value which matches/contains the "{0}" CSS class.', NG_ANIMATE_CLASSNAME);
-	
 	        }
 	      }
 	    }
@@ -32410,7 +36567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       *
 	       * @description Performs an inline animation on the element which applies the provided to and from CSS styles to the element.
 	       * If any detected CSS transition, keyframe or JavaScript matches the provided className value, then the animation will take
-	       * on the provided styles. For example, if a transition animation is set for the given classNamem, then the provided `from` and
+	       * on the provided styles. For example, if a transition animation is set for the given className, then the provided `from` and
 	       * `to` styles will be applied alongside the given transition. If the CSS style provided in `from` does not have a corresponding
 	       * style in `to`, the style in `from` is applied immediately, and no animation is run.
 	       * If a JavaScript animation is detected then the provided styles will be given in as function parameters into the `animate`
@@ -32488,8 +36645,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var $$AnimateRunnerFactoryProvider = /** @this */ function() {
-	  this.$get = ['$q', '$sniffer', '$$animateAsyncRun', '$document', '$timeout',
-	       function($q,   $sniffer,   $$animateAsyncRun,   $document,   $timeout) {
+	  this.$get = ['$q', '$sniffer', '$$animateAsyncRun', '$$isDocumentHidden', '$timeout',
+	       function($q,   $sniffer,   $$animateAsyncRun,   $$isDocumentHidden,   $timeout) {
 	
 	    var INITIAL_STATE = 0;
 	    var DONE_PENDING_STATE = 1;
@@ -32541,11 +36698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      this._doneCallbacks = [];
 	      this._tick = function(fn) {
-	        var doc = $document[0];
-	
-	        // the document may not be ready or attached
-	        // to the module for some internal tests
-	        if (doc && doc.hidden) {
+	        if ($$isDocumentHidden()) {
 	          timeoutTick(fn);
 	        } else {
 	          rafTick(fn);
@@ -33025,7 +37178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  self.baseHref = function() {
 	    var href = baseElement.attr('href');
-	    return href ? href.replace(/^(https?:)?\/\/[^\/]*/, '') : '';
+	    return href ? href.replace(/^(https?:)?\/\/[^/]*/, '') : '';
 	  };
 	
 	  /**
@@ -33469,12 +37622,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * });
 	 * ```
 	 *
-	 * To retrieve the template later, simply use it in your HTML:
-	 * ```html
-	 * <div ng-include=" 'templateId.html' "></div>
+	 * To retrieve the template later, simply use it in your component:
+	 * ```js
+	 * myApp.component('myComponent', {
+	 *    templateUrl: 'templateId.html'
+	 * });
 	 * ```
 	 *
-	 * or get it via Javascript:
+	 * or get it via the `$templateCache` service:
 	 * ```js
 	 * $templateCache.get('templateId.html')
 	 * ```
@@ -33496,7 +37651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *                                                                         *
 	 *  Does the change somehow allow for arbitrary javascript to be executed? *
 	 *    Or allows for someone to change the prototype of built-in objects?   *
-	 *     Or gives undesired access to variables likes document or window?    *
+	 *     Or gives undesired access to variables like document or window?    *
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
 	/* ! VARIABLE/FUNCTION NAMING CONVENTIONS THAT APPLY TO THIS FILE!
@@ -33555,33 +37710,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *   myModule.directive('directiveName', function factory(injectables) {
 	 *     var directiveDefinitionObject = {
-	 *       priority: 0,
-	 *       template: '<div></div>', // or // function(tElement, tAttrs) { ... },
+	 *       {@link $compile#-priority- priority}: 0,
+	 *       {@link $compile#-template- template}: '<div></div>', // or // function(tElement, tAttrs) { ... },
 	 *       // or
-	 *       // templateUrl: 'directive.html', // or // function(tElement, tAttrs) { ... },
-	 *       transclude: false,
-	 *       restrict: 'A',
-	 *       templateNamespace: 'html',
-	 *       scope: false,
-	 *       controller: function($scope, $element, $attrs, $transclude, otherInjectables) { ... },
-	 *       controllerAs: 'stringIdentifier',
-	 *       bindToController: false,
-	 *       require: 'siblingDirectiveName', // or // ['^parentDirectiveName', '?optionalDirectiveName', '?^optionalParent'],
-	 *       compile: function compile(tElement, tAttrs, transclude) {
+	 *       // {@link $compile#-templateurl- templateUrl}: 'directive.html', // or // function(tElement, tAttrs) { ... },
+	 *       {@link $compile#-transclude- transclude}: false,
+	 *       {@link $compile#-restrict- restrict}: 'A',
+	 *       {@link $compile#-templatenamespace- templateNamespace}: 'html',
+	 *       {@link $compile#-scope- scope}: false,
+	 *       {@link $compile#-controller- controller}: function($scope, $element, $attrs, $transclude, otherInjectables) { ... },
+	 *       {@link $compile#-controlleras- controllerAs}: 'stringIdentifier',
+	 *       {@link $compile#-bindtocontroller- bindToController}: false,
+	 *       {@link $compile#-require- require}: 'siblingDirectiveName', // or // ['^parentDirectiveName', '?optionalDirectiveName', '?^optionalParent'],
+	 *       {@link $compile#-multielement- multiElement}: false,
+	 *       {@link $compile#-compile- compile}: function compile(tElement, tAttrs, transclude) {
 	 *         return {
-	 *           pre: function preLink(scope, iElement, iAttrs, controller) { ... },
-	 *           post: function postLink(scope, iElement, iAttrs, controller) { ... }
+	 *            {@link $compile#pre-linking-function pre}: function preLink(scope, iElement, iAttrs, controller) { ... },
+	 *            {@link $compile#post-linking-function post}: function postLink(scope, iElement, iAttrs, controller) { ... }
 	 *         }
 	 *         // or
 	 *         // return function postLink( ... ) { ... }
 	 *       },
 	 *       // or
-	 *       // link: {
-	 *       //  pre: function preLink(scope, iElement, iAttrs, controller) { ... },
-	 *       //  post: function postLink(scope, iElement, iAttrs, controller) { ... }
+	 *       // {@link $compile#-link- link}: {
+	 *       //  {@link $compile#pre-linking-function pre}: function preLink(scope, iElement, iAttrs, controller) { ... },
+	 *       //  {@link $compile#post-linking-function post}: function postLink(scope, iElement, iAttrs, controller) { ... }
 	 *       // }
 	 *       // or
-	 *       // link: function postLink( ... ) { ... }
+	 *       // {@link $compile#-link- link}: function postLink( ... ) { ... }
 	 *     };
 	 *     return directiveDefinitionObject;
 	 *   });
@@ -33733,7 +37889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * compiler}. The attributes are:
 	 *
 	 * #### `multiElement`
-	 * When this property is set to true, the HTML compiler will collect DOM nodes between
+	 * When this property is set to true (default is `false`), the HTML compiler will collect DOM nodes between
 	 * nodes with the attributes `directive-name-start` and `directive-name-end`, and group them
 	 * together as the directive elements. It is recommended that this feature be used on directives
 	 * which are not strictly behavioral (such as {@link ngClick}), and which
@@ -33754,14 +37910,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * and other directives used in the directive's template will also be excluded from execution.
 	 *
 	 * #### `scope`
-	 * The scope property can be `true`, an object or a falsy value:
+	 * The scope property can be `false`, `true`, or an object:
 	 *
-	 * * **falsy:** No scope will be created for the directive. The directive will use its parent's scope.
+	 * * **`false` (default):** No scope will be created for the directive. The directive will use its
+	 * parent's scope.
 	 *
 	 * * **`true`:** A new child scope that prototypically inherits from its parent will be created for
 	 * the directive's element. If multiple directives on the same element request a new scope,
-	 * only one new scope is created. The new scope rule does not apply for the root of the template
-	 * since the root of the template always gets a new scope.
+	 * only one new scope is created.
 	 *
 	 * * **`{...}` (an object hash):** A new "isolate" scope is created for the directive's element. The
 	 * 'isolate' scope differs from normal scope in that it does not prototypically inherit from its parent
@@ -33848,9 +38004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * #### `bindToController`
 	 * This property is used to bind scope properties directly to the controller. It can be either
-	 * `true` or an object hash with the same format as the `scope` property. Additionally, a controller
-	 * alias must be set, either by using `controllerAs: 'myAlias'` or by specifying the alias in the controller
-	 * definition: `controller: 'myCtrl as myAlias'`.
+	 * `true` or an object hash with the same format as the `scope` property.
 	 *
 	 * When an isolate scope is used for a directive (see above), `bindToController: true` will
 	 * allow a component to have its properties bound to the controller, rather than to scope.
@@ -33891,12 +38045,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *        * defines the parent to which the `cloneLinkingFn` will add the cloned elements.
 	 *        * default: `$element.parent()` resp. `$element` for `transclude:'element'` resp. `transclude:true`.
 	 *        * only needed for transcludes that are allowed to contain non html elements (e.g. SVG elements)
-	 *          and when the `cloneLinkinFn` is passed,
+	 *          and when the `cloneLinkingFn` is passed,
 	 *          as those elements need to created and cloned in a special way when they are defined outside their
 	 *          usual containers (e.g. like `<svg>`).
 	 *        * See also the `directive.templateNamespace` property.
 	 *    * `slotName`: (optional) the name of the slot to transclude. If falsy (e.g. `null`, `undefined` or `''`)
-	 *      then the default translusion is provided.
+	 *      then the default transclusion is provided.
 	 *    The `$transclude` function also has a method on it, `$transclude.isSlotFilled(slotName)`, which returns
 	 *    `true` if the specified slot contains content (i.e. one or more DOM nodes).
 	 *
@@ -34185,7 +38339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * When you call a transclusion function you can pass in a **clone attach function**. This function accepts
 	 * two parameters, `function(clone, scope) { ... }`, where the `clone` is a fresh compiled copy of your transcluded
-	 * content and the `scope` is the newly created transclusion scope, to which the clone is bound.
+	 * content and the `scope` is the newly created transclusion scope, which the clone will be linked to.
 	 *
 	 * <div class="alert alert-info">
 	 * **Best Practice**: Always provide a `cloneFn` (clone attach function) when you call a transclude function
@@ -34432,6 +38586,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * For information on how the compiler works, see the
 	 * {@link guide/compiler Angular HTML Compiler} section of the Developer Guide.
+	 *
+	 * @knownIssue
+	 *
+	 * ### Double Compilation
+	 *
+	   Double compilation occurs when an already compiled part of the DOM gets
+	   compiled again. This is an undesired effect and can lead to misbehaving directives, performance issues,
+	   and memory leaks. Refer to the Compiler Guide {@link guide/compiler#double-compilation-and-how-to-avoid-it
+	   section on double compilation} for an in-depth explanation and ways to avoid it.
+	 *
 	 */
 	
 	var $compileMinErr = minErr('$compile');
@@ -34450,8 +38614,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function $CompileProvider($provide, $$sanitizeUriProvider) {
 	  var hasDirectives = {},
 	      Suffix = 'Directive',
-	      COMMENT_DIRECTIVE_REGEXP = /^\s*directive:\s*([\w\-]+)\s+(.*)$/,
-	      CLASS_DIRECTIVE_REGEXP = /(([\w\-]+)(?::([^;]+))?;?)/,
+	      COMMENT_DIRECTIVE_REGEXP = /^\s*directive:\s*([\w-]+)\s+(.*)$/,
+	      CLASS_DIRECTIVE_REGEXP = /(([\w-]+)(?::([^;]+))?;?)/,
 	      ALL_OR_NOTHING_ATTRS = makeMap('ngSrc,ngSrcset,src,srcset'),
 	      REQUIRE_PREFIX_REGEXP = /^(?:(\^\^?)?(\?)?(\^\^?)?)?/;
 	
@@ -34515,20 +38679,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      bindings.bindToController =
 	          parseIsolateBindings(directive.bindToController, directiveName, true);
 	    }
-	    if (isObject(bindings.bindToController)) {
-	      var controller = directive.controller;
-	      var controllerAs = directive.controllerAs;
-	      if (!controller) {
-	        // There is no controller, there may or may not be a controllerAs property
-	        throw $compileMinErr('noctrl',
-	              'Cannot bind to controller without directive \'{0}\'s controller.',
-	              directiveName);
-	      } else if (!identifierForController(controller, controllerAs)) {
-	        // There is a controller, but no identifier or controllerAs property
-	        throw $compileMinErr('noident',
-	              'Cannot bind to controller without identifier for directive \'{0}\'.',
-	              directiveName);
-	      }
+	    if (bindings.bindToController && !directive.controller) {
+	      // There is no controller
+	      throw $compileMinErr('noctrl',
+	            'Cannot bind to controller without directive \'{0}\'s controller.',
+	            directiveName);
 	    }
 	    return bindings;
 	  }
@@ -34559,6 +38714,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return require;
 	  }
 	
+	  function getDirectiveRestrict(restrict, name) {
+	    if (restrict && !(isString(restrict) && /[EACM]/.test(restrict))) {
+	      throw $compileMinErr('badrestrict',
+	          'Restrict property \'{0}\' of directive \'{1}\' is invalid',
+	          restrict,
+	          name);
+	    }
+	
+	    return restrict || 'EA';
+	  }
+	
 	  /**
 	   * @ngdoc method
 	   * @name $compileProvider#directive
@@ -34575,6 +38741,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @returns {ng.$compileProvider} Self for chaining.
 	   */
 	  this.directive = function registerDirective(name, directiveFactory) {
+	    assertArg(name, 'name');
 	    assertNotHasOwnProperty(name, 'directive');
 	    if (isString(name)) {
 	      assertValidDirectiveName(name);
@@ -34596,7 +38763,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                directive.index = index;
 	                directive.name = directive.name || name;
 	                directive.require = getDirectiveRequire(directive);
-	                directive.restrict = directive.restrict || 'EA';
+	                directive.restrict = getDirectiveRestrict(directive.restrict, name);
 	                directive.$$moduleName = directiveFactory.$$moduleName;
 	                directives.push(directive);
 	              } catch (e) {
@@ -34843,6 +39010,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return this;
 	    }
 	    return debugInfoEnabled;
+	  };
+	
+	  /**
+	   * @ngdoc method
+	   * @name  $compileProvider#preAssignBindingsEnabled
+	   *
+	   * @param {boolean=} enabled update the preAssignBindingsEnabled state if provided, otherwise just return the
+	   * current preAssignBindingsEnabled state
+	   * @returns {*} current value if used as getter or itself (chaining) if used as setter
+	   *
+	   * @kind function
+	   *
+	   * @description
+	   * Call this method to enable/disable whether directive controllers are assigned bindings before
+	   * calling the controller's constructor.
+	   * If enabled (true), the compiler assigns the value of each of the bindings to the
+	   * properties of the controller object before the constructor of this object is called.
+	   *
+	   * If disabled (false), the compiler calls the constructor first before assigning bindings.
+	   *
+	   * The default value is true in Angular 1.5.x but will switch to false in Angular 1.6.x.
+	   */
+	  var preAssignBindingsEnabled = false;
+	  this.preAssignBindingsEnabled = function(enabled) {
+	    if (isDefined(enabled)) {
+	      preAssignBindingsEnabled = enabled;
+	      return this;
+	    }
+	    return preAssignBindingsEnabled;
 	  };
 	
 	
@@ -35298,25 +39494,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // modify it.
 	        $compileNodes = jqLite($compileNodes);
 	      }
-	
-	      var NOT_EMPTY = /\S+/;
-	
-	      // We can not compile top level text elements since text nodes can be merged and we will
-	      // not be able to attach scope data to them, so we will wrap them in <span>
-	      for (var i = 0, len = $compileNodes.length; i < len; i++) {
-	        var domNode = $compileNodes[i];
-	
-	        if (domNode.nodeType === NODE_TYPE_TEXT && domNode.nodeValue.match(NOT_EMPTY) /* non-empty */) {
-	          jqLiteWrapNode(domNode, $compileNodes[i] = window.document.createElement('span'));
-	        }
-	      }
-	
 	      var compositeLinkFn =
 	              compileNodes($compileNodes, transcludeFn, $compileNodes,
 	                           maxPriority, ignoreDirective, previousCompileContext);
 	      compile.$$addScopeClass($compileNodes);
 	      var namespace = null;
 	      return function publicLinkFn(scope, cloneConnectFn, options) {
+	        if (!$compileNodes) {
+	          throw $compileMinErr('multilink', 'This element has already been linked.');
+	        }
 	        assertArg(scope, 'scope');
 	
 	        if (previousCompileContext && previousCompileContext.needsNewScope) {
@@ -35371,6 +39557,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (cloneConnectFn) cloneConnectFn($linkNode, scope);
 	        if (compositeLinkFn) compositeLinkFn(scope, $linkNode, $linkNode, parentBoundTranscludeFn);
+	
+	        if (!cloneConnectFn) {
+	          $compileNodes = compositeLinkFn = null;
+	        }
 	        return $linkNode;
 	      };
 	    }
@@ -35403,12 +39593,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function compileNodes(nodeList, transcludeFn, $rootElement, maxPriority, ignoreDirective,
 	                            previousCompileContext) {
 	      var linkFns = [],
+	          // `nodeList` can be either an element's `.childNodes` (live NodeList)
+	          // or a jqLite/jQuery collection or an array
+	          notLiveList = isArray(nodeList) || (nodeList instanceof jqLite),
 	          attrs, directives, nodeLinkFn, childNodes, childLinkFn, linkFnFound, nodeLinkFnFound;
+	
 	
 	      for (var i = 0; i < nodeList.length; i++) {
 	        attrs = new Attributes();
 	
-	        // we must always refer to nodeList[i] since the nodes can be replaced underneath us.
+	        // Support: IE 11 only
+	        // Workaround for #11781 and #14924
+	        if (msie === 11) {
+	          mergeConsecutiveTextNodes(nodeList, i, notLiveList);
+	        }
+	
+	        // We must always refer to `nodeList[i]` hereafter,
+	        // since the nodes can be replaced underneath us.
 	        directives = collectDirectives(nodeList[i], [], attrs, i === 0 ? maxPriority : undefined,
 	                                        ignoreDirective);
 	
@@ -35499,6 +39700,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	
+	    function mergeConsecutiveTextNodes(nodeList, idx, notLiveList) {
+	      var node = nodeList[idx];
+	      var parent = node.parentNode;
+	      var sibling;
+	
+	      if (node.nodeType !== NODE_TYPE_TEXT) {
+	        return;
+	      }
+	
+	      while (true) {
+	        sibling = parent ? node.nextSibling : nodeList[idx + 1];
+	        if (!sibling || sibling.nodeType !== NODE_TYPE_TEXT) {
+	          break;
+	        }
+	
+	        node.nodeValue = node.nodeValue + sibling.nodeValue;
+	
+	        if (sibling.parentNode) {
+	          sibling.parentNode.removeChild(sibling);
+	        }
+	        if (notLiveList && sibling === nodeList[idx + 1]) {
+	          nodeList.splice(idx + 1, 1);
+	        }
+	      }
+	    }
+	
 	    function createBoundTranscludeFn(scope, transcludeFn, previousBoundTranscludeFn) {
 	      function boundTranscludeFn(transcludedScope, cloneFn, controllers, futureParentElement, containingScope) {
 	
@@ -35562,7 +39789,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            attr = nAttrs[j];
 	            name = attr.name;
-	            value = trim(attr.value);
+	            value = attr.value;
 	
 	            // support ngAttr attribute binding
 	            ngAttrName = directiveNormalize(name);
@@ -35618,13 +39845,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	          break;
 	        case NODE_TYPE_TEXT: /* Text Node */
-	          if (msie === 11) {
-	            // Workaround for #11781
-	            while (node.parentNode && node.nextSibling && node.nextSibling.nodeType === NODE_TYPE_TEXT) {
-	              node.nodeValue = node.nodeValue + node.nextSibling.nodeValue;
-	              node.parentNode.removeChild(node.nextSibling);
-	            }
-	          }
 	          addTextInterpolateDirective(directives, node.nodeValue);
 	          break;
 	        case NODE_TYPE_COMMENT: /* Comment */
@@ -35656,7 +39876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    /**
-	     * Given a node with an directive-start it collects all of the siblings until it finds
+	     * Given a node with a directive-start it collects all of the siblings until it finds
 	     * directive-end.
 	     * @param node
 	     * @param attrStart
@@ -35843,7 +40063,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        if (!directive.templateUrl && directive.controller) {
-	          directiveValue = directive.controller;
 	          controllerDirectives = controllerDirectives || createMap();
 	          assertNoDuplicate('\'' + directiveName + '\' controller',
 	              controllerDirectives[directiveName], directive, $compileNode);
@@ -35898,9 +40117,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            var slots = createMap();
 	
-	            $template = jqLite(jqLiteClone(compileNode)).contents();
-	
-	            if (isObject(directiveValue)) {
+	            if (!isObject(directiveValue)) {
+	              $template = jqLite(jqLiteClone(compileNode)).contents();
+	            } else {
 	
 	              // We have transclusion slots,
 	              // collect them up, compile them and store their transclusion functions
@@ -36142,22 +40361,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var controller = elementControllers[name];
 	          var bindings = controllerDirective.$$bindings.bindToController;
 	
-	          if (controller.identifier && bindings) {
-	            controller.bindingInfo =
-	              initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
-	          } else {
-	            controller.bindingInfo = {};
-	          }
-	
-	          var controllerResult = controller();
-	          if (controllerResult !== controller.instance) {
-	            // If the controller constructor has a return value, overwrite the instance
-	            // from setupControllers
-	            controller.instance = controllerResult;
-	            $element.data('$' + controllerDirective.name + 'Controller', controllerResult);
-	            if (controller.bindingInfo.removeWatches) {
-	              controller.bindingInfo.removeWatches();
+	          if (preAssignBindingsEnabled) {
+	            if (bindings) {
+	              controller.bindingInfo =
+	                initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
+	            } else {
+	              controller.bindingInfo = {};
 	            }
+	
+	            var controllerResult = controller();
+	            if (controllerResult !== controller.instance) {
+	              // If the controller constructor has a return value, overwrite the instance
+	              // from setupControllers
+	              controller.instance = controllerResult;
+	              $element.data('$' + controllerDirective.name + 'Controller', controllerResult);
+	              if (controller.bindingInfo.removeWatches) {
+	                controller.bindingInfo.removeWatches();
+	              }
+	              controller.bindingInfo =
+	                initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
+	            }
+	          } else {
+	            controller.instance = controller();
+	            $element.data('$' + controllerDirective.name + 'Controller', controller.instance);
 	            controller.bindingInfo =
 	              initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
 	          }
@@ -36386,24 +40612,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (hasDirectives.hasOwnProperty(name)) {
 	        for (var directive, directives = $injector.get(name + Suffix),
 	            i = 0, ii = directives.length; i < ii; i++) {
-	          try {
-	            directive = directives[i];
-	            if ((isUndefined(maxPriority) || maxPriority > directive.priority) &&
-	                 directive.restrict.indexOf(location) !== -1) {
-	              if (startAttrName) {
-	                directive = inherit(directive, {$$start: startAttrName, $$end: endAttrName});
-	              }
-	              if (!directive.$$bindings) {
-	                var bindings = directive.$$bindings =
-	                    parseDirectiveBindings(directive, directive.name);
-	                if (isObject(bindings.isolateScope)) {
-	                  directive.$$isolateBindings = bindings.isolateScope;
-	                }
-	              }
-	              tDirectives.push(directive);
-	              match = directive;
+	          directive = directives[i];
+	          if ((isUndefined(maxPriority) || maxPriority > directive.priority) &&
+	               directive.restrict.indexOf(location) !== -1) {
+	            if (startAttrName) {
+	              directive = inherit(directive, {$$start: startAttrName, $$end: endAttrName});
 	            }
-	          } catch (e) { $exceptionHandler(e); }
+	            if (!directive.$$bindings) {
+	              var bindings = directive.$$bindings =
+	                  parseDirectiveBindings(directive, directive.name);
+	              if (isObject(bindings.isolateScope)) {
+	                directive.$$isolateBindings = bindings.isolateScope;
+	              }
+	            }
+	            tDirectives.push(directive);
+	            match = directive;
+	          }
 	        }
 	      }
 	      return match;
@@ -36447,7 +40671,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      forEach(dst, function(value, key) {
 	        if (key.charAt(0) !== '$') {
 	          if (src[key] && src[key] !== value) {
-	            value += (key === 'style' ? ';' : ' ') + src[key];
+	            if (value.length) {
+	              value += (key === 'style' ? ';' : ' ') + src[key];
+	            } else {
+	              value = src[key];
+	            }
 	          }
 	          dst.$set(key, value, true, srcAttr[key]);
 	        }
@@ -36566,7 +40794,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	              childBoundTranscludeFn);
 	          }
 	          linkQueue = null;
-	        });
+	        }).catch(function(error) {
+	          if (error instanceof Error) {
+	            $exceptionHandler(error);
+	          }
+	        }).catch(noop);
 	
 	      return function delayedNodeLinkFn(ignoreChildLinkFn, scope, node, rootElement, boundTranscludeFn) {
 	        var childBoundTranscludeFn = boundTranscludeFn;
@@ -36666,27 +40898,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      // maction[xlink:href] can source SVG.  It's not limited to <maction>.
 	      } else if (attrNormalizedName === 'xlinkHref' ||
-	          (tag === 'form' && attrNormalizedName === 'action')
+	          (tag === 'form' && attrNormalizedName === 'action') ||
+	          // links can be stylesheets or imports, which can run script in the current origin
+	          (tag === 'link' && attrNormalizedName === 'href')
 	      ) {
 	        return $sce.RESOURCE_URL;
 	      }
 	    }
 	
 	
-	    function addAttrInterpolateDirective(node, directives, value, name, allOrNothing) {
+	    function addAttrInterpolateDirective(node, directives, value, name, isNgAttr) {
 	      var trustedContext = getTrustedContext(node, name);
-	      allOrNothing = ALL_OR_NOTHING_ATTRS[name] || allOrNothing;
+	      var mustHaveExpression = !isNgAttr;
+	      var allOrNothing = ALL_OR_NOTHING_ATTRS[name] || isNgAttr;
 	
-	      var interpolateFn = $interpolate(value, true, trustedContext, allOrNothing);
+	      var interpolateFn = $interpolate(value, mustHaveExpression, trustedContext, allOrNothing);
 	
 	      // no interpolation found -> ignore
 	      if (!interpolateFn) return;
-	
 	
 	      if (name === 'multiple' && nodeName_(node) === 'select') {
 	        throw $compileMinErr('selmulti',
 	            'Binding to the \'multiple\' attribute is not supported. Element: {0}',
 	            startingTag(node));
+	      }
+	
+	      if (EVENT_HANDLER_ATTR_REGEXP.test(name)) {
+	        throw $compileMinErr('nodomevents',
+	            'Interpolations for HTML DOM event attributes are disallowed.  Please use the ' +
+	                'ng- versions (such as ng-click instead of onclick) instead.');
 	      }
 	
 	      directives.push({
@@ -36695,12 +40935,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return {
 	              pre: function attrInterpolatePreLinkFn(scope, element, attr) {
 	                var $$observers = (attr.$$observers || (attr.$$observers = createMap()));
-	
-	                if (EVENT_HANDLER_ATTR_REGEXP.test(name)) {
-	                  throw $compileMinErr('nodomevents',
-	                      'Interpolations for HTML DOM event attributes are disallowed.  Please use the ' +
-	                          'ng- versions (such as ng-click instead of onclick) instead.');
-	                }
 	
 	                // If the attribute has changed since last $interpolate()ed
 	                var newValue = attr[name];
@@ -36835,8 +41069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	
-	    // Set up $watches for isolate scope and controller bindings. This process
-	    // only occurs for isolate scopes and new scopes with controllerAs.
+	    // Set up $watches for isolate scope and controller bindings.
 	    function initializeDirectiveBindings(scope, attrs, destination, bindings, directive) {
 	      var removeWatchCollection = [];
 	      var initialChanges = {};
@@ -36854,7 +41087,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!optional && !hasOwnProperty.call(attrs, attrName)) {
 	              destination[scopeName] = attrs[attrName] = undefined;
 	            }
-	            attrs.$observe(attrName, function(value) {
+	            removeWatch = attrs.$observe(attrName, function(value) {
 	              if (isString(value) || isBoolean(value)) {
 	                var oldValue = destination[scopeName];
 	                recordChanges(scopeName, value, oldValue);
@@ -36873,6 +41106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              destination[scopeName] = lastValue;
 	            }
 	            initialChanges[scopeName] = new SimpleChange(_UNINITIALIZED_VALUE, destination[scopeName]);
+	            removeWatchCollection.push(removeWatch);
 	            break;
 	
 	          case '=':
@@ -36928,18 +41162,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (optional && !attrs[attrName]) break;
 	
 	            parentGet = $parse(attrs[attrName]);
+	            var deepWatch = parentGet.literal;
 	
 	            var initialValue = destination[scopeName] = parentGet(scope);
 	            initialChanges[scopeName] = new SimpleChange(_UNINITIALIZED_VALUE, destination[scopeName]);
 	
 	            removeWatch = scope.$watch(parentGet, function parentValueWatchAction(newValue, oldValue) {
 	              if (oldValue === newValue) {
-	                if (oldValue === initialValue) return;
+	                if (oldValue === initialValue || (deepWatch && equals(oldValue, initialValue))) {
+	                  return;
+	                }
 	                oldValue = initialValue;
 	              }
 	              recordChanges(scopeName, newValue, oldValue);
 	              destination[scopeName] = newValue;
-	            }, parentGet.literal);
+	            }, deepWatch);
 	
 	            removeWatchCollection.push(removeWatch);
 	            break;
@@ -36959,7 +41196,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	
 	      function recordChanges(key, currentValue, previousValue) {
-	        if (isFunction(destination.$onChanges) && currentValue !== previousValue) {
+	        if (isFunction(destination.$onChanges) && currentValue !== previousValue &&
+	            // eslint-disable-next-line no-self-compare
+	            (currentValue === currentValue || previousValue === previousValue)) {
 	          // If we have not already scheduled the top level onChangesQueue handler then do so now
 	          if (!onChangesQueue) {
 	            scope.$$postDigest(flushOnChangesQueue);
@@ -37005,12 +41244,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	var PREFIX_REGEXP = /^((?:x|data)[:\-_])/i;
+	var SPECIAL_CHARS_REGEXP = /[:\-_]+(.)/g;
+	
 	/**
 	 * Converts all accepted directives format into proper directive name.
 	 * @param name Name to normalize
 	 */
 	function directiveNormalize(name) {
-	  return camelCase(name.replace(PREFIX_REGEXP, ''));
+	  return name
+	    .replace(PREFIX_REGEXP, '')
+	    .replace(SPECIAL_CHARS_REGEXP, fnCamelCaseReplace);
 	}
 	
 	/**
@@ -37099,8 +41342,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  while (i--) {
 	    var node = jqNodes[i];
-	    if (node.nodeType === NODE_TYPE_COMMENT) {
-	      splice.call(jqNodes, i, 1);
+	    if (node.nodeType === NODE_TYPE_COMMENT ||
+	       (node.nodeType === NODE_TYPE_TEXT && node.nodeValue.trim() === '')) {
+	         splice.call(jqNodes, i, 1);
 	    }
 	  }
 	  return jqNodes;
@@ -37165,6 +41409,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @ngdoc method
 	   * @name $controllerProvider#allowGlobals
 	   * @description If called, allows `$controller` to find controller constructors on `window`
+	   *
+	   * @deprecated
+	   * sinceVersion="v1.3.0"
+	   * removeVersion="v1.7.0"
+	   * This method of finding controllers has been deprecated.
 	   */
 	  this.allowGlobals = function() {
 	    globals = true;
@@ -37185,7 +41434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *    * check if a controller with given name is registered via `$controllerProvider`
 	     *    * check if evaluating the string on the current scope returns a constructor
 	     *    * if $controllerProvider#allowGlobals, check `window[constructor]` on the global
-	     *      `window` object (not recommended)
+	     *      `window` object (deprecated, not recommended)
 	     *
 	     *    The string can use the `controller as property` syntax, where the controller instance is published
 	     *    as the specified property on the `scope`; the `scope` must be injected into `locals` param for this
@@ -37227,6 +41476,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            ? controllers[constructor]
 	            : getter(locals.$scope, constructor, true) ||
 	                (globals ? getter($window, constructor, true) : undefined);
+	
+	        if (!expression) {
+	          throw $controllerMinErr('ctrlreg',
+	            'The controller with the name \'{0}\' is not registered.', constructor);
+	        }
 	
 	        assertArgFn(expression, constructor, true);
 	      }
@@ -37319,6 +41573,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }];
 	}
 	
+	
+	/**
+	 * @private
+	 * @this
+	 * Listens for document visibility change and makes the current status accessible.
+	 */
+	function $$IsDocumentHiddenProvider() {
+	  this.$get = ['$document', '$rootScope', function($document, $rootScope) {
+	    var doc = $document[0];
+	    var hidden = doc && doc.hidden;
+	
+	    $document.on('visibilitychange', changeListener);
+	
+	    $rootScope.$on('$destroy', function() {
+	      $document.off('visibilitychange', changeListener);
+	    });
+	
+	    function changeListener() {
+	      hidden = doc.hidden;
+	    }
+	
+	    return function() {
+	      return hidden;
+	    };
+	  }];
+	}
+	
 	/**
 	 * @ngdoc service
 	 * @name $exceptionHandler
@@ -37401,13 +41682,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  '[': /]$/,
 	  '{': /}$/
 	};
-	var JSON_PROTECTION_PREFIX = /^\)\]\}',?\n/;
+	var JSON_PROTECTION_PREFIX = /^\)]\}',?\n/;
 	var $httpMinErr = minErr('$http');
-	var $httpMinErrLegacyFn = function(method) {
-	  return function() {
-	    throw $httpMinErr('legacy', 'The method `{0}` on the promise returned from `$http` has been disabled.', method);
-	  };
-	};
 	
 	function serializeValue(v) {
 	  if (isObject(v)) {
@@ -37589,7 +41865,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {(string|Object)} headers Headers to provide access to.
 	 * @returns {function(string=)} Returns a getter function which if called with:
 	 *
-	 *   - if called with single an argument returns a single header value or null
+	 *   - if called with an argument returns a single header value or null
 	 *   - if called with no arguments returns an object containing all headers.
 	 */
 	function headersGetter(headers) {
@@ -37680,6 +41956,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *  If specified as string, it is interpreted as a function registered with the {@link auto.$injector $injector}.
 	   *  Defaults to {@link ng.$httpParamSerializer $httpParamSerializer}.
 	   *
+	   * - **`defaults.jsonpCallbackParam`** - `{string}` - the name of the query parameter that passes the name of the
+	   * callback in a JSONP request. The value of this parameter will be replaced with the expression generated by the
+	   * {@link $jsonpCallbacks} service. Defaults to `'callback'`.
+	   *
 	   **/
 	  var defaults = this.defaults = {
 	    // transform incoming response data
@@ -37703,7 +41983,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    xsrfCookieName: 'XSRF-TOKEN',
 	    xsrfHeaderName: 'X-XSRF-TOKEN',
 	
-	    paramSerializer: '$httpParamSerializer'
+	    paramSerializer: '$httpParamSerializer',
+	
+	    jsonpCallbackParam: 'callback'
 	  };
 	
 	  var useApplyAsync = false;
@@ -37734,30 +42016,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return useApplyAsync;
 	  };
 	
-	  var useLegacyPromise = true;
-	  /**
-	   * @ngdoc method
-	   * @name $httpProvider#useLegacyPromiseExtensions
-	   * @description
-	   *
-	   * Configure `$http` service to return promises without the shorthand methods `success` and `error`.
-	   * This should be used to make sure that applications work without these methods.
-	   *
-	   * Defaults to true. If no value is specified, returns the current configured value.
-	   *
-	   * @param {boolean=} value If true, `$http` will return a promise with the deprecated legacy `success` and `error` methods.
-	   *
-	   * @returns {boolean|Object} If a value is specified, returns the $httpProvider for chaining.
-	   *    otherwise, returns the current configured value.
-	   **/
-	  this.useLegacyPromiseExtensions = function(value) {
-	    if (isDefined(value)) {
-	      useLegacyPromise = !!value;
-	      return this;
-	    }
-	    return useLegacyPromise;
-	  };
-	
 	  /**
 	   * @ngdoc property
 	   * @name $httpProvider#interceptors
@@ -37773,8 +42031,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   **/
 	  var interceptorFactories = this.interceptors = [];
 	
-	  this.$get = ['$httpBackend', '$$cookieReader', '$cacheFactory', '$rootScope', '$q', '$injector',
-	      function($httpBackend, $$cookieReader, $cacheFactory, $rootScope, $q, $injector) {
+	  this.$get = ['$browser', '$httpBackend', '$$cookieReader', '$cacheFactory', '$rootScope', '$q', '$injector', '$sce',
+	      function($browser, $httpBackend, $$cookieReader, $cacheFactory, $rootScope, $q, $injector, $sce) {
 	
 	    var defaultCache = $cacheFactory('$http');
 	
@@ -37891,14 +42149,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * $httpBackend.flush();
 	     * ```
 	     *
-	     * ## Deprecation Notice
-	     * <div class="alert alert-danger">
-	     *   The `$http` legacy promise methods `success` and `error` have been deprecated.
-	     *   Use the standard `then` method instead.
-	     *   If {@link $httpProvider#useLegacyPromiseExtensions `$httpProvider.useLegacyPromiseExtensions`} is set to
-	     *   `false` then these methods will throw {@link $http:legacy `$http/legacy`} error.
-	     * </div>
-	     *
 	     * ## Setting HTTP Headers
 	     *
 	     * The $http service will automatically add certain HTTP headers to all requests. These defaults
@@ -37906,7 +42156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * object, which currently contains this default configuration:
 	     *
 	     * - `$httpProvider.defaults.headers.common` (headers that are common for all requests):
-	     *   - `Accept: application/json, text/plain, * / *`
+	     *   - <code>Accept: application/json, text/plain, \*&#65279;/&#65279;\*</code>
 	     * - `$httpProvider.defaults.headers.post`: (header defaults for POST requests)
 	     *   - `Content-Type: application/json`
 	     * - `$httpProvider.defaults.headers.put` (header defaults for PUT requests)
@@ -38196,7 +42446,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *    processed. The object has following properties:
 	     *
 	     *    - **method** – `{string}` – HTTP method (e.g. 'GET', 'POST', etc)
-	     *    - **url** – `{string}` – Absolute or relative URL of the resource that is being requested.
+	     *    - **url** – `{string|TrustedObject}` – Absolute or relative URL of the resource that is being requested;
+	     *      or an object created by a call to `$sce.trustAsResourceUrl(url)`.
 	     *    - **params** – `{Object.<string|Object>}` – Map of strings or objects which will be serialized
 	     *      with the `paramSerializer` and appended as GET parameters.
 	     *    - **data** – `{string|Object}` – Data to be sent as the request message data.
@@ -38262,11 +42513,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    <button id="samplegetbtn" ng-click="updateModel('GET', 'http-hello.html')">Sample GET</button>
 	    <button id="samplejsonpbtn"
 	      ng-click="updateModel('JSONP',
-	                    'https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')">
+	                    'https://angularjs.org/greet.php?name=Super%20Hero')">
 	      Sample JSONP
 	    </button>
 	    <button id="invalidjsonpbtn"
-	      ng-click="updateModel('JSONP', 'https://angularjs.org/doesntexist&callback=JSON_CALLBACK')">
+	      ng-click="updateModel('JSONP', 'https://angularjs.org/doesntexist')">
 	        Invalid JSONP
 	      </button>
 	    <pre>http status code: {{status}}</pre>
@@ -38275,6 +42526,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	</file>
 	<file name="script.js">
 	  angular.module('httpExample', [])
+	    .config(['$sceDelegateProvider', function($sceDelegateProvider) {
+	      // We must whitelist the JSONP endpoint that we are using to show that we trust it
+	      $sceDelegateProvider.resourceUrlWhitelist([
+	        'self',
+	        'https://angularjs.org/**'
+	      ]);
+	    }])
 	    .controller('FetchController', ['$scope', '$http', '$templateCache',
 	      function($scope, $http, $templateCache) {
 	        $scope.method = 'GET';
@@ -38342,15 +42600,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw minErr('$http')('badreq', 'Http request configuration must be an object.  Received: {0}', requestConfig);
 	      }
 	
-	      if (!isString(requestConfig.url)) {
-	        throw minErr('$http')('badreq', 'Http request configuration url must be a string.  Received: {0}', requestConfig.url);
+	      if (!isString($sce.valueOf(requestConfig.url))) {
+	        throw minErr('$http')('badreq', 'Http request configuration url must be a string or a $sce trusted object.  Received: {0}', requestConfig.url);
 	      }
 	
 	      var config = extend({
 	        method: 'get',
 	        transformRequest: defaults.transformRequest,
 	        transformResponse: defaults.transformResponse,
-	        paramSerializer: defaults.paramSerializer
+	        paramSerializer: defaults.paramSerializer,
+	        jsonpCallbackParam: defaults.jsonpCallbackParam
 	      }, requestConfig);
 	
 	      config.headers = mergeHeaders(requestConfig);
@@ -38358,9 +42617,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      config.paramSerializer = isString(config.paramSerializer) ?
 	          $injector.get(config.paramSerializer) : config.paramSerializer;
 	
+	      $browser.$$incOutstandingRequestCount();
+	
 	      var requestInterceptors = [];
 	      var responseInterceptors = [];
-	      var promise = $q.when(config);
+	      var promise = $q.resolve(config);
 	
 	      // apply interceptors
 	      forEach(reversedInterceptors, function(interceptor) {
@@ -38375,29 +42636,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      promise = chainInterceptors(promise, requestInterceptors);
 	      promise = promise.then(serverRequest);
 	      promise = chainInterceptors(promise, responseInterceptors);
-	
-	      if (useLegacyPromise) {
-	        promise.success = function(fn) {
-	          assertArgFn(fn, 'fn');
-	
-	          promise.then(function(response) {
-	            fn(response.data, response.status, response.headers, config);
-	          });
-	          return promise;
-	        };
-	
-	        promise.error = function(fn) {
-	          assertArgFn(fn, 'fn');
-	
-	          promise.then(null, function(response) {
-	            fn(response.data, response.status, response.headers, config);
-	          });
-	          return promise;
-	        };
-	      } else {
-	        promise.success = $httpMinErrLegacyFn('success');
-	        promise.error = $httpMinErrLegacyFn('error');
-	      }
+	      promise = promise.finally(completeOutstandingRequest);
 	
 	      return promise;
 	
@@ -38413,6 +42652,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        interceptors.length = 0;
 	
 	        return promise;
+	      }
+	
+	      function completeOutstandingRequest() {
+	        $browser.$$completeOutstandingRequest(noop);
 	      }
 	
 	      function executeHeaderFns(headers, config) {
@@ -38498,7 +42741,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @description
 	     * Shortcut method to perform `GET` request.
 	     *
-	     * @param {string} url Relative or absolute URL specifying the destination of the request
+	     * @param {string|TrustedObject} url Absolute or relative URL of the resource that is being requested;
+	     *                                   or an object created by a call to `$sce.trustAsResourceUrl(url)`.
 	     * @param {Object=} config Optional configuration object
 	     * @returns {HttpPromise} Future object
 	     */
@@ -38510,7 +42754,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @description
 	     * Shortcut method to perform `DELETE` request.
 	     *
-	     * @param {string} url Relative or absolute URL specifying the destination of the request
+	     * @param {string|TrustedObject} url Absolute or relative URL of the resource that is being requested;
+	     *                                   or an object created by a call to `$sce.trustAsResourceUrl(url)`.
 	     * @param {Object=} config Optional configuration object
 	     * @returns {HttpPromise} Future object
 	     */
@@ -38522,7 +42767,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @description
 	     * Shortcut method to perform `HEAD` request.
 	     *
-	     * @param {string} url Relative or absolute URL specifying the destination of the request
+	     * @param {string|TrustedObject} url Absolute or relative URL of the resource that is being requested;
+	     *                                   or an object created by a call to `$sce.trustAsResourceUrl(url)`.
 	     * @param {Object=} config Optional configuration object
 	     * @returns {HttpPromise} Future object
 	     */
@@ -38533,11 +42779,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * @description
 	     * Shortcut method to perform `JSONP` request.
+	     *
+	     * Note that, since JSONP requests are sensitive because the response is given full access to the browser,
+	     * the url must be declared, via {@link $sce} as a trusted resource URL.
+	     * You can trust a URL by adding it to the whitelist via
+	     * {@link $sceDelegateProvider#resourceUrlWhitelist  `$sceDelegateProvider.resourceUrlWhitelist`} or
+	     * by explicitly trusting the URL via {@link $sce#trustAsResourceUrl `$sce.trustAsResourceUrl(url)`}.
+	     *
+	     * JSONP requests must specify a callback to be used in the response from the server. This callback
+	     * is passed as a query parameter in the request. You must specify the name of this parameter by
+	     * setting the `jsonpCallbackParam` property on the request config object.
+	     *
+	     * ```
+	     * $http.jsonp('some/trusted/url', {jsonpCallbackParam: 'callback'})
+	     * ```
+	     *
+	     * You can also specify a default callback parameter name in `$http.defaults.jsonpCallbackParam`.
+	     * Initially this is set to `'callback'`.
+	     *
+	     * <div class="alert alert-danger">
+	     * You can no longer use the `JSON_CALLBACK` string as a placeholder for specifying where the callback
+	     * parameter value should go.
+	     * </div>
+	     *
 	     * If you would like to customise where and how the callbacks are stored then try overriding
 	     * or decorating the {@link $jsonpCallbacks} service.
 	     *
-	     * @param {string} url Relative or absolute URL specifying the destination of the request.
-	     *                     The name of the callback should be the string `JSON_CALLBACK`.
+	     * @param {string|TrustedObject} url Absolute or relative URL of the resource that is being requested;
+	     *                                   or an object created by a call to `$sce.trustAsResourceUrl(url)`.
 	     * @param {Object=} config Optional configuration object
 	     * @returns {HttpPromise} Future object
 	     */
@@ -38636,11 +42905,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	          cache,
 	          cachedResp,
 	          reqHeaders = config.headers,
-	          url = buildUrl(config.url, config.paramSerializer(config.params));
+	          isJsonp = lowercase(config.method) === 'jsonp',
+	          url = config.url;
+	
+	      if (isJsonp) {
+	        // JSONP is a pretty sensitive operation where we're allowing a script to have full access to
+	        // our DOM and JS space.  So we require that the URL satisfies SCE.RESOURCE_URL.
+	        url = $sce.getTrustedResourceUrl(url);
+	      } else if (!isString(url)) {
+	        // If it is not a string then the URL must be a $sce trusted object
+	        url = $sce.valueOf(url);
+	      }
+	
+	      url = buildUrl(url, config.paramSerializer(config.params));
+	
+	      if (isJsonp) {
+	        // Check the url and add the JSONP callback placeholder
+	        url = sanitizeJsonpCallbackParam(url, config.jsonpCallbackParam);
+	      }
 	
 	      $http.pendingRequests.push(config);
 	      promise.then(removePendingReq, removePendingReq);
-	
 	
 	      if ((config.cache || defaults.cache) && config.cache !== false &&
 	          (config.method === 'GET' || config.method === 'JSONP')) {
@@ -38773,6 +43058,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return url;
 	    }
+	
+	    function sanitizeJsonpCallbackParam(url, key) {
+	      if (/[&?][^=]+=JSON_CALLBACK/.test(url)) {
+	        // Throw if the url already contains a reference to JSON_CALLBACK
+	        throw $httpMinErr('badjsonp', 'Illegal use of JSON_CALLBACK in url, "{0}"', url);
+	      }
+	
+	      var callbackParamRegex = new RegExp('[&?]' + key + '=');
+	      if (callbackParamRegex.test(url)) {
+	        // Throw if the callback param was already provided
+	        throw $httpMinErr('badjsonp', 'Illegal use of callback param, "{0}", in url, "{1}"', key, url);
+	      }
+	
+	      // Add in the JSON_CALLBACK callback param value
+	      url += ((url.indexOf('?') === -1) ? '?' : '&') + key + '=JSON_CALLBACK';
+	
+	      return url;
+	    }
 	  }];
 	}
 	
@@ -38833,7 +43136,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDocument) {
 	  // TODO(vojta): fix the signature
 	  return function(method, url, post, callback, headers, timeout, withCredentials, responseType, eventHandlers, uploadEventHandlers) {
-	    $browser.$$incOutstandingRequestCount();
 	    url = url || $browser.url();
 	
 	    if (lowercase(method) === 'jsonp') {
@@ -38945,7 +43247,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      jsonpDone = xhr = null;
 	
 	      callback(status, response, headersString, statusText);
-	      $browser.$$completeOutstandingRequest(noop);
 	    }
 	  };
 	
@@ -38960,8 +43261,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    script.async = true;
 	
 	    callback = function(event) {
-	      removeEventListenerFn(script, 'load', callback);
-	      removeEventListenerFn(script, 'error', callback);
+	      script.removeEventListener('load', callback);
+	      script.removeEventListener('error', callback);
 	      rawDocument.body.removeChild(script);
 	      script = null;
 	      var status = -1;
@@ -38980,8 +43281,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	
-	    addEventListenerFn(script, 'load', callback);
-	    addEventListenerFn(script, 'error', callback);
+	    script.addEventListener('load', callback);
+	    script.addEventListener('error', callback);
 	    rawDocument.body.appendChild(script);
 	    return callback;
 	  }
@@ -39097,23 +43398,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function unescapeText(text) {
 	      return text.replace(escapedStartRegexp, startSymbol).
 	        replace(escapedEndRegexp, endSymbol);
-	    }
-	
-	    function stringify(value) {
-	      if (value == null) { // null || undefined
-	        return '';
-	      }
-	      switch (typeof value) {
-	        case 'string':
-	          break;
-	        case 'number':
-	          value = '' + value;
-	          break;
-	        default:
-	          value = toJson(value);
-	      }
-	
-	      return value;
 	    }
 	
 	    // TODO: this is the same as the constantWatchDelegate in parse.js
@@ -39580,6 +43864,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      */
 	    interval.cancel = function(promise) {
 	      if (promise && promise.$$intervalId in intervals) {
+	        // Interval cancels should not report as unhandled promise.
+	        intervals[promise.$$intervalId].promise.catch(noop);
 	        intervals[promise.$$intervalId].reject('canceled');
 	        $window.clearInterval(promise.$$intervalId);
 	        delete intervals[promise.$$intervalId];
@@ -39684,7 +43970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * * `id` – `{string}` – locale id formatted as `languageId-countryId` (e.g. `en-us`)
 	 */
 	
-	var PATH_MATCH = /^([^\?#]*)(\?([^#]*))?(#(.*))?$/,
+	var PATH_MATCH = /^([^?#]*)(\?([^#]*))?(#(.*))?$/,
 	    DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
 	var $locationMinErr = minErr('$location');
 	
@@ -39737,8 +44023,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	function startsWith(haystack, needle) {
-	  return haystack.lastIndexOf(needle, 0) === 0;
+	function startsWith(str, search) {
+	  return str.slice(0, search.length) === search;
 	}
 	
 	/**
@@ -39776,13 +44062,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	/**
-	 * LocationHtml5Url represents an url
+	 * LocationHtml5Url represents a URL
 	 * This object is exposed as $location service when HTML5 mode is enabled and supported
 	 *
 	 * @constructor
 	 * @param {string} appBase application base URL
 	 * @param {string} appBaseNoFile application base URL stripped of any filename
-	 * @param {string} basePrefix url path prefix
+	 * @param {string} basePrefix URL path prefix
 	 */
 	function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
 	  this.$$html5 = true;
@@ -39791,8 +44077,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  /**
-	   * Parse given html5 (regular) url string into properties
-	   * @param {string} url HTML5 url
+	   * Parse given HTML5 (regular) URL string into properties
+	   * @param {string} url HTML5 URL
 	   * @private
 	   */
 	  this.$$parse = function(url) {
@@ -39855,7 +44141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	/**
-	 * LocationHashbangUrl represents url
+	 * LocationHashbangUrl represents URL
 	 * This object is exposed as $location service when developer doesn't opt into html5 mode.
 	 * It also serves as the base class for html5 mode fallback on legacy browsers.
 	 *
@@ -39870,8 +44156,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  /**
-	   * Parse given hashbang url into properties
-	   * @param {string} url Hashbang url
+	   * Parse given hashbang URL into properties
+	   * @param {string} url Hashbang URL
 	   * @private
 	   */
 	  this.$$parse = function(url) {
@@ -39880,7 +44166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (!isUndefined(withoutBaseUrl) && withoutBaseUrl.charAt(0) === '#') {
 	
-	      // The rest of the url starts with a hash so we have
+	      // The rest of the URL starts with a hash so we have
 	      // got either a hashbang path or a plain hash fragment
 	      withoutHashUrl = stripBaseUrl(hashPrefix, withoutBaseUrl);
 	      if (isUndefined(withoutHashUrl)) {
@@ -39945,7 +44231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  /**
-	   * Compose hashbang url and update `absUrl` property
+	   * Compose hashbang URL and update `absUrl` property
 	   * @private
 	   */
 	  this.$$compose = function() {
@@ -39967,7 +44253,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	/**
-	 * LocationHashbangUrl represents url
+	 * LocationHashbangUrl represents URL
 	 * This object is exposed as $location service when html5 history api is enabled but the browser
 	 * does not support it.
 	 *
@@ -40019,7 +44305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var locationPrototype = {
 	
 	  /**
-	   * Ensure absolute url is initialized.
+	   * Ensure absolute URL is initialized.
 	   * @private
 	   */
 	  $$absUrl:'',
@@ -40043,17 +44329,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter only.
 	   *
-	   * Return full url representation with all segments encoded according to rules specified in
+	   * Return full URL representation with all segments encoded according to rules specified in
 	   * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var absUrl = $location.absUrl();
 	   * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
 	   * ```
 	   *
-	   * @return {string} full url
+	   * @return {string} full URL
 	   */
 	  absUrl: locationGetter('$$absUrl'),
 	
@@ -40064,18 +44350,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter / setter.
 	   *
-	   * Return url (e.g. `/path?a=b#hash`) when called without any parameter.
+	   * Return URL (e.g. `/path?a=b#hash`) when called without any parameter.
 	   *
 	   * Change path, search and hash, when called with parameter and return `$location`.
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var url = $location.url();
 	   * // => "/some/path?foo=bar&baz=xoxo"
 	   * ```
 	   *
-	   * @param {string=} url New url without base prefix (e.g. `/path?a=b#hash`)
+	   * @param {string=} url New URL without base prefix (e.g. `/path?a=b#hash`)
 	   * @return {string} url
 	   */
 	  url: function(url) {
@@ -40098,16 +44384,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter only.
 	   *
-	   * Return protocol of current url.
+	   * Return protocol of current URL.
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var protocol = $location.protocol();
 	   * // => "http"
 	   * ```
 	   *
-	   * @return {string} protocol of current url
+	   * @return {string} protocol of current URL
 	   */
 	  protocol: locationGetter('$$protocol'),
 	
@@ -40118,24 +44404,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter only.
 	   *
-	   * Return host of current url.
+	   * Return host of current URL.
 	   *
 	   * Note: compared to the non-angular version `location.host` which returns `hostname:port`, this returns the `hostname` portion only.
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var host = $location.host();
 	   * // => "example.com"
 	   *
-	   * // given url http://user:password@example.com:8080/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://user:password@example.com:8080/#/some/path?foo=bar&baz=xoxo
 	   * host = $location.host();
 	   * // => "example.com"
 	   * host = location.host;
 	   * // => "example.com:8080"
 	   * ```
 	   *
-	   * @return {string} host of current url.
+	   * @return {string} host of current URL.
 	   */
 	  host: locationGetter('$$host'),
 	
@@ -40146,11 +44432,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter only.
 	   *
-	   * Return port of current url.
+	   * Return port of current URL.
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var port = $location.port();
 	   * // => 80
 	   * ```
@@ -40166,7 +44452,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter / setter.
 	   *
-	   * Return path of current url when called without any parameter.
+	   * Return path of current URL when called without any parameter.
 	   *
 	   * Change path when called with parameter and return `$location`.
 	   *
@@ -40175,7 +44461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var path = $location.path();
 	   * // => "/some/path"
 	   * ```
@@ -40195,13 +44481,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * This method is getter / setter.
 	   *
-	   * Return search part (as object) of current url when called without any parameter.
+	   * Return search part (as object) of current URL when called without any parameter.
 	   *
 	   * Change search part when called with parameter and return `$location`.
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo
 	   * var searchObject = $location.search();
 	   * // => {foo: 'bar', baz: 'xoxo'}
 	   *
@@ -40217,7 +44503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * of `$location` to the specified value.
 	   *
 	   * If the argument is a hash object containing an array of values, these values will be encoded
-	   * as duplicate search parameters in the url.
+	   * as duplicate search parameters in the URL.
 	   *
 	   * @param {(string|Number|Array<string>|boolean)=} paramValue If `search` is a string or number, then `paramValue`
 	   * will override only a single search property.
@@ -40279,7 +44565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   *
 	   * ```js
-	   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo#hashValue
+	   * // given URL http://example.com/#/some/path?foo=bar&baz=xoxo#hashValue
 	   * var hash = $location.hash();
 	   * // => "hashValue"
 	   * ```
@@ -40402,7 +44688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Use the `$locationProvider` to configure how the application deep linking paths are stored.
 	 */
 	function $LocationProvider() {
-	  var hashPrefix = '',
+	  var hashPrefix = '!',
 	      html5Mode = {
 	        enabled: false,
 	        requireBase: true,
@@ -40413,6 +44699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @ngdoc method
 	   * @name $locationProvider#hashPrefix
 	   * @description
+	   * The default value for the prefix is `'!'`.
 	   * @param {string=} prefix Prefix for hash part (containing path and search)
 	   * @returns {*} current value if used as getter or itself (chaining) if used as setter
 	   */
@@ -40439,8 +44726,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *     whether or not a <base> tag is required to be present. If `enabled` and `requireBase` are
 	   *     true, and a base tag is not present, an error will be thrown when `$location` is injected.
 	   *     See the {@link guide/$location $location guide for more information}
-	   *   - **rewriteLinks** - `{boolean}` - (default: `true`) When html5Mode is enabled,
-	   *     enables/disables url rewriting for relative links.
+	   *   - **rewriteLinks** - `{boolean|string}` - (default: `true`) When html5Mode is enabled,
+	   *     enables/disables URL rewriting for relative links. If set to a string, URL rewriting will
+	   *     only happen on links with an attribute that matches the given string. For example, if set
+	   *     to `'internal-link'`, then the URL will only be rewritten for `<a internal-link>` links.
+	   *     Note that [attribute name normalization](guide/directive#normalization) does not apply
+	   *     here, so `'internalLink'` will **not** match `'internal-link'`.
 	   *
 	   * @returns {Object} html5Mode object if used as getter or itself (chaining) if used as setter
 	   */
@@ -40458,7 +44749,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        html5Mode.requireBase = mode.requireBase;
 	      }
 	
-	      if (isBoolean(mode.rewriteLinks)) {
+	      if (isBoolean(mode.rewriteLinks) || isString(mode.rewriteLinks)) {
 	        html5Mode.rewriteLinks = mode.rewriteLinks;
 	      }
 	
@@ -40555,10 +44846,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    $rootElement.on('click', function(event) {
+	      var rewriteLinks = html5Mode.rewriteLinks;
 	      // TODO(vojta): rewrite link when opening in new tab/window (in legacy browser)
 	      // currently we open nice url link and redirect then
 	
-	      if (!html5Mode.rewriteLinks || event.ctrlKey || event.metaKey || event.shiftKey || event.which === 2 || event.button === 2) return;
+	      if (!rewriteLinks || event.ctrlKey || event.metaKey || event.shiftKey || event.which === 2 || event.button === 2) return;
 	
 	      var elm = jqLite(event.target);
 	
@@ -40567,6 +44859,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // ignore rewriting if no A tag (reached root element, or no parent - removed from document)
 	        if (elm[0] === $rootElement[0] || !(elm = elm.parent())[0]) return;
 	      }
+	
+	      if (isString(rewriteLinks) && isUndefined(elm.attr(rewriteLinks))) return;
 	
 	      var absHref = elm.prop('href');
 	      // get the actual href attribute - see
@@ -40609,7 +44903,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // update $location when $browser url changes
 	    $browser.onUrlChange(function(newUrl, newState) {
 	
-	      if (isUndefined(stripBaseUrl(appBaseNoFile, newUrl))) {
+	      if (!startsWith(newUrl, appBaseNoFile)) {
 	        // If we are navigating outside of the app then force a reload
 	        $window.location.href = newUrl;
 	        return;
@@ -40869,59 +45163,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var $parseMinErr = minErr('$parse');
 	
-	var ARRAY_CTOR = [].constructor;
-	var BOOLEAN_CTOR = (false).constructor;
-	var FUNCTION_CTOR = Function.constructor;
-	var NUMBER_CTOR = (0).constructor;
-	var OBJECT_CTOR = {}.constructor;
-	var STRING_CTOR = ''.constructor;
-	var ARRAY_CTOR_PROTO = ARRAY_CTOR.prototype;
-	var BOOLEAN_CTOR_PROTO = BOOLEAN_CTOR.prototype;
-	var FUNCTION_CTOR_PROTO = FUNCTION_CTOR.prototype;
-	var NUMBER_CTOR_PROTO = NUMBER_CTOR.prototype;
-	var OBJECT_CTOR_PROTO = OBJECT_CTOR.prototype;
-	var STRING_CTOR_PROTO = STRING_CTOR.prototype;
-	
-	var CALL = FUNCTION_CTOR_PROTO.call;
-	var APPLY = FUNCTION_CTOR_PROTO.apply;
-	var BIND = FUNCTION_CTOR_PROTO.bind;
-	
-	var objectValueOf = OBJECT_CTOR_PROTO.valueOf;
+	var objectValueOf = {}.constructor.prototype.valueOf;
 	
 	// Sandboxing Angular Expressions
 	// ------------------------------
-	// Angular expressions are generally considered safe because these expressions only have direct
-	// access to `$scope` and locals. However, one can obtain the ability to execute arbitrary JS code by
-	// obtaining a reference to native JS functions such as the Function constructor.
+	// Angular expressions are no longer sandboxed. So it is now even easier to access arbitrary JS code by
+	// various means such as obtaining a reference to native JS functions like the Function constructor.
 	//
 	// As an example, consider the following Angular expression:
 	//
 	//   {}.toString.constructor('alert("evil JS code")')
 	//
-	// This sandboxing technique is not perfect and doesn't aim to be. The goal is to prevent exploits
-	// against the expression language, but not to prevent exploits that were enabled by exposing
-	// sensitive JavaScript or browser APIs on Scope. Exposing such objects on a Scope is never a good
-	// practice and therefore we are not even trying to protect against interaction with an object
-	// explicitly exposed in this way.
-	//
-	// In general, it is not possible to access a Window object from an angular expression unless a
-	// window or some DOM object that has a reference to window is published onto a Scope.
-	// Similarly we prevent invocations of function known to be dangerous, as well as assignments to
-	// native objects.
+	// It is important to realize that if you create an expression from a string that contains user provided
+	// content then it is possible that your application contains a security vulnerability to an XSS style attack.
 	//
 	// See https://docs.angularjs.org/guide/security
 	
-	
-	function ensureSafeMemberName(name, fullExpression) {
-	  if (name === '__defineGetter__' || name === '__defineSetter__'
-	      || name === '__lookupGetter__' || name === '__lookupSetter__'
-	      || name === '__proto__') {
-	    throw $parseMinErr('isecfld',
-	        'Attempting to access a disallowed field in Angular expressions! '
-	        + 'Expression: {0}', fullExpression);
-	  }
-	  return name;
-	}
 	
 	function getStringValue(name) {
 	  // Property names must be strings. This means that non-string objects cannot be used
@@ -40941,67 +45198,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return name + '';
 	}
 	
-	function ensureSafeObject(obj, fullExpression) {
-	  // nifty check if obj is Function that is fast and works across iframes and other contexts
-	  if (obj) {
-	    if (obj.constructor === obj) {
-	      throw $parseMinErr('isecfn',
-	          'Referencing Function in Angular expressions is disallowed! Expression: {0}',
-	          fullExpression);
-	    } else if (// isWindow(obj)
-	        obj.window === obj) {
-	      throw $parseMinErr('isecwindow',
-	          'Referencing the Window in Angular expressions is disallowed! Expression: {0}',
-	          fullExpression);
-	    } else if (// isElement(obj)
-	        obj.children && (obj.nodeName || (obj.prop && obj.attr && obj.find))) {
-	      throw $parseMinErr('isecdom',
-	          'Referencing DOM nodes in Angular expressions is disallowed! Expression: {0}',
-	          fullExpression);
-	    } else if (// block Object so that we can't get hold of dangerous Object.* methods
-	        obj === Object) {
-	      throw $parseMinErr('isecobj',
-	          'Referencing Object in Angular expressions is disallowed! Expression: {0}',
-	          fullExpression);
-	    }
-	  }
-	  return obj;
-	}
-	
-	function ensureSafeFunction(obj, fullExpression) {
-	  if (obj) {
-	    if (obj.constructor === obj) {
-	      throw $parseMinErr('isecfn',
-	        'Referencing Function in Angular expressions is disallowed! Expression: {0}',
-	        fullExpression);
-	    } else if (obj === CALL || obj === APPLY || obj === BIND) {
-	      throw $parseMinErr('isecff',
-	        'Referencing call, apply or bind in Angular expressions is disallowed! Expression: {0}',
-	        fullExpression);
-	    }
-	  }
-	}
-	
-	function ensureSafeAssignContext(obj, fullExpression) {
-	  if (obj) {
-	    if (obj === ARRAY_CTOR ||
-	        obj === BOOLEAN_CTOR ||
-	        obj === FUNCTION_CTOR ||
-	        obj === NUMBER_CTOR ||
-	        obj === OBJECT_CTOR ||
-	        obj === STRING_CTOR ||
-	        obj === ARRAY_CTOR_PROTO ||
-	        obj === BOOLEAN_CTOR_PROTO ||
-	        obj === FUNCTION_CTOR_PROTO ||
-	        obj === NUMBER_CTOR_PROTO ||
-	        obj === OBJECT_CTOR_PROTO ||
-	        obj === STRING_CTOR_PROTO) {
-	      throw $parseMinErr('isecaf',
-	        'Assigning to a constructor or its prototype is disallowed! Expression: {0}',
-	        fullExpression);
-	    }
-	  }
-	}
 	
 	var OPERATORS = createMap();
 	forEach('+ - * / % === !== == != < > <= >= && || ! = |'.split(' '), function(operator) { OPERATORS[operator] = true; });
@@ -41292,6 +45488,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  assignment: function() {
 	    var result = this.ternary();
 	    if (this.expect('=')) {
+	      if (!isAssignable(result)) {
+	        throw $parseMinErr('lval', 'Trying to assign a value to a non l-value');
+	      }
+	
 	      result = { type: AST.AssignmentExpression, left: result, right: this.assignment(), operator: '='};
 	    }
 	    return result;
@@ -41718,13 +45918,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	ASTCompiler.prototype = {
-	  compile: function(expression, expensiveChecks) {
+	  compile: function(expression) {
 	    var self = this;
 	    var ast = this.astBuilder.ast(expression);
 	    this.state = {
 	      nextId: 0,
 	      filters: {},
-	      expensiveChecks: expensiveChecks,
 	      fn: {vars: [], body: [], own: {}},
 	      assign: {vars: [], body: [], own: {}},
 	      inputs: []
@@ -41767,24 +45966,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    // eslint-disable-next-line no-new-func
 	    var fn = (new Function('$filter',
-	        'ensureSafeMemberName',
-	        'ensureSafeObject',
-	        'ensureSafeFunction',
 	        'getStringValue',
-	        'ensureSafeAssignContext',
 	        'ifDefined',
 	        'plus',
-	        'text',
 	        fnString))(
 	          this.$filter,
-	          ensureSafeMemberName,
-	          ensureSafeObject,
-	          ensureSafeFunction,
 	          getStringValue,
-	          ensureSafeAssignContext,
 	          ifDefined,
-	          plusFn,
-	          expression);
+	          plusFn);
 	    this.state = this.stage = undefined;
 	    fn.literal = isLiteral(ast);
 	    fn.constant = isConstant(ast);
@@ -41858,7 +46047,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case AST.Literal:
 	      expression = this.escape(ast.value);
 	      this.assign(intoId, expression);
-	      recursionFn(expression);
+	      recursionFn(intoId || expression);
 	      break;
 	    case AST.UnaryExpression:
 	      this.recurse(ast.argument, undefined, undefined, function(expr) { right = expr; });
@@ -41898,22 +46087,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	        nameId.computed = false;
 	        nameId.name = ast.name;
 	      }
-	      ensureSafeMemberName(ast.name);
 	      self.if_(self.stage === 'inputs' || self.not(self.getHasOwnProperty('l', ast.name)),
 	        function() {
 	          self.if_(self.stage === 'inputs' || 's', function() {
 	            if (create && create !== 1) {
 	              self.if_(
-	                self.not(self.nonComputedMember('s', ast.name)),
+	                self.isNull(self.nonComputedMember('s', ast.name)),
 	                self.lazyAssign(self.nonComputedMember('s', ast.name), '{}'));
 	            }
 	            self.assign(intoId, self.nonComputedMember('s', ast.name));
 	          });
 	        }, intoId && self.lazyAssign(intoId, self.nonComputedMember('l', ast.name))
 	        );
-	      if (self.state.expensiveChecks || isPossiblyDangerousMemberName(ast.name)) {
-	        self.addEnsureSafeObject(intoId);
-	      }
 	      recursionFn(intoId);
 	      break;
 	    case AST.MemberExpression:
@@ -41921,32 +46106,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      intoId = intoId || this.nextId();
 	      self.recurse(ast.object, left, undefined, function() {
 	        self.if_(self.notNull(left), function() {
-	          if (create && create !== 1) {
-	            self.addEnsureSafeAssignContext(left);
-	          }
 	          if (ast.computed) {
 	            right = self.nextId();
 	            self.recurse(ast.property, right);
 	            self.getStringValue(right);
-	            self.addEnsureSafeMemberName(right);
 	            if (create && create !== 1) {
 	              self.if_(self.not(self.computedMember(left, right)), self.lazyAssign(self.computedMember(left, right), '{}'));
 	            }
-	            expression = self.ensureSafeObject(self.computedMember(left, right));
+	            expression = self.computedMember(left, right);
 	            self.assign(intoId, expression);
 	            if (nameId) {
 	              nameId.computed = true;
 	              nameId.name = right;
 	            }
 	          } else {
-	            ensureSafeMemberName(ast.property.name);
 	            if (create && create !== 1) {
-	              self.if_(self.not(self.nonComputedMember(left, ast.property.name)), self.lazyAssign(self.nonComputedMember(left, ast.property.name), '{}'));
+	              self.if_(self.isNull(self.nonComputedMember(left, ast.property.name)), self.lazyAssign(self.nonComputedMember(left, ast.property.name), '{}'));
 	            }
 	            expression = self.nonComputedMember(left, ast.property.name);
-	            if (self.state.expensiveChecks || isPossiblyDangerousMemberName(ast.property.name)) {
-	              expression = self.ensureSafeObject(expression);
-	            }
 	            self.assign(intoId, expression);
 	            if (nameId) {
 	              nameId.computed = false;
@@ -41978,21 +46155,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        args = [];
 	        self.recurse(ast.callee, right, left, function() {
 	          self.if_(self.notNull(right), function() {
-	            self.addEnsureSafeFunction(right);
 	            forEach(ast.arguments, function(expr) {
-	              self.recurse(expr, self.nextId(), undefined, function(argument) {
-	                args.push(self.ensureSafeObject(argument));
+	              self.recurse(expr, ast.constant ? undefined : self.nextId(), undefined, function(argument) {
+	                args.push(argument);
 	              });
 	            });
 	            if (left.name) {
-	              if (!self.state.expensiveChecks) {
-	                self.addEnsureSafeObject(left.context);
-	              }
 	              expression = self.member(left.context, left.name, left.computed) + '(' + args.join(',') + ')';
 	            } else {
 	              expression = right + '(' + args.join(',') + ')';
 	            }
-	            expression = self.ensureSafeObject(expression);
 	            self.assign(intoId, expression);
 	          }, function() {
 	            self.assign(intoId, 'undefined');
@@ -42004,14 +46176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case AST.AssignmentExpression:
 	      right = this.nextId();
 	      left = {};
-	      if (!isAssignable(ast.left)) {
-	        throw $parseMinErr('lval', 'Trying to assign a value to a non l-value');
-	      }
 	      this.recurse(ast.left, undefined, left, function() {
 	        self.if_(self.notNull(left.context), function() {
 	          self.recurse(ast.right, right);
-	          self.addEnsureSafeObject(self.member(left.context, left.name, left.computed));
-	          self.addEnsureSafeAssignContext(left.context);
 	          expression = self.member(left.context, left.name, left.computed) + ast.operator + right;
 	          self.assign(intoId, expression);
 	          recursionFn(intoId || expression);
@@ -42021,13 +46188,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case AST.ArrayExpression:
 	      args = [];
 	      forEach(ast.elements, function(expr) {
-	        self.recurse(expr, self.nextId(), undefined, function(argument) {
+	        self.recurse(expr, ast.constant ? undefined : self.nextId(), undefined, function(argument) {
 	          args.push(argument);
 	        });
 	      });
 	      expression = '[' + args.join(',') + ']';
 	      this.assign(intoId, expression);
-	      recursionFn(expression);
+	      recursionFn(intoId || expression);
 	      break;
 	    case AST.ObjectExpression:
 	      args = [];
@@ -42069,15 +46236,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      break;
 	    case AST.ThisExpression:
 	      this.assign(intoId, 's');
-	      recursionFn('s');
+	      recursionFn(intoId || 's');
 	      break;
 	    case AST.LocalsExpression:
 	      this.assign(intoId, 'l');
-	      recursionFn('l');
+	      recursionFn(intoId || 'l');
 	      break;
 	    case AST.NGValueParameter:
 	      this.assign(intoId, 'v');
-	      recursionFn('v');
+	      recursionFn(intoId || 'v');
 	      break;
 	    }
 	  },
@@ -42136,6 +46303,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return '!(' + expression + ')';
 	  },
 	
+	  isNull: function(expression) {
+	    return expression + '==null';
+	  },
+	
 	  notNull: function(expression) {
 	    return expression + '!=null';
 	  },
@@ -42159,40 +46330,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return this.nonComputedMember(left, right);
 	  },
 	
-	  addEnsureSafeObject: function(item) {
-	    this.current().body.push(this.ensureSafeObject(item), ';');
-	  },
-	
-	  addEnsureSafeMemberName: function(item) {
-	    this.current().body.push(this.ensureSafeMemberName(item), ';');
-	  },
-	
-	  addEnsureSafeFunction: function(item) {
-	    this.current().body.push(this.ensureSafeFunction(item), ';');
-	  },
-	
-	  addEnsureSafeAssignContext: function(item) {
-	    this.current().body.push(this.ensureSafeAssignContext(item), ';');
-	  },
-	
-	  ensureSafeObject: function(item) {
-	    return 'ensureSafeObject(' + item + ',text)';
-	  },
-	
-	  ensureSafeMemberName: function(item) {
-	    return 'ensureSafeMemberName(' + item + ',text)';
-	  },
-	
-	  ensureSafeFunction: function(item) {
-	    return 'ensureSafeFunction(' + item + ',text)';
-	  },
-	
 	  getStringValue: function(item) {
 	    this.assign(item, 'getStringValue(' + item + ')');
-	  },
-	
-	  ensureSafeAssignContext: function(item) {
-	    return 'ensureSafeAssignContext(' + item + ',text)';
 	  },
 	
 	  lazyRecurse: function(ast, intoId, nameId, recursionFn, create, skipWatchIdCheck) {
@@ -42246,11 +46385,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	ASTInterpreter.prototype = {
-	  compile: function(expression, expensiveChecks) {
+	  compile: function(expression) {
 	    var self = this;
 	    var ast = this.astBuilder.ast(expression);
-	    this.expression = expression;
-	    this.expensiveChecks = expensiveChecks;
 	    findConstantAndWatchExpressions(ast, self.$filter);
 	    var assignable;
 	    var assign;
@@ -42321,20 +46458,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        context
 	      );
 	    case AST.Identifier:
-	      ensureSafeMemberName(ast.name, self.expression);
-	      return self.identifier(ast.name,
-	                             self.expensiveChecks || isPossiblyDangerousMemberName(ast.name),
-	                             context, create, self.expression);
+	      return self.identifier(ast.name, context, create);
 	    case AST.MemberExpression:
 	      left = this.recurse(ast.object, false, !!create);
 	      if (!ast.computed) {
-	        ensureSafeMemberName(ast.property.name, self.expression);
 	        right = ast.property.name;
 	      }
 	      if (ast.computed) right = this.recurse(ast.property);
 	      return ast.computed ?
-	        this.computedMember(left, right, context, create, self.expression) :
-	        this.nonComputedMember(left, right, self.expensiveChecks, context, create, self.expression);
+	        this.computedMember(left, right, context, create) :
+	        this.nonComputedMember(left, right, context, create);
 	    case AST.CallExpression:
 	      args = [];
 	      forEach(ast.arguments, function(expr) {
@@ -42355,13 +46488,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var rhs = right(scope, locals, assign, inputs);
 	          var value;
 	          if (rhs.value != null) {
-	            ensureSafeObject(rhs.context, self.expression);
-	            ensureSafeFunction(rhs.value, self.expression);
 	            var values = [];
 	            for (var i = 0; i < args.length; ++i) {
-	              values.push(ensureSafeObject(args[i](scope, locals, assign, inputs), self.expression));
+	              values.push(args[i](scope, locals, assign, inputs));
 	            }
-	            value = ensureSafeObject(rhs.value.apply(rhs.context, values), self.expression);
+	            value = rhs.value.apply(rhs.context, values);
 	          }
 	          return context ? {value: value} : value;
 	        };
@@ -42371,8 +46502,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return function(scope, locals, assign, inputs) {
 	        var lhs = left(scope, locals, assign, inputs);
 	        var rhs = right(scope, locals, assign, inputs);
-	        ensureSafeObject(lhs.value, self.expression);
-	        ensureSafeAssignContext(lhs.context);
 	        lhs.context[lhs.name] = rhs;
 	        return context ? {value: rhs} : rhs;
 	      };
@@ -42448,7 +46577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (isDefined(arg)) {
 	        arg = -arg;
 	      } else {
-	        arg = 0;
+	        arg = -0;
 	      }
 	      return context ? {value: arg} : arg;
 	    };
@@ -42564,16 +46693,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: function(value, context) {
 	    return function() { return context ? {context: undefined, name: undefined, value: value} : value; };
 	  },
-	  identifier: function(name, expensiveChecks, context, create, expression) {
+	  identifier: function(name, context, create) {
 	    return function(scope, locals, assign, inputs) {
 	      var base = locals && (name in locals) ? locals : scope;
-	      if (create && create !== 1 && base && !(base[name])) {
+	      if (create && create !== 1 && base && base[name] == null) {
 	        base[name] = {};
 	      }
 	      var value = base ? base[name] : undefined;
-	      if (expensiveChecks) {
-	        ensureSafeObject(value, expression);
-	      }
 	      if (context) {
 	        return {context: base, name: name, value: value};
 	      } else {
@@ -42581,7 +46707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	  },
-	  computedMember: function(left, right, context, create, expression) {
+	  computedMember: function(left, right, context, create) {
 	    return function(scope, locals, assign, inputs) {
 	      var lhs = left(scope, locals, assign, inputs);
 	      var rhs;
@@ -42589,15 +46715,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (lhs != null) {
 	        rhs = right(scope, locals, assign, inputs);
 	        rhs = getStringValue(rhs);
-	        ensureSafeMemberName(rhs, expression);
 	        if (create && create !== 1) {
-	          ensureSafeAssignContext(lhs);
 	          if (lhs && !(lhs[rhs])) {
 	            lhs[rhs] = {};
 	          }
 	        }
 	        value = lhs[rhs];
-	        ensureSafeObject(value, expression);
 	      }
 	      if (context) {
 	        return {context: lhs, name: rhs, value: value};
@@ -42606,19 +46729,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    };
 	  },
-	  nonComputedMember: function(left, right, expensiveChecks, context, create, expression) {
+	  nonComputedMember: function(left, right, context, create) {
 	    return function(scope, locals, assign, inputs) {
 	      var lhs = left(scope, locals, assign, inputs);
 	      if (create && create !== 1) {
-	        ensureSafeAssignContext(lhs);
-	        if (lhs && !(lhs[right])) {
+	        if (lhs && lhs[right] == null) {
 	          lhs[right] = {};
 	        }
 	      }
 	      var value = lhs != null ? lhs[right] : undefined;
-	      if (expensiveChecks || isPossiblyDangerousMemberName(right)) {
-	        ensureSafeObject(value, expression);
-	      }
 	      if (context) {
 	        return {context: lhs, name: right, value: value};
 	      } else {
@@ -42650,13 +46769,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  constructor: Parser,
 	
 	  parse: function(text) {
-	    return this.astCompiler.compile(text, this.options.expensiveChecks);
+	    return this.astCompiler.compile(text);
 	  }
 	};
-	
-	function isPossiblyDangerousMemberName(name) {
-	  return name === 'constructor';
-	}
 	
 	function getValueOf(value) {
 	  return isFunction(value.valueOf) ? value.valueOf() : objectValueOf.call(value);
@@ -42715,8 +46830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *  service.
 	 */
 	function $ParseProvider() {
-	  var cacheDefault = createMap();
-	  var cacheExpensive = createMap();
+	  var cache = createMap();
 	  var literals = {
 	    'true': true,
 	    'false': false,
@@ -42756,7 +46870,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  * representation. It is expected for the function to return `true` or `false`, whether that
 	  * character is allowed or not.
 	  *
-	  * Since this function will be called extensivelly, keep the implementation of these functions fast,
+	  * Since this function will be called extensively, keep the implementation of these functions fast,
 	  * as the performance of these functions have a direct impact on the expressions parsing speed.
 	  *
 	  * @param {function=} identifierStart The function that will decide whether the given character is
@@ -42774,37 +46888,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var noUnsafeEval = csp().noUnsafeEval;
 	    var $parseOptions = {
 	          csp: noUnsafeEval,
-	          expensiveChecks: false,
-	          literals: copy(literals),
-	          isIdentifierStart: isFunction(identStart) && identStart,
-	          isIdentifierContinue: isFunction(identContinue) && identContinue
-	        },
-	        $parseOptionsExpensive = {
-	          csp: noUnsafeEval,
-	          expensiveChecks: true,
 	          literals: copy(literals),
 	          isIdentifierStart: isFunction(identStart) && identStart,
 	          isIdentifierContinue: isFunction(identContinue) && identContinue
 	        };
-	    var runningChecksEnabled = false;
-	
-	    $parse.$$runningExpensiveChecks = function() {
-	      return runningChecksEnabled;
-	    };
-	
 	    return $parse;
 	
-	    function $parse(exp, interceptorFn, expensiveChecks) {
+	    function $parse(exp, interceptorFn) {
 	      var parsedExpression, oneTime, cacheKey;
-	
-	      expensiveChecks = expensiveChecks || runningChecksEnabled;
 	
 	      switch (typeof exp) {
 	        case 'string':
 	          exp = exp.trim();
 	          cacheKey = exp;
 	
-	          var cache = (expensiveChecks ? cacheExpensive : cacheDefault);
 	          parsedExpression = cache[cacheKey];
 	
 	          if (!parsedExpression) {
@@ -42812,9 +46909,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	              oneTime = true;
 	              exp = exp.substring(2);
 	            }
-	            var parseOptions = expensiveChecks ? $parseOptionsExpensive : $parseOptions;
-	            var lexer = new Lexer(parseOptions);
-	            var parser = new Parser(lexer, $filter, parseOptions);
+	            var lexer = new Lexer($parseOptions);
+	            var parser = new Parser(lexer, $filter, $parseOptions);
 	            parsedExpression = parser.parse(exp);
 	            if (parsedExpression.constant) {
 	              parsedExpression.$$watchDelegate = constantWatchDelegate;
@@ -42823,9 +46919,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  oneTimeLiteralWatchDelegate : oneTimeWatchDelegate;
 	            } else if (parsedExpression.inputs) {
 	              parsedExpression.$$watchDelegate = inputsWatchDelegate;
-	            }
-	            if (expensiveChecks) {
-	              parsedExpression = expensiveChecksInterceptor(parsedExpression);
 	            }
 	            cache[cacheKey] = parsedExpression;
 	          }
@@ -42836,30 +46929,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        default:
 	          return addInterceptor(noop, interceptorFn);
-	      }
-	    }
-	
-	    function expensiveChecksInterceptor(fn) {
-	      if (!fn) return fn;
-	      expensiveCheckFn.$$watchDelegate = fn.$$watchDelegate;
-	      expensiveCheckFn.assign = expensiveChecksInterceptor(fn.assign);
-	      expensiveCheckFn.constant = fn.constant;
-	      expensiveCheckFn.literal = fn.literal;
-	      for (var i = 0; fn.inputs && i < fn.inputs.length; ++i) {
-	        fn.inputs[i] = expensiveChecksInterceptor(fn.inputs[i]);
-	      }
-	      expensiveCheckFn.inputs = fn.inputs;
-	
-	      return expensiveCheckFn;
-	
-	      function expensiveCheckFn(scope, locals, assign, inputs) {
-	        var expensiveCheckOldValue = runningChecksEnabled;
-	        runningChecksEnabled = true;
-	        try {
-	          return fn(scope, locals, assign, inputs);
-	        } finally {
-	          runningChecksEnabled = expensiveCheckOldValue;
-	        }
 	      }
 	    }
 	
@@ -42932,14 +47001,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, listener, objectEquality, prettyPrintExpression);
 	    }
 	
-	    function oneTimeWatchDelegate(scope, listener, objectEquality, parsedExpression) {
+	    function oneTimeWatchDelegate(scope, listener, objectEquality, parsedExpression, prettyPrintExpression) {
 	      var unwatch, lastValue;
-	      unwatch = scope.$watch(function oneTimeWatch(scope) {
+	      if (parsedExpression.inputs) {
+	        unwatch = inputsWatchDelegate(scope, oneTimeListener, objectEquality, parsedExpression, prettyPrintExpression);
+	      } else {
+	        unwatch = scope.$watch(oneTimeWatch, oneTimeListener, objectEquality);
+	      }
+	      return unwatch;
+	
+	      function oneTimeWatch(scope) {
 	        return parsedExpression(scope);
-	      }, /** @this */ function oneTimeListener(value, old, scope) {
+	      }
+	      function oneTimeListener(value, old, scope) {
 	        lastValue = value;
 	        if (isFunction(listener)) {
-	          listener.apply(this, arguments);
+	          listener(value, old, scope);
 	        }
 	        if (isDefined(value)) {
 	          scope.$$postDigest(function() {
@@ -42948,18 +47025,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	          });
 	        }
-	      }, objectEquality);
-	      return unwatch;
+	      }
 	    }
 	
 	    function oneTimeLiteralWatchDelegate(scope, listener, objectEquality, parsedExpression) {
 	      var unwatch, lastValue;
 	      unwatch = scope.$watch(function oneTimeWatch(scope) {
 	        return parsedExpression(scope);
-	      }, /** @this */ function oneTimeListener(value, old, scope) {
+	      }, function oneTimeListener(value, old, scope) {
 	        lastValue = value;
 	        if (isFunction(listener)) {
-	          listener.call(this, value, old, scope);
+	          listener(value, old, scope);
 	        }
 	        if (isAllDefined(value)) {
 	          scope.$$postDigest(function() {
@@ -43008,14 +47084,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	
 	      // Propagate $$watchDelegates other then inputsWatchDelegate
+	      useInputs = !parsedExpression.inputs;
 	      if (parsedExpression.$$watchDelegate &&
 	          parsedExpression.$$watchDelegate !== inputsWatchDelegate) {
 	        fn.$$watchDelegate = parsedExpression.$$watchDelegate;
+	        fn.inputs = parsedExpression.inputs;
 	      } else if (!interceptorFn.$stateful) {
 	        // If there is an interceptor, but no watchDelegate then treat the interceptor like
 	        // we treat filters - it is assumed to be a pure function unless flagged with $stateful
 	        fn.$$watchDelegate = inputsWatchDelegate;
-	        useInputs = !parsedExpression.inputs;
 	        fn.inputs = parsedExpression.inputs ? parsedExpression.inputs : [parsedExpression];
 	      }
 	
@@ -43028,14 +47105,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ngdoc service
 	 * @name $q
 	 * @requires $rootScope
-	 * @this
 	 *
 	 * @description
 	 * A service that helps you run functions asynchronously, and use their return values (or exceptions)
 	 * when they are done processing.
 	 *
-	 * This is an implementation of promises/deferred objects inspired by
-	 * [Kris Kowal's Q](https://github.com/kriskowal/q).
+	 * This is a [Promises/A+](https://promisesaplus.com/)-compliant implementation of promises/deferred
+	 * objects inspired by [Kris Kowal's Q](https://github.com/kriskowal/q).
 	 *
 	 * $q can be used in two fashions --- one which is more similar to Kris Kowal's Q or jQuery's Deferred
 	 * implementations, and the other which resembles ES6 (ES2015) promises to some degree.
@@ -43242,22 +47318,60 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @returns {Promise} The newly created promise.
 	 */
+	/**
+	 * @ngdoc provider
+	 * @name $qProvider
+	 * @this
+	 *
+	 * @description
+	 */
 	function $QProvider() {
-	
+	  var errorOnUnhandledRejections = true;
 	  this.$get = ['$rootScope', '$exceptionHandler', function($rootScope, $exceptionHandler) {
 	    return qFactory(function(callback) {
 	      $rootScope.$evalAsync(callback);
-	    }, $exceptionHandler);
+	    }, $exceptionHandler, errorOnUnhandledRejections);
 	  }];
+	
+	  /**
+	   * @ngdoc method
+	   * @name $qProvider#errorOnUnhandledRejections
+	   * @kind function
+	   *
+	   * @description
+	   * Retrieves or overrides whether to generate an error when a rejected promise is not handled.
+	   *
+	   * @param {boolean=} value Whether to generate an error when a rejected promise is not handled.
+	   * @returns {boolean|ng.$qProvider} Current value when called without a new value or self for
+	   *    chaining otherwise.
+	   */
+	  this.errorOnUnhandledRejections = function(value) {
+	    if (isDefined(value)) {
+	      errorOnUnhandledRejections = value;
+	      return this;
+	    } else {
+	      return errorOnUnhandledRejections;
+	    }
+	  };
 	}
 	
 	/** @this */
 	function $$QProvider() {
+	  var errorOnUnhandledRejections = true;
 	  this.$get = ['$browser', '$exceptionHandler', function($browser, $exceptionHandler) {
 	    return qFactory(function(callback) {
 	      $browser.defer(callback);
-	    }, $exceptionHandler);
+	    }, $exceptionHandler, errorOnUnhandledRejections);
 	  }];
+	
+	  this.errorOnUnhandledRejections = function(value) {
+	    if (isDefined(value)) {
+	      errorOnUnhandledRejections = value;
+	      return this;
+	    } else {
+	      return errorOnUnhandledRejections;
+	    }
+	  };
 	}
 	
 	/**
@@ -43266,10 +47380,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {function(function)} nextTick Function for executing functions in the next turn.
 	 * @param {function(...*)} exceptionHandler Function into which unexpected exceptions are passed for
 	 *     debugging purposes.
+	 @ param {=boolean} errorOnUnhandledRejections Whether an error should be generated on unhandled
+	 *     promises rejections.
 	 * @returns {object} Promise manager.
 	 */
-	function qFactory(nextTick, exceptionHandler) {
+	function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
 	  var $qMinErr = minErr('$q', TypeError);
+	  var queueSize = 0;
+	  var checkQueue = [];
 	
 	  /**
 	   * @ngdoc method
@@ -43281,14 +47399,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @returns {Deferred} Returns a new instance of deferred.
 	   */
-	  var defer = function() {
-	    var d = new Deferred();
-	    //Necessary to support unbound execution :/
-	    d.resolve = simpleBind(d, d.resolve);
-	    d.reject = simpleBind(d, d.reject);
-	    d.notify = simpleBind(d, d.notify);
-	    return d;
-	  };
+	  function defer() {
+	    return new Deferred();
+	  }
+	
+	  function Deferred() {
+	    var promise = this.promise = new Promise();
+	    //Non prototype methods necessary to support unbound execution :/
+	    this.resolve = function(val) { resolvePromise(promise, val); };
+	    this.reject = function(reason) { rejectPromise(promise, reason); };
+	    this.notify = function(progress) { notifyPromise(promise, progress); };
+	  }
+	
 	
 	  function Promise() {
 	    this.$$state = { status: 0 };
@@ -43299,13 +47421,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (isUndefined(onFulfilled) && isUndefined(onRejected) && isUndefined(progressBack)) {
 	        return this;
 	      }
-	      var result = new Deferred();
+	      var result = new Promise();
 	
 	      this.$$state.pending = this.$$state.pending || [];
 	      this.$$state.pending.push([result, onFulfilled, onRejected, progressBack]);
 	      if (this.$$state.status > 0) scheduleProcessQueue(this.$$state);
 	
-	      return result.promise;
+	      return result;
 	    },
 	
 	    'catch': function(callback) {
@@ -43314,129 +47436,143 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    'finally': function(callback, progressBack) {
 	      return this.then(function(value) {
-	        return handleCallback(value, true, callback);
+	        return handleCallback(value, resolve, callback);
 	      }, function(error) {
-	        return handleCallback(error, false, callback);
+	        return handleCallback(error, reject, callback);
 	      }, progressBack);
 	    }
 	  });
 	
-	  //Faster, more basic than angular.bind http://jsperf.com/angular-bind-vs-custom-vs-native
-	  function simpleBind(context, fn) {
-	    return function(value) {
-	      fn.call(context, value);
-	    };
-	  }
-	
 	  function processQueue(state) {
-	    var fn, deferred, pending;
+	    var fn, promise, pending;
 	
 	    pending = state.pending;
 	    state.processScheduled = false;
 	    state.pending = undefined;
-	    for (var i = 0, ii = pending.length; i < ii; ++i) {
-	      deferred = pending[i][0];
-	      fn = pending[i][state.status];
-	      try {
-	        if (isFunction(fn)) {
-	          deferred.resolve(fn(state.value));
-	        } else if (state.status === 1) {
-	          deferred.resolve(state.value);
-	        } else {
-	          deferred.reject(state.value);
+	    try {
+	      for (var i = 0, ii = pending.length; i < ii; ++i) {
+	        state.pur = true;
+	        promise = pending[i][0];
+	        fn = pending[i][state.status];
+	        try {
+	          if (isFunction(fn)) {
+	            resolvePromise(promise, fn(state.value));
+	          } else if (state.status === 1) {
+	            resolvePromise(promise, state.value);
+	          } else {
+	            rejectPromise(promise, state.value);
+	          }
+	        } catch (e) {
+	          rejectPromise(promise, e);
 	        }
-	      } catch (e) {
-	        deferred.reject(e);
-	        exceptionHandler(e);
+	      }
+	    } finally {
+	      --queueSize;
+	      if (errorOnUnhandledRejections && queueSize === 0) {
+	        nextTick(processChecks);
+	      }
+	    }
+	  }
+	
+	  function processChecks() {
+	    // eslint-disable-next-line no-unmodified-loop-condition
+	    while (!queueSize && checkQueue.length) {
+	      var toCheck = checkQueue.shift();
+	      if (!toCheck.pur) {
+	        toCheck.pur = true;
+	        var errorMessage = 'Possibly unhandled rejection: ' + toDebugString(toCheck.value);
+	        exceptionHandler(errorMessage);
 	      }
 	    }
 	  }
 	
 	  function scheduleProcessQueue(state) {
+	    if (errorOnUnhandledRejections && !state.pending && state.status === 2 && !state.pur) {
+	      if (queueSize === 0 && checkQueue.length === 0) {
+	        nextTick(processChecks);
+	      }
+	      checkQueue.push(state);
+	    }
 	    if (state.processScheduled || !state.pending) return;
 	    state.processScheduled = true;
+	    ++queueSize;
 	    nextTick(function() { processQueue(state); });
 	  }
 	
-	  function Deferred() {
-	    this.promise = new Promise();
+	  function resolvePromise(promise, val) {
+	    if (promise.$$state.status) return;
+	    if (val === promise) {
+	      $$reject(promise, $qMinErr(
+	        'qcycle',
+	        'Expected promise to be resolved with value other than itself \'{0}\'',
+	        val));
+	    } else {
+	      $$resolve(promise, val);
+	    }
+	
 	  }
 	
-	  extend(Deferred.prototype, {
-	    resolve: function(val) {
-	      if (this.promise.$$state.status) return;
-	      if (val === this.promise) {
-	        this.$$reject($qMinErr(
-	          'qcycle',
-	          'Expected promise to be resolved with value other than itself \'{0}\'',
-	          val));
+	  function $$resolve(promise, val) {
+	    var then;
+	    var done = false;
+	    try {
+	      if (isObject(val) || isFunction(val)) then = val.then;
+	      if (isFunction(then)) {
+	        promise.$$state.status = -1;
+	        then.call(val, doResolve, doReject, doNotify);
 	      } else {
-	        this.$$resolve(val);
+	        promise.$$state.value = val;
+	        promise.$$state.status = 1;
+	        scheduleProcessQueue(promise.$$state);
 	      }
-	
-	    },
-	
-	    $$resolve: function(val) {
-	      var then;
-	      var that = this;
-	      var done = false;
-	      try {
-	        if ((isObject(val) || isFunction(val))) then = val && val.then;
-	        if (isFunction(then)) {
-	          this.promise.$$state.status = -1;
-	          then.call(val, resolvePromise, rejectPromise, simpleBind(this, this.notify));
-	        } else {
-	          this.promise.$$state.value = val;
-	          this.promise.$$state.status = 1;
-	          scheduleProcessQueue(this.promise.$$state);
-	        }
-	      } catch (e) {
-	        rejectPromise(e);
-	        exceptionHandler(e);
-	      }
-	
-	      function resolvePromise(val) {
-	        if (done) return;
-	        done = true;
-	        that.$$resolve(val);
-	      }
-	      function rejectPromise(val) {
-	        if (done) return;
-	        done = true;
-	        that.$$reject(val);
-	      }
-	    },
-	
-	    reject: function(reason) {
-	      if (this.promise.$$state.status) return;
-	      this.$$reject(reason);
-	    },
-	
-	    $$reject: function(reason) {
-	      this.promise.$$state.value = reason;
-	      this.promise.$$state.status = 2;
-	      scheduleProcessQueue(this.promise.$$state);
-	    },
-	
-	    notify: function(progress) {
-	      var callbacks = this.promise.$$state.pending;
-	
-	      if ((this.promise.$$state.status <= 0) && callbacks && callbacks.length) {
-	        nextTick(function() {
-	          var callback, result;
-	          for (var i = 0, ii = callbacks.length; i < ii; i++) {
-	            result = callbacks[i][0];
-	            callback = callbacks[i][3];
-	            try {
-	              result.notify(isFunction(callback) ? callback(progress) : progress);
-	            } catch (e) {
-	              exceptionHandler(e);
-	            }
-	          }
-	        });
-	      }
+	    } catch (e) {
+	      doReject(e);
 	    }
-	  });
+	
+	    function doResolve(val) {
+	      if (done) return;
+	      done = true;
+	      $$resolve(promise, val);
+	    }
+	    function doReject(val) {
+	      if (done) return;
+	      done = true;
+	      $$reject(promise, val);
+	    }
+	    function doNotify(progress) {
+	      notifyPromise(promise, progress);
+	    }
+	  }
+	
+	  function rejectPromise(promise, reason) {
+	    if (promise.$$state.status) return;
+	    $$reject(promise, reason);
+	  }
+	
+	  function $$reject(promise, reason) {
+	    promise.$$state.value = reason;
+	    promise.$$state.status = 2;
+	    scheduleProcessQueue(promise.$$state);
+	  }
+	
+	  function notifyPromise(promise, progress) {
+	    var callbacks = promise.$$state.pending;
+	
+	    if ((promise.$$state.status <= 0) && callbacks && callbacks.length) {
+	      nextTick(function() {
+	        var callback, result;
+	        for (var i = 0, ii = callbacks.length; i < ii; i++) {
+	          result = callbacks[i][0];
+	          callback = callbacks[i][3];
+	          try {
+	            notifyPromise(result, isFunction(callback) ? callback(progress) : progress);
+	          } catch (e) {
+	            exceptionHandler(e);
+	          }
+	        }
+	      });
+	    }
+	  }
 	
 	  /**
 	   * @ngdoc method
@@ -43474,39 +47610,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {*} reason Constant, message, exception or an object representing the rejection reason.
 	   * @returns {Promise} Returns a promise that was already resolved as rejected with the `reason`.
 	   */
-	  var reject = function(reason) {
-	    var result = new Deferred();
-	    result.reject(reason);
-	    return result.promise;
-	  };
+	  function reject(reason) {
+	    var result = new Promise();
+	    rejectPromise(result, reason);
+	    return result;
+	  }
 	
-	  var makePromise = function makePromise(value, resolved) {
-	    var result = new Deferred();
-	    if (resolved) {
-	      result.resolve(value);
-	    } else {
-	      result.reject(value);
-	    }
-	    return result.promise;
-	  };
-	
-	  var handleCallback = function handleCallback(value, isResolved, callback) {
+	  function handleCallback(value, resolver, callback) {
 	    var callbackOutput = null;
 	    try {
 	      if (isFunction(callback)) callbackOutput = callback();
 	    } catch (e) {
-	      return makePromise(e, false);
+	      return reject(e);
 	    }
 	    if (isPromiseLike(callbackOutput)) {
 	      return callbackOutput.then(function() {
-	        return makePromise(value, isResolved);
-	      }, function(error) {
-	        return makePromise(error, false);
-	      });
+	        return resolver(value);
+	      }, reject);
 	    } else {
-	      return makePromise(value, isResolved);
+	      return resolver(value);
 	    }
-	  };
+	  }
 	
 	  /**
 	   * @ngdoc method
@@ -43526,11 +47650,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	
 	
-	  var when = function(value, callback, errback, progressBack) {
-	    var result = new Deferred();
-	    result.resolve(value);
-	    return result.promise.then(callback, errback, progressBack);
-	  };
+	  function when(value, callback, errback, progressBack) {
+	    var result = new Promise();
+	    resolvePromise(result, value);
+	    return result.then(callback, errback, progressBack);
+	  }
 	
 	  /**
 	   * @ngdoc method
@@ -43565,27 +47689,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	
 	  function all(promises) {
-	    var deferred = new Deferred(),
+	    var result = new Promise(),
 	        counter = 0,
 	        results = isArray(promises) ? [] : {};
 	
 	    forEach(promises, function(promise, key) {
 	      counter++;
 	      when(promise).then(function(value) {
-	        if (results.hasOwnProperty(key)) return;
 	        results[key] = value;
-	        if (!(--counter)) deferred.resolve(results);
+	        if (!(--counter)) resolvePromise(result, results);
 	      }, function(reason) {
-	        if (results.hasOwnProperty(key)) return;
-	        deferred.reject(reason);
+	        rejectPromise(result, reason);
 	      });
 	    });
 	
 	    if (counter === 0) {
-	      deferred.resolve(results);
+	      resolvePromise(result, results);
 	    }
 	
-	    return deferred.promise;
+	    return result;
 	  }
 	
 	  /**
@@ -43612,25 +47734,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return deferred.promise;
 	  }
 	
-	  var $Q = function Q(resolver) {
+	  function $Q(resolver) {
 	    if (!isFunction(resolver)) {
 	      throw $qMinErr('norslvr', 'Expected resolverFn, got \'{0}\'', resolver);
 	    }
 	
-	    var deferred = new Deferred();
+	    var promise = new Promise();
 	
 	    function resolveFn(value) {
-	      deferred.resolve(value);
+	      resolvePromise(promise, value);
 	    }
 	
 	    function rejectFn(reason) {
-	      deferred.reject(reason);
+	      rejectPromise(promise, reason);
 	    }
 	
 	    resolver(resolveFn, rejectFn);
 	
-	    return deferred.promise;
-	  };
+	    return promise;
+	  }
 	
 	  // Let's make the instanceof operator work for promises, so that
 	  // `new $q(fn) instanceof $q` would evaluate to true.
@@ -43782,6 +47904,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    function cleanUpScope($scope) {
 	
+	      // Support: IE 9 only
 	      if (msie === 9) {
 	        // There is a memory leak in IE9 if all child scopes are not disconnected
 	        // completely when a scope is destroyed. So this code will recurse up through
@@ -43962,7 +48085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       *   $digest()} and should return the value that will be watched. (`watchExpression` should not change
 	       *   its value when executed multiple times with the same input because it may be executed multiple
 	       *   times by {@link ng.$rootScope.Scope#$digest $digest()}. That is, `watchExpression` should be
-	       *   [idempotent](http://en.wikipedia.org/wiki/Idempotence).
+	       *   [idempotent](http://en.wikipedia.org/wiki/Idempotence).)
 	       * - The `listener` is called only when the value from the current `watchExpression` and the
 	       *   previous call to `watchExpression` are not equal (with the exception of the initial run,
 	       *   see below). Inequality is determined according to reference inequality,
@@ -43973,6 +48096,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	       *   according to the {@link angular.equals} function. To save the value of the object for
 	       *   later comparison, the {@link angular.copy} function is used. This therefore means that
 	       *   watching complex objects will have adverse memory and performance implications.
+	       * - This should not be used to watch for changes in objects that are
+	       *   or contain [File](https://developer.mozilla.org/docs/Web/API/File) objects due to limitations with {@link angular.copy `angular.copy`}.
 	       * - The watch `listener` may change the model, which may trigger other `listener`s to fire.
 	       *   This is achieved by rerunning the watchers until no changes are detected. The rerun
 	       *   iteration limit is 10 to prevent an infinite loop deadlock.
@@ -44113,8 +48238,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	       * A variant of {@link ng.$rootScope.Scope#$watch $watch()} where it watches an array of `watchExpressions`.
 	       * If any one expression in the collection changes the `listener` is executed.
 	       *
-	       * - The items in the `watchExpressions` array are observed via standard $watch operation and are examined on every
-	       *   call to $digest() to see if any items changes.
+	       * - The items in the `watchExpressions` array are observed via the standard `$watch` operation. Their return
+	       *   values are examined for changes on every call to `$digest`.
 	       * - The `listener` is called whenever any expression in the `watchExpressions` array changes.
 	       *
 	       * @param {Array.<string|Function(scope)>} watchExpressions Array of expressions that will be individually
@@ -45175,6 +49300,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Helper functions follow.
 	
+	var UNDERSCORE_LOWERCASE_REGEXP = /_([a-z])/g;
+	
+	function snakeToCamel(name) {
+	  return name
+	    .replace(UNDERSCORE_LOWERCASE_REGEXP, fnCamelCaseReplace);
+	}
+	
 	function adjustMatcher(matcher) {
 	  if (matcher === 'self') {
 	    return matcher;
@@ -45188,8 +49320,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'Illegal sequence *** in string matcher.  String: {0}', matcher);
 	    }
 	    matcher = escapeForRegexp(matcher).
-	                  replace('\\*\\*', '.*').
-	                  replace('\\*', '[^:/.?&;]*');
+	                  replace(/\\\*\\\*/g, '.*').
+	                  replace(/\\\*/g, '[^:/.?&;]*');
 	    return new RegExp('^' + matcher + '$');
 	  } else if (isRegExp(matcher)) {
 	    // The only other type of matcher allowed is a Regexp.
@@ -45760,8 +49892,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     .controller('AppController', ['$http', '$templateCache', '$sce',
 	 *       function AppController($http, $templateCache, $sce) {
 	 *         var self = this;
-	 *         $http.get('test_data.json', {cache: $templateCache}).success(function(userComments) {
-	 *           self.userComments = userComments;
+	 *         $http.get('test_data.json', {cache: $templateCache}).then(function(response) {
+	 *           self.userComments = response.data;
 	 *         });
 	 *         self.explicitlyTrustedHtml = $sce.trustAsHtml(
 	 *             '<span onmouseover="this.textContent=&quot;Explicitly trusted HTML bypasses ' +
@@ -45889,6 +50021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  this.$get = ['$parse', '$sceDelegate', function(
 	                $parse,   $sceDelegate) {
+	    // Support: IE 9-11 only
 	    // Prereq: Ensure that we're not running in IE<11 quirks mode.  In that mode, IE < 11 allow
 	    // the "expression(javascript expression)" syntax which is insecure.
 	    if (enabled && msie < 8) {
@@ -46202,13 +50335,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    forEach(SCE_CONTEXTS, function(enumValue, name) {
 	      var lName = lowercase(name);
-	      sce[camelCase('parse_as_' + lName)] = function(expr) {
+	      sce[snakeToCamel('parse_as_' + lName)] = function(expr) {
 	        return parse(enumValue, expr);
 	      };
-	      sce[camelCase('get_trusted_' + lName)] = function(value) {
+	      sce[snakeToCamel('get_trusted_' + lName)] = function(value) {
 	        return getTrusted(enumValue, value);
 	      };
-	      sce[camelCase('trust_as_' + lName)] = function(value) {
+	      sce[snakeToCamel('trust_as_' + lName)] = function(value) {
 	        return trustAs(enumValue, value);
 	      };
 	    });
@@ -46251,33 +50384,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	          toInt((/android (\d+)/.exec(lowercase(($window.navigator || {}).userAgent)) || [])[1]),
 	        boxee = /Boxee/i.test(($window.navigator || {}).userAgent),
 	        document = $document[0] || {},
-	        vendorPrefix,
-	        vendorRegex = /^(Moz|webkit|ms)(?=[A-Z])/,
 	        bodyStyle = document.body && document.body.style,
 	        transitions = false,
-	        animations = false,
-	        match;
+	        animations = false;
 	
 	    if (bodyStyle) {
-	      for (var prop in bodyStyle) {
-	        if ((match = vendorRegex.exec(prop))) {
-	          vendorPrefix = match[0];
-	          vendorPrefix = vendorPrefix[0].toUpperCase() + vendorPrefix.substr(1);
-	          break;
-	        }
-	      }
-	
-	      if (!vendorPrefix) {
-	        vendorPrefix = ('WebkitOpacity' in bodyStyle) && 'webkit';
-	      }
-	
-	      transitions = !!(('transition' in bodyStyle) || (vendorPrefix + 'Transition' in bodyStyle));
-	      animations  = !!(('animation' in bodyStyle) || (vendorPrefix + 'Animation' in bodyStyle));
-	
-	      if (android && (!transitions ||  !animations)) {
-	        transitions = isString(bodyStyle.webkitTransition);
-	        animations = isString(bodyStyle.webkitAnimation);
-	      }
+	      // Support: Android <5, Blackberry Browser 10, default Chrome in Android 4.4.x
+	      // Mentioned browsers need a -webkit- prefix for transitions & animations.
+	      transitions = !!('transition' in bodyStyle || 'webkitTransition' in bodyStyle);
+	      animations = !!('animation' in bodyStyle || 'webkitAnimation' in bodyStyle);
 	    }
 	
 	
@@ -46292,12 +50407,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // We are purposefully using `!(android < 4)` to cover the case when `android` is undefined
 	      history: !!(hasHistoryPushState && !(android < 4) && !boxee),
 	      hasEvent: function(event) {
+	        // Support: IE 9-11 only
 	        // IE9 implements 'input' event it's so fubared that we rather pretend that it doesn't have
 	        // it. In particular the event is not fired when backspace or delete key are pressed or
 	        // when cut operation is performed.
 	        // IE10+ implements 'input' event but it erroneously fires under various situations,
 	        // e.g. when placeholder changes, or a form is focused.
-	        if (event === 'input' && msie <= 11) return false;
+	        if (event === 'input' && msie) return false;
 	
 	        if (isUndefined(eventSupport[event])) {
 	          var divElm = document.createElement('div');
@@ -46307,7 +50423,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return eventSupport[event];
 	      },
 	      csp: csp(),
-	      vendorPrefix: vendorPrefix,
 	      transitions: transitions,
 	      animations: animations,
 	      android: android
@@ -46375,55 +50490,61 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @property {number} totalPendingRequests total amount of pending template requests being downloaded.
 	   */
-	  this.$get = ['$templateCache', '$http', '$q', '$sce', function($templateCache, $http, $q, $sce) {
+	  this.$get = ['$exceptionHandler', '$templateCache', '$http', '$q', '$sce',
+	    function($exceptionHandler, $templateCache, $http, $q, $sce) {
 	
-	    function handleRequestFn(tpl, ignoreRequestError) {
-	      handleRequestFn.totalPendingRequests++;
+	      function handleRequestFn(tpl, ignoreRequestError) {
+	        handleRequestFn.totalPendingRequests++;
 	
-	      // We consider the template cache holds only trusted templates, so
-	      // there's no need to go through whitelisting again for keys that already
-	      // are included in there. This also makes Angular accept any script
-	      // directive, no matter its name. However, we still need to unwrap trusted
-	      // types.
-	      if (!isString(tpl) || isUndefined($templateCache.get(tpl))) {
-	        tpl = $sce.getTrustedResourceUrl(tpl);
-	      }
-	
-	      var transformResponse = $http.defaults && $http.defaults.transformResponse;
-	
-	      if (isArray(transformResponse)) {
-	        transformResponse = transformResponse.filter(function(transformer) {
-	          return transformer !== defaultHttpResponseTransform;
-	        });
-	      } else if (transformResponse === defaultHttpResponseTransform) {
-	        transformResponse = null;
-	      }
-	
-	      return $http.get(tpl, extend({
-	          cache: $templateCache,
-	          transformResponse: transformResponse
-	        }, httpOptions)
-	        )['finally'](function() {
-	          handleRequestFn.totalPendingRequests--;
-	        })
-	        .then(function(response) {
-	          $templateCache.put(tpl, response.data);
-	          return response.data;
-	        }, handleError);
-	
-	      function handleError(resp) {
-	        if (!ignoreRequestError) {
-	          throw $templateRequestMinErr('tpload', 'Failed to load template: {0} (HTTP status: {1} {2})',
-	            tpl, resp.status, resp.statusText);
+	        // We consider the template cache holds only trusted templates, so
+	        // there's no need to go through whitelisting again for keys that already
+	        // are included in there. This also makes Angular accept any script
+	        // directive, no matter its name. However, we still need to unwrap trusted
+	        // types.
+	        if (!isString(tpl) || isUndefined($templateCache.get(tpl))) {
+	          tpl = $sce.getTrustedResourceUrl(tpl);
 	        }
-	        return $q.reject(resp);
+	
+	        var transformResponse = $http.defaults && $http.defaults.transformResponse;
+	
+	        if (isArray(transformResponse)) {
+	          transformResponse = transformResponse.filter(function(transformer) {
+	            return transformer !== defaultHttpResponseTransform;
+	          });
+	        } else if (transformResponse === defaultHttpResponseTransform) {
+	          transformResponse = null;
+	        }
+	
+	        return $http.get(tpl, extend({
+	            cache: $templateCache,
+	            transformResponse: transformResponse
+	          }, httpOptions))
+	          .finally(function() {
+	            handleRequestFn.totalPendingRequests--;
+	          })
+	          .then(function(response) {
+	            $templateCache.put(tpl, response.data);
+	            return response.data;
+	          }, handleError);
+	
+	        function handleError(resp) {
+	          if (!ignoreRequestError) {
+	            resp = $templateRequestMinErr('tpload',
+	                'Failed to load template: {0} (HTTP status: {1} {2})',
+	                tpl, resp.status, resp.statusText);
+	
+	            $exceptionHandler(resp);
+	          }
+	
+	          return $q.reject(resp);
+	        }
 	      }
+	
+	      handleRequestFn.totalPendingRequests = 0;
+	
+	      return handleRequestFn;
 	    }
-	
-	    handleRequestFn.totalPendingRequests = 0;
-	
-	    return handleRequestFn;
-	  }];
+	  ];
 	}
 	
 	/** @this */
@@ -46626,6 +50747,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      */
 	    timeout.cancel = function(promise) {
 	      if (promise && promise.$$timeoutId in deferreds) {
+	        // Timeout cancels should not report an unhandled promise.
+	        deferreds[promise.$$timeoutId].promise.catch(noop);
 	        deferreds[promise.$$timeoutId].reject('canceled');
 	        delete deferreds[promise.$$timeoutId];
 	        return $browser.defer.cancel(promise.$$timeoutId);
@@ -46696,6 +50819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function urlResolve(url) {
 	  var href = url;
 	
+	  // Support: IE 9-11 only
 	  if (msie) {
 	    // Normalize before parse.  Refer Implementation Notes on why this is
 	    // done in two steps on IE.
@@ -47046,7 +51170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *     The final result is an array of those elements that the predicate returned true for.
 	 *
-	 * @param {function(actual, expected)|true|undefined} comparator Comparator which is used in
+	 * @param {function(actual, expected)|true|false} [comparator] Comparator which is used in
 	 *     determining if the expected value (from the filter expression) and actual value (from
 	 *     the object in the array) should be considered a match.
 	 *
@@ -47059,13 +51183,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   - `true`: A shorthand for `function(actual, expected) { return angular.equals(actual, expected)}`.
 	 *     This is essentially strict comparison of expected and actual.
 	 *
-	 *   - `false|undefined`: A short hand for a function which will look for a substring match in case
-	 *     insensitive way.
+	 *   - `false`: A short hand for a function which will look for a substring match in a case
+	 *     insensitive way. Primitive values are converted to strings. Objects are not compared against
+	 *     primitives, unless they have a custom `toString` method (e.g. `Date` objects).
 	 *
-	 *     Primitive values are converted to strings. Objects are not compared against primitives,
-	 *     unless they have a custom `toString` method (e.g. `Date` objects).
 	 *
-	 * @param {string=} anyPropertyKey The special property name that matches against any property.
+	 *   Defaults to `false`.
+	 *
+	 * @param {string} [anyPropertyKey] The special property name that matches against any property.
 	 *     By default `$`.
 	 *
 	 * @example
@@ -47295,7 +51420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       <div ng-controller="ExampleController">
 	         <input type="number" ng-model="amount" aria-label="amount"> <br>
 	         default currency symbol ($): <span id="currency-default">{{amount | currency}}</span><br>
-	         custom currency identifier (USD$): <span id="currency-custom">{{amount | currency:"USD$"}}</span>
+	         custom currency identifier (USD$): <span id="currency-custom">{{amount | currency:"USD$"}}</span><br>
 	         no fractions (0): <span id="currency-no-fractions">{{amount | currency:"USD$":0}}</span>
 	       </div>
 	     </file>
@@ -47740,7 +51865,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	var DATE_FORMATS_SPLIT = /((?:[^yMLdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|m+|s+|a|Z|G+|w+))(.*)/,
-	    NUMBER_STRING = /^\-?\d+$/;
+	    NUMBER_STRING = /^-?\d+$/;
 	
 	/**
 	 * @ngdoc filter
@@ -47827,7 +51952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         expect(element(by.binding("1288323623006 | date:'medium'")).getText()).
 	            toMatch(/Oct 2\d, 2010 \d{1,2}:\d{2}:\d{2} (AM|PM)/);
 	         expect(element(by.binding("1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'")).getText()).
-	            toMatch(/2010\-10\-2\d \d{2}:\d{2}:\d{2} (\-|\+)?\d{4}/);
+	            toMatch(/2010-10-2\d \d{2}:\d{2}:\d{2} (-|\+)?\d{4}/);
 	         expect(element(by.binding("'1288323623006' | date:'MM/dd/yyyy @ h:mma'")).getText()).
 	            toMatch(/10\/2\d\/2010 @ \d{1,2}:\d{2}(AM|PM)/);
 	         expect(element(by.binding("'1288323623006' | date:\"MM/dd/yyyy 'at' h:mma\"")).getText()).
@@ -48123,7 +52248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * String, etc).
 	 *
 	 * The `expression` can be a single predicate, or a list of predicates each serving as a tie-breaker
-	 * for the preceeding one. The `expression` is evaluated against each item and the output is used
+	 * for the preceding one. The `expression` is evaluated against each item and the output is used
 	 * for comparing with other items.
 	 *
 	 * You can change the sorting order by setting `reverse` to `true`. By default, items are sorted in
@@ -48193,6 +52318,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * **Note:** If you notice numbers not being sorted as expected, make sure they are actually being
 	 *           saved as numbers and not strings.
+	 * **Note:** For the purpose of sorting, `null` values are treated as the string `'null'` (i.e.
+	 *           `type: 'string'`, `value: 'null'`). This may cause unexpected sort order relative to
+	 *           other values.
 	 *
 	 * @param {Array|ArrayLike} collection - The collection (array or array-like object) to sort.
 	 * @param {(Function|string|Array.<Function|string>)=} expression - A predicate (or list of
@@ -48814,12 +52942,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @restrict E
 	 *
 	 * @description
-	 * Modifies the default behavior of the html A tag so that the default action is prevented when
+	 * Modifies the default behavior of the html a tag so that the default action is prevented when
 	 * the href attribute is empty.
 	 *
-	 * This change permits the easy creation of action links with the `ngClick` directive
-	 * without changing the location or causing page reloads, e.g.:
-	 * `<a href="" ng-click="list.addItem()">Add Item</a>`
+	 * For dynamically creating `href` attributes for a tags, see the {@link ng.ngHref `ngHref`} directive.
 	 */
 	var htmlAnchorDirective = valueFn({
 	  restrict: 'E',
@@ -49269,10 +53395,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          attr.$set(name, value);
 	
-	          // on IE, if "ng:src" directive declaration is used and "src" attribute doesn't exist
+	          // Support: IE 9-11 only
+	          // On IE, if "ng:src" directive declaration is used and "src" attribute doesn't exist
 	          // then calling element.setAttribute('src', 'foo') doesn't do anything, so we need
 	          // to set the property as well to achieve the desired effect.
-	          // we use attr[attrName] value since $set can sanitize the url.
+	          // We use attr[attrName] value since $set can sanitize the url.
 	          if (msie && propName) element.prop(propName, attr[name]);
 	        });
 	      }
@@ -49280,7 +53407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	});
 	
-	/* global -nullFormCtrl, -SUBMITTED_CLASS, addSetValidityMethod: true
+	/* global -nullFormCtrl, -PENDING_CLASS, -SUBMITTED_CLASS
 	 */
 	var nullFormCtrl = {
 	  $addControl: noop,
@@ -49291,6 +53418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  $setPristine: noop,
 	  $setSubmitted: noop
 	},
+	PENDING_CLASS = 'ng-pending',
 	SUBMITTED_CLASS = 'ng-submitted';
 	
 	function nullFormRenameControl(control, name) {
@@ -49341,22 +53469,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	//asks for $scope to fool the BC controller module
 	FormController.$inject = ['$element', '$attrs', '$scope', '$animate', '$interpolate'];
-	function FormController(element, attrs, $scope, $animate, $interpolate) {
-	  var form = this,
-	      controls = [];
+	function FormController($element, $attrs, $scope, $animate, $interpolate) {
+	  this.$$controls = [];
 	
 	  // init state
-	  form.$error = {};
-	  form.$$success = {};
-	  form.$pending = undefined;
-	  form.$name = $interpolate(attrs.name || attrs.ngForm || '')($scope);
-	  form.$dirty = false;
-	  form.$pristine = true;
-	  form.$valid = true;
-	  form.$invalid = false;
-	  form.$submitted = false;
-	  form.$$parentForm = nullFormCtrl;
+	  this.$error = {};
+	  this.$$success = {};
+	  this.$pending = undefined;
+	  this.$name = $interpolate($attrs.name || $attrs.ngForm || '')($scope);
+	  this.$dirty = false;
+	  this.$pristine = true;
+	  this.$valid = true;
+	  this.$invalid = false;
+	  this.$submitted = false;
+	  this.$$parentForm = nullFormCtrl;
 	
+	  this.$$element = $element;
+	  this.$$animate = $animate;
+	
+	  setupValidity(this);
+	}
+	
+	FormController.prototype = {
 	  /**
 	   * @ngdoc method
 	   * @name form.FormController#$rollbackViewValue
@@ -49368,11 +53502,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * event defined in `ng-model-options`. This method is typically needed by the reset button of
 	   * a form that uses `ng-model-options` to pend updates.
 	   */
-	  form.$rollbackViewValue = function() {
-	    forEach(controls, function(control) {
+	  $rollbackViewValue: function() {
+	    forEach(this.$$controls, function(control) {
 	      control.$rollbackViewValue();
 	    });
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49385,11 +53519,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * event defined in `ng-model-options`. This method is rarely needed as `NgModelController`
 	   * usually handles calling this in response to input events.
 	   */
-	  form.$commitViewValue = function() {
-	    forEach(controls, function(control) {
+	  $commitViewValue: function() {
+	    forEach(this.$$controls, function(control) {
 	      control.$commitViewValue();
 	    });
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49412,29 +53546,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * For example, if an input control is added that is already `$dirty` and has `$error` properties,
 	   * calling `$setDirty()` and `$validate()` afterwards will propagate the state to the parent form.
 	   */
-	  form.$addControl = function(control) {
+	  $addControl: function(control) {
 	    // Breaking change - before, inputs whose name was "hasOwnProperty" were quietly ignored
 	    // and not added to the scope.  Now we throw an error.
 	    assertNotHasOwnProperty(control.$name, 'input');
-	    controls.push(control);
+	    this.$$controls.push(control);
 	
 	    if (control.$name) {
-	      form[control.$name] = control;
+	      this[control.$name] = control;
 	    }
 	
-	    control.$$parentForm = form;
-	  };
+	    control.$$parentForm = this;
+	  },
 	
 	  // Private API: rename a form control
-	  form.$$renameControl = function(control, newName) {
+	  $$renameControl: function(control, newName) {
 	    var oldName = control.$name;
 	
-	    if (form[oldName] === control) {
-	      delete form[oldName];
+	    if (this[oldName] === control) {
+	      delete this[oldName];
 	    }
-	    form[newName] = control;
+	    this[newName] = control;
 	    control.$name = newName;
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49452,60 +53586,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * different from case to case. For example, removing the only `$dirty` control from a form may or
 	   * may not mean that the form is still `$dirty`.
 	   */
-	  form.$removeControl = function(control) {
-	    if (control.$name && form[control.$name] === control) {
-	      delete form[control.$name];
+	  $removeControl: function(control) {
+	    if (control.$name && this[control.$name] === control) {
+	      delete this[control.$name];
 	    }
-	    forEach(form.$pending, function(value, name) {
-	      form.$setValidity(name, null, control);
-	    });
-	    forEach(form.$error, function(value, name) {
-	      form.$setValidity(name, null, control);
-	    });
-	    forEach(form.$$success, function(value, name) {
-	      form.$setValidity(name, null, control);
-	    });
+	    forEach(this.$pending, function(value, name) {
+	      // eslint-disable-next-line no-invalid-this
+	      this.$setValidity(name, null, control);
+	    }, this);
+	    forEach(this.$error, function(value, name) {
+	      // eslint-disable-next-line no-invalid-this
+	      this.$setValidity(name, null, control);
+	    }, this);
+	    forEach(this.$$success, function(value, name) {
+	      // eslint-disable-next-line no-invalid-this
+	      this.$setValidity(name, null, control);
+	    }, this);
 	
-	    arrayRemove(controls, control);
+	    arrayRemove(this.$$controls, control);
 	    control.$$parentForm = nullFormCtrl;
-	  };
-	
-	
-	  /**
-	   * @ngdoc method
-	   * @name form.FormController#$setValidity
-	   *
-	   * @description
-	   * Sets the validity of a form control.
-	   *
-	   * This method will also propagate to parent forms.
-	   */
-	  addSetValidityMethod({
-	    ctrl: this,
-	    $element: element,
-	    set: function(object, property, controller) {
-	      var list = object[property];
-	      if (!list) {
-	        object[property] = [controller];
-	      } else {
-	        var index = list.indexOf(controller);
-	        if (index === -1) {
-	          list.push(controller);
-	        }
-	      }
-	    },
-	    unset: function(object, property, controller) {
-	      var list = object[property];
-	      if (!list) {
-	        return;
-	      }
-	      arrayRemove(list, controller);
-	      if (list.length === 0) {
-	        delete object[property];
-	      }
-	    },
-	    $animate: $animate
-	  });
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49517,13 +53617,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * This method can be called to add the 'ng-dirty' class and set the form to a dirty
 	   * state (ng-dirty class). This method will also propagate to parent forms.
 	   */
-	  form.$setDirty = function() {
-	    $animate.removeClass(element, PRISTINE_CLASS);
-	    $animate.addClass(element, DIRTY_CLASS);
-	    form.$dirty = true;
-	    form.$pristine = false;
-	    form.$$parentForm.$setDirty();
-	  };
+	  $setDirty: function() {
+	    this.$$animate.removeClass(this.$$element, PRISTINE_CLASS);
+	    this.$$animate.addClass(this.$$element, DIRTY_CLASS);
+	    this.$dirty = true;
+	    this.$pristine = false;
+	    this.$$parentForm.$setDirty();
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49541,15 +53641,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Setting a form back to a pristine state is often useful when we want to 'reuse' a form after
 	   * saving or resetting it.
 	   */
-	  form.$setPristine = function() {
-	    $animate.setClass(element, PRISTINE_CLASS, DIRTY_CLASS + ' ' + SUBMITTED_CLASS);
-	    form.$dirty = false;
-	    form.$pristine = true;
-	    form.$submitted = false;
-	    forEach(controls, function(control) {
+	  $setPristine: function() {
+	    this.$$animate.setClass(this.$$element, PRISTINE_CLASS, DIRTY_CLASS + ' ' + SUBMITTED_CLASS);
+	    this.$dirty = false;
+	    this.$pristine = true;
+	    this.$submitted = false;
+	    forEach(this.$$controls, function(control) {
 	      control.$setPristine();
 	    });
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49564,11 +53664,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Setting a form controls back to their untouched state is often useful when setting the form
 	   * back to its pristine state.
 	   */
-	  form.$setUntouched = function() {
-	    forEach(controls, function(control) {
+	  $setUntouched: function() {
+	    forEach(this.$$controls, function(control) {
 	      control.$setUntouched();
 	    });
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -49577,12 +53677,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * Sets the form to its submitted state.
 	   */
-	  form.$setSubmitted = function() {
-	    $animate.addClass(element, SUBMITTED_CLASS);
-	    form.$submitted = true;
-	    form.$$parentForm.$setSubmitted();
-	  };
-	}
+	  $setSubmitted: function() {
+	    this.$$animate.addClass(this.$$element, SUBMITTED_CLASS);
+	    this.$submitted = true;
+	    this.$$parentForm.$setSubmitted();
+	  }
+	};
+	
+	/**
+	 * @ngdoc method
+	 * @name form.FormController#$setValidity
+	 *
+	 * @description
+	 * Sets the validity of a form control.
+	 *
+	 * This method will also propagate to parent forms.
+	 */
+	addSetValidityMethod({
+	  clazz: FormController,
+	  set: function(object, property, controller) {
+	    var list = object[property];
+	    if (!list) {
+	      object[property] = [controller];
+	    } else {
+	      var index = list.indexOf(controller);
+	      if (index === -1) {
+	        list.push(controller);
+	      }
+	    }
+	  },
+	  unset: function(object, property, controller) {
+	    var list = object[property];
+	    if (!list) {
+	      return;
+	    }
+	    arrayRemove(list, controller);
+	    if (list.length === 0) {
+	      delete object[property];
+	    }
+	  }
+	});
 	
 	/**
 	 * @ngdoc directive
@@ -49779,13 +53913,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                event.preventDefault();
 	              };
 	
-	              addEventListenerFn(formElement[0], 'submit', handleFormSubmission);
+	              formElement[0].addEventListener('submit', handleFormSubmission);
 	
 	              // unregister the preventDefault listener so that we don't not leak memory but in a
 	              // way that will achieve the prevention of the default action.
 	              formElement.on('$destroy', function() {
 	                $timeout(function() {
-	                  removeEventListenerFn(formElement[0], 'submit', handleFormSubmission);
+	                  formElement[0].removeEventListener('submit', handleFormSubmission);
 	                }, 0, false);
 	              });
 	            }
@@ -49830,6 +53964,111 @@ return /******/ (function(modules) { // webpackBootstrap
 	var formDirective = formDirectiveFactory();
 	var ngFormDirective = formDirectiveFactory(true);
 	
+	
+	
+	// helper methods
+	function setupValidity(instance) {
+	  instance.$$classCache = {};
+	  instance.$$classCache[INVALID_CLASS] = !(instance.$$classCache[VALID_CLASS] = instance.$$element.hasClass(VALID_CLASS));
+	}
+	function addSetValidityMethod(context) {
+	  var clazz = context.clazz,
+	      set = context.set,
+	      unset = context.unset;
+	
+	  clazz.prototype.$setValidity = function(validationErrorKey, state, controller) {
+	    if (isUndefined(state)) {
+	      createAndSet(this, '$pending', validationErrorKey, controller);
+	    } else {
+	      unsetAndCleanup(this, '$pending', validationErrorKey, controller);
+	    }
+	    if (!isBoolean(state)) {
+	      unset(this.$error, validationErrorKey, controller);
+	      unset(this.$$success, validationErrorKey, controller);
+	    } else {
+	      if (state) {
+	        unset(this.$error, validationErrorKey, controller);
+	        set(this.$$success, validationErrorKey, controller);
+	      } else {
+	        set(this.$error, validationErrorKey, controller);
+	        unset(this.$$success, validationErrorKey, controller);
+	      }
+	    }
+	    if (this.$pending) {
+	      cachedToggleClass(this, PENDING_CLASS, true);
+	      this.$valid = this.$invalid = undefined;
+	      toggleValidationCss(this, '', null);
+	    } else {
+	      cachedToggleClass(this, PENDING_CLASS, false);
+	      this.$valid = isObjectEmpty(this.$error);
+	      this.$invalid = !this.$valid;
+	      toggleValidationCss(this, '', this.$valid);
+	    }
+	
+	    // re-read the state as the set/unset methods could have
+	    // combined state in this.$error[validationError] (used for forms),
+	    // where setting/unsetting only increments/decrements the value,
+	    // and does not replace it.
+	    var combinedState;
+	    if (this.$pending && this.$pending[validationErrorKey]) {
+	      combinedState = undefined;
+	    } else if (this.$error[validationErrorKey]) {
+	      combinedState = false;
+	    } else if (this.$$success[validationErrorKey]) {
+	      combinedState = true;
+	    } else {
+	      combinedState = null;
+	    }
+	
+	    toggleValidationCss(this, validationErrorKey, combinedState);
+	    this.$$parentForm.$setValidity(validationErrorKey, combinedState, this);
+	  };
+	
+	  function createAndSet(ctrl, name, value, controller) {
+	    if (!ctrl[name]) {
+	      ctrl[name] = {};
+	    }
+	    set(ctrl[name], value, controller);
+	  }
+	
+	  function unsetAndCleanup(ctrl, name, value, controller) {
+	    if (ctrl[name]) {
+	      unset(ctrl[name], value, controller);
+	    }
+	    if (isObjectEmpty(ctrl[name])) {
+	      ctrl[name] = undefined;
+	    }
+	  }
+	
+	  function cachedToggleClass(ctrl, className, switchValue) {
+	    if (switchValue && !ctrl.$$classCache[className]) {
+	      ctrl.$$animate.addClass(ctrl.$$element, className);
+	      ctrl.$$classCache[className] = true;
+	    } else if (!switchValue && ctrl.$$classCache[className]) {
+	      ctrl.$$animate.removeClass(ctrl.$$element, className);
+	      ctrl.$$classCache[className] = false;
+	    }
+	  }
+	
+	  function toggleValidationCss(ctrl, validationErrorKey, isValid) {
+	    validationErrorKey = validationErrorKey ? '-' + snake_case(validationErrorKey, '-') : '';
+	
+	    cachedToggleClass(ctrl, VALID_CLASS + validationErrorKey, isValid === true);
+	    cachedToggleClass(ctrl, INVALID_CLASS + validationErrorKey, isValid === false);
+	  }
+	}
+	
+	function isObjectEmpty(obj) {
+	  if (obj) {
+	    for (var prop in obj) {
+	      if (obj.hasOwnProperty(prop)) {
+	        return false;
+	      }
+	    }
+	  }
+	  return true;
+	}
+	
 	/* global
 	  VALID_CLASS: false,
 	  INVALID_CLASS: false,
@@ -49851,11 +54090,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	//   7. Path
 	//   8. Query
 	//   9. Fragment
-	//                 1111111111111111 222   333333    44444        555555555555555555555555    666     77777777     8888888     999
-	var URL_REGEXP = /^[a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+\])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
+	//                 1111111111111111 222   333333    44444        55555555555555555555555     666     77777777     8888888     999
+	var URL_REGEXP = /^[a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
 	// eslint-disable-next-line max-len
-	var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
-	var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/;
+	var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
+	var NUMBER_REGEXP = /^\s*(-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/;
 	var DATE_REGEXP = /^(\d{4,})-(\d{2})-(\d{2})$/;
 	var DATETIMELOCAL_REGEXP = /^(\d{4,})-(\d\d)-(\d\d)T(\d\d):(\d\d)(?::(\d\d)(\.\d{1,3})?)?$/;
 	var WEEK_REGEXP = /^(\d{4,})-W(\d\d)$/;
@@ -50509,7 +54748,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {string} ngModel Assignable angular expression to data-bind to.
 	   * @param {string=} name Property name of the form under which the control is published.
 	   * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`.
+	   *    Can be interpolated.
 	   * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`.
+	   *    Can be interpolated.
+	   * @param {string=} ngMin Like `min`, sets the `min` validation error key if the value entered is less than `ngMin`,
+	   *    but does not trigger HTML5 native validation. Takes an expression.
+	   * @param {string=} ngMax Like `max`, sets the `max` validation error key if the value entered is greater than `ngMax`,
+	   *    but does not trigger HTML5 native validation. Takes an expression.
+	   * @param {string=} step Sets the `step` validation error key if the value entered does not fit the `step` constraint.
+	   *    Can be interpolated.
+	   * @param {string=} ngStep Like `step`, sets the `step` validation error key if the value entered does not fit the `ngStep` constraint,
+	   *    but does not trigger HTML5 native validation. Takes an expression.
 	   * @param {string=} required Sets `required` validation error key if the value is not entered.
 	   * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
 	   *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -50864,28 +55113,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @description
 	   * Native range input with validation and transformation.
 	   *
-	   * <div class="alert alert-warning">
-	   *   <p>
-	   *     In v1.5.9+, in order to avoid interfering with already existing, custom directives for
-	   *     `input[range]`, you need to let Angular know that you want to enable its built-in support.
-	   *     You can do this by adding the `ng-input-range` attribute to the input element. E.g.:
-	   *     `<input type="range" ng-input-range ... />`
-	   *   </p><br />
-	   *   <p>
-	   *     Input elements without the `ng-input-range` attibute will continue to be treated the same
-	   *     as in previous versions (e.g. their model value will be a string not a number and Angular
-	   *     will not take `min`/`max`/`step` attributes and properties into account).
-	   *   </p><br />
-	   *   <p>
-	   *     **Note:** From v1.6.x onwards, the support for `input[range]` will be always enabled and
-	   *     the `ng-input-range` attribute will have no effect.
-	   *   </p><br />
-	   *   <p>
-	   *     This documentation page refers to elements which have the built-in support enabled; i.e.
-	   *     elements _with_ the `ng-input-range` attribute.
-	   *   </p>
-	   * </div>
-	   *
 	   * The model for the range input must always be a `Number`.
 	   *
 	   * IE9 and other browsers that do not support the `range` type fall back
@@ -50907,7 +55134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * Since the element value should always reflect the current model value, a range input
 	   * will set the bound ngModel expression to the value that the browser has set for the
-	   * input element. For example, in the following input `<input type="range" ng-input-range ng-model="model.value">`,
+	   * input element. For example, in the following input `<input type="range" ng-model="model.value">`,
 	   * if the application sets `model.value = null`, the browser will set the input to `'50'`.
 	   * Angular will then set the model to `50`, to prevent input and model value being out of sync.
 	   *
@@ -50926,12 +55153,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * instead may set the `stepMismatch` error. If that's the case, the Angular will set the `step`
 	   * error on the input, and set the model to `undefined`.
 	   *
-	   * Note that `input[range]` is not compatible with `ngMax`, `ngMin`, and `ngStep`, because they do
+	   * Note that `input[range]` is not compatible with`ngMax`, `ngMin`, and `ngStep`, because they do
 	   * not set the `min` and `max` attributes, which means that the browser won't automatically adjust
 	   * the input value based on their values, and will always assume min = 0, max = 100, and step = 1.
 	   *
-	   * @param           ngInputRange The presense of this attribute enables the built-in support for
-	   *                  `input[range]`.
 	   * @param {string}  ngModel Assignable angular expression to data-bind to.
 	   * @param {string=} name Property name of the form under which the control is published.
 	   * @param {string=} min Sets the `min` validation to ensure that the value entered is greater
@@ -50942,6 +55167,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *                  Can be interpolated.
 	   * @param {string=} ngChange Angular expression to be executed when the ngModel value changes due
 	   *                  to user interaction with the input element.
+	   * @param {expression=} ngChecked If the expression is truthy, then the `checked` attribute will be set on the
+	   *                      element. **Note** : `ngChecked` should not be used alongside `ngModel`.
+	   *                      Checkout {@link ng.directive:ngChecked ngChecked} for usage.
 	   *
 	   * @example
 	      <example name="range-input-directive" module="rangeExample">
@@ -50956,7 +55184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          </script>
 	          <form name="myForm" ng-controller="ExampleController">
 	
-	            Model as range: <input type="range" ng-input-range name="range" ng-model="value" min="{{min}}"  max="{{max}}">
+	            Model as range: <input type="range" name="range" ng-model="value" min="{{min}}"  max="{{max}}">
 	            <hr>
 	            Model as number: <input type="number" ng-model="value"><br>
 	            Min: <input type="number" ng-model="min"><br>
@@ -50982,7 +55210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              }]);
 	          </script>
 	          <form name="myForm" ng-controller="ExampleController">
-	            Model as range: <input type="range" ng-input-range name="range" ng-model="value" ng-min="min" ng-max="max">
+	            Model as range: <input type="range" name="range" ng-model="value" ng-min="min" ng-max="max">
 	            <hr>
 	            Model as number: <input type="number" ng-model="value"><br>
 	            Min: <input type="number" ng-model="min"><br>
@@ -51075,7 +55303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function baseInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 	  var type = lowercase(element[0].type);
 	
-	  // In composition mode, users are still inputing intermediate text buffer,
+	  // In composition mode, users are still inputting intermediate text buffer,
 	  // hold the listener until composition is done.
 	  // More about composition events: https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 	  if (!$sniffer.android) {
@@ -51268,7 +55496,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return function dynamicDateInputType(scope, element, attr, ctrl, $sniffer, $browser, $filter) {
 	    badInputChecker(scope, element, attr, ctrl);
 	    baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
-	    var timezone = ctrl && ctrl.$options && ctrl.$options.timezone;
+	    var timezone = ctrl && ctrl.$options.getOption('timezone');
 	    var previousDate;
 	
 	    ctrl.$$parserName = type;
@@ -51422,8 +55650,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 	  badInputChecker(scope, element, attr, ctrl);
-	  baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
 	  numberFormatterParser(ctrl);
+	  baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
 	
 	  var minVal;
 	  var maxVal;
@@ -51447,6 +55675,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    attr.$observe('max', function(val) {
 	      maxVal = parseNumberAttrVal(val);
+	      // TODO(matsko): implement validateLater to reduce number of validations
+	      ctrl.$validate();
+	    });
+	  }
+	
+	  if (isDefined(attr.step) || attr.ngStep) {
+	    var stepVal;
+	    ctrl.$validators.step = function(modelValue, viewValue) {
+	      return ctrl.$isEmpty(viewValue) || isUndefined(stepVal) ||
+	             isValidForStep(viewValue, minVal || 0, stepVal);
+	    };
+	
+	    attr.$observe('step', function(val) {
+	      stepVal = parseNumberAttrVal(val);
 	      // TODO(matsko): implement validateLater to reduce number of validations
 	      ctrl.$validate();
 	    });
@@ -51614,14 +55856,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function radioInputType(scope, element, attr, ctrl) {
+	  var doTrim = !attr.ngTrim || trim(attr.ngTrim) !== 'false';
 	  // make the name unique, if not defined
 	  if (isUndefined(attr.name)) {
 	    element.attr('name', nextUid());
 	  }
 	
 	  var listener = function(ev) {
+	    var value;
 	    if (element[0].checked) {
-	      ctrl.$setViewValue(attr.value, ev && ev.type);
+	      value = attr.value;
+	      if (doTrim) {
+	        value = trim(value);
+	      }
+	      ctrl.$setViewValue(value, ev && ev.type);
 	    }
 	  };
 	
@@ -51629,6 +55877,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  ctrl.$render = function() {
 	    var value = attr.value;
+	    if (doTrim) {
+	      value = trim(value);
+	    }
 	    element[0].checked = (value === ctrl.$viewValue);
 	  };
 	
@@ -51874,11 +56125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    link: {
 	      pre: function(scope, element, attr, ctrls) {
 	        if (ctrls[0]) {
-	          var type = lowercase(attr.type);
-	          if ((type === 'range') && !attr.hasOwnProperty('ngInputRange')) {
-	            type = 'text';
-	          }
-	          (inputType[type] || inputType.text)(scope, element, attr, ctrls[0], $sniffer,
+	          (inputType[lowercase(attr.type)] || inputType.text)(scope, element, attr, ctrls[0], $sniffer,
 	                                                              $browser, $filter, $parse);
 	        }
 	      }
@@ -51894,21 +56141,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @name ngValue
 	 *
 	 * @description
-	 * Binds the given expression to the value of `<option>` or {@link input[radio] `input[radio]`},
-	 * so that when the element is selected, the {@link ngModel `ngModel`} of that element is set to
-	 * the bound value.
+	 * Binds the given expression to the value of the element.
 	 *
-	 * `ngValue` is useful when dynamically generating lists of radio buttons using
-	 * {@link ngRepeat `ngRepeat`}, as shown below.
+	 * It is mainly used on {@link input[radio] `input[radio]`} and option elements,
+	 * so that when the element is selected, the {@link ngModel `ngModel`} of that element (or its
+	 * {@link select `select`} parent element) is set to the bound value. It is especially useful
+	 * for dynamically generated lists using {@link ngRepeat `ngRepeat`}, as shown below.
 	 *
-	 * Likewise, `ngValue` can be used to generate `<option>` elements for
-	 * the {@link select `select`} element. In that case however, only strings are supported
-	 * for the `value `attribute, so the resulting `ngModel` will always be a string.
-	 * Support for `select` models with non-string values is available via `ngOptions`.
+	 * It can also be used to achieve one-way binding of a given expression to an input element
+	 * such as an `input[text]` or a `textarea`, when that element does not use ngModel.
 	 *
 	 * @element input
 	 * @param {string=} ngValue angular expression, whose value will be bound to the `value` attribute
-	 *   of the `input` element
+	 * and `value` property of the element.
 	 *
 	 * @example
 	    <example name="ngValue-directive" module="valueExample">
@@ -51947,18 +56192,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    </example>
 	 */
 	var ngValueDirective = function() {
+	  /**
+	   *  inputs use the value attribute as their default value if the value property is not set.
+	   *  Once the value property has been set (by adding input), it will not react to changes to
+	   *  the value attribute anymore. Setting both attribute and property fixes this behavior, and
+	   *  makes it possible to use ngValue as a sort of one-way bind.
+	   */
+	  function updateElementValue(element, attr, value) {
+	    element.prop('value', value);
+	    attr.$set('value', value);
+	  }
+	
 	  return {
 	    restrict: 'A',
 	    priority: 100,
 	    compile: function(tpl, tplAttr) {
 	      if (CONSTANT_VALUE_REGEXP.test(tplAttr.ngValue)) {
 	        return function ngValueConstantLink(scope, elm, attr) {
-	          attr.$set('value', scope.$eval(attr.ngValue));
+	          var value = scope.$eval(attr.ngValue);
+	          updateElementValue(elm, attr, value);
 	        };
 	      } else {
 	        return function ngValueLink(scope, elm, attr) {
 	          scope.$watch(attr.ngValue, function valueWatchAction(value) {
-	            attr.$set('value', value);
+	            updateElementValue(elm, attr, value);
 	          });
 	        };
 	      }
@@ -52026,7 +56283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        $compile.$$addBindingInfo(element, attr.ngBind);
 	        element = element[0];
 	        scope.$watch(attr.ngBind, function ngBindWatchAction(value) {
-	          element.textContent = isUndefined(value) ? '' : value;
+	          element.textContent = stringify(value);
 	        });
 	      };
 	    }
@@ -52756,7 +57013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * If the current `$controllerProvider` is configured to use globals (via
 	 * {@link ng.$controllerProvider#allowGlobals `$controllerProvider.allowGlobals()` }), this may
-	 * also be the name of a globally accessible constructor function (not recommended).
+	 * also be the name of a globally accessible constructor function (deprecated, not recommended).
 	 *
 	 * @example
 	 * Here is a simple form for editing user contact information. Adding, removing, clearing, and
@@ -52964,31 +57221,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @ngdoc directive
 	 * @name ngCsp
 	 *
-	 * @element html
+	 * @restrict A
+	 * @element ANY
 	 * @description
 	 *
-	 * Angular has some features that can break certain
+	 * Angular has some features that can conflict with certain restrictions that are applied when using
 	 * [CSP (Content Security Policy)](https://developer.mozilla.org/en/Security/CSP) rules.
 	 *
-	 * If you intend to implement these rules then you must tell Angular not to use these features.
+	 * If you intend to implement CSP with these rules then you must tell Angular not to use these
+	 * features.
 	 *
 	 * This is necessary when developing things like Google Chrome Extensions or Universal Windows Apps.
 	 *
 	 *
-	 * The following rules affect Angular:
+	 * The following default rules in CSP affect Angular:
 	 *
-	 * * `unsafe-eval`: this rule forbids apps to use `eval` or `Function(string)` generated functions
-	 * (among other things). Angular makes use of this in the {@link $parse} service to provide a 30%
-	 * increase in the speed of evaluating Angular expressions.
+	 * * The use of `eval()`, `Function(string)` and similar functions to dynamically create and execute
+	 * code from strings is forbidden. Angular makes use of this in the {@link $parse} service to
+	 * provide a 30% increase in the speed of evaluating Angular expressions. (This CSP rule can be
+	 * disabled with the CSP keyword `unsafe-eval`, but it is generally not recommended as it would
+	 * weaken the protections offered by CSP.)
 	 *
-	 * * `unsafe-inline`: this rule forbids apps from inject custom styles into the document. Angular
-	 * makes use of this to include some CSS rules (e.g. {@link ngCloak} and {@link ngHide}).
-	 * To make these directives work when a CSP rule is blocking inline styles, you must link to the
-	 * `angular-csp.css` in your HTML manually.
+	 * * The use of inline resources, such as inline `<script>` and `<style>` elements, are forbidden.
+	 * This prevents apps from injecting custom styles directly into the document. Angular makes use of
+	 * this to include some CSS rules (e.g. {@link ngCloak} and {@link ngHide}). To make these
+	 * directives work when a CSP rule is blocking inline styles, you must link to the `angular-csp.css`
+	 * in your HTML manually. (This CSP rule can be disabled with the CSP keyword `unsafe-inline`, but
+	 * it is generally not recommended as it would weaken the protections offered by CSP.)
 	 *
-	 * If you do not provide `ngCsp` then Angular tries to autodetect if CSP is blocking unsafe-eval
-	 * and automatically deactivates this feature in the {@link $parse} service. This autodetection,
-	 * however, triggers a CSP error to be logged in the console:
+	 * If you do not provide `ngCsp` then Angular tries to autodetect if CSP is blocking dynamic code
+	 * creation from strings (e.g., `unsafe-eval` not specified in CSP header) and automatically
+	 * deactivates this feature in the {@link $parse} service. This autodetection, however, triggers a
+	 * CSP error to be logged in the console:
 	 *
 	 * ```
 	 * Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of
@@ -53013,15 +57277,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *
 	 * * No declaration means that Angular will assume that you can do inline styles, but it will do
-	 * a runtime check for unsafe-eval. E.g. `<body>`. This is backwardly compatible with previous versions
-	 * of Angular.
+	 * a runtime check for unsafe-eval. E.g. `<body>`. This is backwardly compatible with previous
+	 * versions of Angular.
 	 *
 	 * * A simple `ng-csp` (or `data-ng-csp`) attribute will tell Angular to deactivate both inline
-	 * styles and unsafe eval. E.g. `<body ng-csp>`. This is backwardly compatible with previous versions
-	 * of Angular.
+	 * styles and unsafe eval. E.g. `<body ng-csp>`. This is backwardly compatible with previous
+	 * versions of Angular.
 	 *
-	 * * Specifying only `no-unsafe-eval` tells Angular that we must not use eval, but that we can inject
-	 * inline styles. E.g. `<body ng-csp="no-unsafe-eval">`.
+	 * * Specifying only `no-unsafe-eval` tells Angular that we must not use eval, but that we can
+	 * inject inline styles. E.g. `<body ng-csp="no-unsafe-eval">`.
 	 *
 	 * * Specifying only `no-inline-style` tells Angular that we must not inject styles, but that we can
 	 * run eval - no automatic check for unsafe eval will occur. E.g. `<body ng-csp="no-inline-style">`
@@ -53040,8 +57304,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     </html>
 	   ```
 	  * @example
-	      // Note: the suffix `.csp` in the example name triggers
-	      // csp mode in our http server!
+	      <!-- Note: the `.csp` suffix in the example name triggers CSP mode in our http server! -->
 	      <example name="example.csp" module="cspExample" ng-csp="true">
 	        <file name="index.html">
 	          <div ng-controller="MainController as ctrl">
@@ -53158,9 +57421,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      </example>
 	  */
 	
-	// ngCsp is not implemented as a proper directive any more, because we need it be processed while we
-	// bootstrap the system (before $parse is instantiated), for this reason we just have
-	// the csp() fn that looks for the `ng-csp` attribute anywhere in the current doc
+	// `ngCsp` is not implemented as a proper directive any more, because we need it be processed while
+	// we bootstrap the app (before `$parse` is instantiated). For this reason, we just have the `csp()`
+	// fn that looks for the `ng-csp` attribute anywhere in the current doc.
 	
 	/**
 	 * @ngdoc directive
@@ -53761,8 +58024,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            if (block) {
 	              previousElements = getBlockNodes(block.clone);
-	              $animate.leave(previousElements).then(function() {
-	                previousElements = null;
+	              $animate.leave(previousElements).done(function(response) {
+	                if (response !== false) previousElements = null;
 	              });
 	              block = null;
 	            }
@@ -53986,8 +58249,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            currentScope = null;
 	          }
 	          if (currentElement) {
-	            $animate.leave(currentElement).then(function() {
-	              previousElement = null;
+	            $animate.leave(currentElement).done(function(response) {
+	              if (response !== false) previousElement = null;
 	            });
 	            previousElement = currentElement;
 	            currentElement = null;
@@ -53995,9 +58258,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	
 	        scope.$watch(srcExp, function ngIncludeWatchAction(src) {
-	          var afterAnimation = function() {
-	            if (isDefined(autoScrollExp) && (!autoScrollExp || scope.$eval(autoScrollExp))) {
-	              $anchorScroll();
+	          var afterAnimation = function(response) {
+	            if (response !== false && isDefined(autoScrollExp) &&
+	              (!autoScrollExp || scope.$eval(autoScrollExp))) {
+	                $anchorScroll();
 	            }
 	          };
 	          var thisChangeId = ++changeCounter;
@@ -54020,7 +58284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              // directives to non existing elements.
 	              var clone = $transclude(newScope, function(clone) {
 	                cleanupLastIncludeContent();
-	                $animate.enter(clone, null, $element).then(afterAnimation);
+	                $animate.enter(clone, null, $element).done(afterAnimation);
 	              });
 	
 	              currentScope = newScope;
@@ -54236,9 +58500,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    priority: 100,
 	    require: 'ngModel',
 	    link: function(scope, element, attr, ctrl) {
-	      // We want to control whitespace trimming so we use this convoluted approach
-	      // to access the ngList attribute, which doesn't pre-trim the attribute
-	      var ngList = element.attr(attr.$attr.ngList) || ', ';
+	      var ngList = attr.ngList || ', ';
 	      var trimValues = attr.ngTrim !== 'false';
 	      var separator = trimValues ? trim(ngList) : ngList;
 	
@@ -54279,8 +58541,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  PRISTINE_CLASS: true,
 	  DIRTY_CLASS: true,
 	  UNTOUCHED_CLASS: true,
-	  TOUCHED_CLASS: true
+	  TOUCHED_CLASS: true,
+	  PENDING_CLASS: true,
+	  addSetValidityMethod: true,
+	  setupValidity: true,
+	  defaultModelOptions: false
 	*/
+	
 	
 	var VALID_CLASS = 'ng-valid',
 	    INVALID_CLASS = 'ng-invalid',
@@ -54288,7 +58555,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    DIRTY_CLASS = 'ng-dirty',
 	    UNTOUCHED_CLASS = 'ng-untouched',
 	    TOUCHED_CLASS = 'ng-touched',
-	    PENDING_CLASS = 'ng-pending',
 	    EMPTY_CLASS = 'ng-empty',
 	    NOT_EMPTY_CLASS = 'ng-not-empty';
 	
@@ -54494,8 +58760,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *
 	 */
-	var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$parse', '$animate', '$timeout', '$rootScope', '$q', '$interpolate',
-	    /** @this */ function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
+	NgModelController.$inject = ['$scope', '$exceptionHandler', '$attrs', '$element', '$parse', '$animate', '$timeout', '$q', '$interpolate'];
+	function NgModelController($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $q, $interpolate) {
 	  this.$viewValue = Number.NaN;
 	  this.$modelValue = Number.NaN;
 	  this.$$rawModelValue = undefined; // stores the parsed modelValue / model set from scope regardless of validity.
@@ -54515,40 +58781,56 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.$pending = undefined; // keep pending keys here
 	  this.$name = $interpolate($attr.name || '', false)($scope);
 	  this.$$parentForm = nullFormCtrl;
+	  this.$options = defaultModelOptions;
 	
-	  var parsedNgModel = $parse($attr.ngModel),
-	      parsedNgModelAssign = parsedNgModel.assign,
-	      ngModelGet = parsedNgModel,
-	      ngModelSet = parsedNgModelAssign,
-	      pendingDebounce = null,
-	      parserValid,
-	      ctrl = this;
+	  this.$$parsedNgModel = $parse($attr.ngModel);
+	  this.$$parsedNgModelAssign = this.$$parsedNgModel.assign;
+	  this.$$ngModelGet = this.$$parsedNgModel;
+	  this.$$ngModelSet = this.$$parsedNgModelAssign;
+	  this.$$pendingDebounce = null;
+	  this.$$parserValid = undefined;
 	
-	  this.$$setOptions = function(options) {
-	    ctrl.$options = options;
-	    if (options && options.getterSetter) {
-	      var invokeModelGetter = $parse($attr.ngModel + '()'),
-	          invokeModelSetter = $parse($attr.ngModel + '($$$p)');
+	  this.$$currentValidationRunId = 0;
 	
-	      ngModelGet = function($scope) {
-	        var modelValue = parsedNgModel($scope);
+	  this.$$scope = $scope;
+	  this.$$attr = $attr;
+	  this.$$element = $element;
+	  this.$$animate = $animate;
+	  this.$$timeout = $timeout;
+	  this.$$parse = $parse;
+	  this.$$q = $q;
+	  this.$$exceptionHandler = $exceptionHandler;
+	
+	  setupValidity(this);
+	  setupModelWatcher(this);
+	}
+	
+	NgModelController.prototype = {
+	  $$initGetterSetters: function() {
+	    if (this.$options.getOption('getterSetter')) {
+	      var invokeModelGetter = this.$$parse(this.$$attr.ngModel + '()'),
+	          invokeModelSetter = this.$$parse(this.$$attr.ngModel + '($$$p)');
+	
+	      this.$$ngModelGet = function($scope) {
+	        var modelValue = this.$$parsedNgModel($scope);
 	        if (isFunction(modelValue)) {
 	          modelValue = invokeModelGetter($scope);
 	        }
 	        return modelValue;
 	      };
-	      ngModelSet = function($scope, newValue) {
-	        if (isFunction(parsedNgModel($scope))) {
+	      this.$$ngModelSet = function($scope, newValue) {
+	        if (isFunction(this.$$parsedNgModel($scope))) {
 	          invokeModelSetter($scope, {$$$p: newValue});
 	        } else {
-	          parsedNgModelAssign($scope, newValue);
+	          this.$$parsedNgModelAssign($scope, newValue);
 	        }
 	      };
-	    } else if (!parsedNgModel.assign) {
+	    } else if (!this.$$parsedNgModel.assign) {
 	      throw ngModelMinErr('nonassign', 'Expression \'{0}\' is non-assignable. Element: {1}',
-	          $attr.ngModel, startingTag($element));
+	          this.$$attr.ngModel, startingTag(this.$$element));
 	    }
-	  };
+	  },
+	
 	
 	  /**
 	   * @ngdoc method
@@ -54570,7 +58852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * or `$viewValue` are objects (rather than a string or number) then `$render()` will not be
 	   * invoked if you only change a property on the objects.
 	   */
-	  this.$render = noop;
+	  $render: noop,
 	
 	  /**
 	   * @ngdoc method
@@ -54590,57 +58872,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {*} value The value of the input to check for emptiness.
 	   * @returns {boolean} True if `value` is "empty".
 	   */
-	  this.$isEmpty = function(value) {
+	  $isEmpty: function(value) {
 	    // eslint-disable-next-line no-self-compare
 	    return isUndefined(value) || value === '' || value === null || value !== value;
-	  };
+	  },
 	
-	  this.$$updateEmptyClasses = function(value) {
-	    if (ctrl.$isEmpty(value)) {
-	      $animate.removeClass($element, NOT_EMPTY_CLASS);
-	      $animate.addClass($element, EMPTY_CLASS);
+	  $$updateEmptyClasses: function(value) {
+	    if (this.$isEmpty(value)) {
+	      this.$$animate.removeClass(this.$$element, NOT_EMPTY_CLASS);
+	      this.$$animate.addClass(this.$$element, EMPTY_CLASS);
 	    } else {
-	      $animate.removeClass($element, EMPTY_CLASS);
-	      $animate.addClass($element, NOT_EMPTY_CLASS);
+	      this.$$animate.removeClass(this.$$element, EMPTY_CLASS);
+	      this.$$animate.addClass(this.$$element, NOT_EMPTY_CLASS);
 	    }
-	  };
-	
-	
-	  var currentValidationRunId = 0;
-	
-	  /**
-	   * @ngdoc method
-	   * @name ngModel.NgModelController#$setValidity
-	   *
-	   * @description
-	   * Change the validity state, and notify the form.
-	   *
-	   * This method can be called within $parsers/$formatters or a custom validation implementation.
-	   * However, in most cases it should be sufficient to use the `ngModel.$validators` and
-	   * `ngModel.$asyncValidators` collections which will call `$setValidity` automatically.
-	   *
-	   * @param {string} validationErrorKey Name of the validator. The `validationErrorKey` will be assigned
-	   *        to either `$error[validationErrorKey]` or `$pending[validationErrorKey]`
-	   *        (for unfulfilled `$asyncValidators`), so that it is available for data-binding.
-	   *        The `validationErrorKey` should be in camelCase and will get converted into dash-case
-	   *        for class name. Example: `myError` will result in `ng-valid-my-error` and `ng-invalid-my-error`
-	   *        class and can be bound to as  `{{someForm.someControl.$error.myError}}` .
-	   * @param {boolean} isValid Whether the current state is valid (true), invalid (false), pending (undefined),
-	   *                          or skipped (null). Pending is used for unfulfilled `$asyncValidators`.
-	   *                          Skipped is used by Angular when validators do not run because of parse errors and
-	   *                          when `$asyncValidators` do not run because any of the `$validators` failed.
-	   */
-	  addSetValidityMethod({
-	    ctrl: this,
-	    $element: $element,
-	    set: function(object, property) {
-	      object[property] = true;
-	    },
-	    unset: function(object, property) {
-	      delete object[property];
-	    },
-	    $animate: $animate
-	  });
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54653,12 +58898,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * state (`ng-pristine` class). A model is considered to be pristine when the control
 	   * has not been changed from when first compiled.
 	   */
-	  this.$setPristine = function() {
-	    ctrl.$dirty = false;
-	    ctrl.$pristine = true;
-	    $animate.removeClass($element, DIRTY_CLASS);
-	    $animate.addClass($element, PRISTINE_CLASS);
-	  };
+	  $setPristine: function() {
+	    this.$dirty = false;
+	    this.$pristine = true;
+	    this.$$animate.removeClass(this.$$element, DIRTY_CLASS);
+	    this.$$animate.addClass(this.$$element, PRISTINE_CLASS);
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54671,13 +58916,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * state (`ng-dirty` class). A model is considered to be dirty when the control has been changed
 	   * from when first compiled.
 	   */
-	  this.$setDirty = function() {
-	    ctrl.$dirty = true;
-	    ctrl.$pristine = false;
-	    $animate.removeClass($element, PRISTINE_CLASS);
-	    $animate.addClass($element, DIRTY_CLASS);
-	    ctrl.$$parentForm.$setDirty();
-	  };
+	  $setDirty: function() {
+	    this.$dirty = true;
+	    this.$pristine = false;
+	    this.$$animate.removeClass(this.$$element, PRISTINE_CLASS);
+	    this.$$animate.addClass(this.$$element, DIRTY_CLASS);
+	    this.$$parentForm.$setDirty();
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54691,11 +58936,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * by default, however this function can be used to restore that state if the model has
 	   * already been touched by the user.
 	   */
-	  this.$setUntouched = function() {
-	    ctrl.$touched = false;
-	    ctrl.$untouched = true;
-	    $animate.setClass($element, UNTOUCHED_CLASS, TOUCHED_CLASS);
-	  };
+	  $setUntouched: function() {
+	    this.$touched = false;
+	    this.$untouched = true;
+	    this.$$animate.setClass(this.$$element, UNTOUCHED_CLASS, TOUCHED_CLASS);
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54708,11 +58953,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * touched state (`ng-touched` class). A model is considered to be touched when the user has
 	   * first focused the control element and then shifted focus away from the control (blur event).
 	   */
-	  this.$setTouched = function() {
-	    ctrl.$touched = true;
-	    ctrl.$untouched = false;
-	    $animate.setClass($element, TOUCHED_CLASS, UNTOUCHED_CLASS);
-	  };
+	  $setTouched: function() {
+	    this.$touched = true;
+	    this.$untouched = false;
+	    this.$$animate.setClass(this.$$element, TOUCHED_CLASS, UNTOUCHED_CLASS);
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54720,12 +58965,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @description
 	   * Cancel an update and reset the input element's value to prevent an update to the `$modelValue`,
-	   * which may be caused by a pending debounced event or because the input is waiting for a some
+	   * which may be caused by a pending debounced event or because the input is waiting for some
 	   * future event.
 	   *
 	   * If you have an input that uses `ng-model-options` to set up debounced updates or updates that
-	   * depend on special events such as blur, you can have a situation where there is a period when
-	   * the `$viewValue` is out of sync with the ngModel's `$modelValue`.
+	   * depend on special events such as `blur`, there can be a period when the `$viewValue` is out of
+	   * sync with the ngModel's `$modelValue`.
 	   *
 	   * In this case, you can use `$rollbackViewValue()` to manually cancel the debounced / future update
 	   * and reset the input to the last committed view value.
@@ -54743,7 +58988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *     angular.module('cancel-update-example', [])
 	   *
 	   *     .controller('CancelUpdateController', ['$scope', function($scope) {
-	   *       $scope.model = {};
+	   *       $scope.model = {value1: '', value2: ''};
 	   *
 	   *       $scope.setEmpty = function(e, value, rollback) {
 	   *         if (e.keyCode === 27) {
@@ -54758,8 +59003,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   </file>
 	   *   <file name="index.html">
 	   *     <div ng-controller="CancelUpdateController">
-	   *        <p>Both of these inputs are only updated if they are blurred. Hitting escape should
-	   *        empty them. Follow these steps and observe the difference:</p>
+	   *       <p>Both of these inputs are only updated if they are blurred. Hitting escape should
+	   *       empty them. Follow these steps and observe the difference:</p>
 	   *       <ol>
 	   *         <li>Type something in the input. You will see that the model is not yet updated</li>
 	   *         <li>Press the Escape key.
@@ -54776,17 +59021,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   *       <form name="myForm" ng-model-options="{ updateOn: 'blur' }">
 	   *         <div>
-	   *        <p id="inputDescription1">Without $rollbackViewValue():</p>
-	   *         <input name="value1" aria-describedby="inputDescription1" ng-model="model.value1"
-	   *                ng-keydown="setEmpty($event, 'value1')">
-	   *         value1: "{{ model.value1 }}"
+	   *           <p id="inputDescription1">Without $rollbackViewValue():</p>
+	   *           <input name="value1" aria-describedby="inputDescription1" ng-model="model.value1"
+	   *                  ng-keydown="setEmpty($event, 'value1')">
+	   *           value1: "{{ model.value1 }}"
 	   *         </div>
 	   *
 	   *         <div>
-	   *        <p id="inputDescription2">With $rollbackViewValue():</p>
-	   *         <input name="value2" aria-describedby="inputDescription2" ng-model="model.value2"
-	   *                ng-keydown="setEmpty($event, 'value2', true)">
-	   *         value2: "{{ model.value2 }}"
+	   *           <p id="inputDescription2">With $rollbackViewValue():</p>
+	   *           <input name="value2" aria-describedby="inputDescription2" ng-model="model.value2"
+	   *                  ng-keydown="setEmpty($event, 'value2', true)">
+	   *           value2: "{{ model.value2 }}"
 	   *         </div>
 	   *       </form>
 	   *     </div>
@@ -54802,11 +59047,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        </file>
 	   * </example>
 	   */
-	  this.$rollbackViewValue = function() {
-	    $timeout.cancel(pendingDebounce);
-	    ctrl.$viewValue = ctrl.$$lastCommittedViewValue;
-	    ctrl.$render();
-	  };
+	  $rollbackViewValue: function() {
+	    this.$$timeout.cancel(this.$$pendingDebounce);
+	    this.$viewValue = this.$$lastCommittedViewValue;
+	    this.$render();
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54820,45 +59065,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * If the validity changes to valid, it will set the model to the last available valid
 	   * `$modelValue`, i.e. either the last parsed value or the last value set from the scope.
 	   */
-	  this.$validate = function() {
+	  $validate: function() {
 	    // ignore $validate before model is initialized
-	    if (isNumberNaN(ctrl.$modelValue)) {
+	    if (isNumberNaN(this.$modelValue)) {
 	      return;
 	    }
 	
-	    var viewValue = ctrl.$$lastCommittedViewValue;
+	    var viewValue = this.$$lastCommittedViewValue;
 	    // Note: we use the $$rawModelValue as $modelValue might have been
 	    // set to undefined during a view -> model update that found validation
 	    // errors. We can't parse the view here, since that could change
 	    // the model although neither viewValue nor the model on the scope changed
-	    var modelValue = ctrl.$$rawModelValue;
+	    var modelValue = this.$$rawModelValue;
 	
-	    var prevValid = ctrl.$valid;
-	    var prevModelValue = ctrl.$modelValue;
+	    var prevValid = this.$valid;
+	    var prevModelValue = this.$modelValue;
 	
-	    var allowInvalid = ctrl.$options && ctrl.$options.allowInvalid;
+	    var allowInvalid = this.$options.getOption('allowInvalid');
 	
-	    ctrl.$$runValidators(modelValue, viewValue, function(allValid) {
+	    var that = this;
+	    this.$$runValidators(modelValue, viewValue, function(allValid) {
 	      // If there was no change in validity, don't update the model
 	      // This prevents changing an invalid modelValue to undefined
 	      if (!allowInvalid && prevValid !== allValid) {
-	        // Note: Don't check ctrl.$valid here, as we could have
+	        // Note: Don't check this.$valid here, as we could have
 	        // external validators (e.g. calculated on the server),
 	        // that just call $setValidity and need the model value
 	        // to calculate their validity.
-	        ctrl.$modelValue = allValid ? modelValue : undefined;
+	        that.$modelValue = allValid ? modelValue : undefined;
 	
-	        if (ctrl.$modelValue !== prevModelValue) {
-	          ctrl.$$writeModelToScope();
+	        if (that.$modelValue !== prevModelValue) {
+	          that.$$writeModelToScope();
 	        }
 	      }
 	    });
+	  },
 	
-	  };
-	
-	  this.$$runValidators = function(modelValue, viewValue, doneCallback) {
-	    currentValidationRunId++;
-	    var localValidationRunId = currentValidationRunId;
+	  $$runValidators: function(modelValue, viewValue, doneCallback) {
+	    this.$$currentValidationRunId++;
+	    var localValidationRunId = this.$$currentValidationRunId;
+	    var that = this;
 	
 	    // check parser error
 	    if (!processParseErrors()) {
@@ -54872,34 +59118,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	    processAsyncValidators();
 	
 	    function processParseErrors() {
-	      var errorKey = ctrl.$$parserName || 'parse';
-	      if (isUndefined(parserValid)) {
+	      var errorKey = that.$$parserName || 'parse';
+	      if (isUndefined(that.$$parserValid)) {
 	        setValidity(errorKey, null);
 	      } else {
-	        if (!parserValid) {
-	          forEach(ctrl.$validators, function(v, name) {
+	        if (!that.$$parserValid) {
+	          forEach(that.$validators, function(v, name) {
 	            setValidity(name, null);
 	          });
-	          forEach(ctrl.$asyncValidators, function(v, name) {
+	          forEach(that.$asyncValidators, function(v, name) {
 	            setValidity(name, null);
 	          });
 	        }
 	        // Set the parse error last, to prevent unsetting it, should a $validators key == parserName
-	        setValidity(errorKey, parserValid);
-	        return parserValid;
+	        setValidity(errorKey, that.$$parserValid);
+	        return that.$$parserValid;
 	      }
 	      return true;
 	    }
 	
 	    function processSyncValidators() {
 	      var syncValidatorsValid = true;
-	      forEach(ctrl.$validators, function(validator, name) {
-	        var result = validator(modelValue, viewValue);
+	      forEach(that.$validators, function(validator, name) {
+	        var result = Boolean(validator(modelValue, viewValue));
 	        syncValidatorsValid = syncValidatorsValid && result;
 	        setValidity(name, result);
 	      });
 	      if (!syncValidatorsValid) {
-	        forEach(ctrl.$asyncValidators, function(v, name) {
+	        forEach(that.$asyncValidators, function(v, name) {
 	          setValidity(name, null);
 	        });
 	        return false;
@@ -54910,7 +59156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function processAsyncValidators() {
 	      var validatorPromises = [];
 	      var allValid = true;
-	      forEach(ctrl.$asyncValidators, function(validator, name) {
+	      forEach(that.$asyncValidators, function(validator, name) {
 	        var promise = validator(modelValue, viewValue);
 	        if (!isPromiseLike(promise)) {
 	          throw ngModelMinErr('nopromise',
@@ -54927,25 +59173,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!validatorPromises.length) {
 	        validationDone(true);
 	      } else {
-	        $q.all(validatorPromises).then(function() {
+	        that.$$q.all(validatorPromises).then(function() {
 	          validationDone(allValid);
 	        }, noop);
 	      }
 	    }
 	
 	    function setValidity(name, isValid) {
-	      if (localValidationRunId === currentValidationRunId) {
-	        ctrl.$setValidity(name, isValid);
+	      if (localValidationRunId === that.$$currentValidationRunId) {
+	        that.$setValidity(name, isValid);
 	      }
 	    }
 	
 	    function validationDone(allValid) {
-	      if (localValidationRunId === currentValidationRunId) {
+	      if (localValidationRunId === that.$$currentValidationRunId) {
 	
 	        doneCallback(allValid);
 	      }
 	    }
-	  };
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -54958,84 +59204,87 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * event defined in `ng-model-options`. this method is rarely needed as `NgModelController`
 	   * usually handles calling this in response to input events.
 	   */
-	  this.$commitViewValue = function() {
-	    var viewValue = ctrl.$viewValue;
+	  $commitViewValue: function() {
+	    var viewValue = this.$viewValue;
 	
-	    $timeout.cancel(pendingDebounce);
+	    this.$$timeout.cancel(this.$$pendingDebounce);
 	
 	    // If the view value has not changed then we should just exit, except in the case where there is
 	    // a native validator on the element. In this case the validation state may have changed even though
 	    // the viewValue has stayed empty.
-	    if (ctrl.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !ctrl.$$hasNativeValidators)) {
+	    if (this.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !this.$$hasNativeValidators)) {
 	      return;
 	    }
-	    ctrl.$$updateEmptyClasses(viewValue);
-	    ctrl.$$lastCommittedViewValue = viewValue;
+	    this.$$updateEmptyClasses(viewValue);
+	    this.$$lastCommittedViewValue = viewValue;
 	
 	    // change to dirty
-	    if (ctrl.$pristine) {
+	    if (this.$pristine) {
 	      this.$setDirty();
 	    }
 	    this.$$parseAndValidate();
-	  };
+	  },
 	
-	  this.$$parseAndValidate = function() {
-	    var viewValue = ctrl.$$lastCommittedViewValue;
+	  $$parseAndValidate: function() {
+	    var viewValue = this.$$lastCommittedViewValue;
 	    var modelValue = viewValue;
-	    parserValid = isUndefined(modelValue) ? undefined : true;
+	    var that = this;
 	
-	    if (parserValid) {
-	      for (var i = 0; i < ctrl.$parsers.length; i++) {
-	        modelValue = ctrl.$parsers[i](modelValue);
+	    this.$$parserValid = isUndefined(modelValue) ? undefined : true;
+	
+	    if (this.$$parserValid) {
+	      for (var i = 0; i < this.$parsers.length; i++) {
+	        modelValue = this.$parsers[i](modelValue);
 	        if (isUndefined(modelValue)) {
-	          parserValid = false;
+	          this.$$parserValid = false;
 	          break;
 	        }
 	      }
 	    }
-	    if (isNumberNaN(ctrl.$modelValue)) {
-	      // ctrl.$modelValue has not been touched yet...
-	      ctrl.$modelValue = ngModelGet($scope);
+	    if (isNumberNaN(this.$modelValue)) {
+	      // this.$modelValue has not been touched yet...
+	      this.$modelValue = this.$$ngModelGet(this.$$scope);
 	    }
-	    var prevModelValue = ctrl.$modelValue;
-	    var allowInvalid = ctrl.$options && ctrl.$options.allowInvalid;
-	    ctrl.$$rawModelValue = modelValue;
+	    var prevModelValue = this.$modelValue;
+	    var allowInvalid = this.$options.getOption('allowInvalid');
+	    this.$$rawModelValue = modelValue;
 	
 	    if (allowInvalid) {
-	      ctrl.$modelValue = modelValue;
+	      this.$modelValue = modelValue;
 	      writeToModelIfNeeded();
 	    }
 	
 	    // Pass the $$lastCommittedViewValue here, because the cached viewValue might be out of date.
 	    // This can happen if e.g. $setViewValue is called from inside a parser
-	    ctrl.$$runValidators(modelValue, ctrl.$$lastCommittedViewValue, function(allValid) {
+	    this.$$runValidators(modelValue, this.$$lastCommittedViewValue, function(allValid) {
 	      if (!allowInvalid) {
-	        // Note: Don't check ctrl.$valid here, as we could have
+	        // Note: Don't check this.$valid here, as we could have
 	        // external validators (e.g. calculated on the server),
 	        // that just call $setValidity and need the model value
 	        // to calculate their validity.
-	        ctrl.$modelValue = allValid ? modelValue : undefined;
+	        that.$modelValue = allValid ? modelValue : undefined;
 	        writeToModelIfNeeded();
 	      }
 	    });
 	
 	    function writeToModelIfNeeded() {
-	      if (ctrl.$modelValue !== prevModelValue) {
-	        ctrl.$$writeModelToScope();
+	      if (that.$modelValue !== prevModelValue) {
+	        that.$$writeModelToScope();
 	      }
 	    }
-	  };
+	  },
 	
-	  this.$$writeModelToScope = function() {
-	    ngModelSet($scope, ctrl.$modelValue);
-	    forEach(ctrl.$viewChangeListeners, function(listener) {
+	  $$writeModelToScope: function() {
+	    this.$$ngModelSet(this.$$scope, this.$modelValue);
+	    forEach(this.$viewChangeListeners, function(listener) {
 	      try {
 	        listener();
 	      } catch (e) {
-	        $exceptionHandler(e);
+	        // eslint-disable-next-line no-invalid-this
+	        this.$$exceptionHandler(e);
 	      }
-	    });
-	  };
+	    }, this);
+	  },
 	
 	  /**
 	   * @ngdoc method
@@ -55087,43 +59336,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {*} value value from the view.
 	   * @param {string} trigger Event that triggered the update.
 	   */
-	  this.$setViewValue = function(value, trigger) {
-	    ctrl.$viewValue = value;
-	    if (!ctrl.$options || ctrl.$options.updateOnDefault) {
-	      ctrl.$$debounceViewValueCommit(trigger);
+	  $setViewValue: function(value, trigger) {
+	    this.$viewValue = value;
+	    if (this.$options.getOption('updateOnDefault')) {
+	      this.$$debounceViewValueCommit(trigger);
 	    }
-	  };
+	  },
 	
-	  this.$$debounceViewValueCommit = function(trigger) {
-	    var debounceDelay = 0,
-	        options = ctrl.$options,
-	        debounce;
+	  $$debounceViewValueCommit: function(trigger) {
+	    var debounceDelay = this.$options.getOption('debounce');
 	
-	    if (options && isDefined(options.debounce)) {
-	      debounce = options.debounce;
-	      if (isNumber(debounce)) {
-	        debounceDelay = debounce;
-	      } else if (isNumber(debounce[trigger])) {
-	        debounceDelay = debounce[trigger];
-	      } else if (isNumber(debounce['default'])) {
-	        debounceDelay = debounce['default'];
-	      }
+	    if (isNumber(debounceDelay[trigger])) {
+	      debounceDelay = debounceDelay[trigger];
+	    } else if (isNumber(debounceDelay['default'])) {
+	      debounceDelay = debounceDelay['default'];
 	    }
 	
-	    $timeout.cancel(pendingDebounce);
-	    if (debounceDelay) {
-	      pendingDebounce = $timeout(function() {
-	        ctrl.$commitViewValue();
+	    this.$$timeout.cancel(this.$$pendingDebounce);
+	    var that = this;
+	    if (debounceDelay > 0) { // this fails if debounceDelay is an object
+	      this.$$pendingDebounce = this.$$timeout(function() {
+	        that.$commitViewValue();
 	      }, debounceDelay);
-	    } else if ($rootScope.$$phase) {
-	      ctrl.$commitViewValue();
+	    } else if (this.$$scope.$root.$$phase) {
+	      this.$commitViewValue();
 	    } else {
-	      $scope.$apply(function() {
-	        ctrl.$commitViewValue();
+	      this.$$scope.$apply(function() {
+	        that.$commitViewValue();
 	      });
 	    }
-	  };
+	  }
+	};
 	
+	function setupModelWatcher(ctrl) {
 	  // model -> value
 	  // Note: we cannot use a normal scope.$watch as we want to detect the following:
 	  // 1. scope value is 'a'
@@ -55132,8 +59377,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //    -> scope value did not change since the last digest as
 	  //       ng-change executes in apply phase
 	  // 4. view should be changed back to 'a'
-	  $scope.$watch(function ngModelWatch() {
-	    var modelValue = ngModelGet($scope);
+	  ctrl.$$scope.$watch(function ngModelWatch() {
+	    var modelValue = ctrl.$$ngModelGet(ctrl.$$scope);
 	
 	    // if scope model value and ngModel value are out of sync
 	    // TODO(perf): why not move this to the action fn?
@@ -55143,7 +59388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	       (ctrl.$modelValue === ctrl.$modelValue || modelValue === modelValue)
 	    ) {
 	      ctrl.$modelValue = ctrl.$$rawModelValue = modelValue;
-	      parserValid = undefined;
+	      ctrl.$$parserValid = undefined;
 	
 	      var formatters = ctrl.$formatters,
 	          idx = formatters.length;
@@ -55164,7 +59409,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    return modelValue;
 	  });
-	}];
+	}
+	
+	/**
+	 * @ngdoc method
+	 * @name ngModel.NgModelController#$setValidity
+	 *
+	 * @description
+	 * Change the validity state, and notify the form.
+	 *
+	 * This method can be called within $parsers/$formatters or a custom validation implementation.
+	 * However, in most cases it should be sufficient to use the `ngModel.$validators` and
+	 * `ngModel.$asyncValidators` collections which will call `$setValidity` automatically.
+	 *
+	 * @param {string} validationErrorKey Name of the validator. The `validationErrorKey` will be assigned
+	 *        to either `$error[validationErrorKey]` or `$pending[validationErrorKey]`
+	 *        (for unfulfilled `$asyncValidators`), so that it is available for data-binding.
+	 *        The `validationErrorKey` should be in camelCase and will get converted into dash-case
+	 *        for class name. Example: `myError` will result in `ng-valid-my-error` and `ng-invalid-my-error`
+	 *        class and can be bound to as  `{{someForm.someControl.$error.myError}}` .
+	 * @param {boolean} isValid Whether the current state is valid (true), invalid (false), pending (undefined),
+	 *                          or skipped (null). Pending is used for unfulfilled `$asyncValidators`.
+	 *                          Skipped is used by Angular when validators do not run because of parse errors and
+	 *                          when `$asyncValidators` do not run because any of the `$validators` failed.
+	 */
+	addSetValidityMethod({
+	  clazz: NgModelController,
+	  set: function(object, property) {
+	    object[property] = true;
+	  },
+	  unset: function(object, property) {
+	    delete object[property];
+	  }
+	});
 	
 	
 	/**
@@ -55370,9 +59647,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return {
 	        pre: function ngModelPreLink(scope, element, attr, ctrls) {
 	          var modelCtrl = ctrls[0],
-	              formCtrl = ctrls[1] || modelCtrl.$$parentForm;
+	              formCtrl = ctrls[1] || modelCtrl.$$parentForm,
+	              optionsCtrl = ctrls[2];
 	
-	          modelCtrl.$$setOptions(ctrls[2] && ctrls[2].$options);
+	          if (optionsCtrl) {
+	            modelCtrl.$options = optionsCtrl.$options;
+	          }
+	
+	          modelCtrl.$$initGetterSetters();
 	
 	          // notify others, especially parent forms
 	          formCtrl.$addControl(modelCtrl);
@@ -55389,19 +59671,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        post: function ngModelPostLink(scope, element, attr, ctrls) {
 	          var modelCtrl = ctrls[0];
-	          if (modelCtrl.$options && modelCtrl.$options.updateOn) {
-	            element.on(modelCtrl.$options.updateOn, function(ev) {
+	          if (modelCtrl.$options.getOption('updateOn')) {
+	            element.on(modelCtrl.$options.getOption('updateOn'), function(ev) {
 	              modelCtrl.$$debounceViewValueCommit(ev && ev.type);
 	            });
+	          }
+	
+	          function setTouched() {
+	            modelCtrl.$setTouched();
 	          }
 	
 	          element.on('blur', function() {
 	            if (modelCtrl.$touched) return;
 	
 	            if ($rootScope.$$phase) {
-	              scope.$evalAsync(modelCtrl.$setTouched);
+	              scope.$evalAsync(setTouched);
 	            } else {
-	              scope.$apply(modelCtrl.$setTouched);
+	              scope.$apply(setTouched);
 	            }
 	          });
 	        }
@@ -55410,25 +59696,173 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}];
 	
-	
-	
+	/* exported defaultModelOptions */
+	var defaultModelOptions;
 	var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
+	
+	/**
+	 * @ngdoc type
+	 * @name ModelOptions
+	 * @description
+	 * A container for the options set by the {@link ngModelOptions} directive
+	 */
+	function ModelOptions(options) {
+	  this.$$options = options;
+	}
+	
+	ModelOptions.prototype = {
+	
+	  /**
+	   * @ngdoc method
+	   * @name ModelOptions#getOption
+	   * @param {string} name the name of the option to retrieve
+	   * @returns {*} the value of the option
+	   * @description
+	   * Returns the value of the given option
+	   */
+	  getOption: function(name) {
+	    return this.$$options[name];
+	  },
+	
+	  /**
+	   * @ngdoc method
+	   * @name ModelOptions#createChild
+	   * @param {Object} options a hash of options for the new child that will override the parent's options
+	   * @return {ModelOptions} a new `ModelOptions` object initialized with the given options.
+	   */
+	  createChild: function(options) {
+	    var inheritAll = false;
+	
+	    // make a shallow copy
+	    options = extend({}, options);
+	
+	    // Inherit options from the parent if specified by the value `"$inherit"`
+	    forEach(options, /* @this */ function(option, key) {
+	      if (option === '$inherit') {
+	        if (key === '*') {
+	          inheritAll = true;
+	        } else {
+	          options[key] = this.$$options[key];
+	          // `updateOn` is special so we must also inherit the `updateOnDefault` option
+	          if (key === 'updateOn') {
+	            options.updateOnDefault = this.$$options.updateOnDefault;
+	          }
+	        }
+	      } else {
+	        if (key === 'updateOn') {
+	          // If the `updateOn` property contains the `default` event then we have to remove
+	          // it from the event list and set the `updateOnDefault` flag.
+	          options.updateOnDefault = false;
+	          options[key] = trim(option.replace(DEFAULT_REGEXP, function() {
+	            options.updateOnDefault = true;
+	            return ' ';
+	          }));
+	        }
+	      }
+	    }, this);
+	
+	    if (inheritAll) {
+	      // We have a property of the form: `"*": "$inherit"`
+	      delete options['*'];
+	      defaults(options, this.$$options);
+	    }
+	
+	    // Finally add in any missing defaults
+	    defaults(options, defaultModelOptions.$$options);
+	
+	    return new ModelOptions(options);
+	  }
+	};
+	
+	
+	defaultModelOptions = new ModelOptions({
+	  updateOn: '',
+	  updateOnDefault: true,
+	  debounce: 0,
+	  getterSetter: false,
+	  allowInvalid: false,
+	  timezone: null
+	});
+	
 	
 	/**
 	 * @ngdoc directive
 	 * @name ngModelOptions
 	 *
 	 * @description
-	 * Allows tuning how model updates are done. Using `ngModelOptions` you can specify a custom list of
-	 * events that will trigger a model update and/or a debouncing delay so that the actual update only
-	 * takes place when a timer expires; this timer will be reset after another change takes place.
+	 * This directive allows you to modify the behaviour of {@link ngModel} directives within your
+	 * application. You can specify an `ngModelOptions` directive on any element. All {@link ngModel}
+	 * directives will use the options of their nearest `ngModelOptions` ancestor.
+	 *
+	 * The `ngModelOptions` settings are found by evaluating the value of the attribute directive as
+	 * an Angular expression. This expression should evaluate to an object, whose properties contain
+	 * the settings. For example: `<div "ng-model-options"="{ debounce: 100 }"`.
+	 *
+	 * ## Inheriting Options
+	 *
+	 * You can specify that an `ngModelOptions` setting should be inherited from a parent `ngModelOptions`
+	 * directive by giving it the value of `"$inherit"`.
+	 * Then it will inherit that setting from the first `ngModelOptions` directive found by traversing up the
+	 * DOM tree. If there is no ancestor element containing an `ngModelOptions` directive then default settings
+	 * will be used.
+	 *
+	 * For example given the following fragment of HTML
+	 *
+	 *
+	 * ```html
+	 * <div ng-model-options="{ allowInvalid: true, debounce: 200 }">
+	 *   <form ng-model-options="{ updateOn: 'blur', allowInvalid: '$inherit' }">
+	 *     <input ng-model-options="{ updateOn: 'default', allowInvalid: '$inherit' }" />
+	 *   </form>
+	 * </div>
+	 * ```
+	 *
+	 * the `input` element will have the following settings
+	 *
+	 * ```js
+	 * { allowInvalid: true, updateOn: 'default', debounce: 0 }
+	 * ```
+	 *
+	 * Notice that the `debounce` setting was not inherited and used the default value instead.
+	 *
+	 * You can specify that all undefined settings are automatically inherited from an ancestor by
+	 * including a property with key of `"*"` and value of `"$inherit"`.
+	 *
+	 * For example given the following fragment of HTML
+	 *
+	 *
+	 * ```html
+	 * <div ng-model-options="{ allowInvalid: true, debounce: 200 }">
+	 *   <form ng-model-options="{ updateOn: 'blur', "*": '$inherit' }">
+	 *     <input ng-model-options="{ updateOn: 'default', "*": '$inherit' }" />
+	 *   </form>
+	 * </div>
+	 * ```
+	 *
+	 * the `input` element will have the following settings
+	 *
+	 * ```js
+	 * { allowInvalid: true, updateOn: 'default', debounce: 200 }
+	 * ```
+	 *
+	 * Notice that the `debounce` setting now inherits the value from the outer `<div>` element.
+	 *
+	 * If you are creating a reusable component then you should be careful when using `"*": "$inherit"`
+	 * since you may inadvertently inherit a setting in the future that changes the behavior of your component.
+	 *
+	 *
+	 * ## Triggering and debouncing model updates
+	 *
+	 * The `updateOn` and `debounce` properties allow you to specify a custom list of events that will
+	 * trigger a model update and/or a debouncing delay so that the actual update only takes place when
+	 * a timer expires; this timer will be reset after another change takes place.
 	 *
 	 * Given the nature of `ngModelOptions`, the value displayed inside input fields in the view might
 	 * be different from the value in the actual model. This means that if you update the model you
-	 * should also invoke {@link ngModel.NgModelController `$rollbackViewValue`} on the relevant input field in
+	 * should also invoke {@link ngModel.NgModelController#$rollbackViewValue} on the relevant input field in
 	 * order to make sure it is synchronized with the model and that any debounced action is canceled.
 	 *
-	 * The easiest way to reference the control's {@link ngModel.NgModelController `$rollbackViewValue`}
+	 * The easiest way to reference the control's {@link ngModel.NgModelController#$rollbackViewValue}
 	 * method is by making sure the input is placed inside a form that has a `name` attribute. This is
 	 * important because `form` controllers are published to the related scope under the name in their
 	 * `name` attribute.
@@ -55437,271 +59871,186 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * `submit` event. Note that `ngClick` events will occur before the model is updated. Use `ngSubmit`
 	 * to have access to the updated model.
 	 *
-	 * `ngModelOptions` has an effect on the element it's declared on and its descendants.
+	 * The following example shows how to override immediate updates. Changes on the inputs within the
+	 * form will update the model only when the control loses focus (blur event). If `escape` key is
+	 * pressed while the input field is focused, the value is reset to the value in the current model.
 	 *
-	 * @param {Object} ngModelOptions options to apply to the current model. Valid keys are:
+	 * <example name="ngModelOptions-directive-blur" module="optionsExample">
+	 *   <file name="index.html">
+	 *     <div ng-controller="ExampleController">
+	 *       <form name="userForm">
+	 *         <label>
+	 *           Name:
+	 *           <input type="text" name="userName"
+	 *                  ng-model="user.name"
+	 *                  ng-model-options="{ updateOn: 'blur' }"
+	 *                  ng-keyup="cancel($event)" />
+	 *         </label><br />
+	 *         <label>
+	 *           Other data:
+	 *           <input type="text" ng-model="user.data" />
+	 *         </label><br />
+	 *       </form>
+	 *       <pre>user.name = <span ng-bind="user.name"></span></pre>
+	 *     </div>
+	 *   </file>
+	 *   <file name="app.js">
+	 *     angular.module('optionsExample', [])
+	 *       .controller('ExampleController', ['$scope', function($scope) {
+	 *         $scope.user = { name: 'say', data: '' };
+	 *
+	 *         $scope.cancel = function(e) {
+	 *           if (e.keyCode === 27) {
+	 *             $scope.userForm.userName.$rollbackViewValue();
+	 *           }
+	 *         };
+	 *       }]);
+	 *   </file>
+	 *   <file name="protractor.js" type="protractor">
+	 *     var model = element(by.binding('user.name'));
+	 *     var input = element(by.model('user.name'));
+	 *     var other = element(by.model('user.data'));
+	 *
+	 *     it('should allow custom events', function() {
+	 *       input.sendKeys(' hello');
+	 *       input.click();
+	 *       expect(model.getText()).toEqual('say');
+	 *       other.click();
+	 *       expect(model.getText()).toEqual('say hello');
+	 *     });
+	 *
+	 *     it('should $rollbackViewValue when model changes', function() {
+	 *       input.sendKeys(' hello');
+	 *       expect(input.getAttribute('value')).toEqual('say hello');
+	 *       input.sendKeys(protractor.Key.ESCAPE);
+	 *       expect(input.getAttribute('value')).toEqual('say');
+	 *       other.click();
+	 *       expect(model.getText()).toEqual('say');
+	 *     });
+	 *   </file>
+	 * </example>
+	 *
+	 * The next example shows how to debounce model changes. Model will be updated only 1 sec after last change.
+	 * If the `Clear` button is pressed, any debounced action is canceled and the value becomes empty.
+	 *
+	 * <example name="ngModelOptions-directive-debounce" module="optionsExample">
+	 *   <file name="index.html">
+	 *     <div ng-controller="ExampleController">
+	 *       <form name="userForm">
+	 *         Name:
+	 *         <input type="text" name="userName"
+	 *                ng-model="user.name"
+	 *                ng-model-options="{ debounce: 1000 }" />
+	 *         <button ng-click="userForm.userName.$rollbackViewValue(); user.name=''">Clear</button><br />
+	 *       </form>
+	 *       <pre>user.name = <span ng-bind="user.name"></span></pre>
+	 *     </div>
+	 *   </file>
+	 *   <file name="app.js">
+	 *     angular.module('optionsExample', [])
+	 *       .controller('ExampleController', ['$scope', function($scope) {
+	 *         $scope.user = { name: 'say' };
+	 *       }]);
+	 *   </file>
+	 * </example>
+	 *
+	 * ## Model updates and validation
+	 *
+	 * The default behaviour in `ngModel` is that the model value is set to `undefined` when the
+	 * validation determines that the value is invalid. By setting the `allowInvalid` property to true,
+	 * the model will still be updated even if the value is invalid.
+	 *
+	 *
+	 * ## Connecting to the scope
+	 *
+	 * By setting the `getterSetter` property to true you are telling ngModel that the `ngModel` expression
+	 * on the scope refers to a "getter/setter" function rather than the value itself.
+	 *
+	 * The following example shows how to bind to getter/setters:
+	 *
+	 * <example name="ngModelOptions-directive-getter-setter" module="getterSetterExample">
+	 *   <file name="index.html">
+	 *     <div ng-controller="ExampleController">
+	 *       <form name="userForm">
+	 *         <label>
+	 *           Name:
+	 *           <input type="text" name="userName"
+	 *                  ng-model="user.name"
+	 *                  ng-model-options="{ getterSetter: true }" />
+	 *         </label>
+	 *       </form>
+	 *       <pre>user.name = <span ng-bind="user.name()"></span></pre>
+	 *     </div>
+	 *   </file>
+	 *   <file name="app.js">
+	 *     angular.module('getterSetterExample', [])
+	 *       .controller('ExampleController', ['$scope', function($scope) {
+	 *         var _name = 'Brian';
+	 *         $scope.user = {
+	 *           name: function(newName) {
+	 *             return angular.isDefined(newName) ? (_name = newName) : _name;
+	 *           }
+	 *         };
+	 *       }]);
+	 *   </file>
+	 * </example>
+	 *
+	 *
+	 * ## Specifying timezones
+	 *
+	 * You can specify the timezone that date/time input directives expect by providing its name in the
+	 * `timezone` property.
+	 *
+	 * @param {Object} ngModelOptions options to apply to {@link ngModel} directives on this element and
+	 *   and its descendents. Valid keys are:
 	 *   - `updateOn`: string specifying which event should the input be bound to. You can set several
 	 *     events using an space delimited list. There is a special event called `default` that
-	 *     matches the default events belonging of the control.
+	 *     matches the default events belonging to the control.
 	 *   - `debounce`: integer value which contains the debounce model update value in milliseconds. A
 	 *     value of 0 triggers an immediate update. If an object is supplied instead, you can specify a
 	 *     custom value for each event. For example:
-	 *     `ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"`
+	 *     ```
+	 *     ng-model-options="{
+	 *       updateOn: 'default blur',
+	 *       debounce: { 'default': 500, 'blur': 0 }
+	 *     }"
+	 *     ```
 	 *   - `allowInvalid`: boolean value which indicates that the model can be set with values that did
 	 *     not validate correctly instead of the default behavior of setting the model to undefined.
 	 *   - `getterSetter`: boolean value which determines whether or not to treat functions bound to
-	       `ngModel` as getters/setters.
+	 *     `ngModel` as getters/setters.
 	 *   - `timezone`: Defines the timezone to be used to read/write the `Date` instance in the model for
-	 *     `<input type="date">`, `<input type="time">`, ... . It understands UTC/GMT and the
+	 *     `<input type="date" />`, `<input type="time" />`, ... . It understands UTC/GMT and the
 	 *     continental US time zone abbreviations, but for general use, use a time zone offset, for
 	 *     example, `'+0430'` (4 hours, 30 minutes east of the Greenwich meridian)
 	 *     If not specified, the timezone of the browser will be used.
 	 *
-	 * @example
-	
-	  The following example shows how to override immediate updates. Changes on the inputs within the
-	  form will update the model only when the control loses focus (blur event). If `escape` key is
-	  pressed while the input field is focused, the value is reset to the value in the current model.
-	
-	  <example name="ngModelOptions-directive-blur" module="optionsExample">
-	    <file name="index.html">
-	      <div ng-controller="ExampleController">
-	        <form name="userForm">
-	          <label>Name:
-	            <input type="text" name="userName"
-	                   ng-model="user.name"
-	                   ng-model-options="{ updateOn: 'blur' }"
-	                   ng-keyup="cancel($event)" />
-	          </label><br />
-	          <label>Other data:
-	            <input type="text" ng-model="user.data" />
-	          </label><br />
-	        </form>
-	        <pre>user.name = <span ng-bind="user.name"></span></pre>
-	        <pre>user.data = <span ng-bind="user.data"></span></pre>
-	      </div>
-	    </file>
-	    <file name="app.js">
-	      angular.module('optionsExample', [])
-	        .controller('ExampleController', ['$scope', function($scope) {
-	          $scope.user = { name: 'John', data: '' };
-	
-	          $scope.cancel = function(e) {
-	            if (e.keyCode === 27) {
-	              $scope.userForm.userName.$rollbackViewValue();
-	            }
-	          };
-	        }]);
-	    </file>
-	    <file name="protractor.js" type="protractor">
-	      var model = element(by.binding('user.name'));
-	      var input = element(by.model('user.name'));
-	      var other = element(by.model('user.data'));
-	
-	      it('should allow custom events', function() {
-	        input.sendKeys(' Doe');
-	        input.click();
-	        expect(model.getText()).toEqual('John');
-	        other.click();
-	        expect(model.getText()).toEqual('John Doe');
-	      });
-	
-	      it('should $rollbackViewValue when model changes', function() {
-	        input.sendKeys(' Doe');
-	        expect(input.getAttribute('value')).toEqual('John Doe');
-	        input.sendKeys(protractor.Key.ESCAPE);
-	        expect(input.getAttribute('value')).toEqual('John');
-	        other.click();
-	        expect(model.getText()).toEqual('John');
-	      });
-	    </file>
-	  </example>
-	
-	  This one shows how to debounce model changes. Model will be updated only 1 sec after last change.
-	  If the `Clear` button is pressed, any debounced action is canceled and the value becomes empty.
-	
-	  <example name="ngModelOptions-directive-debounce" module="optionsExample">
-	    <file name="index.html">
-	      <div ng-controller="ExampleController">
-	        <form name="userForm">
-	          <label>Name:
-	            <input type="text" name="userName"
-	                   ng-model="user.name"
-	                   ng-model-options="{ debounce: 1000 }" />
-	          </label>
-	          <button ng-click="userForm.userName.$rollbackViewValue(); user.name=''">Clear</button>
-	          <br />
-	        </form>
-	        <pre>user.name = <span ng-bind="user.name"></span></pre>
-	      </div>
-	    </file>
-	    <file name="app.js">
-	      angular.module('optionsExample', [])
-	        .controller('ExampleController', ['$scope', function($scope) {
-	          $scope.user = { name: 'Igor' };
-	        }]);
-	    </file>
-	  </example>
-	
-	  This one shows how to bind to getter/setters:
-	
-	  <example name="ngModelOptions-directive-getter-setter" module="getterSetterExample">
-	    <file name="index.html">
-	      <div ng-controller="ExampleController">
-	        <form name="userForm">
-	          <label>Name:
-	            <input type="text" name="userName"
-	                   ng-model="user.name"
-	                   ng-model-options="{ getterSetter: true }" />
-	          </label>
-	        </form>
-	        <pre>user.name = <span ng-bind="user.name()"></span></pre>
-	      </div>
-	    </file>
-	    <file name="app.js">
-	      angular.module('getterSetterExample', [])
-	        .controller('ExampleController', ['$scope', function($scope) {
-	          var _name = 'Brian';
-	          $scope.user = {
-	            name: function(newName) {
-	              // Note that newName can be undefined for two reasons:
-	              // 1. Because it is called as a getter and thus called with no arguments
-	              // 2. Because the property should actually be set to undefined. This happens e.g. if the
-	              //    input is invalid
-	              return arguments.length ? (_name = newName) : _name;
-	            }
-	          };
-	        }]);
-	    </file>
-	  </example>
 	 */
 	var ngModelOptionsDirective = function() {
 	  return {
 	    restrict: 'A',
-	    controller: ['$scope', '$attrs', function NgModelOptionsController($scope, $attrs) {
-	      var that = this;
-	      this.$options = copy($scope.$eval($attrs.ngModelOptions));
-	      // Allow adding/overriding bound events
-	      if (isDefined(this.$options.updateOn)) {
-	        this.$options.updateOnDefault = false;
-	        // extract "default" pseudo-event from list of events that can trigger a model update
-	        this.$options.updateOn = trim(this.$options.updateOn.replace(DEFAULT_REGEXP, function() {
-	          that.$options.updateOnDefault = true;
-	          return ' ';
-	        }));
-	      } else {
-	        this.$options.updateOnDefault = true;
+	    // ngModelOptions needs to run before ngModel and input directives
+	    priority: 10,
+	    require: ['ngModelOptions', '?^^ngModelOptions'],
+	    controller: function NgModelOptionsController() {},
+	    link: {
+	      pre: function ngModelOptionsPreLinkFn(scope, element, attrs, ctrls) {
+	        var optionsCtrl = ctrls[0];
+	        var parentOptions = ctrls[1] ? ctrls[1].$options : defaultModelOptions;
+	        optionsCtrl.$options = parentOptions.createChild(scope.$eval(attrs.ngModelOptions));
 	      }
-	    }]
+	    }
 	  };
 	};
 	
 	
-	
-	// helper methods
-	function addSetValidityMethod(context) {
-	  var ctrl = context.ctrl,
-	      $element = context.$element,
-	      classCache = {},
-	      set = context.set,
-	      unset = context.unset,
-	      $animate = context.$animate;
-	
-	  classCache[INVALID_CLASS] = !(classCache[VALID_CLASS] = $element.hasClass(VALID_CLASS));
-	
-	  ctrl.$setValidity = setValidity;
-	
-	  function setValidity(validationErrorKey, state, controller) {
-	    if (isUndefined(state)) {
-	      createAndSet('$pending', validationErrorKey, controller);
-	    } else {
-	      unsetAndCleanup('$pending', validationErrorKey, controller);
+	// shallow copy over values from `src` that are not already specified on `dst`
+	function defaults(dst, src) {
+	  forEach(src, function(value, key) {
+	    if (!isDefined(dst[key])) {
+	      dst[key] = value;
 	    }
-	    if (!isBoolean(state)) {
-	      unset(ctrl.$error, validationErrorKey, controller);
-	      unset(ctrl.$$success, validationErrorKey, controller);
-	    } else {
-	      if (state) {
-	        unset(ctrl.$error, validationErrorKey, controller);
-	        set(ctrl.$$success, validationErrorKey, controller);
-	      } else {
-	        set(ctrl.$error, validationErrorKey, controller);
-	        unset(ctrl.$$success, validationErrorKey, controller);
-	      }
-	    }
-	    if (ctrl.$pending) {
-	      cachedToggleClass(PENDING_CLASS, true);
-	      ctrl.$valid = ctrl.$invalid = undefined;
-	      toggleValidationCss('', null);
-	    } else {
-	      cachedToggleClass(PENDING_CLASS, false);
-	      ctrl.$valid = isObjectEmpty(ctrl.$error);
-	      ctrl.$invalid = !ctrl.$valid;
-	      toggleValidationCss('', ctrl.$valid);
-	    }
-	
-	    // re-read the state as the set/unset methods could have
-	    // combined state in ctrl.$error[validationError] (used for forms),
-	    // where setting/unsetting only increments/decrements the value,
-	    // and does not replace it.
-	    var combinedState;
-	    if (ctrl.$pending && ctrl.$pending[validationErrorKey]) {
-	      combinedState = undefined;
-	    } else if (ctrl.$error[validationErrorKey]) {
-	      combinedState = false;
-	    } else if (ctrl.$$success[validationErrorKey]) {
-	      combinedState = true;
-	    } else {
-	      combinedState = null;
-	    }
-	
-	    toggleValidationCss(validationErrorKey, combinedState);
-	    ctrl.$$parentForm.$setValidity(validationErrorKey, combinedState, ctrl);
-	  }
-	
-	  function createAndSet(name, value, controller) {
-	    if (!ctrl[name]) {
-	      ctrl[name] = {};
-	    }
-	    set(ctrl[name], value, controller);
-	  }
-	
-	  function unsetAndCleanup(name, value, controller) {
-	    if (ctrl[name]) {
-	      unset(ctrl[name], value, controller);
-	    }
-	    if (isObjectEmpty(ctrl[name])) {
-	      ctrl[name] = undefined;
-	    }
-	  }
-	
-	  function cachedToggleClass(className, switchValue) {
-	    if (switchValue && !classCache[className]) {
-	      $animate.addClass($element, className);
-	      classCache[className] = true;
-	    } else if (!switchValue && classCache[className]) {
-	      $animate.removeClass($element, className);
-	      classCache[className] = false;
-	    }
-	  }
-	
-	  function toggleValidationCss(validationErrorKey, isValid) {
-	    validationErrorKey = validationErrorKey ? '-' + snake_case(validationErrorKey, '-') : '';
-	
-	    cachedToggleClass(VALID_CLASS + validationErrorKey, isValid === true);
-	    cachedToggleClass(INVALID_CLASS + validationErrorKey, isValid === false);
-	  }
-	}
-	
-	function isObjectEmpty(obj) {
-	  if (obj) {
-	    for (var prop in obj) {
-	      if (obj.hasOwnProperty(prop)) {
-	        return false;
-	      }
-	    }
-	  }
-	  return true;
+	  });
 	}
 	
 	/**
@@ -55755,13 +60104,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * elements for the `<select>` element using the array or object obtained by evaluating the
 	 * `ngOptions` comprehension expression.
 	 *
-	 * In many cases, `ngRepeat` can be used on `<option>` elements instead of `ngOptions` to achieve a
-	 * similar result. However, `ngOptions` provides some benefits such as reducing memory and
-	 * increasing speed by not creating a new scope for each repeated instance, as well as providing
-	 * more flexibility in how the `<select>`'s model is assigned via the `select` **`as`** part of the
-	 * comprehension expression. `ngOptions` should be used when the `<select>` model needs to be bound
-	 *  to a non-string value. This is because an option element can only be bound to string values at
-	 * present.
+	 * In many cases, {@link ng.directive:ngRepeat ngRepeat} can be used on `<option>` elements instead of
+	 * `ngOptions` to achieve a similar result. However, `ngOptions` provides some benefits:
+	 * - more flexibility in how the `<select>`'s model is assigned via the `select` **`as`** part of the
+	 * comprehension expression
+	 * - reduced memory consumption by not creating a new scope for each repeated instance
+	 * - increased render speed by creating the options in a documentFragment instead of individually
 	 *
 	 * When an item in the `<select>` menu is selected, the array element or object property
 	 * represented by the selected option will be bound to the model identified by the `ngModel`
@@ -55971,8 +60319,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	
 	/* eslint-disable max-len */
-	//                     //00001111111111000000000002222222222000000000000000000000333333333300000000000000000000000004444444444400000000000005555555555555550000000006666666666666660000000777777777777777000000000000000888888888800000000000000000009999999999
-	var NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?(?:\s+disable\s+when\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/;
+	//                     //00001111111111000000000002222222222000000000000000000000333333333300000000000000000000000004444444444400000000000005555555555555000000000666666666666600000007777777777777000000000000000888888888800000000000000000009999999999
+	var NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?(?:\s+disable\s+when\s+([\s\S]+?))?\s+for\s+(?:([$\w][$\w]*)|(?:\(\s*([$\w][$\w]*)\s*,\s*([$\w][$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/;
 	                        // 1: value expression (valueFn)
 	                        // 2: label expression (displayFn)
 	                        // 3: group by expression (groupByFn)
@@ -56136,7 +60484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          getViewValueFromOption: function(option) {
 	            // If the viewValue could be an object that may be mutated by the application,
 	            // we need to make a copy and not return the reference to the value on the option.
-	            return trackBy ? angular.copy(option.viewValue) : option.viewValue;
+	            return trackBy ? copy(option.viewValue) : option.viewValue;
 	          }
 	        };
 	      }
@@ -56157,15 +60505,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      // The emptyOption allows the application developer to provide their own custom "empty"
 	      // option when the viewValue does not match any of the option values.
-	      var emptyOption;
 	      for (var i = 0, children = selectElement.children(), ii = children.length; i < ii; i++) {
 	        if (children[i].value === '') {
-	          emptyOption = children.eq(i);
+	          selectCtrl.hasEmptyOption = true;
+	          selectCtrl.emptyOption = children.eq(i);
 	          break;
 	        }
 	      }
 	
-	      var providedEmptyOption = !!emptyOption;
+	      var providedEmptyOption = !!selectCtrl.emptyOption;
 	
 	      var unknownOption = jqLite(optionTemplate.cloneNode(false));
 	      unknownOption.val('?');
@@ -56177,32 +60525,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // we only need to create it once.
 	      var listFragment = $document[0].createDocumentFragment();
 	
-	      var renderEmptyOption = function() {
-	        if (!providedEmptyOption) {
-	          selectElement.prepend(emptyOption);
-	        }
-	        selectElement.val('');
-	        emptyOption.prop('selected', true); // needed for IE
-	        emptyOption.attr('selected', true);
-	      };
-	
-	      var removeEmptyOption = function() {
-	        if (!providedEmptyOption) {
-	          emptyOption.remove();
-	        } else {
-	          emptyOption.removeAttr('selected');
-	        }
-	      };
-	
-	      var renderUnknownOption = function() {
-	        selectElement.prepend(unknownOption);
-	        selectElement.val('?');
-	        unknownOption.prop('selected', true); // needed for IE
-	        unknownOption.attr('selected', true);
-	      };
-	
-	      var removeUnknownOption = function() {
-	        unknownOption.remove();
+	      // Overwrite the implementation. ngOptions doesn't use hashes
+	      selectCtrl.generateUnknownOptionValue = function(val) {
+	        return '?';
 	      };
 	
 	      // Update the controller methods for multiple selectable options
@@ -56223,8 +60548,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // set always
 	
 	            if (selectElement[0].value !== option.selectValue) {
-	              removeUnknownOption();
-	              removeEmptyOption();
+	              selectCtrl.removeUnknownOption();
+	              selectCtrl.unselectEmptyOption();
 	
 	              selectElement[0].value = option.selectValue;
 	              option.element.selected = true;
@@ -56232,12 +60557,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            option.element.setAttribute('selected', 'selected');
 	          } else {
-	            if (value === null || providedEmptyOption) {
-	              removeUnknownOption();
-	              renderEmptyOption();
+	
+	            if (providedEmptyOption) {
+	              selectCtrl.selectEmptyOption();
+	            } else if (selectCtrl.unknownOption.parent().length) {
+	              selectCtrl.updateUnknownOption(value);
 	            } else {
-	              removeEmptyOption();
-	              renderUnknownOption();
+	              selectCtrl.renderUnknownOption(value);
 	            }
 	          }
 	        };
@@ -56247,8 +60573,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var selectedOption = options.selectValueMap[selectElement.val()];
 	
 	          if (selectedOption && !selectedOption.disabled) {
-	            removeEmptyOption();
-	            removeUnknownOption();
+	            selectCtrl.unselectEmptyOption();
+	            selectCtrl.removeUnknownOption();
 	            return options.getViewValueFromOption(selectedOption);
 	          }
 	          return null;
@@ -56265,11 +60591,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	      } else {
-	
-	        ngModelCtrl.$isEmpty = function(value) {
-	          return !value || value.length === 0;
-	        };
-	
 	
 	        selectCtrl.writeValue = function writeNgOptionsMultiple(value) {
 	          options.items.forEach(function(option) {
@@ -56314,21 +60635,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	
-	
 	      if (providedEmptyOption) {
 	
 	        // we need to remove it before calling selectElement.empty() because otherwise IE will
 	        // remove the label from the element. wtf?
-	        emptyOption.remove();
+	        selectCtrl.emptyOption.remove();
 	
 	        // compile the element since there might be bindings in it
-	        $compile(emptyOption)(scope);
+	        $compile(selectCtrl.emptyOption)(scope);
 	
-	        // remove the class, which is added automatically because we recompile the element and it
-	        // becomes the compilation root
-	        emptyOption.removeClass('ng-scope');
-	      } else {
-	        emptyOption = jqLite(optionTemplate.cloneNode(false));
+	        if (selectCtrl.emptyOption[0].nodeType === NODE_TYPE_COMMENT) {
+	          // This means the empty option has currently no actual DOM node, probably because
+	          // it has been modified by a transclusion directive.
+	          selectCtrl.hasEmptyOption = false;
+	
+	          // Redefine the registerOption function, which will catch
+	          // options that are added by ngIf etc. (rendering of the node is async because of
+	          // lazy transclusion)
+	          selectCtrl.registerOption = function(optionScope, optionEl) {
+	            if (optionEl.val() === '') {
+	              selectCtrl.hasEmptyOption = true;
+	              selectCtrl.emptyOption = optionEl;
+	              selectCtrl.emptyOption.removeClass('ng-scope');
+	              // This ensures the new empty option is selected if previously no option was selected
+	              ngModelCtrl.$render();
+	
+	              optionEl.on('$destroy', function() {
+	                selectCtrl.hasEmptyOption = false;
+	                selectCtrl.emptyOption = undefined;
+	              });
+	            }
+	          };
+	
+	        } else {
+	          // remove the class, which is added automatically because we recompile the element and it
+	          // becomes the compilation root
+	          selectCtrl.emptyOption.removeClass('ng-scope');
+	        }
+	
 	      }
 	
 	      selectElement.empty();
@@ -56361,7 +60705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          element.label = option.label;
 	          element.textContent = option.label;
 	        }
-	        if (option.value !== element.value) element.value = option.selectValue;
+	        element.value = option.selectValue;
 	      }
 	
 	      function updateOptions() {
@@ -56390,7 +60734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // Ensure that the empty option is always there if it was explicitly provided
 	        if (providedEmptyOption) {
-	          selectElement.prepend(emptyOption);
+	          selectElement.prepend(selectCtrl.emptyOption);
 	        }
 	
 	        options.items.forEach(function addOption(option) {
@@ -56734,7 +61078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * <div ng-repeat="(key, value) in myObj"> ... </div>
 	 * ```
 	 *
-	 * However, there are a limitations compared to array iteration:
+	 * However, there are a few limitations compared to array iteration:
 	 *
 	 * - The JavaScript specification does not define the order of keys
 	 *   returned for an object, so Angular relies on the order returned by the browser
@@ -56758,7 +61102,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * # Tracking and Duplicates
 	 *
 	 * `ngRepeat` uses {@link $rootScope.Scope#$watchCollection $watchCollection} to detect changes in
-	 * the collection. When a change happens, ngRepeat then makes the corresponding changes to the DOM:
+	 * the collection. When a change happens, `ngRepeat` then makes the corresponding changes to the DOM:
 	 *
 	 * * When an item is added, a new instance of the template is added to the DOM.
 	 * * When an item is removed, its template instance is removed from the DOM.
@@ -56766,7 +61110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * To minimize creation of DOM elements, `ngRepeat` uses a function
 	 * to "keep track" of all items in the collection and their corresponding DOM elements.
-	 * For example, if an item is added to the collection, ngRepeat will know that all other items
+	 * For example, if an item is added to the collection, `ngRepeat` will know that all other items
 	 * already have DOM elements, and will not re-render them.
 	 *
 	 * The default tracking function (which tracks items by their identity) does not allow
@@ -56793,18 +61137,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * ```
 	 *
 	 * <div class="alert alert-success">
-	 * If you are working with objects that have an identifier property, you should track
-	 * by the identifier instead of the whole object. Should you reload your data later, `ngRepeat`
+	 * If you are working with objects that have a unique identifier property, you should track
+	 * by this identifier instead of the object instance. Should you reload your data later, `ngRepeat`
 	 * will not have to rebuild the DOM elements for items it has already rendered, even if the
 	 * JavaScript objects in the collection have been substituted for new ones. For large collections,
 	 * this significantly improves rendering performance. If you don't have a unique identifier,
 	 * `track by $index` can also provide a performance boost.
 	 * </div>
+	 *
 	 * ```html
 	 *    <div ng-repeat="model in collection track by model.id">
 	 *      {{model.name}}
 	 *    </div>
 	 * ```
+	 *
+	 * <br />
+	 * <div class="alert alert-warning">
+	 * Avoid using `track by $index` when the repeated template contains
+	 * {@link guide/expression#one-time-binding one-time bindings}. In such cases, the `nth` DOM
+	 * element will always be matched with the `nth` item of the array, so the bindings on that element
+	 * will not be updated even when the corresponding item changes, essentially causing the view to get
+	 * out-of-sync with the underlying data.
+	 * </div>
 	 *
 	 * When no `track by` expression is provided, it is equivalent to tracking by the built-in
 	 * `$id` function, which tracks items by their identity:
@@ -56814,14 +61168,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *    </div>
 	 * ```
 	 *
+	 * <br />
 	 * <div class="alert alert-warning">
 	 * **Note:** `track by` must always be the last expression:
 	 * </div>
 	 * ```
-	 * <div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
-	 *     {{model.name}}
-	 * </div>
+	 *    <div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
+	 *      {{model.name}}
+	 *    </div>
 	 * ```
+	 *
 	 *
 	 * # Special repeat start and end points
 	 * To repeat a series of elements instead of just one parent element, ngRepeat (as well as other ng directives) supports extending
@@ -56929,7 +61285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @example
 	 * This example uses `ngRepeat` to display a list of people. A filter is used to restrict the displayed
-	 * results by name. New (entering) and removed (leaving) items are animated.
+	 * results by name or by age. New (entering) and removed (leaving) items are animated.
 	  <example module="ngRepeat" name="ngRepeat" deps="angular-animate.js" animations="true" name="ng-repeat">
 	    <file name="index.html">
 	      <div ng-controller="repeatController">
@@ -57068,7 +61424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var aliasAs = match[3];
 	      var trackByExp = match[4];
 	
-	      match = lhs.match(/^(?:(\s*[\$\w]+)|\(\s*([\$\w]+)\s*,\s*([\$\w]+)\s*\))$/);
+	      match = lhs.match(/^(?:(\s*[$\w]+)|\(\s*([$\w]+)\s*,\s*([$\w]+)\s*\))$/);
 	
 	      if (!match) {
 	        throw ngRepeatMinErr('iidexp', '\'_item_\' in \'_item_ in _collection_\' should be an identifier or \'(_key_, _value_)\' expression, but got \'{0}\'.',
@@ -57697,7 +62053,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * * `ngSwitchWhen`: the case statement to match against. If match then this
 	 *   case will be displayed. If the same match appears multiple times, all the
-	 *   elements will be displayed.
+	 *   elements will be displayed. It is possible to associate multiple values to
+	 *   the same `ngSwitchWhen` by defining the optional attribute
+	 *   `ngSwitchWhenSeparator`. The separator will be used to split the value of
+	 *   the `ngSwitchWhen` attribute into multiple tokens, and the element will show
+	 *   if any of the `ngSwitch` evaluates to any of these tokens.
 	 * * `ngSwitchDefault`: the default case when no other case match. If there
 	 *   are multiple default cases, all of them will be displayed when no other
 	 *   case match.
@@ -57713,7 +62073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        <hr/>
 	        <div class="animate-switch-container"
 	          ng-switch on="selection">
-	            <div class="animate-switch" ng-switch-when="settings">Settings Div</div>
+	            <div class="animate-switch" ng-switch-when="settings|options" ng-switch-when-separator="|">Settings Div</div>
 	            <div class="animate-switch" ng-switch-when="home">Home Span</div>
 	            <div class="animate-switch" ng-switch-default>default</div>
 	        </div>
@@ -57722,7 +62082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    <file name="script.js">
 	      angular.module('switchExample', ['ngAnimate'])
 	        .controller('ExampleController', ['$scope', function($scope) {
-	          $scope.items = ['settings', 'home', 'other'];
+	          $scope.items = ['settings', 'home', 'options', 'other'];
 	          $scope.selection = $scope.items[0];
 	        }]);
 	    </file>
@@ -57769,8 +62129,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        select.all(by.css('option')).get(1).click();
 	        expect(switchElem.getText()).toMatch(/Home Span/);
 	      });
-	      it('should select default', function() {
+	      it('should change to settings via "options"', function() {
 	        select.all(by.css('option')).get(2).click();
+	        expect(switchElem.getText()).toMatch(/Settings Div/);
+	      });
+	      it('should select default', function() {
+	        select.all(by.css('option')).get(3).click();
 	        expect(switchElem.getText()).toMatch(/default/);
 	      });
 	    </file>
@@ -57792,21 +62156,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	          selectedScopes = [];
 	
 	      var spliceFactory = function(array, index) {
-	          return function() { array.splice(index, 1); };
+	          return function(response) {
+	            if (response !== false) array.splice(index, 1);
+	          };
 	      };
 	
 	      scope.$watch(watchExpr, function ngSwitchWatchAction(value) {
 	        var i, ii;
-	        for (i = 0, ii = previousLeaveAnimations.length; i < ii; ++i) {
-	          $animate.cancel(previousLeaveAnimations[i]);
+	
+	        // Start with the last, in case the array is modified during the loop
+	        while (previousLeaveAnimations.length) {
+	          $animate.cancel(previousLeaveAnimations.pop());
 	        }
-	        previousLeaveAnimations.length = 0;
 	
 	        for (i = 0, ii = selectedScopes.length; i < ii; ++i) {
 	          var selected = getBlockNodes(selectedElements[i].clone);
 	          selectedScopes[i].$destroy();
-	          var promise = previousLeaveAnimations[i] = $animate.leave(selected);
-	          promise.then(spliceFactory(previousLeaveAnimations, i));
+	          var runner = previousLeaveAnimations[i] = $animate.leave(selected);
+	          runner.done(spliceFactory(previousLeaveAnimations, i));
 	        }
 	
 	        selectedElements.length = 0;
@@ -57836,8 +62203,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  require: '^ngSwitch',
 	  multiElement: true,
 	  link: function(scope, element, attrs, ctrl, $transclude) {
-	    ctrl.cases['!' + attrs.ngSwitchWhen] = (ctrl.cases['!' + attrs.ngSwitchWhen] || []);
-	    ctrl.cases['!' + attrs.ngSwitchWhen].push({ transclude: $transclude, element: element });
+	
+	    var cases = attrs.ngSwitchWhen.split(attrs.ngSwitchWhenSeparator).sort().filter(
+	      // Filter duplicate cases
+	      function(element, index, array) { return array[index - 1] !== element; }
+	    );
+	
+	    forEach(cases, function(whenCase) {
+	      ctrl.cases['!' + whenCase] = (ctrl.cases['!' + whenCase] || []);
+	      ctrl.cases['!' + whenCase].push({ transclude: $transclude, element: element });
+	    });
 	  }
 	});
 	
@@ -57865,8 +62240,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * If the transcluded content is not empty (i.e. contains one or more DOM nodes, including whitespace text nodes), any existing
 	 * content of this element will be removed before the transcluded content is inserted.
-	 * If the transcluded content is empty, the existing content is left intact. This lets you provide fallback content in the case
-	 * that no transcluded content is provided.
+	 * If the transcluded content is empty (or only whitespace), the existing content is left intact. This lets you provide fallback
+	 * content in the case that no transcluded content is provided.
 	 *
 	 * @element ANY
 	 *
@@ -57899,7 +62274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     <div ng-controller="ExampleController">
 	 *       <input ng-model="title" aria-label="title"> <br/>
 	 *       <textarea ng-model="text" aria-label="text"></textarea> <br/>
-	 *       <pane title="{{title}}">{{text}}</pane>
+	 *       <pane title="{{title}}"><span>{{text}}</span></pane>
 	 *     </div>
 	 *   </file>
 	 *   <file name="protractor.js" type="protractor">
@@ -58047,7 +62422,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        function ngTranscludeCloneAttachFn(clone, transcludedScope) {
-	          if (clone.length) {
+	          if (clone.length && notWhitespace(clone)) {
 	            $element.append(clone);
 	          } else {
 	            useFallbackContent();
@@ -58063,6 +62438,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	          fallbackLinkFn($scope, function(clone) {
 	            $element.append(clone);
 	          });
+	        }
+	
+	        function notWhitespace(nodes) {
+	          for (var i = 0, ii = nodes.length; i < ii; i++) {
+	            var node = nodes[i];
+	            if (node.nodeType !== NODE_TYPE_TEXT || node.nodeValue.trim()) {
+	              return true;
+	            }
+	          }
 	        }
 	      };
 	    }
@@ -58121,15 +62505,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var noopNgModelController = { $setViewValue: noop, $render: noop };
 	
-	function chromeHack(optionElement) {
-	  // Workaround for https://code.google.com/p/chromium/issues/detail?id=381459
-	  // Adding an <option selected="selected"> element to a <select required="required"> should
-	  // automatically select the new element
-	  if (optionElement[0].hasAttribute('selected')) {
-	    optionElement[0].selected = true;
-	  }
-	}
-	
 	/**
 	 * @ngdoc type
 	 * @name  select.SelectController
@@ -58144,8 +62519,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var self = this,
 	      optionsMap = new HashMap();
 	
+	  self.selectValueMap = {}; // Keys are the hashed values, values the original values
+	
 	  // If the ngModel doesn't get provided then provide a dummy noop version to prevent errors
 	  self.ngModelCtrl = noopNgModelController;
+	  self.multiple = false;
 	
 	  // The "unknown" option is one that is prepended to the list if the viewValue
 	  // does not match any of the options. When it is rendered the value of the unknown
@@ -58154,11 +62532,49 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // We can't just jqLite('<option>') since jqLite is not smart enough
 	  // to create it in <select> and IE barfs otherwise.
 	  self.unknownOption = jqLite(window.document.createElement('option'));
+	
+	  // The empty option is an option with the value '' that te application developer can
+	  // provide inside the select. When the model changes to a value that doesn't match an option,
+	  // it is selected - so if an empty option is provided, no unknown option is generated.
+	  // However, the empty option is not removed when the model matches an option. It is always selectable
+	  // and indicates that a "null" selection has been made.
+	  self.hasEmptyOption = false;
+	  self.emptyOption = undefined;
+	
 	  self.renderUnknownOption = function(val) {
-	    var unknownVal = '? ' + hashKey(val) + ' ?';
+	    var unknownVal = self.generateUnknownOptionValue(val);
 	    self.unknownOption.val(unknownVal);
 	    $element.prepend(self.unknownOption);
+	    setOptionAsSelected(self.unknownOption);
 	    $element.val(unknownVal);
+	  };
+	
+	  self.updateUnknownOption = function(val) {
+	    var unknownVal = self.generateUnknownOptionValue(val);
+	    self.unknownOption.val(unknownVal);
+	    setOptionAsSelected(self.unknownOption);
+	    $element.val(unknownVal);
+	  };
+	
+	  self.generateUnknownOptionValue = function(val) {
+	    return '? ' + hashKey(val) + ' ?';
+	  };
+	
+	  self.removeUnknownOption = function() {
+	    if (self.unknownOption.parent()) self.unknownOption.remove();
+	  };
+	
+	  self.selectEmptyOption = function() {
+	    if (self.emptyOption) {
+	      $element.val('');
+	      setOptionAsSelected(self.emptyOption);
+	    }
+	  };
+	
+	  self.unselectEmptyOption = function() {
+	    if (self.hasEmptyOption) {
+	      self.emptyOption.removeAttr('selected');
+	    }
 	  };
 	
 	  $scope.$on('$destroy', function() {
@@ -58166,30 +62582,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	    self.renderUnknownOption = noop;
 	  });
 	
-	  self.removeUnknownOption = function() {
-	    if (self.unknownOption.parent()) self.unknownOption.remove();
-	  };
-	
-	
 	  // Read the value of the select control, the implementation of this changes depending
 	  // upon whether the select can have multiple values and whether ngOptions is at work.
 	  self.readValue = function readSingleValue() {
-	    self.removeUnknownOption();
-	    return $element.val();
+	    var val = $element.val();
+	    // ngValue added option values are stored in the selectValueMap, normal interpolations are not
+	    var realVal = val in self.selectValueMap ? self.selectValueMap[val] : val;
+	
+	    if (self.hasOption(realVal)) {
+	      return realVal;
+	    }
+	
+	    return null;
 	  };
 	
 	
 	  // Write the value to the select control, the implementation of this changes depending
 	  // upon whether the select can have multiple values and whether ngOptions is at work.
 	  self.writeValue = function writeSingleValue(value) {
+	    // Make sure to remove the selected attribute from the previously selected option
+	    // Otherwise, screen readers might get confused
+	    var currentlySelectedOption = $element[0].options[$element[0].selectedIndex];
+	    if (currentlySelectedOption) currentlySelectedOption.removeAttribute('selected');
+	
 	    if (self.hasOption(value)) {
 	      self.removeUnknownOption();
-	      $element.val(value);
-	      if (value === '') self.emptyOption.prop('selected', true); // to make IE9 happy
+	
+	      var hashedVal = hashKey(value);
+	      $element.val(hashedVal in self.selectValueMap ? hashedVal : value);
+	
+	      // Set selected attribute and property on selected option for screen readers
+	      var selectedOption = $element[0].options[$element[0].selectedIndex];
+	      setOptionAsSelected(jqLite(selectedOption));
 	    } else {
 	      if (value == null && self.emptyOption) {
 	        self.removeUnknownOption();
-	        $element.val('');
+	        self.selectEmptyOption();
+	      } else if (self.unknownOption.parent().length) {
+	        self.updateUnknownOption(value);
 	      } else {
 	        self.renderUnknownOption(value);
 	      }
@@ -58204,12 +62634,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    assertNotHasOwnProperty(value, '"option value"');
 	    if (value === '') {
+	      self.hasEmptyOption = true;
 	      self.emptyOption = element;
 	    }
 	    var count = optionsMap.get(value) || 0;
 	    optionsMap.put(value, count + 1);
-	    self.ngModelCtrl.$render();
-	    chromeHack(element);
+	    // Only render at the end of a digest. This improves render performance when many options
+	    // are added during a digest and ensures all relevant options are correctly marked as selected
+	    scheduleRender();
 	  };
 	
 	  // Tell the select control that an option, with the given value, has been removed
@@ -58219,6 +62651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (count === 1) {
 	        optionsMap.remove(value);
 	        if (value === '') {
+	          self.hasEmptyOption = false;
 	          self.emptyOption = undefined;
 	        }
 	      } else {
@@ -58233,37 +62666,138 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	
+	  var renderScheduled = false;
+	  function scheduleRender() {
+	    if (renderScheduled) return;
+	    renderScheduled = true;
+	    $scope.$$postDigest(function() {
+	      renderScheduled = false;
+	      self.ngModelCtrl.$render();
+	    });
+	  }
+	
+	  var updateScheduled = false;
+	  function scheduleViewValueUpdate(renderAfter) {
+	    if (updateScheduled) return;
+	
+	    updateScheduled = true;
+	
+	    $scope.$$postDigest(function() {
+	      if ($scope.$$destroyed) return;
+	
+	      updateScheduled = false;
+	      self.ngModelCtrl.$setViewValue(self.readValue());
+	      if (renderAfter) self.ngModelCtrl.$render();
+	    });
+	  }
+	
+	
 	  self.registerOption = function(optionScope, optionElement, optionAttrs, interpolateValueFn, interpolateTextFn) {
 	
-	    if (interpolateValueFn) {
-	      // The value attribute is interpolated
-	      var oldVal;
+	    if (optionAttrs.$attr.ngValue) {
+	      // The value attribute is set by ngValue
+	      var oldVal, hashedVal = NaN;
 	      optionAttrs.$observe('value', function valueAttributeObserveAction(newVal) {
+	
+	        var removal;
+	        var previouslySelected = optionElement.prop('selected');
+	
+	        if (isDefined(hashedVal)) {
+	          self.removeOption(oldVal);
+	          delete self.selectValueMap[hashedVal];
+	          removal = true;
+	        }
+	
+	        hashedVal = hashKey(newVal);
+	        oldVal = newVal;
+	        self.selectValueMap[hashedVal] = newVal;
+	        self.addOption(newVal, optionElement);
+	        // Set the attribute directly instead of using optionAttrs.$set - this stops the observer
+	        // from firing a second time. Other $observers on value will also get the result of the
+	        // ngValue expression, not the hashed value
+	        optionElement.attr('value', hashedVal);
+	
+	        if (removal && previouslySelected) {
+	          scheduleViewValueUpdate();
+	        }
+	
+	      });
+	    } else if (interpolateValueFn) {
+	      // The value attribute is interpolated
+	      optionAttrs.$observe('value', function valueAttributeObserveAction(newVal) {
+	        // This method is overwritten in ngOptions and has side-effects!
+	        self.readValue();
+	
+	        var removal;
+	        var previouslySelected = optionElement.prop('selected');
+	
 	        if (isDefined(oldVal)) {
 	          self.removeOption(oldVal);
+	          removal = true;
 	        }
 	        oldVal = newVal;
 	        self.addOption(newVal, optionElement);
+	
+	        if (removal && previouslySelected) {
+	          scheduleViewValueUpdate();
+	        }
 	      });
 	    } else if (interpolateTextFn) {
 	      // The text content is interpolated
 	      optionScope.$watch(interpolateTextFn, function interpolateWatchAction(newVal, oldVal) {
 	        optionAttrs.$set('value', newVal);
+	        var previouslySelected = optionElement.prop('selected');
 	        if (oldVal !== newVal) {
 	          self.removeOption(oldVal);
 	        }
 	        self.addOption(newVal, optionElement);
+	
+	        if (oldVal && previouslySelected) {
+	          scheduleViewValueUpdate();
+	        }
 	      });
 	    } else {
 	      // The value attribute is static
 	      self.addOption(optionAttrs.value, optionElement);
 	    }
 	
+	
+	    optionAttrs.$observe('disabled', function(newVal) {
+	
+	      // Since model updates will also select disabled options (like ngOptions),
+	      // we only have to handle options becoming disabled, not enabled
+	
+	      if (newVal === 'true' || newVal && optionElement.prop('selected')) {
+	        if (self.multiple) {
+	          scheduleViewValueUpdate(true);
+	        } else {
+	          self.ngModelCtrl.$setViewValue(null);
+	          self.ngModelCtrl.$render();
+	        }
+	      }
+	    });
+	
 	    optionElement.on('$destroy', function() {
-	      self.removeOption(optionAttrs.value);
+	      var currentValue = self.readValue();
+	      var removeValue = optionAttrs.value;
+	
+	      self.removeOption(removeValue);
 	      self.ngModelCtrl.$render();
+	
+	      if (self.multiple && currentValue && currentValue.indexOf(removeValue) !== -1 ||
+	          currentValue === removeValue
+	      ) {
+	        // When multiple (selected) options are destroyed at the same time, we don't want
+	        // to run a model update for each of them. Instead, run a single update in the $$postDigest
+	        scheduleViewValueUpdate(true);
+	      }
 	    });
 	  };
+	
+	  function setOptionAsSelected(optionEl) {
+	    optionEl.prop('selected', true); // needed for IE
+	    optionEl.attr('selected', true);
+	  }
 	}];
 	
 	/**
@@ -58272,7 +62806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @restrict E
 	 *
 	 * @description
-	 * HTML `SELECT` element with angular data-binding.
+	 * HTML `select` element with angular data-binding.
 	 *
 	 * The `select` directive is used together with {@link ngModel `ngModel`} to provide data-binding
 	 * between the scope and the `<select>` control (including setting default values).
@@ -58282,14 +62816,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * When an item in the `<select>` menu is selected, the value of the selected option will be bound
 	 * to the model identified by the `ngModel` directive. With static or repeated options, this is
 	 * the content of the `value` attribute or the textContent of the `<option>`, if the value attribute is missing.
-	 * If you want dynamic value attributes, you can use interpolation inside the value attribute.
+	 * Value and textContent can be interpolated.
 	 *
-	 * <div class="alert alert-warning">
-	 * Note that the value of a `select` directive used without `ngOptions` is always a string.
-	 * When the model needs to be bound to a non-string value, you must either explicitly convert it
-	 * using a directive (see example below) or use `ngOptions` to specify the set of options.
-	 * This is because an option element can only be bound to string values at present.
-	 * </div>
+	 * ## Matching model and option values
+	 *
+	 * In general, the match between the model and an option is evaluated by strictly comparing the model
+	 * value against the value of the available options.
+	 *
+	 * If you are setting the option value with the option's `value` attribute, or textContent, the
+	 * value will always be a `string` which means that the model value must also be a string.
+	 * Otherwise the `select` directive cannot match them correctly.
+	 *
+	 * To bind the model to a non-string value, you can use one of the following strategies:
+	 * - the {@link ng.ngOptions `ngOptions`} directive
+	 *   ({@link ng.select#using-select-with-ngoptions-and-setting-a-default-value})
+	 * - the {@link ng.ngValue `ngValue`} directive, which allows arbitrary expressions to be
+	 *   option values ({@link ng.select#using-ngvalue-to-bind-the-model-to-an-array-of-objects Example})
+	 * - model $parsers / $formatters to convert the string value
+	 *   ({@link ng.select#binding-select-to-a-non-string-value-via-ngmodel-parsing-formatting Example})
 	 *
 	 * If the viewValue of `ngModel` does not match any of the options, then the control
 	 * will automatically add an "unknown" option, which it then removes when the mismatch is resolved.
@@ -58298,13 +62842,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * be nested into the `<select>` element. This element will then represent the `null` or "not selected"
 	 * option. See example below for demonstration.
 	 *
-	 * <div class="alert alert-info">
+	 * ## Choosing between `ngRepeat` and `ngOptions`
+	 *
 	 * In many cases, `ngRepeat` can be used on `<option>` elements instead of {@link ng.directive:ngOptions
-	 * ngOptions} to achieve a similar result. However, `ngOptions` provides some benefits, such as
-	 * more flexibility in how the `<select>`'s model is assigned via the `select` **`as`** part of the
-	 * comprehension expression, and additionally in reducing memory and increasing speed by not creating
-	 * a new scope for each repeated instance.
-	 * </div>
+	 * ngOptions} to achieve a similar result. However, `ngOptions` provides some benefits:
+	 * - more flexibility in how the `<select>`'s model is assigned via the `select` **`as`** part of the
+	 * comprehension expression
+	 * - reduced memory consumption by not creating a new scope for each repeated instance
+	 * - increased render speed by creating the options in a documentFragment instead of individually
+	 *
+	 * Specifically, select with repeated options slows down significantly starting at 2000 options in
+	 * Chrome and Internet Explorer / Edge.
 	 *
 	 *
 	 * @param {string} ngModel Assignable angular expression to data-bind to.
@@ -58370,24 +62918,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *</example>
 	 *
 	 * ### Using `ngRepeat` to generate `select` options
-	 * <example name="ngrepeat-select" module="ngrepeatSelect">
+	 * <example name="select-ngrepeat" module="ngrepeatSelect">
 	 * <file name="index.html">
 	 * <div ng-controller="ExampleController">
 	 *   <form name="myForm">
 	 *     <label for="repeatSelect"> Repeat select: </label>
-	 *     <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect">
+	 *     <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
 	 *       <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
 	 *     </select>
 	 *   </form>
 	 *   <hr>
-	 *   <tt>repeatSelect = {{data.repeatSelect}}</tt><br/>
+	 *   <tt>model = {{data.model}}</tt><br/>
 	 * </div>
 	 * </file>
 	 * <file name="app.js">
 	 *  angular.module('ngrepeatSelect', [])
 	 *    .controller('ExampleController', ['$scope', function($scope) {
 	 *      $scope.data = {
-	 *       repeatSelect: null,
+	 *       model: null,
 	 *       availableOptions: [
 	 *         {id: '1', name: 'Option A'},
 	 *         {id: '2', name: 'Option B'},
@@ -58398,6 +62946,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * </file>
 	 *</example>
 	 *
+	 * ### Using `ngValue` to bind the model to an array of objects
+	 * <example name="select-ngvalue" module="ngvalueSelect">
+	 * <file name="index.html">
+	 * <div ng-controller="ExampleController">
+	 *   <form name="myForm">
+	 *     <label for="ngvalueselect"> ngvalue select: </label>
+	 *     <select size="6" name="ngvalueselect" ng-model="data.model" multiple>
+	 *       <option ng-repeat="option in data.availableOptions" ng-value="option.value">{{option.name}}</option>
+	 *     </select>
+	 *   </form>
+	 *   <hr>
+	 *   <pre>model = {{data.model | json}}</pre><br/>
+	 * </div>
+	 * </file>
+	 * <file name="app.js">
+	 *  angular.module('ngvalueSelect', [])
+	 *    .controller('ExampleController', ['$scope', function($scope) {
+	 *      $scope.data = {
+	 *       model: null,
+	 *       availableOptions: [
+	           {value: 'myString', name: 'string'},
+	           {value: 1, name: 'integer'},
+	           {value: true, name: 'boolean'},
+	           {value: null, name: 'null'},
+	           {value: {prop: 'value'}, name: 'object'},
+	           {value: ['a'], name: 'array'}
+	 *       ]
+	 *      };
+	 *   }]);
+	 * </file>
+	 *</example>
 	 *
 	 * ### Using `select` with `ngOptions` and setting a default value
 	 * See the {@link ngOptions ngOptions documentation} for more `ngOptions` usage examples.
@@ -58484,11 +63063,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function selectPreLink(scope, element, attr, ctrls) {
 	
-	      // if ngModel is not defined, we don't need to do anything
-	      var ngModelCtrl = ctrls[1];
-	      if (!ngModelCtrl) return;
-	
 	      var selectCtrl = ctrls[0];
+	      var ngModelCtrl = ctrls[1];
+	
+	      // if ngModel is not defined, we don't need to do anything but set the registerOption
+	      // function to noop, so options don't get added internally
+	      if (!ngModelCtrl) {
+	        selectCtrl.registerOption = noop;
+	        return;
+	      }
+	
 	
 	      selectCtrl.ngModelCtrl = ngModelCtrl;
 	
@@ -58496,6 +63080,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // to the `readValue` method, which can be changed if the select can have multiple
 	      // selected values or if the options are being generated by `ngOptions`
 	      element.on('change', function() {
+	        selectCtrl.removeUnknownOption();
 	        scope.$apply(function() {
 	          ngModelCtrl.$setViewValue(selectCtrl.readValue());
 	        });
@@ -58506,13 +63091,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // we have to add an extra watch since ngModel doesn't work well with arrays - it
 	      // doesn't trigger rendering if only an item in the array changes.
 	      if (attr.multiple) {
+	        selectCtrl.multiple = true;
 	
 	        // Read value now needs to check each option to see if it is selected
 	        selectCtrl.readValue = function readMultipleValue() {
 	          var array = [];
 	          forEach(element.find('option'), function(option) {
-	            if (option.selected) {
-	              array.push(option.value);
+	            if (option.selected && !option.disabled) {
+	              var val = option.value;
+	              array.push(val in selectCtrl.selectValueMap ? selectCtrl.selectValueMap[val] : val);
 	            }
 	          });
 	          return array;
@@ -58522,7 +63109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        selectCtrl.writeValue = function writeMultipleValue(value) {
 	          var items = new HashMap(value);
 	          forEach(element.find('option'), function(option) {
-	            option.selected = isDefined(items.get(option.value));
+	            option.selected = isDefined(items.get(option.value)) || isDefined(items.get(selectCtrl.selectValueMap[option.value]));
 	          });
 	        };
 	
@@ -58573,13 +63160,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    restrict: 'E',
 	    priority: 100,
 	    compile: function(element, attr) {
-	      if (isDefined(attr.value)) {
+	      var interpolateValueFn, interpolateTextFn;
+	
+	      if (isDefined(attr.ngValue)) {
+	        // Will be handled by registerOption
+	      } else if (isDefined(attr.value)) {
 	        // If the value attribute is defined, check if it contains an interpolation
-	        var interpolateValueFn = $interpolate(attr.value, true);
+	        interpolateValueFn = $interpolate(attr.value, true);
 	      } else {
 	        // If the value attribute is not defined then we fall back to the
 	        // text content of the option element, which may be interpolated
-	        var interpolateTextFn = $interpolate(element.text(), true);
+	        interpolateTextFn = $interpolate(element.text(), true);
 	        if (!interpolateTextFn) {
 	          attr.$set('value', element.text());
 	        }
@@ -58955,15 +63546,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	if (window.angular.bootstrap) {
-	  //AngularJS is already loaded, so we can return here...
+	  // AngularJS is already loaded, so we can return here...
 	  if (window.console) {
 	    console.log('WARNING: Tried to load angular more than once.');
 	  }
 	  return;
 	}
 	
-	//try to bind to jquery now so that one can write jqLite(document).ready()
-	//but we will rebind on bootstrap again.
+	// try to bind to jquery now so that one can write jqLite(fn)
+	// but we will rebind on bootstrap again.
 	bindJQuery();
 	
 	publishExternalAPI(angular);
@@ -59111,7 +63702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	}]);
 	
-	  jqLite(window.document).ready(function() {
+	  jqLite(function() {
 	    angularInit(window.document, bootstrap);
 	  });
 	
@@ -59120,25 +63711,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 56 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-	__webpack_require__(68)
-	__webpack_require__(58)
-	__webpack_require__(59)
-	__webpack_require__(60)
-	__webpack_require__(61)
-	__webpack_require__(62)
-	__webpack_require__(63)
-	__webpack_require__(67)
-	__webpack_require__(64)
+	__webpack_require__(75)
 	__webpack_require__(65)
 	__webpack_require__(66)
-	__webpack_require__(57)
+	__webpack_require__(67)
+	__webpack_require__(68)
+	__webpack_require__(69)
+	__webpack_require__(70)
+	__webpack_require__(74)
+	__webpack_require__(71)
+	__webpack_require__(72)
+	__webpack_require__(73)
+	__webpack_require__(64)
 
 /***/ },
-/* 57 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59306,7 +63897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 65 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59406,7 +63997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59537,7 +64128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 67 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59780,7 +64371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 68 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -59998,7 +64589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 69 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60169,7 +64760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 70 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60514,7 +65105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 71 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60628,7 +65219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 72 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60806,7 +65397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 66 */
+/* 73 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -60967,7 +65558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 67 */
+/* 74 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -61493,7 +66084,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 68 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/* ========================================================================
@@ -61558,7 +66149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 69 */
+/* 76 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -61866,7 +66457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 70 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -62052,7 +66643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	if (typeof module !== "undefined" && module.exports) {
 	  module.exports.saveAs = saveAs;
-	} else if (("function" !== "undefined" && __webpack_require__(146) !== null) && (__webpack_require__(147) !== null)) {
+	} else if (("function" !== "undefined" && __webpack_require__(171) !== null) && (__webpack_require__(172) !== null)) {
 	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    return saveAs;
 	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -62060,7 +66651,156 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 71 */
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(10);
+	var index = __webpack_require__(20);
+	var tartan = __webpack_require__(2);
+	
+	function formatPivot(str) {
+	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
+	}
+	
+	var defaultOptions = {
+	  format: {
+	    color: function(item) {
+	      var comment = item.comment != '' ? ' ' + item.comment : '';
+	      return item.name + item.value + comment + ';';
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var items = block.formattedItems;
+	      if (block.reflect && (items.length >= 2)) {
+	        // Convert first and last to pivots
+	        items[0] = formatPivot(items[0]);
+	        items[items.length - 1] = formatPivot(items[items.length - 1]);
+	      }
+	      return _.trim(_.join(items, ' '));
+	    }
+	  }
+	};
+	
+	// Options same as for tartan.render.format():
+	// + warpAndWeftSeparator: index.warpAndWeftSeparator
+	// - format
+	// - join
+	function factory(options) {
+	  options = _.extend({}, options, defaultOptions);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  options.transformSyntaxTree = tartan.transform([
+	    options.transformSyntaxTree,
+	    tartan.transform.flatten(),
+	    tartan.transform.fold()
+	  ]);
+	
+	  options.join = function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	    if (components.warp != components.weft) {
+	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
+	        ' ' + components.weft);
+	    } else {
+	      parts.push(components.warp);
+	    }
+	    return parts.join('\n');
+	  };
+	
+	  return tartan.render.format(options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(10);
+	var core = __webpack_require__(19);
+	var packageInfo = __webpack_require__(99);
+	
+	var tartan = null;
+	try {
+	  tartan = __webpack_require__(2);
+	} catch (e) {
+	  tartan = null;
+	}
+	
+	if (tartan) {
+	  tartan.schema.identartan = _.extend(__webpack_require__(20), packageInfo);
+	  module.exports = packageInfo;
+	} else {
+	  module.exports = function(string, options) {
+	    return _.join(_.map(core.generate(string, options), function(item) {
+	      return item.isPivot ?
+	        item.name + '/' + item.count :
+	        item.name + item.count;
+	    }), ' ');
+	  };
+	  _.extend(module.exports, packageInfo);
+	}
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(10);
+	var tartan = __webpack_require__(2);
+	var core = __webpack_require__(19);
+	
+	/*
+	  options = {
+	    // + default options for core
+	    transformSyntaxTree: <default>
+	  }
+	*/
+	
+	function buildTree(tokens) {
+	  var items = _.map(tokens, function(token) {
+	    return tartan.utils.node.newStripe(token);
+	  });
+	  var isReflected = (tokens.length >= 2) && (tokens[0].isPivot);
+	  return tartan.utils.node.newRootBlock(items, isReflected);
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, options);
+	
+	  return function(source) {
+	    var result = {};
+	    result.colors = tartan.utils.color.buildColorMap([]);
+	    result.warp = result.weft = buildTree(core.generate(source, options));
+	    if (_.isFunction(options.transformSyntaxTree)) {
+	      result = options.transformSyntaxTree(result);
+	    }
+	    return result;
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -72286,7 +77026,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 72 */
+/* 82 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -72363,2086 +77103,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * lunr - http://lunrjs.com - A bit like Solr, but much smaller and not as bright - 0.7.2
-	 * Copyright (C) 2016 Oliver Nightingale
-	 * @license MIT
-	 */
-	
-	;(function(){
-	
-	/**
-	 * Convenience function for instantiating a new lunr index and configuring it
-	 * with the default pipeline functions and the passed config function.
-	 *
-	 * When using this convenience function a new index will be created with the
-	 * following functions already in the pipeline:
-	 *
-	 * lunr.StopWordFilter - filters out any stop words before they enter the
-	 * index
-	 *
-	 * lunr.stemmer - stems the tokens before entering the index.
-	 *
-	 * Example:
-	 *
-	 *     var idx = lunr(function () {
-	 *       this.field('title', 10)
-	 *       this.field('tags', 100)
-	 *       this.field('body')
-	 *       
-	 *       this.ref('cid')
-	 *       
-	 *       this.pipeline.add(function () {
-	 *         // some custom pipeline function
-	 *       })
-	 *       
-	 *     })
-	 *
-	 * @param {Function} config A function that will be called with the new instance
-	 * of the lunr.Index as both its context and first parameter. It can be used to
-	 * customize the instance of new lunr.Index.
-	 * @namespace
-	 * @module
-	 * @returns {lunr.Index}
-	 *
-	 */
-	var lunr = function (config) {
-	  var idx = new lunr.Index
-	
-	  idx.pipeline.add(
-	    lunr.trimmer,
-	    lunr.stopWordFilter,
-	    lunr.stemmer
-	  )
-	
-	  if (config) config.call(idx, idx)
-	
-	  return idx
-	}
-	
-	lunr.version = "0.7.2"
-	/*!
-	 * lunr.utils
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * A namespace containing utils for the rest of the lunr library
-	 */
-	lunr.utils = {}
-	
-	/**
-	 * Print a warning message to the console.
-	 *
-	 * @param {String} message The message to be printed.
-	 * @memberOf Utils
-	 */
-	lunr.utils.warn = (function (global) {
-	  return function (message) {
-	    if (global.console && console.warn) {
-	      console.warn(message)
-	    }
-	  }
-	})(this)
-	
-	/**
-	 * Convert an object to a string.
-	 *
-	 * In the case of `null` and `undefined` the function returns
-	 * the empty string, in all other cases the result of calling
-	 * `toString` on the passed object is returned.
-	 *
-	 * @param {Any} obj The object to convert to a string.
-	 * @return {String} string representation of the passed object.
-	 * @memberOf Utils
-	 */
-	lunr.utils.asString = function (obj) {
-	  if (obj === void 0 || obj === null) {
-	    return ""
-	  } else {
-	    return obj.toString()
-	  }
-	}
-	/*!
-	 * lunr.EventEmitter
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.EventEmitter is an event emitter for lunr. It manages adding and removing event handlers and triggering events and their handlers.
-	 *
-	 * @constructor
-	 */
-	lunr.EventEmitter = function () {
-	  this.events = {}
-	}
-	
-	/**
-	 * Binds a handler function to a specific event(s).
-	 *
-	 * Can bind a single function to many different events in one call.
-	 *
-	 * @param {String} [eventName] The name(s) of events to bind this function to.
-	 * @param {Function} fn The function to call when an event is fired.
-	 * @memberOf EventEmitter
-	 */
-	lunr.EventEmitter.prototype.addListener = function () {
-	  var args = Array.prototype.slice.call(arguments),
-	      fn = args.pop(),
-	      names = args
-	
-	  if (typeof fn !== "function") throw new TypeError ("last argument must be a function")
-	
-	  names.forEach(function (name) {
-	    if (!this.hasHandler(name)) this.events[name] = []
-	    this.events[name].push(fn)
-	  }, this)
-	}
-	
-	/**
-	 * Removes a handler function from a specific event.
-	 *
-	 * @param {String} eventName The name of the event to remove this function from.
-	 * @param {Function} fn The function to remove from an event.
-	 * @memberOf EventEmitter
-	 */
-	lunr.EventEmitter.prototype.removeListener = function (name, fn) {
-	  if (!this.hasHandler(name)) return
-	
-	  var fnIndex = this.events[name].indexOf(fn)
-	  this.events[name].splice(fnIndex, 1)
-	
-	  if (!this.events[name].length) delete this.events[name]
-	}
-	
-	/**
-	 * Calls all functions bound to the given event.
-	 *
-	 * Additional data can be passed to the event handler as arguments to `emit`
-	 * after the event name.
-	 *
-	 * @param {String} eventName The name of the event to emit.
-	 * @memberOf EventEmitter
-	 */
-	lunr.EventEmitter.prototype.emit = function (name) {
-	  if (!this.hasHandler(name)) return
-	
-	  var args = Array.prototype.slice.call(arguments, 1)
-	
-	  this.events[name].forEach(function (fn) {
-	    fn.apply(undefined, args)
-	  })
-	}
-	
-	/**
-	 * Checks whether a handler has ever been stored against an event.
-	 *
-	 * @param {String} eventName The name of the event to check.
-	 * @private
-	 * @memberOf EventEmitter
-	 */
-	lunr.EventEmitter.prototype.hasHandler = function (name) {
-	  return name in this.events
-	}
-	
-	/*!
-	 * lunr.tokenizer
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * A function for splitting a string into tokens ready to be inserted into
-	 * the search index. Uses `lunr.tokenizer.separator` to split strings, change
-	 * the value of this property to change how strings are split into tokens.
-	 *
-	 * @module
-	 * @param {String} obj The string to convert into tokens
-	 * @see lunr.tokenizer.separator
-	 * @returns {Array}
-	 */
-	lunr.tokenizer = function (obj) {
-	  if (!arguments.length || obj == null || obj == undefined) return []
-	  if (Array.isArray(obj)) return obj.map(function (t) { return lunr.utils.asString(t).toLowerCase() })
-	
-	  // TODO: This exists so that the deprecated property lunr.tokenizer.seperator can still be used. By
-	  // default it is set to false and so the correctly spelt lunr.tokenizer.separator is used unless
-	  // the user is using the old property to customise the tokenizer.
-	  //
-	  // This should be removed when version 1.0.0 is released.
-	  var separator = lunr.tokenizer.seperator || lunr.tokenizer.separator
-	
-	  return obj.toString().trim().toLowerCase().split(separator)
-	}
-	
-	/**
-	 * This property is legacy alias for lunr.tokenizer.separator to maintain backwards compatability.
-	 * When introduced the token was spelt incorrectly. It will remain until 1.0.0 when it will be removed,
-	 * all code should use the correctly spelt lunr.tokenizer.separator property instead.
-	 *
-	 * @static
-	 * @see lunr.tokenizer.separator
-	 * @deprecated since 0.7.2 will be removed in 1.0.0
-	 * @private
-	 * @see lunr.tokenizer
-	 */
-	lunr.tokenizer.seperator = false
-	
-	/**
-	 * The sperator used to split a string into tokens. Override this property to change the behaviour of
-	 * `lunr.tokenizer` behaviour when tokenizing strings. By default this splits on whitespace and hyphens.
-	 *
-	 * @static
-	 * @see lunr.tokenizer
-	 */
-	lunr.tokenizer.separator = /[\s\-]+/
-	
-	/**
-	 * Loads a previously serialised tokenizer.
-	 *
-	 * A tokenizer function to be loaded must already be registered with lunr.tokenizer.
-	 * If the serialised tokenizer has not been registered then an error will be thrown.
-	 *
-	 * @param {String} label The label of the serialised tokenizer.
-	 * @returns {Function}
-	 * @memberOf tokenizer
-	 */
-	lunr.tokenizer.load = function (label) {
-	  var fn = this.registeredFunctions[label]
-	
-	  if (!fn) {
-	    throw new Error('Cannot load un-registered function: ' + label)
-	  }
-	
-	  return fn
-	}
-	
-	lunr.tokenizer.label = 'default'
-	
-	lunr.tokenizer.registeredFunctions = {
-	  'default': lunr.tokenizer
-	}
-	
-	/**
-	 * Register a tokenizer function.
-	 *
-	 * Functions that are used as tokenizers should be registered if they are to be used with a serialised index.
-	 *
-	 * Registering a function does not add it to an index, functions must still be associated with a specific index for them to be used when indexing and searching documents.
-	 *
-	 * @param {Function} fn The function to register.
-	 * @param {String} label The label to register this function with
-	 * @memberOf tokenizer
-	 */
-	lunr.tokenizer.registerFunction = function (fn, label) {
-	  if (label in this.registeredFunctions) {
-	    lunr.utils.warn('Overwriting existing tokenizer: ' + label)
-	  }
-	
-	  fn.label = label
-	  this.registeredFunctions[label] = fn
-	}
-	/*!
-	 * lunr.Pipeline
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.Pipelines maintain an ordered list of functions to be applied to all
-	 * tokens in documents entering the search index and queries being ran against
-	 * the index.
-	 *
-	 * An instance of lunr.Index created with the lunr shortcut will contain a
-	 * pipeline with a stop word filter and an English language stemmer. Extra
-	 * functions can be added before or after either of these functions or these
-	 * default functions can be removed.
-	 *
-	 * When run the pipeline will call each function in turn, passing a token, the
-	 * index of that token in the original list of all tokens and finally a list of
-	 * all the original tokens.
-	 *
-	 * The output of functions in the pipeline will be passed to the next function
-	 * in the pipeline. To exclude a token from entering the index the function
-	 * should return undefined, the rest of the pipeline will not be called with
-	 * this token.
-	 *
-	 * For serialisation of pipelines to work, all functions used in an instance of
-	 * a pipeline should be registered with lunr.Pipeline. Registered functions can
-	 * then be loaded. If trying to load a serialised pipeline that uses functions
-	 * that are not registered an error will be thrown.
-	 *
-	 * If not planning on serialising the pipeline then registering pipeline functions
-	 * is not necessary.
-	 *
-	 * @constructor
-	 */
-	lunr.Pipeline = function () {
-	  this._stack = []
-	}
-	
-	lunr.Pipeline.registeredFunctions = {}
-	
-	/**
-	 * Register a function with the pipeline.
-	 *
-	 * Functions that are used in the pipeline should be registered if the pipeline
-	 * needs to be serialised, or a serialised pipeline needs to be loaded.
-	 *
-	 * Registering a function does not add it to a pipeline, functions must still be
-	 * added to instances of the pipeline for them to be used when running a pipeline.
-	 *
-	 * @param {Function} fn The function to check for.
-	 * @param {String} label The label to register this function with
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.registerFunction = function (fn, label) {
-	  if (label in this.registeredFunctions) {
-	    lunr.utils.warn('Overwriting existing registered function: ' + label)
-	  }
-	
-	  fn.label = label
-	  lunr.Pipeline.registeredFunctions[fn.label] = fn
-	}
-	
-	/**
-	 * Warns if the function is not registered as a Pipeline function.
-	 *
-	 * @param {Function} fn The function to check for.
-	 * @private
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
-	  var isRegistered = fn.label && (fn.label in this.registeredFunctions)
-	
-	  if (!isRegistered) {
-	    lunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn)
-	  }
-	}
-	
-	/**
-	 * Loads a previously serialised pipeline.
-	 *
-	 * All functions to be loaded must already be registered with lunr.Pipeline.
-	 * If any function from the serialised data has not been registered then an
-	 * error will be thrown.
-	 *
-	 * @param {Object} serialised The serialised pipeline to load.
-	 * @returns {lunr.Pipeline}
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.load = function (serialised) {
-	  var pipeline = new lunr.Pipeline
-	
-	  serialised.forEach(function (fnName) {
-	    var fn = lunr.Pipeline.registeredFunctions[fnName]
-	
-	    if (fn) {
-	      pipeline.add(fn)
-	    } else {
-	      throw new Error('Cannot load un-registered function: ' + fnName)
-	    }
-	  })
-	
-	  return pipeline
-	}
-	
-	/**
-	 * Adds new functions to the end of the pipeline.
-	 *
-	 * Logs a warning if the function has not been registered.
-	 *
-	 * @param {Function} functions Any number of functions to add to the pipeline.
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.add = function () {
-	  var fns = Array.prototype.slice.call(arguments)
-	
-	  fns.forEach(function (fn) {
-	    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
-	    this._stack.push(fn)
-	  }, this)
-	}
-	
-	/**
-	 * Adds a single function after a function that already exists in the
-	 * pipeline.
-	 *
-	 * Logs a warning if the function has not been registered.
-	 *
-	 * @param {Function} existingFn A function that already exists in the pipeline.
-	 * @param {Function} newFn The new function to add to the pipeline.
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.after = function (existingFn, newFn) {
-	  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
-	
-	  var pos = this._stack.indexOf(existingFn)
-	  if (pos == -1) {
-	    throw new Error('Cannot find existingFn')
-	  }
-	
-	  pos = pos + 1
-	  this._stack.splice(pos, 0, newFn)
-	}
-	
-	/**
-	 * Adds a single function before a function that already exists in the
-	 * pipeline.
-	 *
-	 * Logs a warning if the function has not been registered.
-	 *
-	 * @param {Function} existingFn A function that already exists in the pipeline.
-	 * @param {Function} newFn The new function to add to the pipeline.
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.before = function (existingFn, newFn) {
-	  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
-	
-	  var pos = this._stack.indexOf(existingFn)
-	  if (pos == -1) {
-	    throw new Error('Cannot find existingFn')
-	  }
-	
-	  this._stack.splice(pos, 0, newFn)
-	}
-	
-	/**
-	 * Removes a function from the pipeline.
-	 *
-	 * @param {Function} fn The function to remove from the pipeline.
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.remove = function (fn) {
-	  var pos = this._stack.indexOf(fn)
-	  if (pos == -1) {
-	    return
-	  }
-	
-	  this._stack.splice(pos, 1)
-	}
-	
-	/**
-	 * Runs the current list of functions that make up the pipeline against the
-	 * passed tokens.
-	 *
-	 * @param {Array} tokens The tokens to run through the pipeline.
-	 * @returns {Array}
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.run = function (tokens) {
-	  var out = [],
-	      tokenLength = tokens.length,
-	      stackLength = this._stack.length
-	
-	  for (var i = 0; i < tokenLength; i++) {
-	    var token = tokens[i]
-	
-	    for (var j = 0; j < stackLength; j++) {
-	      token = this._stack[j](token, i, tokens)
-	      if (token === void 0 || token === '') break
-	    };
-	
-	    if (token !== void 0 && token !== '') out.push(token)
-	  };
-	
-	  return out
-	}
-	
-	/**
-	 * Resets the pipeline by removing any existing processors.
-	 *
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.reset = function () {
-	  this._stack = []
-	}
-	
-	/**
-	 * Returns a representation of the pipeline ready for serialisation.
-	 *
-	 * Logs a warning if the function has not been registered.
-	 *
-	 * @returns {Array}
-	 * @memberOf Pipeline
-	 */
-	lunr.Pipeline.prototype.toJSON = function () {
-	  return this._stack.map(function (fn) {
-	    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
-	
-	    return fn.label
-	  })
-	}
-	/*!
-	 * lunr.Vector
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.Vectors implement vector related operations for
-	 * a series of elements.
-	 *
-	 * @constructor
-	 */
-	lunr.Vector = function () {
-	  this._magnitude = null
-	  this.list = undefined
-	  this.length = 0
-	}
-	
-	/**
-	 * lunr.Vector.Node is a simple struct for each node
-	 * in a lunr.Vector.
-	 *
-	 * @private
-	 * @param {Number} The index of the node in the vector.
-	 * @param {Object} The data at this node in the vector.
-	 * @param {lunr.Vector.Node} The node directly after this node in the vector.
-	 * @constructor
-	 * @memberOf Vector
-	 */
-	lunr.Vector.Node = function (idx, val, next) {
-	  this.idx = idx
-	  this.val = val
-	  this.next = next
-	}
-	
-	/**
-	 * Inserts a new value at a position in a vector.
-	 *
-	 * @param {Number} The index at which to insert a value.
-	 * @param {Object} The object to insert in the vector.
-	 * @memberOf Vector.
-	 */
-	lunr.Vector.prototype.insert = function (idx, val) {
-	  this._magnitude = undefined;
-	  var list = this.list
-	
-	  if (!list) {
-	    this.list = new lunr.Vector.Node (idx, val, list)
-	    return this.length++
-	  }
-	
-	  if (idx < list.idx) {
-	    this.list = new lunr.Vector.Node (idx, val, list)
-	    return this.length++
-	  }
-	
-	  var prev = list,
-	      next = list.next
-	
-	  while (next != undefined) {
-	    if (idx < next.idx) {
-	      prev.next = new lunr.Vector.Node (idx, val, next)
-	      return this.length++
-	    }
-	
-	    prev = next, next = next.next
-	  }
-	
-	  prev.next = new lunr.Vector.Node (idx, val, next)
-	  return this.length++
-	}
-	
-	/**
-	 * Calculates the magnitude of this vector.
-	 *
-	 * @returns {Number}
-	 * @memberOf Vector
-	 */
-	lunr.Vector.prototype.magnitude = function () {
-	  if (this._magnitude) return this._magnitude
-	  var node = this.list,
-	      sumOfSquares = 0,
-	      val
-	
-	  while (node) {
-	    val = node.val
-	    sumOfSquares += val * val
-	    node = node.next
-	  }
-	
-	  return this._magnitude = Math.sqrt(sumOfSquares)
-	}
-	
-	/**
-	 * Calculates the dot product of this vector and another vector.
-	 *
-	 * @param {lunr.Vector} otherVector The vector to compute the dot product with.
-	 * @returns {Number}
-	 * @memberOf Vector
-	 */
-	lunr.Vector.prototype.dot = function (otherVector) {
-	  var node = this.list,
-	      otherNode = otherVector.list,
-	      dotProduct = 0
-	
-	  while (node && otherNode) {
-	    if (node.idx < otherNode.idx) {
-	      node = node.next
-	    } else if (node.idx > otherNode.idx) {
-	      otherNode = otherNode.next
-	    } else {
-	      dotProduct += node.val * otherNode.val
-	      node = node.next
-	      otherNode = otherNode.next
-	    }
-	  }
-	
-	  return dotProduct
-	}
-	
-	/**
-	 * Calculates the cosine similarity between this vector and another
-	 * vector.
-	 *
-	 * @param {lunr.Vector} otherVector The other vector to calculate the
-	 * similarity with.
-	 * @returns {Number}
-	 * @memberOf Vector
-	 */
-	lunr.Vector.prototype.similarity = function (otherVector) {
-	  return this.dot(otherVector) / (this.magnitude() * otherVector.magnitude())
-	}
-	/*!
-	 * lunr.SortedSet
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.SortedSets are used to maintain an array of uniq values in a sorted
-	 * order.
-	 *
-	 * @constructor
-	 */
-	lunr.SortedSet = function () {
-	  this.length = 0
-	  this.elements = []
-	}
-	
-	/**
-	 * Loads a previously serialised sorted set.
-	 *
-	 * @param {Array} serialisedData The serialised set to load.
-	 * @returns {lunr.SortedSet}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.load = function (serialisedData) {
-	  var set = new this
-	
-	  set.elements = serialisedData
-	  set.length = serialisedData.length
-	
-	  return set
-	}
-	
-	/**
-	 * Inserts new items into the set in the correct position to maintain the
-	 * order.
-	 *
-	 * @param {Object} The objects to add to this set.
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.add = function () {
-	  var i, element
-	
-	  for (i = 0; i < arguments.length; i++) {
-	    element = arguments[i]
-	    if (~this.indexOf(element)) continue
-	    this.elements.splice(this.locationFor(element), 0, element)
-	  }
-	
-	  this.length = this.elements.length
-	}
-	
-	/**
-	 * Converts this sorted set into an array.
-	 *
-	 * @returns {Array}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.toArray = function () {
-	  return this.elements.slice()
-	}
-	
-	/**
-	 * Creates a new array with the results of calling a provided function on every
-	 * element in this sorted set.
-	 *
-	 * Delegates to Array.prototype.map and has the same signature.
-	 *
-	 * @param {Function} fn The function that is called on each element of the
-	 * set.
-	 * @param {Object} ctx An optional object that can be used as the context
-	 * for the function fn.
-	 * @returns {Array}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.map = function (fn, ctx) {
-	  return this.elements.map(fn, ctx)
-	}
-	
-	/**
-	 * Executes a provided function once per sorted set element.
-	 *
-	 * Delegates to Array.prototype.forEach and has the same signature.
-	 *
-	 * @param {Function} fn The function that is called on each element of the
-	 * set.
-	 * @param {Object} ctx An optional object that can be used as the context
-	 * @memberOf SortedSet
-	 * for the function fn.
-	 */
-	lunr.SortedSet.prototype.forEach = function (fn, ctx) {
-	  return this.elements.forEach(fn, ctx)
-	}
-	
-	/**
-	 * Returns the index at which a given element can be found in the
-	 * sorted set, or -1 if it is not present.
-	 *
-	 * @param {Object} elem The object to locate in the sorted set.
-	 * @returns {Number}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.indexOf = function (elem) {
-	  var start = 0,
-	      end = this.elements.length,
-	      sectionLength = end - start,
-	      pivot = start + Math.floor(sectionLength / 2),
-	      pivotElem = this.elements[pivot]
-	
-	  while (sectionLength > 1) {
-	    if (pivotElem === elem) return pivot
-	
-	    if (pivotElem < elem) start = pivot
-	    if (pivotElem > elem) end = pivot
-	
-	    sectionLength = end - start
-	    pivot = start + Math.floor(sectionLength / 2)
-	    pivotElem = this.elements[pivot]
-	  }
-	
-	  if (pivotElem === elem) return pivot
-	
-	  return -1
-	}
-	
-	/**
-	 * Returns the position within the sorted set that an element should be
-	 * inserted at to maintain the current order of the set.
-	 *
-	 * This function assumes that the element to search for does not already exist
-	 * in the sorted set.
-	 *
-	 * @param {Object} elem The elem to find the position for in the set
-	 * @returns {Number}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.locationFor = function (elem) {
-	  var start = 0,
-	      end = this.elements.length,
-	      sectionLength = end - start,
-	      pivot = start + Math.floor(sectionLength / 2),
-	      pivotElem = this.elements[pivot]
-	
-	  while (sectionLength > 1) {
-	    if (pivotElem < elem) start = pivot
-	    if (pivotElem > elem) end = pivot
-	
-	    sectionLength = end - start
-	    pivot = start + Math.floor(sectionLength / 2)
-	    pivotElem = this.elements[pivot]
-	  }
-	
-	  if (pivotElem > elem) return pivot
-	  if (pivotElem < elem) return pivot + 1
-	}
-	
-	/**
-	 * Creates a new lunr.SortedSet that contains the elements in the intersection
-	 * of this set and the passed set.
-	 *
-	 * @param {lunr.SortedSet} otherSet The set to intersect with this set.
-	 * @returns {lunr.SortedSet}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.intersect = function (otherSet) {
-	  var intersectSet = new lunr.SortedSet,
-	      i = 0, j = 0,
-	      a_len = this.length, b_len = otherSet.length,
-	      a = this.elements, b = otherSet.elements
-	
-	  while (true) {
-	    if (i > a_len - 1 || j > b_len - 1) break
-	
-	    if (a[i] === b[j]) {
-	      intersectSet.add(a[i])
-	      i++, j++
-	      continue
-	    }
-	
-	    if (a[i] < b[j]) {
-	      i++
-	      continue
-	    }
-	
-	    if (a[i] > b[j]) {
-	      j++
-	      continue
-	    }
-	  };
-	
-	  return intersectSet
-	}
-	
-	/**
-	 * Makes a copy of this set
-	 *
-	 * @returns {lunr.SortedSet}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.clone = function () {
-	  var clone = new lunr.SortedSet
-	
-	  clone.elements = this.toArray()
-	  clone.length = clone.elements.length
-	
-	  return clone
-	}
-	
-	/**
-	 * Creates a new lunr.SortedSet that contains the elements in the union
-	 * of this set and the passed set.
-	 *
-	 * @param {lunr.SortedSet} otherSet The set to union with this set.
-	 * @returns {lunr.SortedSet}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.union = function (otherSet) {
-	  var longSet, shortSet, unionSet
-	
-	  if (this.length >= otherSet.length) {
-	    longSet = this, shortSet = otherSet
-	  } else {
-	    longSet = otherSet, shortSet = this
-	  }
-	
-	  unionSet = longSet.clone()
-	
-	  for(var i = 0, shortSetElements = shortSet.toArray(); i < shortSetElements.length; i++){
-	    unionSet.add(shortSetElements[i])
-	  }
-	
-	  return unionSet
-	}
-	
-	/**
-	 * Returns a representation of the sorted set ready for serialisation.
-	 *
-	 * @returns {Array}
-	 * @memberOf SortedSet
-	 */
-	lunr.SortedSet.prototype.toJSON = function () {
-	  return this.toArray()
-	}
-	/*!
-	 * lunr.Index
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.Index is object that manages a search index.  It contains the indexes
-	 * and stores all the tokens and document lookups.  It also provides the main
-	 * user facing API for the library.
-	 *
-	 * @constructor
-	 */
-	lunr.Index = function () {
-	  this._fields = []
-	  this._ref = 'id'
-	  this.pipeline = new lunr.Pipeline
-	  this.documentStore = new lunr.Store
-	  this.tokenStore = new lunr.TokenStore
-	  this.corpusTokens = new lunr.SortedSet
-	  this.eventEmitter =  new lunr.EventEmitter
-	  this.tokenizerFn = lunr.tokenizer
-	
-	  this._idfCache = {}
-	
-	  this.on('add', 'remove', 'update', (function () {
-	    this._idfCache = {}
-	  }).bind(this))
-	}
-	
-	/**
-	 * Bind a handler to events being emitted by the index.
-	 *
-	 * The handler can be bound to many events at the same time.
-	 *
-	 * @param {String} [eventName] The name(s) of events to bind the function to.
-	 * @param {Function} fn The serialised set to load.
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.on = function () {
-	  var args = Array.prototype.slice.call(arguments)
-	  return this.eventEmitter.addListener.apply(this.eventEmitter, args)
-	}
-	
-	/**
-	 * Removes a handler from an event being emitted by the index.
-	 *
-	 * @param {String} eventName The name of events to remove the function from.
-	 * @param {Function} fn The serialised set to load.
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.off = function (name, fn) {
-	  return this.eventEmitter.removeListener(name, fn)
-	}
-	
-	/**
-	 * Loads a previously serialised index.
-	 *
-	 * Issues a warning if the index being imported was serialised
-	 * by a different version of lunr.
-	 *
-	 * @param {Object} serialisedData The serialised set to load.
-	 * @returns {lunr.Index}
-	 * @memberOf Index
-	 */
-	lunr.Index.load = function (serialisedData) {
-	  if (serialisedData.version !== lunr.version) {
-	    lunr.utils.warn('version mismatch: current ' + lunr.version + ' importing ' + serialisedData.version)
-	  }
-	
-	  var idx = new this
-	
-	  idx._fields = serialisedData.fields
-	  idx._ref = serialisedData.ref
-	
-	  idx.tokenizer(lunr.tokenizer.load(serialisedData.tokenizer))
-	  idx.documentStore = lunr.Store.load(serialisedData.documentStore)
-	  idx.tokenStore = lunr.TokenStore.load(serialisedData.tokenStore)
-	  idx.corpusTokens = lunr.SortedSet.load(serialisedData.corpusTokens)
-	  idx.pipeline = lunr.Pipeline.load(serialisedData.pipeline)
-	
-	  return idx
-	}
-	
-	/**
-	 * Adds a field to the list of fields that will be searchable within documents
-	 * in the index.
-	 *
-	 * An optional boost param can be passed to affect how much tokens in this field
-	 * rank in search results, by default the boost value is 1.
-	 *
-	 * Fields should be added before any documents are added to the index, fields
-	 * that are added after documents are added to the index will only apply to new
-	 * documents added to the index.
-	 *
-	 * @param {String} fieldName The name of the field within the document that
-	 * should be indexed
-	 * @param {Number} boost An optional boost that can be applied to terms in this
-	 * field.
-	 * @returns {lunr.Index}
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.field = function (fieldName, opts) {
-	  var opts = opts || {},
-	      field = { name: fieldName, boost: opts.boost || 1 }
-	
-	  this._fields.push(field)
-	  return this
-	}
-	
-	/**
-	 * Sets the property used to uniquely identify documents added to the index,
-	 * by default this property is 'id'.
-	 *
-	 * This should only be changed before adding documents to the index, changing
-	 * the ref property without resetting the index can lead to unexpected results.
-	 *
-	 * The value of ref can be of any type but it _must_ be stably comparable and
-	 * orderable.
-	 *
-	 * @param {String} refName The property to use to uniquely identify the
-	 * documents in the index.
-	 * @param {Boolean} emitEvent Whether to emit add events, defaults to true
-	 * @returns {lunr.Index}
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.ref = function (refName) {
-	  this._ref = refName
-	  return this
-	}
-	
-	/**
-	 * Sets the tokenizer used for this index.
-	 *
-	 * By default the index will use the default tokenizer, lunr.tokenizer. The tokenizer
-	 * should only be changed before adding documents to the index. Changing the tokenizer
-	 * without re-building the index can lead to unexpected results.
-	 *
-	 * @param {Function} fn The function to use as a tokenizer.
-	 * @returns {lunr.Index}
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.tokenizer = function (fn) {
-	  var isRegistered = fn.label && (fn.label in lunr.tokenizer.registeredFunctions)
-	
-	  if (!isRegistered) {
-	    lunr.utils.warn('Function is not a registered tokenizer. This may cause problems when serialising the index')
-	  }
-	
-	  this.tokenizerFn = fn
-	  return this
-	}
-	
-	/**
-	 * Add a document to the index.
-	 *
-	 * This is the way new documents enter the index, this function will run the
-	 * fields from the document through the index's pipeline and then add it to
-	 * the index, it will then show up in search results.
-	 *
-	 * An 'add' event is emitted with the document that has been added and the index
-	 * the document has been added to. This event can be silenced by passing false
-	 * as the second argument to add.
-	 *
-	 * @param {Object} doc The document to add to the index.
-	 * @param {Boolean} emitEvent Whether or not to emit events, default true.
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.add = function (doc, emitEvent) {
-	  var docTokens = {},
-	      allDocumentTokens = new lunr.SortedSet,
-	      docRef = doc[this._ref],
-	      emitEvent = emitEvent === undefined ? true : emitEvent
-	
-	  this._fields.forEach(function (field) {
-	    var fieldTokens = this.pipeline.run(this.tokenizerFn(doc[field.name]))
-	
-	    docTokens[field.name] = fieldTokens
-	
-	    for (var i = 0; i < fieldTokens.length; i++) {
-	      var token = fieldTokens[i]
-	      allDocumentTokens.add(token)
-	      this.corpusTokens.add(token)
-	    }
-	  }, this)
-	
-	  this.documentStore.set(docRef, allDocumentTokens)
-	
-	  for (var i = 0; i < allDocumentTokens.length; i++) {
-	    var token = allDocumentTokens.elements[i]
-	    var tf = 0;
-	
-	    for (var j = 0; j < this._fields.length; j++){
-	      var field = this._fields[j]
-	      var fieldTokens = docTokens[field.name]
-	      var fieldLength = fieldTokens.length
-	
-	      if (!fieldLength) continue
-	
-	      var tokenCount = 0
-	      for (var k = 0; k < fieldLength; k++){
-	        if (fieldTokens[k] === token){
-	          tokenCount++
-	        }
-	      }
-	
-	      tf += (tokenCount / fieldLength * field.boost)
-	    }
-	
-	    this.tokenStore.add(token, { ref: docRef, tf: tf })
-	  };
-	
-	  if (emitEvent) this.eventEmitter.emit('add', doc, this)
-	}
-	
-	/**
-	 * Removes a document from the index.
-	 *
-	 * To make sure documents no longer show up in search results they can be
-	 * removed from the index using this method.
-	 *
-	 * The document passed only needs to have the same ref property value as the
-	 * document that was added to the index, they could be completely different
-	 * objects.
-	 *
-	 * A 'remove' event is emitted with the document that has been removed and the index
-	 * the document has been removed from. This event can be silenced by passing false
-	 * as the second argument to remove.
-	 *
-	 * @param {Object} doc The document to remove from the index.
-	 * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.remove = function (doc, emitEvent) {
-	  var docRef = doc[this._ref],
-	      emitEvent = emitEvent === undefined ? true : emitEvent
-	
-	  if (!this.documentStore.has(docRef)) return
-	
-	  var docTokens = this.documentStore.get(docRef)
-	
-	  this.documentStore.remove(docRef)
-	
-	  docTokens.forEach(function (token) {
-	    this.tokenStore.remove(token, docRef)
-	  }, this)
-	
-	  if (emitEvent) this.eventEmitter.emit('remove', doc, this)
-	}
-	
-	/**
-	 * Updates a document in the index.
-	 *
-	 * When a document contained within the index gets updated, fields changed,
-	 * added or removed, to make sure it correctly matched against search queries,
-	 * it should be updated in the index.
-	 *
-	 * This method is just a wrapper around `remove` and `add`
-	 *
-	 * An 'update' event is emitted with the document that has been updated and the index.
-	 * This event can be silenced by passing false as the second argument to update. Only
-	 * an update event will be fired, the 'add' and 'remove' events of the underlying calls
-	 * are silenced.
-	 *
-	 * @param {Object} doc The document to update in the index.
-	 * @param {Boolean} emitEvent Whether to emit update events, defaults to true
-	 * @see Index.prototype.remove
-	 * @see Index.prototype.add
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.update = function (doc, emitEvent) {
-	  var emitEvent = emitEvent === undefined ? true : emitEvent
-	
-	  this.remove(doc, false)
-	  this.add(doc, false)
-	
-	  if (emitEvent) this.eventEmitter.emit('update', doc, this)
-	}
-	
-	/**
-	 * Calculates the inverse document frequency for a token within the index.
-	 *
-	 * @param {String} token The token to calculate the idf of.
-	 * @see Index.prototype.idf
-	 * @private
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.idf = function (term) {
-	  var cacheKey = "@" + term
-	  if (Object.prototype.hasOwnProperty.call(this._idfCache, cacheKey)) return this._idfCache[cacheKey]
-	
-	  var documentFrequency = this.tokenStore.count(term),
-	      idf = 1
-	
-	  if (documentFrequency > 0) {
-	    idf = 1 + Math.log(this.documentStore.length / documentFrequency)
-	  }
-	
-	  return this._idfCache[cacheKey] = idf
-	}
-	
-	/**
-	 * Searches the index using the passed query.
-	 *
-	 * Queries should be a string, multiple words are allowed and will lead to an
-	 * AND based query, e.g. `idx.search('foo bar')` will run a search for
-	 * documents containing both 'foo' and 'bar'.
-	 *
-	 * All query tokens are passed through the same pipeline that document tokens
-	 * are passed through, so any language processing involved will be run on every
-	 * query term.
-	 *
-	 * Each query term is expanded, so that the term 'he' might be expanded to
-	 * 'hello' and 'help' if those terms were already included in the index.
-	 *
-	 * Matching documents are returned as an array of objects, each object contains
-	 * the matching document ref, as set for this index, and the similarity score
-	 * for this document against the query.
-	 *
-	 * @param {String} query The query to search the index with.
-	 * @returns {Object}
-	 * @see Index.prototype.idf
-	 * @see Index.prototype.documentVector
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.search = function (query) {
-	  var queryTokens = this.pipeline.run(this.tokenizerFn(query)),
-	      queryVector = new lunr.Vector,
-	      documentSets = [],
-	      fieldBoosts = this._fields.reduce(function (memo, f) { return memo + f.boost }, 0)
-	
-	  var hasSomeToken = queryTokens.some(function (token) {
-	    return this.tokenStore.has(token)
-	  }, this)
-	
-	  if (!hasSomeToken) return []
-	
-	  queryTokens
-	    .forEach(function (token, i, tokens) {
-	      var tf = 1 / tokens.length * this._fields.length * fieldBoosts,
-	          self = this
-	
-	      var set = this.tokenStore.expand(token).reduce(function (memo, key) {
-	        var pos = self.corpusTokens.indexOf(key),
-	            idf = self.idf(key),
-	            similarityBoost = 1,
-	            set = new lunr.SortedSet
-	
-	        // if the expanded key is not an exact match to the token then
-	        // penalise the score for this key by how different the key is
-	        // to the token.
-	        if (key !== token) {
-	          var diff = Math.max(3, key.length - token.length)
-	          similarityBoost = 1 / Math.log(diff)
-	        }
-	
-	        // calculate the query tf-idf score for this token
-	        // applying an similarityBoost to ensure exact matches
-	        // these rank higher than expanded terms
-	        if (pos > -1) queryVector.insert(pos, tf * idf * similarityBoost)
-	
-	        // add all the documents that have this key into a set
-	        // ensuring that the type of key is preserved
-	        var matchingDocuments = self.tokenStore.get(key),
-	            refs = Object.keys(matchingDocuments),
-	            refsLen = refs.length
-	
-	        for (var i = 0; i < refsLen; i++) {
-	          set.add(matchingDocuments[refs[i]].ref)
-	        }
-	
-	        return memo.union(set)
-	      }, new lunr.SortedSet)
-	
-	      documentSets.push(set)
-	    }, this)
-	
-	  var documentSet = documentSets.reduce(function (memo, set) {
-	    return memo.intersect(set)
-	  })
-	
-	  return documentSet
-	    .map(function (ref) {
-	      return { ref: ref, score: queryVector.similarity(this.documentVector(ref)) }
-	    }, this)
-	    .sort(function (a, b) {
-	      return b.score - a.score
-	    })
-	}
-	
-	/**
-	 * Generates a vector containing all the tokens in the document matching the
-	 * passed documentRef.
-	 *
-	 * The vector contains the tf-idf score for each token contained in the
-	 * document with the passed documentRef.  The vector will contain an element
-	 * for every token in the indexes corpus, if the document does not contain that
-	 * token the element will be 0.
-	 *
-	 * @param {Object} documentRef The ref to find the document with.
-	 * @returns {lunr.Vector}
-	 * @private
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.documentVector = function (documentRef) {
-	  var documentTokens = this.documentStore.get(documentRef),
-	      documentTokensLength = documentTokens.length,
-	      documentVector = new lunr.Vector
-	
-	  for (var i = 0; i < documentTokensLength; i++) {
-	    var token = documentTokens.elements[i],
-	        tf = this.tokenStore.get(token)[documentRef].tf,
-	        idf = this.idf(token)
-	
-	    documentVector.insert(this.corpusTokens.indexOf(token), tf * idf)
-	  };
-	
-	  return documentVector
-	}
-	
-	/**
-	 * Returns a representation of the index ready for serialisation.
-	 *
-	 * @returns {Object}
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.toJSON = function () {
-	  return {
-	    version: lunr.version,
-	    fields: this._fields,
-	    ref: this._ref,
-	    tokenizer: this.tokenizerFn.label,
-	    documentStore: this.documentStore.toJSON(),
-	    tokenStore: this.tokenStore.toJSON(),
-	    corpusTokens: this.corpusTokens.toJSON(),
-	    pipeline: this.pipeline.toJSON()
-	  }
-	}
-	
-	/**
-	 * Applies a plugin to the current index.
-	 *
-	 * A plugin is a function that is called with the index as its context.
-	 * Plugins can be used to customise or extend the behaviour the index
-	 * in some way. A plugin is just a function, that encapsulated the custom
-	 * behaviour that should be applied to the index.
-	 *
-	 * The plugin function will be called with the index as its argument, additional
-	 * arguments can also be passed when calling use. The function will be called
-	 * with the index as its context.
-	 *
-	 * Example:
-	 *
-	 *     var myPlugin = function (idx, arg1, arg2) {
-	 *       // `this` is the index to be extended
-	 *       // apply any extensions etc here.
-	 *     }
-	 *
-	 *     var idx = lunr(function () {
-	 *       this.use(myPlugin, 'arg1', 'arg2')
-	 *     })
-	 *
-	 * @param {Function} plugin The plugin to apply.
-	 * @memberOf Index
-	 */
-	lunr.Index.prototype.use = function (plugin) {
-	  var args = Array.prototype.slice.call(arguments, 1)
-	  args.unshift(this)
-	  plugin.apply(this, args)
-	}
-	/*!
-	 * lunr.Store
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.Store is a simple key-value store used for storing sets of tokens for
-	 * documents stored in index.
-	 *
-	 * @constructor
-	 * @module
-	 */
-	lunr.Store = function () {
-	  this.store = {}
-	  this.length = 0
-	}
-	
-	/**
-	 * Loads a previously serialised store
-	 *
-	 * @param {Object} serialisedData The serialised store to load.
-	 * @returns {lunr.Store}
-	 * @memberOf Store
-	 */
-	lunr.Store.load = function (serialisedData) {
-	  var store = new this
-	
-	  store.length = serialisedData.length
-	  store.store = Object.keys(serialisedData.store).reduce(function (memo, key) {
-	    memo[key] = lunr.SortedSet.load(serialisedData.store[key])
-	    return memo
-	  }, {})
-	
-	  return store
-	}
-	
-	/**
-	 * Stores the given tokens in the store against the given id.
-	 *
-	 * @param {Object} id The key used to store the tokens against.
-	 * @param {Object} tokens The tokens to store against the key.
-	 * @memberOf Store
-	 */
-	lunr.Store.prototype.set = function (id, tokens) {
-	  if (!this.has(id)) this.length++
-	  this.store[id] = tokens
-	}
-	
-	/**
-	 * Retrieves the tokens from the store for a given key.
-	 *
-	 * @param {Object} id The key to lookup and retrieve from the store.
-	 * @returns {Object}
-	 * @memberOf Store
-	 */
-	lunr.Store.prototype.get = function (id) {
-	  return this.store[id]
-	}
-	
-	/**
-	 * Checks whether the store contains a key.
-	 *
-	 * @param {Object} id The id to look up in the store.
-	 * @returns {Boolean}
-	 * @memberOf Store
-	 */
-	lunr.Store.prototype.has = function (id) {
-	  return id in this.store
-	}
-	
-	/**
-	 * Removes the value for a key in the store.
-	 *
-	 * @param {Object} id The id to remove from the store.
-	 * @memberOf Store
-	 */
-	lunr.Store.prototype.remove = function (id) {
-	  if (!this.has(id)) return
-	
-	  delete this.store[id]
-	  this.length--
-	}
-	
-	/**
-	 * Returns a representation of the store ready for serialisation.
-	 *
-	 * @returns {Object}
-	 * @memberOf Store
-	 */
-	lunr.Store.prototype.toJSON = function () {
-	  return {
-	    store: this.store,
-	    length: this.length
-	  }
-	}
-	
-	/*!
-	 * lunr.stemmer
-	 * Copyright (C) 2016 Oliver Nightingale
-	 * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
-	 */
-	
-	/**
-	 * lunr.stemmer is an english language stemmer, this is a JavaScript
-	 * implementation of the PorterStemmer taken from http://tartarus.org/~martin
-	 *
-	 * @module
-	 * @param {String} str The string to stem
-	 * @returns {String}
-	 * @see lunr.Pipeline
-	 */
-	lunr.stemmer = (function(){
-	  var step2list = {
-	      "ational" : "ate",
-	      "tional" : "tion",
-	      "enci" : "ence",
-	      "anci" : "ance",
-	      "izer" : "ize",
-	      "bli" : "ble",
-	      "alli" : "al",
-	      "entli" : "ent",
-	      "eli" : "e",
-	      "ousli" : "ous",
-	      "ization" : "ize",
-	      "ation" : "ate",
-	      "ator" : "ate",
-	      "alism" : "al",
-	      "iveness" : "ive",
-	      "fulness" : "ful",
-	      "ousness" : "ous",
-	      "aliti" : "al",
-	      "iviti" : "ive",
-	      "biliti" : "ble",
-	      "logi" : "log"
-	    },
-	
-	    step3list = {
-	      "icate" : "ic",
-	      "ative" : "",
-	      "alize" : "al",
-	      "iciti" : "ic",
-	      "ical" : "ic",
-	      "ful" : "",
-	      "ness" : ""
-	    },
-	
-	    c = "[^aeiou]",          // consonant
-	    v = "[aeiouy]",          // vowel
-	    C = c + "[^aeiouy]*",    // consonant sequence
-	    V = v + "[aeiou]*",      // vowel sequence
-	
-	    mgr0 = "^(" + C + ")?" + V + C,               // [C]VC... is m>0
-	    meq1 = "^(" + C + ")?" + V + C + "(" + V + ")?$",  // [C]VC[V] is m=1
-	    mgr1 = "^(" + C + ")?" + V + C + V + C,       // [C]VCVC... is m>1
-	    s_v = "^(" + C + ")?" + v;                   // vowel in stem
-	
-	  var re_mgr0 = new RegExp(mgr0);
-	  var re_mgr1 = new RegExp(mgr1);
-	  var re_meq1 = new RegExp(meq1);
-	  var re_s_v = new RegExp(s_v);
-	
-	  var re_1a = /^(.+?)(ss|i)es$/;
-	  var re2_1a = /^(.+?)([^s])s$/;
-	  var re_1b = /^(.+?)eed$/;
-	  var re2_1b = /^(.+?)(ed|ing)$/;
-	  var re_1b_2 = /.$/;
-	  var re2_1b_2 = /(at|bl|iz)$/;
-	  var re3_1b_2 = new RegExp("([^aeiouylsz])\\1$");
-	  var re4_1b_2 = new RegExp("^" + C + v + "[^aeiouwxy]$");
-	
-	  var re_1c = /^(.+?[^aeiou])y$/;
-	  var re_2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/;
-	
-	  var re_3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/;
-	
-	  var re_4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/;
-	  var re2_4 = /^(.+?)(s|t)(ion)$/;
-	
-	  var re_5 = /^(.+?)e$/;
-	  var re_5_1 = /ll$/;
-	  var re3_5 = new RegExp("^" + C + v + "[^aeiouwxy]$");
-	
-	  var porterStemmer = function porterStemmer(w) {
-	    var   stem,
-	      suffix,
-	      firstch,
-	      re,
-	      re2,
-	      re3,
-	      re4;
-	
-	    if (w.length < 3) { return w; }
-	
-	    firstch = w.substr(0,1);
-	    if (firstch == "y") {
-	      w = firstch.toUpperCase() + w.substr(1);
-	    }
-	
-	    // Step 1a
-	    re = re_1a
-	    re2 = re2_1a;
-	
-	    if (re.test(w)) { w = w.replace(re,"$1$2"); }
-	    else if (re2.test(w)) { w = w.replace(re2,"$1$2"); }
-	
-	    // Step 1b
-	    re = re_1b;
-	    re2 = re2_1b;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      re = re_mgr0;
-	      if (re.test(fp[1])) {
-	        re = re_1b_2;
-	        w = w.replace(re,"");
-	      }
-	    } else if (re2.test(w)) {
-	      var fp = re2.exec(w);
-	      stem = fp[1];
-	      re2 = re_s_v;
-	      if (re2.test(stem)) {
-	        w = stem;
-	        re2 = re2_1b_2;
-	        re3 = re3_1b_2;
-	        re4 = re4_1b_2;
-	        if (re2.test(w)) {  w = w + "e"; }
-	        else if (re3.test(w)) { re = re_1b_2; w = w.replace(re,""); }
-	        else if (re4.test(w)) { w = w + "e"; }
-	      }
-	    }
-	
-	    // Step 1c - replace suffix y or Y by i if preceded by a non-vowel which is not the first letter of the word (so cry -> cri, by -> by, say -> say)
-	    re = re_1c;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      stem = fp[1];
-	      w = stem + "i";
-	    }
-	
-	    // Step 2
-	    re = re_2;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      stem = fp[1];
-	      suffix = fp[2];
-	      re = re_mgr0;
-	      if (re.test(stem)) {
-	        w = stem + step2list[suffix];
-	      }
-	    }
-	
-	    // Step 3
-	    re = re_3;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      stem = fp[1];
-	      suffix = fp[2];
-	      re = re_mgr0;
-	      if (re.test(stem)) {
-	        w = stem + step3list[suffix];
-	      }
-	    }
-	
-	    // Step 4
-	    re = re_4;
-	    re2 = re2_4;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      stem = fp[1];
-	      re = re_mgr1;
-	      if (re.test(stem)) {
-	        w = stem;
-	      }
-	    } else if (re2.test(w)) {
-	      var fp = re2.exec(w);
-	      stem = fp[1] + fp[2];
-	      re2 = re_mgr1;
-	      if (re2.test(stem)) {
-	        w = stem;
-	      }
-	    }
-	
-	    // Step 5
-	    re = re_5;
-	    if (re.test(w)) {
-	      var fp = re.exec(w);
-	      stem = fp[1];
-	      re = re_mgr1;
-	      re2 = re_meq1;
-	      re3 = re3_5;
-	      if (re.test(stem) || (re2.test(stem) && !(re3.test(stem)))) {
-	        w = stem;
-	      }
-	    }
-	
-	    re = re_5_1;
-	    re2 = re_mgr1;
-	    if (re.test(w) && re2.test(w)) {
-	      re = re_1b_2;
-	      w = w.replace(re,"");
-	    }
-	
-	    // and turn initial Y back to y
-	
-	    if (firstch == "y") {
-	      w = firstch.toLowerCase() + w.substr(1);
-	    }
-	
-	    return w;
-	  };
-	
-	  return porterStemmer;
-	})();
-	
-	lunr.Pipeline.registerFunction(lunr.stemmer, 'stemmer')
-	/*!
-	 * lunr.stopWordFilter
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.generateStopWordFilter builds a stopWordFilter function from the provided
-	 * list of stop words.
-	 *
-	 * The built in lunr.stopWordFilter is built using this generator and can be used
-	 * to generate custom stopWordFilters for applications or non English languages.
-	 *
-	 * @module
-	 * @param {Array} token The token to pass through the filter
-	 * @returns {Function}
-	 * @see lunr.Pipeline
-	 * @see lunr.stopWordFilter
-	 */
-	lunr.generateStopWordFilter = function (stopWords) {
-	  var words = stopWords.reduce(function (memo, stopWord) {
-	    memo[stopWord] = stopWord
-	    return memo
-	  }, {})
-	
-	  return function (token) {
-	    if (token && words[token] !== token) return token
-	  }
-	}
-	
-	/**
-	 * lunr.stopWordFilter is an English language stop word list filter, any words
-	 * contained in the list will not be passed through the filter.
-	 *
-	 * This is intended to be used in the Pipeline. If the token does not pass the
-	 * filter then undefined will be returned.
-	 *
-	 * @module
-	 * @param {String} token The token to pass through the filter
-	 * @returns {String}
-	 * @see lunr.Pipeline
-	 */
-	lunr.stopWordFilter = lunr.generateStopWordFilter([
-	  'a',
-	  'able',
-	  'about',
-	  'across',
-	  'after',
-	  'all',
-	  'almost',
-	  'also',
-	  'am',
-	  'among',
-	  'an',
-	  'and',
-	  'any',
-	  'are',
-	  'as',
-	  'at',
-	  'be',
-	  'because',
-	  'been',
-	  'but',
-	  'by',
-	  'can',
-	  'cannot',
-	  'could',
-	  'dear',
-	  'did',
-	  'do',
-	  'does',
-	  'either',
-	  'else',
-	  'ever',
-	  'every',
-	  'for',
-	  'from',
-	  'get',
-	  'got',
-	  'had',
-	  'has',
-	  'have',
-	  'he',
-	  'her',
-	  'hers',
-	  'him',
-	  'his',
-	  'how',
-	  'however',
-	  'i',
-	  'if',
-	  'in',
-	  'into',
-	  'is',
-	  'it',
-	  'its',
-	  'just',
-	  'least',
-	  'let',
-	  'like',
-	  'likely',
-	  'may',
-	  'me',
-	  'might',
-	  'most',
-	  'must',
-	  'my',
-	  'neither',
-	  'no',
-	  'nor',
-	  'not',
-	  'of',
-	  'off',
-	  'often',
-	  'on',
-	  'only',
-	  'or',
-	  'other',
-	  'our',
-	  'own',
-	  'rather',
-	  'said',
-	  'say',
-	  'says',
-	  'she',
-	  'should',
-	  'since',
-	  'so',
-	  'some',
-	  'than',
-	  'that',
-	  'the',
-	  'their',
-	  'them',
-	  'then',
-	  'there',
-	  'these',
-	  'they',
-	  'this',
-	  'tis',
-	  'to',
-	  'too',
-	  'twas',
-	  'us',
-	  'wants',
-	  'was',
-	  'we',
-	  'were',
-	  'what',
-	  'when',
-	  'where',
-	  'which',
-	  'while',
-	  'who',
-	  'whom',
-	  'why',
-	  'will',
-	  'with',
-	  'would',
-	  'yet',
-	  'you',
-	  'your'
-	])
-	
-	lunr.Pipeline.registerFunction(lunr.stopWordFilter, 'stopWordFilter')
-	/*!
-	 * lunr.trimmer
-	 * Copyright (C) 2016 Oliver Nightingale
-	 */
-	
-	/**
-	 * lunr.trimmer is a pipeline function for trimming non word
-	 * characters from the begining and end of tokens before they
-	 * enter the index.
-	 *
-	 * This implementation may not work correctly for non latin
-	 * characters and should either be removed or adapted for use
-	 * with languages with non-latin characters.
-	 *
-	 * @module
-	 * @param {String} token The token to pass through the filter
-	 * @returns {String}
-	 * @see lunr.Pipeline
-	 */
-	lunr.trimmer = function (token) {
-	  return token.replace(/^\W+/, '').replace(/\W+$/, '')
-	}
-	
-	lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
-	/*!
-	 * lunr.stemmer
-	 * Copyright (C) 2016 Oliver Nightingale
-	 * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
-	 */
-	
-	/**
-	 * lunr.TokenStore is used for efficient storing and lookup of the reverse
-	 * index of token to document ref.
-	 *
-	 * @constructor
-	 */
-	lunr.TokenStore = function () {
-	  this.root = { docs: {} }
-	  this.length = 0
-	}
-	
-	/**
-	 * Loads a previously serialised token store
-	 *
-	 * @param {Object} serialisedData The serialised token store to load.
-	 * @returns {lunr.TokenStore}
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.load = function (serialisedData) {
-	  var store = new this
-	
-	  store.root = serialisedData.root
-	  store.length = serialisedData.length
-	
-	  return store
-	}
-	
-	/**
-	 * Adds a new token doc pair to the store.
-	 *
-	 * By default this function starts at the root of the current store, however
-	 * it can start at any node of any token store if required.
-	 *
-	 * @param {String} token The token to store the doc under
-	 * @param {Object} doc The doc to store against the token
-	 * @param {Object} root An optional node at which to start looking for the
-	 * correct place to enter the doc, by default the root of this lunr.TokenStore
-	 * is used.
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.add = function (token, doc, root) {
-	  var root = root || this.root,
-	      key = token.charAt(0),
-	      rest = token.slice(1)
-	
-	  if (!(key in root)) root[key] = {docs: {}}
-	
-	  if (rest.length === 0) {
-	    root[key].docs[doc.ref] = doc
-	    this.length += 1
-	    return
-	  } else {
-	    return this.add(rest, doc, root[key])
-	  }
-	}
-	
-	/**
-	 * Checks whether this key is contained within this lunr.TokenStore.
-	 *
-	 * By default this function starts at the root of the current store, however
-	 * it can start at any node of any token store if required.
-	 *
-	 * @param {String} token The token to check for
-	 * @param {Object} root An optional node at which to start
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.has = function (token) {
-	  if (!token) return false
-	
-	  var node = this.root
-	
-	  for (var i = 0; i < token.length; i++) {
-	    if (!node[token.charAt(i)]) return false
-	
-	    node = node[token.charAt(i)]
-	  }
-	
-	  return true
-	}
-	
-	/**
-	 * Retrieve a node from the token store for a given token.
-	 *
-	 * By default this function starts at the root of the current store, however
-	 * it can start at any node of any token store if required.
-	 *
-	 * @param {String} token The token to get the node for.
-	 * @param {Object} root An optional node at which to start.
-	 * @returns {Object}
-	 * @see TokenStore.prototype.get
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.getNode = function (token) {
-	  if (!token) return {}
-	
-	  var node = this.root
-	
-	  for (var i = 0; i < token.length; i++) {
-	    if (!node[token.charAt(i)]) return {}
-	
-	    node = node[token.charAt(i)]
-	  }
-	
-	  return node
-	}
-	
-	/**
-	 * Retrieve the documents for a node for the given token.
-	 *
-	 * By default this function starts at the root of the current store, however
-	 * it can start at any node of any token store if required.
-	 *
-	 * @param {String} token The token to get the documents for.
-	 * @param {Object} root An optional node at which to start.
-	 * @returns {Object}
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.get = function (token, root) {
-	  return this.getNode(token, root).docs || {}
-	}
-	
-	lunr.TokenStore.prototype.count = function (token, root) {
-	  return Object.keys(this.get(token, root)).length
-	}
-	
-	/**
-	 * Remove the document identified by ref from the token in the store.
-	 *
-	 * By default this function starts at the root of the current store, however
-	 * it can start at any node of any token store if required.
-	 *
-	 * @param {String} token The token to get the documents for.
-	 * @param {String} ref The ref of the document to remove from this token.
-	 * @param {Object} root An optional node at which to start.
-	 * @returns {Object}
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.remove = function (token, ref) {
-	  if (!token) return
-	  var node = this.root
-	
-	  for (var i = 0; i < token.length; i++) {
-	    if (!(token.charAt(i) in node)) return
-	    node = node[token.charAt(i)]
-	  }
-	
-	  delete node.docs[ref]
-	}
-	
-	/**
-	 * Find all the possible suffixes of the passed token using tokens
-	 * currently in the store.
-	 *
-	 * @param {String} token The token to expand.
-	 * @returns {Array}
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.expand = function (token, memo) {
-	  var root = this.getNode(token),
-	      docs = root.docs || {},
-	      memo = memo || []
-	
-	  if (Object.keys(docs).length) memo.push(token)
-	
-	  Object.keys(root)
-	    .forEach(function (key) {
-	      if (key === 'docs') return
-	
-	      memo.concat(this.expand(token + key, memo))
-	    }, this)
-	
-	  return memo
-	}
-	
-	/**
-	 * Returns a representation of the token store ready for serialisation.
-	 *
-	 * @returns {Object}
-	 * @memberOf TokenStore
-	 */
-	lunr.TokenStore.prototype.toJSON = function () {
-	  return {
-	    root: this.root,
-	    length: this.length
-	  }
-	}
-	
-	  /**
-	   * export the module via AMD, CommonJS or as a browser global
-	   * Export code from https://github.com/umdjs/umd/blob/master/returnExports.js
-	   */
-	  ;(function (root, factory) {
-	    if (true) {
-	      // AMD. Register as an anonymous module.
-	      !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-	    } else if (typeof exports === 'object') {
-	      /**
-	       * Node. Does not work with strict CommonJS, but
-	       * only CommonJS-like enviroments that support module.exports,
-	       * like Node.
-	       */
-	      module.exports = factory()
-	    } else {
-	      // Browser globals (root is window)
-	      root.lunr = factory()
-	    }
-	  }(this, function () {
-	    /**
-	     * Just return a value to define the module export.
-	     * This example returns an object, but the module
-	     * can return a function as the exported value.
-	     */
-	    return lunr
-	  }))
-	})();
-
-
-/***/ },
-/* 74 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -75735,17 +78396,223 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 75 */
+/* 84 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	/**
+	 * Expose `md5omatic(str)`.
+	 */
+	 
+	module.exports = md5omatic;
+	
+	/**
+	 * Hash any string using message digest.
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 * @api public
+	 */
+	 
+	function md5omatic(str) {
+	    var x = str2blks_MD5(str);
+	    var a =  1732584193;
+	    var b = -271733879;
+	    var c = -1732584194;
+	    var d =  271733878;
+	
+	    for(var i=0; i<x.length; i += 16)
+	    {
+	        var olda = a;
+	        var oldb = b;
+	        var oldc = c;
+	        var oldd = d;
+	
+	        a = ff(a, b, c, d, x[i+ 0], 7 , -680876936);
+	        d = ff(d, a, b, c, x[i+ 1], 12, -389564586);
+	        c = ff(c, d, a, b, x[i+ 2], 17,  606105819);
+	        b = ff(b, c, d, a, x[i+ 3], 22, -1044525330);
+	        a = ff(a, b, c, d, x[i+ 4], 7 , -176418897);
+	        d = ff(d, a, b, c, x[i+ 5], 12,  1200080426);
+	        c = ff(c, d, a, b, x[i+ 6], 17, -1473231341);
+	        b = ff(b, c, d, a, x[i+ 7], 22, -45705983);
+	        a = ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
+	        d = ff(d, a, b, c, x[i+ 9], 12, -1958414417);
+	        c = ff(c, d, a, b, x[i+10], 17, -42063);
+	        b = ff(b, c, d, a, x[i+11], 22, -1990404162);
+	        a = ff(a, b, c, d, x[i+12], 7 ,  1804603682);
+	        d = ff(d, a, b, c, x[i+13], 12, -40341101);
+	        c = ff(c, d, a, b, x[i+14], 17, -1502002290);
+	        b = ff(b, c, d, a, x[i+15], 22,  1236535329);
+	        a = gg(a, b, c, d, x[i+ 1], 5 , -165796510);
+	        d = gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
+	        c = gg(c, d, a, b, x[i+11], 14,  643717713);
+	        b = gg(b, c, d, a, x[i+ 0], 20, -373897302);
+	        a = gg(a, b, c, d, x[i+ 5], 5 , -701558691);
+	        d = gg(d, a, b, c, x[i+10], 9 ,  38016083);
+	        c = gg(c, d, a, b, x[i+15], 14, -660478335);
+	        b = gg(b, c, d, a, x[i+ 4], 20, -405537848);
+	        a = gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
+	        d = gg(d, a, b, c, x[i+14], 9 , -1019803690);
+	        c = gg(c, d, a, b, x[i+ 3], 14, -187363961);
+	        b = gg(b, c, d, a, x[i+ 8], 20,  1163531501);
+	        a = gg(a, b, c, d, x[i+13], 5 , -1444681467);
+	        d = gg(d, a, b, c, x[i+ 2], 9 , -51403784);
+	        c = gg(c, d, a, b, x[i+ 7], 14,  1735328473);
+	        b = gg(b, c, d, a, x[i+12], 20, -1926607734);
+	        a = hh(a, b, c, d, x[i+ 5], 4 , -378558);
+	        d = hh(d, a, b, c, x[i+ 8], 11, -2022574463);
+	        c = hh(c, d, a, b, x[i+11], 16,  1839030562);
+	        b = hh(b, c, d, a, x[i+14], 23, -35309556);
+	        a = hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
+	        d = hh(d, a, b, c, x[i+ 4], 11,  1272893353);
+	        c = hh(c, d, a, b, x[i+ 7], 16, -155497632);
+	        b = hh(b, c, d, a, x[i+10], 23, -1094730640);
+	        a = hh(a, b, c, d, x[i+13], 4 ,  681279174);
+	        d = hh(d, a, b, c, x[i+ 0], 11, -358537222);
+	        c = hh(c, d, a, b, x[i+ 3], 16, -722521979);
+	        b = hh(b, c, d, a, x[i+ 6], 23,  76029189);
+	        a = hh(a, b, c, d, x[i+ 9], 4 , -640364487);
+	        d = hh(d, a, b, c, x[i+12], 11, -421815835);
+	        c = hh(c, d, a, b, x[i+15], 16,  530742520);
+	        b = hh(b, c, d, a, x[i+ 2], 23, -995338651);
+	        a = ii(a, b, c, d, x[i+ 0], 6 , -198630844);
+	        d = ii(d, a, b, c, x[i+ 7], 10,  1126891415);
+	        c = ii(c, d, a, b, x[i+14], 15, -1416354905);
+	        b = ii(b, c, d, a, x[i+ 5], 21, -57434055);
+	        a = ii(a, b, c, d, x[i+12], 6 ,  1700485571);
+	        d = ii(d, a, b, c, x[i+ 3], 10, -1894986606);
+	        c = ii(c, d, a, b, x[i+10], 15, -1051523);
+	        b = ii(b, c, d, a, x[i+ 1], 21, -2054922799);
+	        a = ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
+	        d = ii(d, a, b, c, x[i+15], 10, -30611744);
+	        c = ii(c, d, a, b, x[i+ 6], 15, -1560198380);
+	        b = ii(b, c, d, a, x[i+13], 21,  1309151649);
+	        a = ii(a, b, c, d, x[i+ 4], 6 , -145523070);
+	        d = ii(d, a, b, c, x[i+11], 10, -1120210379);
+	        c = ii(c, d, a, b, x[i+ 2], 15,  718787259);
+	        b = ii(b, c, d, a, x[i+ 9], 21, -343485551);
+	
+	        a = addme(a, olda);
+	        b = addme(b, oldb);
+	        c = addme(c, oldc);
+	        d = addme(d, oldd);
+	    }
+	
+	    return rhex(a) + rhex(b) + rhex(c) + rhex(d);
+	};
+	
+	var hex_chr = "0123456789abcdef";
+	
+	function bitOR(a, b)
+	{
+	    var lsb = (a & 0x1) | (b & 0x1);
+	    var msb31 = (a >>> 1) | (b >>> 1);
+	
+	    return (msb31 << 1) | lsb;
+	}
+	
+	function bitXOR(a, b)
+	{
+	    var lsb = (a & 0x1) ^ (b & 0x1);
+	    var msb31 = (a >>> 1) ^ (b >>> 1);
+	
+	    return (msb31 << 1) | lsb;
+	}
+	
+	function bitAND(a, b)
+	{
+	    var lsb = (a & 0x1) & (b & 0x1);
+	    var msb31 = (a >>> 1) & (b >>> 1);
+	
+	    return (msb31 << 1) | lsb;
+	}
+	
+	function addme(x, y)
+	{
+	    var lsw = (x & 0xFFFF)+(y & 0xFFFF);
+	    var msw = (x >> 16)+(y >> 16)+(lsw >> 16);
+	
+	    return (msw << 16) | (lsw & 0xFFFF);
+	}
+	
+	function rhex(num)
+	{
+	    var str = "";
+	    var j;
+	
+	    for(j=0; j<=3; j++)
+	        str += hex_chr.charAt((num >> (j * 8 + 4)) & 0x0F) + hex_chr.charAt((num >> (j * 8)) & 0x0F);
+	
+	    return str;
+	}
+	
+	function str2blks_MD5(str)
+	{
+	    var nblk = ((str.length + 8) >> 6) + 1;
+	    var blks = new Array(nblk * 16);
+	    var i;
+	
+	    for(i=0; i<nblk * 16; i++)
+	        blks[i] = 0;
+	
+	    for(i=0; i<str.length; i++)
+	        blks[i >> 2] |= str.charCodeAt(i) << (((str.length * 8 + i) % 4) * 8);
+	
+	    blks[i >> 2] |= 0x80 << (((str.length * 8 + i) % 4) * 8);
+	
+	    var l = str.length * 8;
+	    blks[nblk * 16 - 2] = (l & 0xFF);
+	    blks[nblk * 16 - 2] |= ((l >>> 8) & 0xFF) << 8;
+	    blks[nblk * 16 - 2] |= ((l >>> 16) & 0xFF) << 16;
+	    blks[nblk * 16 - 2] |= ((l >>> 24) & 0xFF) << 24;
+	
+	    return blks;
+	}
+	
+	function rol(num, cnt)
+	{
+	    return (num << cnt) | (num >>> (32 - cnt));
+	}
+	
+	function cmn(q, a, b, x, s, t)
+	{
+	    return addme(rol((addme(addme(a, q), addme(x, t))), s), b);
+	}
+	
+	function ff(a, b, c, d, x, s, t)
+	{
+	    return cmn(bitOR(bitAND(b, c), bitAND((~b), d)), a, b, x, s, t);
+	}
+	
+	function gg(a, b, c, d, x, s, t)
+	{
+	    return cmn(bitOR(bitAND(b, d), bitAND(c, (~d))), a, b, x, s, t);
+	}
+	
+	function hh(a, b, c, d, x, s, t)
+	{
+	    return cmn(bitXOR(bitXOR(b, c), d), a, b, x, s, t);
+	}
+	
+	function ii(a, b, c, d, x, s, t)
+	{
+	    return cmn(bitXOR(c, bitOR(b, (~d))), a, b, x, s, t);
+	}
+
+/***/ },
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Top level file is just a mixin of submodules & constants
 	'use strict';
 	
-	var assign    = __webpack_require__(6).assign;
+	var assign    = __webpack_require__(7).assign;
 	
-	var deflate   = __webpack_require__(76);
-	var inflate   = __webpack_require__(77);
-	var constants = __webpack_require__(25);
+	var deflate   = __webpack_require__(86);
+	var inflate   = __webpack_require__(87);
+	var constants = __webpack_require__(24);
 	
 	var pako = {};
 	
@@ -75755,17 +78622,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 76 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var zlib_deflate = __webpack_require__(78);
-	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(23);
-	var msg          = __webpack_require__(17);
-	var ZStream      = __webpack_require__(27);
+	var zlib_deflate = __webpack_require__(88);
+	var utils        = __webpack_require__(7);
+	var strings      = __webpack_require__(22);
+	var msg          = __webpack_require__(14);
+	var ZStream      = __webpack_require__(26);
 	
 	var toString = Object.prototype.toString;
 	
@@ -76118,7 +78985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  deflator.push(input, true);
 	
 	  // That will never happens, if you don't cheat with options :)
-	  if (deflator.err) { throw deflator.msg; }
+	  if (deflator.err) { throw deflator.msg || msg[deflator.err]; }
 	
 	  return deflator.result;
 	}
@@ -76161,19 +79028,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 77 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var zlib_inflate = __webpack_require__(81);
-	var utils        = __webpack_require__(6);
-	var strings      = __webpack_require__(23);
-	var c            = __webpack_require__(25);
-	var msg          = __webpack_require__(17);
-	var ZStream      = __webpack_require__(27);
-	var GZheader     = __webpack_require__(79);
+	var zlib_inflate = __webpack_require__(91);
+	var utils        = __webpack_require__(7);
+	var strings      = __webpack_require__(22);
+	var c            = __webpack_require__(24);
+	var msg          = __webpack_require__(14);
+	var ZStream      = __webpack_require__(26);
+	var GZheader     = __webpack_require__(89);
 	
 	var toString = Object.prototype.toString;
 	
@@ -76547,7 +79414,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  inflator.push(input, true);
 	
 	  // That will never happens, if you don't cheat with options :)
-	  if (inflator.err) { throw inflator.msg; }
+	  if (inflator.err) { throw inflator.msg || msg[inflator.err]; }
 	
 	  return inflator.result;
 	}
@@ -76585,16 +79452,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 78 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils   = __webpack_require__(6);
-	var trees   = __webpack_require__(83);
-	var adler32 = __webpack_require__(24);
-	var crc32   = __webpack_require__(26);
-	var msg     = __webpack_require__(17);
+	var utils   = __webpack_require__(7);
+	var trees   = __webpack_require__(93);
+	var adler32 = __webpack_require__(23);
+	var crc32   = __webpack_require__(25);
+	var msg     = __webpack_require__(14);
 	
 	/* Public constants ==========================================================*/
 	/* ===========================================================================*/
@@ -78446,7 +81313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 79 */
+/* 89 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78492,7 +81359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 80 */
+/* 90 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78824,17 +81691,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 81 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var utils         = __webpack_require__(6);
-	var adler32       = __webpack_require__(24);
-	var crc32         = __webpack_require__(26);
-	var inflate_fast  = __webpack_require__(80);
-	var inflate_table = __webpack_require__(82);
+	var utils         = __webpack_require__(7);
+	var adler32       = __webpack_require__(23);
+	var crc32         = __webpack_require__(25);
+	var inflate_fast  = __webpack_require__(90);
+	var inflate_table = __webpack_require__(92);
 	
 	var CODES = 0;
 	var LENS = 1;
@@ -80368,13 +83235,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 82 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var utils = __webpack_require__(6);
+	var utils = __webpack_require__(7);
 	
 	var MAXBITS = 15;
 	var ENOUGH_LENS = 852;
@@ -80600,10 +83467,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return 1;
 	  }
 	
-	  var i = 0;
 	  /* process all codes and make table entries */
 	  for (;;) {
-	    i++;
 	    /* create table entry */
 	    here_bits = len - drop;
 	    if (work[sym] < end) {
@@ -80701,13 +83566,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 83 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	
-	var utils = __webpack_require__(6);
+	var utils = __webpack_require__(7);
 	
 	/* Public constants ==========================================================*/
 	/* ===========================================================================*/
@@ -81909,7 +84774,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 84 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -83318,7 +86183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 85 */
+/* 95 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -83404,7 +86269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 86 */
+/* 96 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -83474,89 +86339,119 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 87 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(85);
-	exports.encode = exports.stringify = __webpack_require__(86);
+	exports.decode = exports.parse = __webpack_require__(95);
+	exports.encode = exports.stringify = __webpack_require__(96);
 
-
-/***/ },
-/* 88 */
-/***/ function(module, exports) {
-
-	module.exports = {"version":"0.5.0"}
-
-/***/ },
-/* 89 */
-/***/ function(module, exports) {
-
-	module.exports = {"version":"4.3.0"}
-
-/***/ },
-/* 90 */
-/***/ function(module, exports) {
-
-	module.exports = {"version":"0.1.2"}
-
-/***/ },
-/* 91 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
-
-/***/ },
-/* 92 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
-
-/***/ },
-/* 93 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
-
-/***/ },
-/* 94 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"dataset-view\">\n  <div ng-if=\"!isSearchIndexReady\"\n    class=\"alert alert-info margin-top-15 margin-bottom-15\">\n    <i class=\"fa fa-2x fa-spinner fa-pulse margin-right-5\" style=\"vertical-align: middle;\"></i>\n    <span style=\"vertical-align: middle;\">Preparing search index...</span>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"isSearchIndexReady && (selectedCategories.length > 0)\"\n    class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
-
-/***/ },
-/* 95 */
-/***/ function(module, exports) {
-
-	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
-
-/***/ },
-/* 96 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
-
-/***/ },
-/* 97 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
 
 /***/ },
 /* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div>\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item); onpreview();\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"pagination.items.length >= pagination.itemsPerPage / 2\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+	module.exports = {"version":"0.6.1"}
 
 /***/ },
 /* 99 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = {"version":"2.0.0"}
 
 /***/ },
 /* 100 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"0.1.0"}
+
+/***/ },
+/* 101 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"1.0.0"}
+
+/***/ },
+/* 102 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"1.0.0"}
+
+/***/ },
+/* 103 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"1.0.0"}
+
+/***/ },
+/* 104 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"5.0.0"}
+
+/***/ },
+/* 105 */
+/***/ function(module, exports) {
+
+	module.exports = {"version":"0.1.2"}
+
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.title }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <p marked=\"item.description | join:'\\n\\n'\"></p>\n        <p ng-if=\"item.author\">\n          <strong>Author:</strong> {{ item.author }}\n        </p>\n        <p ng-if=\"item.version\">\n          <strong>Version:</strong> {{ item.version }}\n        </p>\n        <p ng-if=\"item.updated\">\n          <strong>Updated:</strong> {{ item.updated }}\n        </p>\n\n        <div ng-if=\"!isLoaded\" class=\"text-center padding-top-50 padding-bottom-50\">\n          <div class=\"margin-bottom-10\"><i class=\"fa fa-4x fa-spinner fa-pulse\"></i></div>\n          <div class=\"margin-bottom-10\">Preparing files...</div>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length <= 0)\" class=\"alert alert-info\">\n          <i class=\"fa fa-2x fa-info-circle margin-right-5\" style=\"vertical-align: middle;\"></i>\n          <span style=\"vertical-align: middle;\">No files available for download</span>\n        </div>\n\n        <div ng-if=\"isLoaded && (files.length > 0)\">\n          <p><strong>Files in this package:</strong></p>\n          <ul class=\"list-group\">\n            <li ng-repeat=\"file in files track by file.name\" class=\"list-group-item\">\n              <button class=\"btn btn-default btn-xs pull-right\"\n                title=\"Download this file\"\n                ng-click=\"downloadFile(file)\"\n              ><i class=\"fa fa-download\"></i></button>\n              <span class=\"pull-right margin-right-10\">{{ file.formattedSize }}</span>\n              <i class=\"fa fa-file-o margin-right-5\"></i>\n              <span>{{ file.name }}</span>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn btn-info margin-right-10\"\n          ng-if=\"isLoaded && (files.length > 0)\" ng-click=\"downloadAll(files)\"\n          ><i class=\"fa fa-download margin-right-5\"></i>Download all (.tar.gz)</button>\n        <button class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 107 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"dataset-header\">\n  <div class=\"clearfix\">\n    <button class=\"btn btn-info pull-left without-margins margin-right-10\"\n      ng-if=\"onclose\" ng-click=\"onclose()\"><i\n      class=\"fa fa-reply margin-right-5\"></i>Back</button>\n    <button class=\"btn btn-default pull-right without-margins margin-left-10\"\n      title=\"Download this dataset\"\n      ng-if=\"ondownload\" ng-click=\"ondownload()\"><i\n      class=\"fa fa-download\"></i></button>\n    <h2 class=\"hidden-xs hidden-sm without-margins\">{{ item.title }}</h2>\n    <h3 class=\"hidden-xs hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <div class=\"margin-top-15\">\n    <h3 class=\"hidden-sm hidden-md hidden-lg without-margins\">{{ item.title }}</h3>\n  </div>\n  <hr class=\"margin-top-15 margin-bottom-15\">\n  <div class=\"clearfix\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n  </div>\n  <div class=\"clearfix\">\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n    <p class=\"pull-left margin-right-15\" ng-if=\"loaded\">\n      <strong>Count of items:</strong> {{ item.items.length }}\n    </p>\n  </div>\n</div>"
+
+/***/ },
+/* 108 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"panel panel-info dataset-list-item\">\n  <div class=\"panel-heading\"><h4 title=\"{{ item.title }}\"><i\n    class=\"fa fa-database margin-right-5\"></i>{{ item.title }}</h4></div>\n  <div class=\"panel-body\">\n    <p marked=\"item.description | join:'\\n\\n'\"></p>\n    <p ng-if=\"item.author\">\n      <strong>Author:</strong> {{ item.author }}\n    </p>\n    <p ng-if=\"item.version\">\n      <strong>Version:</strong> {{ item.version }}\n    </p>\n    <p ng-if=\"item.updated\">\n      <strong>Updated:</strong> {{ item.updated }}\n    </p>\n  </div>\n  <div class=\"panel-footer\" ng-if=\"!!onselect || !!onsave\">\n    <button class=\"btn btn-info margin-right-10\"\n      title=\"View dataset\"\n      ng-if=\"!!onselect\" ng-click=\"onselect()\"\n    ><i class=\"fa fa-arrow-circle-right margin-right-5\"></i>Open</button>\n\n    <button class=\"btn btn-default margin-right-10\"\n      title=\"Download this dataset\"\n      ng-if=\"!!ondownload\" ng-click=\"ondownload()\"\n    ><i class=\"fa fa-download margin-right-5\"></i> Download</button>\n  </div>\n</div>\n"
+
+/***/ },
+/* 109 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"dataset-view\">\n  <div ng-if=\"!isSearchIndexReady\"\n    class=\"alert alert-info margin-top-15 margin-bottom-15\">\n    <i class=\"fa fa-2x fa-spinner fa-pulse margin-right-5\" style=\"vertical-align: middle;\"></i>\n    <span style=\"vertical-align: middle;\">Preparing search index...</span>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"input-group margin-top-15 margin-bottom-15\">\n    <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Search\"\n      ng-model-options=\"{debounce: 300}\"\n      ng-model=\"state.search.query\">\n    <dropdown ng-if=\"availableCategories.length > 0\"\n      align=\"right\" type=\"addon\"\n      items=\"availableCategories\" selected=\"state.search.categories\"\n      title=\"Category\"></dropdown>\n  </div>\n  <div ng-if=\"isSearchIndexReady\" class=\"margin-top-5 margin-bottom-10\">\n    <span class=\"margin-right-10\">Examples:</span>\n    <a href=\"javascript:void(0)\" class=\"margin-right-10\"\n      ng-repeat=\"phrase in searchExamples\"\n      ng-click=\"state.search.query = phrase\">{{ phrase }}</a>\n  </div>\n\n  <div ng-if=\"isSearchIndexReady && (selectedCategories.length > 0)\"\n    class=\"margin-top-10 margin-bottom-10\">\n    <span class=\"margin-right-10\">Categories:</span>\n    <span class=\"label label-info margin-right-5\"\n      ng-repeat=\"item in selectedCategories track by item.value\"\n    >{{ item.name }}<i style=\"cursor: pointer\"\n      ng-click=\"clearSelectedCategory(item.value)\"\n      class=\"fa fa-remove margin-left-5\"></i>\n    </span>\n  </div>\n\n  <div class=\"margin-top-10 margin-bottom-10\">\n    <tartan-list items=\"state.items\" item=\"state.current\" show-legend=\"true\"\n      onpreview=\"state.showPreview = true;\"></tartan-list>\n  </div>\n\n  <tartan-preview item=\"state.current\" active=\"state.showPreview\"></tartan-preview>\n</div>"
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	module.exports = "<div ng-class=\"{'dropdown': type != 'addon', 'input-group-btn': type == 'addon'}\">\n  <button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n    {{ title }}\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" ng-class=\"{'dropdown-menu-right': align == 'right'}\">\n    <li ng-if=\"selected.length > 0\"><a href=\"javascript:void(0)\"\n      ng-click=\"clearSelected()\">Clear selection</a></li>\n    <li ng-if=\"selected.length > 0\" class=\"divider\"></li>\n    <li ng-repeat=\"item in items track by item.value\"\n      ng-if=\"item.count > 0\"\n      ng-class=\"{active: selected.indexOf(item.value) >= 0}\"\n    ><a href=\"javascript:void(0)\"\n      ng-click=\"toggleSelected(item.value)\"\n    ><span class=\"badge pull-right\"\n    >{{ item.count }}</span><span style=\"margin-right: 60px\"\n    >{{ item.name }}</span></a></li>\n  </ul>\n</div>"
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"input-group pagination-control\">\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = 1\"\n    ><i class=\"fa fa-angle-double-left\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current - 1\"\n    ><i class=\"fa fa-angle-left\"></i></button>\n  </span>\n  <button class=\"form-control\"\n    ng-if=\"!state.editing\"\n    ng-click=\"state.editing = true;\"\n  >page {{ state.current }} of {{ state.count }}</button>\n  <input type=\"text\" class=\"form-control text-center\"\n    ng-if=\"state.editing\" autofocus\n    ng-model=\"state.current\"\n    ng-keydown=\"handleKeyPress($event)\"\n    ng-blur=\"state.editing = false\"\n  >\n  <span class=\"input-group-btn\">\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.current + 1\"\n    ><i class=\"fa fa-angle-right\"></i></button>\n    <button class=\"btn btn-default\"\n      ng-click=\"state.current = state.count\"\n    ><i class=\"fa fa-angle-double-right\"></i></button>\n  </span>\n</div>"
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <h3 ng-if=\"showTitle\" class=\"margin-top-15\">{{ item.name }}</h3>\n  <p ng-if=\"!!item.dataset\"><strong>Source:</strong>\n    <a ng-if=\"!!item.url\" ng-href=\"{{ item.url }}\"\n      target=\"_blank\">{{ item.dataset }}</a>\n    <span ng-if=\"!item.url\">{{ item.dataset }}</span>\n  </p>\n  <p ng-if=\"item.category.length > 0\"><strong\n    ng-pluralize\n    count=\"item.category.length\"\n    when=\"{1: 'Category:', 'other': 'Categories:'}\"></strong>\n    <span>{{ item.category | join:', ' }}</span>\n  </p>\n  <p ng-if=\"!!item.description\" marked=\"item.description | join:'\\n\\n'\"></p>\n\n  <div ng-if=\"!!item.sett\">\n    <p><strong>Item threadcount:</strong></p>\n    <pre>{{ item.sett }}</pre>\n  </div>\n</div>\n"
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"tartan-list\">\n  <div class=\"margin-bottom-5\" ng-if=\"!!showLegend\">\n    <span ng-pluralize\n      count=\"items.length\"\n      when=\"{0: 'No results found.', 1: 'One item found.', 'other': 'Found: {{ items.length }} items'}\"></span>\n  </div>\n\n  <div ng-if=\"items.length > 0\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n  <div class=\"tartan-list-items clearfix\">\n    <div class=\"tartan-list-item pull-left\"\n      ng-repeat=\"item in pagination.items track by item.ref\">\n      <a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item);\">\n        <tartan-image source=\"{{ 'classic/2,2/' + item.sett }}\"></tartan-image>\n      </a>\n\n      <h4><a href=\"javascript:void(0)\" title=\"{{ item.name }}\"\n        ng-click=\"setCurrent(item);\">{{ item.name }}</a></h4>\n    </div>\n  </div>\n\n  <div ng-if=\"(items.length > 0) && (pagination.items.length >= pagination.itemsPerPage / 2)\">\n    <pagination count=\"pagination.count\" current=\"pagination.current\"></pagination>\n  </div>\n\n</div>\n"
+
+/***/ },
+/* 114 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"modal fade modal-fluid\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><i class=\"fa fa-close\"></i></button>\n        <h4 class=\"modal-title\">{{ item.name }}</h4>\n      </div>\n\n      <div class=\"modal-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12\"\n            ng-class=\"{'col-sm-6': !!item.sett, 'col-sm-12': !item.sett}\"\n          >\n            <tartan-info item=\"item\" show-title=\"false\"></tartan-info>\n          </div>\n          <div ng-if=\"!!item.sett\" class=\"col-xs-12 col-sm-6\">\n          <div class=\"btn-group margin-bottom-15\">\n            <button type=\"button\" class=\"btn hide-outline\"\n              ng-class=\"{'btn-default': !state.isInfiniteMode, 'btn-info': state.isInfiniteMode}\"\n              ng-click=\"state.isInfiniteMode = !state.isInfiniteMode; state.isInteractiveMode = false; updateImage()\"\n            ><i class=\"margin-right-5 fa fa-check-square-o\"\n              ng-if=\"state.isInfiniteMode\"></i>\n              Draw as infinite texture\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode\"\n              ng-click=\"state.isInteractiveMode = !state.isInteractiveMode\">\n              <i class=\"margin-right-5 fa\"\n                ng-class=\"{'fa-check-square-o': state.isInteractiveMode, 'fa-square-o': !state.isInteractiveMode}\"></i>\n              Interactive\n            </button>\n            <button type=\"button\" class=\"btn btn-info hide-outline\"\n              title=\"Restore offset\"\n              ng-if=\"state.isInfiniteMode && state.isInteractiveMode\"\n              ng-click=\"state.renderingOffset={x: 0, y: 0}\">\n              <i class=\"fa fa-home\"></i>\n            </button>\n          </div>\n          <div>\n            <tartan schema=\"classic\" source=\"{{ item.sett }}\">\n              <div class=\"x-preview-canvas-wrapper\"\n                ng-class=\"{interactive: state.isInfiniteMode && state.isInteractiveMode}\"\n                ng-style=\"getImageBounds()\">\n                <tartan-preview-control repeat=\"state.isInfiniteMode\"\n                  offset=\"state.renderingOffset\"\n                  interactive=\"{resize: true, drag: state.isInteractiveMode}\"\n                  metrics=\"state.metrics\" options=\"{weave: state.weave}\"\n                ></tartan-preview-control>\n              </div>\n            </tartan>\n          </div>\n        </div>\n        </div>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -83746,1066 +86641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    attachTo.clearImmediate = clearImmediate;
 	}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(28)))
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	var defaults = __webpack_require__(4);
-	
-	var defaultOptions = {
-	  isColor: function(token, index, tokens) {
-	    return utils.token.isColor(token);
-	  },
-	  isStripe: function(token, index, tokens) {
-	    return utils.token.isStripe(token);
-	  },
-	  isPivot: function(token, index, tokens) {
-	    return utils.token.isPivot(token);
-	  },
-	  isRepeat: function(token, index, tokens) {
-	    return utils.token.isRepeat(token);
-	  },
-	  isWarpAndWeftSeparator: function(token, index, tokens) {
-	    return utils.token.isLiteral(token) &&
-	      (token.value == defaults.warpAndWeftSeparator);
-	  },
-	  isBlockStart: function(token, index, tokens) {
-	    return utils.token.isOpeningSquareBracket(token) ||
-	      utils.token.isOpeningParenthesis(token);
-	  },
-	  isBlockEnd: function(token, index, tokens) {
-	    return utils.token.isClosingSquareBracket(token) ||
-	      utils.token.isClosingParenthesis(token);
-	  }
-	};
-	
-	function isNone(token, index, tokens) {
-	  return false;
-	}
-	
-	function process(tokens, options) {
-	  return _.map(tokens, function(token, index) {
-	    var result = _.clone(token);
-	    _.each(options, function(check, property) {
-	      result[property] = check(token, index, tokens);
-	    });
-	    return result;
-	  });
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  _.each(defaultOptions, function(value, key) {
-	    if (!_.isFunction(options[key])) {
-	      options[key] = isNone;
-	    }
-	  });
-	  return function(tokens) {
-	    return process(tokens, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(4);
-	
-	function createPredicate(typesOrPredicate) {
-	  // Predicate should return `true` if token should be removed from list
-	  if (_.isFunction(typesOrPredicate)) {
-	    return typesOrPredicate;
-	  }
-	  if (!_.isArray(typesOrPredicate)) {
-	    typesOrPredicate = defaults.insignificantTokens;
-	  }
-	  return function(token) {
-	    return _.isObject(token) ? typesOrPredicate.indexOf(token.type) >= 0 : true;
-	  };
-	}
-	
-	function factory(typesOrPredicate) {
-	  var predicate = createPredicate(typesOrPredicate);
-	  return function(tokens) {
-	    return _.filter(tokens, function(token) {
-	      return !predicate(token);
-	    });
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports.autodetect = __webpack_require__(29);
-	module.exports.string = __webpack_require__(31);
-	module.exports.object = __webpack_require__(30);
-	module.exports.json = __webpack_require__(104);
-
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	
-	function factory(source) {
-	  return _.extend(
-	    {threadcount: ''},
-	    _.isString(source) ? JSON.parse(source) : source
-	  );
-	}
-	
-	module.exports = factory;
-	// Define some properties for `factory()` function
-	Object.defineProperty(module.exports, 'id', {
-	  enumerable: true,
-	  value: 'json'
-	});
-	Object.defineProperty(module.exports, 'name', {
-	  enumerable: true,
-	  value: 'JSON'
-	});
-
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Name can have more than one character
-	  allowLongNames: true,
-	  // Regular expression or string; case-insensitive
-	  colorPrefix: /[=]?[#]/,
-	  // Regular expression or string; case-insensitive
-	  colorSuffix: /;?/,
-	  // Formats: `short` (#fc0), `long` (#ffcc00) or `both`
-	  colorFormat: 'both',
-	  allowComment: false,
-	  // Regular expression or string; case-insensitive
-	  commentSuffix: /;/,
-	  requireCommentSuffix: true,
-	  // Regular expression; value of first group will be used to modify
-	  // comment (if available)
-	  commentFormat: /^\s*(.*)\s*;\s*$/
-	};
-	
-	function validateOptions(options) {
-	  options.colorFormat = _.trim(('' + options.colorFormat).toLowerCase());
-	  if (['long', 'short', 'both'].indexOf(options.colorFormat) == -1) {
-	    options.colorFormat = defaultOptions.colorFormat;
-	  }
-	
-	  if (options.colorPrefix instanceof RegExp) {
-	    options.colorPrefix = options.colorPrefix.source;
-	  } else
-	  if (!_.isString(options.colorPrefix)) {
-	    options.colorPrefix = '';
-	  }
-	
-	  if (options.colorSuffix instanceof RegExp) {
-	    options.colorSuffix = options.colorSuffix.source;
-	  } else
-	  if (!_.isString(options.colorSuffix)) {
-	    options.colorSuffix = '';
-	  }
-	
-	  if (options.commentSuffix instanceof RegExp) {
-	    var flags = options.commentSuffix.ignoreCase ? 'i' : '';
-	    options.commentSuffix = new RegExp(
-	      '^' + options.commentSuffix.source, flags);
-	  } else {
-	    options.commentSuffix = null;
-	  }
-	
-	  if (!(options.commentFormat instanceof RegExp)) {
-	    options.commentFormat = null;
-	  }
-	
-	  return options;
-	}
-	
-	function buildRegExp(options) {
-	  var result = ['^'];
-	
-	  // Name part
-	  var part = '[a-z]';
-	  if (options.allowLongNames) {
-	    part += '{1,100}';
-	  }
-	  result.push('(' + part + ')');
-	
-	  // Color format
-	  result.push('(' + options.colorPrefix + ')');
-	  switch (options.colorFormat) {
-	    case 'long':
-	      result.push('([0-9a-f]{6})');
-	      break;
-	    case 'short':
-	      result.push('([0-9a-f]{3})');
-	      break;
-	    case 'both':
-	      result.push('([0-9a-f]{6}|[0-9a-f]{3})');
-	      break;
-	    default:
-	      break;
-	  }
-	  result.push(options.colorSuffix);
-	
-	  return new RegExp(result.join(''), 'i');
-	}
-	
-	function parser(context, offset, pattern, options) {
-	  var source = context.source;
-	  var matches;
-	  var chunk;
-	  var i;
-	
-	  chunk = source.substr(offset, 200);
-	
-	  matches = pattern.exec(chunk);
-	  if (matches) {
-	    var result = {
-	      type: utils.token.color,
-	      name: matches[1].toUpperCase(),
-	      // matches[2] is color prefix
-	      color: utils.color.normalizeColor(matches[3]),
-	      comment: '',
-	      length: matches[0].length
-	    };
-	
-	    if (!context.inForesee) {
-	      if (options.allowComment) {
-	        var commentOffset = offset + result.length;
-	        if (options.commentSuffix && options.requireCommentSuffix) {
-	          // Fast case - just search for suffix
-	          for (i = commentOffset; i < source.length; i++) {
-	            chunk = source.substr(i, 10);
-	            matches = options.commentSuffix.exec(chunk);
-	            if (matches) {
-	              result.comment = source.substr(commentOffset,
-	                i - commentOffset + matches[0].length);
-	              break;
-	            }
-	          }
-	          if (i >= source.length) {
-	            result.comment = source.substr(commentOffset, source.length);
-	          }
-	        } else {
-	          var ignoreTokens = ['whitespace', 'invalid'];
-	          // Slow - search for next token or suffix (if available)
-	          for (i = commentOffset; i < source.length; i++) {
-	            chunk = source.substr(i, 10);
-	            matches = options.commentSuffix.exec(chunk);
-	            if (matches) {
-	              result.comment = source.substr(commentOffset,
-	                i - commentOffset + matches[0].length);
-	              break;
-	            }
-	            var token = context.foresee(i);
-	            if (_.isObject(token) && (ignoreTokens.indexOf(token.type) == -1)) {
-	              result.comment = source.substr(commentOffset,
-	                i - commentOffset);
-	              break;
-	            }
-	          }
-	          if (i >= source.length) {
-	            result.comment = source.substr(commentOffset, source.length);
-	          }
-	        }
-	      }
-	
-	      result.length += result.comment.length;
-	
-	      if (options.commentFormat) {
-	        matches = options.commentFormat.exec(result.comment);
-	        if (matches && _.isString(matches[1])) {
-	          result.comment = matches[1];
-	        }
-	      }
-	      result.comment = _.trim(result.comment);
-	    }
-	
-	    return result;
-	  }
-	}
-	
-	function factory(options) {
-	  options = validateOptions(_.extend({}, defaultOptions, options));
-	  var pattern = buildRegExp(options);
-	  return function(context, offset) {
-	    return parser(context, offset, pattern, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	function parse(context, offset) {
-	  var source = context.source;
-	  var result = source.charAt(offset);
-	
-	  if (!context.inForesee) {
-	    var foreseeOffset = offset + 1;
-	    while (true) {
-	      var token = context.foresee(foreseeOffset);
-	      if (_.isObject(token) && (token.type == 'invalid')) {
-	        result += token.value;
-	        foreseeOffset += token.length;
-	        continue;
-	      }
-	      break;
-	    }
-	  }
-	
-	  if (result != '') {
-	    result = {
-	      type: utils.token.invalid,
-	      value: result,
-	      length: result.length
-	    };
-	    if (!context.inForesee) {
-	      context.errorHandler(
-	        new Error(utils.error.message.invalidToken),
-	        {token: result},
-	        utils.error.severity.error
-	      );
-	    }
-	    return result;
-	  }
-	}
-	
-	function factory() {
-	  return parse;
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 107 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  string: '',
-	  ignoreCase: false
-	};
-	
-	function parser(context, offset, options) {
-	  var source = context.source;
-	  if (options.string != '') {
-	    var s = source.substr(offset, options.string.length);
-	    var q = options.ignoreCase ? s.toUpperCase() : s;
-	    if (q == options.string) {
-	      return {
-	        type: utils.token.literal,
-	        value: s,
-	        length: s.length
-	      };
-	    }
-	  }
-	}
-	
-	function factory(options) {
-	  if (_.isString(options)) {
-	    options = {string: options};
-	  }
-	  options = _.extend({}, defaultOptions, options);
-	  if (!_.isString(options.string)) {
-	    options.string = '';
-	  }
-	  if (options.ignoreCase) {
-	    options.string = options.string.toUpperCase();
-	  }
-	  return function(str, offset) {
-	    return parser(str, offset, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Name can have more than one character
-	  allowLongNames: true
-	};
-	
-	function buildRegExp(options) {
-	  var result = ['^'];
-	
-	  // Name part
-	  var part = '[a-z]';
-	  if (options.allowLongNames) {
-	    part += '{1,100}';
-	  }
-	  result.push('(' + part + ')');
-	
-	  // Count part
-	  result.push('/([0-9]+)');
-	
-	  return new RegExp(result.join(''), 'i');
-	}
-	
-	function parser(context, offset, pattern, options) {
-	  var source = context.source;
-	
-	  // Hope nobody will try to add stripe with 1e19 lines...
-	  var matches = pattern.exec(source.substr(offset, 20));
-	  if (matches) {
-	    var count = parseInt(matches[2], 10) || 0;
-	    if (count < 0) {
-	      count = 0;
-	    }
-	    var result = {
-	      type: utils.token.pivot,
-	      name: matches[1].toUpperCase(),
-	      count: count,
-	      length: matches[0].length
-	    };
-	
-	    if (result.count == 0) {
-	      context.errorHandler(
-	        new Error(utils.error.message.zeroWidthStripe),
-	        {token: result},
-	        utils.error.severity.warning
-	      );
-	    }
-	
-	    return result;
-	  }
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  var pattern = buildRegExp(options);
-	  return function(str, offset) {
-	    return parser(str, offset, pattern, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // NNN * <something> variant
-	  allowAsPrefix: true,
-	  // <something> * NNN variant
-	  allowAsSuffix: true
-	};
-	
-	var patternPrefix = /^([0-9]+)\s*[*]/i;
-	var patternSuffix = /^[*]\s*([0-9]+)/i;
-	
-	function parser(context, offset, options) {
-	  var source = context.source;
-	
-	  var matches = null;
-	  var isPrefix = false;
-	  var isSuffix = false;
-	
-	  if (options.allowAsPrefix) {
-	    matches = patternPrefix.exec(source.substr(offset, 20));
-	    isPrefix = !!matches;
-	  }
-	
-	  if (options.allowAsSuffix && !matches) {
-	    matches = patternSuffix.exec(source.substr(offset, 20));
-	    isSuffix = !!matches;
-	  }
-	
-	  if (matches) {
-	    var count = parseInt(matches[1], 10) || 0;
-	    if (count <= 0) {
-	      count = 1;
-	    }
-	    var result = {
-	      type: utils.token.repeat,
-	      count: count >= 1 ? count : 1,
-	      isPrefix: isPrefix,
-	      isSuffix: isSuffix,
-	      length: matches[0].length
-	    };
-	
-	    if (count < 1) {
-	      context.errorHandler(
-	        new Error(utils.error.message.invalidMultiplier),
-	        {token: _.extend({}, result, {count: count})},
-	        utils.error.severity.warning
-	      );
-	    }
-	
-	    return result;
-	  }
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  return function(str, offset) {
-	    return parser(str, offset, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Name can have more than one character
-	  allowLongNames: true
-	};
-	
-	function buildRegExp(options) {
-	  var result = ['^'];
-	
-	  // Name part
-	  var part = '[a-z]';
-	  if (options.allowLongNames) {
-	    part += '{1,100}';
-	  }
-	  result.push('(' + part + ')');
-	
-	  // Count part
-	  result.push('([0-9]+)');
-	
-	  return new RegExp(result.join(''), 'i');
-	}
-	
-	function parser(context, offset, pattern, options) {
-	  var source = context.source;
-	
-	  // Hope nobody will try to add stripe with 1e19 lines...
-	  var matches = pattern.exec(source.substr(offset, 20));
-	  if (matches) {
-	    var count = parseInt(matches[2], 10) || 0;
-	    if (count < 0) {
-	      count = 0;
-	    }
-	    var result = {
-	      type: utils.token.stripe,
-	      name: matches[1].toUpperCase(),
-	      count: count,
-	      length: matches[0].length
-	    };
-	
-	    if (result.count == 0) {
-	      context.errorHandler(
-	        new Error(utils.error.message.zeroWidthStripe),
-	        {token: result},
-	        utils.error.severity.warning
-	      );
-	    }
-	
-	    return result;
-	  }
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  var pattern = buildRegExp(options);
-	  return function(str, offset) {
-	    return parser(str, offset, pattern, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var pattern = /^\s+/i;
-	var utils = __webpack_require__(2);
-	
-	function parse(context, offset) {
-	  var source = context.source;
-	  var chunkSize = 10;
-	  var result = '';
-	  while (true) {
-	    var chunk = source.substr(offset, chunkSize);
-	    var matches = pattern.exec(chunk);
-	    if (!matches) {
-	      break;
-	    }
-	    result += matches[0];
-	    if (matches[0].length < chunkSize) {
-	      // Don't wait for next turn
-	      break;
-	    }
-	  }
-	
-	  if (result != '') {
-	    return {
-	      type: utils.token.whitespace,
-	      value: result,
-	      length: result.length
-	    };
-	  }
-	}
-	
-	function factory() {
-	  return parse;
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var whitespace = __webpack_require__(111);
-	var invalid = __webpack_require__(106);
-	
-	function Context(source, parsers, options) {
-	  this.source = _.isString(source) ? source : '';
-	
-	  parsers = _.filter(parsers, _.isFunction);
-	  parsers.splice(0, 0, whitespace()); // Prepend this parser to skip spaces
-	  parsers.push(invalid()); // This parser will handle invalid tokens
-	  this.parsers = parsers;
-	  this.options = options;
-	
-	  this.inForesee = 0;
-	
-	  if (_.isFunction(options.errorHandler)) {
-	    this.errorHandler = function(error, data, severity) {
-	      options.errorHandler(error, data, severity || 'error');
-	    };
-	  }
-	}
-	
-	Context.prototype = {};
-	
-	Context.prototype.errorHandler = function(error, data, severity) {
-	  // Do nothing - default error handler will just ignore all errors.
-	};
-	
-	function getToken(context, offset) {
-	  var result = null;
-	
-	  _.each(context.parsers, function(parser) {
-	    result = parser(context, offset);
-	    if (_.isObject(result)) {
-	      result.offset = result.offset || offset;
-	      return false; // Break
-	    }
-	  });
-	
-	  return result;
-	}
-	
-	Context.prototype.foresee = function(offset) {
-	  var foreseeLimit = this.options.foreseeLimit;
-	  if (this.inForesee >= foreseeLimit) {
-	    return null;
-	  }
-	
-	  offset = parseInt(offset, 10) || 0;
-	  if (offset < 0) {
-	    offset = 0;
-	  }
-	
-	  if (offset <= this.offset) {
-	    this.errorHandler(new Error('Parser should not go back.'), {
-	      currentOffset: this.offset,
-	      requestedOffset: offset,
-	      source: this.source
-	    });
-	    return null;
-	  }
-	
-	  this.inForesee++;
-	  var result = getToken(this, offset);
-	  if (this.inForesee > 0) {
-	    this.inForesee--;
-	  }
-	  return result;
-	};
-	
-	Context.prototype.parse = function(offset) {
-	  var result = [];
-	
-	  offset = parseInt(offset, 10) || 0;
-	  if (offset < 0) {
-	    offset = 0;
-	  }
-	
-	  while (offset < this.source.length) {
-	    this.offset = offset;
-	    var token = getToken(this, offset);
-	    if (_.isObject(token)) {
-	      result.push(token);
-	      offset = token.offset + token.length;
-	    }
-	  }
-	
-	  return result;
-	};
-	
-	function factory(source, parsers, options) {
-	  options = _.extend({}, options);
-	  options.foreseeLimit = parseInt(options.foreseeLimit, 10) || 0;
-	  if (options.foreseeLimit < 1) {
-	    options.foreseeLimit = 1;
-	  }
-	  return new Context(source, parsers, options);
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 113 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	
-	var defaultOptions = {
-	  // function to transform newly built AST: (sett) => { return modifiedSett; }
-	  transformSyntaxTree: null,
-	  format: {
-	    color: function(item) {
-	      var comment = item.comment != '' ? ' ' + item.comment : '';
-	      return item.name + item.value + comment + ';';
-	    },
-	    stripe: function(item) {
-	      return item.name + item.count;
-	    },
-	    block: function(block) {
-	      var result = _.chain(block.formattedItems).join(' ').trim().value();
-	      if (result == '') {
-	        return '';
-	      }
-	      var multiply = block.repeat > 1 ? '*' + block.repeat : '';
-	      if (block.isRoot) {
-	        result = block.reflect ? '[' + result + ']' : result;
-	      } else {
-	        result = block.reflect ? '[' + result + ']' : '(' + result + ')';
-	      }
-	      return result + multiply;
-	    }
-	  },
-	  join: function(components) {
-	    var parts = [];
-	    if (components.colors.length > 0) {
-	      parts.push(components.colors.join(' '));
-	    }
-	    if (components.warp != components.weft) {
-	      parts.push(components.warp + ' // ' + components.weft);
-	    } else {
-	      parts.push(components.warp);
-	    }
-	    return parts.join('\n');
-	  },
-	  defaultColors: {},
-	  includeUnusedColors: true,
-	  includeDefaultColors: true
-	};
-	
-	function processColors(usedColors, settColors, options) {
-	  var defaultColors = _.extend({}, options.defaultColors);
-	  var keys = _.intersection(_.keys(settColors), _.keys(usedColors));
-	  if (options.includeUnusedColors) {
-	    keys = _.keys(settColors);
-	  }
-	  if (options.includeDefaultColors) {
-	    keys = _.union(_.keys(settColors), _.keys(usedColors));
-	  }
-	
-	  var format = options.format;
-	  if (!_.isFunction(format.color)) {
-	    return [];
-	  }
-	
-	  return _.chain(keys)
-	    .sortBy()
-	    .map(function(key) {
-	      var color = settColors[key] || defaultColors[key];
-	      if (color) {
-	        return format.color(_.extend({name: key}, color));
-	      }
-	      return null;
-	    })
-	    .filter(function(str) {
-	      return _.isString(str) && (str.length > 0);
-	    })
-	    .value();
-	}
-	
-	function process(block, options, usedColors) {
-	  var format = options.format;
-	  if (!_.isFunction(format.stripe) || !_.isFunction(format.block)) {
-	    return '';
-	  }
-	
-	  block = _.clone(block);
-	  block.formattedItems = _.chain(block.items)
-	    .map(function(item) {
-	      if (item.isStripe) {
-	        usedColors[item.name] = true;
-	        return format.stripe(item);
-	      }
-	      if (item.isBlock) {
-	        return process(item, options, usedColors);
-	      }
-	      return '';
-	    })
-	    .filter(function(str) {
-	      return str.length > 0;
-	    })
-	    .value();
-	  return _.isFunction(format.block) ? format.block(block) : '';
-	}
-	
-	function render(sett, options) {
-	  var warpIsSameAsWeft = sett.warp === sett.weft;
-	
-	  var usedColors = {};
-	  var warp = process(sett.warp, options, usedColors);
-	  var weft = warp;
-	  if (!warpIsSameAsWeft) {
-	    weft = process(sett.weft, options, usedColors);
-	  }
-	
-	  var colors = processColors(usedColors, sett.colors, options);
-	
-	  return _.trim(options.join({
-	    colors: colors,
-	    warp: warp,
-	    weft: weft
-	  }, sett));
-	}
-	
-	function factory(options) {
-	  options = _.merge({}, defaultOptions, options);
-	
-	  return function(sett) {
-	    if (!_.isObject(sett)) {
-	      return '';
-	    }
-	    if (_.isFunction(options.transformSyntaxTree)) {
-	      sett = options.transformSyntaxTree(sett);
-	    }
-	
-	    return render(sett, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var canvas = __webpack_require__(32);
-	var defaults = __webpack_require__(4);
-	
-	/* global Image */
-	
-	var shadow = new Image();
-	shadow.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAAD' +
-	  'ED76LAAAABHNCSVQICAgIfAhkiAAAAFVJREFUGJV1jsENgEAIBGcTCvBrJbbi90qgEuu6buw' +
-	  'AHx4mKjcfkg0MS0Qs3KyA5xy5m6TGmwPokk4AcnNm0gidPxvQn4uZyb4/i051+zQZsFft03Q' +
-	  'B/booYDTfo3wAAAAASUVORK5CYII=';
-	
-	function renderWeft(context, options, stage) {
-	  if (stage) {
-	    if (options.zoom == 2) {
-	      var dx = options.offset.x;
-	      var dy = options.offset.y;
-	
-	      context.save();
-	      context.translate(dx, dy);
-	
-	      context.fillStyle = context.createPattern(shadow, 'repeat');
-	      context.fillRect(-dx, -dy, options.width, options.height);
-	
-	      context.restore();
-	    }
-	  }
-	}
-	
-	function factory(sett, options) {
-	  return canvas(sett, _.extend(options, {
-	    weave: defaults.weave.serge,
-	    zoom: 2,
-	    hooks: {
-	      renderWeft: renderWeft
-	    }
-	  }));
-	}
-	
-	module.exports = factory;
-	// Define some properties for `factory()` function
-	Object.defineProperty(module.exports, 'id', {
-	  enumerable: true,
-	  value: 'house-of-tartan'
-	});
-	Object.defineProperty(module.exports, 'name', {
-	  enumerable: true,
-	  value: 'House of Tartan'
-	});
-
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var index = __webpack_require__(18);
-	var render = __webpack_require__(11);
-	var transform = __webpack_require__(13);
-	
-	function formatPivot(str) {
-	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
-	}
-	
-	var defaultOptions = {
-	  format: {
-	    color: function(item) {
-	      var comment = item.comment != '' ? ' ' + item.comment : '';
-	      return item.name + item.value + comment + ';';
-	    },
-	    stripe: function(item) {
-	      return item.name + item.count;
-	    },
-	    block: function(block) {
-	      var items = block.formattedItems;
-	      if (block.reflect && (items.length >= 2)) {
-	        // Convert first and last to pivots
-	        items[0] = formatPivot(items[0]);
-	        items[items.length - 1] = formatPivot(items[items.length - 1]);
-	      }
-	      return _.chain(items).join(' ').trim().value();
-	    }
-	  }
-	};
-	
-	// Options same as for tartan.render.format():
-	// + warpAndWeftSeparator: index.warpAndWeftSeparator
-	// - format
-	// - join
-	function factory(options) {
-	  options = _.extend({}, options, defaultOptions);
-	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
-	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
-	  }
-	
-	  options.transformSyntaxTree = transform([
-	    options.transformSyntaxTree,
-	    transform.flatten(),
-	    transform.fold({
-	      allowRootReorder: false,
-	      allowNestedBlocks: false,
-	      maxFoldLevels: 2,
-	      minBlockSize: 3,
-	      greedy: false,
-	      allowSplitStripe: false,
-	      processExistingBlocks: false
-	    })
-	  ]);
-	
-	  options.join = function(components) {
-	    var parts = [];
-	    if (components.colors.length > 0) {
-	      parts.push(components.colors.join(' '));
-	    }
-	    if (components.warp != components.weft) {
-	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
-	        ' ' + components.weft);
-	    } else {
-	      parts.push(components.warp);
-	    }
-	    return parts.join('\n');
-	  };
-	
-	  return render.format(options);
-	}
-	
-	module.exports = factory;
-
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(27)))
 
 /***/ },
 /* 116 */
@@ -84814,66 +86650,207 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(18);
-	var defaults = __webpack_require__(4);
-	var parse = __webpack_require__(10);
-	var filter = __webpack_require__(8);
-	var syntax = __webpack_require__(12);
-	var utils = __webpack_require__(2);
 	
-	/*
-	  options = {
-	    warpAndWeftSeparator: index.warpAndWeftSeparator,
-	    errorHandler: <default>,
-	    processTokens: <default>,
-	    transformSyntaxTree: <default>
+	function colorDistance(left, right) {
+	  var rmean = (left[0] + right[0]) / 2;
+	  var r = left[0] - right[0];
+	  var g = left[1] - right[1];
+	  var b = left[2] - right[2];
+	  return Math.sqrt((512 + rmean) * r * r / 256 + 4 * g * g +
+	    (767 - rmean) * b * b / 256) / 768;
+	}
+	
+	function compareColorsHelper(left, right) {
+	  if ((left.length == 0) || (right.length == 0)) {
+	    return {sum: 0, restLeft: left, restRight: right};
 	  }
-	*/
+	  right = right.slice(0, right.length);  // copy
 	
-	function factory(options) {
-	  options = _.extend({}, options);
+	  var sum = 0;
+	  var restLeft = [];
+	  left.forEach(function(cleft) {
+	    for (var i = 0; i < right.length; i++) {
+	      var cright = right[i];
+	      var dist = colorDistance(cleft, cright);
+	      if (dist <= 0.07) {
+	        var diff = cleft[3] - cright[3];
+	        sum += diff * diff;
+	        right.splice(i, 1);  // remove it
+	        return;
+	      }
+	    }
+	    restLeft.push(cleft);
+	  });
+	  return {
+	    sum: sum,
+	    restLeft: restLeft,
+	    restRight: right
+	  };
+	}
 	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
+	function compareColors(left, right) {
+	  // Map left colors to right
+	  var temp = compareColorsHelper(left.cl, right.cl);
+	  var sum = temp.sum;
+	
+	  // Add the rest of unmatched with difference against 0,
+	  // but only if there ae more than one unmatched color and it is not
+	  // major
+	  var rest = 1;
+	  if (temp.restLeft.length + temp.restRight.length == 1) {
+	    if (temp.restLeft.length == 1) {
+	      rest = temp.restLeft[0][3];
+	    }
+	    if (temp.restRight.length == 1) {
+	      rest = temp.restRight[0][3];
+	    }
 	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  if (rest > 0.43) {
+	    temp.restLeft.forEach(function(value) {
+	      sum += value[3] * value[3];
+	    });
+	    temp.restRight.forEach(function(value) {
+	      sum += value[3] * value[3];
+	    });
 	  }
 	
-	  return parse([
-	    parse.pivot(),
-	    parse.stripe(),
-	    parse.literal(options.warpAndWeftSeparator),
-	    parse.color({
-	      allowLongNames: true,
-	      colorPrefix: /[=]?[#]/,
-	      colorSuffix: null,
-	      colorFormat: 'long',
-	      allowComment: true,
-	      commentSuffix: /;/,
-	      requireCommentSuffix: true,
-	      commentFormat: /^\s*(.*)\s*;\s*$/
+	  // Respect smallest stripes
+	  var diff = left.clrs - right.clrs;
+	  sum += diff * diff;
+	
+	  return Math.sqrt(sum);
+	}
+	
+	function compareSequence(left, right) {
+	  var n = Math.max(left.length, right.length);
+	
+	  var sum = 0;
+	  for (var i = 0; i < n; i++) {
+	    var diff = (left[i] || 0) - (right[i] || 0);
+	    sum += diff * diff;
+	  }
+	
+	  return Math.sqrt(sum);
+	}
+	
+	function compareColorSequences(left, right) {
+	  // If one of sequences is empty - consider sequences very far each from other
+	  if ((left.length == 0) || (right.length == 0)) {
+	    return 100;
+	  }
+	
+	  // Compare all possible pairs and calculate difference
+	  var pairs = [];
+	  for (var i = 0; i < left.length; i++) {
+	    for (var j = 0; j < right.length; j++) {
+	      pairs.push([
+	        compareSequence(left[i], right[j]),
+	        left[i],
+	        right[j]
+	      ]);
+	    }
+	  }
+	
+	  // Choose best combinations
+	  pairs = pairs.sort(function(a, b) {
+	    return a[0] - b[0];
+	  });
+	
+	  var sum = 0;
+	  var usedLeft = [];
+	  var usedRight = [];
+	  pairs.forEach(function(value) {
+	    var isLeftUsed = usedLeft.indexOf(value[1]) >= 0;
+	    var isRightUsed = usedRight.indexOf(value[2]) >= 0;
+	    if (isLeftUsed || isRightUsed) {
+	      return;
+	    }
+	
+	    sum += value[0] * value[0];
+	    usedLeft.push(value[1]);
+	    usedRight.push(value[2]);
+	  });
+	
+	  // Find and update rest
+	  left.forEach(function(value) {
+	    var isUsed = usedLeft.indexOf(value) >= 0;
+	    if (!isUsed) {
+	      var diff = compareSequence(value, []);
+	      sum += diff * diff;
+	    }
+	  });
+	  right.forEach(function(value) {
+	    var isUsed = usedRight.indexOf(value) >= 0;
+	    if (!isUsed) {
+	      var diff = compareSequence(value, []);
+	      sum += diff * diff;
+	    }
+	  });
+	
+	  return Math.sqrt(sum);
+	}
+	
+	function compare(left, right) {
+	  var color = compareColors(left, right);
+	
+	  var sett1 = compareSequence(left.wrsq, right.wrsq) +
+	    compareSequence(left.wfsq, right.wfsq);
+	
+	  var sett2 = compareColorSequences(left.wrsc, right.wrsc) +
+	    compareColorSequences(left.wfsc, right.wfsc);
+	
+	  var w1 = 2 / 5;
+	  var w2 = 1 - w1;
+	  var sett = w1 * sett1 + w2 * sett2;
+	
+	  var q1 = 2 / 7;
+	  var q2 = 1 - q1;
+	
+	  return {
+	    color: color,
+	    sett: sett,
+	    total: q1 * color + q2 * sett
+	  };
+	}
+	
+	function search(items, fingerprint, normalizeScore) {
+	  if (!_.isFunction(normalizeScore)) {
+	    normalizeScore = function(score) {
+	      return score.total;
+	    };
+	  }
+	
+	  var result = _.chain(items)
+	    .map(function(item) {
+	      var score = compare(fingerprint, item.fingerprint);
+	      return _.extend({}, item, {
+	        score: normalizeScore(score)
+	      });
 	    })
-	  ], {
-	    errorHandler: options.errorHandler,
-	    processTokens: filter([
-	      options.processTokens,
-	      filter.removeTokens(defaults.insignificantTokens)
-	    ]),
-	    buildSyntaxTree: syntax.classic({
-	      errorHandler: options.errorHandler,
-	      processTokens: filter.classify({
-	        isWarpAndWeftSeparator: function(token) {
-	          return utils.token.isLiteral(token) &&
-	            (token.value == options.warpAndWeftSeparator);
-	        }
-	      }),
-	      transformSyntaxTree: options.transformSyntaxTree
-	    })
+	    .filter()
+	    .sortBy('score')
+	    .value();
+	
+	  var sum = 0;
+	  var count = 0;
+	  _.each(result, function(item) {
+	    if ((item.score > 0) && (item.score <= 5)) {
+	      sum += item.score;
+	      count += 1;
+	    }
+	    return item.score <= 5;  // continue until we found too bad result
+	  });
+	  var threshold = sum / count < 1.21 ? 1.21 : sum / count;
+	
+	  return _.filter(result, function(item) {
+	    return item.score <= threshold;
 	  });
 	}
 	
-	module.exports = factory;
+	module.exports = {
+	  compare: compare,
+	  search: search
+	};
 
 
 /***/ },
@@ -84883,80 +86860,226 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(19);
-	var render = __webpack_require__(11);
-	var transform = __webpack_require__(13);
+	var tartan = __webpack_require__(2);
 	
-	var defaultOptions = {
-	  format: {
-	    color: function(item) {
-	      var comment = item.comment != '' ? ' ' + item.comment : '';
-	      return item.name + item.value + comment + ';';
-	    },
-	    stripe: function(item) {
-	      return item.name + item.count;
-	    },
-	    block: function(block) {
-	      var result = _.chain(block.formattedItems).join(' ').trim().value();
-	      if (result == '') {
-	        return '';
-	      }
-	      var multiply = block.repeat > 1 ? '*' + block.repeat : '';
-	      if (block.isRoot) {
-	        result = block.reflect ? '[' + result + ']' : result;
-	      } else {
-	        result = block.reflect ? '[' + result + ']' : '(' + result + ')';
-	      }
-	      return result + multiply;
-	    }
-	  }
-	};
+	/*
+	cl - colors (from most-used to less used), cut by threashold
+	clrs - count of rest colors
 	
-	// Options same as for tartan.render.format():
-	// + warpAndWeftSeparator: index.warpAndWeftSeparator
-	// - format
-	// - join
-	function factory(options) {
-	  options = _.extend({}, options, defaultOptions);
+	wr* - warp, wf* - weft
 	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
-	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
-	  }
+	wrsq/wfsq - normalized stripes, ordered from wide to thin;
+	            simplified using median filter
+	wrsc/wfsc - normalized stripes, ordered from wide to thin and groupped by color
 	
-	  options.transformSyntaxTree = transform([
-	    options.transformSyntaxTree,
-	    transform.fold({
-	      allowRootReorder: false,
-	      allowNestedBlocks: false,
-	      maxFoldLevels: 2,
-	      minBlockSize: 3,
-	      greedy: false,
-	      allowSplitStripe: false,
-	      processExistingBlocks: false
-	    })
-	  ]);
+	*/
 	
-	  options.join = function(components) {
-	    var parts = [];
-	    if (components.colors.length > 0) {
-	      parts.push(components.colors.join(' '));
-	    }
-	    if (components.warp != components.weft) {
-	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
-	        ' ' + components.weft);
+	function grayscaleFactor(color) {
+	  // Calculate S from HLS
+	  var r = color[0];
+	  var g = color[1];
+	  var b = color[2];
+	
+	  var st = 0;
+	  if (r + g + b != 0) {
+	    var min = Math.min(r, g, b) / 255;
+	    var max = Math.max(r, g, b) / 255;
+	    if (min + max < 1) {
+	      st = (max - min) / (max + min);
 	    } else {
-	      parts.push(components.warp);
+	      st = (max - min) / (2.0 - max - min);
 	    }
-	    return parts.join('\n');
-	  };
+	  }
 	
-	  return render.format(options);
+	  // scale and offset - we don't need zero values
+	  return st * 0.5 + 0.5;
 	}
 	
-	module.exports = factory;
+	function createColorFingerprint(warp, weft) {
+	  warp = _.reduce(warp, function(accumulator, value) {
+	    accumulator[value[0]] = accumulator[value[0]] || 0;
+	    accumulator[value[0]] += value[1];
+	    return accumulator;
+	  }, {});
+	
+	  weft = _.reduce(weft, function(accumulator, value) {
+	    accumulator[value[0]] = accumulator[value[0]] || 0;
+	    accumulator[value[0]] += value[1];
+	    return accumulator;
+	  }, {});
+	
+	  var normalizationSquare = _.sum(_.values(warp)) * _.sum(_.values(weft));
+	
+	  var result = {};
+	  _.each(warp, function(widthA, colorA) {
+	    _.each(weft, function(widthB, colorB) {
+	      var square = widthA * widthB / normalizationSquare;
+	
+	      result[colorA] = result[colorA] || 0;
+	      result[colorA] += square / 2;
+	
+	      result[colorB] = result[colorB] || 0;
+	      result[colorB] += square / 2;
+	    });
+	  });
+	
+	  var mapped = {
+	    cl: [],
+	    clrs: 0
+	  };
+	
+	  var normalize = _.max(_.values(result));
+	  _.each(result, function(score, color) {
+	    score = Math.sqrt(score / normalize);
+	    if (score >= 0.17) {
+	      var value = [
+	        parseInt(color[1] + color[2], 16),
+	        parseInt(color[3] + color[4], 16),
+	        parseInt(color[5] + color[6], 16)
+	      ];
+	      value.push(score / normalize * grayscaleFactor(value));
+	      mapped['cl'].push(value);
+	    } else {
+	      mapped.clrs += 1;
+	    }
+	  });
+	
+	  mapped.cl = _.orderBy(mapped.cl, _.identity, 'desc');
+	
+	  return mapped;
+	}
+	
+	function createColorSequenceFingerprint(items, normalize) {
+	  var itemsByColors = {};
+	
+	  _.each(items, function(item) {
+	    itemsByColors[item[0]] = itemsByColors[item[0]] || [];
+	    itemsByColors[item[0]].push(item[1] / normalize);
+	  });
+	
+	  return _.chain(itemsByColors)
+	    .values()
+	    .map(function(items) {
+	      return _.orderBy(items, _.identity, 'desc');
+	    })
+	    .orderBy('length', 'desc')
+	    .value();
+	}
+	
+	function createMedianSequenceFingerprint(items, normalize) {
+	  return _.chain(items)
+	    .map(function(current, index, items) {
+	      // Median filter
+	      var lastIndex = items.length - 1;
+	      var left = index == 0 ? items[lastIndex] : items[index - 1];
+	      var right = index == lastIndex ? items[0] : items[index + 1];
+	
+	      if (left[0] == right[0]) {
+	        if (left[1] + right[1] >= current[1] * 3) {
+	          return [left[0], current[1]];
+	        }
+	      }
+	
+	      return current;
+	    })
+	    .reduce(function(accumulator, item, index, items) {
+	      // Merge stripes with the same color
+	      var prev = accumulator.pop();
+	      if (prev && (prev[0] == item[0])) {
+	        accumulator.push([prev[0], prev[1] + item[1]]);
+	      } else {
+	        if (prev) {
+	          accumulator.push(prev);
+	        }
+	        accumulator.push(item);
+	      }
+	
+	      // If first and last stripes has the same color, merge it
+	      if ((index == items.length - 1) && (accumulator.length >= 3)) {
+	        var first = accumulator[0];
+	        var last = accumulator.pop();
+	        if (last[0] == first[0]) {
+	          first[1] += last[1];
+	        } else {
+	          accumulator.push(last);
+	        }
+	      }
+	
+	      return accumulator;
+	    }, [])
+	    .map(function(item) {
+	      // Normalize values
+	      return item[1] / normalize;
+	    })
+	    .orderBy(_.identity, 'desc')
+	    .value();
+	}
+	
+	function createSequenceFingerprint(items, prefix) {
+	  var normalize = _.chain(items)
+	    .map(function(item) {
+	      return item[1];
+	    })
+	    .max()
+	    .value();
+	
+	  var mapped = {};
+	  mapped[prefix + 'sq'] = createMedianSequenceFingerprint(items, normalize);
+	  mapped[prefix + 'sc'] = createColorSequenceFingerprint(items, normalize);
+	
+	  return mapped;
+	}
+	
+	function create(sett, defaultColors) {
+	  var warp = [];
+	  var weft = [];
+	  if (_.isObject(sett)) {
+	    var warpIsSameAsWeft = sett.warp === sett.weft;
+	    if (_.isObject(sett.warp) && _.isArray(sett.warp.items)) {
+	      warp = tartan.utils.sett.compile(sett.warp.items,
+	        sett.colors, defaultColors);
+	    }
+	    if (warpIsSameAsWeft) {
+	      weft = warp;
+	    } else {
+	      if (_.isObject(sett.weft) && _.isArray(sett.weft.items)) {
+	        weft = tartan.utils.sett.compile(sett.weft.items,
+	          sett.colors, defaultColors);
+	      }
+	    }
+	  }
+	
+	  var warpFingerprint = createSequenceFingerprint(warp, 'wr');
+	  var weftFingerprint;
+	  if (weft === warp) {
+	    weftFingerprint = _.chain(warpFingerprint)
+	      .toPairs()
+	      .map(function(pair) {
+	        if (pair[0].substr(0, 2) == 'wr') {
+	          return [
+	            'wf' + pair[0].substr(2, pair[0].length),
+	            pair[1]
+	          ];
+	        } else {
+	          return pair;
+	        }
+	      })
+	      .fromPairs()
+	      .value();
+	  } else {
+	    weftFingerprint = createSequenceFingerprint(weft, 'wf');
+	  }
+	
+	  return _.extend({},
+	    createColorFingerprint(warp, weft),
+	    warpFingerprint,
+	    weftFingerprint
+	  );
+	}
+	
+	module.exports = {
+	  create: create
+	};
 
 
 /***/ },
@@ -84966,74 +87089,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(19);
-	var defaults = __webpack_require__(4);
-	var parse = __webpack_require__(10);
-	var filter = __webpack_require__(8);
-	var syntax = __webpack_require__(12);
-	var utils = __webpack_require__(2);
 	
-	/*
-	  options = {
-	    warpAndWeftSeparator: index.warpAndWeftSeparator,
-	    errorHandler: <default>,
-	    processTokens: <default>,
-	    transformSyntaxTree: <default>
-	  }
-	*/
-	
-	function factory(options) {
-	  options = _.extend({}, options);
-	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
-	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
-	  }
-	
-	  return parse([
-	    parse.pivot(),
-	    parse.stripe(),
-	    parse.literal('['),
-	    parse.literal(']'),
-	    parse.literal('('),
-	    parse.literal(')'),
-	    parse.literal(options.warpAndWeftSeparator),
-	    parse.repeat({
-	      allowAsPrefix: true,
-	      allowAsSuffix: true
-	    }),
-	    parse.color({
-	      allowLongNames: true,
-	      colorPrefix: /[=]?[#]/,
-	      colorSuffix: null,
-	      colorFormat: 'both',
-	      allowComment: true,
-	      commentSuffix: /;/,
-	      requireCommentSuffix: false,
-	      commentFormat: /^\s*(.*)\s*;\s*$/
-	    })
-	  ], {
-	    errorHandler: options.errorHandler,
-	    processTokens: filter([
-	      options.processTokens,
-	      filter.removeTokens(defaults.insignificantTokens)
-	    ]),
-	    buildSyntaxTree: syntax.extended({
-	      errorHandler: options.errorHandler,
-	      processTokens: filter.classify({
-	        isWarpAndWeftSeparator: function(token) {
-	          return utils.token.isLiteral(token) &&
-	            (token.value == options.warpAndWeftSeparator);
-	        }
-	      }),
-	      transformSyntaxTree: options.transformSyntaxTree
-	    })
-	  });
-	}
-	
-	module.exports = factory;
+	_.extend(module.exports, __webpack_require__(117), __webpack_require__(116));
 
 
 /***/ },
@@ -85042,94 +87099,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	module.exports.classic = __webpack_require__(18);
-	module.exports.extended = __webpack_require__(19);
-	module.exports.stwr = __webpack_require__(20);
-	module.exports.weddslist = __webpack_require__(123);
+	var _ = __webpack_require__(1);
+	var tartan = __webpack_require__(2);
+	
+	_.extend(module.exports, __webpack_require__(100));
+	
+	module.exports.fingerprint = __webpack_require__(118);
+	
+	tartan.fingerprint = module.exports.fingerprint;
 
 
 /***/ },
 /* 120 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var index = __webpack_require__(20);
-	var render = __webpack_require__(11);
-	var transform = __webpack_require__(13);
-	
-	function formatPivot(str) {
-	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
-	}
-	
-	var defaultOptions = {
-	  format: {
-	    color: function(item) {
-	      var comment = item.comment != '' ? ' ' + item.comment : '';
-	      return item.name + '=' + item.value + comment + ';';
-	    },
-	    stripe: function(item) {
-	      return item.name + item.count;
-	    },
-	    block: function(block) {
-	      var items = block.formattedItems;
-	      if (block.reflect && (items.length >= 2)) {
-	        // Convert first and last to pivots
-	        items[0] = formatPivot(items[0]);
-	        items[items.length - 1] = formatPivot(items[items.length - 1]);
-	      }
-	      return _.chain(items).join(' ').trim().value();
-	    }
-	  }
-	};
-	
-	// Options same as for tartan.render.format():
-	// + warpAndWeftSeparator: index.warpAndWeftSeparator
-	// - format
-	// - join
-	function factory(options) {
-	  options = _.extend({}, options, defaultOptions);
-	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
-	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
-	  }
-	
-	  options.transformSyntaxTree = transform([
-	    options.transformSyntaxTree,
-	    transform.flatten(),
-	    transform.fold({
-	      allowRootReorder: false,
-	      allowNestedBlocks: false,
-	      maxFoldLevels: 2,
-	      minBlockSize: 3,
-	      greedy: false,
-	      allowSplitStripe: false,
-	      processExistingBlocks: false
-	    })
-	  ]);
-	
-	  options.join = function(components) {
-	    var parts = [];
-	    if (components.colors.length > 0) {
-	      parts.push(components.colors.join(' '));
-	    }
-	    if (components.warp != components.weft) {
-	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
-	        ' ' + components.weft);
-	    } else {
-	      parts.push(components.warp);
-	    }
-	    return parts.join('\n');
-	  };
-	
-	  return render.format(options);
-	}
-	
-	module.exports = factory;
 
 
 /***/ },
@@ -85139,66 +87123,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var index = __webpack_require__(20);
-	var defaults = __webpack_require__(4);
-	var parse = __webpack_require__(10);
-	var filter = __webpack_require__(8);
-	var syntax = __webpack_require__(12);
-	var utils = __webpack_require__(2);
+	var tartan = __webpack_require__(2);
 	
-	/*
-	  options = {
-	    warpAndWeftSeparator: index.warpAndWeftSeparator
-	    errorHandler: <default>,
-	    processTokens: <default>,
-	    transformSyntaxTree: <default>
-	  }
-	*/
+	_.extend(module.exports, __webpack_require__(101));
 	
-	function factory(options) {
-	  options = _.extend({}, options);
+	module.exports.filter = __webpack_require__(120);
+	module.exports.transform = __webpack_require__(123);
 	
-	  if (!_.isString(options.warpAndWeftSeparator)) {
-	    options.warpAndWeftSeparator = '';
-	  }
-	  if (options.warpAndWeftSeparator == '') {
-	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
-	  }
-	
-	  return parse([
-	    parse.pivot(),
-	    parse.stripe(),
-	    parse.literal(options.warpAndWeftSeparator),
-	    parse.color({
-	      allowLongNames: true,
-	      colorPrefix: /[=][#]?/,
-	      colorSuffix: null,
-	      colorFormat: 'long',
-	      allowComment: true,
-	      commentSuffix: /;/,
-	      requireCommentSuffix: true,
-	      commentFormat: /^\s*(.*)\s*;\s*$/
-	    })
-	  ], {
-	    errorHandler: options.errorHandler,
-	    processTokens: filter([
-	      options.processTokens,
-	      filter.removeTokens(defaults.insignificantTokens)
-	    ]),
-	    buildSyntaxTree: syntax.classic({
-	      errorHandler: options.errorHandler,
-	      processTokens: filter.classify({
-	        isWarpAndWeftSeparator: function(token) {
-	          return utils.token.isLiteral(token) &&
-	            (token.value == options.warpAndWeftSeparator);
-	        }
-	      }),
-	      transformSyntaxTree: options.transformSyntaxTree
-	    })
-	  });
-	}
-	
-	module.exports = factory;
+	_.extend(tartan.filter, module.exports.filter);
+	_.extend(tartan.transform, module.exports.transform);
 
 
 /***/ },
@@ -85208,916 +87141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var render = __webpack_require__(11);
-	var transform = __webpack_require__(13);
-	
-	var defaultOptions = {
-	  format: {
-	    color: function(item) {
-	      return item.name + item.value;
-	    },
-	    stripe: function(item) {
-	      return item.name + item.count;
-	    },
-	    block: function(block) {
-	      var items = block.formattedItems;
-	      if (block.reflect && (items.length >= 3)) {
-	        items.splice(1, 0, '(');
-	        items.splice(-1, 0, ')');
-	      }
-	      return _.chain(items).join(' ').trim().value()
-	        .replace(/\(\s+/g, '(')
-	        .replace(/\s+\)/g, ')');
-	    }
-	  },
-	  join: function(components) {
-	    var parts = [];
-	    if (components.colors.length > 0) {
-	      parts.push(components.colors.join(' '));
-	    }
-	
-	    var warp = components.warp;
-	    var weft = components.weft;
-	    if (warp == '') {
-	      warp = weft;
-	      weft = '';
-	    }
-	    if (components.warp == components.weft) {
-	      weft = '';
-	    }
-	
-	    if (warp != '') {
-	      parts.push('[ ' + warp);
-	    }
-	    if (weft != '') {
-	      parts.push('] ' + weft);
-	    }
-	
-	    return parts.join('\n');
-	  }
-	};
-	
-	// Options same as for tartan.render.format():
-	// - format
-	// - join
-	function factory(options) {
-	  options = _.extend({}, options, defaultOptions);
-	
-	  options.transformSyntaxTree = transform([
-	    options.transformSyntaxTree,
-	    transform.flatten(),
-	    transform.fold({
-	      allowRootReorder: false,
-	      allowNestedBlocks: false,
-	      maxFoldLevels: 2,
-	      minBlockSize: 3,
-	      greedy: false,
-	      allowSplitStripe: false,
-	      processExistingBlocks: false
-	    })
-	  ]);
-	
-	  return render.format(options);
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(2);
-	
-	module.exports.id = 'weddslist';
-	module.exports.name = 'Syntax by Weddslist (TDF)';
-	module.exports.parse = __webpack_require__(124);
-	module.exports.format = __webpack_require__(122);
-	
-	module.exports.colors = utils.color.buildColorMap({
-	  /* eslint-disable key-spacing */
-	  W:  '#ffffff', TR: '#ffffe9', R: '#800000',
-	  A:  '#80ffff', X:  '#00ff00', D: '#404040',
-	  LG: '#80ff80', J:  '#400080', Y: '#808000',
-	  U:  '#ff00ff', K:  '#000000', H: '#004080',
-	  G:  '#008000', LB: '#8080ff', F: '#800040',
-	  T:  '#00ffff', I:  '#008040', E: '#c0c0c0',
-	  N:  '#808080', V:  '#ffff80', M: '#800080',
-	  S:  '#ffff00', L:  '#408000', P: '#ff0000',
-	  C:  '#008080', Q:  '#0000ff', B: '#000080',
-	  Z:  '#ff7dff', LR: '#ff8080', O: '#804000'
-	  /* eslint-enable key-spacing */
-	});
-
-
-/***/ },
-/* 124 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var defaults = __webpack_require__(4);
-	var parse = __webpack_require__(10);
-	var filter = __webpack_require__(8);
-	var syntax = __webpack_require__(12);
-	var utils = __webpack_require__(2);
-	
-	/*
-	 options = {
-	   errorHandler: <default>,
-	   processTokens: <default>,
-	   transformSyntaxTree: <default>
-	 }
-	 */
-	
-	function factory(options) {
-	  options = _.extend({}, options);
-	
-	  return parse([
-	    parse.stripe(),
-	    parse.literal('('),
-	    parse.literal(')'),
-	    parse.literal('['),
-	    parse.literal(']'),
-	    parse.color({
-	      allowLongNames: true,
-	      colorPrefix: /[#]/,
-	      colorSuffix: null,
-	      colorFormat: 'long',
-	      allowComment: false
-	    })
-	  ], {
-	    errorHandler: options.errorHandler,
-	    processTokens: filter([
-	      options.processTokens,
-	      filter.removeTokens(defaults.insignificantTokens)
-	    ]),
-	    buildSyntaxTree: syntax.weddslist({
-	      errorHandler: options.errorHandler,
-	      processTokens: filter.classify({
-	        // Disable some token classes
-	        isWarpAndWeftSeparator: null,
-	        isPivot: null,
-	        isBlockStart: null,
-	        isBlockEnd: null,
-	
-	        // Add new token classes
-	        isWarpStart: function(token) {
-	          return utils.token.isLiteral(token) && (token.value == '[');
-	        },
-	        isWeftStart: function(token) {
-	          return utils.token.isLiteral(token) && (token.value == ']');
-	        },
-	        isBlockBodyStart: function(token) {
-	          return utils.token.isLiteral(token) && (token.value == '(');
-	        },
-	        isBlockBodyEnd: function(token) {
-	          return utils.token.isLiteral(token) && (token.value == ')');
-	        }
-	      }),
-	      transformSyntaxTree: options.transformSyntaxTree
-	    })
-	  });
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Error handler
-	  errorHandler: function(error, data, severity) {
-	    // Do nothing
-	  },
-	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
-	  processTokens: null,
-	  // function to transform newly built AST: (ast) => { return modifiedAst; }
-	  transformSyntaxTree: null
-	};
-	
-	/*
-	 <sett> ::= <sequence> [ '//' <sequence> ]
-	 <sequence> ::= <reflected> | <repetitive>
-	 <reflected> ::= <pivot> [{ <color> | <stripe> }] <pivot>
-	 <repetitive> ::= { <color> | <stripe> }
-	*/
-	
-	function buildTree(tokens, options) {
-	  var items = [];
-	  var isReflected = false;
-	  var first = null;
-	  var last = null;
-	
-	  if (tokens.length >= 2) {
-	    first = _.first(tokens);
-	    last = _.last(tokens);
-	    if (first.isPivot && last.isPivot) {
-	      isReflected = true;
-	    }
-	  }
-	
-	  _.each(tokens, function(token) {
-	    if (token.isStripe) {
-	      items.push(utils.node.newStripe(token));
-	      return;
-	    }
-	    if (token.isPivot) {
-	      if (isReflected) {
-	        if ((token === first) || (token === last)) {
-	          items.push(utils.node.newStripe(token));
-	          return;
-	        }
-	      }
-	      options.errorHandler(
-	        new Error(utils.error.message.orphanedPivot),
-	        {token: token},
-	        utils.error.severity.warning
-	      );
-	      items.push(utils.node.newStripe(token));
-	      return;
-	    }
-	    options.errorHandler(
-	      new Error(utils.error.message.unexpectedToken),
-	      {token: token},
-	      utils.error.severity.error
-	    );
-	  });
-	
-	  return utils.node.newRootBlock(items, isReflected);
-	}
-	
-	function buildSyntaxTree(tokens, options) {
-	  // Some pre-validation and filtering
-	  if (!_.isArray(tokens)) {
-	    return tokens;
-	  }
-	  if (_.isFunction(options.processTokens)) {
-	    tokens = options.processTokens(tokens);
-	    if (!_.isArray(tokens)) {
-	      return tokens;
-	    }
-	  }
-	
-	  // Extract colors; split warp and weft
-	  var colorTokens = [];
-	  var warpTokens = [];
-	  var weftTokens = [];
-	  var current = warpTokens;
-	  _.each(tokens, function(token) {
-	    if (token.isColor) {
-	      colorTokens.push(token);
-	      return;
-	    }
-	    if (token.isWarpAndWeftSeparator) {
-	      if (current === weftTokens) {
-	        options.errorHandler(
-	          new Error(utils.error.message.multipleWarpAnWeftSeparator),
-	          {token: token},
-	          utils.error.severity.warning
-	        );
-	      }
-	      current = weftTokens;
-	    } else {
-	      current.push(token);
-	    }
-	  });
-	  if (warpTokens.length == 0) {
-	    warpTokens = weftTokens;
-	    weftTokens = [];
-	  }
-	  if (weftTokens.length == 0) {
-	    weftTokens = warpTokens;
-	  }
-	
-	  var result = {};
-	  result.colors = utils.color.buildColorMap(colorTokens);
-	  result.warp = buildTree(warpTokens, options);
-	  if (weftTokens === warpTokens) {
-	    result.weft = result.warp;
-	  } else {
-	    result.weft = buildTree(weftTokens, options);
-	  }
-	
-	  if (_.isFunction(options.transformSyntaxTree)) {
-	    result = options.transformSyntaxTree(result);
-	  }
-	
-	  return result;
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  if (!_.isFunction(options.errorHandler)) {
-	    options.errorHandler = defaultOptions.errorHandler;
-	  }
-	  return function(tokens) {
-	    return buildSyntaxTree(tokens, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Error handler
-	  errorHandler: function(error, data, severity) {
-	    // Do nothing
-	  },
-	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
-	  processTokens: null,
-	  // function to transform newly built AST: (ast) => { return modifiedAst; }
-	  transformSyntaxTree: null
-	};
-	
-	function isMatchingToken(opening, closing) {
-	  return (
-	    utils.token.isOpeningSquareBracket(opening) &&
-	    utils.token.isClosingSquareBracket(closing)
-	  ) || (
-	    utils.token.isOpeningParenthesis(opening) &&
-	    utils.token.isClosingParenthesis(closing)
-	  );
-	}
-	
-	/*
-	  <sett> ::= <sequence> [ '//' <sequence> ]
-	  <sequence> ::= {
-	    <color> |
-	    [ <repeat> ] <stripe> [ <repeat> ] |
-	    <pivots> |
-	    [ <repeat> ] <block> [ <repeat> ]
-	  }
-	  <block> ::= '[' <sequence> ']' | '(' <sequence> ')'
-	  <pivots> ::=
-	    [ <repeat> ] <pivot> [ <repeat> ]
-	    [{ <color> | [ <repeat> ] <stripe> [ <repeat> ] }]
-	    [ <repeat> ] <pivot> [ <repeat> ]
-	*/
-	
-	function buildTree(tokens, options) {
-	  var stack = [{
-	    isRegularBlock: true,
-	    items: []
-	  }];
-	  var current;
-	  var parent;
-	
-	  _.each(tokens, function(token) {
-	    if (token.isStripe) {
-	      current = _.last(stack);
-	      current.items.push(utils.node.newStripe(token));
-	      return;
-	    }
-	    if (token.isPivot) {
-	      current = _.last(stack);
-	      if (current.isPivotBlock) {
-	        current.items.push(utils.node.newStripe(token));
-	        stack.pop();
-	        parent = _.last(stack);
-	        parent.items.push(utils.node.newBlock(current.items, true));
-	      } else {
-	        stack.push({
-	          isPivotBlock: true,
-	          token: token,
-	          items: [utils.node.newStripe(token)]
-	        });
-	      }
-	      return;
-	    }
-	    if (token.isBlockStart || token.isBlockEnd) {
-	      current = _.last(stack);
-	      if (current.isPivotBlock) {
-	        options.errorHandler(
-	          new Error(utils.error.message.orphanedPivot),
-	          {token: current.token},
-	          utils.error.severity.warning
-	        );
-	        stack.pop();
-	        parent = _.last(stack);
-	        [].push.apply(parent.items, current.items);
-	      }
-	    }
-	    if (token.isBlockStart) {
-	      stack.push({
-	        isRegularBlock: true,
-	        token: token,
-	        items: []
-	      });
-	      return;
-	    }
-	    if (token.isBlockEnd) {
-	      if (stack.length > 1) {
-	        current = stack.pop();
-	        if (isMatchingToken(current.token, token)) {
-	          if (current.items.length > 0) {
-	            parent = _.last(stack);
-	            parent.items.push(utils.node.newBlock(
-	              current.items, // items
-	              utils.token.isClosingSquareBracket(token), // reflect
-	              current.token.repeat * token.repeat // repeat
-	            ));
-	          }
-	          return;
-	        }
-	        // Put block back onto stack and proceed to showing an error
-	        stack.push(current);
-	      }
-	      options.errorHandler(
-	        new Error(utils.error.message.unmatchedBlockEnd),
-	        {token: token},
-	        utils.error.severity.error
-	      );
-	      return;
-	    }
-	    options.errorHandler(
-	      new Error(utils.error.message.unexpectedToken),
-	      {token: token},
-	      utils.error.severity.error
-	    );
-	  });
-	
-	  while (stack.length > 1) {
-	    current = stack.pop();
-	    parent = _.last(stack);
-	    if (current.items.length > 0) {
-	      [].push.apply(parent.items, current.items);
-	    }
-	    if (current.isPivotBlock) {
-	      options.errorHandler(
-	        new Error(utils.error.message.orphanedPivot),
-	        {token: current.token},
-	        utils.error.severity.warning
-	      );
-	    } else {
-	      options.errorHandler(
-	        new Error(utils.error.message.unmatchedBlockStart),
-	        {token: current.token},
-	        utils.error.severity.error
-	      );
-	    }
-	  }
-	
-	  current = _.first(stack).items;
-	  var isReflected = false;
-	  if ((current.length == 1) && current[0].isBlock && current[0].reflect) {
-	    isReflected = true;
-	    current = current[0].items;
-	  }
-	  return utils.node.newRootBlock(current, isReflected);
-	}
-	
-	function processRepeats(tokens, options) {
-	  return _.chain(tokens)
-	    // Process suffix repeats
-	    .reduce(function(accumulator, item) {
-	      if (item.isRepeat && item.isSuffix) {
-	        var last = accumulator.pop();
-	        if (last) {
-	          last = _.clone(last);
-	          last.repeat = last.repeat > 1 ? last.repeat : 1;
-	          last.repeat *= item.count;
-	          accumulator.push(last);
-	        } else {
-	          options.errorHandler(
-	            new Error(utils.error.message.unexpectedToken),
-	            {token: item},
-	            utils.error.severity.error
-	          );
-	        }
-	      } else {
-	        item = _.clone(item);
-	        item.repeat = item.repeat > 1 ? item.repeat : 1;
-	        accumulator.push(item);
-	      }
-	      return accumulator;
-	    }, [])
-	    // Process prefix repeats; result will be reversed - so after this
-	    // turn it back
-	    .reduceRight(function(accumulator, item) {
-	      if (item.isRepeat && item.isPrefix) {
-	        var last = accumulator.pop();
-	        if (last) {
-	          last = _.clone(last);
-	          last.repeat = last.repeat > 1 ? last.repeat : 1;
-	          last.repeat *= item.count;
-	          accumulator.push(last);
-	        } else {
-	          options.errorHandler(
-	            new Error(utils.error.message.unexpectedToken),
-	            {token: item},
-	            utils.error.severity.error
-	          );
-	        }
-	      } else {
-	        item = _.clone(item);
-	        item.repeat = item.repeat > 1 ? item.repeat : 1;
-	        accumulator.push(item);
-	      }
-	      return accumulator;
-	    }, [])
-	    .reverse()
-	    // Apply repeats to stripes and pivots
-	    .map(function(item) {
-	      if ((item.isStripe || item.isPivot) && (item.repeat > 1)) {
-	        item = _.clone(item);
-	        item.count *= item.repeat;
-	        item.repeat = 1;
-	      }
-	      return item;
-	    })
-	    .value();
-	}
-	
-	function buildSyntaxTree(tokens, options) {
-	  // Some pre-validation and filtering
-	  if (!_.isArray(tokens)) {
-	    return tokens;
-	  }
-	  if (_.isFunction(options.processTokens)) {
-	    tokens = options.processTokens(tokens);
-	    if (!_.isArray(tokens)) {
-	      return tokens;
-	    }
-	  }
-	
-	  // Extract colors; split warp and weft
-	  var colorTokens = [];
-	  var warpTokens = [];
-	  var weftTokens = [];
-	  var current = warpTokens;
-	  _.each(tokens, function(token) {
-	    if (token.isColor) {
-	      colorTokens.push(token);
-	      return;
-	    }
-	    if (token.isWarpAndWeftSeparator) {
-	      if (current === weftTokens) {
-	        options.errorHandler(
-	          new Error(utils.error.message.multipleWarpAnWeftSeparator),
-	          {token: token},
-	          utils.error.severity.warning
-	        );
-	      }
-	      current = weftTokens;
-	    } else {
-	      current.push(token);
-	    }
-	  });
-	
-	  warpTokens = processRepeats(warpTokens, options);
-	  weftTokens = processRepeats(weftTokens, options);
-	
-	  if (warpTokens.length == 0) {
-	    warpTokens = weftTokens;
-	    weftTokens = [];
-	  }
-	  if (weftTokens.length == 0) {
-	    weftTokens = warpTokens;
-	  }
-	
-	  var result = {};
-	  result.colors = utils.color.buildColorMap(colorTokens);
-	  result.warp = buildTree(warpTokens, options);
-	  if (weftTokens === warpTokens) {
-	    result.weft = result.warp;
-	  } else {
-	    result.weft = buildTree(weftTokens, options);
-	  }
-	
-	  if (_.isFunction(options.transformSyntaxTree)) {
-	    result = options.transformSyntaxTree(result);
-	  }
-	
-	  return result;
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  if (!_.isFunction(options.errorHandler)) {
-	    options.errorHandler = defaultOptions.errorHandler;
-	  }
-	  return function(tokens) {
-	    return buildSyntaxTree(tokens, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	var defaultOptions = {
-	  // Error handler
-	  errorHandler: function(error, data, severity) {
-	    // Do nothing
-	  },
-	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
-	  processTokens: null,
-	  // function to transform newly built AST: (ast) => { return modifiedAst; }
-	  transformSyntaxTree: null
-	};
-	
-	/*
-	  <sett> ::= [ { <color> } ]
-	    <sequence> |
-	    <warp> [ <weft> ] |
-	    [ <warp> ] <weft> |
-	    <weft> <warp>
-	
-	  <warp> ::= '[' <sequence>
-	  <weft> ::= ']' <sequence>
-	
-	  <sequence> ::= <reflected> | <repetitive>
-	  <reflected> ::= <stripe> '(' { <stripe> } ')' <stripe>
-	  <repetitive> ::= [ '(' ] { <stripe> } [ ')' ]
-	*/
-	
-	function buildTree(tokens, options) {
-	  var first;
-	  var last;
-	  var isReflected = false;
-	
-	  tokens = _.filter(tokens, function(token) {
-	    return !token.isWarpStart && !token.isWeftStart;
-	  });
-	
-	  // Strip parenthesis at beginning and end
-	  if (tokens.length >= 2) {
-	    first = _.first(tokens);
-	    last = _.last(tokens);
-	    if (first.isBlockBodyStart && last.isBlockBodyEnd) {
-	      tokens.splice(0, 1);
-	      tokens.splice(-1, 1);
-	    } else {
-	      if (first.isBlockBodyStart) {
-	        options.errorHandler(
-	          new Error(utils.error.message.unexpectedToken),
-	          {token: first},
-	          utils.error.severity.error
-	        );
-	        tokens.splice(0, 1);
-	      }
-	      if (last.isBlockBodyStart) {
-	        options.errorHandler(
-	          new Error(utils.error.message.unexpectedToken),
-	          {token: last},
-	          utils.error.severity.error
-	        );
-	        tokens.splice(-1, 1);
-	      }
-	    }
-	  }
-	
-	  // Check if sequence is reflected
-	  if (tokens.length >= 4) {
-	    first = _.first(tokens);
-	    last = _.last(tokens);
-	    if (first.isStripe && last.isStripe) {
-	      first = tokens[1];
-	      last = tokens[tokens.length - 2];
-	      if (first.isBlockBodyStart && last.isBlockBodyEnd) {
-	        isReflected = true;
-	        tokens.splice(1, 1);
-	        tokens.splice(-2, 1);
-	      }
-	    }
-	  }
-	
-	  // Convert all tokens to items
-	  var items = _.chain(tokens)
-	    .map(function(token) {
-	      if (token.isStripe) {
-	        return utils.node.newStripe(token);
-	      }
-	      options.errorHandler(
-	        new Error(utils.error.message.unexpectedToken),
-	        {token: token},
-	        utils.error.severity.error
-	      );
-	      return null;
-	    })
-	    .filter()
-	    .value();
-	
-	  // Check for <stripe> '(' ')' <stripe>
-	  if (items.length <= 2) {
-	    isReflected = false;
-	  }
-	
-	  return utils.node.newRootBlock(items, isReflected);
-	}
-	
-	function extractSequence(tokens, result, options, shouldBreak) {
-	  var first = _.first(tokens);
-	  _.each(tokens, function(token) {
-	    if (shouldBreak(token)) {
-	      return false; // Break
-	    }
-	    if (token.isWarpStart && (token !== first)) {
-	      options.errorHandler(
-	        new Error(utils.error.message.multipleWarpAnWeftSeparator),
-	        {token: token},
-	        utils.error.severity.warning
-	      );
-	    }
-	    result.push(token);
-	  });
-	}
-	
-	function extractWarpAndWeft(tokens, warp, weft, options) {
-	  if (tokens.length == 0) {
-	    return;
-	  }
-	
-	  var first;
-	  var isWarpExtracted = false;
-	
-	  // Try to extract warp
-	  first = _.first(tokens);
-	  if (first.isWarpStart || first.isStripe || first.isBlockBodyStart) {
-	    extractSequence(tokens, warp, options, function(token) {
-	      return token.isWeftStart;
-	    });
-	    tokens.splice(0, warp.length);
-	    isWarpExtracted = true;
-	  }
-	
-	  // Try to extract weft
-	  first = _.first(tokens);
-	  if (first && first.isWeftStart) {
-	    extractSequence(tokens, weft, options, function(token) {
-	      return token.isWarpStart;
-	    });
-	    tokens.splice(0, weft.length);
-	  }
-	
-	  // If warp was not extracted, try again, but more strict
-	  if (!isWarpExtracted) {
-	    first = _.first(tokens);
-	    if (first && first.isWarpStart) {
-	      extractSequence(tokens, warp, options, function(token) {
-	        return token.isWeftStart;
-	      });
-	      tokens.splice(0, warp.length);
-	    }
-	  }
-	
-	  // Trigger error for rest tokens
-	  _.each(tokens, function(token) {
-	    options.errorHandler(
-	      new Error(utils.error.message.extraTokenInInputSequence),
-	      {token: token},
-	      utils.error.severity.warning
-	    );
-	  });
-	}
-	
-	function buildSyntaxTree(tokens, options) {
-	  // Some pre-validation and filtering
-	  if (!_.isArray(tokens)) {
-	    return tokens;
-	  }
-	  if (_.isFunction(options.processTokens)) {
-	    tokens = options.processTokens(tokens);
-	    if (!_.isArray(tokens)) {
-	      return tokens;
-	    }
-	  }
-	
-	  // Extract colors; split warp and weft
-	  var colorTokens = _.filter(tokens, function(token) {
-	    return token.isColor;
-	  });
-	  var warpTokens = [];
-	  var weftTokens = [];
-	  extractWarpAndWeft(_.filter(tokens, function(token) {
-	    return !token.isColor;
-	  }), warpTokens, weftTokens, options);
-	  if (warpTokens.length == 0) {
-	    warpTokens = weftTokens;
-	    weftTokens = [];
-	  }
-	  if (weftTokens.length == 0) {
-	    weftTokens = warpTokens;
-	  }
-	
-	  var result = {};
-	  result.colors = utils.color.buildColorMap(colorTokens);
-	  result.warp = buildTree(warpTokens, options);
-	  if (weftTokens === warpTokens) {
-	    result.weft = result.warp;
-	  } else {
-	    result.weft = buildTree(weftTokens, options);
-	  }
-	
-	  if (_.isFunction(options.transformSyntaxTree)) {
-	    result = options.transformSyntaxTree(result);
-	  }
-	  return result;
-	}
-	
-	function factory(options) {
-	  options = _.extend({}, defaultOptions, options);
-	  if (!_.isFunction(options.errorHandler)) {
-	    options.errorHandler = defaultOptions.errorHandler;
-	  }
-	  return function(tokens) {
-	    return buildSyntaxTree(tokens, options);
-	  };
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
-	
-	function flatten(block) {
-	  var result = [];
-	
-	  // Flatten nested blocks
-	  _.each(block.items, function(item) {
-	    if (item.isBlock) {
-	      // Flatten nested block
-	      item = flatten(item);
-	      [].push.apply(result, item.items);
-	    } else {
-	      result.push(item);
-	    }
-	  });
-	
-	  // Reflect and repeat
-	  block = _.clone(block);
-	  block.items = result;
-	  return utils.sett.reflectAndRepeat(block);
-	}
-	
-	function transform(sett) {
-	  var result = _.clone(sett);
-	  var warpIsSameAsWeft = sett.warp == sett.weft;
-	
-	  if (_.isObject(sett.warp)) {
-	    result.warp = flatten(sett.warp);
-	  }
-	  if (_.isObject(sett.weft)) {
-	    if (warpIsSameAsWeft) {
-	      result.weft = result.warp;
-	    } else {
-	      result.weft = flatten(sett.weft);
-	    }
-	  }
-	
-	  return result;
-	}
-	
-	function factory() {
-	  return transform;
-	}
-	
-	module.exports = factory;
-
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ = __webpack_require__(1);
-	var utils = __webpack_require__(2);
+	var utils = __webpack_require__(2).utils;
 	
 	var defaultOptions = {
 	  // treat root block as infinite - may detect non-obvious folds
@@ -86411,7 +87435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var variants = [{
 	    node: root,
 	    hash: utils.node.calculateNodeHash(root),
-	    weight: utils.node.calculateNodeWeight(root)
+	    weight: options.calculateNodeWeight(root)
 	  }];
 	
 	  var rootVariants = [];
@@ -86499,17 +87523,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 130 */
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.flattenSimpleBlocks = __webpack_require__(28);
+	module.exports.fold = __webpack_require__(122);
+	module.exports.mergeStripes = __webpack_require__(29);
+	module.exports.removeEmptyBlocks = __webpack_require__(30);
+	module.exports.removeZeroWidthStripes = __webpack_require__(31);
+	module.exports.optimize = __webpack_require__(124);
+
+
+/***/ },
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
 	
-	var flattenSimpleBlocks = __webpack_require__(33);
-	var mergeStripes = __webpack_require__(34);
-	var removeEmptyBlocks = __webpack_require__(35);
-	var removeZeroWidthStripes = __webpack_require__(36);
+	var flattenSimpleBlocks = __webpack_require__(28);
+	var mergeStripes = __webpack_require__(29);
+	var removeEmptyBlocks = __webpack_require__(30);
+	var removeZeroWidthStripes = __webpack_require__(31);
 	
 	var defaultOptions = {
 	  // Also options for removeZeroWidthStripes
@@ -86548,7 +87586,2000 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var tartan = __webpack_require__(2);
+	
+	_.extend(module.exports, __webpack_require__(102));
+	
+	module.exports.render = __webpack_require__(127);
+	
+	_.extend(tartan.render, module.exports.render);
+
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var canvas = __webpack_require__(32);
+	var tartan = __webpack_require__(2);
+	
+	/* global Image */
+	
+	var shadow = new Image();
+	shadow.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAAD' +
+	  'ED76LAAAABHNCSVQICAgIfAhkiAAAAFVJREFUGJV1jsENgEAIBGcTCvBrJbbi90qgEuu6buw' +
+	  'AHx4mKjcfkg0MS0Qs3KyA5xy5m6TGmwPokk4AcnNm0gidPxvQn4uZyb4/i051+zQZsFft03Q' +
+	  'B/booYDTfo3wAAAAASUVORK5CYII=';
+	
+	function renderWeft(context, options, stage) {
+	  if (stage) {
+	    if (options.zoom == 2) {
+	      var dx = options.offset.x;
+	      var dy = options.offset.y;
+	
+	      context.save();
+	      context.translate(dx, dy);
+	
+	      context.fillStyle = context.createPattern(shadow, 'repeat');
+	      context.fillRect(-dx, -dy, options.width, options.height);
+	
+	      context.restore();
+	    }
+	  }
+	}
+	
+	function factory(sett, options) {
+	  return canvas(sett, _.extend(options, {
+	    weave: tartan.defaults.weave.serge,
+	    zoom: 2,
+	    hooks: {
+	      renderWeft: renderWeft
+	    }
+	  }));
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'house-of-tartan'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'House of Tartan'
+	});
+
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.canvas = __webpack_require__(32);
+	module.exports.houseOfTartan = __webpack_require__(126);
+
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var tartan = __webpack_require__(2);
+	
+	_.extend(module.exports, __webpack_require__(103));
+	
+	module.exports.syntax = __webpack_require__(137);
+	module.exports.schema = __webpack_require__(131);
+	
+	_.extend(tartan.syntax, module.exports.syntax);
+	_.extend(tartan.schema, module.exports.schema);
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(15);
+	var tartan = __webpack_require__(2);
+	
+	var defaultOptions = {
+	  format: {
+	    color: function(item) {
+	      var comment = item.comment != '' ? ' ' + item.comment : '';
+	      return item.name + item.value + comment + ';';
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var result = _.chain(block.formattedItems).join(' ').trim().value();
+	      if (result == '') {
+	        return '';
+	      }
+	      var multiply = block.repeat > 1 ? '*' + block.repeat : '';
+	      if (block.isRoot) {
+	        result = block.reflect ? '[' + result + ']' : result;
+	      } else {
+	        result = block.reflect ? '[' + result + ']' : '(' + result + ')';
+	      }
+	      return result + multiply;
+	    }
+	  }
+	};
+	
+	// Options same as for tartan.render.format():
+	// + warpAndWeftSeparator: index.warpAndWeftSeparator
+	// - format
+	// - join
+	function factory(options) {
+	  options = _.extend({}, options, defaultOptions);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  options.transformSyntaxTree = tartan.transform([
+	    options.transformSyntaxTree,
+	    tartan.transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
+	  ]);
+	
+	  options.join = function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	    if (components.warp != components.weft) {
+	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
+	        ' ' + components.weft);
+	    } else {
+	      parts.push(components.warp);
+	    }
+	    return parts.join('\n');
+	  };
+	
+	  return tartan.render.format(options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(15);
+	var tartan = __webpack_require__(2);
+	var syntax = __webpack_require__(33);
+	
+	/*
+	  options = {
+	    warpAndWeftSeparator: index.warpAndWeftSeparator,
+	    errorHandler: <default>,
+	    processTokens: <default>,
+	    transformSyntaxTree: <default>
+	  }
+	*/
+	
+	function factory(options) {
+	  options = _.extend({}, options);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  return tartan.parse([
+	    tartan.parse.pivot(),
+	    tartan.parse.stripe(),
+	    tartan.parse.literal('['),
+	    tartan.parse.literal(']'),
+	    tartan.parse.literal('('),
+	    tartan.parse.literal(')'),
+	    tartan.parse.literal(options.warpAndWeftSeparator),
+	    tartan.parse.repeat({
+	      allowAsPrefix: true,
+	      allowAsSuffix: true
+	    }),
+	    tartan.parse.color({
+	      allowLongNames: true,
+	      colorPrefix: /[=]?[#]/,
+	      colorSuffix: null,
+	      colorFormat: 'both',
+	      allowComment: true,
+	      commentSuffix: /;/,
+	      requireCommentSuffix: false,
+	      commentFormat: /^\s*(.*)\s*;\s*$/
+	    })
+	  ], {
+	    errorHandler: options.errorHandler,
+	    processTokens: tartan.filter([
+	      options.processTokens,
+	      tartan.filter.removeTokens(tartan.defaults.insignificantTokens)
+	    ]),
+	    buildSyntaxTree: syntax({
+	      errorHandler: options.errorHandler,
+	      processTokens: tartan.filter.classify({
+	        isWarpAndWeftSeparator: function(token) {
+	          return tartan.utils.token.isLiteral(token) &&
+	            (token.value == options.warpAndWeftSeparator);
+	        }
+	      }),
+	      transformSyntaxTree: options.transformSyntaxTree
+	    })
+	  });
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
 /* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.extended = __webpack_require__(15);
+	module.exports.stwr = __webpack_require__(16);
+	module.exports.weddslist = __webpack_require__(135);
+
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(16);
+	var tartan = __webpack_require__(2);
+	
+	function formatPivot(str) {
+	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
+	}
+	
+	var defaultOptions = {
+	  format: {
+	    color: function(item) {
+	      var comment = item.comment != '' ? ' ' + item.comment : '';
+	      return item.name + '=' + item.value + comment + ';';
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var items = block.formattedItems;
+	      if (block.reflect && (items.length >= 2)) {
+	        // Convert first and last to pivots
+	        items[0] = formatPivot(items[0]);
+	        items[items.length - 1] = formatPivot(items[items.length - 1]);
+	      }
+	      return _.chain(items).join(' ').trim().value();
+	    }
+	  }
+	};
+	
+	// Options same as for tartan.render.format():
+	// + warpAndWeftSeparator: index.warpAndWeftSeparator
+	// - format
+	// - join
+	function factory(options) {
+	  options = _.extend({}, options, defaultOptions);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  options.transformSyntaxTree = tartan.transform([
+	    options.transformSyntaxTree,
+	    tartan.transform.flatten(),
+	    tartan.transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
+	  ]);
+	
+	  options.join = function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	    if (components.warp != components.weft) {
+	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
+	        ' ' + components.weft);
+	    } else {
+	      parts.push(components.warp);
+	    }
+	    return parts.join('\n');
+	  };
+	
+	  return tartan.render.format(options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(16);
+	var tartan = __webpack_require__(2);
+	
+	/*
+	  options = {
+	    warpAndWeftSeparator: index.warpAndWeftSeparator
+	    errorHandler: <default>,
+	    processTokens: <default>,
+	    transformSyntaxTree: <default>
+	  }
+	*/
+	
+	function factory(options) {
+	  options = _.extend({}, options);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  return tartan.parse([
+	    tartan.parse.pivot(),
+	    tartan.parse.stripe(),
+	    tartan.parse.literal(options.warpAndWeftSeparator),
+	    tartan.parse.color({
+	      allowLongNames: true,
+	      colorPrefix: /[=][#]?/,
+	      colorSuffix: null,
+	      colorFormat: 'long',
+	      allowComment: true,
+	      commentSuffix: /;/,
+	      requireCommentSuffix: true,
+	      commentFormat: /^\s*(.*)\s*;\s*$/
+	    })
+	  ], {
+	    errorHandler: options.errorHandler,
+	    processTokens: tartan.filter([
+	      options.processTokens,
+	      tartan.filter.removeTokens(tartan.defaults.insignificantTokens)
+	    ]),
+	    buildSyntaxTree: tartan.syntax.classic({
+	      errorHandler: options.errorHandler,
+	      processTokens: tartan.filter.classify({
+	        isWarpAndWeftSeparator: function(token) {
+	          return tartan.utils.token.isLiteral(token) &&
+	            (token.value == options.warpAndWeftSeparator);
+	        }
+	      }),
+	      transformSyntaxTree: options.transformSyntaxTree
+	    })
+	  });
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var tartan = __webpack_require__(2);
+	
+	var defaultOptions = {
+	  format: {
+	    color: function(item) {
+	      return item.name + item.value;
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var items = block.formattedItems;
+	      if (block.reflect && (items.length >= 3)) {
+	        items.splice(1, 0, '(');
+	        items.splice(-1, 0, ')');
+	      }
+	      return _.chain(items).join(' ').trim().value()
+	        .replace(/\(\s+/g, '(')
+	        .replace(/\s+\)/g, ')');
+	    }
+	  },
+	  join: function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	
+	    var warp = components.warp;
+	    var weft = components.weft;
+	    if (warp == '') {
+	      warp = weft;
+	      weft = '';
+	    }
+	    if (components.warp == components.weft) {
+	      weft = '';
+	    }
+	
+	    if (warp != '') {
+	      parts.push('[ ' + warp);
+	    }
+	    if (weft != '') {
+	      parts.push('] ' + weft);
+	    }
+	
+	    return parts.join('\n');
+	  }
+	};
+	
+	// Options same as for tartan.render.format():
+	// - format
+	// - join
+	function factory(options) {
+	  options = _.extend({}, options, defaultOptions);
+	
+	  options.transformSyntaxTree = tartan.transform([
+	    options.transformSyntaxTree,
+	    tartan.transform.flatten(),
+	    tartan.transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
+	  ]);
+	
+	  return tartan.render.format(options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var tartan = __webpack_require__(2);
+	
+	module.exports.id = 'weddslist';
+	module.exports.name = 'Syntax by Weddslist (TDF)';
+	module.exports.parse = __webpack_require__(136);
+	module.exports.format = __webpack_require__(134);
+	module.exports.colors = tartan.utils.color.buildColorMap({
+	  /* eslint-disable key-spacing */
+	  W:  '#ffffff', TR: '#ffffe9', R: '#800000',
+	  A:  '#80ffff', X:  '#00ff00', D: '#404040',
+	  LG: '#80ff80', J:  '#400080', Y: '#808000',
+	  U:  '#ff00ff', K:  '#000000', H: '#004080',
+	  G:  '#008000', LB: '#8080ff', F: '#800040',
+	  T:  '#00ffff', I:  '#008040', E: '#c0c0c0',
+	  N:  '#808080', V:  '#ffff80', M: '#800080',
+	  S:  '#ffff00', L:  '#408000', P: '#ff0000',
+	  C:  '#008080', Q:  '#0000ff', B: '#000080',
+	  Z:  '#ff7dff', LR: '#ff8080', O: '#804000'
+	  /* eslint-enable key-spacing */
+	});
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var tartan = __webpack_require__(2);
+	var syntax = __webpack_require__(34);
+	
+	/*
+	 options = {
+	   errorHandler: <default>,
+	   processTokens: <default>,
+	   transformSyntaxTree: <default>
+	 }
+	 */
+	
+	function factory(options) {
+	  options = _.extend({}, options);
+	
+	  return tartan.parse([
+	    tartan.parse.stripe(),
+	    tartan.parse.literal('('),
+	    tartan.parse.literal(')'),
+	    tartan.parse.literal('['),
+	    tartan.parse.literal(']'),
+	    tartan.parse.color({
+	      allowLongNames: true,
+	      colorPrefix: /[#]/,
+	      colorSuffix: null,
+	      colorFormat: 'long',
+	      allowComment: false
+	    })
+	  ], {
+	    errorHandler: options.errorHandler,
+	    processTokens: tartan.filter([
+	      options.processTokens,
+	      tartan.filter.removeTokens(tartan.defaults.insignificantTokens)
+	    ]),
+	    buildSyntaxTree: syntax({
+	      errorHandler: options.errorHandler,
+	      processTokens: tartan.filter.classify({
+	        // Disable some token classes
+	        isWarpAndWeftSeparator: null,
+	        isPivot: null,
+	        isBlockStart: null,
+	        isBlockEnd: null,
+	
+	        // Add new token classes
+	        isWarpStart: function(token) {
+	          return tartan.utils.token.isLiteral(token) && (token.value == '[');
+	        },
+	        isWeftStart: function(token) {
+	          return tartan.utils.token.isLiteral(token) && (token.value == ']');
+	        },
+	        isBlockBodyStart: function(token) {
+	          return tartan.utils.token.isLiteral(token) && (token.value == '(');
+	        },
+	        isBlockBodyEnd: function(token) {
+	          return tartan.utils.token.isLiteral(token) && (token.value == ')');
+	        }
+	      }),
+	      transformSyntaxTree: options.transformSyntaxTree
+	    })
+	  });
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.extended = __webpack_require__(33);
+	module.exports.weddslist = __webpack_require__(34);
+
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	var defaults = __webpack_require__(8);
+	
+	var defaultOptions = {
+	  isColor: function(token, index, tokens) {
+	    return utils.token.isColor(token);
+	  },
+	  isStripe: function(token, index, tokens) {
+	    return utils.token.isStripe(token);
+	  },
+	  isPivot: function(token, index, tokens) {
+	    return utils.token.isPivot(token);
+	  },
+	  isRepeat: function(token, index, tokens) {
+	    return utils.token.isRepeat(token);
+	  },
+	  isWarpAndWeftSeparator: function(token, index, tokens) {
+	    return utils.token.isLiteral(token) &&
+	      (token.value == defaults.warpAndWeftSeparator);
+	  },
+	  isBlockStart: function(token, index, tokens) {
+	    return utils.token.isOpeningSquareBracket(token) ||
+	      utils.token.isOpeningParenthesis(token);
+	  },
+	  isBlockEnd: function(token, index, tokens) {
+	    return utils.token.isClosingSquareBracket(token) ||
+	      utils.token.isClosingParenthesis(token);
+	  }
+	};
+	
+	function isNone(token, index, tokens) {
+	  return false;
+	}
+	
+	function process(tokens, options) {
+	  return _.map(tokens, function(token, index) {
+	    var result = _.clone(token);
+	    _.each(options, function(check, property) {
+	      result[property] = check(token, index, tokens);
+	    });
+	    return result;
+	  });
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  _.each(defaultOptions, function(value, key) {
+	    if (!_.isFunction(options[key])) {
+	      options[key] = isNone;
+	    }
+	  });
+	  return function(tokens) {
+	    return process(tokens, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var defaults = __webpack_require__(8);
+	
+	function createPredicate(typesOrPredicate) {
+	  // Predicate should return `true` if token should be removed from list
+	  if (_.isFunction(typesOrPredicate)) {
+	    return typesOrPredicate;
+	  }
+	  if (!_.isArray(typesOrPredicate)) {
+	    typesOrPredicate = defaults.insignificantTokens;
+	  }
+	  return function(token) {
+	    return _.isObject(token) ? typesOrPredicate.indexOf(token.type) >= 0 : true;
+	  };
+	}
+	
+	function factory(typesOrPredicate) {
+	  var predicate = createPredicate(typesOrPredicate);
+	  return function(tokens) {
+	    return _.filter(tokens, function(token) {
+	      return !predicate(token);
+	    });
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.autodetect = __webpack_require__(37);
+	module.exports.string = __webpack_require__(39);
+	module.exports.object = __webpack_require__(38);
+	module.exports.json = __webpack_require__(141);
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	function factory(source) {
+	  return _.extend(
+	    {threadcount: ''},
+	    _.isString(source) ? JSON.parse(source) : source
+	  );
+	}
+	
+	module.exports = factory;
+	// Define some properties for `factory()` function
+	Object.defineProperty(module.exports, 'id', {
+	  enumerable: true,
+	  value: 'json'
+	});
+	Object.defineProperty(module.exports, 'name', {
+	  enumerable: true,
+	  value: 'JSON'
+	});
+
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  // Name can have more than one character
+	  allowLongNames: true,
+	  // Regular expression or string; case-insensitive
+	  colorPrefix: /[=]?[#]/,
+	  // Regular expression or string; case-insensitive
+	  colorSuffix: /;?/,
+	  // Formats: `short` (#fc0), `long` (#ffcc00) or `both`
+	  colorFormat: 'both',
+	  allowComment: false,
+	  // Regular expression or string; case-insensitive
+	  commentSuffix: /;/,
+	  requireCommentSuffix: true,
+	  // Regular expression; value of first group will be used to modify
+	  // comment (if available)
+	  commentFormat: /^\s*(.*)\s*;\s*$/
+	};
+	
+	function validateOptions(options) {
+	  options.colorFormat = _.trim(('' + options.colorFormat).toLowerCase());
+	  if (['long', 'short', 'both'].indexOf(options.colorFormat) == -1) {
+	    options.colorFormat = defaultOptions.colorFormat;
+	  }
+	
+	  if (options.colorPrefix instanceof RegExp) {
+	    options.colorPrefix = options.colorPrefix.source;
+	  } else
+	  if (!_.isString(options.colorPrefix)) {
+	    options.colorPrefix = '';
+	  }
+	
+	  if (options.colorSuffix instanceof RegExp) {
+	    options.colorSuffix = options.colorSuffix.source;
+	  } else
+	  if (!_.isString(options.colorSuffix)) {
+	    options.colorSuffix = '';
+	  }
+	
+	  if (options.commentSuffix instanceof RegExp) {
+	    var flags = options.commentSuffix.ignoreCase ? 'i' : '';
+	    options.commentSuffix = new RegExp(
+	      '^' + options.commentSuffix.source, flags);
+	  } else {
+	    options.commentSuffix = null;
+	  }
+	
+	  if (!(options.commentFormat instanceof RegExp)) {
+	    options.commentFormat = null;
+	  }
+	
+	  return options;
+	}
+	
+	function buildRegExp(options) {
+	  var result = ['^'];
+	
+	  // Name part
+	  var part = '[a-z]';
+	  if (options.allowLongNames) {
+	    part += '{1,100}';
+	  }
+	  result.push('(' + part + ')');
+	
+	  // Color format
+	  result.push('(' + options.colorPrefix + ')');
+	  switch (options.colorFormat) {
+	    case 'long':
+	      result.push('([0-9a-f]{6})');
+	      break;
+	    case 'short':
+	      result.push('([0-9a-f]{3})');
+	      break;
+	    case 'both':
+	      result.push('([0-9a-f]{6}|[0-9a-f]{3})');
+	      break;
+	    default:
+	      break;
+	  }
+	  result.push(options.colorSuffix);
+	
+	  return new RegExp(result.join(''), 'i');
+	}
+	
+	function parser(context, offset, pattern, options) {
+	  var source = context.source;
+	  var matches;
+	  var chunk;
+	  var i;
+	
+	  chunk = source.substr(offset, 200);
+	
+	  matches = pattern.exec(chunk);
+	  if (matches) {
+	    var result = {
+	      type: utils.token.color,
+	      name: matches[1].toUpperCase(),
+	      // matches[2] is color prefix
+	      color: utils.color.normalizeColor(matches[3]),
+	      comment: '',
+	      length: matches[0].length
+	    };
+	
+	    if (!context.inForesee) {
+	      if (options.allowComment) {
+	        var commentOffset = offset + result.length;
+	        if (options.commentSuffix && options.requireCommentSuffix) {
+	          // Fast case - just search for suffix
+	          for (i = commentOffset; i < source.length; i++) {
+	            chunk = source.substr(i, 10);
+	            matches = options.commentSuffix.exec(chunk);
+	            if (matches) {
+	              result.comment = source.substr(commentOffset,
+	                i - commentOffset + matches[0].length);
+	              break;
+	            }
+	          }
+	          if (i >= source.length) {
+	            result.comment = source.substr(commentOffset, source.length);
+	          }
+	        } else {
+	          var ignoreTokens = ['whitespace', 'invalid'];
+	          // Slow - search for next token or suffix (if available)
+	          for (i = commentOffset; i < source.length; i++) {
+	            chunk = source.substr(i, 10);
+	            matches = options.commentSuffix.exec(chunk);
+	            if (matches) {
+	              result.comment = source.substr(commentOffset,
+	                i - commentOffset + matches[0].length);
+	              break;
+	            }
+	            var token = context.foresee(i);
+	            if (_.isObject(token) && (ignoreTokens.indexOf(token.type) == -1)) {
+	              result.comment = source.substr(commentOffset,
+	                i - commentOffset);
+	              break;
+	            }
+	          }
+	          if (i >= source.length) {
+	            result.comment = source.substr(commentOffset, source.length);
+	          }
+	        }
+	      }
+	
+	      result.length += result.comment.length;
+	
+	      if (options.commentFormat) {
+	        matches = options.commentFormat.exec(result.comment);
+	        if (matches && _.isString(matches[1])) {
+	          result.comment = matches[1];
+	        }
+	      }
+	      result.comment = _.trim(result.comment);
+	    }
+	
+	    return result;
+	  }
+	}
+	
+	function factory(options) {
+	  options = validateOptions(_.extend({}, defaultOptions, options));
+	  var pattern = buildRegExp(options);
+	  return function(context, offset) {
+	    return parser(context, offset, pattern, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 143 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	function parse(context, offset) {
+	  var source = context.source;
+	  var result = source.charAt(offset);
+	
+	  if (!context.inForesee) {
+	    var foreseeOffset = offset + 1;
+	    while (true) {
+	      var token = context.foresee(foreseeOffset);
+	      if (_.isObject(token) && (token.type == 'invalid')) {
+	        result += token.value;
+	        foreseeOffset += token.length;
+	        continue;
+	      }
+	      break;
+	    }
+	  }
+	
+	  if (result != '') {
+	    result = {
+	      type: utils.token.invalid,
+	      value: result,
+	      length: result.length
+	    };
+	    if (!context.inForesee) {
+	      context.errorHandler(
+	        new Error(utils.error.message.invalidToken),
+	        {token: result},
+	        utils.error.severity.error
+	      );
+	    }
+	    return result;
+	  }
+	}
+	
+	function factory() {
+	  return parse;
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  string: '',
+	  ignoreCase: false
+	};
+	
+	function parser(context, offset, options) {
+	  var source = context.source;
+	  if (options.string != '') {
+	    var s = source.substr(offset, options.string.length);
+	    var q = options.ignoreCase ? s.toUpperCase() : s;
+	    if (q == options.string) {
+	      return {
+	        type: utils.token.literal,
+	        value: s,
+	        length: s.length
+	      };
+	    }
+	  }
+	}
+	
+	function factory(options) {
+	  if (_.isString(options)) {
+	    options = {string: options};
+	  }
+	  options = _.extend({}, defaultOptions, options);
+	  if (!_.isString(options.string)) {
+	    options.string = '';
+	  }
+	  if (options.ignoreCase) {
+	    options.string = options.string.toUpperCase();
+	  }
+	  return function(str, offset) {
+	    return parser(str, offset, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 145 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  // Name can have more than one character
+	  allowLongNames: true
+	};
+	
+	function buildRegExp(options) {
+	  var result = ['^'];
+	
+	  // Name part
+	  var part = '[a-z]';
+	  if (options.allowLongNames) {
+	    part += '{1,100}';
+	  }
+	  result.push('(' + part + ')');
+	
+	  // Count part
+	  result.push('/([0-9]+)');
+	
+	  return new RegExp(result.join(''), 'i');
+	}
+	
+	function parser(context, offset, pattern, options) {
+	  var source = context.source;
+	
+	  // Hope nobody will try to add stripe with 1e19 lines...
+	  var matches = pattern.exec(source.substr(offset, 20));
+	  if (matches) {
+	    var count = parseInt(matches[2], 10) || 0;
+	    if (count < 0) {
+	      count = 0;
+	    }
+	    var result = {
+	      type: utils.token.pivot,
+	      name: matches[1].toUpperCase(),
+	      count: count,
+	      length: matches[0].length
+	    };
+	
+	    if (result.count == 0) {
+	      context.errorHandler(
+	        new Error(utils.error.message.zeroWidthStripe),
+	        {token: result},
+	        utils.error.severity.warning
+	      );
+	    }
+	
+	    return result;
+	  }
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  var pattern = buildRegExp(options);
+	  return function(str, offset) {
+	    return parser(str, offset, pattern, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  // NNN * <something> variant
+	  allowAsPrefix: true,
+	  // <something> * NNN variant
+	  allowAsSuffix: true
+	};
+	
+	var patternPrefix = /^([0-9]+)\s*[*]/i;
+	var patternSuffix = /^[*]\s*([0-9]+)/i;
+	
+	function parser(context, offset, options) {
+	  var source = context.source;
+	
+	  var matches = null;
+	  var isPrefix = false;
+	  var isSuffix = false;
+	
+	  if (options.allowAsPrefix) {
+	    matches = patternPrefix.exec(source.substr(offset, 20));
+	    isPrefix = !!matches;
+	  }
+	
+	  if (options.allowAsSuffix && !matches) {
+	    matches = patternSuffix.exec(source.substr(offset, 20));
+	    isSuffix = !!matches;
+	  }
+	
+	  if (matches) {
+	    var count = parseInt(matches[1], 10) || 0;
+	    if (count <= 0) {
+	      count = 1;
+	    }
+	    var result = {
+	      type: utils.token.repeat,
+	      count: count >= 1 ? count : 1,
+	      isPrefix: isPrefix,
+	      isSuffix: isSuffix,
+	      length: matches[0].length
+	    };
+	
+	    if (count < 1) {
+	      context.errorHandler(
+	        new Error(utils.error.message.invalidMultiplier),
+	        {token: _.extend({}, result, {count: count})},
+	        utils.error.severity.warning
+	      );
+	    }
+	
+	    return result;
+	  }
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  return function(str, offset) {
+	    return parser(str, offset, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 147 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  // Name can have more than one character
+	  allowLongNames: true
+	};
+	
+	function buildRegExp(options) {
+	  var result = ['^'];
+	
+	  // Name part
+	  var part = '[a-z]';
+	  if (options.allowLongNames) {
+	    part += '{1,100}';
+	  }
+	  result.push('(' + part + ')');
+	
+	  // Count part
+	  result.push('([0-9]+)');
+	
+	  return new RegExp(result.join(''), 'i');
+	}
+	
+	function parser(context, offset, pattern, options) {
+	  var source = context.source;
+	
+	  // Hope nobody will try to add stripe with 1e19 lines...
+	  var matches = pattern.exec(source.substr(offset, 20));
+	  if (matches) {
+	    var count = parseInt(matches[2], 10) || 0;
+	    if (count < 0) {
+	      count = 0;
+	    }
+	    var result = {
+	      type: utils.token.stripe,
+	      name: matches[1].toUpperCase(),
+	      count: count,
+	      length: matches[0].length
+	    };
+	
+	    if (result.count == 0) {
+	      context.errorHandler(
+	        new Error(utils.error.message.zeroWidthStripe),
+	        {token: result},
+	        utils.error.severity.warning
+	      );
+	    }
+	
+	    return result;
+	  }
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  var pattern = buildRegExp(options);
+	  return function(str, offset) {
+	    return parser(str, offset, pattern, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var pattern = /^\s+/i;
+	var utils = __webpack_require__(3);
+	
+	function parse(context, offset) {
+	  var source = context.source;
+	  var chunkSize = 10;
+	  var result = '';
+	  while (true) {
+	    var chunk = source.substr(offset, chunkSize);
+	    var matches = pattern.exec(chunk);
+	    if (!matches) {
+	      break;
+	    }
+	    result += matches[0];
+	    if (matches[0].length < chunkSize) {
+	      // Don't wait for next turn
+	      break;
+	    }
+	  }
+	
+	  if (result != '') {
+	    return {
+	      type: utils.token.whitespace,
+	      value: result,
+	      length: result.length
+	    };
+	  }
+	}
+	
+	function factory() {
+	  return parse;
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var whitespace = __webpack_require__(148);
+	var invalid = __webpack_require__(143);
+	
+	function Context(source, parsers, options) {
+	  this.source = _.isString(source) ? source : '';
+	
+	  parsers = _.filter(parsers, _.isFunction);
+	  parsers.splice(0, 0, whitespace()); // Prepend this parser to skip spaces
+	  parsers.push(invalid()); // This parser will handle invalid tokens
+	  this.parsers = parsers;
+	  this.options = options;
+	
+	  this.inForesee = 0;
+	
+	  if (_.isFunction(options.errorHandler)) {
+	    this.errorHandler = function(error, data, severity) {
+	      options.errorHandler(error, data, severity || 'error');
+	    };
+	  }
+	}
+	
+	Context.prototype = {};
+	
+	Context.prototype.errorHandler = function(error, data, severity) {
+	  // Do nothing - default error handler will just ignore all errors.
+	};
+	
+	function getToken(context, offset) {
+	  var result = null;
+	
+	  _.each(context.parsers, function(parser) {
+	    result = parser(context, offset);
+	    if (_.isObject(result)) {
+	      result.offset = result.offset || offset;
+	      return false; // Break
+	    }
+	  });
+	
+	  return result;
+	}
+	
+	Context.prototype.foresee = function(offset) {
+	  var foreseeLimit = this.options.foreseeLimit;
+	  if (this.inForesee >= foreseeLimit) {
+	    return null;
+	  }
+	
+	  offset = parseInt(offset, 10) || 0;
+	  if (offset < 0) {
+	    offset = 0;
+	  }
+	
+	  if (offset <= this.offset) {
+	    this.errorHandler(new Error('Parser should not go back.'), {
+	      currentOffset: this.offset,
+	      requestedOffset: offset,
+	      source: this.source
+	    });
+	    return null;
+	  }
+	
+	  this.inForesee++;
+	  var result = getToken(this, offset);
+	  if (this.inForesee > 0) {
+	    this.inForesee--;
+	  }
+	  return result;
+	};
+	
+	Context.prototype.parse = function(offset) {
+	  var result = [];
+	
+	  offset = parseInt(offset, 10) || 0;
+	  if (offset < 0) {
+	    offset = 0;
+	  }
+	
+	  while (offset < this.source.length) {
+	    this.offset = offset;
+	    var token = getToken(this, offset);
+	    if (_.isObject(token)) {
+	      result.push(token);
+	      offset = token.offset + token.length;
+	    }
+	  }
+	
+	  return result;
+	};
+	
+	function factory(source, parsers, options) {
+	  options = _.extend({}, options);
+	  options.foreseeLimit = parseInt(options.foreseeLimit, 10) || 0;
+	  if (options.foreseeLimit < 1) {
+	    options.foreseeLimit = 1;
+	  }
+	  return new Context(source, parsers, options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	
+	var defaultOptions = {
+	  // function to transform newly built AST: (sett) => { return modifiedSett; }
+	  transformSyntaxTree: null,
+	  format: {
+	    color: function(item) {
+	      var comment = item.comment != '' ? ' ' + item.comment : '';
+	      return item.name + item.value + comment + ';';
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var result = _.chain(block.formattedItems).join(' ').trim().value();
+	      if (result == '') {
+	        return '';
+	      }
+	      var multiply = block.repeat > 1 ? '*' + block.repeat : '';
+	      if (block.isRoot) {
+	        result = block.reflect ? '[' + result + ']' : result;
+	      } else {
+	        result = block.reflect ? '[' + result + ']' : '(' + result + ')';
+	      }
+	      return result + multiply;
+	    }
+	  },
+	  join: function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	    if (components.warp != components.weft) {
+	      parts.push(components.warp + ' // ' + components.weft);
+	    } else {
+	      parts.push(components.warp);
+	    }
+	    return parts.join('\n');
+	  },
+	  defaultColors: {},
+	  includeUnusedColors: true,
+	  includeDefaultColors: true
+	};
+	
+	function processColors(usedColors, settColors, options) {
+	  var defaultColors = _.extend({}, options.defaultColors);
+	  var keys = _.intersection(_.keys(settColors), _.keys(usedColors));
+	  if (options.includeUnusedColors) {
+	    keys = _.keys(settColors);
+	  }
+	  if (options.includeDefaultColors) {
+	    keys = _.union(_.keys(settColors), _.keys(usedColors));
+	  }
+	
+	  var format = options.format;
+	  if (!_.isFunction(format.color)) {
+	    return [];
+	  }
+	
+	  return _.chain(keys)
+	    .sortBy()
+	    .map(function(key) {
+	      var color = settColors[key] || defaultColors[key];
+	      if (color) {
+	        return format.color(_.extend({name: key}, color));
+	      }
+	      return null;
+	    })
+	    .filter(function(str) {
+	      return _.isString(str) && (str.length > 0);
+	    })
+	    .value();
+	}
+	
+	function process(block, options, usedColors) {
+	  var format = options.format;
+	  if (!_.isFunction(format.stripe) || !_.isFunction(format.block)) {
+	    return '';
+	  }
+	
+	  block = _.clone(block);
+	  block.formattedItems = _.chain(block.items)
+	    .map(function(item) {
+	      if (item.isStripe) {
+	        usedColors[item.name] = true;
+	        return format.stripe(item);
+	      }
+	      if (item.isBlock) {
+	        return process(item, options, usedColors);
+	      }
+	      return '';
+	    })
+	    .filter(function(str) {
+	      return str.length > 0;
+	    })
+	    .value();
+	  return _.isFunction(format.block) ? format.block(block) : '';
+	}
+	
+	function render(sett, options) {
+	  var warpIsSameAsWeft = sett.warp === sett.weft;
+	
+	  var usedColors = {};
+	  var warp = process(sett.warp, options, usedColors);
+	  var weft = warp;
+	  if (!warpIsSameAsWeft) {
+	    weft = process(sett.weft, options, usedColors);
+	  }
+	
+	  var colors = processColors(usedColors, sett.colors, options);
+	
+	  return _.trim(options.join({
+	    colors: colors,
+	    warp: warp,
+	    weft: weft
+	  }, sett));
+	}
+	
+	function factory(options) {
+	  options = _.merge({}, defaultOptions, options);
+	
+	  return function(sett) {
+	    if (!_.isObject(sett)) {
+	      return '';
+	    }
+	    if (_.isFunction(options.transformSyntaxTree)) {
+	      sett = options.transformSyntaxTree(sett);
+	    }
+	
+	    return render(sett, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(17);
+	var render = __webpack_require__(40);
+	var transform = __webpack_require__(42);
+	
+	function formatPivot(str) {
+	  return str.replace(/^([a-z]+)([0-9]+)$/i, '$1/$2');
+	}
+	
+	var defaultOptions = {
+	  format: {
+	    color: function(item) {
+	      var comment = item.comment != '' ? ' ' + item.comment : '';
+	      return item.name + item.value + comment + ';';
+	    },
+	    stripe: function(item) {
+	      return item.name + item.count;
+	    },
+	    block: function(block) {
+	      var items = block.formattedItems;
+	      if (block.reflect && (items.length >= 2)) {
+	        // Convert first and last to pivots
+	        items[0] = formatPivot(items[0]);
+	        items[items.length - 1] = formatPivot(items[items.length - 1]);
+	      }
+	      return _.chain(items).join(' ').trim().value();
+	    }
+	  }
+	};
+	
+	// Options same as for tartan.render.format():
+	// + warpAndWeftSeparator: index.warpAndWeftSeparator
+	// - format
+	// - join
+	function factory(options) {
+	  options = _.extend({}, options, defaultOptions);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  options.transformSyntaxTree = transform([
+	    options.transformSyntaxTree,
+	    transform.flatten(),
+	    transform.fold({
+	      allowRootReorder: false,
+	      allowNestedBlocks: false,
+	      maxFoldLevels: 2,
+	      minBlockSize: 3,
+	      greedy: false,
+	      allowSplitStripe: false,
+	      processExistingBlocks: false
+	    })
+	  ]);
+	
+	  options.join = function(components) {
+	    var parts = [];
+	    if (components.colors.length > 0) {
+	      parts.push(components.colors.join(' '));
+	    }
+	    if (components.warp != components.weft) {
+	      parts.push(components.warp + ' ' + options.warpAndWeftSeparator +
+	        ' ' + components.weft);
+	    } else {
+	      parts.push(components.warp);
+	    }
+	    return parts.join('\n');
+	  };
+	
+	  return render.format(options);
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var index = __webpack_require__(17);
+	var defaults = __webpack_require__(8);
+	var parse = __webpack_require__(36);
+	var filter = __webpack_require__(35);
+	var syntax = __webpack_require__(41);
+	var utils = __webpack_require__(3);
+	
+	/*
+	  options = {
+	    warpAndWeftSeparator: index.warpAndWeftSeparator,
+	    errorHandler: <default>,
+	    processTokens: <default>,
+	    transformSyntaxTree: <default>
+	  }
+	*/
+	
+	function factory(options) {
+	  options = _.extend({}, options);
+	
+	  if (!_.isString(options.warpAndWeftSeparator)) {
+	    options.warpAndWeftSeparator = '';
+	  }
+	  if (options.warpAndWeftSeparator == '') {
+	    options.warpAndWeftSeparator = index.warpAndWeftSeparator;
+	  }
+	
+	  return parse([
+	    parse.pivot(),
+	    parse.stripe(),
+	    parse.literal(options.warpAndWeftSeparator),
+	    parse.color({
+	      allowLongNames: true,
+	      colorPrefix: /[=]?[#]/,
+	      colorSuffix: null,
+	      colorFormat: 'long',
+	      allowComment: true,
+	      commentSuffix: /;/,
+	      requireCommentSuffix: true,
+	      commentFormat: /^\s*(.*)\s*;\s*$/
+	    })
+	  ], {
+	    errorHandler: options.errorHandler,
+	    processTokens: filter([
+	      options.processTokens,
+	      filter.removeTokens(defaults.insignificantTokens)
+	    ]),
+	    buildSyntaxTree: syntax.classic({
+	      errorHandler: options.errorHandler,
+	      processTokens: filter.classify({
+	        isWarpAndWeftSeparator: function(token) {
+	          return utils.token.isLiteral(token) &&
+	            (token.value == options.warpAndWeftSeparator);
+	        }
+	      }),
+	      transformSyntaxTree: options.transformSyntaxTree
+	    })
+	  });
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports.classic = __webpack_require__(17);
+
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  // Error handler
+	  errorHandler: function(error, data, severity) {
+	    // Do nothing
+	  },
+	  // function to filter parsed tokens: (tokens) => { return modifiedTokens; }
+	  processTokens: null,
+	  // function to transform newly built AST: (ast) => { return modifiedAst; }
+	  transformSyntaxTree: null
+	};
+	
+	/*
+	 <sett> ::= <sequence> [ '//' <sequence> ]
+	 <sequence> ::= <reflected> | <repetitive>
+	 <reflected> ::= <pivot> [{ <color> | <stripe> }] <pivot>
+	 <repetitive> ::= { <color> | <stripe> }
+	*/
+	
+	function buildTree(tokens, options) {
+	  var items = [];
+	  var isReflected = false;
+	  var first = null;
+	  var last = null;
+	
+	  if (tokens.length >= 2) {
+	    first = _.first(tokens);
+	    last = _.last(tokens);
+	    if (first.isPivot && last.isPivot) {
+	      isReflected = true;
+	    }
+	  }
+	
+	  _.each(tokens, function(token) {
+	    if (token.isStripe) {
+	      items.push(utils.node.newStripe(token));
+	      return;
+	    }
+	    if (token.isPivot) {
+	      if (isReflected) {
+	        if ((token === first) || (token === last)) {
+	          items.push(utils.node.newStripe(token));
+	          return;
+	        }
+	      }
+	      options.errorHandler(
+	        new Error(utils.error.message.orphanedPivot),
+	        {token: token},
+	        utils.error.severity.warning
+	      );
+	      items.push(utils.node.newStripe(token));
+	      return;
+	    }
+	    options.errorHandler(
+	      new Error(utils.error.message.unexpectedToken),
+	      {token: token},
+	      utils.error.severity.error
+	    );
+	  });
+	
+	  return utils.node.newRootBlock(items, isReflected);
+	}
+	
+	function buildSyntaxTree(tokens, options) {
+	  // Some pre-validation and filtering
+	  if (!_.isArray(tokens)) {
+	    return tokens;
+	  }
+	  if (_.isFunction(options.processTokens)) {
+	    tokens = options.processTokens(tokens);
+	    if (!_.isArray(tokens)) {
+	      return tokens;
+	    }
+	  }
+	
+	  // Extract colors; split warp and weft
+	  var colorTokens = [];
+	  var warpTokens = [];
+	  var weftTokens = [];
+	  var current = warpTokens;
+	  _.each(tokens, function(token) {
+	    if (token.isColor) {
+	      colorTokens.push(token);
+	      return;
+	    }
+	    if (token.isWarpAndWeftSeparator) {
+	      if (current === weftTokens) {
+	        options.errorHandler(
+	          new Error(utils.error.message.multipleWarpAnWeftSeparator),
+	          {token: token},
+	          utils.error.severity.warning
+	        );
+	      }
+	      current = weftTokens;
+	    } else {
+	      current.push(token);
+	    }
+	  });
+	  if (warpTokens.length == 0) {
+	    warpTokens = weftTokens;
+	    weftTokens = [];
+	  }
+	  if (weftTokens.length == 0) {
+	    weftTokens = warpTokens;
+	  }
+	
+	  var result = {};
+	  result.colors = utils.color.buildColorMap(colorTokens);
+	  result.warp = buildTree(warpTokens, options);
+	  if (weftTokens === warpTokens) {
+	    result.weft = result.warp;
+	  } else {
+	    result.weft = buildTree(weftTokens, options);
+	  }
+	
+	  if (_.isFunction(options.transformSyntaxTree)) {
+	    result = options.transformSyntaxTree(result);
+	  }
+	
+	  return result;
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  if (!_.isFunction(options.errorHandler)) {
+	    options.errorHandler = defaultOptions.errorHandler;
+	  }
+	  return function(tokens) {
+	    return buildSyntaxTree(tokens, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	function flatten(block) {
+	  var result = [];
+	
+	  // Flatten nested blocks
+	  _.each(block.items, function(item) {
+	    if (item.isBlock) {
+	      // Flatten nested block
+	      item = flatten(item);
+	      [].push.apply(result, item.items);
+	    } else {
+	      result.push(item);
+	    }
+	  });
+	
+	  // Reflect and repeat
+	  block = _.clone(block);
+	  block.items = result;
+	  return utils.sett.reflectAndRepeat(block);
+	}
+	
+	function transform(sett) {
+	  var result = _.clone(sett);
+	  var warpIsSameAsWeft = sett.warp == sett.weft;
+	
+	  if (_.isObject(sett.warp)) {
+	    result.warp = flatten(sett.warp);
+	  }
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weft = result.warp;
+	    } else {
+	      result.weft = flatten(sett.weft);
+	    }
+	  }
+	
+	  return result;
+	}
+	
+	function factory() {
+	  return transform;
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _ = __webpack_require__(1);
+	var utils = __webpack_require__(3);
+	
+	var defaultOptions = {
+	  calculateNodeWeight: utils.node.calculateNodeWeight
+	};
+	
+	function tryFoldBlock(items) {
+	  // Smallest reflective sett contains 3 stripes in threadcount or
+	  // 5 stripes when unfolded, i.e. R/10 K2 Y/2 => R10 K2 Y2 K2 R10;
+	  // R/10 K/2 => R10 K2
+	  if ((items.length < 5) || (items.length % 2 != 1)) {
+	    return;
+	  }
+	
+	  var left;
+	  var right;
+	
+	  var result = [];
+	  var i = 0;
+	  var j = items.length - 1;
+	  while (true) {
+	    left = items[i];
+	    right = items[j];
+	    if (utils.node.isSameNode(left, right)) {
+	      result.push(left);
+	      if (i == j) {
+	        break;
+	      }
+	      i++;
+	      j--;
+	      continue;
+	    }
+	    return;
+	  }
+	
+	  return result;
+	}
+	
+	function foldRootBlock(root, options, results) {
+	  if (root.reflect || (root.items.length == 0)) {
+	    return;
+	  }
+	
+	  var items = _.concat(root.items, root.items[0]);
+	  var resultItems = tryFoldBlock(items);
+	  if (_.isArray(resultItems)) {
+	    var result = _.clone(root);
+	    result.items = resultItems;
+	    result.reflect = true;
+	    results.push({
+	      node: result,
+	      hash: utils.node.calculateNodeHash(result),
+	      weight: options.calculateNodeWeight(result)
+	    });
+	  }
+	}
+	
+	function processTokens(root, options, doNotLog) {
+	  var variants = [];
+	  foldRootBlock(root, options, variants);
+	  variants.push({
+	    node: root,
+	    hash: utils.node.calculateNodeHash(root),
+	    weight: options.calculateNodeWeight(root)
+	  });
+	
+	  // There may be at most two variants: unfolded and folded;
+	  // folded is better.
+	  return variants;
+	}
+	
+	function transform(sett, options) {
+	  var result = _.clone(sett);
+	
+	  var warpIsSameAsWeft = sett.warp === sett.weft;
+	  if (_.isObject(sett.warp)) {
+	    result.warpVariants = processTokens(sett.warp, options, true);
+	  }
+	  if (_.isObject(sett.weft)) {
+	    if (warpIsSameAsWeft) {
+	      result.weftVariants = result.warpVariants;
+	    } else {
+	      result.weftVariants = processTokens(sett.weft, options, true);
+	    }
+	  }
+	
+	  // Take the best variant, but keep other too
+	  result.warp = _.first(result.warpVariants).node;
+	  result.weft = _.first(result.weftVariants).node;
+	
+	  return result;
+	}
+	
+	function factory(options) {
+	  options = _.extend({}, defaultOptions, options);
+	  return function(sett) {
+	    return transform(sett, options);
+	  };
+	}
+	
+	module.exports = factory;
+
+
+/***/ },
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -86576,7 +89607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 132 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86728,7 +89759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 133 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86799,13 +89830,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 134 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var color = __webpack_require__(37);
+	var color = __webpack_require__(43);
 	
 	function getColor(name, colors, defaultColors) {
 	  var temp = colors[name];
@@ -86932,7 +89963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 135 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87148,13 +90179,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 136 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
 	// See LICENSE.md for more information.
 	
-	var encoding = __webpack_require__(138);
+	var encoding = __webpack_require__(164);
 	
 	module.exports = {
 	  TextEncoder: encoding.TextEncoder,
@@ -87163,7 +90194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 137 */
+/* 163 */
 /***/ function(module, exports) {
 
 	(function(global) {
@@ -87208,7 +90239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 138 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is free and unencumbered software released into the public domain.
@@ -87221,7 +90252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	if (typeof module !== "undefined" && module.exports) {
 	  this["encoding-indexes"] =
-	    __webpack_require__(137)["encoding-indexes"];
+	    __webpack_require__(163)["encoding-indexes"];
 	}
 	
 	(function(global) {
@@ -90523,7 +93554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 139 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = Function.prototype.apply;
@@ -90576,36 +93607,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	// setimmediate attaches itself to the global object
-	__webpack_require__(100);
+	__webpack_require__(115);
 	exports.setImmediate = setImmediate;
 	exports.clearImmediate = clearImmediate;
 
 
 /***/ },
-/* 140 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// http://www.gnu.org/software/tar/manual/html_node/Standard.html
 	
-	var utils = __webpack_require__(16);
-	var constants = __webpack_require__(15);
-	var tar = __webpack_require__(141);
-	var untar = __webpack_require__(142);
+	var utils = __webpack_require__(12);
+	var constants = __webpack_require__(11);
+	var tar = __webpack_require__(167);
+	var untar = __webpack_require__(168);
 	
 	utils.extend(module.exports, tar, untar, constants);
 
 
 /***/ },
-/* 141 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var constants = __webpack_require__(15);
-	var utils = __webpack_require__(16);
-	var types = __webpack_require__(38);
+	var constants = __webpack_require__(11);
+	var utils = __webpack_require__(12);
+	var types = __webpack_require__(44);
 	
 	function headerSize(file) {
 	  // header has fixed size
@@ -90699,14 +93730,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 142 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var constants = __webpack_require__(15);
-	var utils = __webpack_require__(16);
-	var types = __webpack_require__(38);
+	var constants = __webpack_require__(11);
+	var utils = __webpack_require__(12);
+	var types = __webpack_require__(44);
 	
 	var defaultOptions = {
 	  extractData: true,
@@ -90858,7 +93889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 143 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -91390,748 +94421,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46)(module), (function() { return this; }())))
 
 /***/ },
-/* 144 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
-	'use strict';
-	
-	var punycode = __webpack_require__(143);
-	var util = __webpack_require__(145);
-	
-	exports.parse = urlParse;
-	exports.resolve = urlResolve;
-	exports.resolveObject = urlResolveObject;
-	exports.format = urlFormat;
-	
-	exports.Url = Url;
-	
-	function Url() {
-	  this.protocol = null;
-	  this.slashes = null;
-	  this.auth = null;
-	  this.host = null;
-	  this.port = null;
-	  this.hostname = null;
-	  this.hash = null;
-	  this.search = null;
-	  this.query = null;
-	  this.pathname = null;
-	  this.path = null;
-	  this.href = null;
-	}
-	
-	// Reference: RFC 3986, RFC 1808, RFC 2396
-	
-	// define these here so at least they only have to be
-	// compiled once on the first module load.
-	var protocolPattern = /^([a-z0-9.+-]+:)/i,
-	    portPattern = /:[0-9]*$/,
-	
-	    // Special case for a simple path URL
-	    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
-	
-	    // RFC 2396: characters reserved for delimiting URLs.
-	    // We actually just auto-escape these.
-	    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
-	
-	    // RFC 2396: characters not allowed for various reasons.
-	    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
-	
-	    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
-	    autoEscape = ['\''].concat(unwise),
-	    // Characters that are never ever allowed in a hostname.
-	    // Note that any invalid chars are also handled, but these
-	    // are the ones that are *expected* to be seen, so we fast-path
-	    // them.
-	    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
-	    hostEndingChars = ['/', '?', '#'],
-	    hostnameMaxLen = 255,
-	    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
-	    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
-	    // protocols that can allow "unsafe" and "unwise" chars.
-	    unsafeProtocol = {
-	      'javascript': true,
-	      'javascript:': true
-	    },
-	    // protocols that never have a hostname.
-	    hostlessProtocol = {
-	      'javascript': true,
-	      'javascript:': true
-	    },
-	    // protocols that always contain a // bit.
-	    slashedProtocol = {
-	      'http': true,
-	      'https': true,
-	      'ftp': true,
-	      'gopher': true,
-	      'file': true,
-	      'http:': true,
-	      'https:': true,
-	      'ftp:': true,
-	      'gopher:': true,
-	      'file:': true
-	    },
-	    querystring = __webpack_require__(87);
-	
-	function urlParse(url, parseQueryString, slashesDenoteHost) {
-	  if (url && util.isObject(url) && url instanceof Url) return url;
-	
-	  var u = new Url;
-	  u.parse(url, parseQueryString, slashesDenoteHost);
-	  return u;
-	}
-	
-	Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
-	  if (!util.isString(url)) {
-	    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
-	  }
-	
-	  // Copy chrome, IE, opera backslash-handling behavior.
-	  // Back slashes before the query string get converted to forward slashes
-	  // See: https://code.google.com/p/chromium/issues/detail?id=25916
-	  var queryIndex = url.indexOf('?'),
-	      splitter =
-	          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
-	      uSplit = url.split(splitter),
-	      slashRegex = /\\/g;
-	  uSplit[0] = uSplit[0].replace(slashRegex, '/');
-	  url = uSplit.join(splitter);
-	
-	  var rest = url;
-	
-	  // trim before proceeding.
-	  // This is to support parse stuff like "  http://foo.com  \n"
-	  rest = rest.trim();
-	
-	  if (!slashesDenoteHost && url.split('#').length === 1) {
-	    // Try fast path regexp
-	    var simplePath = simplePathPattern.exec(rest);
-	    if (simplePath) {
-	      this.path = rest;
-	      this.href = rest;
-	      this.pathname = simplePath[1];
-	      if (simplePath[2]) {
-	        this.search = simplePath[2];
-	        if (parseQueryString) {
-	          this.query = querystring.parse(this.search.substr(1));
-	        } else {
-	          this.query = this.search.substr(1);
-	        }
-	      } else if (parseQueryString) {
-	        this.search = '';
-	        this.query = {};
-	      }
-	      return this;
-	    }
-	  }
-	
-	  var proto = protocolPattern.exec(rest);
-	  if (proto) {
-	    proto = proto[0];
-	    var lowerProto = proto.toLowerCase();
-	    this.protocol = lowerProto;
-	    rest = rest.substr(proto.length);
-	  }
-	
-	  // figure out if it's got a host
-	  // user@server is *always* interpreted as a hostname, and url
-	  // resolution will treat //foo/bar as host=foo,path=bar because that's
-	  // how the browser resolves relative URLs.
-	  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
-	    var slashes = rest.substr(0, 2) === '//';
-	    if (slashes && !(proto && hostlessProtocol[proto])) {
-	      rest = rest.substr(2);
-	      this.slashes = true;
-	    }
-	  }
-	
-	  if (!hostlessProtocol[proto] &&
-	      (slashes || (proto && !slashedProtocol[proto]))) {
-	
-	    // there's a hostname.
-	    // the first instance of /, ?, ;, or # ends the host.
-	    //
-	    // If there is an @ in the hostname, then non-host chars *are* allowed
-	    // to the left of the last @ sign, unless some host-ending character
-	    // comes *before* the @-sign.
-	    // URLs are obnoxious.
-	    //
-	    // ex:
-	    // http://a@b@c/ => user:a@b host:c
-	    // http://a@b?@c => user:a host:c path:/?@c
-	
-	    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
-	    // Review our test case against browsers more comprehensively.
-	
-	    // find the first instance of any hostEndingChars
-	    var hostEnd = -1;
-	    for (var i = 0; i < hostEndingChars.length; i++) {
-	      var hec = rest.indexOf(hostEndingChars[i]);
-	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-	        hostEnd = hec;
-	    }
-	
-	    // at this point, either we have an explicit point where the
-	    // auth portion cannot go past, or the last @ char is the decider.
-	    var auth, atSign;
-	    if (hostEnd === -1) {
-	      // atSign can be anywhere.
-	      atSign = rest.lastIndexOf('@');
-	    } else {
-	      // atSign must be in auth portion.
-	      // http://a@b/c@d => host:b auth:a path:/c@d
-	      atSign = rest.lastIndexOf('@', hostEnd);
-	    }
-	
-	    // Now we have a portion which is definitely the auth.
-	    // Pull that off.
-	    if (atSign !== -1) {
-	      auth = rest.slice(0, atSign);
-	      rest = rest.slice(atSign + 1);
-	      this.auth = decodeURIComponent(auth);
-	    }
-	
-	    // the host is the remaining to the left of the first non-host char
-	    hostEnd = -1;
-	    for (var i = 0; i < nonHostChars.length; i++) {
-	      var hec = rest.indexOf(nonHostChars[i]);
-	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-	        hostEnd = hec;
-	    }
-	    // if we still have not hit it, then the entire thing is a host.
-	    if (hostEnd === -1)
-	      hostEnd = rest.length;
-	
-	    this.host = rest.slice(0, hostEnd);
-	    rest = rest.slice(hostEnd);
-	
-	    // pull out port.
-	    this.parseHost();
-	
-	    // we've indicated that there is a hostname,
-	    // so even if it's empty, it has to be present.
-	    this.hostname = this.hostname || '';
-	
-	    // if hostname begins with [ and ends with ]
-	    // assume that it's an IPv6 address.
-	    var ipv6Hostname = this.hostname[0] === '[' &&
-	        this.hostname[this.hostname.length - 1] === ']';
-	
-	    // validate a little.
-	    if (!ipv6Hostname) {
-	      var hostparts = this.hostname.split(/\./);
-	      for (var i = 0, l = hostparts.length; i < l; i++) {
-	        var part = hostparts[i];
-	        if (!part) continue;
-	        if (!part.match(hostnamePartPattern)) {
-	          var newpart = '';
-	          for (var j = 0, k = part.length; j < k; j++) {
-	            if (part.charCodeAt(j) > 127) {
-	              // we replace non-ASCII char with a temporary placeholder
-	              // we need this to make sure size of hostname is not
-	              // broken by replacing non-ASCII by nothing
-	              newpart += 'x';
-	            } else {
-	              newpart += part[j];
-	            }
-	          }
-	          // we test again with ASCII char only
-	          if (!newpart.match(hostnamePartPattern)) {
-	            var validParts = hostparts.slice(0, i);
-	            var notHost = hostparts.slice(i + 1);
-	            var bit = part.match(hostnamePartStart);
-	            if (bit) {
-	              validParts.push(bit[1]);
-	              notHost.unshift(bit[2]);
-	            }
-	            if (notHost.length) {
-	              rest = '/' + notHost.join('.') + rest;
-	            }
-	            this.hostname = validParts.join('.');
-	            break;
-	          }
-	        }
-	      }
-	    }
-	
-	    if (this.hostname.length > hostnameMaxLen) {
-	      this.hostname = '';
-	    } else {
-	      // hostnames are always lower case.
-	      this.hostname = this.hostname.toLowerCase();
-	    }
-	
-	    if (!ipv6Hostname) {
-	      // IDNA Support: Returns a punycoded representation of "domain".
-	      // It only converts parts of the domain name that
-	      // have non-ASCII characters, i.e. it doesn't matter if
-	      // you call it with a domain that already is ASCII-only.
-	      this.hostname = punycode.toASCII(this.hostname);
-	    }
-	
-	    var p = this.port ? ':' + this.port : '';
-	    var h = this.hostname || '';
-	    this.host = h + p;
-	    this.href += this.host;
-	
-	    // strip [ and ] from the hostname
-	    // the host field still retains them, though
-	    if (ipv6Hostname) {
-	      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
-	      if (rest[0] !== '/') {
-	        rest = '/' + rest;
-	      }
-	    }
-	  }
-	
-	  // now rest is set to the post-host stuff.
-	  // chop off any delim chars.
-	  if (!unsafeProtocol[lowerProto]) {
-	
-	    // First, make 100% sure that any "autoEscape" chars get
-	    // escaped, even if encodeURIComponent doesn't think they
-	    // need to be.
-	    for (var i = 0, l = autoEscape.length; i < l; i++) {
-	      var ae = autoEscape[i];
-	      if (rest.indexOf(ae) === -1)
-	        continue;
-	      var esc = encodeURIComponent(ae);
-	      if (esc === ae) {
-	        esc = escape(ae);
-	      }
-	      rest = rest.split(ae).join(esc);
-	    }
-	  }
-	
-	
-	  // chop off from the tail first.
-	  var hash = rest.indexOf('#');
-	  if (hash !== -1) {
-	    // got a fragment string.
-	    this.hash = rest.substr(hash);
-	    rest = rest.slice(0, hash);
-	  }
-	  var qm = rest.indexOf('?');
-	  if (qm !== -1) {
-	    this.search = rest.substr(qm);
-	    this.query = rest.substr(qm + 1);
-	    if (parseQueryString) {
-	      this.query = querystring.parse(this.query);
-	    }
-	    rest = rest.slice(0, qm);
-	  } else if (parseQueryString) {
-	    // no query string, but parseQueryString still requested
-	    this.search = '';
-	    this.query = {};
-	  }
-	  if (rest) this.pathname = rest;
-	  if (slashedProtocol[lowerProto] &&
-	      this.hostname && !this.pathname) {
-	    this.pathname = '/';
-	  }
-	
-	  //to support http.request
-	  if (this.pathname || this.search) {
-	    var p = this.pathname || '';
-	    var s = this.search || '';
-	    this.path = p + s;
-	  }
-	
-	  // finally, reconstruct the href based on what has been validated.
-	  this.href = this.format();
-	  return this;
-	};
-	
-	// format a parsed object into a url string
-	function urlFormat(obj) {
-	  // ensure it's an object, and not a string url.
-	  // If it's an obj, this is a no-op.
-	  // this way, you can call url_format() on strings
-	  // to clean up potentially wonky urls.
-	  if (util.isString(obj)) obj = urlParse(obj);
-	  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
-	  return obj.format();
-	}
-	
-	Url.prototype.format = function() {
-	  var auth = this.auth || '';
-	  if (auth) {
-	    auth = encodeURIComponent(auth);
-	    auth = auth.replace(/%3A/i, ':');
-	    auth += '@';
-	  }
-	
-	  var protocol = this.protocol || '',
-	      pathname = this.pathname || '',
-	      hash = this.hash || '',
-	      host = false,
-	      query = '';
-	
-	  if (this.host) {
-	    host = auth + this.host;
-	  } else if (this.hostname) {
-	    host = auth + (this.hostname.indexOf(':') === -1 ?
-	        this.hostname :
-	        '[' + this.hostname + ']');
-	    if (this.port) {
-	      host += ':' + this.port;
-	    }
-	  }
-	
-	  if (this.query &&
-	      util.isObject(this.query) &&
-	      Object.keys(this.query).length) {
-	    query = querystring.stringify(this.query);
-	  }
-	
-	  var search = this.search || (query && ('?' + query)) || '';
-	
-	  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
-	
-	  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
-	  // unless they had them to begin with.
-	  if (this.slashes ||
-	      (!protocol || slashedProtocol[protocol]) && host !== false) {
-	    host = '//' + (host || '');
-	    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
-	  } else if (!host) {
-	    host = '';
-	  }
-	
-	  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
-	  if (search && search.charAt(0) !== '?') search = '?' + search;
-	
-	  pathname = pathname.replace(/[?#]/g, function(match) {
-	    return encodeURIComponent(match);
-	  });
-	  search = search.replace('#', '%23');
-	
-	  return protocol + host + pathname + search + hash;
-	};
-	
-	function urlResolve(source, relative) {
-	  return urlParse(source, false, true).resolve(relative);
-	}
-	
-	Url.prototype.resolve = function(relative) {
-	  return this.resolveObject(urlParse(relative, false, true)).format();
-	};
-	
-	function urlResolveObject(source, relative) {
-	  if (!source) return relative;
-	  return urlParse(source, false, true).resolveObject(relative);
-	}
-	
-	Url.prototype.resolveObject = function(relative) {
-	  if (util.isString(relative)) {
-	    var rel = new Url();
-	    rel.parse(relative, false, true);
-	    relative = rel;
-	  }
-	
-	  var result = new Url();
-	  var tkeys = Object.keys(this);
-	  for (var tk = 0; tk < tkeys.length; tk++) {
-	    var tkey = tkeys[tk];
-	    result[tkey] = this[tkey];
-	  }
-	
-	  // hash is always overridden, no matter what.
-	  // even href="" will remove it.
-	  result.hash = relative.hash;
-	
-	  // if the relative url is empty, then there's nothing left to do here.
-	  if (relative.href === '') {
-	    result.href = result.format();
-	    return result;
-	  }
-	
-	  // hrefs like //foo/bar always cut to the protocol.
-	  if (relative.slashes && !relative.protocol) {
-	    // take everything except the protocol from relative
-	    var rkeys = Object.keys(relative);
-	    for (var rk = 0; rk < rkeys.length; rk++) {
-	      var rkey = rkeys[rk];
-	      if (rkey !== 'protocol')
-	        result[rkey] = relative[rkey];
-	    }
-	
-	    //urlParse appends trailing / to urls like http://www.example.com
-	    if (slashedProtocol[result.protocol] &&
-	        result.hostname && !result.pathname) {
-	      result.path = result.pathname = '/';
-	    }
-	
-	    result.href = result.format();
-	    return result;
-	  }
-	
-	  if (relative.protocol && relative.protocol !== result.protocol) {
-	    // if it's a known url protocol, then changing
-	    // the protocol does weird things
-	    // first, if it's not file:, then we MUST have a host,
-	    // and if there was a path
-	    // to begin with, then we MUST have a path.
-	    // if it is file:, then the host is dropped,
-	    // because that's known to be hostless.
-	    // anything else is assumed to be absolute.
-	    if (!slashedProtocol[relative.protocol]) {
-	      var keys = Object.keys(relative);
-	      for (var v = 0; v < keys.length; v++) {
-	        var k = keys[v];
-	        result[k] = relative[k];
-	      }
-	      result.href = result.format();
-	      return result;
-	    }
-	
-	    result.protocol = relative.protocol;
-	    if (!relative.host && !hostlessProtocol[relative.protocol]) {
-	      var relPath = (relative.pathname || '').split('/');
-	      while (relPath.length && !(relative.host = relPath.shift()));
-	      if (!relative.host) relative.host = '';
-	      if (!relative.hostname) relative.hostname = '';
-	      if (relPath[0] !== '') relPath.unshift('');
-	      if (relPath.length < 2) relPath.unshift('');
-	      result.pathname = relPath.join('/');
-	    } else {
-	      result.pathname = relative.pathname;
-	    }
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    result.host = relative.host || '';
-	    result.auth = relative.auth;
-	    result.hostname = relative.hostname || relative.host;
-	    result.port = relative.port;
-	    // to support http.request
-	    if (result.pathname || result.search) {
-	      var p = result.pathname || '';
-	      var s = result.search || '';
-	      result.path = p + s;
-	    }
-	    result.slashes = result.slashes || relative.slashes;
-	    result.href = result.format();
-	    return result;
-	  }
-	
-	  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
-	      isRelAbs = (
-	          relative.host ||
-	          relative.pathname && relative.pathname.charAt(0) === '/'
-	      ),
-	      mustEndAbs = (isRelAbs || isSourceAbs ||
-	                    (result.host && relative.pathname)),
-	      removeAllDots = mustEndAbs,
-	      srcPath = result.pathname && result.pathname.split('/') || [],
-	      relPath = relative.pathname && relative.pathname.split('/') || [],
-	      psychotic = result.protocol && !slashedProtocol[result.protocol];
-	
-	  // if the url is a non-slashed url, then relative
-	  // links like ../.. should be able
-	  // to crawl up to the hostname, as well.  This is strange.
-	  // result.protocol has already been set by now.
-	  // Later on, put the first path part into the host field.
-	  if (psychotic) {
-	    result.hostname = '';
-	    result.port = null;
-	    if (result.host) {
-	      if (srcPath[0] === '') srcPath[0] = result.host;
-	      else srcPath.unshift(result.host);
-	    }
-	    result.host = '';
-	    if (relative.protocol) {
-	      relative.hostname = null;
-	      relative.port = null;
-	      if (relative.host) {
-	        if (relPath[0] === '') relPath[0] = relative.host;
-	        else relPath.unshift(relative.host);
-	      }
-	      relative.host = null;
-	    }
-	    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
-	  }
-	
-	  if (isRelAbs) {
-	    // it's absolute.
-	    result.host = (relative.host || relative.host === '') ?
-	                  relative.host : result.host;
-	    result.hostname = (relative.hostname || relative.hostname === '') ?
-	                      relative.hostname : result.hostname;
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    srcPath = relPath;
-	    // fall through to the dot-handling below.
-	  } else if (relPath.length) {
-	    // it's relative
-	    // throw away the existing file, and take the new path instead.
-	    if (!srcPath) srcPath = [];
-	    srcPath.pop();
-	    srcPath = srcPath.concat(relPath);
-	    result.search = relative.search;
-	    result.query = relative.query;
-	  } else if (!util.isNullOrUndefined(relative.search)) {
-	    // just pull out the search.
-	    // like href='?foo'.
-	    // Put this after the other two cases because it simplifies the booleans
-	    if (psychotic) {
-	      result.hostname = result.host = srcPath.shift();
-	      //occationaly the auth can get stuck only in host
-	      //this especially happens in cases like
-	      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-	      var authInHost = result.host && result.host.indexOf('@') > 0 ?
-	                       result.host.split('@') : false;
-	      if (authInHost) {
-	        result.auth = authInHost.shift();
-	        result.host = result.hostname = authInHost.shift();
-	      }
-	    }
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    //to support http.request
-	    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-	      result.path = (result.pathname ? result.pathname : '') +
-	                    (result.search ? result.search : '');
-	    }
-	    result.href = result.format();
-	    return result;
-	  }
-	
-	  if (!srcPath.length) {
-	    // no path at all.  easy.
-	    // we've already handled the other stuff above.
-	    result.pathname = null;
-	    //to support http.request
-	    if (result.search) {
-	      result.path = '/' + result.search;
-	    } else {
-	      result.path = null;
-	    }
-	    result.href = result.format();
-	    return result;
-	  }
-	
-	  // if a url ENDs in . or .., then it must get a trailing slash.
-	  // however, if it ends in anything else non-slashy,
-	  // then it must NOT get a trailing slash.
-	  var last = srcPath.slice(-1)[0];
-	  var hasTrailingSlash = (
-	      (result.host || relative.host || srcPath.length > 1) &&
-	      (last === '.' || last === '..') || last === '');
-	
-	  // strip single dots, resolve double dots to parent dir
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = srcPath.length; i >= 0; i--) {
-	    last = srcPath[i];
-	    if (last === '.') {
-	      srcPath.splice(i, 1);
-	    } else if (last === '..') {
-	      srcPath.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      srcPath.splice(i, 1);
-	      up--;
-	    }
-	  }
-	
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (!mustEndAbs && !removeAllDots) {
-	    for (; up--; up) {
-	      srcPath.unshift('..');
-	    }
-	  }
-	
-	  if (mustEndAbs && srcPath[0] !== '' &&
-	      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
-	    srcPath.unshift('');
-	  }
-	
-	  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
-	    srcPath.push('');
-	  }
-	
-	  var isAbsolute = srcPath[0] === '' ||
-	      (srcPath[0] && srcPath[0].charAt(0) === '/');
-	
-	  // put the host back
-	  if (psychotic) {
-	    result.hostname = result.host = isAbsolute ? '' :
-	                                    srcPath.length ? srcPath.shift() : '';
-	    //occationaly the auth can get stuck only in host
-	    //this especially happens in cases like
-	    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-	    var authInHost = result.host && result.host.indexOf('@') > 0 ?
-	                     result.host.split('@') : false;
-	    if (authInHost) {
-	      result.auth = authInHost.shift();
-	      result.host = result.hostname = authInHost.shift();
-	    }
-	  }
-	
-	  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
-	
-	  if (mustEndAbs && !isAbsolute) {
-	    srcPath.unshift('');
-	  }
-	
-	  if (!srcPath.length) {
-	    result.pathname = null;
-	    result.path = null;
-	  } else {
-	    result.pathname = srcPath.join('/');
-	  }
-	
-	  //to support request.http
-	  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-	    result.path = (result.pathname ? result.pathname : '') +
-	                  (result.search ? result.search : '');
-	  }
-	  result.auth = relative.auth || result.auth;
-	  result.slashes = result.slashes || relative.slashes;
-	  result.href = result.format();
-	  return result;
-	};
-	
-	Url.prototype.parseHost = function() {
-	  var host = this.host;
-	  var port = portPattern.exec(host);
-	  if (port) {
-	    port = port[0];
-	    if (port !== ':') {
-	      this.port = port.substr(1);
-	    }
-	    host = host.substr(0, host.length - port.length);
-	  }
-	  if (host) this.hostname = host;
-	};
-
-
-/***/ },
-/* 145 */
+/* 170 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -92153,14 +94446,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 146 */
+/* 171 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 147 */
+/* 172 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -92168,7 +94461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 148 */
+/* 173 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -92191,6 +94484,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    })(),
 	    formData: 'FormData' in self,
 	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
+	  if (support.arrayBuffer) {
+	    var viewClasses = [
+	      '[object Int8Array]',
+	      '[object Uint8Array]',
+	      '[object Uint8ClampedArray]',
+	      '[object Int16Array]',
+	      '[object Uint16Array]',
+	      '[object Int32Array]',
+	      '[object Uint32Array]',
+	      '[object Float32Array]',
+	      '[object Float64Array]'
+	    ]
+	
+	    var isDataView = function(obj) {
+	      return obj && DataView.prototype.isPrototypeOf(obj)
+	    }
+	
+	    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+	      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+	    }
 	  }
 	
 	  function normalizeName(name) {
@@ -92246,12 +94561,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Headers.prototype.append = function(name, value) {
 	    name = normalizeName(name)
 	    value = normalizeValue(value)
-	    var list = this.map[name]
-	    if (!list) {
-	      list = []
-	      this.map[name] = list
-	    }
-	    list.push(value)
+	    var oldValue = this.map[name]
+	    this.map[name] = oldValue ? oldValue+','+value : value
 	  }
 	
 	  Headers.prototype['delete'] = function(name) {
@@ -92259,12 +94570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  Headers.prototype.get = function(name) {
-	    var values = this.map[normalizeName(name)]
-	    return values ? values[0] : null
-	  }
-	
-	  Headers.prototype.getAll = function(name) {
-	    return this.map[normalizeName(name)] || []
+	    name = normalizeName(name)
+	    return this.has(name) ? this.map[name] : null
 	  }
 	
 	  Headers.prototype.has = function(name) {
@@ -92272,15 +94579,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  Headers.prototype.set = function(name, value) {
-	    this.map[normalizeName(name)] = [normalizeValue(value)]
+	    this.map[normalizeName(name)] = normalizeValue(value)
 	  }
 	
 	  Headers.prototype.forEach = function(callback, thisArg) {
-	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
-	      this.map[name].forEach(function(value) {
-	        callback.call(thisArg, value, name, this)
-	      }, this)
-	    }, this)
+	    for (var name in this.map) {
+	      if (this.map.hasOwnProperty(name)) {
+	        callback.call(thisArg, this.map[name], name, this)
+	      }
+	    }
 	  }
 	
 	  Headers.prototype.keys = function() {
@@ -92325,14 +94632,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  function readBlobAsArrayBuffer(blob) {
 	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
 	    reader.readAsArrayBuffer(blob)
-	    return fileReaderReady(reader)
+	    return promise
 	  }
 	
 	  function readBlobAsText(blob) {
 	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
 	    reader.readAsText(blob)
-	    return fileReaderReady(reader)
+	    return promise
+	  }
+	
+	  function readArrayBufferAsText(buf) {
+	    var view = new Uint8Array(buf)
+	    var chars = new Array(view.length)
+	
+	    for (var i = 0; i < view.length; i++) {
+	      chars[i] = String.fromCharCode(view[i])
+	    }
+	    return chars.join('')
+	  }
+	
+	  function bufferClone(buf) {
+	    if (buf.slice) {
+	      return buf.slice(0)
+	    } else {
+	      var view = new Uint8Array(buf.byteLength)
+	      view.set(new Uint8Array(buf))
+	      return view.buffer
+	    }
 	  }
 	
 	  function Body() {
@@ -92340,7 +94669,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    this._initBody = function(body) {
 	      this._bodyInit = body
-	      if (typeof body === 'string') {
+	      if (!body) {
+	        this._bodyText = ''
+	      } else if (typeof body === 'string') {
 	        this._bodyText = body
 	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
 	        this._bodyBlob = body
@@ -92348,11 +94679,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._bodyFormData = body
 	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
 	        this._bodyText = body.toString()
-	      } else if (!body) {
-	        this._bodyText = ''
-	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
-	        // Only support ArrayBuffers for POST method.
-	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+	        this._bodyArrayBuffer = bufferClone(body.buffer)
+	        // IE 10-11 can't handle a DataView body.
+	        this._bodyInit = new Blob([this._bodyArrayBuffer])
+	      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+	        this._bodyArrayBuffer = bufferClone(body)
 	      } else {
 	        throw new Error('unsupported BodyInit type')
 	      }
@@ -92377,6 +94709,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (this._bodyBlob) {
 	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyArrayBuffer) {
+	          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
 	        } else if (this._bodyFormData) {
 	          throw new Error('could not read FormData body as blob')
 	        } else {
@@ -92385,27 +94719,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      this.arrayBuffer = function() {
-	        return this.blob().then(readBlobAsArrayBuffer)
-	      }
-	
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-	
-	        if (this._bodyBlob) {
-	          return readBlobAsText(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as text')
+	        if (this._bodyArrayBuffer) {
+	          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
 	        } else {
-	          return Promise.resolve(this._bodyText)
+	          return this.blob().then(readBlobAsArrayBuffer)
 	        }
 	      }
-	    } else {
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	    }
+	
+	    this.text = function() {
+	      var rejected = consumed(this)
+	      if (rejected) {
+	        return rejected
+	      }
+	
+	      if (this._bodyBlob) {
+	        return readBlobAsText(this._bodyBlob)
+	      } else if (this._bodyArrayBuffer) {
+	        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+	      } else if (this._bodyFormData) {
+	        throw new Error('could not read FormData body as text')
+	      } else {
+	        return Promise.resolve(this._bodyText)
 	      }
 	    }
 	
@@ -92433,7 +94768,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Request(input, options) {
 	    options = options || {}
 	    var body = options.body
-	    if (Request.prototype.isPrototypeOf(input)) {
+	
+	    if (typeof input === 'string') {
+	      this.url = input
+	    } else {
 	      if (input.bodyUsed) {
 	        throw new TypeError('Already read')
 	      }
@@ -92444,12 +94782,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      this.method = input.method
 	      this.mode = input.mode
-	      if (!body) {
+	      if (!body && input._bodyInit != null) {
 	        body = input._bodyInit
 	        input.bodyUsed = true
 	      }
-	    } else {
-	      this.url = input
 	    }
 	
 	    this.credentials = options.credentials || this.credentials || 'omit'
@@ -92467,7 +94803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  Request.prototype.clone = function() {
-	    return new Request(this)
+	    return new Request(this, { body: this._bodyInit })
 	  }
 	
 	  function decode(body) {
@@ -92483,16 +94819,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return form
 	  }
 	
-	  function headers(xhr) {
-	    var head = new Headers()
-	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
-	    pairs.forEach(function(header) {
-	      var split = header.trim().split(':')
-	      var key = split.shift().trim()
-	      var value = split.join(':').trim()
-	      head.append(key, value)
+	  function parseHeaders(rawHeaders) {
+	    var headers = new Headers()
+	    rawHeaders.split('\r\n').forEach(function(line) {
+	      var parts = line.split(':')
+	      var key = parts.shift().trim()
+	      if (key) {
+	        var value = parts.join(':').trim()
+	        headers.append(key, value)
+	      }
 	    })
-	    return head
+	    return headers
 	  }
 	
 	  Body.call(Request.prototype)
@@ -92503,10 +94840,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    this.type = 'default'
-	    this.status = options.status
+	    this.status = 'status' in options ? options.status : 200
 	    this.ok = this.status >= 200 && this.status < 300
-	    this.statusText = options.statusText
-	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.statusText = 'statusText' in options ? options.statusText : 'OK'
+	    this.headers = new Headers(options.headers)
 	    this.url = options.url || ''
 	    this._initBody(bodyInit)
 	  }
@@ -92544,35 +94881,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  self.fetch = function(input, init) {
 	    return new Promise(function(resolve, reject) {
-	      var request
-	      if (Request.prototype.isPrototypeOf(input) && !init) {
-	        request = input
-	      } else {
-	        request = new Request(input, init)
-	      }
-	
+	      var request = new Request(input, init)
 	      var xhr = new XMLHttpRequest()
-	
-	      function responseURL() {
-	        if ('responseURL' in xhr) {
-	          return xhr.responseURL
-	        }
-	
-	        // Avoid security warnings on getResponseHeader when not allowed by CORS
-	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-	          return xhr.getResponseHeader('X-Request-URL')
-	        }
-	
-	        return
-	      }
 	
 	      xhr.onload = function() {
 	        var options = {
 	          status: xhr.status,
 	          statusText: xhr.statusText,
-	          headers: headers(xhr),
-	          url: responseURL()
+	          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
 	        }
+	        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
 	        var body = 'response' in xhr ? xhr.response : xhr.responseText
 	        resolve(new Response(body, options))
 	      }
@@ -92607,37 +94925,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 149 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(3);
+	module.exports = __webpack_require__(4);
 	
-	__webpack_require__(150);
-	__webpack_require__(158);
-	__webpack_require__(163);
+	__webpack_require__(175);
+	__webpack_require__(183);
+	__webpack_require__(188);
 
 
 /***/ },
-/* 150 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(151);
+	__webpack_require__(176);
 
 
 /***/ },
-/* 151 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var $q = __webpack_require__(41).$q;
-	var ngModule = __webpack_require__(3);
-	var log = __webpack_require__(42);
-	var application = __webpack_require__(40);
+	var $q = __webpack_require__(48).$q;
+	var ngModule = __webpack_require__(4);
+	var log = __webpack_require__(49);
+	var application = __webpack_require__(47);
 	
 	ngModule.controller('MainController', [
 	  '$scope',
@@ -92693,12 +95011,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 152 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('autofocus', [
 	  '$timeout',
@@ -92716,7 +95034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 153 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92724,17 +95042,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Blob */
 	
 	var _ = __webpack_require__(1);
-	var $q = __webpack_require__(41).$q;
-	var application = __webpack_require__(40);
-	var utils = __webpack_require__(169);
-	var ngModule = __webpack_require__(3);
+	var $q = __webpack_require__(48).$q;
+	var application = __webpack_require__(47);
+	var utils = __webpack_require__(194);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('datasetDownload', [
 	  '$window',
 	  function($window) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(91),
+	      template: __webpack_require__(106),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -92803,18 +95121,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 154 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('datasetHeader', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(92),
+	      template: __webpack_require__(107),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -92830,18 +95148,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 155 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('datasetListItem', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(93),
+	      template: __webpack_require__(108),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -92856,19 +95174,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 156 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('datasetView', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(94),
+	      template: __webpack_require__(109),
 	      replace: true,
 	      scope: {
 	        item: '='
@@ -92975,19 +95293,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 157 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('dropdown', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(95),
+	      template: __webpack_require__(110),
 	      replace: true,
 	      scope: {
 	        items: '=',
@@ -93021,32 +95339,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 158 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(152);
+	__webpack_require__(177);
 	
 	// Components
-	__webpack_require__(159);
-	__webpack_require__(157);
-	__webpack_require__(160);
-	__webpack_require__(161);
-	__webpack_require__(162);
-	__webpack_require__(155);
-	__webpack_require__(154);
-	__webpack_require__(156);
-	__webpack_require__(153);
+	__webpack_require__(184);
+	__webpack_require__(182);
+	__webpack_require__(185);
+	__webpack_require__(186);
+	__webpack_require__(187);
+	__webpack_require__(180);
+	__webpack_require__(179);
+	__webpack_require__(181);
+	__webpack_require__(178);
 
 
 /***/ },
-/* 159 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	function validateCount(value) {
 	  value = parseFloat(value) || 0;
@@ -93063,7 +95381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(96),
+	      template: __webpack_require__(111),
 	      replace: true,
 	      scope: {
 	        count: '=',
@@ -93081,29 +95399,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        state.current = validateCurrent($scope.current, state.count);
 	        $scope.current = state.current;
 	
-	        $scope.$watch('count', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            state.count = validateCount($scope.count);
-	            if (!state.editing) {
-	              state.current = validateCurrent(state.current, state.count);
-	            }
+	        $scope.$watch('count', function() {
+	          state.count = validateCount($scope.count);
+	          if (!state.editing) {
+	            state.current = validateCurrent(state.current, state.count);
 	          }
 	        });
 	
-	        $scope.$watch('current', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            if (!state.editing) {
-	              state.current = validateCurrent($scope.current, state.count);
-	            }
+	        $scope.$watch('current', function() {
+	          if (!state.editing) {
+	            state.current = validateCurrent($scope.current, state.count);
 	          }
 	        });
 	
-	        $scope.$watch('state', function(newValue, oldValue) {
-	          if (newValue !== oldValue) {
-	            if (!state.editing) {
-	              state.current = validateCurrent(state.current, state.count);
-	              $scope.current = state.current;
-	            }
+	        $scope.$watch('state', function() {
+	          if (!state.editing) {
+	            state.current = validateCurrent(state.current, state.count);
+	            $scope.current = state.current;
 	          }
 	        }, true);
 	
@@ -93133,18 +95445,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 160 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('tartanInfo', [
 	  function() {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(97),
+	      template: __webpack_require__(112),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -93158,24 +95470,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 161 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('tartanList', [
-	  function() {
+	  '$timeout',
+	  function($timeout) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(98),
+	      template: __webpack_require__(113),
 	      replace: true,
 	      scope: {
 	        items: '=',
 	        item: '=?',
-	        onpreview: '&?'
+	        itemsPerPage: '=?',
+	        onpreview: '&?',
+	        showLegend: '=?'
 	      },
 	      link: function($scope) {
 	        var pagination = $scope.pagination = {
@@ -93186,6 +95501,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	          current: 1
 	        };
 	
+	        function updateItemsPerPage(value) {
+	          value = parseInt(value) || 20;
+	          if (value < 2) {
+	            value = 2;
+	          }
+	          pagination.itemsPerPage = value;
+	          pagination.count = Math.ceil(
+	            pagination.all.length / pagination.itemsPerPage
+	          );
+	          pagination.current = 1;
+	        }
+	
 	        function updateItems() {
 	          var ipp = pagination.itemsPerPage;
 	          var from = (pagination.current - 1) * ipp;
@@ -93193,7 +95520,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          pagination.items = pagination.all.slice(from, to);
 	        }
 	
+	        updateItemsPerPage($scope.itemsPerPage);
 	        updateItems();
+	
+	        $scope.$watch('itemsPerPage', function(newValue, oldValue) {
+	          if (newValue !== oldValue) {
+	            updateItemsPerPage($scope.itemsPerPage);
+	          }
+	        });
 	
 	        $scope.$watch('pagination.current', function(newValue, oldValue) {
 	          if (newValue !== oldValue) {
@@ -93212,6 +95546,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        $scope.setCurrent = function(item) {
 	          $scope.item = item;
+	          $timeout($scope.onpreview);
 	        };
 	      }
 	    };
@@ -93220,7 +95555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 162 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93228,14 +95563,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* global Event */
 	
 	var _ = __webpack_require__(1);
-	var ngModule = __webpack_require__(3);
+	var ngModule = __webpack_require__(4);
 	
 	ngModule.directive('tartanPreview', [
 	  '$window', '$timeout', 'tartan',
 	  function($window, $timeout, tartan) {
 	    return {
 	      restrict: 'E',
-	      template: __webpack_require__(99),
+	      template: __webpack_require__(114),
 	      replace: true,
 	      scope: {
 	        item: '=',
@@ -93315,22 +95650,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 163 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(164);
+	__webpack_require__(189);
 
 
 /***/ },
-/* 164 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var module = __webpack_require__(3);
+	var module = __webpack_require__(4);
 	
 	module.filter('join', [
 	  function() {
@@ -93345,15 +95680,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 165 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	/* global fetch */
 	
-	__webpack_require__(22);
-	var Promise = __webpack_require__(7);
+	__webpack_require__(21);
+	var Promise = __webpack_require__(9);
 	
 	var cache = {};
 	
@@ -93386,32 +95721,50 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 166 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var async = __webpack_require__(21);
+	var async = __webpack_require__(18);
+	
+	function worker() {
+	  self.onmessage = function(event) {
+	    var refsList = [];
+	    var refCategories = {};
+	    var refMap = {};
+	
+	    var records = event.data;
+	    for (var i = 0; i < records.length; i++) {
+	      var record = records[i];
+	      refMap[record.ref] = record;
+	      refsList.push(record.ref);
+	
+	      var categories = record.category;
+	      if (categories.length == 0) {
+	        categories = [''];
+	      }
+	      for (var j = 0; j < categories.length; j++) {
+	        var category = categories[j];
+	        refCategories[category] = refCategories[category] || [];
+	        refCategories[category].push(record.ref);
+	      }
+	    }
+	    self.postMessage({
+	      refsList: refsList,
+	      refCategories: refCategories,
+	      refMap: refMap
+	    });
+	  };
+	}
 	
 	function createIndex(records) {
-	  var refsList = [];
-	  var refCategories = {};
-	  var refMap = {};
+	  return async.task(worker, records).then(function(data) {
+	    var refsList = data.refsList;
+	    var refCategories = data.refCategories;
+	    var refMap = data.refMap;
 	
-	  return async.each(records, function(record) {
-	    refMap[record.ref] = record;
-	    refsList.push(record.ref);
-	
-	    var categories = record.category;
-	    if (categories.length == 0) {
-	      categories = [''];
-	    }
-	    _.each(categories, function(category) {
-	      refCategories[category] = refCategories[category] || [];
-	      refCategories[category].push(record.ref);
-	    });
-	  }).then(function() {
 	    var searchIndex = function(query, returnOnlyRefs) {
 	      query = _.extend({categories: []}, query);
 	
@@ -93449,77 +95802,98 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 167 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var lunr = __webpack_require__(73);
-	var async = __webpack_require__(21);
+	var lunr = __webpack_require__(13);
+	var async = __webpack_require__(18);
+	
+	function patchLunrIndex(index) {
+	  // Path pipeline to do some pre-processing
+	  var run = index.pipeline.run;
+	  index.pipeline.run = function(tokens) {
+	    var result = [];
+	    var n = tokens.length;
+	    for (var i = 0; i < n; i++) {
+	      tokens[i] = tokens[i]
+	        .replace(/[^a-z0-9-']+/ig, '')
+	        .replace(/'s$/i, '');
+	
+	      var token = tokens[i];
+	      token = token
+	        .replace(/^(mac|mc|o'|m'k|m'c)/i, '')
+	        .replace(/[']+/ig, '');
+	
+	      tokens[i] = tokens[i]
+	        .replace(/[']+/ig, '');
+	
+	      if (token != '') {
+	        result.push(tokens[i], token);
+	      }
+	    }
+	    return run.call(this, result);
+	  };
+	}
+	
+	function worker() {
+	  self.onmessage = function(event) {
+	    var refList = [];
+	    var refMap = {};
+	    var index = lunr(function() {
+	      /* eslint-disable no-invalid-this */
+	      this.addField('name', {boost: 100});
+	      this.addField('description');
+	      this.setRef('ref');
+	      this.saveDocument(false);
+	      patchLunrIndex(this);
+	      /* eslint-disable no-invalid-this */
+	    });
+	
+	    var records = event.data;
+	    for (var i = 0; i < records.length; i++) {
+	      var record = Object.assign({}, records[i]);
+	      if (Array.isArray(record.description)) {
+	        record.description = record.description.join(' ');
+	      }
+	      index.addDoc(record);
+	      refMap[record.ref] = record;
+	      refList.push(record.ref);
+	    }
+	
+	    self.postMessage({
+	      index: index.toJSON(),
+	      refList: refList,
+	      refMap: refMap
+	    });
+	  };
+	}
 	
 	function createIndex(records) {
 	  records = _.sortBy(records, 'name');
 	
-	  var index = lunr(function() {
-	    /* eslint-disable no-invalid-this */
-	    this.field('name', {boost: 100});
-	    this.field('description');
-	    this.ref('ref');
+	  return async.task(worker, records, {
+	    patchLunrIndex: patchLunrIndex
+	  }, ['dist/lunr.js']).then(function(data) {
+	    var refList = data.refList;
+	    var refMap = data.refMap;
+	    var index = lunr.Index.load(data.index);
+	    patchLunrIndex(index);
 	
-	    // Path pipeline to do some pre-processing
-	    var run = this.pipeline.run;
-	    this.pipeline.run = function(tokens) {
-	      var result = [];
-	      var n = tokens.length;
-	      for (var i = 0; i < n; i++) {
-	        tokens[i] = tokens[i]
-	          .replace(/[^a-z0-9-']+/ig, '')
-	          .replace(/'s$/i, '');
-	
-	        var token = tokens[i];
-	        token = token
-	          .replace(/^(mac|mc|o'|m'k|m'c)/i, '')
-	          .replace(/[']+/ig, '');
-	
-	        tokens[i] = tokens[i]
-	          .replace(/[']+/ig, '');
-	
-	        if (token != '') {
-	          result.push(tokens[i], token);
-	        }
-	      }
-	      return run.call(this, result);
-	    };
-	
-	    /* eslint-disable no-invalid-this */
-	  });
-	
-	  var refList = [];
-	  var refMap = {};
-	
-	  return async.each(records, function(record) {
-	    record = _.extend({}, record);
-	    if (_.isArray(record.description)) {
-	      record.description = record.description.join(' ');
-	    }
-	    index.add(record);
-	    refMap[record.ref] = record;
-	    refList.push(record.ref);
-	  }).then(function() {
 	    return function(query, returnOnlyRefs) {
 	      query = _.extend({query: ''}, query);
-	      query = _.isString(query.query) ? query.query : '';
-	      query = query.replace(/^\s+/i, '').replace(/\s+$/i, '');
+	      query = _.trim(_.isString(query.query) ? query.query : '');
 	
 	      if (query == '') {
 	        return returnOnlyRefs ? refList : records;
 	      }
-	      return _.chain(index.search(query))
+	      return _.chain(index.search(query, {bool: 'AND'}))
 	        .sortBy('score')
 	        .reverse()
 	        .map(function(item) {
-	          return returnOnlyRefs ? item.ref : refMap[item.ref];
+	          return returnOnlyRefs ? parseInt(item.ref) : refMap[item.ref];
 	        })
 	        .value();
 	    };
@@ -93530,13 +95904,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 168 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _ = __webpack_require__(1);
-	var Promise = __webpack_require__(7);
+	var Promise = __webpack_require__(9);
 	
 	function createIndex(records, engines) {
 	  engines = _.filter(engines, _.isObject);
@@ -93572,12 +95946,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = createIndex;
 	
-	module.exports.fulltext = __webpack_require__(167);
-	module.exports.category = __webpack_require__(166);
+	module.exports.fulltext = __webpack_require__(192);
+	module.exports.category = __webpack_require__(191);
 
 
 /***/ },
-/* 169 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93598,8 +95972,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return bytes.toFixed(1) + ' ' + units[u];
 	}
 	
-	module.exports.async = __webpack_require__(21);
-	module.exports.log = __webpack_require__(42);
+	module.exports.async = __webpack_require__(18);
+	module.exports.log = __webpack_require__(49);
 	
 	module.exports.formatDataSize = formatDataSize;
 
