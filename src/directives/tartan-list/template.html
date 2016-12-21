@@ -14,7 +14,8 @@
       ng-repeat="item in pagination.items track by item.ref">
       <a href="javascript:void(0)" title="{{ item.name }}"
         ng-click="setCurrent(item);">
-        <tartan-image source="{{ 'classic/2,2/' + item.sett }}"></tartan-image>
+        <tartan-image source="{{ 'classic/2,2/' + item.sett }}"
+          renderer="canvas"></tartan-image>
       </a>
 
       <h4><a href="javascript:void(0)" title="{{ item.name }}"

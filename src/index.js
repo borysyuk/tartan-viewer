@@ -4,6 +4,14 @@
 
 var _ = require('lodash');
 
+// Initialize tartan library and its plugins
+require('tartan');
+require('tartan-processing');
+require('tartan-render');
+require('tartan-schema');
+require('tartan-fingerprint');
+require('identartan');
+
 // Init some global variables - needed for proper work of angular and
 // some other 3rd-party libraries
 (function(globals) {
