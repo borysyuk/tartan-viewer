@@ -3,24 +3,42 @@
 var _ = require('lodash');
 var async = require('../utils/async');
 
-function createIndex(records) {
-  var refsList = [];
-  var refCategories = {};
-  var refMap = {};
+function worker() {
+  self.onmessage = function(event) {
+    var refsList = [];
+    var refCategories = {};
+    var refMap = {};
 
-  return async.each(records, function(record) {
-    refMap[record.ref] = record;
-    refsList.push(record.ref);
+    var records = event.data;
+    for (var i = 0; i < records.length; i++) {
+      var record = records[i];
+      refMap[record.ref] = record;
+      refsList.push(record.ref);
 
-    var categories = record.category;
-    if (categories.length == 0) {
-      categories = [''];
+      var categories = record.category;
+      if (categories.length == 0) {
+        categories = [''];
+      }
+      for (var j = 0; j < categories.length; j++) {
+        var category = categories[j];
+        refCategories[category] = refCategories[category] || [];
+        refCategories[category].push(record.ref);
+      }
     }
-    _.each(categories, function(category) {
-      refCategories[category] = refCategories[category] || [];
-      refCategories[category].push(record.ref);
+    self.postMessage({
+      refsList: refsList,
+      refCategories: refCategories,
+      refMap: refMap
     });
-  }).then(function() {
+  };
+}
+
+function createIndex(records) {
+  return async.task(worker, records).then(function(data) {
+    var refsList = data.refsList;
+    var refCategories = data.refCategories;
+    var refMap = data.refMap;
+
     var searchIndex = function(query, returnOnlyRefs) {
       query = _.extend({categories: []}, query);
 

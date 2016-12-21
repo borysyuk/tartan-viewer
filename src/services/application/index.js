@@ -26,7 +26,11 @@ function getDatasetDirectory() {
     });
 }
 
-function createAttributeMapper(fields, attributes) {
+function createAttributeMapper(fields, attributes, pickAttributes) {
+  if (_.isString(pickAttributes) || _.isArray(pickAttributes)) {
+    attributes = _.pick(attributes, pickAttributes);
+  }
+
   var fieldIndex = _.chain(fields)
     .map(function(field, index) {
       return [field.name, index];
@@ -161,7 +165,7 @@ function createAttributeMapper(fields, attributes) {
   };
 }
 
-function getDataset(dataset) {
+function getDataset(dataset, pickAttributes) {
   var attributes = null;
   var fields = null;
   var resourceName = null;
@@ -199,7 +203,7 @@ function getDataset(dataset) {
       }
       var result = records;
       if (fields && attributes) {
-        var mapper = createAttributeMapper(fields, attributes);
+        var mapper = createAttributeMapper(fields, attributes, pickAttributes);
         result = _.map(records, function(record, index) {
           return _.extend({}, mapper(record), {
             ref: index + 1,
