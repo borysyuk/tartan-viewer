@@ -3,11 +3,14 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js',
+    lunr: './src/modules/lunr.js'
+  },
   output: {
     library: 'app',
     libraryTarget: 'umd',
-    filename: 'app.js',
+    filename: '[name].js',
     path: './dist'
   },
   devtool: 'source-map',
